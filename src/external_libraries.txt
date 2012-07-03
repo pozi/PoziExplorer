@@ -1,6 +1,6 @@
 Ext
 GeoExt
 GXP
-OpenLayers 2.12 RC7
+OpenLayers 2.12
 PrintPreview
 ux

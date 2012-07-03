@@ -4,8 +4,8 @@
  * @require widgets/Viewer.js
  * @require plugins/LayerManager.js
  * @require plugins/OLSource.js
- * @require plugins/OSMSource.js
  * @require plugins/WMSCSource.js
+ * @require plugins/MapQuestSource.js
  * @require plugins/Zoom.js
  * @require plugins/ZoomToLayerExtent.js
  * @require plugins/AddLayers.js
@@ -29,6 +29,7 @@
  * @require OpenLayers/Console.js
  * @require OpenLayers/Lang.js 
  * @require OpenLayers/Layer/Vector.js
+ * @require OpenLayers/Layer/OSM.js
  * @require OpenLayers/Control/ScaleLine.js
  * @require OpenLayers/Projection.js
  * @require PrintPreview.js
@@ -43,8 +44,22 @@
  */
 
 var app;
-var glayerLocSel;
+var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurrentExpandedTabIdx=[];
 var poziLinkClickHandler;
+
+// Helper functions
+function toTitleCase(str)
+{
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
+function trim(str)
+{
+	if (str) 
+		{return str.replace(/^\s*/, "").replace(/\s*$/, "");}
+	else 
+		{return "";}
+}
 
 Ext.onReady(function() {
 
@@ -186,6 +201,7 @@ Ext.onReady(function() {
  	// Reasons for override:
 	// - transition effect on single tiled layer should be null  
 	// - URL of a layer should be an array, not the first one created via the layer store
+	// - managing store-wide parameters (especially for layers added behind + button)
 
 	    gxp.plugins.WMSSource.prototype.createLayerRecord = function(config) {
 		var record, original;
@@ -236,6 +252,39 @@ Ext.onReady(function() {
 			}
 		    }
 
+			// Apply store-wide config if none present in the layer config - format, group, tiling and transitionEffect
+			if (config && JSONconf.sources[config.source])
+			{
+				if (!('format' in config))
+				{
+					if ('format' in JSONconf.sources[config.source])
+					{
+						config.format=JSONconf.sources[config.source].format;
+					}
+				}
+				if (!('group' in config))
+				{
+					if ('group' in JSONconf.sources[config.source])
+					{
+						config.group=JSONconf.sources[config.source].group;
+					}
+				}
+				if (!('tiled' in config))
+				{
+					if ('tiled' in JSONconf.sources[config.source])
+					{
+						config.tiled=JSONconf.sources[config.source].tiled;
+					}
+				}
+				if (!('transition' in config))
+				{
+					if ('transition' in JSONconf.sources[config.source])
+					{
+						config.transition=JSONconf.sources[config.source].transition;
+					}
+				}
+			}
+
 		    // update params from config
 		    layer.mergeNewParams({
 			STYLES: config.styles,
@@ -265,7 +314,7 @@ Ext.onReady(function() {
 			opacity: ("opacity" in config) ? config.opacity : 1,
 			buffer: ("buffer" in config) ? config.buffer : 1,
 			dimensions: original.data.dimensions,
-			// Inverted the base logic here
+//			transitionEffect: ("transition" in config) ? config.transition : null,
 			transitionEffect: singleTile ? null : 'resize',
 			minScale: config.minscale,
 			maxScale: config.maxscale
@@ -399,6 +448,198 @@ Ext.onReady(function() {
 	};
 
 
+
+
+/** api: constructor
+ *  .. class:: WMSGetFeatureInfo(config)
+ *
+ *    This plugins provides an action which, when active, will issue a
+ *    GetFeatureInfo request to the WMS of all layers on the map. The output
+ *    will be displayed in a popup.
+ */   
+ 	// Reasons for override:
+ 	// - custom selection of objects to return
+ 	// - custom content (JSON in HTML)
+	// - custom interaction with the right hand panel
+	// - managing array of URLs
+	// - activating the control by default and masking its icon
+
+
+    gxp.plugins.WMSGetFeatureInfo.prototype.addActions = function() {
+        this.popupCache = {};
+        
+        var actions = gxp.plugins.WMSGetFeatureInfo.superclass.addActions.call(this, [{
+            tooltip: this.infoActionTip,
+            iconCls: "gxp-icon-getfeatureinfo",
+            buttonText: this.buttonText,
+            toggleGroup: this.toggleGroup,
+            enableToggle: true,
+            allowDepress: true,
+            toggleHandler: function(button, pressed) {
+                for (var i = 0, len = info.controls.length; i < len; i++){
+                    if (pressed) {
+                        info.controls[i].activate();
+                    } else {
+                        info.controls[i].deactivate();
+                    }
+                }
+             }
+        }]);
+        var infoButton = this.actions[0].items[0];
+
+        var info = {controls: []};
+        var updateInfo = function() {
+            var queryableLayers = this.target.mapPanel.layers.queryBy(function(x){
+                //return x.get("queryable");
+		return x.get("queryable") && x.get("layer").visibility && (x.get("group") != "background") 
+            });
+
+            // Keeping track of the number of objects to be returned
+            var layerMax=queryableLayers.length;
+            // ID within the combostore must be unique, so we use a counter
+            var id_ct=0;
+            // Count the number of features within a layer
+            var layerCounter = 0;
+			
+            var map = this.target.mapPanel.map;
+            var control;
+            for (var i = 0, len = info.controls.length; i < len; i++){
+                control = info.controls[i];
+                control.deactivate();  // TODO: remove when http://trac.openlayers.org/ticket/2130 is closed
+                control.destroy();
+            }
+
+            info.controls = [];
+            
+            queryableLayers.each(function(x){
+                var layer = x.getLayer();
+                var vendorParams = Ext.apply({}, this.vendorParams), param;
+                if (this.layerParams) {
+                    for (var i=this.layerParams.length-1; i>=0; --i) {
+                        param = this.layerParams[i].toUpperCase();
+                        vendorParams[param] = layer.params[param];
+                    }
+                }
+                var infoFormat = x.get("infoFormat");
+                if (infoFormat === undefined) {
+                    // TODO: check if chosen format exists in infoFormats array
+                    // TODO: this will not work for WMS 1.3 (text/xml instead for GML)
+                    //infoFormat = this.format == "html" ? "text/html" : "application/vnd.ogc.gml";
+                    infoFormat = "text/html";
+                }
+                var control = new OpenLayers.Control.WMSGetFeatureInfo(Ext.applyIf({
+                    // Managing array of URLs
+                    url: (typeof layer.url == "object" ? layer.url[0] : layer.url),
+                    queryVisible: true,
+                    radius: 64,
+                    layers: [layer],
+                    infoFormat: infoFormat,
+                    vendorParams: vendorParams,
+                    eventListeners: {
+                        getfeatureinfo: function(evt) {
+				layerCounter = layerCounter+1;
+				var idx=0;
+				// Index contains the position of the layer within the tree layer
+				for(i=0;i<app.mapPanel.layers.data.items.length;i++)
+				{
+					if (app.mapPanel.layers.data.items[i]===x) 
+					{
+						idx=i;
+						break;
+					}
+				}
+
+				// Extract the core of the object, that is the JSON object
+				var match = evt.text.match(/<body[^>]*>([\s\S]*)<\/body>/);
+				if (match && !match[1].match(/^\s*$/)) {
+					// Issue with simple quotes - with the template js_string, they appear as \', which is not parseable as JSON
+					res=Ext.util.JSON.decode(match[1].replace('\\\'','\''));
+
+					// We hydrate an object that powers the datastore for the right panel combo
+					var row_array;
+					for (var i=0;i<res.rows.length;i++)
+					{
+						// Id - need to be distinct for all objects in the drop down: if several layers activated, must be different across all layers (we can't use looping variable i)
+						id_ct++;
+						// Type - from the layer name in the layer selector
+						var typ=x.data.title;
+						// Attempt to format it nicely (removing the parenthesis content)
+						var simpleTitle=x.data.title.match(/(.*) ?\(.*\)/);
+						if (simpleTitle) {typ=trim(simpleTitle[1]);}
+						// All the attributes are contained in a serialised JSON object
+						var cont=res.rows[i].row;
+						// Label - for now, nothing									
+						var lab='';
+						// We select the first attribute that is not the_geom as the label
+						for (l in cont)
+						{
+							if (l!="the_geom" && l!="projection"){var lab=cont[l];break;}
+						}
+						// Layer name (without namespace), to enable additional accordion panels
+						var lay=x.data.layer.params.LAYERS.split(":")[1];
+						// Catering for layer groups (they don't have a workspace name as a prefix)
+						if (!lay)
+						{
+							lay=x.data.layer.params.LAYERS;
+						}
+						// Building a row and pushing it to an array																		
+						row_array = new Array(id_ct,typ,cont,idx,lab,lay); 
+
+						gComboDataArray.push(row_array);
+					}
+				}
+
+				// Only to be executed when all queriable layers have been traversed (depends number of layers actually ticked in the layer tree)
+				if (layerCounter==layerMax)
+				{
+					// Remove any previous results						
+					clear_highlight();
+
+					if (gComboDataArray.length)
+					{
+						var cb = Ext.getCmp('gtInfoCombobox');
+						if (cb.disabled) {cb.enable();}
+						gComboDataArray.sort(function(a,b){return b[3]-a[3]});
+						gfromWFS="N";
+						gCombostore.loadData(gComboDataArray);
+					}
+					//else			
+					//{cb.disable();}
+
+					gComboDataArray=[];
+					layerCounter=0;
+				}                        
+                        
+                        },
+                        scope: this
+                    }
+                }, this.controlOptions));
+                map.addControl(control);
+                info.controls.push(control);
+		// Activating the info control by default
+                //if(infoButton.pressed) {
+                    control.activate();
+                //}
+            }, this);
+
+        };
+        
+        this.target.mapPanel.layers.on("update", updateInfo, this);
+        this.target.mapPanel.layers.on("add", updateInfo, this);
+        this.target.mapPanel.layers.on("remove", updateInfo, this);
+        
+        return actions;
+    };
+
+
+
+
+
+
+
+
+
+
 	// Starting by loading the specific configuration for the council using an AJAX call
 	// For now, this is a static JSON file, but we expect to be able to generate it from a database
 	// This JSON contains information about the map configuration
@@ -462,15 +703,12 @@ Ext.onReady(function() {
 				url: ["http://m1.pozi.com/geoserver/MITCHELL/ows","http://m2.pozi.com/geoserver/MITCHELL/ows","http://m3.pozi.com/geoserver/MITCHELL/ows","http://m4.pozi.com/geoserver/MITCHELL/ows"],
 				title: "DSE Image Web Server",
 				ptype: "gxp_wmscsource"
-				//,format: "image/JPEG"
-				//,group: "background"
-				//,transition:'resize'
+				,format: "image/JPEG"
+				,group: "background"
+				,transition:'resize'
 			},
-//			mapquest: {
-//				ptype: "gxp_mapquestsource"
-//			},
-			osm: {
-				ptype: "gxp_osmsource"
+			mapquest: {
+				ptype: "gxp_mapquestsource"
 			},
 			ol: {
 				ptype: "gxp_olsource"
@@ -479,7 +717,7 @@ Ext.onReady(function() {
 				url: ["http://m1.pozi.com/geoserver/ows","http://m2.pozi.com/geoserver/ows","http://m3.pozi.com/geoserver/ows","http://m4.pozi.com/geoserver/ows"],
 				title: "Pozi Data Server",
 				ptype: "gxp_wmscsource"
-				//,transition:'resize'
+				,transition:null
 			}
 		},
 		layers: [{
@@ -594,7 +832,8 @@ Ext.onReady(function() {
 				format:"image/png8",
 				styles:"",
 				transparent:true,
-				tiled:false
+				tiled:false,
+				transition:'resize'
 			},{
 				source:"backend",
 				name:"LabelClassic",
@@ -605,8 +844,7 @@ Ext.onReady(function() {
 				format:"image/png8",
 				styles:"",
 				transparent:true,
-				tiled:false,
-				transition:''
+				tiled:false
 			},{
 				source:"backend",
 				name:"VicmapClassic",
@@ -618,13 +856,14 @@ Ext.onReady(function() {
 				format:"image/png8",
 				styles:"",
 				transparent:true,
-				cached:true
+				cached:true,
+				transition:'resize'
 			},{
-//				source:"mapquest",
-//				name: "osm",
-//				visibility: false,
-//				group:"background"
-//			},{
+				source:"mapquest",
+				name: "osm",
+				visibility: false,
+				group:"background"
+			},{
 				source:"dse_iws_cascaded",
 				name :"MITCHELL:AERIAL_MITCHELL_2007JAN26_AIR_VIS_50CM_MGA55",
 				title:"Aerial Photo (CIP 2007)",
@@ -655,7 +894,8 @@ Ext.onReady(function() {
 		center: [16143500, -4461908],
 		zoom: 10,
 		customJS:'mitchell.js',
-		workspace: "MITCHELL"
+		workspace: "MITCHELL",
+		highlightSymboliser: {name:"test",strokeColor:"yellow",strokeWidth: 15, strokeOpacity:0.5,fillColor:"yellow",fillOpacity:0.2}
 	};
 	
 
@@ -752,7 +992,14 @@ Ext.onReady(function() {
 
 		// WFS layer: style , definition , namespaces
 		var gtStyleMap = new OpenLayers.StyleMap();
-		var gtSymbolizer = {name:"test",strokeColor:"yellow",strokeWidth: 15, strokeOpacity:0.5,fillColor:"yellow",fillOpacity:0.2};
+		var gtSymbolizer = JSONconf.highlightSymboliser;
+
+		var rule_for_all = new OpenLayers.Rule({
+			symbolizer: gtSymbolizer, elseFilter: true
+		});
+		rule_for_all.title=" ";
+		gtStyleMap.styles["default"].addRules([rule_for_all]);
+
 		var gtWFSsrsName = "EPSG:4326";
 		var gtWFSgeometryName = "the_geom";
 
@@ -760,25 +1007,6 @@ Ext.onReady(function() {
 		var gtWFSEndPoint = gtServicesHost + "/geoserver/wfs";
 		var gtFeatureNS="http://www.pozi.com/vicmap";
 		
-		// Definition of the WFS layer - arbitrarily defining a WFS layer to be able to add it to the map (so that it's ready to be used when the app has loaded)
-		/*
-		gtLayerLocSel = new OpenLayers.Layer.Vector("Selection", {
-			styleMap: gtStyleMap,
-			strategies: [new OpenLayers.Strategy.BBOX({ratio:100})],
-			protocol: new OpenLayers.Protocol.WFS({
-				version:       "1.1.0",
-				url:           gtWFSEndPoint,
-				featureType:   "VMPROP_PROPERTY",
-				srsName:       gtWFSsrsName,
-				featureNS:     gtFeatureNS,
-				geometryName:  gtWFSgeometryName,
-				schema:        gtWFSEndPoint+"?service=WFS&version=1.1.0&request=DescribeFeatureType&TypeName="+"VICMAP:VMPROP_PROPERTY"
-			}),
-			filter: new OpenLayers.Filter.Comparison({type: OpenLayers.Filter.Comparison.EQUAL_TO,property: 'pr_propnum',value: -1}),
-			projection: new OpenLayers.Projection("EPSG:4326")			
-		});
-		*/
-
 		// Pushing the WFS layer in the layer store
 		JSONconf.layers.push({
 			source: "ol",
@@ -804,17 +1032,16 @@ Ext.onReady(function() {
 		});		
 
 		// Store behind the info drop-down list
-		var gCombostore = new Ext.data.ArrayStore({
+		gCombostore = new Ext.data.ArrayStore({
 		    //autoDestroy: true,
 		    storeId: 'myStore',
 		    idIndex: 0,  
 		    fields: [
 		       'id',
 		       'type',
-		       'label',
 		       'content',
 		       'index',
-		       'projCode',
+		       'label',
 		       'layer'
 		    ],
 		    listeners: {
@@ -869,7 +1096,7 @@ Ext.onReady(function() {
 		});
 
 		// Remove the WFS highlight, clear and disable the select feature combo, empty the combostore and clean the details panel 
-		var clear_highlight = function(){ 
+		clear_highlight = function(){ 
 			// Removing the highlight by clearing the selected features in the WFS layer
 			glayerLocSel.removeAllFeatures();
 
@@ -952,7 +1179,8 @@ Ext.onReady(function() {
 							cont["the_geom_WFS"]=this.features[k];										
 
 							// Building a record and inserting it into an array											
-							row_array = new Array(k,typ,lab,cont,null,null,this.features[k].layer.protocol.featureType); 
+							//row_array = new Array(k,typ,lab,cont,null,null,this.features[k].layer.protocol.featureType); 
+							row_array = new Array(k,typ,cont,0,lab,this.features[k].layer.protocol.featureType); 
 							gComboDataArray.push(row_array);
 						}
 
@@ -1047,13 +1275,15 @@ Ext.onReady(function() {
 										
 										// Refreshing the DOM with the newly added parts
 										e0.doLayout();										
-										//e0.items.itemAt(0).expand();
+
+										e0.items.itemAt(0).expand();
+										/*
 										if (!(gCurrentExpandedTabIdx[record.data.layer]))
 										{
 											gCurrentExpandedTabIdx[record.data.layer]="0";
 										}
 										e0.items.itemAt(gCurrentExpandedTabIdx[record.data.layer]).expand();
-	
+										*/	
 										// Setting a reference on this part of the DOM for injection of the attributes										
 										var e1=e0.items.items[0].body.id;
 										var e2=Ext.get(e1).dom;
@@ -1063,19 +1293,13 @@ Ext.onReady(function() {
 										var val;
 										var item_array=new Array();
 										var has_gsv = false;
+										var fa = [];
 										
 										for(var k in record.data.content)
 										{
 											if (k=="the_geom")
 											{
-												lab="spatial type";
 												var featureToRead = record.data.content[k];
-												val=featureToRead.replace(/\(.*\)\s*/,"");
-												
-												// record.data.projCode contains the projection system of the highlighing geometry
-												// Unfortunately, it seems that the OpenLayers transform only caters for 4326
-												// Other attempts to transform from 4283 (for instance) have resulted in the data not being projected to Google's SRS
-												// Attempts to invoke Proj4js library have rendered the zoom to tool ineffective (the bounding box data would not be transformed anymore)
 												var wktObj = new OpenLayers.Format.WKT({
 													externalProjection: new OpenLayers.Projection("EPSG:4326"), //projection your data is in
 													internalProjection: new OpenLayers.Projection("EPSG:900913") //projection you map uses to display stuff
@@ -1091,8 +1315,6 @@ Ext.onReady(function() {
 											{
 												var wktfeatures=record.data.content[k];
 												gfromWFS="N";
-												lab="spatial type";
-												val=wktfeatures.geometry.CLASS_NAME.replace(/OpenLayers\.Geometry\./,"").toUpperCase();
 												glayerLocSel.removeAllFeatures();
 												glayerLocSel.addFeatures(wktfeatures);
 											}
@@ -1115,24 +1337,40 @@ Ext.onReady(function() {
 												{
 													val=val.replace(/ 12:00 AM/g,"");
 												}
+
+												// Formatting the cells for attribute display in a tidy table
+												item_array.push({html:"<div style='font-size:8pt;'><font color='#666666'>"+trim(lab)+"</font></div>"});
+												item_array.push({html:"<div style='font-size:10pt;'>"+trim(val)+"</div>"});
+												fa[trim(lab)]=trim(val);
 											}
-											
-											// Formatting the cells for attribute display in a tidy table
-											item_array.push({html:"<div style='font-size:8pt;'><font color='#666666'>"+trim(lab)+"</font></div>"});
-											item_array.push({html:"<div style='font-size:10pt;'>"+trim(val)+"</div>"});
+
 										}
-																													
-										var win = new Ext.Panel({
-											id:'tblayout-win'
-											//,width:227
-											,layout:'table'
-											,layoutConfig:{columns:2}
-											,border:false
-											//,closable:false
-											,defaults:{height:20}
-											,renderTo: e2
-											,items: item_array
+
+										var p = new Ext.grid.PropertyGrid({
+												listeners: {
+													'beforeedit': function (e) { 
+														return false; 
+													} 
+												},
+												stripeRows: true,
+												autoHeight: true,
+												renderTo: e2,
+												hideHeaders: true,
+												viewConfig: {
+													forceFit: true,
+													scrollOffset: 0
+												}
 										});
+
+
+										// Remove default sorting
+										delete p.getStore().sortInfo;
+										p.getColumnModel().getColumnById('name').sortable = false;
+										// Now load data
+										p.setSource(fa);
+
+										p.doLayout();
+										
 									},
 								    scope:this}
 						    
