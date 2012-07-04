@@ -1225,11 +1225,6 @@ Ext.onReady(function() {
 				],
 				border: false,
 				id: 'tree'
-//			}, {
-//				region: 'south',
-//				xtype: "container",
-//				border: false,
-//				id: 'legend'
 			}]
 		});
 
@@ -1263,30 +1258,6 @@ Ext.onReady(function() {
 										var e0=Ext.getCmp('gtAccordion');
 
 										e0.removeAll();
-										// Accordion part for normal attributes
-										e0.add({id:'attributeAcc',title: gtDetailsTitle,html: '<p></p>'});
-
-										// Layout configuration the global variable array loaded at application start										
-										var configArray = gLayoutsArr[record.data.layer];
-										if (configArray)
-										{
-											e0.add(configArray);										
-										}
-										
-										// Refreshing the DOM with the newly added parts
-										e0.doLayout();										
-
-										e0.items.itemAt(0).expand();
-										/*
-										if (!(gCurrentExpandedTabIdx[record.data.layer]))
-										{
-											gCurrentExpandedTabIdx[record.data.layer]="0";
-										}
-										e0.items.itemAt(gCurrentExpandedTabIdx[record.data.layer]).expand();
-										*/	
-										// Setting a reference on this part of the DOM for injection of the attributes										
-										var e1=e0.items.items[0].body.id;
-										var e2=Ext.get(e1).dom;
 										
 										// Population of the direct attributes accordion panel
 										var lab;
@@ -1339,8 +1310,6 @@ Ext.onReady(function() {
 												}
 
 												// Formatting the cells for attribute display in a tidy table
-												item_array.push({html:"<div style='font-size:8pt;'><font color='#666666'>"+trim(lab)+"</font></div>"});
-												item_array.push({html:"<div style='font-size:10pt;'>"+trim(val)+"</div>"});
 												fa[trim(lab)]=trim(val);
 											}
 
@@ -1354,7 +1323,6 @@ Ext.onReady(function() {
 												},
 												stripeRows: true,
 												autoHeight: true,
-												renderTo: e2,
 												hideHeaders: true,
 												viewConfig: {
 													forceFit: true,
@@ -1362,15 +1330,48 @@ Ext.onReady(function() {
 												}
 										});
 
-
 										// Remove default sorting
 										delete p.getStore().sortInfo;
 										p.getColumnModel().getColumnById('name').sortable = false;
+										p.getColumnModel().getColumnById('name').width = 80;
+										p.getColumnModel().getColumnById('value').width = 170;										
 										// Now load data
 										p.setSource(fa);
 
-										p.doLayout();
+//										p.doLayout();
+
+
+										var panel = new Ext.Panel({
+											  id:'attributeAcc',
+											  title: gtDetailsTitle,
+//											  renderTo: e2,
+											  layout: 'fit',
+											  items: [p]
+											});
+											
+										e0.add(panel);
+
+										// Layout configuration the global variable array loaded at application start										
+										var configArray = gLayoutsArr[record.data.layer];
+										if (configArray)
+										{
+											e0.add(configArray);										
+										}
 										
+										// Refreshing the DOM with the newly added parts
+										e0.doLayout();	
+										
+										// Expanding the first tab - TO BE MODIFIED
+										e0.items.itemAt(0).expand();
+										/*
+										if (!(gCurrentExpandedTabIdx[record.data.layer]))
+										{
+											gCurrentExpandedTabIdx[record.data.layer]="0";
+										}
+										e0.items.itemAt(gCurrentExpandedTabIdx[record.data.layer]).expand();		
+										*/
+
+
 									},
 								    scope:this}
 						    
@@ -1400,6 +1401,13 @@ Ext.onReady(function() {
 			border: false,
 			collapsible: false,
 			autoScroll:true,
+			listeners:{
+					scope: this,
+					resize:function(p){
+						// This is required to get the content of the accordion tabs to resize
+						p.doLayout();
+					}
+			},
 			defaults: {
 				// applied to each contained panel
 				bodyStyle: " background-color: transparent ",
@@ -1716,7 +1724,7 @@ Ext.onReady(function() {
         
 		var eastPanel = new Ext.Panel({
 			border: false,
-			layout: "border",
+			layout: "anchor",
 			region: "east",
 			title: gtInfoTitle,
 			collapsible: true,
