@@ -1357,9 +1357,6 @@ Ext.onReady(function() {
 			header: false,
 			items: [{
 				region: 'center',
-				tbar: [
-
-				],
 				border: false,
 				id: 'tree'
 			}]
