@@ -113,6 +113,84 @@ Ext.onReady(function() {
 
 // GXP overrides
 
+    /** private: method[createOutputConfig]
+     *  :returns: ``Object`` Configuration object for an Ext.tree.TreePanel
+     */
+ 	// Reasons for override:
+	// - configuration for expanded / collapsed initial display of layer groups (controlled by layer manager's group config)
+	
+    gxp.plugins.LayerTree.prototype.createOutputConfig = function() {
+        var treeRoot = new Ext.tree.TreeNode({
+            text: this.rootNodeText,
+            expanded: true,
+            isTarget: false,
+            allowDrop: false
+        });
+        
+        var defaultGroup = this.defaultGroup,
+            plugin = this,
+            groupConfig,
+            exclusive;
+        for (var group in this.groups) {
+            groupConfig = typeof this.groups[group] == "string" ?
+                {title: this.groups[group]} : this.groups[group];
+            exclusive = groupConfig.exclusive;
+            treeRoot.appendChild(new GeoExt.tree.LayerContainer(Ext.apply({
+                text: groupConfig.title,
+                iconCls: "gxp-folder",
+                expanded: ("collapsed" in groupConfig?!groupConfig.collapsed:true),
+                group: group == this.defaultGroup ? undefined : group,
+                loader: new GeoExt.tree.LayerLoader({
+                    baseAttrs: exclusive ?
+                        {checkedGroup: Ext.isString(exclusive) ? exclusive : group} :
+                        undefined,
+                    store: this.target.mapPanel.layers,
+                    filter: (function(group) {
+                        return function(record) {
+                            return (record.get("group") || defaultGroup) == group &&
+                                record.getLayer().displayInLayerSwitcher == true;
+                        };
+                    })(group),
+                    createNode: function(attr) {
+                        plugin.configureLayerNode(this, attr);
+                        return GeoExt.tree.LayerLoader.prototype.createNode.apply(this, arguments);
+                    }
+                }),
+                singleClickExpand: true,
+                allowDrag: false,
+                listeners: {
+                    append: function(tree, node) {
+                        node.expand();
+                    }
+                }
+            }, groupConfig)));
+        }
+        
+        return {
+            xtype: "treepanel",
+            root: treeRoot,
+            rootVisible: false,
+            shortTitle: this.shortTitle,
+            border: false,
+            enableDD: true,
+            selModel: new Ext.tree.DefaultSelectionModel({
+                listeners: {
+                    beforeselect: this.handleBeforeSelect,
+                    scope: this
+                }
+            }),
+            listeners: {
+                contextmenu: this.handleTreeContextMenu,
+                beforemovenode: this.handleBeforeMoveNode,                
+                scope: this
+            },
+            contextMenu: new Ext.menu.Menu({
+                items: []
+            })
+        };
+    };
+
+
     /** api: method[createStore]
      *
      *  Creates a store of layer records.  Fires "ready" when store is loaded.
@@ -685,6 +763,14 @@ Ext.onReady(function() {
 		tools: [{
 				// A layer manager displays the legend in line with the layer tree
 				ptype: "gxp_layermanager",
+				groups: {
+				    "top": { title:"Top Layers", collapsed:true},
+				    "default": "Overlays", // title can be overridden with overlayNodeText
+				    "background": {
+				        title: "Base Maps", // can be overridden with baseNodeText
+				        exclusive: true
+				    }
+				},
 				outputConfig: {
 					id: "tree",
 					border: false,
@@ -767,8 +853,8 @@ Ext.onReady(function() {
 			backend: {
 				url: ["http://m1.pozi.com/geoserver/ows","http://m2.pozi.com/geoserver/ows","http://m3.pozi.com/geoserver/ows","http://m4.pozi.com/geoserver/ows"],
 				title: "Pozi Data Server",
-				ptype: "gxp_wmscsource"
-				,transition:null
+				ptype: "gxp_wmscsource",
+				transition:null
 			}
 		},
 		layers: [{
@@ -895,7 +981,8 @@ Ext.onReady(function() {
 				format:"image/png8",
 				styles:"",
 				transparent:true,
-				tiled:false
+				tiled:false,
+				group: "top"
 			},{
 				source:"backend",
 				name:"VicmapClassic",
@@ -1071,6 +1158,7 @@ Ext.onReady(function() {
 			source: "ol",
 			visibility: true,
 			type: "OpenLayers.Layer.Vector",
+			group: "top",
 			args: [
 				"Selection", {
 					styleMap: gtStyleMap,
@@ -1261,6 +1349,7 @@ Ext.onReady(function() {
 			region: "west",
 			width: 250,
 			split: true,
+			border: false,
 			collapsible: true,
 			collapseMode: "mini",
 			collapsed: gtCollapseLayerTree,
