@@ -97,7 +97,9 @@ Ext.onReady(function() {
 			}
 			else
 			{
-				rv ="<a href='"+val+"' target='_blank'>link</a>";
+				var linkName=val.split("/").pop();
+				if (linkName.length<1) {linkName = 'link';};
+				rv ="<a href='"+val+"' target='_blank'>"+linkName+"</a>";
 			}
 			doNotHTMLEncode = true;
 		}else	{
