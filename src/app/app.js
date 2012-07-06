@@ -19,6 +19,7 @@
  * @require plugins/FeatureManager.js 
  * @require plugins/Styler.js 
  * @require widgets/WMSLayerPanel.js
+ * @require widgets/ScaleOverlay.js
  * @require RowExpander.js
  * @require GeoExt/widgets/PrintMapPanel.js
  * @require GeoExt/plugins/PrintProviderField.js
@@ -52,7 +53,7 @@
  */
 
 var app;
-var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurrentExpandedTabIdx=[];
+var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurrentExpandedTabIdx=[],gCurrentLoggedRole="NONE";
 var poziLinkClickHandler;
 
 // Helper functions
@@ -818,9 +819,8 @@ Ext.onReady(function() {
 				autoLoadFeature: true
 			}, {
 				actions: ["->"]
-			}, {
-				actions: ["loginbutton"]
-                }],
+			}
+                ],
 		sources: {
 //			local: {
 //				url: "/geoserver/MITCHELL/ows",
@@ -1989,13 +1989,15 @@ Ext.onReady(function() {
 				zoom: JSONconf.zoom,
 				layers: JSONconf.layers ,
 				items: [{
-						xtype: "gx_zoomslider",
-						vertical: true,
-						height: 100
+					xtype: "gxp_scaleoverlay"
+				},{
+					xtype: "gx_zoomslider",
+					vertical: true,
+					height: 100
 				}]
 			}
 		});
-		
+
 		app.on("ready", function() {
 			//alert('Now');
 			// This is when we want to find the handle to the WFS layer
@@ -2010,23 +2012,229 @@ Ext.onReady(function() {
 					}
 				}
 			};
-			
 
-			// Currently logged role
-			if (app.authorizedRoles)
-			{
-				if (app.authorizedRoles[0])
-				{
-					gCurrentLoggedRole=app.authorizedRoles[0];
+//			if (config.authStatus === 401) {
+				// user has not authenticated or is not authorized
+				app.authorizedRoles = [];
+//			} else if (config.authStatus !== 404) {
+//				// user has authenticated
+//				app.authorizedRoles = ["ROLE_ADMINISTRATOR"];
+//			}			
+
+
+			// Adding the login button manually to the toolbar (couldn't find a proper ptype to add it at app creation)
+			app.mapPanel.toolbars[0].items.add(new Ext.Button({id:"loginbutton"}));
+			app.mapPanel.toolbars[0].doLayout();
+
+			app.cookieParamName= 'geoexplorer-user';
+			app.loginText= "Login";
+			app.logoutText= "Logout, {user}";
+			app.loginErrorText= "Invalid username or password.";
+			app.saveErrorText= "Trouble saving: ";
+
+			/** private: method[setCookieValue]
+			* Set the value for a cookie parameter
+			*/
+			    app.setCookieValue = function(param, value) {
+				document.cookie = param + '=' + escape(value);
+			    };
+
+			/** private: method[clearCookieValue]
+			* Clear a certain cookie parameter.
+			*/
+			    app.clearCookieValue = function(param) {
+				document.cookie = param + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+			    };
+
+			/** private: method[getCookieValue]
+			* Get the value of a certain cookie parameter. Returns null if not found.
+			*/
+			    app.getCookieValue = function(param) {
+				var i, x, y, cookies = document.cookie.split(";");
+				for (i=0; i < cookies.length; i++) {
+				    x = cookies[i].substr(0, cookies[i].indexOf("="));
+				    y = cookies[i].substr(cookies[i].indexOf("=")+1);
+				    x=x.replace(/^\s+|\s+$/g,"");
+				    if (x==param) {
+					return unescape(y);
+				    }
 				}
-			}
-			else
-			{
-				gCurrentLoggedRole="NONE";
-			}
+				return null;
+			    };
 
-			// Extraction of the information panel layouts for the current authorized role - we should degrade nicely if the service is not found
-			// Using endpoints array
+			/** private: method[logout]
+			* Log out the current user from the application.
+			*/
+			    app.logout = function() {
+				app.clearCookieValue("JSESSIONID");
+				app.clearCookieValue(app.cookieParamName);
+				app.setAuthorizedRoles([]);
+				Ext.getCmp('paneltbar').items.each(function(tool) {
+				    if (tool.needsAuthorization === true) {
+					tool.disable();
+				    }
+				});
+				app.showLogin();
+			    };
+
+
+			/** private: method[authenticate]
+			* Show the login dialog for the user to login.
+			*/
+			    app.authenticate = function() {
+			    
+				var submitLogin=function() {
+//					alert('submit');
+				    panel.buttons[0].disable();
+				    panel.getForm().submit({
+					success: function(form, action) {
+//						alert('logged in');
+					    Ext.getCmp('paneltbar').items.each(function(tool) {
+						if (tool.needsAuthorization === true) {
+						    tool.enable();
+						}
+					    });
+					    var user = form.findField('username').getValue();
+					    app.setCookieValue(app.cookieParamName, user);
+					    app.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
+					    app.showLogout(user);
+					    win.un("beforedestroy", this.cancelAuthentication, this);
+					    win.close();
+					},
+					failure: function(form, action) {
+//						alert('login failure');
+					    app.authorizedRoles = [];
+					    panel.buttons[0].enable();
+					    form.markInvalid({
+						"username": this.loginErrorText,
+						"password": this.loginErrorText
+					    });
+					},
+					scope: this
+				    });
+				};
+
+
+
+				var panel = new Ext.FormPanel({
+				    url: "/geoexplorer/login/",
+				    frame: true,
+				    labelWidth: 60,
+				    defaultType: "textfield",
+				    errorReader: {
+					read: function(response) {
+					    var success = false;
+					    var records = [];
+					    if (response.status === 200) {
+						success = true;
+					    } else {
+						records = [
+						    {data: {id: "username", msg: app.loginErrorText}},
+						    {data: {id: "password", msg: app.loginErrorText}}
+						];
+					    }
+					    return {
+						success: success,
+						records: records
+					    };
+					}
+				    },
+				    items: [{
+					fieldLabel: "Username",
+					name: "username",
+					allowBlank: false,
+					listeners: {
+					    render: function() {
+						this.focus(true, 100);
+					    }
+					}
+				    }, {
+					fieldLabel: "Password",
+					name: "password",
+					inputType: "password",
+					allowBlank: false
+				    }],
+				    buttons: [{
+					text: app.loginText,
+					formBind: true,
+					handler: submitLogin,
+					scope: this
+				    }],
+				    keys: [{
+					key: [Ext.EventObject.ENTER],
+					handler: submitLogin,
+					scope: this
+				    }]
+				});
+
+
+
+				var win = new Ext.Window({
+				    title: app.loginText,
+				    layout: "fit",
+				    width: 235,
+				    height: 130,
+				    plain: true,
+				    border: false,
+				    modal: true,
+				    items: [panel],
+				    listeners: {
+					beforedestroy: this.cancelAuthentication,
+					scope: this
+				    }
+				});
+				win.show();
+			    };
+
+			/**
+			* private: method[applyLoginState]
+			* Attach a handler to the login button and set its text.
+			*/
+			    app.applyLoginState = function(iconCls, text, handler, scope) {
+				var loginButton = Ext.getCmp("loginbutton");
+				loginButton.setIconClass(iconCls);
+				loginButton.setText(text);
+				loginButton.setHandler(handler, scope);
+			    };
+
+			/** private: method[showLogin]
+			* Show the login button.
+			*/
+			    app.showLogin = function() {
+				var text = app.loginText;
+				var handler = app.authenticate;
+				app.applyLoginState('login', text, handler, this);
+			    };
+
+			/** private: method[showLogout]
+			* Show the logout button.
+			*/
+			    app.showLogout = function(user) {
+				var text = new Ext.Template(this.logoutText).applyTemplate({user: user});
+				var handler = logout;
+				app.applyLoginState('logout', text, handler, this);
+			    };
+
+			if (app.authorizedRoles) {
+				    // unauthorized, show login button
+				    if (app.authorizedRoles.length === 0) {
+					app.showLogin();
+				    } else {
+					var user = app.getCookieValue(app.cookieParamName);
+					if (user === null) {
+					    user = "unknown";
+					}
+					app.showLogout(user);
+
+					if (app.authorizedRoles[0])
+					{
+						gCurrentLoggedRole=app.authorizedRoles[0];
+					}                
+
+				    }
+			 };
+
+			// Information panel layouts for the current authorized role - we should degrade nicely if the service is not found
 			var ds;
 			for (urlIdx in gtGetLiveDataEndPoints)
 			{
