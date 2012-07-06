@@ -14,6 +14,10 @@
  * @require plugins/WMSGetFeatureInfo.js
  * @require plugins/Print.js
  * @require plugins/LayerProperties.js
+ * @require plugins/Measure.js
+ * @require plugins/FeatureEditor.js 
+ * @require plugins/FeatureManager.js 
+ * @require plugins/Styler.js 
  * @require widgets/WMSLayerPanel.js
  * @require RowExpander.js
  * @require GeoExt/widgets/PrintMapPanel.js
@@ -21,6 +25,9 @@
  * @require GeoExt/plugins/PrintPageField.js
  * @require GeoExt/plugins/PrintExtent.js
  * @require OpenLayers/Layer.js
+ * @require OpenLayers/Handler/Path.js
+ * @require OpenLayers/Handler/Point.js
+ * @require OpenLayers/Handler/Polygon.js
  * @require OpenLayers/Renderer.js
  * @require OpenLayers/Renderer/SVG.js 
  * @require OpenLayers/Renderer/VML.js 
@@ -64,7 +71,45 @@ function trim(str)
 
 Ext.onReady(function() {
 
-	// Overrides still needed after moving to GXP on 2.5
+// Ext overrides
+
+	// Overriding the behaviour of the property column model because it HTML encodes everything
+	// This is where we can format cell content, regardless of the name of the property to render, but based on the content of its value
+	// If we knew the name of the property in advance, we could use PropertyGrid custom renderers
+	// Based on the source code: http://docs.sencha.com/ext-js/3-4/source/Column.html
+	// TODO: this is a good candidate for a custom type extending the PropertyGrid if we find ourselves modifying its core functionalities anymore	
+
+	Ext.grid.PropertyColumnModel.prototype.renderCell = function(val, meta, rec){
+		var renderer = this.grid.customRenderers[rec.get('name')];
+		var doNotHTMLEncode = false;
+		if(renderer){
+			return renderer.apply(this, arguments);
+		}
+		var rv = val;
+		if(Ext.isDate(val)){
+			rv = this.renderDate(val);
+		}else if(typeof val == 'boolean'){
+			rv = this.renderBool(val);
+		}else if(val.search(/^http/)>-1){
+			if (val.search(/\.jpg/)>-1)
+			{
+				rv ="<a href='"+val+"' target='_blank'><img src='"+val+"' height='20' width='20' /></a>";
+			}
+			else
+			{
+				rv ="<a href='"+val+"' target='_blank'>link</a>";
+			}
+			doNotHTMLEncode = true;
+		}else	{
+			rv=val.replace(/ 12:00 AM/g,"");
+		}
+		if (doNotHTMLEncode)
+		{return rv;}
+		else
+		{return Ext.util.Format.htmlEncode(rv);}
+	};
+
+// GXP overrides
 
     /** api: method[createStore]
      *
@@ -315,8 +360,8 @@ Ext.onReady(function() {
 			opacity: ("opacity" in config) ? config.opacity : 1,
 			buffer: ("buffer" in config) ? config.buffer : 1,
 			dimensions: original.data.dimensions,
-//			transitionEffect: ("transition" in config) ? config.transition : null,
-			transitionEffect: singleTile ? null : 'resize',
+			transitionEffect: ("transition" in config) ? config.transition : null,
+//			transitionEffect: singleTile ? null : 'resize',
 			minScale: config.minscale,
 			maxScale: config.maxscale
 		    });
@@ -448,9 +493,6 @@ Ext.onReady(function() {
 		gxp.WMSLayerPanel.superclass.initComponent.call(this);
 	};
 
-
-
-
 /** api: constructor
  *  .. class:: WMSGetFeatureInfo(config)
  *
@@ -470,10 +512,12 @@ Ext.onReady(function() {
         this.popupCache = {};
         
         var actions = gxp.plugins.WMSGetFeatureInfo.superclass.addActions.call(this, [{
-            tooltip: this.infoActionTip,
-            iconCls: "gxp-icon-getfeatureinfo",
+//            tooltip: this.infoActionTip,
+//            iconCls: "gxp-icon-getfeatureinfo",
             buttonText: this.buttonText,
             toggleGroup: this.toggleGroup,
+	    // The info button does not need to be clickable
+	    disabled: true,            
             enableToggle: true,
             allowDepress: true,
             toggleHandler: function(button, pressed) {
@@ -604,9 +648,7 @@ Ext.onReady(function() {
 						gfromWFS="N";
 						gCombostore.loadData(gComboDataArray);
 					}
-					//else			
-					//{cb.disable();}
-
+					
 					gComboDataArray=[];
 					layerCounter=0;
 				}                        
@@ -633,14 +675,6 @@ Ext.onReady(function() {
     };
 
 
-
-
-
-
-
-
-
-
 	// Starting by loading the specific configuration for the council using an AJAX call
 	// For now, this is a static JSON file, but we expect to be able to generate it from a database
 	// This JSON contains information about the map configuration
@@ -659,9 +693,6 @@ Ext.onReady(function() {
 				ptype: "gxp_addlayers",
 				actionTarget: "tree.tbar"
 			}, {
-				ptype: "gxp_removelayer",
-				actionTarget: "tree.contextMenu"
-			}, {
 				ptype: "gxp_layerproperties",
 				id: "layerproperties",
 				actionTarget: "tree.contextMenu"
@@ -669,20 +700,34 @@ Ext.onReady(function() {
 				ptype: "gxp_zoomtolayerextent",
 				actionTarget: "tree.contextMenu"
 			}, {
+				ptype: "gxp_styler",
+				actionTarget: "tree.contextMenu"
+			}, {
+				ptype: "gxp_removelayer",
+				actionTarget: "tree.contextMenu"
+			}, {
 				ptype: "gxp_wmsgetfeatureinfo", 
 				format: 'grid',
 				toggleGroup: "interaction",
 				showButtonText: false
 			}, {
-//				ptype: "gxp_measure", 
-//				toggleGroup: "interaction",
-//				controlOptions: {immediate: true},
-//				showButtonText: true,
-//			}, {
 				ptype: "gxp_print",
 				customParams: {outputFilename: 'PoziExplorer-print'},
 				printService: "/geoserver/pdf",
 				showButtonText: false
+			}, {
+				ptype: "gxp_measure", 
+				toggleGroup: "interaction",
+				controlOptions: {immediate: true},
+				showButtonText: false
+			}, {
+				ptype: "gxp_featuremanager",
+				id: "featuremanager",
+				maxFeatures: 20
+			}, {
+				ptype: "gxp_featureeditor",
+				featureManager: "featuremanager",
+				autoLoadFeature: true
 			}, {
 				actions: ["->"]
 			}, {
@@ -703,10 +748,10 @@ Ext.onReady(function() {
 			dse_iws_cascaded: {
 				url: ["http://m1.pozi.com/geoserver/MITCHELL/ows","http://m2.pozi.com/geoserver/MITCHELL/ows","http://m3.pozi.com/geoserver/MITCHELL/ows","http://m4.pozi.com/geoserver/MITCHELL/ows"],
 				title: "DSE Image Web Server",
-				ptype: "gxp_wmscsource"
-				,format: "image/JPEG"
-				,group: "background"
-				,transition:'resize'
+				ptype: "gxp_wmscsource",
+				format: "image/JPEG",
+				group: "background",
+				transition:'resize'
 			},
 			mapquest: {
 				ptype: "gxp_mapquestsource"
@@ -906,8 +951,8 @@ Ext.onReady(function() {
 		workspace: "MITCHELL",
 		highlightSymboliser: {name:"test",strokeColor:"yellow",strokeWidth: 15, strokeOpacity:0.5,fillColor:"yellow",fillOpacity:0.2},
 		liveDataEndPoints: [
-					{ urlLayout:'http://172.20.10.19:9090/ws/rest/v3/ws_get_layouts.php', 	urlLiveData:'http://172.20.10.19:9090/ws/rest/v3/ws_get_live_data.php',	storeMode:'sqlite',	storeName:'mitchell'},
-					{ urlLayout:'http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php', 	urlLiveData:'http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php',	storeMode:'pgsql',	storeName:'vicmap'}
+			{ urlLayout:'http://172.20.10.19:9090/ws/rest/v3/ws_get_layouts.php', 	urlLiveData:'http://172.20.10.19:9090/ws/rest/v3/ws_get_live_data.php',	storeMode:'sqlite',	storeName:'mitchell'},
+			{ urlLayout:'http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php', 	urlLiveData:'http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php',	storeMode:'pgsql',	storeName:'vicmap'}
 		]	
 	};
 	
@@ -1114,12 +1159,6 @@ Ext.onReady(function() {
 		clear_highlight = function(){ 
 			// Removing the highlight by clearing the selected features in the WFS layer
 			glayerLocSel.removeAllFeatures();
-
-			// Fix the issue where the layer's startegy layer is nulled after printing
-//			if (!(glayerLocSel.strategies[0].layer)) {glayerLocSel.strategies[0].layer=glayerLocSel;}
-//			if (!(glayerLocSel.strategies[0].layer.map)) 	{glayerLocSel.strategies[0].layer.map=app.mapPanel.map;}
-//			if (!(glayerLocSel.protocol.format)) 		{glayerLocSel.protocol.format=gFormat;}
-
 			glayerLocSel.redraw();
 			// Clearing combo
 			var cb = Ext.getCmp('gtInfoCombobox');
@@ -1130,9 +1169,7 @@ Ext.onReady(function() {
 			// Removing all values from the combo
 			gCombostore.removeAll();
 			// Clearing the details from the panel
-			var e1=Ext.getCmp('gtAccordion').items.items[0].body.id;
-			var e2=Ext.get(e1).dom;
-			e2.innerHTML="";
+			accordion.removeAll();
 		};
 
 		// Handler called when:
@@ -1142,12 +1179,6 @@ Ext.onReady(function() {
 			// Zooming to the relevant area (covering the selected record)
 			var bd = new OpenLayers.Bounds(record.data.xmini,record.data.ymini,record.data.xmaxi,record.data.ymaxi).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
 			var z = app.mapPanel.map.getZoomForExtent(bd);
-
-			// Fix the issue where the WFS layer's strategy's layer and its protocol's format are nulled after invoking the printing functionality
-			// Symptom is this.layer is null (strategy) or this.format is null (protocol)
-//			if (!(glayerLocSel.strategies[0].layer)) 	{glayerLocSel.strategies[0].layer=glayerLocSel;}
-//			if (!(glayerLocSel.strategies[0].layer.map)) 	{glayerLocSel.strategies[0].layer.map=app.mapPanel.map;}
-//			if (!(glayerLocSel.protocol.format)) 		{glayerLocSel.protocol.format=gFormat;}
 
 			if (z<gtZoomMax)
 			{	
@@ -1242,28 +1273,6 @@ Ext.onReady(function() {
 				id: 'tree'
 			}]
 		});
-
-
-		var attributeRenderer = function(val) {
-			if (val.search(/^http/)>-1)
-			{
-				if (val.search(/\.jpg/)>-1)
-				{
-					val="<a href='"+val+"' target='_blank'><img src='"+val+"' height='20' width='20' /></a>";
-				}
-				else
-				{
-					val="<a href='"+val+"' target='_blank'>link</a>";
-				}
-			}
-			else
-			{
-				val=val.replace(/ 12:00 AM/g,"");
-			}
-			return val;
-		};
-
-
 
 		var tabExpand = function(p){
 			// Current layer (cl) as per content of the drop down (cb)
@@ -1426,8 +1435,12 @@ Ext.onReady(function() {
 											else
 											{
 												// This is a different tab than Google Street View, we push the attribute names and values
+												// By setting a title, we create a header (required to number the different tabs if multiple elements)
+												// but if it's the only property grid, we deny it to be rendered
+												// Based on API doc: http://docs.sencha.com/ext-js/3-4/#!/api/Ext.Panel-cfg-header
 												tab_el = new Ext.grid.PropertyGrid({
 														title:m+1,
+														header: (recs.length>1),
 														listeners: {
 															'beforeedit': function (e) { 
 																return false; 
@@ -1441,17 +1454,17 @@ Ext.onReady(function() {
 															forceFit: true,
 															scrollOffset: 0
 														}
+														//,customRenderers:{
+														//	doc:attributeRenderer
+														//}
 												});
 
 												// Remove default sorting
 												delete tab_el.getStore().sortInfo;
 												tab_el.getColumnModel().getColumnById('name').sortable = false;
 												// Managing column width ratio
-												tab_el.getColumnModel().getColumnById('name').width = 30;
-												tab_el.getColumnModel().getColumnById('value').width = 70;
-												// Renderer for cases where the value is a link
-												tab_el.getColumnModel().getColumnById('value').renderer = attributeRenderer;
-												
+												tab_el.getColumnModel().getColumnById('name').width = 35;
+												tab_el.getColumnModel().getColumnById('value').width = 65;
 												// Now load data
 												tab_el.setSource(src_attr_array);
 
@@ -1546,7 +1559,6 @@ Ext.onReady(function() {
 								//,width:227
 								,layout:'fit'
 								,border:false
-//											,defaults:{height:100%}
 								,renderTo: targ3
 								,items: [
 									{html:configArray[i].html}
@@ -1667,11 +1679,8 @@ Ext.onReady(function() {
 										delete p.getStore().sortInfo;
 										p.getColumnModel().getColumnById('name').sortable = false;
 										// Managing column width ratio
-										p.getColumnModel().getColumnById('name').width = 80;
-										p.getColumnModel().getColumnById('value').width = 170;										
-										// Renderer for cases where the value is a link
-										// Does not seem to work
-										p.getColumnModel().getColumnById('value').renderer = attributeRenderer;
+										p.getColumnModel().getColumnById('name').width = 35;
+										p.getColumnModel().getColumnById('value').width = 65;										
 										// Now load data
 										p.setSource(fa);
 
@@ -1693,14 +1702,6 @@ Ext.onReady(function() {
 										if (configArray)
 										{
 											e0.add(configArray);
-											// Adding a resize listener to each item
-/*											
-											e0.items.each(function(x){
-												x.addListener('resize',function(p){
-													p.doLayout();
-												});
-											});
-*/											
 										}
 										
 										// Refreshing the DOM with the newly added parts
@@ -1765,12 +1766,7 @@ Ext.onReady(function() {
 				activeOnTop: false,
 				hideCollapseTool: false,
 				fill: false 
-			},
-			items: [{
-				title: gtDetailsTitle,
-				html: '<p></p>',
-				autoScroll: true
-			}]
+			}
 		});
         
 		var eastPanel = new Ext.Panel({
