@@ -52,6 +52,19 @@
  * @require OpenLayers/Request/XMLHttpRequest.js
  */
 
+var debugMode = false;
+var gtProxy,gtLoginEndpoint;
+if (debugMode)
+{
+	gtProxy = "proxy/?url=";
+	gtLoginEndpoint = "http://localhost:8080/geoexplorer/login/";
+}
+else
+{
+	gtProxy = "/geoexplorer/proxy/?url=";
+	gtLoginEndpoint = "/geoexplorer/login";
+}
+
 var app;
 var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurrentExpandedTabIdx=[],gCurrentLoggedRole="NONE";
 var poziLinkClickHandler;
@@ -91,20 +104,22 @@ Ext.onReady(function() {
 			rv = this.renderDate(val);
 		}else if(typeof val == 'boolean'){
 			rv = this.renderBool(val);
-		}else if(val.search(/^http/)>-1){
-			if (val.search(/\.jpg/)>-1)
-			{
-				rv ="<a href='"+val+"' target='_blank'><img src='"+val+"' height='20' width='20' /></a>";
+		}else if(val){
+			if (val.search(/^http/)>-1){
+				if (val.search(/\.jpg/)>-1)
+				{
+					rv ="<a href='"+val+"' target='_blank'><img src='"+val+"' height='20' width='20' /></a>";
+				}
+				else
+				{
+					var linkName=val.split("/").pop();
+					if (linkName.length<1) {linkName = 'link';};
+					rv ="<a href='"+val+"' target='_blank'>"+linkName+"</a>";
+				}
+				doNotHTMLEncode = true;
+			}else	{
+				rv=val.replace(/ 12:00 AM/g,"");
 			}
-			else
-			{
-				var linkName=val.split("/").pop();
-				if (linkName.length<1) {linkName = 'link';};
-				rv ="<a href='"+val+"' target='_blank'>"+linkName+"</a>";
-			}
-			doNotHTMLEncode = true;
-		}else	{
-			rv=val.replace(/ 12:00 AM/g,"");
 		}
 		if (doNotHTMLEncode)
 		{return rv;}
@@ -113,6 +128,88 @@ Ext.onReady(function() {
 	};
 
 // GXP overrides
+
+	/** api: constructor
+	 *  .. class:: FeatureEditor(config)
+	 *
+	 *    Plugin for feature editing. Requires a
+	 *    :class:`gxp.plugins.FeatureManager`.
+	 */ 
+
+ 	// Reasons for override:
+	// - layer change activates create/edit control irrespective of user being logged in
+
+	gxp.plugins.FeatureEditor.prototype.enableOrDisable = function() {
+		// disable editing if no schema or non authorized
+		// ideally, we'd like the entire control to be deactivated (so that describe layers are not sent to the server) but couldn't find how to do that
+		var disable = !this.schema || !this.target.isAuthorized(this.roles);
+		if (this.splitButton) {
+		    this.splitButton.setDisabled(disable);
+		}
+		this.createAction.setDisabled(disable);
+		this.editAction.setDisabled(disable);
+		return disable;
+	};
+
+    /** private: method[checkIfStyleable]
+     *  :arg layerRec: ``GeoExt.data.LayerRecord``
+     *  :arg describeRec: ``Ext.data.Record`` Record from a 
+     *      `GeoExt.data.DescribeLayerStore``.
+     *
+     *  Given a layer record and the corresponding describe layer record, 
+     *  determine if the target layer can be styled.  If so, enable the launch 
+     *  action.
+     */
+ 	// Reasons for override:
+	// - managing URL parameters that are arrays
+	// - managing workspaced layers
+	
+    gxp.plugins.Styler.prototype.checkIfStyleable = function(layerRec, describeRec) {
+        if (describeRec) {
+            var owsTypes = ["WFS"];
+            if (this.rasterStyling === true) {
+                owsTypes.push("WCS");
+            }
+        }
+        if (describeRec ? owsTypes.indexOf(describeRec.get("owsType")) !== -1 : !this.requireDescribeLayer) {
+            var editableStyles = false;
+            var source = this.target.layerSources[layerRec.get("source")];
+            var url;
+            // TODO: revisit this
+            var restUrl = layerRec.get("restUrl");
+            if (restUrl) {
+                url = restUrl + "/styles";
+            } else {
+//                url = source.url.split("?").shift().replace(/\/(wms|ows)\/?$/, "/rest/styles");
+		// Array of URLs
+		if (typeof source.url =="object"){ source.url = source.url[0];}
+		// Workspaced layers
+                url = source.url.split("?").shift().replace(/\/geoserver\/.*\/(wms|ows)\/?$/, "/geoserver/rest/styles");
+            }
+            if (this.sameOriginStyling) {
+                // this could be made more robust
+                // for now, only style for sources with relative url
+                editableStyles = url.charAt(0) === "/";
+                // and assume that local sources are GeoServer instances with
+                // styling capabilities
+                if (this.target.authenticate && editableStyles) {
+                    // we'll do on-demand authentication when the button is
+                    // pressed.
+                    this.launchAction.enable();
+                    return;
+                }
+            } else {
+                editableStyles = true;
+            }
+            if (editableStyles) {
+                if (this.target.isAuthorized()) {
+                    // check if service is available
+                    this.enableActionIfAvailable(url);
+                }
+            }
+        }
+    };
+
 
     /** private: method[createOutputConfig]
      *  :returns: ``Object`` Configuration object for an Ext.tree.TreePanel
@@ -816,18 +913,19 @@ Ext.onReady(function() {
 			}, {
 				ptype: "gxp_featureeditor",
 				featureManager: "featuremanager",
-				autoLoadFeature: true
+				autoLoadFeature: true,
+				toggleGroup: "interaction"
 			}, {
 				actions: ["->"]
 			}
                 ],
 		sources: {
-//			local: {
-//				url: "/geoserver/MITCHELL/ows",
-//				title: "Mitchell Shire Council Layers",
-//				ptype: "gxp_wmscsource"
-//				//,tiled: false
-//			},
+			local: {
+				url: "http://localhost:8080/geoserver/MITCHELL/ows",
+				title: "Mitchell Shire Council Layers",
+				ptype: "gxp_wmscsource"
+				//,tiled: false
+			},
 			backend_cascaded: {
 				url: "http://basemap.pozi.com/geoserver/DSE/ows",
 				title: "DSE Vicmap Layers",
@@ -942,15 +1040,15 @@ Ext.onReady(function() {
 //				transparent:true,
 //				tiled:false
 //			},{
-//				source:"local",
-//				name:"MITCHELL:MSC_KINDERGARTEN2",
-//				title:"Kindergartens",
-//				visibility:false,
-//				format:"image/png",
-//				styles:"",
-//				transparent:true,
-//				tiled:false
-//			},{
+				source:"local",
+				name:"MITCHELL:MSC_KINDERGARTEN",
+				title:"Kindergartens",
+				visibility:false,
+				format:"image/png",
+				styles:"",
+				transparent:true,
+				tiled:false
+			},{
 				source:"backend",
 				name:"VICMAP:VW_TRANSFER_STATION",
 				title:"Transfer Stations",
@@ -970,7 +1068,8 @@ Ext.onReady(function() {
 				styles:"",
 				transparent:true,
 				tiled:false,
-				transition:'resize'
+				transition:'resize',
+				group: "top"
 			},{
 				source:"backend",
 				name:"LabelClassic",
@@ -1872,6 +1971,12 @@ Ext.onReady(function() {
 			]
 		});
 
+		var toolbar = new Ext.Toolbar({
+			disabled: true,
+			id: 'paneltbar',
+			items: []
+		});
+		
 		var portalItems = [
 		{
 			region: "north",
@@ -1951,7 +2056,7 @@ Ext.onReady(function() {
 		// HS MOD END
 		    region: "center",
 		    layout: "border",
-		    tbar: this.toolbar,
+		    tbar: toolbar,
 		    items: [
 			{
 				id: "centerpanel",
@@ -1967,8 +2072,9 @@ Ext.onReady(function() {
 		];
 
 		app = new gxp.Viewer({
+			proxy: gtProxy,
 //			proxy: "proxy/?url=",
-			proxy: "/geoexplorer/proxy/?url=",
+//			proxy: "/geoexplorer/proxy/?url=",
 			//defaultSourceType: "gxp_wmscsource",
 			portalConfig: {
 				layout: "border",
@@ -1999,7 +2105,6 @@ Ext.onReady(function() {
 		});
 
 		app.on("ready", function() {
-			//alert('Now');
 			// This is when we want to find the handle to the WFS layer
 			for(x in app.mapPanel.layers.data.items) {
 				var u = app.mapPanel.layers.data.items[x];
@@ -2013,19 +2118,15 @@ Ext.onReady(function() {
 				}
 			};
 
-//			if (config.authStatus === 401) {
-				// user has not authenticated or is not authorized
-				app.authorizedRoles = [];
-//			} else if (config.authStatus !== 404) {
-//				// user has authenticated
-//				app.authorizedRoles = ["ROLE_ADMINISTRATOR"];
-//			}			
+			// Adding the login button manually to the toolbar
+			// Note: the toolbar variable is used after this section
+			toolbar = app.mapPanel.toolbars[0];
+			toolbar.items.add(new Ext.Button({id:"loginbutton"}));
+			toolbar.doLayout();
 
-
-			// Adding the login button manually to the toolbar (couldn't find a proper ptype to add it at app creation)
-			app.mapPanel.toolbars[0].items.add(new Ext.Button({id:"loginbutton"}));
-			app.mapPanel.toolbars[0].doLayout();
-
+			// Login management via cookie and internal this.authorizedRoles variable
+			// Variable and functions copied across from GeoExplorer' Composer.js:
+			// https://github.com/opengeo/GeoExplorer/blob/master/app/static/script/app/GeoExplorer/Composer.js
 			app.cookieParamName= 'geoexplorer-user';
 			app.loginText= "Login";
 			app.logoutText= "Logout, {user}";
@@ -2035,21 +2136,21 @@ Ext.onReady(function() {
 			/** private: method[setCookieValue]
 			* Set the value for a cookie parameter
 			*/
-			    app.setCookieValue = function(param, value) {
+			app.setCookieValue = function(param, value) {
 				document.cookie = param + '=' + escape(value);
-			    };
+			};
 
 			/** private: method[clearCookieValue]
 			* Clear a certain cookie parameter.
 			*/
-			    app.clearCookieValue = function(param) {
+			app.clearCookieValue = function(param) {
 				document.cookie = param + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
-			    };
+			};
 
 			/** private: method[getCookieValue]
 			* Get the value of a certain cookie parameter. Returns null if not found.
 			*/
-			    app.getCookieValue = function(param) {
+			app.getCookieValue = function(param) {
 				var i, x, y, cookies = document.cookie.split(";");
 				for (i=0; i < cookies.length; i++) {
 				    x = cookies[i].substr(0, cookies[i].indexOf("="));
@@ -2060,38 +2161,37 @@ Ext.onReady(function() {
 				    }
 				}
 				return null;
-			    };
+			};
 
 			/** private: method[logout]
 			* Log out the current user from the application.
 			*/
-			    app.logout = function() {
+			app.logout = function() {
 				app.clearCookieValue("JSESSIONID");
 				app.clearCookieValue(app.cookieParamName);
 				app.setAuthorizedRoles([]);
-				Ext.getCmp('paneltbar').items.each(function(tool) {
-				    if (tool.needsAuthorization === true) {
-					tool.disable();
-				    }
-				});
+				// This section became useless for tools which are actively monitoring the authorization status
+				//toolbar.items.each(function(tool) {
+				//	if (tool.needsAuthorization === true) {
+				//		tool.disable();
+				//	}
+				//});
 				app.showLogin();
-			    };
+			};
 
 
 			/** private: method[authenticate]
 			* Show the login dialog for the user to login.
 			*/
-			    app.authenticate = function() {
+			app.authenticate = function() {
 			    
 				var submitLogin=function() {
-//					alert('submit');
 				    panel.buttons[0].disable();
 				    panel.getForm().submit({
 					success: function(form, action) {
-//						alert('logged in');
-					    Ext.getCmp('paneltbar').items.each(function(tool) {
+					    toolbar.items.each(function(tool) {
 						if (tool.needsAuthorization === true) {
-						    tool.enable();
+							tool.enable();
 						}
 					    });
 					    var user = form.findField('username').getValue();
@@ -2102,7 +2202,6 @@ Ext.onReady(function() {
 					    win.close();
 					},
 					failure: function(form, action) {
-//						alert('login failure');
 					    app.authorizedRoles = [];
 					    panel.buttons[0].enable();
 					    form.markInvalid({
@@ -2114,10 +2213,8 @@ Ext.onReady(function() {
 				    });
 				};
 
-
-
 				var panel = new Ext.FormPanel({
-				    url: "/geoexplorer/login/",
+				    url: gtLoginEndpoint,
 				    frame: true,
 				    labelWidth: 60,
 				    defaultType: "textfield",
@@ -2184,45 +2281,53 @@ Ext.onReady(function() {
 				    }
 				});
 				win.show();
-			    };
+			};
 
 			/**
 			* private: method[applyLoginState]
 			* Attach a handler to the login button and set its text.
 			*/
-			    app.applyLoginState = function(iconCls, text, handler, scope) {
+			app.applyLoginState = function(iconCls, text, handler, scope) {
 				var loginButton = Ext.getCmp("loginbutton");
 				loginButton.setIconClass(iconCls);
 				loginButton.setText(text);
 				loginButton.setHandler(handler, scope);
-			    };
+			};
 
 			/** private: method[showLogin]
 			* Show the login button.
 			*/
-			    app.showLogin = function() {
+			app.showLogin = function() {
 				var text = app.loginText;
 				var handler = app.authenticate;
 				app.applyLoginState('login', text, handler, this);
-			    };
+			};
 
 			/** private: method[showLogout]
 			* Show the logout button.
 			*/
-			    app.showLogout = function(user) {
+			app.showLogout = function(user) {
 				var text = new Ext.Template(this.logoutText).applyTemplate({user: user});
-				var handler = logout;
+				var handler = app.logout;
 				app.applyLoginState('logout', text, handler, this);
-			    };
+			};
 
+			app.authorizedRoles = [];
 			if (app.authorizedRoles) {
-				    // unauthorized, show login button
-				    if (app.authorizedRoles.length === 0) {
+				// If there is a cookie, the user is authorized
+				var user = app.getCookieValue(app.cookieParamName);
+				if (user !== null) {
+					app.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
+					gCurrentLoggedRole=app.authorizedRoles[0];
+				}
+			
+				// unauthorized, show login button
+				if (app.authorizedRoles.length === 0) {
 					app.showLogin();
-				    } else {
+				} else {
 					var user = app.getCookieValue(app.cookieParamName);
 					if (user === null) {
-					    user = "unknown";
+						user = "unknown";
 					}
 					app.showLogout(user);
 
@@ -2231,8 +2336,8 @@ Ext.onReady(function() {
 						gCurrentLoggedRole=app.authorizedRoles[0];
 					}                
 
-				    }
-			 };
+				}
+			};
 
 			// Information panel layouts for the current authorized role - we should degrade nicely if the service is not found
 			var ds;
