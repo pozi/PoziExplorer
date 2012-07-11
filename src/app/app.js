@@ -52,17 +52,21 @@
  * @require OpenLayers/Request/XMLHttpRequest.js
  */
 
+// Toggle value from true to false to switch between local (debug) and remote (deployed)
 var debugMode = false;
+
 var gtProxy,gtLoginEndpoint;
 if (debugMode)
 {
 	gtProxy = "proxy/?url=";
 	gtLoginEndpoint = "http://localhost:8080/geoexplorer/login/";
+	gtLocalLayerSourcePrefix = "http://103.29.64.29";
 }
 else
 {
 	gtProxy = "/geoexplorer/proxy/?url=";
 	gtLoginEndpoint = "/geoexplorer/login";
+	gtLocalLayerSourcePrefix = "";
 }
 
 var app;
@@ -129,6 +133,42 @@ Ext.onReady(function() {
 
 // GXP overrides
 
+
+	/** private: method[onRenderNode]
+	 *  :param node: ``Ext.tree.TreeNode``
+	 */
+ 	// Reasons for override:
+	// - initial collapse of the legend for each node
+	
+	GeoExt.plugins.TreeNodeComponent.prototype.onRenderNode = function(node) {
+		var rendered = node.rendered;
+		var attr = node.attributes;
+		var component = attr.component || this.component;
+		if(!rendered && component) {
+		    // We're initially hiding the component
+		    component.hidden=true;
+		    var elt = Ext.DomHelper.append(node.ui.elNode, [
+			{"tag": "div"}
+		    ]);
+		    if(typeof component == "function") {
+			component = component(node, elt);
+		    } else if (typeof component == "object" &&
+			       typeof component.fn == "function") {
+			component = component.fn.apply(
+			    component.scope, [node, elt]
+			);
+		    }
+		    if(typeof component == "object" &&
+		       typeof component.xtype == "string") {
+			component = Ext.ComponentMgr.create(component);
+		    }
+		    if(component instanceof Ext.Component) {
+			component.render(elt);
+			node.component = component;
+		    }
+		}
+	};
+
 	/** api: constructor
 	 *  .. class:: FeatureEditor(config)
 	 *
@@ -141,7 +181,7 @@ Ext.onReady(function() {
 
 	gxp.plugins.FeatureEditor.prototype.enableOrDisable = function() {
 		// disable editing if no schema or non authorized
-		// ideally, we'd like the entire control to be deactivated (so that describe layers are not sent to the server) but couldn't find how to do that
+		// TODO: entire control to be deactivated (so that describe layers are not sent to the server)
 		var disable = !this.schema || !this.target.isAuthorized(this.roles);
 		if (this.splitButton) {
 		    this.splitButton.setDisabled(disable);
@@ -921,10 +961,10 @@ Ext.onReady(function() {
                 ],
 		sources: {
 			local: {
-				url: "http://localhost:8080/geoserver/MITCHELL/ows",
+				url: gtLocalLayerSourcePrefix + "/geoserver/MITCHELL/ows",
 				title: "Mitchell Shire Council Layers",
-				ptype: "gxp_wmscsource"
-				//,tiled: false
+				ptype: "gxp_wmscsource",
+				tiled: false
 			},
 			backend_cascaded: {
 				url: "http://basemap.pozi.com/geoserver/DSE/ows",
@@ -976,15 +1016,15 @@ Ext.onReady(function() {
 				transparent:true,
 				tiled: false
 			},{
-//				source:"local",
-//				name:"MITCHELL:VICMAP_BUILDINGREG_BUSHFIRE_PRONE_AREA",
-//				title:"Bushfire-Prone Areas (Vicmap)",
-//				visibility:false,
-//				opacity:0.25,
-//				format:"image/png8",
-//				styles:"",
-//				transparent:true
-//			},{
+				source:"backend_cascaded",
+				name:"DSE:CC_BUSHFIRE_PRONE_AREAS",
+				title:"Bushfire-Prone Areas",
+				visibility:false,
+				opacity:0.75,
+				format:"image/png8",
+				styles:"",
+				transparent:true
+			},{
 				source:"backend",
 				name:"VICMAP:VICMAP_PROPERTY_ADDRESS",
 				title:"Property (Vicmap)",
@@ -995,56 +1035,57 @@ Ext.onReady(function() {
 				transparent:true,
 				tiled:false
 			},{
-//				source:"local",
-//				name:"MITCHELL:MSC_GARBAGE_COLLECTION",
-//				title:"Waste Collection",
-//				visibility:false,
-//				opacity:0.6,
-//				format:"image/png8",
-//				styles:"",
-//				transparent:true
-//			},{
-//				source:"local",
-//				name:"MITCHELL:MSC_LEISURE_CENTRE2",
-//				title:"Leisure Centres",
-//				visibility:false,
-//				format:"image/png",
-//				styles:"",
-//				transparent:true,
-//				tiled:false
-//			},{
-//				source:"local",
-//				name:"MITCHELL:MSC_SPORTS_RESERVE2",
-//				title:"Sports Reserves",
-//				visibility:false,
-//				format:"image/png",
-//				styles:"",
-//				transparent:true,
-//				tiled:false
-//			},{
-//				source:"local",
-//				name:"MITCHELL:MSC_CUSTOMER_SERVICE_CENTRE2",
-//				title:"Customer Service Centres",
-//				visibility:false,
-//				format:"image/png",
-//				styles:"",
-//				transparent:true,
-//				tiled:false
-//			},{
-//				source:"local",
-//				name:"MITCHELL:MSC_LIBRARY2",
-//				title:"Libraries",
-//				visibility:false,
-//				format:"image/png",
-//				styles:"",
-//				transparent:true,
-//				tiled:false
-//			},{
+				source:"local",
+				name:"MITCHELL:MSC_GARBAGE_COLLECTION",
+				title:"Waste Collection",
+				visibility:false,
+				opacity:0.6,
+				format:"image/png8",
+				styles:"",
+				transparent:true,
+				tiled:false
+			},{
+				source:"local",
+				name:"MITCHELL:MSC_LEISURE_CENTRE",
+				title:"Leisure Centres",
+				visibility:false,
+				format:"image/png8",
+				styles:"",
+				transparent:true,
+				tiled:false
+			},{
+				source:"local",
+				name:"MITCHELL:MSC_SPORTS_RESERVE",
+				title:"Sports Reserves",
+				visibility:false,
+				format:"image/png8",
+				styles:"",
+				transparent:true,
+				tiled:false
+			},{
+				source:"local",
+				name:"MITCHELL:MSC_CUSTOMER_SERVICE_CENTRE",
+				title:"Customer Service Centres",
+				visibility:false,
+				format:"image/png8",
+				styles:"",
+				transparent:true,
+				tiled:false
+			},{
+				source:"local",
+				name:"MITCHELL:MSC_LIBRARY",
+				title:"Libraries",
+				visibility:false,
+				format:"image/png8",
+				styles:"",
+				transparent:true,
+				tiled:false
+			},{
 				source:"local",
 				name:"MITCHELL:MSC_KINDERGARTEN",
 				title:"Kindergartens",
 				visibility:false,
-				format:"image/png",
+				format:"image/png8",
 				styles:"",
 				transparent:true,
 				tiled:false
