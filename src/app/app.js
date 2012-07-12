@@ -70,7 +70,7 @@ else
 }
 
 var app;
-var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurrentExpandedTabIdx=[],gCurrentLoggedRole="NONE";
+var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurrentExpandedTabIdx=[],gCurrentLoggedRole="NONE",JSONconf;
 var poziLinkClickHandler;
 
 // Helper functions
@@ -133,6 +133,62 @@ Ext.onReady(function() {
 
 // GXP overrides
 
+    /** private: method[addLayers]
+     *  :arg records: ``Array`` the layer records to add
+     *  :arg source: :class:`gxp.plugins.LayerSource` The source to add from
+     *  :arg isUpload: ``Boolean`` Do the layers to add come from an upload?
+     */
+ 	// Reasons for override:
+	// - do not zoom to layer extent when it's added
+	// - more precise control of the group a layer is being added to
+
+    gxp.plugins.AddLayers.prototype.addLayers = function(records, source, isUpload) {
+        source = source || this.selectedSource;
+        var layerStore = this.target.mapPanel.layers,
+            extent, record, layer;
+        for (var i=0, ii=records.length; i<ii; ++i) {
+            record = source.createLayerRecord({
+                name: records[i].get("name"),
+                source: source.id
+            });
+            if (record) {
+                layer = record.getLayer();
+                if (layer.maxExtent) {
+                    if (!extent) {
+                        extent = record.getLayer().maxExtent.clone();
+                    } else {
+                        extent.extend(record.getLayer().maxExtent);
+                    }
+                }
+ 		if (record.get("group") === "background") {
+
+                    layerStore.insert(0, [record]);
+                } else {
+ 		    // TODO: Try triggering the layer/map refresh that happens when drag/dropping a layer
+                    layerStore.add([record]);
+                }
+            }
+        }
+        if (extent) {
+        	// TODO: we could trigger the zoomToExtent but only if we are outside the extent
+            //this.target.mapPanel.map.zoomToExtent(extent);
+        }
+        if (records.length === 1 && record) {
+		// The layer is not available yet for selection (just set a break point on previous line)	
+            // select the added layer
+            this.target.selectLayer(record);
+            if (isUpload && this.postUploadAction) {
+                // show LayerProperties dialog if just one layer was uploaded
+                var outputConfig,
+                    actionPlugin = this.postUploadAction;
+                if (!Ext.isString(actionPlugin)) {
+                    outputConfig = actionPlugin.outputConfig;
+                    actionPlugin = actionPlugin.plugin;
+                }
+                this.target.tools[actionPlugin].addOutput(outputConfig);
+            }
+        }
+    };
 
 	/** private: method[onRenderNode]
 	 *  :param node: ``Ext.tree.TreeNode``
@@ -276,6 +332,7 @@ Ext.onReady(function() {
             treeRoot.appendChild(new GeoExt.tree.LayerContainer(Ext.apply({
                 text: groupConfig.title,
                 iconCls: "gxp-folder",
+                // Extracting the expanded/collapsed state from groupConfig
                 expanded: ("collapsed" in groupConfig?!groupConfig.collapsed:true),
                 group: group == this.defaultGroup ? undefined : group,
                 loader: new GeoExt.tree.LayerLoader({
@@ -892,1555 +949,1336 @@ Ext.onReady(function() {
         return actions;
     };
 
+	// Extraction of parameters from the URL to load the correct configuration file, and an optional property number to focus on
+	function getURLParameter(name) {	
+		return decodeURI(	
+			(RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]	
+		);
+	}
 
-	// Starting by loading the specific configuration for the council using an AJAX call
-	// For now, this is a static JSON file, but we expect to be able to generate it from a database
-	// This JSON contains information about the map configuration
+	// Extracting parameters values: config and property
+	var configScript = getURLParameter('config');
+	var propnum = getURLParameter('property');
 
-	var JSONconf = {
-		tools: [{
-				// A layer manager displays the legend in line with the layer tree
-				ptype: "gxp_layermanager",
-				groups: {
-				    "top": { title:"Top Layers", collapsed:true},
-				    "default": "Overlays", // title can be overridden with overlayNodeText
-				    "background": {
-				        title: "Base Maps", // can be overridden with baseNodeText
-				        exclusive: true
-				    }
-				},
-				outputConfig: {
-					id: "tree",
-					border: false,
-					tbar: [] // we will add buttons to "tree.bbar" later
-				},
-				outputTarget: "westpanel"
-			}, {
-				ptype: "gxp_addlayers",
-				actionTarget: "tree.tbar"
-			}, {
-				ptype: "gxp_layerproperties",
-				id: "layerproperties",
-				actionTarget: "tree.contextMenu"
-			},{
-				ptype: "gxp_zoomtolayerextent",
-				actionTarget: "tree.contextMenu"
-			}, {
-				ptype: "gxp_styler",
-				actionTarget: "tree.contextMenu"
-			}, {
-				ptype: "gxp_removelayer",
-				actionTarget: "tree.contextMenu"
-			}, {
-				ptype: "gxp_wmsgetfeatureinfo", 
-				format: 'grid',
-				toggleGroup: "interaction",
-				showButtonText: false
-			}, {
-				ptype: "gxp_print",
-				customParams: {outputFilename: 'PoziExplorer-print'},
-				printService: "/geoserver/pdf",
-				showButtonText: false
-			}, {
-				ptype: "gxp_measure", 
-				toggleGroup: "interaction",
-				controlOptions: {immediate: true},
-				showButtonText: false
-			}, {
-				ptype: "gxp_featuremanager",
-				id: "featuremanager",
-				maxFeatures: 20
-			}, {
-				ptype: "gxp_featureeditor",
-				featureManager: "featuremanager",
-				autoLoadFeature: true,
-				toggleGroup: "interaction"
-			}, {
-				actions: ["->"]
-			}
-                ],
-		sources: {
-			local: {
-				url: gtLocalLayerSourcePrefix + "/geoserver/MITCHELL/ows",
-				title: "Mitchell Shire Council Layers",
-				ptype: "gxp_wmscsource",
-				tiled: false
-			},
-			backend_cascaded: {
-				url: "http://basemap.pozi.com/geoserver/DSE/ows",
-				title: "DSE Vicmap Layers",
-				ptype: "gxp_wmscsource"
-			},
-			dse_iws_cascaded: {
-				url: ["http://m1.pozi.com/geoserver/MITCHELL/ows","http://m2.pozi.com/geoserver/MITCHELL/ows","http://m3.pozi.com/geoserver/MITCHELL/ows","http://m4.pozi.com/geoserver/MITCHELL/ows"],
-				title: "DSE Image Web Server",
-				ptype: "gxp_wmscsource",
-				format: "image/JPEG",
-				group: "background",
-				transition:'resize'
-			},
-			mapquest: {
-				ptype: "gxp_mapquestsource"
-			},
-			bing: {
-				ptype: "gxp_bingsource"
-			},
-			ol: {
-				ptype: "gxp_olsource"
-			},
-			backend: {
-				url: ["http://m1.pozi.com/geoserver/ows","http://m2.pozi.com/geoserver/ows","http://m3.pozi.com/geoserver/ows","http://m4.pozi.com/geoserver/ows"],
-				title: "Pozi Data Server",
-				ptype: "gxp_wmscsource",
-				transition:null
-			}
-		},
-		layers: [{
-				source:"backend",
-				name:"VICMAP:VW_DSE_VMPLAN_ZONE",
-				title:"Planning Zones (Vicmap)",
-				visibility:false,
-				opacity:0.5,
-				format:"image/png8",
-				styles:"",
-				transparent:true,
-				tiled: false
-			},{
-				source:"backend",
-				name:"VICMAP:VW_DSE_VMPLAN_OVERLAY",
-				title:"Planning Overlays (Vicmap)",
-				visibility:false,
-				opacity:0.5,
-				format:"image/png8",
-				styles:"",
-				transparent:true,
-				tiled: false
-			},{
-				source:"backend_cascaded",
-				name:"DSE:CC_BUSHFIRE_PRONE_AREAS",
-				title:"Bushfire-Prone Areas",
-				visibility:false,
-				opacity:0.75,
-				format:"image/png8",
-				styles:"",
-				transparent:true
-			},{
-				source:"backend",
-				name:"VICMAP:VICMAP_PROPERTY_ADDRESS",
-				title:"Property (Vicmap)",
-				visibility:true,
-				opacity:0.25,
-				format:"image/GIF",
-				styles:"",
-				transparent:true,
-				tiled:false
-			},{
-				source:"local",
-				name:"MITCHELL:MSC_GARBAGE_COLLECTION",
-				title:"Waste Collection",
-				visibility:false,
-				opacity:0.6,
-				format:"image/png8",
-				styles:"",
-				transparent:true,
-				tiled:false
-			},{
-				source:"local",
-				name:"MITCHELL:MSC_LEISURE_CENTRE",
-				title:"Leisure Centres",
-				visibility:false,
-				format:"image/png8",
-				styles:"",
-				transparent:true,
-				tiled:false
-			},{
-				source:"local",
-				name:"MITCHELL:MSC_SPORTS_RESERVE",
-				title:"Sports Reserves",
-				visibility:false,
-				format:"image/png8",
-				styles:"",
-				transparent:true,
-				tiled:false
-			},{
-				source:"local",
-				name:"MITCHELL:MSC_CUSTOMER_SERVICE_CENTRE",
-				title:"Customer Service Centres",
-				visibility:false,
-				format:"image/png8",
-				styles:"",
-				transparent:true,
-				tiled:false
-			},{
-				source:"local",
-				name:"MITCHELL:MSC_LIBRARY",
-				title:"Libraries",
-				visibility:false,
-				format:"image/png8",
-				styles:"",
-				transparent:true,
-				tiled:false
-			},{
-				source:"local",
-				name:"MITCHELL:MSC_KINDERGARTEN",
-				title:"Kindergartens",
-				visibility:false,
-				format:"image/png8",
-				styles:"",
-				transparent:true,
-				tiled:false
-			},{
-				source:"backend",
-				name:"VICMAP:VW_TRANSFER_STATION",
-				title:"Transfer Stations",
-				visibility:false,
-				opacity:0.85,
-				format:"image/png8",
-				styles:"",
-				transparent:true,
-				tiled:false
-			},{
-				source:"backend",
-				name:"VICMAP:VW_MITCHELL_MASK",
-				title:"Municipal Boundary",
-				visibility:true,
-				opacity:0.6,
-				format:"image/png8",
-				styles:"",
-				transparent:true,
-				tiled:false,
-				transition:'resize',
-				group: "top"
-			},{
-				source:"backend",
-				name:"LabelClassic",
-				title:"Labels",
-				visibility:true,
-				opacity:1,
-				selected:false,
-				format:"image/png8",
-				styles:"",
-				transparent:true,
-				tiled:false,
-				group: "top"
-			},{
-				source:"backend",
-				name:"VicmapClassic",
-				title:"Vicmap Classic",
-				visibility:true,
-				opacity:1,
-				group:"background",
-				selected:false,
-				format:"image/png8",
-				styles:"",
-				transparent:true,
-				cached:true,
-				transition:'resize'
-			},{
-				source:"mapquest",
-				name: "osm",
-				visibility: false,
-				group:"background"
-			},{
-				source:"bing",
-				name: "Aerial",
-				visibility: false,
-				group:"background"
-			},{
-				source:"dse_iws_cascaded",
-				name :"MITCHELL:AERIAL_MITCHELL_2007JAN26_AIR_VIS_50CM_MGA55",
-				title:"Aerial Photo (CIP 2007)",
-				visibility:false,
-				opacity:1,
-				group:"background",
-				selected:false,
-				format:"image/JPEG",
-				transparent:true
-			},{
-				source: "ol",
-				group: "background",
-				visibility: false,
-				fixed: true,
-				type: "OpenLayers.Layer.OSM",
-				args: [
-					"Aerial Photo (Nearmap)", "https://mitchell:v55ngas6@www.nearmap.com/maps/nml=Vert&x=${x}&y=${y}&z=${z}", {numZoomLevels: 24,transitionEffect:'resize'}
-				]
-			},{
-				source: "ol",
-				group: "background",
-				fixed: true,
-				type: "OpenLayers.Layer",
-				args: [
-					"None", {visibility: false}
-				]
-		}],
-		center: [16143500, -4461908],
-		zoom: 10,
-		customJS:'mitchell.js',
-		workspace: "MITCHELL",
-		highlightSymboliser: {name:"test",strokeColor:"yellow",strokeWidth: 15, strokeOpacity:0.5,fillColor:"yellow",fillOpacity:0.2},
-		liveDataEndPoints: [
-			{ urlLayout:'http://172.20.10.19:9090/ws/rest/v3/ws_get_layouts.php', 	urlLiveData:'http://172.20.10.19:9090/ws/rest/v3/ws_get_live_data.php',	storeMode:'sqlite',	storeName:'mitchell'},
-			{ urlLayout:'http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php', 	urlLiveData:'http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php',	storeMode:'pgsql',	storeName:'vicmap'}
-		]	
-	};
-	
-
-	// Based on the previous JSON configuration, we may decide to dynamically load an additional Javascript file of interaction customisations
-	
-	// Function that is able to dynamically load the extra Javascript
-	var loadjscssfile = function(filename, cbk){
-		var fileref = document.createElement('script');
-		fileref.setAttribute("type",'text/javascript');
-
-		// The onload callback option does not work as expected in IE so we are using the following work-around
-		// From: http://www.nczonline.net/blog/2009/07/28/the-best-way-to-load-external-javascript/
-		if (fileref.readyState){  
-			//IE
-			fileref.onreadystatechange = function(){
-				if (fileref.readyState == "loaded" || fileref.readyState == "complete"){
-					fileref.onreadystatechange = null;
-					cbk();
-				}
-			};
-		} else {  
-			//Others
-			fileref.onload = function(){
-				cbk();
-			};
-		}
-		fileref.setAttribute("src", filename);
-		document.getElementsByTagName('head')[0].appendChild(fileref);
-	};
-	
-	// Encapsulating the loading of the main app in a callback  
-	var extraJSScriptLoaded = function(){
-		// Global variables and their possible client-specific overrides
-		var gtCollapseLayerTree = false;
-		if (JSONconf.collapseLayerTree) {gtCollapseLayerTree=JSONconf.collapseLayerTree;};
-
-		var gtEmptyTextSelectFeature = "Selected features ...";
-		if (JSONconf.emptyTextSelectFeature) {gtEmptyTextSelectFeature=JSONconf.emptyTextSelectFeature;};
-
-		var gtGetLiveDataEndPoints = JSONconf.liveDataEndPoints;
-
-		var gtLogoClientSrc = "http://www.pozi.com/theme/app/img/mitchell_banner.jpg";
-		var gtLogoClientWidth=238;
-
-		var gtEmptyTextSearch = 'Find properties, roads, features, etc...';
-		var gtLoadingText = 'Searching...';
-		var gtLoadingText = "Loading ...";
-		var gtDetailsTitle = "Details";
-		var gtClearButton = "Clear";
-		var gtInfoTitle = "Info";
-
-		var gtZoomMax = 18;
-
-		// Layout for the extra tabs
-		var gLayoutsArr = [];
-		
-		// Flag to track the origin of the store refresh
-		var gfromWFS="N";
-
-		poziLinkClickHandler = function () {
-			var appInfo = new Ext.Panel({
-				title: "GeoExplorer",
-				html: "<iframe style='border: none; height: 100%; width: 100%' src='about.html' frameborder='0' border='0'><a target='_blank' href='about.html'>" + this.aboutText + "</a> </iframe>"
-			});
-			var poziInfo = new Ext.Panel({
-				title: "Pozi Explorer",
-				html: "<iframe style='border: none; height: 100%; width: 100%' src='about-pozi.html' frameborder='0' border='0'><a target='_blank' href='about-pozi.html'>" + "</a> </iframe>"
-			});
-			var tabs = new Ext.TabPanel({
-				activeTab: 0,
-				items: [
-				poziInfo,appInfo]
-			});
-			var win = new Ext.Window({
-				title: "About this map",
-				modal: true,
-				layout: "fit",
-				width: 300,
-				height: 300,
-				items: [
-					tabs]
-				});
-			win.show();
-		};	
-
-		var gtInitialDisclaimerFlag=true;
-		var gtDisclaimer="disclaimer.html";
-		var gtRedirectIfDeclined="http://www.mitchellshire.vic.gov.au/";
-		var gtLinkToCouncilWebsite="http://www.mitchellshire.vic.gov.au/";
-		var gtBannerLineColor="#DE932A";
-		var gtBannerRightCornerLine1="Mitchell Shire Council";
-		var gtBannerRightCornerLine2="Victoria, Australia";
-
-		// WFS layer: style , definition , namespaces
-		var gtStyleMap = new OpenLayers.StyleMap();
-		var gtSymbolizer = JSONconf.highlightSymboliser;
-
-		var rule_for_all = new OpenLayers.Rule({
-			symbolizer: gtSymbolizer, elseFilter: true
-		});
-		rule_for_all.title=" ";
-		gtStyleMap.styles["default"].addRules([rule_for_all]);
-
-		var gtWFSsrsName = "EPSG:4326";
-		var gtWFSgeometryName = "the_geom";
-
-		var gtServicesHost = "http://49.156.17.41";		
-		var gtWFSEndPoint = gtServicesHost + "/geoserver/wfs";
-		var gtFeatureNS="http://www.pozi.com/vicmap";
-		
-		// Pushing the WFS layer in the layer store
-		JSONconf.layers.push({
-			source: "ol",
-			visibility: true,
-			type: "OpenLayers.Layer.Vector",
-			group: "top",
-			args: [
-				"Selection", {
-					styleMap: gtStyleMap,
-					strategies: [new OpenLayers.Strategy.BBOX({ratio:100})],
-				        protocol: new OpenLayers.Protocol.WFS({
-						version:       "1.1.0",
-						url:           gtWFSEndPoint,
-						featureType:   "VMPROP_PROPERTY",
-						srsName:       gtWFSsrsName,
-						featureNS:     gtFeatureNS,
-						geometryName:  gtWFSgeometryName,
-						schema:        gtWFSEndPoint+"?service=WFS&version=1.1.0&request=DescribeFeatureType&TypeName="+"VICMAP:VMPROP_PROPERTY"
-					}),
-					filter: new OpenLayers.Filter.Comparison({type: OpenLayers.Filter.Comparison.EQUAL_TO,property: 'pr_propnum',value: -1}),
-					projection: new OpenLayers.Projection("EPSG:4326")
-				}
-			]
-		});		
-
-		// Store behind the info drop-down list
-		gCombostore = new Ext.data.ArrayStore({
-		    //autoDestroy: true,
-		    storeId: 'myStore',
-		    idIndex: 0,  
-		    fields: [
-		       'id',
-		       'type',
-		       'content',
-		       'index',
-		       'label',
-		       'layer'
-		    ],
-		    listeners: {
-			    load: function(ds,records,o) {
-				var cb = Ext.getCmp('gtInfoCombobox');
-				var rec = records[0];
-				if (records.length>1)
-				{
-					// Multiple records, color of the combo background is different
-					cb.addClass("x-form-multi");
-				}
-				else
-				{
-					// Restoring the color to a normal white
-					cb.removeClass("x-form-multi");
-				}
-				cb.setValue(rec.data.type);
-				cb.fireEvent('select',cb,rec);
-				},
-			    scope: this
-			}
-		});
-
-		
-
-		// In a multi-council database setup, use 346
-		var gtLGACode = "346";
-		// Database config for the master search table
-		var gtDatabaseConfig = "vicmap";
-		
-		var gtSearchComboEndPoint = gtServicesHost + "/ws/rest/v3/ws_all_features_by_string_and_lga.php";
-		
-		// Datastore definition for the web service search results 
-		var ds = new Ext.data.JsonStore({
-			autoLoad: false, //autoload the data
-			root: 'rows',
-			baseParams: { config: gtDatabaseConfig, lga:gtLGACode},
-			fields: [{name: "label"	, mapping:"row.label"},
-				{name: "xmini"	, mapping:"row.xmini"},
-				{name: "ymini"	, mapping:"row.ymini"},
-				{name: "xmaxi"	, mapping:"row.xmaxi"},
-				{name: "ymaxi"	, mapping:"row.ymaxi"},
-				{name: "gsns"	, mapping:"row.gsns"},
-				{name: "gsln"	, mapping:"row.gsln"},
-				{name: "idcol"	, mapping:"row.idcol"},
-				{name: "idval"	, mapping:"row.idval"},
-				{name: "ld"	, mapping:"row.ld"}
-			],
-			proxy: new Ext.data.ScriptTagProxy({
-				url: gtSearchComboEndPoint
-			})
-		});
-
-
-
-
-		// Remove the WFS highlight, clear and disable the select feature combo, empty the combostore and clean the details panel 
-		clear_highlight = function(){ 
-			// Removing the highlight by clearing the selected features in the WFS layer
-			glayerLocSel.removeAllFeatures();
-			glayerLocSel.redraw();
-			// Clearing combo
-			var cb = Ext.getCmp('gtInfoCombobox');
-			cb.collapse();
-			cb.clearValue();
-			cb.disable();
-			cb.removeClass("x-form-multi");
-			// Removing all values from the combo
-			gCombostore.removeAll();
-			// Clearing the details from the panel
-			accordion.removeAll();
-		};
-
-		// Handler called when:
-		// - a record is selected in the search drop down list
-		// - a property number is passed in the URL and has returned a valid property record
-		var search_record_select_handler = function (combo,record){
-			// Zooming to the relevant area (covering the selected record)
-			var bd = new OpenLayers.Bounds(record.data.xmini,record.data.ymini,record.data.xmaxi,record.data.ymaxi).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
-			var z = app.mapPanel.map.getZoomForExtent(bd);
-
-			if (z<gtZoomMax)
-			{	
-				app.mapPanel.map.zoomToExtent(bd);
+	// If the URL does not offer itself to splitting according to the rules above, it means, we are having Apache clean URL: http://www.pozi.com/mitchell/property/45633
+	// We extract the information according to this pattern
+	if (!(configScript))
+	{
+		// We extract the end of the URL
+		// This will no longer work when we consider saved maps
+		var urlquery=location.href.split("?");
+		if (urlquery[urlquery.length-2])
+		{
+			if (urlquery[urlquery.length-2]=="property")
+			{
+				configScript = urlquery[urlquery.length-3];
+				propnum = urlquery[urlquery.length-1];
 			}
 			else
-			{// If zooming too close, taking step back to level gtZoomMax , centered on the center of the bounding box for this record
-				app.mapPanel.map.moveTo(new OpenLayers.LonLat((bd.left+bd.right)/2,(bd.top+bd.bottom)/2), gtZoomMax);
+			{
+				configScript = urlquery[urlquery.length-1];
 			}
+		}
+	}	
 
-			// Updating the WFS protocol to fetch this record
-			glayerLocSel.protocol = new OpenLayers.Protocol.WFS({
-				version:       "1.1.0",
-				url:           gtWFSEndPoint,
-				featureType:   record.data.gsln,
-				srsName:       gtWFSsrsName,
-				featureNS:     gtFeatureNS,
-				geometryName:  gtWFSgeometryName,
-				schema:        gtWFSEndPoint+"?service=WFS&version=1.1.0&request=DescribeFeatureType&TypeName="+record.data.gsns+":"+record.data.gsln
+	// Function to execute on successful return of the JSON configuration file loading
+	var onConfigurationLoaded = function() {
+
+		// Based on the previous JSON configuration, we may decide to dynamically load an additional Javascript file of interaction customisations
+
+		// Function that is able to dynamically load the extra Javascript
+		var loadjscssfile = function(filename, cbk){
+			var fileref = document.createElement('script');
+			fileref.setAttribute("type",'text/javascript');
+
+			// The onload callback option does not work as expected in IE so we are using the following work-around
+			// From: http://www.nczonline.net/blog/2009/07/28/the-best-way-to-load-external-javascript/
+			if (fileref.readyState){  
+				//IE
+				fileref.onreadystatechange = function(){
+					if (fileref.readyState == "loaded" || fileref.readyState == "complete"){
+						fileref.onreadystatechange = null;
+						cbk();
+					}
+				};
+			} else {  
+				//Others
+				fileref.onload = function(){
+					cbk();
+				};
+			}
+			fileref.setAttribute("src", filename);
+			document.getElementsByTagName('head')[0].appendChild(fileref);
+		};
+
+		// Encapsulating the loading of the main app in a callback  
+		var extraJSScriptLoaded = function(){
+			// Fixing local URL source for debug mode
+			JSONconf.sources.local.url = gtLocalLayerSourcePrefix + JSONconf.sources.local.url;
+
+			// Global variables and their possible client-specific overrides
+			var gtCollapseLayerTree = false;
+			if (JSONconf.collapseLayerTree) {gtCollapseLayerTree=JSONconf.collapseLayerTree;};
+
+			var gtEmptyTextSelectFeature = "Selected features ...";
+			if (JSONconf.emptyTextSelectFeature) {gtEmptyTextSelectFeature=JSONconf.emptyTextSelectFeature;};
+
+			var gtGetLiveDataEndPoints = JSONconf.liveDataEndPoints;
+
+			var gtLogoClientSrc = "http://www.pozi.com/theme/app/img/mitchell_banner.jpg";
+			var gtLogoClientWidth=238;
+
+			var gtEmptyTextSearch = 'Find properties, roads, features, etc...';
+			var gtLoadingText = 'Searching...';
+			var gtLoadingText = "Loading ...";
+			var gtDetailsTitle = "Details";
+			var gtClearButton = "Clear";
+			var gtInfoTitle = "Info";
+
+			var gtZoomMax = 18;
+
+			// Layout for the extra tabs
+			var gLayoutsArr = [];
+
+			// Flag to track the origin of the store refresh
+			var gfromWFS="N";
+
+			poziLinkClickHandler = function () {
+				var appInfo = new Ext.Panel({
+					title: "GeoExplorer",
+					html: "<iframe style='border: none; height: 100%; width: 100%' src='about.html' frameborder='0' border='0'><a target='_blank' href='about.html'>" + this.aboutText + "</a> </iframe>"
+				});
+				var poziInfo = new Ext.Panel({
+					title: "Pozi Explorer",
+					html: "<iframe style='border: none; height: 100%; width: 100%' src='about-pozi.html' frameborder='0' border='0'><a target='_blank' href='about-pozi.html'>" + "</a> </iframe>"
+				});
+				var tabs = new Ext.TabPanel({
+					activeTab: 0,
+					items: [
+					poziInfo,appInfo]
+				});
+				var win = new Ext.Window({
+					title: "About this map",
+					modal: true,
+					layout: "fit",
+					width: 300,
+					height: 300,
+					items: [
+						tabs]
+					});
+				win.show();
+			};	
+
+			var gtInitialDisclaimerFlag=true;
+			var gtDisclaimer="disclaimer.html";
+			var gtRedirectIfDeclined="http://www.mitchellshire.vic.gov.au/";
+			var gtLinkToCouncilWebsite="http://www.mitchellshire.vic.gov.au/";
+			var gtBannerLineColor="#DE932A";
+			var gtBannerRightCornerLine1="Mitchell Shire Council";
+			var gtBannerRightCornerLine2="Victoria, Australia";
+
+			// WFS layer: style , definition , namespaces
+			var gtStyleMap = new OpenLayers.StyleMap();
+			var gtSymbolizer = JSONconf.highlightSymboliser;
+
+			var rule_for_all = new OpenLayers.Rule({
+				symbolizer: gtSymbolizer, elseFilter: true
+			});
+			rule_for_all.title=" ";
+			gtStyleMap.styles["default"].addRules([rule_for_all]);
+
+			var gtWFSsrsName = "EPSG:4326";
+			var gtWFSgeometryName = "the_geom";
+
+			var gtServicesHost = "http://49.156.17.41";		
+			var gtWFSEndPoint = gtServicesHost + "/geoserver/wfs";
+			var gtFeatureNS="http://www.pozi.com/vicmap";
+
+			// Pushing the WFS layer in the layer store
+			JSONconf.layers.push({
+				source: "ol",
+				visibility: true,
+				type: "OpenLayers.Layer.Vector",
+				group: "top",
+				args: [
+					"Selection", {
+						styleMap: gtStyleMap,
+						strategies: [new OpenLayers.Strategy.BBOX({ratio:100})],
+						protocol: new OpenLayers.Protocol.WFS({
+							version:       "1.1.0",
+							url:           gtWFSEndPoint,
+							featureType:   "VMPROP_PROPERTY",
+							srsName:       gtWFSsrsName,
+							featureNS:     gtFeatureNS,
+							geometryName:  gtWFSgeometryName,
+							schema:        gtWFSEndPoint+"?service=WFS&version=1.1.0&request=DescribeFeatureType&TypeName="+"VICMAP:VMPROP_PROPERTY"
+						}),
+						filter: new OpenLayers.Filter.Comparison({type: OpenLayers.Filter.Comparison.EQUAL_TO,property: 'pr_propnum',value: -1}),
+						projection: new OpenLayers.Projection("EPSG:4326")
+					}
+				]
+			});		
+
+			// Store behind the info drop-down list
+			gCombostore = new Ext.data.ArrayStore({
+			    //autoDestroy: true,
+			    storeId: 'myStore',
+			    idIndex: 0,  
+			    fields: [
+			       'id',
+			       'type',
+			       'content',
+			       'index',
+			       'label',
+			       'layer'
+			    ],
+			    listeners: {
+				    load: function(ds,records,o) {
+					var cb = Ext.getCmp('gtInfoCombobox');
+					var rec = records[0];
+					if (records.length>1)
+					{
+						// Multiple records, color of the combo background is different
+						cb.addClass("x-form-multi");
+					}
+					else
+					{
+						// Restoring the color to a normal white
+						cb.removeClass("x-form-multi");
+					}
+					cb.setValue(rec.data.type);
+					cb.fireEvent('select',cb,rec);
+					},
+				    scope: this
+				}
 			});
 
-			// Filtering the WFS layer on a column name and value - if the value contains a \, we escape it by doubling it
-			glayerLocSel.filter = new OpenLayers.Filter.Comparison({type: OpenLayers.Filter.Comparison.EQUAL_TO,property: record.data.idcol ,value: record.data.idval.replace('\\','\\\\') });
-			gfromWFS="Y";
-			gtyp=record.data.ld;
-			glab=record.data.label;
 
-			glayerLocSel.events.on({
-				featuresadded: function(event) {
-					if (gfromWFS=="Y")
-					{
-						var typ=gtyp;
-						var lab=glab;
 
-						var row_array = [];
-						var cont;
-						gComboDataArray=[];
+			// In a multi-council database setup, use 346
+			var gtLGACode = "346";
+			// Database config for the master search table
+			var gtDatabaseConfig = "vicmap";
 
-						for (var k=0;k<this.features.length;k++)
+			var gtSearchComboEndPoint = gtServicesHost + "/ws/rest/v3/ws_all_features_by_string_and_lga.php";
+
+			// Datastore definition for the web service search results 
+			var ds = new Ext.data.JsonStore({
+				autoLoad: false, //autoload the data
+				root: 'rows',
+				baseParams: { config: gtDatabaseConfig, lga:gtLGACode},
+				fields: [{name: "label"	, mapping:"row.label"},
+					{name: "xmini"	, mapping:"row.xmini"},
+					{name: "ymini"	, mapping:"row.ymini"},
+					{name: "xmaxi"	, mapping:"row.xmaxi"},
+					{name: "ymaxi"	, mapping:"row.ymaxi"},
+					{name: "gsns"	, mapping:"row.gsns"},
+					{name: "gsln"	, mapping:"row.gsln"},
+					{name: "idcol"	, mapping:"row.idcol"},
+					{name: "idval"	, mapping:"row.idval"},
+					{name: "ld"	, mapping:"row.ld"}
+				],
+				proxy: new Ext.data.ScriptTagProxy({
+					url: gtSearchComboEndPoint
+				})
+			});
+
+
+
+
+			// Remove the WFS highlight, clear and disable the select feature combo, empty the combostore and clean the details panel 
+			clear_highlight = function(){ 
+				// Removing the highlight by clearing the selected features in the WFS layer
+				glayerLocSel.removeAllFeatures();
+				glayerLocSel.redraw();
+				// Clearing combo
+				var cb = Ext.getCmp('gtInfoCombobox');
+				cb.collapse();
+				cb.clearValue();
+				cb.disable();
+				cb.removeClass("x-form-multi");
+				// Removing all values from the combo
+				gCombostore.removeAll();
+				// Clearing the details from the panel
+				accordion.removeAll();
+			};
+
+			// Handler called when:
+			// - a record is selected in the search drop down list
+			// - a property number is passed in the URL and has returned a valid property record
+			var search_record_select_handler = function (combo,record){
+				// Zooming to the relevant area (covering the selected record)
+				var bd = new OpenLayers.Bounds(record.data.xmini,record.data.ymini,record.data.xmaxi,record.data.ymaxi).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
+				var z = app.mapPanel.map.getZoomForExtent(bd);
+
+				if (z<gtZoomMax)
+				{	
+					app.mapPanel.map.zoomToExtent(bd);
+				}
+				else
+				{// If zooming too close, taking step back to level gtZoomMax , centered on the center of the bounding box for this record
+					app.mapPanel.map.moveTo(new OpenLayers.LonLat((bd.left+bd.right)/2,(bd.top+bd.bottom)/2), gtZoomMax);
+				}
+
+				// Updating the WFS protocol to fetch this record
+				glayerLocSel.protocol = new OpenLayers.Protocol.WFS({
+					version:       "1.1.0",
+					url:           gtWFSEndPoint,
+					featureType:   record.data.gsln,
+					srsName:       gtWFSsrsName,
+					featureNS:     gtFeatureNS,
+					geometryName:  gtWFSgeometryName,
+					schema:        gtWFSEndPoint+"?service=WFS&version=1.1.0&request=DescribeFeatureType&TypeName="+record.data.gsns+":"+record.data.gsln
+				});
+
+				// Filtering the WFS layer on a column name and value - if the value contains a \, we escape it by doubling it
+				glayerLocSel.filter = new OpenLayers.Filter.Comparison({type: OpenLayers.Filter.Comparison.EQUAL_TO,property: record.data.idcol ,value: record.data.idval.replace('\\','\\\\') });
+				gfromWFS="Y";
+				gtyp=record.data.ld;
+				glab=record.data.label;
+
+				glayerLocSel.events.on({
+					featuresadded: function(event) {
+						if (gfromWFS=="Y")
 						{
-							// We capture the attributes brought back by the WFS call
-							cont=this.features[k].data;
-							// Capturing the feature as well (it contains the geometry)
-							cont["the_geom_WFS"]=this.features[k];										
+							var typ=gtyp;
+							var lab=glab;
 
-							// Building a record and inserting it into an array											
-							//row_array = new Array(k,typ,lab,cont,null,null,this.features[k].layer.protocol.featureType); 
-							row_array = new Array(k,typ,cont,0,lab,this.features[k].layer.protocol.featureType); 
-							gComboDataArray.push(row_array);
-						}
-
-						// Clearing existing value from the drop-down list
-						var cb = Ext.getCmp('gtInfoCombobox');
-						cb.clearValue();
-
-						// If there is a record (and there should be at least one - by construction of the search table)
-						if (gComboDataArray.length)
-						{							
-							if (cb.disabled) {cb.enable();}
-							gCombostore.removeAll();
-							gCombostore.loadData(gComboDataArray);
+							var row_array = [];
+							var cont;
 							gComboDataArray=[];
-						}									
+
+							for (var k=0;k<this.features.length;k++)
+							{
+								// We capture the attributes brought back by the WFS call
+								cont=this.features[k].data;
+								// Capturing the feature as well (it contains the geometry)
+								cont["the_geom_WFS"]=this.features[k];										
+
+								// Building a record and inserting it into an array											
+								//row_array = new Array(k,typ,lab,cont,null,null,this.features[k].layer.protocol.featureType); 
+								row_array = new Array(k,typ,cont,0,lab,this.features[k].layer.protocol.featureType); 
+								gComboDataArray.push(row_array);
+							}
+
+							// Clearing existing value from the drop-down list
+							var cb = Ext.getCmp('gtInfoCombobox');
+							cb.clearValue();
+
+							// If there is a record (and there should be at least one - by construction of the search table)
+							if (gComboDataArray.length)
+							{							
+								if (cb.disabled) {cb.enable();}
+								gCombostore.removeAll();
+								gCombostore.loadData(gComboDataArray);
+								gComboDataArray=[];
+							}									
+						}
+					}
+				});
+
+				// Refreshing the WFS layer so that the highlight appears and triggers the featuresadded event handler above
+				glayerLocSel.refresh({force:true});
+
+			};
+
+			// Panels and portals
+			var westPanel = new Ext.Panel({
+				id:"westpanel",
+				border: false,
+				layout: "anchor",
+				region: "west",
+				width: 250,
+				split: true,
+				border: false,
+				collapsible: true,
+				collapseMode: "mini",
+				collapsed: gtCollapseLayerTree,
+				autoScroll:true,
+				header: false,
+				items: [{
+					region: 'center',
+					border: false,
+					id: 'tree'
+				}]
+			});
+
+			var tabExpand = function(p){
+				// Current layer (cl) as per content of the drop down (cb)
+				var cb = Ext.getCmp('gtInfoCombobox');
+				var cl = cb.getStore().data.items[cb.getStore().find("type",cb.getValue())].data.layer;
+
+				// Updating the index of the currently opened tab
+				for(k in p.ownerCt.items.items)
+				{	
+					if (p.ownerCt.items.items[k].id==p.id)
+					{
+						// Layer name of the currently selected item in the combo
+						gCurrentExpandedTabIdx[cl] = k;
+						break;
 					}
 				}
-			});
-			
-			// Refreshing the WFS layer so that the highlight appears and triggers the featuresadded event handler above
-			glayerLocSel.refresh({force:true});
 
-		};
-		
-		// Panels and portals
-		var westPanel = new Ext.Panel({
-			id:"westpanel",
-			border: false,
-			layout: "anchor",
-			region: "west",
-			width: 250,
-			split: true,
-			border: false,
-			collapsible: true,
-			collapseMode: "mini",
-			collapsed: gtCollapseLayerTree,
-			autoScroll:true,
-			header: false,
-			items: [{
-				region: 'center',
-				border: false,
-				id: 'tree'
-			}]
-		});
+				// Sending in the query to populate this specific tab (tab on demand)
+				// Could be further refined by keeping track of which tab has already been opened, so that we don't re-request the data
 
-		var tabExpand = function(p){
-			// Current layer (cl) as per content of the drop down (cb)
-			var cb = Ext.getCmp('gtInfoCombobox');
-			var cl = cb.getStore().data.items[cb.getStore().find("type",cb.getValue())].data.layer;
-
-			// Updating the index of the currently opened tab
-			for(k in p.ownerCt.items.items)
-			{	
-				if (p.ownerCt.items.items[k].id==p.id)
+				if (gCurrentExpandedTabIdx[cl] != 0)
 				{
-					// Layer name of the currently selected item in the combo
-					gCurrentExpandedTabIdx[cl] = k;
-					break;
-				}
-			}
-
-			// Sending in the query to populate this specific tab (tab on demand)
-			// Could be further refined by keeping track of which tab has already been opened, so that we don't re-request the data
-					
-			if (gCurrentExpandedTabIdx[cl] != 0)
-			{
-				//alert("Requesting data on demand!");
-				var configArray = gLayoutsArr[cl];
-				if (configArray)
-				{
-					// This could be further refined by sending only the query corresponding to the open accordion part
-					for (var i=gCurrentExpandedTabIdx[cl]-1; i< gCurrentExpandedTabIdx[cl]; i++)
+					//alert("Requesting data on demand!");
+					var configArray = gLayoutsArr[cl];
+					if (configArray)
 					{
-						var g=0;
-
-						// Adding a loading indicator for user feedback		
-						var targ2 = Ext.getCmp(configArray[i].id);
-						targ2.removeAll();
-						
-						// Rendering as a table
-						var win2 = new Ext.Panel({
-							id:'tblayout-win-loading'
-							,layout:'hbox'
-							,layoutConfig: {
-								padding:'5',
-								pack:'center',
-								align:'middle'
-							}
-							,border:false
-							,defaults:{height:26}
-							,items: [
-								{html:'<img src="http://www.pozi.com/externals/ext/resources/images/default/grid/loading.gif"/>',border:false,padding:'5'}
-							]
-						});
-						targ2.add(win2);
-						targ2.doLayout();
-
-						// Finding the unique ID of the selected record, to pass to the live query
-						var selectedRecordIndex = cb.selectedIndex;	
-						if ((selectedRecordIndex==-1) || (selectedRecordIndex>=cb.store.data.items.length))
+						// This could be further refined by sending only the query corresponding to the open accordion part
+						for (var i=gCurrentExpandedTabIdx[cl]-1; i< gCurrentExpandedTabIdx[cl]; i++)
 						{
-							selectedRecordIndex=0;
-						}
-						var idFeature = cb.store.data.items[selectedRecordIndex].data.content[configArray[i].idName];
+							var g=0;
 
-						if (configArray[i].id.substring(0,1)!='X')
-						{
-							// Live query using the script tag
-							var ds = new Ext.data.Store({
-								autoLoad:true,
-								proxy: new Ext.data.ScriptTagProxy({
-									url: gtGetLiveDataEndPoints[configArray[i].definition].urlLiveData
-								}),
-								reader: new Ext.data.JsonReader({	
-									root: 'rows',
-									totalProperty: 'total_rows',
-									id: 'id'	
-									}, 
-									[	{name: 'id', mapping: 'row.id'}
-								]),
-								baseParams: {
-									// Logged in role
-									role: gCurrentLoggedRole,
-									// Passing the value of the property defined as containing the common ID
-									id: idFeature,
-									// Passing the tab name
-									infoGroup: configArray[i].id,
-									// Passing the database type to query
-									mode: gtGetLiveDataEndPoints[configArray[i].definition].storeMode,
-									// Passing the database name to query
-									config: gtGetLiveDataEndPoints[configArray[i].definition].storeName,
-									// Passing the LGA code, so that the query can be narrowed down (unused)
-									lga: gtLGACode
-								},
-								listeners:
-								{
-									load: function(store, recs)
-									{
-										// Looping thru the records returned by the query
-										tab_array = new Array();
-										for (m = 0 ; m < recs.length; m++)
-										{
-											res_data = recs[m].json.row;
-											var has_gsv = false;	
-											var src_attr_array = new Array();
-
-											for (j in res_data)
-											{
-												if (j!="target")
-												{
-													var val=res_data[j];
-
-													if (j.search(/^gsv/)>-1)
-													{
-														// Not showing the cells - technical properties for Google Street View
-														has_gsv = true;
-													}
-													else
-													{	
-														// Building the source array for a property grid
-														src_attr_array[trim(j)]=trim(val);
-													}
-												}
-											}
-
-											// Adding a Google Street View link for selected datasets
-											if (has_gsv)
-											{
-												var gsv_lat, gsv_lon, gsv_head=0;
-
-												for(var k in res_data)
-												{
-													if (k=="gsv_lat")
-													{
-														gsv_lat=res_data[k];
-													}
-													if (k=="gsv_lon")
-													{
-														gsv_lon=res_data[k];
-													}
-													if (k=="gsv_head")
-													{
-														gsv_head=res_data[k];
-													}												
-												}
-
-												if (gsv_lat && gsv_lon)
-												{
-													// Adjusted to the size of the column
-													var size_thumb = 245;
-													var gsvthumb = "http://maps.googleapis.com/maps/api/streetview?location="+gsv_lat+","+gsv_lon+"&fov=90&heading="+gsv_head+"&pitch=-10&sensor=false&size="+size_thumb+"x"+size_thumb;
-													var gsvlink = "http://maps.google.com.au/maps?layer=c&cbll="+gsv_lat+","+gsv_lon+"&cbp=12,"+gsv_head+",,0,0";
-										
-												
-													tab_el = {
-														layout	: 'fit',
-														height  : size_thumb,
-														items	: [{
-															html:"<div style='font-size:10pt;'><a href='"+gsvlink+"' target='_blank'><img src='"+gsvthumb+"'/></a></div>"
-														}]
-													};
-												}
-											}
-											else
-											{
-												// This is a different tab than Google Street View, we push the attribute names and values
-												// By setting a title, we create a header (required to number the different tabs if multiple elements)
-												// but if it's the only property grid, we deny it to be rendered
-												// Based on API doc: http://docs.sencha.com/ext-js/3-4/#!/api/Ext.Panel-cfg-header
-												tab_el = new Ext.grid.PropertyGrid({
-														title:m+1,
-														header: (recs.length>1),
-														listeners: {
-															'beforeedit': function (e) { 
-																return false; 
-															}
-														},
-														stripeRows: true,
-														autoHeight: true,
-														hideHeaders: true,
-														// Removing the space on the right usually reserved for scrollbar
-														viewConfig: {
-															forceFit: true,
-															scrollOffset: 0
-														}
-														//,customRenderers:{
-														//	doc:attributeRenderer
-														//}
-												});
-
-												// Remove default sorting
-												delete tab_el.getStore().sortInfo;
-												tab_el.getColumnModel().getColumnById('name').sortable = false;
-												// Managing column width ratio
-												tab_el.getColumnModel().getColumnById('name').width = 35;
-												tab_el.getColumnModel().getColumnById('value').width = 65;
-												// Now load data
-												tab_el.setSource(src_attr_array);
-
-											}
-											
-											tab_array.push(tab_el);
-										}	
-
-										// Identification of the div to render the attributes to, if there is anything to render
-										if (recs[0])
-										{
-											// The target div for placing this data
-											var targ = Ext.getCmp(recs[0].json.row["target"]);
-											targ.removeAll();
-
-											// The container depends on the number of records returned
-											if (tab_array.length==1)
-											{
-												// Removing the title - it's useless
-												// We should be able to remove the header that was created with a non-null title
-												tab_array[0].title = undefined;
-												
-												// Rendering as a table
-												var win = new Ext.Panel({
-													id:'tblayout-win'+g,
-													layout:'fit',
-													border:false,
-													items: tab_array[0]													
-												});
-											}
-											else
-											{
-												// Renderng as a tab panel of tables
-												var win = new Ext.TabPanel({
-													activeTab       : 0,
-													id              : 'tblayout-win'+g,
-													enableTabScroll : true,
-													resizeTabs      : false,
-													minTabWidth     : 15,																
-													border:false,
-													items: tab_array
-												});
-											}
-											targ.add(win);
-											targ.doLayout();	
-										}
-										else
-										{
-											// The target div for placing this data: the loading div's parent
-											var targ = Ext.getCmp(recs[0].json.row["target"]);
-											targ.removeAll();
-
-											// Rendering as a table
-											var win3 = new Ext.Panel({
-												id:'tblayout-win-noresult'
-												//,width:227
-												,layout:'hbox'
-												,layoutConfig: {
-													padding:'5',
-													pack:'center',
-													align:'middle'
-												}
-												,border:false
-												,defaults:{height:26}
-												,renderTo: targ
-												,items: [
-													{html:'<p style="font-size:12px;">No result found</p>',border:false,padding:'5'}
-												]
-											});
-											targ.add(win3);
-											targ.doLayout();
-										}
-										g++;
-									}
-								}
-							});
-						}
-						else
-						{
-							// Rendering a generic tab based on its HTML definition
-							// The target div for placing this data: the loading div's parent
-							var targ3 = Ext.get(Ext.getCmp('tblayout-win-loading').body.id).dom.parentNode.parentElement.parentElement;
-							// If data already exists, we remove it for replacement with the latest data
-							if (targ3.hasChildNodes())
-							{
-								targ3.removeChild(targ3.firstChild);
-							}
+							// Adding a loading indicator for user feedback		
+							var targ2 = Ext.getCmp(configArray[i].id);
+							targ2.removeAll();
 
 							// Rendering as a table
-							var win4 = new Ext.Panel({
-								id:'tblayout-win-generic'
-								//,width:227
-								,layout:'fit'
+							var win2 = new Ext.Panel({
+								id:'tblayout-win-loading'
+								,layout:'hbox'
+								,layoutConfig: {
+									padding:'5',
+									pack:'center',
+									align:'middle'
+								}
 								,border:false
-								,renderTo: targ3
+								,defaults:{height:26}
 								,items: [
-									{html:configArray[i].html}
+									{html:'<img src="http://www.pozi.com/externals/ext/resources/images/default/grid/loading.gif"/>',border:false,padding:'5'}
 								]
 							});
-							win4.doLayout();
-						}
-					}
+							targ2.add(win2);
+							targ2.doLayout();
 
-				}							
-			}
-																	
-		};
+							// Finding the unique ID of the selected record, to pass to the live query
+							var selectedRecordIndex = cb.selectedIndex;	
+							if ((selectedRecordIndex==-1) || (selectedRecordIndex>=cb.store.data.items.length))
+							{
+								selectedRecordIndex=0;
+							}
+							var idFeature = cb.store.data.items[selectedRecordIndex].data.content[configArray[i].idName];
 
-		// Defines the north part of the east panel
-		var northPart = new Ext.Panel({
-			region: "north",
-		    	border: false,
-		    	layout: 'column',
-		        height: 23,
-			bodyStyle: " background-color: transparent ",
-			items: [
-				new Ext.Panel({
-					border: false,
-					layout: 'fit',
-					height: 22,
-					columnWidth: 1,
-					items: [
-						new Ext.form.ComboBox({
-							id: 'gtInfoCombobox',
-							store: gCombostore,
-							displayField:'type',
-							disabled: true,
-							mode: 'local',
-							typeAhead: true,
-							forceSelection: true,
-							triggerAction: 'all',
-							emptyText: gtEmptyTextSelectFeature,
-							tpl: '<tpl for="."><div class="info-item" style="height: 16px;">{type}: {label}</div></tpl>',
-							itemSelector: 'div.info-item',
-							listeners: {'select': function (combo,record){
-										var e0=Ext.getCmp('gtAccordion');
-
-										e0.removeAll();
-										
-										// Whatever the current expanded tab is, we populate the direct attributes accordion panel
-										var lab;
-										var val;
-										var item_array=new Array();
-										var has_gsv = false;
-										var fa = [];
-										
-										for(var k in record.data.content)
+							if (configArray[i].id.substring(0,1)!='X')
+							{
+								// Live query using the script tag
+								var ds = new Ext.data.Store({
+									autoLoad:true,
+									proxy: new Ext.data.ScriptTagProxy({
+										url: gtGetLiveDataEndPoints[configArray[i].definition].urlLiveData
+									}),
+									reader: new Ext.data.JsonReader({	
+										root: 'rows',
+										totalProperty: 'total_rows',
+										id: 'id'	
+										}, 
+										[	{name: 'id', mapping: 'row.id'}
+									]),
+									baseParams: {
+										// Logged in role
+										role: gCurrentLoggedRole,
+										// Passing the value of the property defined as containing the common ID
+										id: idFeature,
+										// Passing the tab name
+										infoGroup: configArray[i].id,
+										// Passing the database type to query
+										mode: gtGetLiveDataEndPoints[configArray[i].definition].storeMode,
+										// Passing the database name to query
+										config: gtGetLiveDataEndPoints[configArray[i].definition].storeName,
+										// Passing the LGA code, so that the query can be narrowed down (unused)
+										lga: gtLGACode
+									},
+									listeners:
+									{
+										load: function(store, recs)
 										{
-											if (k=="the_geom")
+											// Looping thru the records returned by the query
+											tab_array = new Array();
+											for (m = 0 ; m < recs.length; m++)
 											{
-												var featureToRead = record.data.content[k];
-												var wktObj = new OpenLayers.Format.WKT({
-													externalProjection: new OpenLayers.Projection("EPSG:4326"), //projection your data is in
-													internalProjection: new OpenLayers.Projection("EPSG:900913") //projection you map uses to display stuff
-												});
-												var wktfeatures = wktObj.read(featureToRead);
-												
-												// Should be able to select several if the control key is pressed
-												glayerLocSel.removeAllFeatures();
-												glayerLocSel.addFeatures(wktfeatures);
-											
-											}
-											else if (k=="the_geom_WFS")
-											{
-												var wktfeatures=record.data.content[k];
-												gfromWFS="N";
-												glayerLocSel.removeAllFeatures();
-												glayerLocSel.addFeatures(wktfeatures);
-											}
-											else
-											{
-												lab=k;
-												val=record.data.content[k];
-												if (val.search(/^http/)>-1)
+												res_data = recs[m].json.row;
+												var has_gsv = false;	
+												var src_attr_array = new Array();
+
+												for (j in res_data)
 												{
-													if (val.search(/\.jpg/)>-1)
+													if (j!="target")
 													{
-														val="<a href='"+val+"' target='_blank'><img src='"+val+"' height='20' width='20' /></a>";
+														var val=res_data[j];
+
+														if (j.search(/^gsv/)>-1)
+														{
+															// Not showing the cells - technical properties for Google Street View
+															has_gsv = true;
+														}
+														else
+														{	
+															// Building the source array for a property grid
+															src_attr_array[trim(j)]=trim(val);
+														}
 													}
-													else
+												}
+
+												// Adding a Google Street View link for selected datasets
+												if (has_gsv)
+												{
+													var gsv_lat, gsv_lon, gsv_head=0;
+
+													for(var k in res_data)
 													{
-														val="<a href='"+val+"' target='_blank'>link</a>";
+														if (k=="gsv_lat")
+														{
+															gsv_lat=res_data[k];
+														}
+														if (k=="gsv_lon")
+														{
+															gsv_lon=res_data[k];
+														}
+														if (k=="gsv_head")
+														{
+															gsv_head=res_data[k];
+														}												
+													}
+
+													if (gsv_lat && gsv_lon)
+													{
+														// Adjusted to the size of the column
+														var size_thumb = 245;
+														var gsvthumb = "http://maps.googleapis.com/maps/api/streetview?location="+gsv_lat+","+gsv_lon+"&fov=90&heading="+gsv_head+"&pitch=-10&sensor=false&size="+size_thumb+"x"+size_thumb;
+														var gsvlink = "http://maps.google.com.au/maps?layer=c&cbll="+gsv_lat+","+gsv_lon+"&cbp=12,"+gsv_head+",,0,0";
+
+
+														tab_el = {
+															layout	: 'fit',
+															height  : size_thumb,
+															items	: [{
+																html:"<div style='font-size:10pt;'><a href='"+gsvlink+"' target='_blank'><img src='"+gsvthumb+"'/></a></div>"
+															}]
+														};
 													}
 												}
 												else
 												{
-													val=val.replace(/ 12:00 AM/g,"");
+													// This is a different tab than Google Street View, we push the attribute names and values
+													// By setting a title, we create a header (required to number the different tabs if multiple elements)
+													// but if it's the only property grid, we deny it to be rendered
+													// Based on API doc: http://docs.sencha.com/ext-js/3-4/#!/api/Ext.Panel-cfg-header
+													tab_el = new Ext.grid.PropertyGrid({
+															title:m+1,
+															header: (recs.length>1),
+															listeners: {
+																'beforeedit': function (e) { 
+																	return false; 
+																}
+															},
+															stripeRows: true,
+															autoHeight: true,
+															hideHeaders: true,
+															// Removing the space on the right usually reserved for scrollbar
+															viewConfig: {
+																forceFit: true,
+																scrollOffset: 0
+															}
+															//,customRenderers:{
+															//	doc:attributeRenderer
+															//}
+													});
+
+													// Remove default sorting
+													delete tab_el.getStore().sortInfo;
+													tab_el.getColumnModel().getColumnById('name').sortable = false;
+													// Managing column width ratio
+													tab_el.getColumnModel().getColumnById('name').width = 35;
+													tab_el.getColumnModel().getColumnById('value').width = 65;
+													// Now load data
+													tab_el.setSource(src_attr_array);
+
 												}
 
-												// Building the source of a property grid
-												fa[trim(lab)]=trim(val);
+												tab_array.push(tab_el);
+											}	
+
+											// Identification of the div to render the attributes to, if there is anything to render
+											if (recs[0])
+											{
+												// The target div for placing this data
+												var targ = Ext.getCmp(recs[0].json.row["target"]);
+												targ.removeAll();
+
+												// The container depends on the number of records returned
+												if (tab_array.length==1)
+												{
+													// Removing the title - it's useless
+													// We should be able to remove the header that was created with a non-null title
+													tab_array[0].title = undefined;
+
+													// Rendering as a table
+													var win = new Ext.Panel({
+														id:'tblayout-win'+g,
+														layout:'fit',
+														border:false,
+														items: tab_array[0]													
+													});
+												}
+												else
+												{
+													// Renderng as a tab panel of tables
+													var win = new Ext.TabPanel({
+														activeTab       : 0,
+														id              : 'tblayout-win'+g,
+														enableTabScroll : true,
+														resizeTabs      : false,
+														minTabWidth     : 15,																
+														border:false,
+														items: tab_array
+													});
+												}
+												targ.add(win);
+												targ.doLayout();	
+											}
+											else
+											{
+												// The target div for placing this data: the loading div's parent
+												var targ = Ext.getCmp(recs[0].json.row["target"]);
+												targ.removeAll();
+
+												// Rendering as a table
+												var win3 = new Ext.Panel({
+													id:'tblayout-win-noresult'
+													//,width:227
+													,layout:'hbox'
+													,layoutConfig: {
+														padding:'5',
+														pack:'center',
+														align:'middle'
+													}
+													,border:false
+													,defaults:{height:26}
+													,renderTo: targ
+													,items: [
+														{html:'<p style="font-size:12px;">No result found</p>',border:false,padding:'5'}
+													]
+												});
+												targ.add(win3);
+												targ.doLayout();
+											}
+											g++;
+										}
+									}
+								});
+							}
+							else
+							{
+								// Rendering a generic tab based on its HTML definition
+								// The target div for placing this data: the loading div's parent
+								var targ3 = Ext.get(Ext.getCmp('tblayout-win-loading').body.id).dom.parentNode.parentElement.parentElement;
+								// If data already exists, we remove it for replacement with the latest data
+								if (targ3.hasChildNodes())
+								{
+									targ3.removeChild(targ3.firstChild);
+								}
+
+								// Rendering as a table
+								var win4 = new Ext.Panel({
+									id:'tblayout-win-generic'
+									//,width:227
+									,layout:'fit'
+									,border:false
+									,renderTo: targ3
+									,items: [
+										{html:configArray[i].html}
+									]
+								});
+								win4.doLayout();
+							}
+						}
+
+					}							
+				}
+
+			};
+
+			// Defines the north part of the east panel
+			var northPart = new Ext.Panel({
+				region: "north",
+				border: false,
+				layout: 'column',
+				height: 23,
+				bodyStyle: " background-color: transparent ",
+				items: [
+					new Ext.Panel({
+						border: false,
+						layout: 'fit',
+						height: 22,
+						columnWidth: 1,
+						items: [
+							new Ext.form.ComboBox({
+								id: 'gtInfoCombobox',
+								store: gCombostore,
+								displayField:'type',
+								disabled: true,
+								mode: 'local',
+								typeAhead: true,
+								forceSelection: true,
+								triggerAction: 'all',
+								emptyText: gtEmptyTextSelectFeature,
+								tpl: '<tpl for="."><div class="info-item" style="height: 16px;">{type}: {label}</div></tpl>',
+								itemSelector: 'div.info-item',
+								listeners: {'select': function (combo,record){
+											var e0=Ext.getCmp('gtAccordion');
+
+											e0.removeAll();
+
+											// Whatever the current expanded tab is, we populate the direct attributes accordion panel
+											var lab;
+											var val;
+											var item_array=new Array();
+											var has_gsv = false;
+											var fa = [];
+
+											for(var k in record.data.content)
+											{
+												if (k=="the_geom")
+												{
+													var featureToRead = record.data.content[k];
+													var wktObj = new OpenLayers.Format.WKT({
+														externalProjection: new OpenLayers.Projection("EPSG:4326"), //projection your data is in
+														internalProjection: new OpenLayers.Projection("EPSG:900913") //projection you map uses to display stuff
+													});
+													var wktfeatures = wktObj.read(featureToRead);
+
+													// Should be able to select several if the control key is pressed
+													glayerLocSel.removeAllFeatures();
+													glayerLocSel.addFeatures(wktfeatures);
+
+												}
+												else if (k=="the_geom_WFS")
+												{
+													var wktfeatures=record.data.content[k];
+													gfromWFS="N";
+													glayerLocSel.removeAllFeatures();
+													glayerLocSel.addFeatures(wktfeatures);
+												}
+												else
+												{
+													lab=k;
+													val=record.data.content[k];
+													if (val.search(/^http/)>-1)
+													{
+														if (val.search(/\.jpg/)>-1)
+														{
+															val="<a href='"+val+"' target='_blank'><img src='"+val+"' height='20' width='20' /></a>";
+														}
+														else
+														{
+															val="<a href='"+val+"' target='_blank'>link</a>";
+														}
+													}
+													else
+													{
+														val=val.replace(/ 12:00 AM/g,"");
+													}
+
+													// Building the source of a property grid
+													fa[trim(lab)]=trim(val);
+												}
+
 											}
 
-										}
+											var p = new Ext.grid.PropertyGrid({
+													listeners: {
+														'beforeedit': function (e) { 
+															return false; 
+														} 
+													},
+													stripeRows: true,
+													autoHeight: true,
+													hideHeaders: true,
+													viewConfig: {
+														forceFit: true,
+														scrollOffset: 0
+													}
+											});
 
-										var p = new Ext.grid.PropertyGrid({
-												listeners: {
-													'beforeedit': function (e) { 
-														return false; 
-													} 
-												},
-												stripeRows: true,
-												autoHeight: true,
-												hideHeaders: true,
-												viewConfig: {
-													forceFit: true,
-													scrollOffset: 0
-												}
-										});
+											// Remove default sorting
+											delete p.getStore().sortInfo;
+											p.getColumnModel().getColumnById('name').sortable = false;
+											// Managing column width ratio
+											p.getColumnModel().getColumnById('name').width = 35;
+											p.getColumnModel().getColumnById('value').width = 65;										
+											// Now load data
+											p.setSource(fa);
 
-										// Remove default sorting
-										delete p.getStore().sortInfo;
-										p.getColumnModel().getColumnById('name').sortable = false;
-										// Managing column width ratio
-										p.getColumnModel().getColumnById('name').width = 35;
-										p.getColumnModel().getColumnById('value').width = 65;										
-										// Now load data
-										p.setSource(fa);
+											var panel = new Ext.Panel({
+												  id:'attributeAcc',
+												  title: gtDetailsTitle,
+												  layout: 'fit',
+												  items: [p],
+												  listeners:{
+													scope:this,
+													expand:tabExpand
+												  }
+											});
 
-										var panel = new Ext.Panel({
-											  id:'attributeAcc',
-											  title: gtDetailsTitle,
-											  layout: 'fit',
-											  items: [p],
-											  listeners:{
-											  	scope:this,
-											  	expand:tabExpand
-											  }
-										});
-											
-										e0.add(panel);
+											e0.add(panel);
 
-										// Layout configuration the global variable array loaded at application start										
-										var configArray = gLayoutsArr[record.data.layer];
-										if (configArray)
-										{
-											e0.add(configArray);
-										}
-										
-										// Refreshing the DOM with the newly added parts
-										e0.doLayout();	
-										
-										/// Expanding the tab whose index has been memorised
-										if (!(gCurrentExpandedTabIdx[record.data.layer]))
-										{
-											gCurrentExpandedTabIdx[record.data.layer]="0";
-										}
-										e0.items.itemAt(gCurrentExpandedTabIdx[record.data.layer]).expand();
+											// Layout configuration the global variable array loaded at application start										
+											var configArray = gLayoutsArr[record.data.layer];
+											if (configArray)
+											{
+												e0.add(configArray);
+											}
 
-									},
-								    scope:this}
-						    
-							})
-						]}),
-						
-				new Ext.Panel({
-					border: false,
-					layout: 'fit',
-					width: 35,
-					height: 22,
-					items: [
-							new Ext.Button({
-								text: gtClearButton,
-								handler: clear_highlight
-							})
-					]
-				})
-			]
-		});
+											// Refreshing the DOM with the newly added parts
+											e0.doLayout();	
 
-		var accordion = new Ext.Panel({
-			//title: 'Accordion Layout',
-			id:'gtAccordion',
-			layout:'accordion',
-			region: "center",
-			border: false,
-			collapsible: false,
-			autoScroll:true,
-			listeners:{
-					scope: this,
-					resize:function(p){
-						// This is required to get the content of the accordion tabs to resize
-						p.doLayout();
-					}
-			},
-			defaults: {
-				// applied to each contained panel
-				bodyStyle: " background-color: transparent ",
-				collapsed: true,
-				listeners: {
-					scope:this,
-					expand: tabExpand
-				}
-			},
-			layoutConfig: {
-				// layout-specific configs go here
-				animate: false,
-				titleCollapse: true,
-				activeOnTop: false,
-				hideCollapseTool: false,
-				fill: false 
-			}
-		});
-        
-		var eastPanel = new Ext.Panel({
-			border: false,
-			layout: "anchor",
-			region: "east",
-			title: gtInfoTitle,
-			collapsible: true,
-			collapseMode: "mini",
-			width: 250,
-			split: true,
-			items: [
-				northPart,
-				accordion
-			]
-		});
+											/// Expanding the tab whose index has been memorised
+											if (!(gCurrentExpandedTabIdx[record.data.layer]))
+											{
+												gCurrentExpandedTabIdx[record.data.layer]="0";
+											}
+											e0.items.itemAt(gCurrentExpandedTabIdx[record.data.layer]).expand();
 
-		var toolbar = new Ext.Toolbar({
-			disabled: true,
-			id: 'paneltbar',
-			items: []
-		});
-		
-		var portalItems = [
-		{
-			region: "north",
-			layout: "column",
-			height: 100,
-			footerCfg: {
-				// Required to have the footer display
-				html: '<p style="font-size:8px;"><br></p>'
-			},
-			footerStyle:'background-color:'+gtBannerLineColor+';border:0px;',
-			// Removes the grey border around the footer (and around the whole container body)
-			bodyStyle:'border:0px;',
-			items:
-				[
-				new Ext.BoxComponent({
-				region: "west",
-					width: gtLogoClientWidth,
-					bodyStyle: " background-color: transparent ",
-					html: '<img style="height: 90px" src="'+gtLogoClientSrc+'" align="right"/>'
-				})
-				,
-				{
-					columnWidth: 0.5,
-					html:"",
-					height: 100,
-					border:false
-				}
-				,
-				new Ext.Panel({
-					region: "center",
-					width: 500,
-					padding: "34px",
-					border: false,
-					bodyStyle: " background-color: white ; ",
-					items: [
-						new Ext.form.ComboBox({
-							id: 'gtSearchCombobox',
-							queryParam: 'query',
-							store: ds,
-							displayField:'label',
-							selectOnFocus: true,
-							minChars: 3,
-							typeAhead: false,
-							loadingText: gtLoadingText,
-							width: 450,
-							style: "border: 2px solid #BBBBBB; width: 490px; height: 24px; font-size: 11pt;",
-							pageSize:0,
-							emptyText:gtEmptyTextSearch,
-							hideTrigger:true,
-							tpl: '<tpl for="."><div class="search-item" style="height: 28px;"><font color="#666666">{ld}</font> : {[values.label.replace(new RegExp( "(" +  Ext.get(\'gtSearchCombobox\').getValue()  + ")" , \'gi\' ), "<b>$1</b>" )]} <br></div></tpl>',
-							itemSelector: 'div.search-item',
-							listeners: {'select': search_record_select_handler,scope:this}
-						})
-					]
-				})
-				,
-				{
-					columnWidth: 0.5,
-					html:"",
-					height: 100,
-					border:false
-				}
-				,
+										},
+									    scope:this}
 
-				new Ext.Panel({
-					region: "east",
-					border: false,
-					width: 200,
-					height: 100,
-					bodyStyle: " background-color: transparent; ",
-					html: '<p style="text-align:right;padding: 15px;font-size:12px;"><a href="'+gtLinkToCouncilWebsite+'" target="_blank">'+ gtBannerRightCornerLine1 +'</a><br> '+ gtBannerRightCornerLine2 +' <br><br>Map powered by <a href="javascript:poziLinkClickHandler()">Pozi</a></p>'
+								})
+							]}),
 
-				})
+					new Ext.Panel({
+						border: false,
+						layout: 'fit',
+						width: 35,
+						height: 22,
+						items: [
+								new Ext.Button({
+									text: gtClearButton,
+									handler: clear_highlight
+								})
+						]
+					})
 				]
-		},
-		{
-		// HS MOD END
-		    region: "center",
-		    layout: "border",
-		    tbar: toolbar,
-		    items: [
-			{
-				id: "centerpanel",
-				xtype: "panel",
-				layout: "fit",
+			});
+
+			var accordion = new Ext.Panel({
+				//title: 'Accordion Layout',
+				id:'gtAccordion',
+				layout:'accordion',
 				region: "center",
 				border: false,
-				items: ["mymap"]
-			},
-			westPanel,
-			eastPanel
-		    ]}
-		];
-
-		app = new gxp.Viewer({
-			proxy: gtProxy,
-//			proxy: "proxy/?url=",
-//			proxy: "/geoexplorer/proxy/?url=",
-			//defaultSourceType: "gxp_wmscsource",
-			portalConfig: {
-				layout: "border",
-				region: "center",
-				// by configuring items here, we don't need to configure portalItems and save a wrapping container
-				items: portalItems,
-				bbar: {id: "mybbar"}
-			},
-			// configuration of all tool plugins for this application
-			tools: JSONconf.tools,
-			// layer sources
-			sources: JSONconf.sources,
-			// map and layers
-			map: {
-				id: "mymap", // id needed to reference map in portalConfig above
-				projection: "EPSG:900913",
-				center: JSONconf.center,
-				zoom: JSONconf.zoom,
-				layers: JSONconf.layers ,
-				items: [{
-					xtype: "gxp_scaleoverlay"
-				},{
-					xtype: "gx_zoomslider",
-					vertical: true,
-					height: 100
-				}]
-			}
-		});
-
-		app.on("ready", function() {
-			// This is when we want to find the handle to the WFS layer
-			for(x in app.mapPanel.layers.data.items) {
-				var u = app.mapPanel.layers.data.items[x];
-				if (u.data)
-				{
-					// Assigning the selection layer to a global variable for easier access
-					if (u.data.name == "Selection")
-					{
-						glayerLocSel = u.getLayer();
-					}
-				}
-			};
-
-			// Adding the login button manually to the toolbar
-			// Note: the toolbar variable is used after this section
-			toolbar = app.mapPanel.toolbars[0];
-			toolbar.items.add(new Ext.Button({id:"loginbutton"}));
-			toolbar.doLayout();
-
-			// Login management via cookie and internal this.authorizedRoles variable
-			// Variable and functions copied across from GeoExplorer' Composer.js:
-			// https://github.com/opengeo/GeoExplorer/blob/master/app/static/script/app/GeoExplorer/Composer.js
-			app.cookieParamName= 'geoexplorer-user';
-			app.loginText= "Login";
-			app.logoutText= "Logout, {user}";
-			app.loginErrorText= "Invalid username or password.";
-			app.saveErrorText= "Trouble saving: ";
-
-			/** private: method[setCookieValue]
-			* Set the value for a cookie parameter
-			*/
-			app.setCookieValue = function(param, value) {
-				document.cookie = param + '=' + escape(value);
-			};
-
-			/** private: method[clearCookieValue]
-			* Clear a certain cookie parameter.
-			*/
-			app.clearCookieValue = function(param) {
-				document.cookie = param + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
-			};
-
-			/** private: method[getCookieValue]
-			* Get the value of a certain cookie parameter. Returns null if not found.
-			*/
-			app.getCookieValue = function(param) {
-				var i, x, y, cookies = document.cookie.split(";");
-				for (i=0; i < cookies.length; i++) {
-				    x = cookies[i].substr(0, cookies[i].indexOf("="));
-				    y = cookies[i].substr(cookies[i].indexOf("=")+1);
-				    x=x.replace(/^\s+|\s+$/g,"");
-				    if (x==param) {
-					return unescape(y);
-				    }
-				}
-				return null;
-			};
-
-			/** private: method[logout]
-			* Log out the current user from the application.
-			*/
-			app.logout = function() {
-				app.clearCookieValue("JSESSIONID");
-				app.clearCookieValue(app.cookieParamName);
-				app.setAuthorizedRoles([]);
-				// This section became useless for tools which are actively monitoring the authorization status
-				//toolbar.items.each(function(tool) {
-				//	if (tool.needsAuthorization === true) {
-				//		tool.disable();
-				//	}
-				//});
-				app.showLogin();
-			};
-
-
-			/** private: method[authenticate]
-			* Show the login dialog for the user to login.
-			*/
-			app.authenticate = function() {
-			    
-				var submitLogin=function() {
-				    panel.buttons[0].disable();
-				    panel.getForm().submit({
-					success: function(form, action) {
-					    toolbar.items.each(function(tool) {
-						if (tool.needsAuthorization === true) {
-							tool.enable();
+				collapsible: false,
+				autoScroll:true,
+				listeners:{
+						scope: this,
+						resize:function(p){
+							// This is required to get the content of the accordion tabs to resize
+							p.doLayout();
 						}
-					    });
-					    var user = form.findField('username').getValue();
-					    app.setCookieValue(app.cookieParamName, user);
-					    app.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
-					    app.showLogout(user);
-					    win.un("beforedestroy", this.cancelAuthentication, this);
-					    win.close();
-					},
-					failure: function(form, action) {
-					    app.authorizedRoles = [];
-					    panel.buttons[0].enable();
-					    form.markInvalid({
-						"username": this.loginErrorText,
-						"password": this.loginErrorText
-					    });
-					},
-					scope: this
-				    });
+				},
+				defaults: {
+					// applied to each contained panel
+					bodyStyle: " background-color: transparent ",
+					collapsed: true,
+					listeners: {
+						scope:this,
+						expand: tabExpand
+					}
+				},
+				layoutConfig: {
+					// layout-specific configs go here
+					animate: false,
+					titleCollapse: true,
+					activeOnTop: false,
+					hideCollapseTool: false,
+					fill: false 
+				}
+			});
+
+			var eastPanel = new Ext.Panel({
+				border: false,
+				layout: "anchor",
+				region: "east",
+				title: gtInfoTitle,
+				collapsible: true,
+				collapseMode: "mini",
+				width: 250,
+				split: true,
+				items: [
+					northPart,
+					accordion
+				]
+			});
+
+			var toolbar = new Ext.Toolbar({
+				disabled: true,
+				id: 'paneltbar',
+				items: []
+			});
+
+			var portalItems = [
+			{
+				region: "north",
+				layout: "column",
+				height: 100,
+				footerCfg: {
+					// Required to have the footer display
+					html: '<p style="font-size:8px;"><br></p>'
+				},
+				footerStyle:'background-color:'+gtBannerLineColor+';border:0px;',
+				// Removes the grey border around the footer (and around the whole container body)
+				bodyStyle:'border:0px;',
+				items:
+					[
+					new Ext.BoxComponent({
+					region: "west",
+						width: gtLogoClientWidth,
+						bodyStyle: " background-color: transparent ",
+						html: '<img style="height: 90px" src="'+gtLogoClientSrc+'" align="right"/>'
+					})
+					,
+					{
+						columnWidth: 0.5,
+						html:"",
+						height: 100,
+						border:false
+					}
+					,
+					new Ext.Panel({
+						region: "center",
+						width: 500,
+						padding: "34px",
+						border: false,
+						bodyStyle: " background-color: white ; ",
+						items: [
+							new Ext.form.ComboBox({
+								id: 'gtSearchCombobox',
+								queryParam: 'query',
+								store: ds,
+								displayField:'label',
+								selectOnFocus: true,
+								minChars: 3,
+								typeAhead: false,
+								loadingText: gtLoadingText,
+								width: 450,
+								style: "border: 2px solid #BBBBBB; width: 490px; height: 24px; font-size: 11pt;",
+								pageSize:0,
+								emptyText:gtEmptyTextSearch,
+								hideTrigger:true,
+								tpl: '<tpl for="."><div class="search-item" style="height: 28px;"><font color="#666666">{ld}</font> : {[values.label.replace(new RegExp( "(" +  Ext.get(\'gtSearchCombobox\').getValue()  + ")" , \'gi\' ), "<b>$1</b>" )]} <br></div></tpl>',
+								itemSelector: 'div.search-item',
+								listeners: {'select': search_record_select_handler,scope:this}
+							})
+						]
+					})
+					,
+					{
+						columnWidth: 0.5,
+						html:"",
+						height: 100,
+						border:false
+					}
+					,
+
+					new Ext.Panel({
+						region: "east",
+						border: false,
+						width: 200,
+						height: 100,
+						bodyStyle: " background-color: transparent; ",
+						html: '<p style="text-align:right;padding: 15px;font-size:12px;"><a href="'+gtLinkToCouncilWebsite+'" target="_blank">'+ gtBannerRightCornerLine1 +'</a><br> '+ gtBannerRightCornerLine2 +' <br><br>Map powered by <a href="javascript:poziLinkClickHandler()">Pozi</a></p>'
+
+					})
+					]
+			},
+			{
+			// HS MOD END
+			    region: "center",
+			    layout: "border",
+			    tbar: toolbar,
+			    items: [
+				{
+					id: "centerpanel",
+					xtype: "panel",
+					layout: "fit",
+					region: "center",
+					border: false,
+					items: ["mymap"]
+				},
+				westPanel,
+				eastPanel
+			    ]}
+			];
+
+			app = new gxp.Viewer({
+				proxy: gtProxy,
+	//			proxy: "proxy/?url=",
+	//			proxy: "/geoexplorer/proxy/?url=",
+				//defaultSourceType: "gxp_wmscsource",
+				portalConfig: {
+					layout: "border",
+					region: "center",
+					// by configuring items here, we don't need to configure portalItems and save a wrapping container
+					items: portalItems,
+					bbar: {id: "mybbar"}
+				},
+				// configuration of all tool plugins for this application
+				tools: JSONconf.tools,
+				// layer sources
+				sources: JSONconf.sources,
+				// map and layers
+				map: {
+					id: "mymap", // id needed to reference map in portalConfig above
+					projection: "EPSG:900913",
+					center: JSONconf.center,
+					zoom: JSONconf.zoom,
+					layers: JSONconf.layers ,
+					items: [{
+						xtype: "gxp_scaleoverlay"
+					},{
+						xtype: "gx_zoomslider",
+						vertical: true,
+						height: 100
+					}]
+				}
+			});
+
+			app.on("ready", function() {
+				// This is when we want to find the handle to the WFS layer
+				for(x in app.mapPanel.layers.data.items) {
+					var u = app.mapPanel.layers.data.items[x];
+					if (u.data)
+					{
+						// Assigning the selection layer to a global variable for easier access
+						if (u.data.name == "Selection")
+						{
+							glayerLocSel = u.getLayer();
+						}
+					}
 				};
 
-				var panel = new Ext.FormPanel({
-				    url: gtLoginEndpoint,
-				    frame: true,
-				    labelWidth: 60,
-				    defaultType: "textfield",
-				    errorReader: {
-					read: function(response) {
-					    var success = false;
-					    var records = [];
-					    if (response.status === 200) {
-						success = true;
-					    } else {
-						records = [
-						    {data: {id: "username", msg: app.loginErrorText}},
-						    {data: {id: "password", msg: app.loginErrorText}}
-						];
+				// Adding the login button manually to the toolbar
+				// Note: the toolbar variable is used after this section
+				toolbar = app.mapPanel.toolbars[0];
+				toolbar.items.add(new Ext.Button({id:"loginbutton"}));
+				toolbar.doLayout();
+
+				// Login management via cookie and internal this.authorizedRoles variable
+				// Variable and functions copied across from GeoExplorer' Composer.js:
+				// https://github.com/opengeo/GeoExplorer/blob/master/app/static/script/app/GeoExplorer/Composer.js
+				app.cookieParamName= 'geoexplorer-user';
+				app.loginText= "Login";
+				app.logoutText= "Logout, {user}";
+				app.loginErrorText= "Invalid username or password.";
+				app.saveErrorText= "Trouble saving: ";
+
+				/** private: method[setCookieValue]
+				* Set the value for a cookie parameter
+				*/
+				app.setCookieValue = function(param, value) {
+					document.cookie = param + '=' + escape(value);
+				};
+
+				/** private: method[clearCookieValue]
+				* Clear a certain cookie parameter.
+				*/
+				app.clearCookieValue = function(param) {
+					document.cookie = param + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+				};
+
+				/** private: method[getCookieValue]
+				* Get the value of a certain cookie parameter. Returns null if not found.
+				*/
+				app.getCookieValue = function(param) {
+					var i, x, y, cookies = document.cookie.split(";");
+					for (i=0; i < cookies.length; i++) {
+					    x = cookies[i].substr(0, cookies[i].indexOf("="));
+					    y = cookies[i].substr(cookies[i].indexOf("=")+1);
+					    x=x.replace(/^\s+|\s+$/g,"");
+					    if (x==param) {
+						return unescape(y);
 					    }
-					    return {
-						success: success,
-						records: records
-					    };
 					}
-				    },
-				    items: [{
-					fieldLabel: "Username",
-					name: "username",
-					allowBlank: false,
-					listeners: {
-					    render: function() {
-						this.focus(true, 100);
-					    }
-					}
-				    }, {
-					fieldLabel: "Password",
-					name: "password",
-					inputType: "password",
-					allowBlank: false
-				    }],
-				    buttons: [{
-					text: app.loginText,
-					formBind: true,
-					handler: submitLogin,
-					scope: this
-				    }],
-				    keys: [{
-					key: [Ext.EventObject.ENTER],
-					handler: submitLogin,
-					scope: this
-				    }]
-				});
+					return null;
+				};
 
-
-
-				var win = new Ext.Window({
-				    title: app.loginText,
-				    layout: "fit",
-				    width: 235,
-				    height: 130,
-				    plain: true,
-				    border: false,
-				    modal: true,
-				    items: [panel],
-				    listeners: {
-					beforedestroy: this.cancelAuthentication,
-					scope: this
-				    }
-				});
-				win.show();
-			};
-
-			/**
-			* private: method[applyLoginState]
-			* Attach a handler to the login button and set its text.
-			*/
-			app.applyLoginState = function(iconCls, text, handler, scope) {
-				var loginButton = Ext.getCmp("loginbutton");
-				loginButton.setIconClass(iconCls);
-				loginButton.setText(text);
-				loginButton.setHandler(handler, scope);
-			};
-
-			/** private: method[showLogin]
-			* Show the login button.
-			*/
-			app.showLogin = function() {
-				var text = app.loginText;
-				var handler = app.authenticate;
-				app.applyLoginState('login', text, handler, this);
-			};
-
-			/** private: method[showLogout]
-			* Show the logout button.
-			*/
-			app.showLogout = function(user) {
-				var text = new Ext.Template(this.logoutText).applyTemplate({user: user});
-				var handler = app.logout;
-				app.applyLoginState('logout', text, handler, this);
-			};
-
-			app.authorizedRoles = [];
-			if (app.authorizedRoles) {
-				// If there is a cookie, the user is authorized
-				var user = app.getCookieValue(app.cookieParamName);
-				if (user !== null) {
-					app.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
-					gCurrentLoggedRole=app.authorizedRoles[0];
-				}
-			
-				// unauthorized, show login button
-				if (app.authorizedRoles.length === 0) {
+				/** private: method[logout]
+				* Log out the current user from the application.
+				*/
+				app.logout = function() {
+					app.clearCookieValue("JSESSIONID");
+					app.clearCookieValue(app.cookieParamName);
+					app.setAuthorizedRoles([]);
+					// This section became useless for tools which are actively monitoring the authorization status
+					//toolbar.items.each(function(tool) {
+					//	if (tool.needsAuthorization === true) {
+					//		tool.disable();
+					//	}
+					//});
 					app.showLogin();
-				} else {
-					var user = app.getCookieValue(app.cookieParamName);
-					if (user === null) {
-						user = "unknown";
-					}
-					app.showLogout(user);
+				};
 
-					if (app.authorizedRoles[0])
-					{
-						gCurrentLoggedRole=app.authorizedRoles[0];
-					}                
 
-				}
-			};
+				/** private: method[authenticate]
+				* Show the login dialog for the user to login.
+				*/
+				app.authenticate = function() {
 
-			// Information panel layouts for the current authorized role - we should degrade nicely if the service is not found
-			var ds;
-			for (urlIdx in gtGetLiveDataEndPoints)
-			{
-				if (urlIdx != "remove")
-				{
-					ds = new Ext.data.Store({
-						autoLoad:true,
-						proxy: new Ext.data.ScriptTagProxy({
-							url: gtGetLiveDataEndPoints[urlIdx].urlLayout
-						}),
-						reader: new Ext.data.JsonReader({	
-							root: 'rows',
-							totalProperty: 'total_rows',
-							id: 'key_arr'	
-							}, 
-							[	{name: 'key_arr', mapping: 'row.key_arr'}
-						]),
-						baseParams: {
-							role: gCurrentLoggedRole,
-							mode: gtGetLiveDataEndPoints[urlIdx].storeMode,
-							config: gtGetLiveDataEndPoints[urlIdx].storeName
+					var submitLogin=function() {
+					    panel.buttons[0].disable();
+					    panel.getForm().submit({
+						success: function(form, action) {
+						    toolbar.items.each(function(tool) {
+							if (tool.needsAuthorization === true) {
+								tool.enable();
+							}
+						    });
+						    var user = form.findField('username').getValue();
+						    app.setCookieValue(app.cookieParamName, user);
+						    app.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
+						    app.showLogout(user);
+						    win.un("beforedestroy", this.cancelAuthentication, this);
+						    win.close();
 						},
-						listeners:
-						{
-							load: function(store, recs)
-							{
-								// Setting up a global variable array to define the info panel layouts
-								for (key=0;key<recs.length;key++)
-								{
-									var a = recs[key].json.row.val_arr;
+						failure: function(form, action) {
+						    app.authorizedRoles = [];
+						    panel.buttons[0].enable();
+						    form.markInvalid({
+							"username": this.loginErrorText,
+							"password": this.loginErrorText
+						    });
+						},
+						scope: this
+					    });
+					};
 
-									if (gLayoutsArr[recs[key].json.row.key_arr])
+					var panel = new Ext.FormPanel({
+					    url: gtLoginEndpoint,
+					    frame: true,
+					    labelWidth: 60,
+					    defaultType: "textfield",
+					    errorReader: {
+						read: function(response) {
+						    var success = false;
+						    var records = [];
+						    if (response.status === 200) {
+							success = true;
+						    } else {
+							records = [
+							    {data: {id: "username", msg: app.loginErrorText}},
+							    {data: {id: "password", msg: app.loginErrorText}}
+							];
+						    }
+						    return {
+							success: success,
+							records: records
+						    };
+						}
+					    },
+					    items: [{
+						fieldLabel: "Username",
+						name: "username",
+						allowBlank: false,
+						listeners: {
+						    render: function() {
+							this.focus(true, 100);
+						    }
+						}
+					    }, {
+						fieldLabel: "Password",
+						name: "password",
+						inputType: "password",
+						allowBlank: false
+					    }],
+					    buttons: [{
+						text: app.loginText,
+						formBind: true,
+						handler: submitLogin,
+						scope: this
+					    }],
+					    keys: [{
+						key: [Ext.EventObject.ENTER],
+						handler: submitLogin,
+						scope: this
+					    }]
+					});
+
+
+
+					var win = new Ext.Window({
+					    title: app.loginText,
+					    layout: "fit",
+					    width: 235,
+					    height: 130,
+					    plain: true,
+					    border: false,
+					    modal: true,
+					    items: [panel],
+					    listeners: {
+						beforedestroy: this.cancelAuthentication,
+						scope: this
+					    }
+					});
+					win.show();
+				};
+
+				/**
+				* private: method[applyLoginState]
+				* Attach a handler to the login button and set its text.
+				*/
+				app.applyLoginState = function(iconCls, text, handler, scope) {
+					var loginButton = Ext.getCmp("loginbutton");
+					loginButton.setIconClass(iconCls);
+					loginButton.setText(text);
+					loginButton.setHandler(handler, scope);
+				};
+
+				/** private: method[showLogin]
+				* Show the login button.
+				*/
+				app.showLogin = function() {
+					var text = app.loginText;
+					var handler = app.authenticate;
+					app.applyLoginState('login', text, handler, this);
+				};
+
+				/** private: method[showLogout]
+				* Show the logout button.
+				*/
+				app.showLogout = function(user) {
+					var text = new Ext.Template(this.logoutText).applyTemplate({user: user});
+					var handler = app.logout;
+					app.applyLoginState('logout', text, handler, this);
+				};
+
+				app.authorizedRoles = [];
+				if (app.authorizedRoles) {
+					// If there is a cookie, the user is authorized
+					var user = app.getCookieValue(app.cookieParamName);
+					if (user !== null) {
+						app.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
+						gCurrentLoggedRole=app.authorizedRoles[0];
+					}
+
+					// unauthorized, show login button
+					if (app.authorizedRoles.length === 0) {
+						app.showLogin();
+					} else {
+						var user = app.getCookieValue(app.cookieParamName);
+						if (user === null) {
+							user = "unknown";
+						}
+						app.showLogout(user);
+
+						if (app.authorizedRoles[0])
+						{
+							gCurrentLoggedRole=app.authorizedRoles[0];
+						}                
+
+					}
+				};
+
+				// Information panel layouts for the current authorized role - we should degrade nicely if the service is not found
+				var ds;
+				for (urlIdx in gtGetLiveDataEndPoints)
+				{
+					if (urlIdx != "remove")
+					{
+						ds = new Ext.data.Store({
+							autoLoad:true,
+							proxy: new Ext.data.ScriptTagProxy({
+								url: gtGetLiveDataEndPoints[urlIdx].urlLayout
+							}),
+							reader: new Ext.data.JsonReader({	
+								root: 'rows',
+								totalProperty: 'total_rows',
+								id: 'key_arr'	
+								}, 
+								[	{name: 'key_arr', mapping: 'row.key_arr'}
+							]),
+							baseParams: {
+								role: gCurrentLoggedRole,
+								mode: gtGetLiveDataEndPoints[urlIdx].storeMode,
+								config: gtGetLiveDataEndPoints[urlIdx].storeName
+							},
+							listeners:
+							{
+								load: function(store, recs)
+								{
+									// Setting up a global variable array to define the info panel layouts
+									for (key=0;key<recs.length;key++)
 									{
-										// If this key (layer) already exists, we add the JSON element (tab) to its value (tab array)
-										gLayoutsArr[recs[key].json.row.key_arr]= gLayoutsArr[recs[key].json.row.key_arr].concat(a);
-									}
-									else
-									{
-										// We create this key if it didn't exist
-										gLayoutsArr[recs[key].json.row.key_arr]=a; 
+										var a = recs[key].json.row.val_arr;
+
+										if (gLayoutsArr[recs[key].json.row.key_arr])
+										{
+											// If this key (layer) already exists, we add the JSON element (tab) to its value (tab array)
+											gLayoutsArr[recs[key].json.row.key_arr]= gLayoutsArr[recs[key].json.row.key_arr].concat(a);
+										}
+										else
+										{
+											// We create this key if it didn't exist
+											gLayoutsArr[recs[key].json.row.key_arr]=a; 
+										}
 									}
 								}
 							}
-						}
-					});
-				}
-			};
+						});
+					}
+				};
 
-		});
-		
+			});
+
+		};
+
+		// Loading the extra Javascript if the configuration file contains a name
+		if (JSONconf.customJS)
+		{
+			loadjscssfile('lib/custom/js/'+JSONconf.customJS,extraJSScriptLoaded);
+		}
+		else
+		{
+			extraJSScriptLoaded();
+		}
+
 	};
+	
 
-	// Loading the extra Javascript if the configuration file contains a name
-	if (JSONconf.customJS)
-	{
-		loadjscssfile('lib/custom/js/'+JSONconf.customJS,extraJSScriptLoaded);
-	}
-	else
-	{
-		extraJSScriptLoaded();
-	}
-
+	// Loading the JSON configuration based on the council name
+	OpenLayers.Request.GET({
+                url: "lib/custom/json/"+configScript+".json",
+                success: function(request) {
+                    JSONconf = Ext.util.JSON.decode(request.responseText);
+                    
+                    // We could load the extent and zoom to override initial map center and zoom level
+                    // What about the highlight?                    
+                    
+                    onConfigurationLoaded();
+                },
+                failure: function(request) {
+                    var obj;
+                    try {
+                        obj = Ext.util.JSON.decode(request.responseText);
+                    } catch (err) {
+                        // pass
+                    }
+                    var msg = this.loadConfigErrorText;
+                    if (obj && obj.error) {
+                        msg += obj.error;
+                    } else {
+                        msg += this.loadConfigErrorDefaultText;
+                    }
+                    this.on({
+                        ready: function() {
+                            this.displayXHRTrouble(msg, request.status);
+                        },
+                        scope: this
+                    });
+                },
+                scope: this
+	});
+	
 });
