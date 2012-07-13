@@ -55,7 +55,7 @@
 // Toggle value from true to false to switch between local (debug) and remote (deployed)
 var debugMode = false;
 
-var gtProxy,gtLoginEndpoint;
+var gtProxy,gtLoginEndpoint,gtLocalLayerSourcePrefix;
 if (debugMode)
 {
 	gtProxy = "proxy/?url=";
@@ -70,7 +70,7 @@ else
 }
 
 var app;
-var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurrentExpandedTabIdx=[],gCurrentLoggedRole="NONE",JSONconf;
+var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurrentExpandedTabIdx=[],gCurrentLoggedRole="NONE",JSONconf,propertyDataInit;
 var poziLinkClickHandler;
 
 // Helper functions
@@ -98,15 +98,13 @@ Ext.onReady(function() {
 	// TODO: this is a good candidate for a custom type extending the PropertyGrid if we find ourselves modifying its core functionalities anymore	
 
 	Ext.grid.PropertyColumnModel.prototype.renderCell = function(val, meta, rec){
-		var renderer = this.grid.customRenderers[rec.get('name')];
-		var doNotHTMLEncode = false;
+		var renderer = this.grid.customRenderers[rec.get('name')], doNotHTMLEncode = false, rv = val;
 		if(renderer){
 			return renderer.apply(this, arguments);
 		}
-		var rv = val;
 		if(Ext.isDate(val)){
 			rv = this.renderDate(val);
-		}else if(typeof val == 'boolean'){
+		}else if(typeof val === 'boolean'){
 			rv = this.renderBool(val);
 		}else if(val){
 			if (val.search(/^http/)>-1){
@@ -117,7 +115,7 @@ Ext.onReady(function() {
 				else
 				{
 					var linkName=val.split("/").pop();
-					if (linkName.length<1) {linkName = 'link';};
+					if (linkName.length<1) {linkName = 'link';}
 					rv ="<a href='"+val+"' target='_blank'>"+linkName+"</a>";
 				}
 				doNotHTMLEncode = true;
@@ -952,7 +950,7 @@ Ext.onReady(function() {
 	// Extraction of parameters from the URL to load the correct configuration file, and an optional property number to focus on
 	function getURLParameter(name) {	
 		return decodeURI(	
-			(RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]	
+			(RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,''])[1]	
 		);
 	}
 
@@ -1016,32 +1014,56 @@ Ext.onReady(function() {
 			// Fixing local URL source for debug mode
 			JSONconf.sources.local.url = gtLocalLayerSourcePrefix + JSONconf.sources.local.url;
 
-			// Global variables and their possible client-specific overrides
-			var gtCollapseLayerTree = false;
-			if (JSONconf.collapseLayerTree) {gtCollapseLayerTree=JSONconf.collapseLayerTree;};
-
-			var gtEmptyTextSelectFeature = "Selected features ...";
-			if (JSONconf.emptyTextSelectFeature) {gtEmptyTextSelectFeature=JSONconf.emptyTextSelectFeature;};
-
-			var gtGetLiveDataEndPoints = JSONconf.liveDataEndPoints;
-
-			var gtLogoClientSrc = "http://www.pozi.com/theme/app/img/mitchell_banner.jpg";
-			var gtLogoClientWidth=238;
-
+			// Global variables all clients
 			var gtEmptyTextSearch = 'Find properties, roads, features, etc...';
 			var gtLoadingText = 'Searching...';
 			var gtLoadingText = "Loading ...";
 			var gtDetailsTitle = "Details";
 			var gtClearButton = "Clear";
 			var gtInfoTitle = "Info";
+			var gtEmptyTextSelectFeature = "Selected features ...";
+			
+			// Client-specific overridable variables
+			var gtServicesHost = "http://49.156.17.41";		
+			if (JSONconf.servicesHost) {gtServicesHost = JSONconf.servicesHost;};
+			// Not sure it would make sense to override the WFS endpoint
+			var gtWFSEndPoint = gtServicesHost + "/geoserver/wfs";
+			
+			var gtSearchComboEndPoint = gtServicesHost + "/ws/rest/v3/ws_all_features_by_string_and_lga.php";
+			if (JSONconf.searchEndPoint) {gtSearchComboEndPoint = gtServicesHost + JSONconf.searchEndPoint;};
+
+			var gtLGACode = "346";
+			if (JSONconf.LGACode) {gtLGACode = JSONconf.LGACode;};
+
+			var gtDatabaseConfig = "vicmap";
+			if (JSONconf.databaseConfig) {gtDatabaseConfig = JSONconf.databaseConfig;};
+			
+			var gtCollapseLayerTree = false;
+			if (JSONconf.collapseLayerTree) {gtCollapseLayerTree=JSONconf.collapseLayerTree;};
+
+			var gtSymbolizer = {"name": "test","strokeColor": "yellow","strokeWidth": 15,"strokeOpacity": 0.5,"fillColor": "yellow","fillOpacity": 0.2};
+			if(JSONconf.highlightSymboliser) {gtSymbolizer = JSONconf.highlightSymboliser;};
+
+			var gtGetLiveDataEndPoints = JSONconf.liveDataEndPoints;
+
+			var gtLogoClientSrc = "http://www.pozi.com/theme/app/img/mitchell_banner.jpg";
+			if (JSONconf.logoClientSrc) {gtLogoClientSrc = JSONconf.logoClientSrc;};
+			
+			var gtLogoClientWidth=238;
+			if (JSONconf.logoClientWidth) {gtLogoClientWidth = JSONconf.logoClientWidth;};
 
 			var gtZoomMax = 18;
+			if (JSONconf.zoomMax) {gtZoomMax = JSONconf.zoomMax;};
 
-			// Layout for the extra tabs
-			var gLayoutsArr = [];
+			var gtBannerLineColor="#DE932A";
+			if (JSONconf.bannerLineColor) {gtBannerLineColor = JSONconf.bannerLineColor;};
 
-			// Flag to track the origin of the store refresh
-			var gfromWFS="N";
+			var gtBannerRightCornerLine1="Mitchell Shire Council";
+			if (JSONconf.bannerRightCornerLine1) {gtBannerRightCornerLine1 = JSONconf.bannerRightCornerLine1;};
+
+			var gtBannerRightCornerLine2="Victoria, Australia";
+			if (JSONconf.bannerRightCornerLine2) {gtBannerRightCornerLine2 = JSONconf.bannerRightCornerLine2;};
+			
 
 			poziLinkClickHandler = function () {
 				var appInfo = new Ext.Panel({
@@ -1073,25 +1095,22 @@ Ext.onReady(function() {
 			var gtDisclaimer="disclaimer.html";
 			var gtRedirectIfDeclined="http://www.mitchellshire.vic.gov.au/";
 			var gtLinkToCouncilWebsite="http://www.mitchellshire.vic.gov.au/";
-			var gtBannerLineColor="#DE932A";
-			var gtBannerRightCornerLine1="Mitchell Shire Council";
-			var gtBannerRightCornerLine2="Victoria, Australia";
+
+			// Layout for the extra tabs
+			var gLayoutsArr = [];
+
+			// Flag to track the origin of the store refresh
+			var gfromWFS="N";
 
 			// WFS layer: style , definition , namespaces
 			var gtStyleMap = new OpenLayers.StyleMap();
-			var gtSymbolizer = JSONconf.highlightSymboliser;
-
 			var rule_for_all = new OpenLayers.Rule({
 				symbolizer: gtSymbolizer, elseFilter: true
 			});
 			rule_for_all.title=" ";
 			gtStyleMap.styles["default"].addRules([rule_for_all]);
-
 			var gtWFSsrsName = "EPSG:4326";
 			var gtWFSgeometryName = "the_geom";
-
-			var gtServicesHost = "http://49.156.17.41";		
-			var gtWFSEndPoint = gtServicesHost + "/geoserver/wfs";
 			var gtFeatureNS="http://www.pozi.com/vicmap";
 
 			// Pushing the WFS layer in the layer store
@@ -1153,15 +1172,6 @@ Ext.onReady(function() {
 				}
 			});
 
-
-
-			// In a multi-council database setup, use 346
-			var gtLGACode = "346";
-			// Database config for the master search table
-			var gtDatabaseConfig = "vicmap";
-
-			var gtSearchComboEndPoint = gtServicesHost + "/ws/rest/v3/ws_all_features_by_string_and_lga.php";
-
 			// Datastore definition for the web service search results 
 			var ds = new Ext.data.JsonStore({
 				autoLoad: false, //autoload the data
@@ -1182,9 +1192,6 @@ Ext.onReady(function() {
 					url: gtSearchComboEndPoint
 				})
 			});
-
-
-
 
 			// Remove the WFS highlight, clear and disable the select feature combo, empty the combostore and clean the details panel 
 			clear_highlight = function(){ 
@@ -1915,8 +1922,6 @@ Ext.onReady(function() {
 
 			app = new gxp.Viewer({
 				proxy: gtProxy,
-	//			proxy: "proxy/?url=",
-	//			proxy: "/geoexplorer/proxy/?url=",
 				//defaultSourceType: "gxp_wmscsource",
 				portalConfig: {
 					layout: "border",
@@ -1959,6 +1964,14 @@ Ext.onReady(function() {
 						}
 					}
 				};
+				
+				// If we have found a property to zoom to, well, zoom to and highlight it
+				if (propertyDataInit)
+				{
+					var r = [];
+					r["data"] = propertyDataInit;
+					search_record_select_handler(null, r);
+				} 
 
 				// Adding the login button manually to the toolbar
 				// Note: the toolbar variable is used after this section
@@ -2250,13 +2263,58 @@ Ext.onReady(function() {
 	// Loading the JSON configuration based on the council name
 	OpenLayers.Request.GET({
                 url: "lib/custom/json/"+configScript+".json",
-                success: function(request) {
-                    JSONconf = Ext.util.JSON.decode(request.responseText);
+		success: function(request) {
+			// Decoding the configuration file - it's a JSON file
+			JSONconf = Ext.util.JSON.decode(request.responseText);
                     
-                    // We could load the extent and zoom to override initial map center and zoom level
-                    // What about the highlight?                    
-                    
-                    onConfigurationLoaded();
+ 			// If a property number has been passed
+ 		        if (propnum)
+ 		        {
+ 				// Handler for result of retrieving the property details by its number
+ 				var prop_by_prop_num_handler=function(request){
+ 					// The first row returned contains our property record
+ 					// We populate the global variable with that
+ 					if (request.data && request.data.items[0])
+ 					{
+	 					propertyDataInit = request.data.items[0].json.row;
+	 				}
+					else 				
+ 					{
+ 						alert("No property found in "+toTitleCase(configScript)+" with number: "+propnum+".");
+ 					}
+ 					
+ 					onConfigurationLoaded();
+ 				};
+ 
+ 				var ds = new Ext.data.JsonStore({
+ 					autoLoad: true, //autoload the data
+ 					root: 'rows',
+ 					baseParams: {query: propnum, config: JSONconf.databaseConfig, lga: JSONconf.LGACode},
+ 					fields: [{name: "label"	, mapping:"row.label"},
+ 						{name: "xmini"	, mapping:"row.xmini"},
+ 						{name: "ymini"	, mapping:"row.ymini"},
+ 						{name: "xmaxi"	, mapping:"row.xmaxi"},
+ 						{name: "ymaxi"	, mapping:"row.ymaxi"},
+ 						{name: "gsns"	, mapping:"row.gsns"},
+ 						{name: "gsln"	, mapping:"row.gsln"},
+ 						{name: "idcol"	, mapping:"row.idcol"},
+ 						{name: "idval"	, mapping:"row.idval"},
+ 						{name: "ld"	, mapping:"row.ld"}
+ 					],
+ 					proxy: new Ext.data.ScriptTagProxy({
+ 						url: JSONconf.servicesHost + JSONconf.searchEndPoint
+ 					}),
+ 					listeners: {
+ 						load: prop_by_prop_num_handler
+ 					}
+ 				});
+ 
+ 
+ 		        }
+			else
+			{
+				onConfigurationLoaded();
+			}
                 },
                 failure: function(request) {
                     var obj;
