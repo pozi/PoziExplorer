@@ -964,7 +964,7 @@ Ext.onReady(function() {
 	{
 		// We extract the end of the URL
 		// This will no longer work when we consider saved maps
-		var urlquery=location.href.split("?");
+		var urlquery=location.href.split("/");
 		if (urlquery[urlquery.length-2])
 		{
 			if (urlquery[urlquery.length-2]=="property")
@@ -1012,8 +1012,11 @@ Ext.onReady(function() {
 		// Encapsulating the loading of the main app in a callback  
 		var extraJSScriptLoaded = function(){
 			// Fixing local URL source for debug mode
-			JSONconf.sources.local.url = gtLocalLayerSourcePrefix + JSONconf.sources.local.url;
-
+			if (JSONconf.sources.local)
+			{
+				JSONconf.sources.local.url = gtLocalLayerSourcePrefix + JSONconf.sources.local.url;
+			}
+			
 			// Global variables all clients
 			var gtEmptyTextSearch = 'Find properties, roads, features, etc...';
 			var gtLoadingText = 'Searching...';

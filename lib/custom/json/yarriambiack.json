@@ -1,0 +1,244 @@
+{
+    "servicesHost":"http://49.156.17.41",
+    "searchEndPoint":"/ws/rest/v3/ws_all_features_by_string_and_lga.php",
+    "LGACode":"378",
+    "databaseConfig":"vicmap",
+    "tools": [
+        {
+            "ptype": "gxp_layermanager",
+            "groups": {
+                "top": {
+                    "title": "Top Layers",
+                    "collapsed": true
+                },
+                "default": "Overlays",
+                "background": {
+                    "title": "Base Maps",
+                    "exclusive": true
+                }
+            },
+            "outputConfig": {
+                "id": "tree",
+                "border": false,
+                "tbar": [
+                    
+                ]
+            },
+            "outputTarget": "westpanel"
+        },
+        {
+            "ptype": "gxp_addlayers",
+            "actionTarget": "tree.tbar"
+        },
+        {
+            "ptype": "gxp_layerproperties",
+            "id": "layerproperties",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_zoomtolayerextent",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_styler",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_removelayer",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_wmsgetfeatureinfo",
+            "format": "grid",
+            "toggleGroup": "interaction",
+            "showButtonText": false
+        },
+        {
+            "ptype": "gxp_print",
+            "customParams": {
+                "outputFilename": "PoziExplorer-print"
+            },
+            "printService": "/geoserver/pdf",
+            "showButtonText": false
+        },
+        {
+            "ptype": "gxp_measure",
+            "toggleGroup": "interaction",
+            "controlOptions": {
+                "immediate": true
+            },
+            "showButtonText": false
+        },
+        {
+            "actions": [
+                "->"
+            ]
+        }
+    ],
+    "sources": {
+        "backend_cascaded": {
+            "url": "http://basemap.pozi.com/geoserver/DSE/ows",
+            "title": "DSE Vicmap Layers",
+            "ptype": "gxp_wmscsource"
+        },
+        "mapquest": {
+            "ptype": "gxp_mapquestsource"
+        },
+        "ol": {
+            "ptype": "gxp_olsource"
+        },
+        "backend": {
+            "url": [
+                "http://m1.pozi.com/geoserver/ows",
+                "http://m2.pozi.com/geoserver/ows",
+                "http://m3.pozi.com/geoserver/ows",
+                "http://m4.pozi.com/geoserver/ows"
+            ],
+            "title": "Pozi Data Server",
+            "ptype": "gxp_wmscsource",
+            "transition": null
+        }
+    },
+    "layers": [
+        {
+            "source": "backend",
+            "name": "VICMAP:VW_DSE_VMPLAN_ZONE",
+            "title": "Planning Zones (Vicmap)",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "backend",
+            "name": "VICMAP:VW_DSE_VMPLAN_OVERLAY",
+            "title": "Planning Overlays (Vicmap)",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "backend_cascaded",
+            "name": "DSE:CC_BUSHFIRE_PRONE_AREAS",
+            "title": "Bushfire-Prone Areas",
+            "visibility": false,
+            "opacity": 0.75,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true
+        },
+        {
+            "source": "backend",
+            "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
+            "title": "Property (Vicmap)",
+            "visibility": true,
+            "opacity": 0.25,
+            "format": "image/GIF",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "backend",
+            "name": "VICMAP:VW_TRANSFER_STATION",
+            "title": "Transfer Stations",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "backend",
+            "name": "VICMAP:VW_YARRIAMBIACK_MASK",
+            "title": "Municipal Boundary",
+            "visibility": true,
+            "opacity": 0.6,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "transition": "resize",
+            "group": "top"
+        },
+        {
+            "source": "backend",
+            "name": "LabelClassic",
+            "title": "Labels",
+            "visibility": true,
+            "opacity": 1,
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "group": "top"
+        },
+        {
+            "source": "backend",
+            "name": "VicmapClassic",
+            "title": "Vicmap Classic",
+            "visibility": true,
+            "opacity": 1,
+            "group": "background",
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "cached": true,
+            "transition": "resize"
+        },
+        {
+            "source": "mapquest",
+            "name": "osm",
+            "visibility": false,
+            "group": "background"
+        },
+        {
+            "source": "ol",
+            "group": "background",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "None",
+                {
+                    "visibility": false
+                }
+            ]
+        }
+    ],
+    "center": [
+        15854012,
+        -4299244
+    ],
+    "zoom": 9,
+    "workspace": "YARRIAMBIACK",
+    "highlightSymboliser": {
+        "name": "test",
+        "strokeColor": "blue",
+        "strokeWidth": 15,
+        "strokeOpacity": 0.5,
+        "fillColor": "blue",
+        "fillOpacity": 0.2
+    },
+    "liveDataEndPoints": [
+        {
+            "urlLayout": "http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "pgsql",
+            "storeName": "vicmap"
+        }
+    ],
+    "logoClientSrc":"http://www.yarriambiack.vic.gov.au/media/img/logo.png",
+    "logoClientWidth":122,
+    "zoomMax":18,
+    "bannerLineColor":"#CF5D38",
+    "bannerRightCornerLine1":"Yarriambiack Shire Council",
+    "bannerRightCornerLine2":"Victoria, Australia"
+}
