@@ -79,11 +79,6 @@
             "featureManager": "featuremanager",
             "autoLoadFeature": true,
             "toggleGroup": "interaction"
-        },
-        {
-            "actions": [
-                "->"
-            ]
         }
     ],
     "sources": {
@@ -373,5 +368,17 @@
     "zoomMax":18,
     "bannerLineColor":"#DE932A",
     "bannerRightCornerLine1":"Mitchell Shire Council",
-    "bannerRightCornerLine2":"Victoria, Australia"
+    "bannerRightCornerLine2":"Victoria, Australia",
+    "quickZoomDatastore": [
+	["144.936",	"-37.484",	"144.989",	"-37.467", "Beveridge"	],
+	["145.025",	"-37.229",	"145.069",	"-37.195", "Broadford"	],
+	["144.931",	"-37.325",	"144.967",	"-37.281", "Kilmore"	],
+	["144.845",	"-37.148",	"144.876",	"-37.111", "Pyalong"	],
+	["145.12",	"-37.04",	"145.168",	"-37.006", "Seymour"	],
+	["145.085",	"-37.109",	"145.112",	"-37.084", "Tallarook"	],
+	["144.793",	"-37.049",	"144.803",	"-37.038", "Tooborac"	],
+	["144.953",	"-37.431",	"145.021",	"-37.379", "Wallan"	],
+	["145.018",	"-37.381",	"145.045",	"-37.349", "Wandong"	],
+	["145.064",	"-37.303",	"145.069",	"-37.297", "Waterford Park"]
+   ]     
 }

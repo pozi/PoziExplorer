@@ -1025,6 +1025,7 @@ Ext.onReady(function() {
 			var gtClearButton = "Clear";
 			var gtInfoTitle = "Info";
 			var gtEmptyTextSelectFeature = "Selected features ...";
+			var gtEmptyTextQuickZoom = "Zoom to town ...";
 			
 			// Client-specific overridable variables
 			var gtServicesHost = "http://49.156.17.41";		
@@ -1634,6 +1635,7 @@ Ext.onReady(function() {
 								mode: 'local',
 								typeAhead: true,
 								forceSelection: true,
+								editable:false,
 								triggerAction: 'all',
 								emptyText: gtEmptyTextSelectFeature,
 								tpl: '<tpl for="."><div class="info-item" style="height: 16px;">{type}: {label}</div></tpl>',
@@ -1976,11 +1978,57 @@ Ext.onReady(function() {
 					search_record_select_handler(null, r);
 				} 
 
-				// Adding the login button manually to the toolbar
-				// Note: the toolbar variable is used after this section
+				// The main toolbar containing tools to be activated / deactivated on login/logout
+				// TODO: determine if this is still relevant
 				toolbar = app.mapPanel.toolbars[0];
-				toolbar.items.add(new Ext.Button({id:"loginbutton"}));
+
+				// Tree toolbar to add the login button to
+				westpaneltoolbar = Ext.getCmp('tree').getTopToolbar();
+				westpaneltoolbar.addFill();
+				westpaneltoolbar.items.add(new Ext.Button({id:"loginbutton"}));
+				westpaneltoolbar.doLayout();
+
+				// Zoom to town tool, to add to the map toolbar
+				Ext.namespace('Ext.selectdata');
+				Ext.selectdata.zooms = JSONconf.quickZoomDatastore;
+				var zoomstore = new Ext.data.ArrayStore({
+					fields: [{ name : 'xmin', type: 'float'},
+						{ name : 'ymin', type: 'float'},
+						{ name : 'xmax', type: 'float'},
+						{ name : 'ymax', type: 'float'},
+						{ name : 'label', type: 'string'}],
+					data : Ext.selectdata.zooms
+				});
+				// additional tools at the end of the map toolbar:
+				var addTool1 = "->";
+				var addTool2 = "->";
+				// Not displaying the zoom to combo if the underlying store is empty
+				if (zoomstore.data.length>0)
+				{
+					var addTool2 = new Ext.form.ComboBox({
+						tpl: '<tpl for="."><div ext:qtip="{label}" class="x-combo-list-item">{label}</div></tpl>',
+						store: zoomstore,
+						displayField:'label',
+						mode: 'local',
+						typeAhead: true,
+						editable:false,
+						forceSelection: true,
+						triggerAction: 'all',
+						width:125,
+						emptyText:gtEmptyTextQuickZoom,
+						listeners: {'select': function (combo,record){
+									var projsrc = new OpenLayers.Projection("EPSG:4326");
+									var projdest = new OpenLayers.Projection("EPSG:900913");
+									var bd = new OpenLayers.Bounds(record.data.xmin,record.data.ymin,record.data.xmax,record.data.ymax).transform(projsrc, projdest);
+									this.mapPanel.map.zoomToExtent(bd);},
+							    scope:this}
+						}	     
+					     );
+				}
+				// Adding to the list of tools			
+				toolbar.add(addTool1,addTool2);
 				toolbar.doLayout();
+
 
 				// Login management via cookie and internal this.authorizedRoles variable
 				// Variable and functions copied across from GeoExplorer' Composer.js:

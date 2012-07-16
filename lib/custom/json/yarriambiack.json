@@ -68,11 +68,6 @@
                 "immediate": true
             },
             "showButtonText": false
-        },
-        {
-            "actions": [
-                "->"
-            ]
         }
     ],
     "sources": {
@@ -221,13 +216,19 @@
     "workspace": "YARRIAMBIACK",
     "highlightSymboliser": {
         "name": "test",
-        "strokeColor": "blue",
+        "strokeColor": "orange",
         "strokeWidth": 15,
         "strokeOpacity": 0.5,
-        "fillColor": "blue",
+        "fillColor": "orange",
         "fillOpacity": 0.2
     },
     "liveDataEndPoints": [
+        {
+            "urlLayout": "http://172.20.10.19: 9090/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://172.20.10.19: 9090/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "sqlite",
+            "storeName": "yaariambiack"
+        },
         {
             "urlLayout": "http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php",
             "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
@@ -240,5 +241,20 @@
     "zoomMax":18,
     "bannerLineColor":"#CF5D38",
     "bannerRightCornerLine1":"Yarriambiack Shire Council",
-    "bannerRightCornerLine2":"Victoria, Australia"
+    "bannerRightCornerLine2":"Victoria, Australia",
+    "quickZoomDatastore": [
+	["142.415","-35.945","142.424","-35.934","Beulah"],
+	["142.412","-36.079","142.421","-36.075","Brim"],
+	["142.356","-35.736","142.371","-35.709","Hopetoun"],
+	["142.578","-35.610","142.582","-35.605","Lascelles"],
+	["142.580","-36.466","142.595","-36.455","Minyip"],
+	["142.457","-36.625","142.483","-36.613","Murtoa"],
+	["142.186","-35.384","142.194","-35.377","Patchewollock"],
+	["142.626","-36.640","142.640","-36.623","Rupanyup"],
+	["142.438","-35.403","142.442","-35.400","Speed"],
+	["142.424","-35.348","142.428","-35.343","Tempy"],
+	["142.383","-36.265","142.403","-36.242","Warracknabeal"],
+	["142.659","-35.688","142.675","-35.679","Woomelang"],
+	["142.052","-35.771","142.057","-35.766","Yaapeet"]
+   ]    
 }
