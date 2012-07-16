@@ -4,6 +4,7 @@
  * @require widgets/Viewer.js
  * @require plugins/LayerManager.js
  * @require plugins/OLSource.js
+ * @require plugins/OSMSource.js
  * @require plugins/BingSource.js
  * @require plugins/WMSCSource.js
  * @require plugins/MapQuestSource.js
@@ -1041,6 +1042,9 @@ Ext.onReady(function() {
 
 			var gtDatabaseConfig = "vicmap";
 			if (JSONconf.databaseConfig) {gtDatabaseConfig = JSONconf.databaseConfig;};
+
+			var gtWorkspace = "";
+			if (JSONconf.workspace) {gtWorkspace = JSONconf.workspace;};		
 			
 			var gtCollapseLayerTree = false;
 			if (JSONconf.collapseLayerTree) {gtCollapseLayerTree=JSONconf.collapseLayerTree;};
@@ -2101,6 +2105,17 @@ Ext.onReady(function() {
 
 					var submitLogin=function() {
 					    panel.buttons[0].disable();
+
+						// Prefixes the username with the workspace name
+						win.hide();
+						var typedUsername=panel.getForm().items.items[0].getValue();
+						if (typedUsername != "admin")
+						{
+							panel.getForm().items.items[0].setValue(gtWorkspace+"."+typedUsername);
+						}
+						//
+
+
 					    panel.getForm().submit({
 						success: function(form, action) {
 						    toolbar.items.each(function(tool) {
@@ -2111,11 +2126,21 @@ Ext.onReady(function() {
 						    var user = form.findField('username').getValue();
 						    app.setCookieValue(app.cookieParamName, user);
 						    app.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
-						    app.showLogout(user);
+						    // Only showing the username without its workspace
+						    var typedUsername = user;
+						    if (user.split(".")[1])
+						    {
+						    	typedUsername = user.split(".")[1];
+						    }
+						    app.showLogout(typedUsername);
 						    win.un("beforedestroy", this.cancelAuthentication, this);
 						    win.close();
 						},
 						failure: function(form, action) {
+							// Reset the username to what was initially typed, and show the login window
+							panel.getForm().items.items[0].setValue(typedUsername);
+							win.show();
+							//
 						    app.authorizedRoles = [];
 						    panel.buttons[0].enable();
 						    form.markInvalid({
@@ -2243,7 +2268,13 @@ Ext.onReady(function() {
 						if (user === null) {
 							user = "unknown";
 						}
-						app.showLogout(user);
+						    // Only showing the username without its workspace
+						    var typedUsername = user;
+						    if (user.split(".")[1])
+						    {
+						    	typedUsername = user.split(".")[1];
+						    }
+						    app.showLogout(typedUsername);
 
 						if (app.authorizedRoles[0])
 						{
