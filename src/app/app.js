@@ -6,6 +6,7 @@
  * @require plugins/OLSource.js
  * @require plugins/OSMSource.js
  * @require plugins/BingSource.js
+ * @require plugins/GoogleSource.js
  * @require plugins/WMSCSource.js
  * @require plugins/MapQuestSource.js
  * @require plugins/Zoom.js
@@ -122,6 +123,13 @@ Ext.onReady(function() {
 				doNotHTMLEncode = true;
 			}else	{
 				rv=val.replace(/ 12:00 AM/g,"");
+				// Better presentation of boolean values (they are not detected as boolean in the tests above)
+				if (val == "true")  {rv="<input type='checkbox' name='a' value='a' checked='checked' disabled='disabled'/>";}
+				if (val == "false") {rv="<input type='checkbox' name='b' value='b' disabled='disabled'/>";}
+				if (val == "true" || val == "false")
+				{
+					doNotHTMLEncode = true;
+				}
 			}
 		}
 		if (doNotHTMLEncode)
@@ -653,6 +661,12 @@ Ext.onReady(function() {
 			layer: layer
 		    }, original.data);
 
+			// Overwriting the queryable attribute if present in config
+			if ('queryable' in config)
+			{
+				data.queryable = config.queryable;
+			}
+
 		    // add additional fields
 		    var fields = [
 			{name: "source", type: "string"}, 
@@ -1044,9 +1058,6 @@ Ext.onReady(function() {
 			var gtWorkspace = "";
 			if (JSONconf.workspace) {gtWorkspace = JSONconf.workspace;};		
 			
-			var gtCollapseLayerTree = false;
-			if (JSONconf.collapseLayerTree) {gtCollapseLayerTree=JSONconf.collapseLayerTree;};
-
 			var gtSymbolizer = {"name": "test","strokeColor": "yellow","strokeWidth": 15,"strokeOpacity": 0.5,"fillColor": "yellow","fillOpacity": 0.2};
 			if(JSONconf.highlightSymboliser) {gtSymbolizer = JSONconf.highlightSymboliser;};
 
@@ -1075,6 +1086,15 @@ Ext.onReady(function() {
 
 			var gtLinkToCouncilWebsite="http://www.mitchellshire.vic.gov.au/";
 			if (JSONconf.linkToCouncilWebsite) {gtLinkToCouncilWebsite = JSONconf.linkToCouncilWebsite;};
+			
+			var gtQuickZoomDatastore=[];
+			if (JSONconf.quickZoomDatastore) {gtQuickZoomDatastore = JSONconf.quickZoomDatastore;};
+
+			var gtCollapseWestPanel = false;
+			if (JSONconf.collapseWestPanel) {gtCollapseWestPanel=JSONconf.collapseWestPanel;};
+
+			var gtHideNorthRegion = false;
+			if (JSONconf.hideNorthRegion) {gtHideNorthRegion=JSONconf.hideNorthRegion;};
 
 			poziLinkClickHandler = function () {
 				var appInfo = new Ext.Panel({
@@ -1307,10 +1327,10 @@ Ext.onReady(function() {
 				region: "west",
 				width: 250,
 				split: true,
-				border: false,
+				border: true,
 				collapsible: true,
 				collapseMode: "mini",
-				collapsed: gtCollapseLayerTree,
+				collapsed: gtCollapseWestPanel,
 				autoScroll:true,
 				header: false,
 				items: [{
@@ -1592,25 +1612,21 @@ Ext.onReady(function() {
 							{
 								// Rendering a generic tab based on its HTML definition
 								// The target div for placing this data: the loading div's parent
-								var targ3 = Ext.get(Ext.getCmp('tblayout-win-loading').body.id).dom.parentNode.parentElement.parentElement;
-								// If data already exists, we remove it for replacement with the latest data
-								if (targ3.hasChildNodes())
-								{
-									targ3.removeChild(targ3.firstChild);
-								}
+								targ2.removeAll();
 
 								// Rendering as a table
 								var win4 = new Ext.Panel({
 									id:'tblayout-win-generic'
 									//,width:227
+									,idFeature:idFeature
 									,layout:'fit'
 									,border:false
-									,renderTo: targ3
 									,items: [
-										{html:configArray[i].html}
+										{html:configArray[i].html_to_render}
 									]
 								});
-								win4.doLayout();
+								targ2.add(win4);
+								targ2.doLayout();
 							}
 						}
 
@@ -1817,7 +1833,7 @@ Ext.onReady(function() {
 			});
 
 			var eastPanel = new Ext.Panel({
-				border: false,
+				border: true,
 				layout: "anchor",
 				region: "east",
 				title: gtInfoTitle,
@@ -1930,6 +1946,12 @@ Ext.onReady(function() {
 					eastPanel
 				]}
 			];
+			
+			// Masking the north region
+			if (gtHideNorthRegion)
+			{
+				portalItems=[portalItems[1]];
+			}
 
 			app = new gxp.Viewer({
 				proxy: gtProxy,
@@ -2000,7 +2022,7 @@ Ext.onReady(function() {
 
 				// Zoom to town tool, to add to the map toolbar
 				Ext.namespace('Ext.selectdata');
-				Ext.selectdata.zooms = JSONconf.quickZoomDatastore;
+				Ext.selectdata.zooms = gtQuickZoomDatastore;
 				var zoomstore = new Ext.data.ArrayStore({
 					fields: [{ name : 'xmin', type: 'float'},
 						{ name : 'ymin', type: 'float'},
