@@ -236,7 +236,7 @@
             "storeName": "vicmap"
         }
     ],
-    "logoClientSrc":"http://www.yarriambiack.vic.gov.au/media/img/logo.png",
+    "logoClientSrc":"theme/app/img/custom/yarriambiack_logo.png",
     "logoClientWidth":122,
     "zoomMax":18,
     "bannerLineColor":"#CF5D38",
@@ -256,5 +256,7 @@
 	["142.383","-36.265","142.403","-36.242","Warracknabeal"],
 	["142.659","-35.688","142.675","-35.679","Woomelang"],
 	["142.052","-35.771","142.057","-35.766","Yaapeet"]
-   ]    
+    ],
+    "printMapTitle":"Yarriambiack Shire Council",
+    "linkToCouncilWebsite":"http://www.yarriambiack.vic.gov.au/"
 }

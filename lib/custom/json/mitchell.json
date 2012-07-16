@@ -363,7 +363,7 @@
             "storeName": "vicmap"
         }
     ],
-    "logoClientSrc":"http://www.pozi.com/theme/app/img/mitchell_banner.jpg",
+    "logoClientSrc":"theme/app/img/custom/mitchell_logo.jpg",
     "logoClientWidth":238,
     "zoomMax":18,
     "bannerLineColor":"#DE932A",
@@ -380,5 +380,7 @@
 	["144.953",	"-37.431",	"145.021",	"-37.379", "Wallan"	],
 	["145.018",	"-37.381",	"145.045",	"-37.349", "Wandong"	],
 	["145.064",	"-37.303",	"145.069",	"-37.297", "Waterford Park"]
-   ]     
+    ],
+    "printMapTitle":"Mitchell Shire Council",
+    "linkToCouncilWebsite":"http://www.mitchellshire.vic.gov.au/"
 }

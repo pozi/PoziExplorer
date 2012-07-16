@@ -1067,7 +1067,12 @@ Ext.onReady(function() {
 
 			var gtBannerRightCornerLine2="Victoria, Australia";
 			if (JSONconf.bannerRightCornerLine2) {gtBannerRightCornerLine2 = JSONconf.bannerRightCornerLine2;};
-			
+	
+			var gtPrintMapTitle="";
+			if (JSONconf.printMapTitle) {gtPrintMapTitle=JSONconf.printMapTitle;};
+
+			var gtLinkToCouncilWebsite="http://www.mitchellshire.vic.gov.au/";
+			if (JSONconf.linkToCouncilWebsite) {gtLinkToCouncilWebsite = JSONconf.linkToCouncilWebsite;};
 
 			poziLinkClickHandler = function () {
 				var appInfo = new Ext.Panel({
@@ -1088,7 +1093,7 @@ Ext.onReady(function() {
 					modal: true,
 					layout: "fit",
 					width: 300,
-					height: 300,
+					height: 320,
 					items: [
 						tabs]
 					});
@@ -1098,7 +1103,6 @@ Ext.onReady(function() {
 			var gtInitialDisclaimerFlag=true;
 			var gtDisclaimer="disclaimer.html";
 			var gtRedirectIfDeclined="http://www.mitchellshire.vic.gov.au/";
-			var gtLinkToCouncilWebsite="http://www.mitchellshire.vic.gov.au/";
 
 			// Layout for the extra tabs
 			var gLayoutsArr = [];
@@ -1957,6 +1961,10 @@ Ext.onReady(function() {
 			});
 
 			app.on("ready", function() {
+				// Setting the title of the map to print
+				app.about={};
+				app.about["title"]=gtPrintMapTitle;
+
 				// This is when we want to find the handle to the WFS layer
 				for(x in app.mapPanel.layers.data.items) {
 					var u = app.mapPanel.layers.data.items[x];
