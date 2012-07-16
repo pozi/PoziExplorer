@@ -1,0 +1,310 @@
+{
+    "servicesHost":"http://49.156.17.41",
+    "searchEndPoint":"/ws/rest/v3/ws_all_features_by_string_and_lga.php",
+    "LGACode":"371",
+    "databaseConfig":"vicmap",
+    "tools": [
+        {
+            "ptype": "gxp_layermanager",
+            "groups": {
+                "top": {
+                    "title": "Top Layers",
+                    "collapsed": true
+                },
+                "default": "Overlays",
+                "background": {
+                    "title": "Base Maps",
+                    "exclusive": true
+                }
+            },
+            "outputConfig": {
+                "id": "tree",
+                "border": false,
+                "tbar": [
+                    
+                ]
+            },
+            "outputTarget": "westpanel"
+        },
+        {
+            "ptype": "gxp_addlayers",
+            "actionTarget": "tree.tbar"
+        },
+        {
+            "ptype": "gxp_layerproperties",
+            "id": "layerproperties",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_zoomtolayerextent",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_styler",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_removelayer",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_wmsgetfeatureinfo",
+            "format": "grid",
+            "toggleGroup": "interaction",
+            "showButtonText": false
+        },
+        {
+            "ptype": "gxp_print",
+            "customParams": {
+                "outputFilename": "PoziExplorer-print"
+            },
+            "printService": "/geoserver/pdf",
+            "showButtonText": false
+        },
+        {
+            "ptype": "gxp_measure",
+            "toggleGroup": "interaction",
+            "controlOptions": {
+                "immediate": true
+            },
+            "showButtonText": false
+        }
+    ],
+    "sources": {
+	"local": {
+		"url": "/geoserver/WESTWIMMERA/ows",
+		"title": "West Wimmera Shire Council Layers",
+		"ptype": "gxp_wmscsource",
+		"tiled": false
+	},    
+        "backend_cascaded": {
+            "url": "http://basemap.pozi.com/geoserver/DSE/ows",
+            "title": "DSE Vicmap Layers",
+            "ptype": "gxp_wmscsource"
+        },
+	"dse_iws_cascaded": {
+		"url": ["http://m1.pozi.com/geoserver/WESTWIMMERA/ows","http://m2.pozi.com/geoserver/WESTWIMMERA/ows","http://m3.pozi.com/geoserver/WESTWIMMERA/ows","http://m4.pozi.com/geoserver/WESTWIMMERA/ows"],
+		"title": "DSE Image Web Server",
+		"ptype": "gxp_wmscsource",
+		"format": "image/JPEG",
+		"group": "background",
+		"transition":'resize'
+	},        
+        "mapquest": {
+		"ptype": "gxp_mapquestsource"
+        },
+	"osm": {
+		"ptype": "gxp_osmsource"
+	},
+        "ol": {
+		"ptype": "gxp_olsource"
+        },
+        "backend": {
+            "url": [
+                "http://m1.pozi.com/geoserver/ows",
+                "http://m2.pozi.com/geoserver/ows",
+                "http://m3.pozi.com/geoserver/ows",
+                "http://m4.pozi.com/geoserver/ows"
+            ],
+            "title": "Pozi Data Server",
+            "ptype": "gxp_wmscsource",
+            "transition": null
+        }
+    },
+    "layers": [
+        {
+            "source": "backend",
+            "name": "VICMAP:VW_DSE_VMPLAN_ZONE",
+            "title": "Planning Zones (Vicmap)",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "backend",
+            "name": "VICMAP:VW_DSE_VMPLAN_OVERLAY",
+            "title": "Planning Overlays (Vicmap)",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+		"source":"local",
+		"name":"WESTWIMMERA:AAV_CULTURAL_SENSITIVITY",
+		"title":"Cultural Sensitivity (AAV, 12/2011)",
+		"visibility":false,
+		"opacity":0.5,
+		"format":"image/png8",
+		"styles":"",
+		"transparent":true,
+		"tiled": false
+	},
+	{
+		"source":"local",
+		"name":"WESTWIMMERA:WWSC_MAINTENANCE_ZONE",
+		"title":"Maintenance Zones",
+		"visibility":false,
+		"opacity":0.8,
+		"format":"image/png8",
+		"styles":"",
+		"transparent":true,
+		"tiled":false
+	},
+	{
+            "source": "backend",
+            "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
+            "title": "Property (Vicmap)",
+            "visibility": true,
+            "opacity": 0.25,
+            "format": "image/GIF",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+		"source":"local",
+		"name":"WESTWIMMERA:VW_WWSC_ASSETS_MOLONEY_ROAD",
+		"title":"Road Details (Moloney)",
+		"visibility":false,
+		"opacity":0.8,
+		"format":"image/png8",
+		"styles":"",
+		"transparent":true,
+		"tiled":false
+	},
+	{
+            "source": "backend",
+            "name": "VICMAP:VW_TRANSFER_STATION",
+            "title": "Transfer Stations",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "backend",
+            "name": "VICMAP:VW_WEST_WIMMERA_MASK",
+            "title": "Municipal Boundary",
+            "visibility": true,
+            "opacity": 0.6,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "transition": "resize",
+            "group": "top"
+        },
+        {
+            "source": "backend",
+            "name": "LabelClassic",
+            "title": "Labels",
+            "visibility": true,
+            "opacity": 1,
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "group": "top"
+        },
+        {
+            "source": "backend",
+            "name": "VicmapClassic",
+            "title": "Vicmap Classic",
+            "visibility": true,
+            "opacity": 1,
+            "group": "background",
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "cached": true,
+            "transition": "resize"
+        },
+        {
+            "source": "mapquest",
+            "name": "osm",
+            "visibility": false,
+            "group": "background"
+ 	},
+ 	{
+		"source":"dse_iws_cascaded",
+		"name" :"WESTWIMMERA:AERIAL_WIMMERA-CMA_2004NOV01_AIR_VIS_60CM_MGA54",
+		"title":"Aerial Photo (WCMA 2004)",
+		"visibility":false,
+		"opacity":1,
+		"group":"background",
+		"selected":false,
+		"format":"image/JPEG",
+		"transparent":true
+       },
+        {
+            "source": "ol",
+            "group": "background",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "None",
+                {
+                    "visibility": false
+                }
+            ]
+        }
+    ],
+    "center": [
+        15727146,
+        -4393955
+    ],
+    "zoom": 9,
+    "workspace": "WESTWIMMERA",
+    "highlightSymboliser": {
+        "name": "test",
+        "strokeColor": "green",
+        "strokeWidth": 15,
+        "strokeOpacity": 0.5,
+        "fillColor": "green",
+        "fillOpacity": 0.2
+    },
+    "liveDataEndPoints": [
+        {
+            "urlLayout": "http://192.168.10.12/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://192.168.10.12/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "sqlite",
+            "storeName": "westwimmera"
+        },
+        {
+            "urlLayout": "http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "pgsql",
+            "storeName": "vicmap"
+        }
+    ],
+    "logoClientSrc":"theme/app/img/custom/westwimmera_logo.gif",
+    "logoClientWidth":167,
+    "zoomMax":18,
+    "bannerLineColor":"#D0D2B9",
+    "bannerRightCornerLine1":"West Wimmera Shire Council",
+    "bannerRightCornerLine2":"Victoria, Australia",
+    "quickZoomDatastore": [
+	["141.079","-36.971","141.090","-36.965","Apsley"],
+	["141.416","-37.282","141.423","-37.276","Chetwynd"],
+	["141.212","-37.374","141.218","-37.367","Dergholm"],
+	["141.276","-37.043","141.306","-37.019","Edenhope"],
+	["141.469","-36.724","141.479","-36.715","Goroke"],
+	["141.588","-37.170","141.595","-37.163","Harrow"],
+	["141.233","-36.383","141.251","-36.370","Kaniva"],
+	["141.127","-36.363","141.129","-36.362","Lillimur"],
+	["141.339","-36.357","141.348","-36.353","Miram"],
+	["140.981","-36.379","140.993","-36.372","Serviceton"]
+    ],
+    "printMapTitle":"West Wimmera Shire Council",
+    "linkToCouncilWebsite":"http://www.westwimmera.vic.gov.au/"
+}
