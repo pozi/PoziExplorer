@@ -925,28 +925,26 @@ Ext.onReady(function() {
 					
 					gComboDataArray=[];
 					layerCounter=0;
-				}                        
-                        
-                        },
-                        scope: this
-                    }
-                }, this.controlOptions));
-                map.addControl(control);
-                info.controls.push(control);
+				}
+			},
+			scope: this
+			}
+		}, this.controlOptions));
+		map.addControl(control);
+		info.controls.push(control);
 		// Activating the info control by default
-                //if(infoButton.pressed) {
-                    control.activate();
-                //}
-            }, this);
+		//if(infoButton.pressed) {
+			control.activate();
+		//}
+		}, this);
+	};
 
-        };
-        
-        this.target.mapPanel.layers.on("update", updateInfo, this);
-        this.target.mapPanel.layers.on("add", updateInfo, this);
-        this.target.mapPanel.layers.on("remove", updateInfo, this);
-        
-        return actions;
-    };
+	this.target.mapPanel.layers.on("update", updateInfo, this);
+	this.target.mapPanel.layers.on("add", updateInfo, this);
+	this.target.mapPanel.layers.on("remove", updateInfo, this);
+	
+	return actions;
+	};
 
 	// Extraction of parameters from the URL to load the correct configuration file, and an optional property number to focus on
 	function getURLParameter(name) {	
@@ -1916,21 +1914,21 @@ Ext.onReady(function() {
 			},
 			{
 			// HS MOD END
-			    region: "center",
-			    layout: "border",
-			    tbar: toolbar,
-			    items: [
-				{
-					id: "centerpanel",
-					xtype: "panel",
-					layout: "fit",
-					region: "center",
-					border: false,
-					items: ["mymap"]
-				},
-				westPanel,
-				eastPanel
-			    ]}
+				region: "center",
+				layout: "border",
+				tbar: toolbar,
+				items: [
+					{
+						id: "centerpanel",
+						xtype: "panel",
+						layout: "fit",
+						region: "center",
+						border: false,
+						items: ["mymap"]
+					},
+					westPanel,
+					eastPanel
+				]}
 			];
 
 			app = new gxp.Viewer({
@@ -2033,9 +2031,9 @@ Ext.onReady(function() {
 									var projdest = new OpenLayers.Projection("EPSG:900913");
 									var bd = new OpenLayers.Bounds(record.data.xmin,record.data.ymin,record.data.xmax,record.data.ymax).transform(projsrc, projdest);
 									this.mapPanel.map.zoomToExtent(bd);},
-							    scope:this}
-						}	     
-					     );
+								scope:this}
+						}
+					);
 				}
 				// Adding to the list of tools			
 				toolbar.add(addTool1,addTool2);
@@ -2071,12 +2069,12 @@ Ext.onReady(function() {
 				app.getCookieValue = function(param) {
 					var i, x, y, cookies = document.cookie.split(";");
 					for (i=0; i < cookies.length; i++) {
-					    x = cookies[i].substr(0, cookies[i].indexOf("="));
-					    y = cookies[i].substr(cookies[i].indexOf("=")+1);
-					    x=x.replace(/^\s+|\s+$/g,"");
-					    if (x==param) {
-						return unescape(y);
-					    }
+						x = cookies[i].substr(0, cookies[i].indexOf("="));
+						y = cookies[i].substr(cookies[i].indexOf("=")+1);
+						x=x.replace(/^\s+|\s+$/g,"");
+						if (x==param) {
+							return unescape(y);
+						}
 					}
 					return null;
 				};
@@ -2104,7 +2102,7 @@ Ext.onReady(function() {
 				app.authenticate = function() {
 
 					var submitLogin=function() {
-					    panel.buttons[0].disable();
+						panel.buttons[0].disable();
 
 						// Prefixes the username with the workspace name
 						win.hide();
@@ -2116,108 +2114,106 @@ Ext.onReady(function() {
 						//
 
 
-					    panel.getForm().submit({
-						success: function(form, action) {
-						    toolbar.items.each(function(tool) {
-							if (tool.needsAuthorization === true) {
-								tool.enable();
-							}
-						    });
-						    var user = form.findField('username').getValue();
-						    app.setCookieValue(app.cookieParamName, user);
-						    app.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
-						    // Only showing the username without its workspace
-						    var typedUsername = user;
-						    if (user.split(".")[1])
-						    {
-						    	typedUsername = user.split(".")[1];
-						    }
-						    app.showLogout(typedUsername);
-						    win.un("beforedestroy", this.cancelAuthentication, this);
-						    win.close();
-						},
-						failure: function(form, action) {
-							// Reset the username to what was initially typed, and show the login window
-							panel.getForm().items.items[0].setValue(typedUsername);
-							win.show();
-							//
-						    app.authorizedRoles = [];
-						    panel.buttons[0].enable();
-						    form.markInvalid({
-							"username": this.loginErrorText,
-							"password": this.loginErrorText
-						    });
-						},
-						scope: this
-					    });
+						panel.getForm().submit({
+							success: function(form, action) {
+								toolbar.items.each(function(tool) {
+									if (tool.needsAuthorization === true) {
+										tool.enable();
+									}
+								});
+								var user = form.findField('username').getValue();
+								app.setCookieValue(app.cookieParamName, user);
+								app.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
+								// Only showing the username without its workspace
+								var typedUsername = user;
+								if (user.split(".")[1])
+								{
+									typedUsername = user.split(".")[1];
+								}
+								app.showLogout(typedUsername);
+								win.un("beforedestroy", this.cancelAuthentication, this);
+								win.close();
+							},
+							failure: function(form, action) {
+								// Reset the username to what was initially typed, and show the login window
+								panel.getForm().items.items[0].setValue(typedUsername);
+								win.show();
+								//
+								app.authorizedRoles = [];
+								panel.buttons[0].enable();
+								form.markInvalid({
+									"username": this.loginErrorText,
+									"password": this.loginErrorText
+								});
+							},
+							scope: this
+						});
 					};
 
 					var panel = new Ext.FormPanel({
-					    url: gtLoginEndpoint,
-					    frame: true,
-					    labelWidth: 60,
-					    defaultType: "textfield",
-					    errorReader: {
-						read: function(response) {
-						    var success = false;
-						    var records = [];
-						    if (response.status === 200) {
-							success = true;
-						    } else {
-							records = [
-							    {data: {id: "username", msg: app.loginErrorText}},
-							    {data: {id: "password", msg: app.loginErrorText}}
-							];
-						    }
-						    return {
-							success: success,
-							records: records
-						    };
-						}
-					    },
-					    items: [{
-						fieldLabel: "Username",
-						name: "username",
-						allowBlank: false,
-						listeners: {
-						    render: function() {
-							this.focus(true, 100);
-						    }
-						}
-					    }, {
-						fieldLabel: "Password",
-						name: "password",
-						inputType: "password",
-						allowBlank: false
-					    }],
-					    buttons: [{
-						text: app.loginText,
-						formBind: true,
-						handler: submitLogin,
-						scope: this
-					    }],
-					    keys: [{
-						key: [Ext.EventObject.ENTER],
-						handler: submitLogin,
-						scope: this
-					    }]
+						url: gtLoginEndpoint,
+						frame: true,
+						labelWidth: 60,
+						defaultType: "textfield",
+						errorReader: {
+							read: function(response) {
+								var success = false;
+								var records = [];
+								if (response.status === 200) {
+									success = true;
+								} else {
+									records = [
+										{data: {id: "username", msg: app.loginErrorText}},
+										{data: {id: "password", msg: app.loginErrorText}}
+									];
+								}
+								return {
+									success: success,
+									records: records
+								};
+							}
+						},
+						items: [{
+							fieldLabel: "Username",
+							name: "username",
+							allowBlank: false,
+							listeners: {
+								render: function() {
+									this.focus(true, 100);
+								}
+							}
+						}, {
+							fieldLabel: "Password",
+							name: "password",
+							inputType: "password",
+							allowBlank: false
+						}],
+						buttons: [{
+							text: app.loginText,
+							formBind: true,
+							handler: submitLogin,
+							scope: this
+						}],
+						keys: [{
+							key: [Ext.EventObject.ENTER],
+							handler: submitLogin,
+							scope: this
+						}]
 					});
 
-
-
 					var win = new Ext.Window({
-					    title: app.loginText,
-					    layout: "fit",
-					    width: 235,
-					    height: 130,
-					    plain: true,
-					    border: false,
-					    modal: true,
-					    items: [panel],
-					    listeners: {
-						beforedestroy: this.cancelAuthentication,
-						scope: this
-					    }
+						title: app.loginText,
+						layout: "fit",
+						width: 235,
+						height: 130,
+						plain: true,
+						border: false,
+						modal: true,
+						items: [panel],
+						listeners: {
+							beforedestroy: this.cancelAuthentication,
+							scope: this
+						}
 					});
 					win.show();
 				};
@@ -2268,18 +2264,18 @@ Ext.onReady(function() {
 						if (user === null) {
 							user = "unknown";
 						}
-						    // Only showing the username without its workspace
-						    var typedUsername = user;
-						    if (user.split(".")[1])
-						    {
-						    	typedUsername = user.split(".")[1];
-						    }
-						    app.showLogout(typedUsername);
+						// Only showing the username without its workspace
+						var typedUsername = user;
+						if (user.split(".")[1])
+						{
+							typedUsername = user.split(".")[1];
+						}
+						app.showLogout(typedUsername);
 
 						if (app.authorizedRoles[0])
 						{
 							gCurrentLoggedRole=app.authorizedRoles[0];
-						}                
+						}
 
 					}
 				};
@@ -2352,81 +2348,79 @@ Ext.onReady(function() {
 
 	// Loading the JSON configuration based on the council name
 	OpenLayers.Request.GET({
-                url: "lib/custom/json/"+configScript+".json",
+		url: "lib/custom/json/"+configScript+".json",
 		success: function(request) {
 			// Decoding the configuration file - it's a JSON file
 			JSONconf = Ext.util.JSON.decode(request.responseText);
-                    
- 			// If a property number has been passed
- 		        if (propnum)
- 		        {
- 				// Handler for result of retrieving the property details by its number
- 				var prop_by_prop_num_handler=function(request){
- 					// The first row returned contains our property record
- 					// We populate the global variable with that
- 					if (request.data && request.data.items[0])
- 					{
-	 					propertyDataInit = request.data.items[0].json.row;
-	 				}
-					else 				
- 					{
- 						alert("No property found in "+toTitleCase(configScript)+" with number: "+propnum+".");
- 					}
- 					
- 					onConfigurationLoaded();
- 				};
+			// If a property number has been passed
+			if (propnum)
+			{
+				// Handler for result of retrieving the property details by its number
+				var prop_by_prop_num_handler=function(request){
+					// The first row returned contains our property record
+					// We populate the global variable with that
+					if (request.data && request.data.items[0])
+					{
+						propertyDataInit = request.data.items[0].json.row;
+					}
+					else
+					{
+						alert("No property found in "+toTitleCase(configScript)+" with number: "+propnum+".");
+					}
+					
+					onConfigurationLoaded();
+				};
  
- 				var ds = new Ext.data.JsonStore({
- 					autoLoad: true, //autoload the data
- 					root: 'rows',
- 					baseParams: {query: propnum, config: JSONconf.databaseConfig, lga: JSONconf.LGACode},
- 					fields: [{name: "label"	, mapping:"row.label"},
- 						{name: "xmini"	, mapping:"row.xmini"},
- 						{name: "ymini"	, mapping:"row.ymini"},
- 						{name: "xmaxi"	, mapping:"row.xmaxi"},
- 						{name: "ymaxi"	, mapping:"row.ymaxi"},
- 						{name: "gsns"	, mapping:"row.gsns"},
- 						{name: "gsln"	, mapping:"row.gsln"},
- 						{name: "idcol"	, mapping:"row.idcol"},
- 						{name: "idval"	, mapping:"row.idval"},
- 						{name: "ld"	, mapping:"row.ld"}
- 					],
- 					proxy: new Ext.data.ScriptTagProxy({
- 						url: JSONconf.servicesHost + JSONconf.searchEndPoint
- 					}),
- 					listeners: {
- 						load: prop_by_prop_num_handler
- 					}
- 				});
+				var ds = new Ext.data.JsonStore({
+					autoLoad: true, //autoload the data
+					root: 'rows',
+					baseParams: {query: propnum, config: JSONconf.databaseConfig, lga: JSONconf.LGACode},
+					fields: [{name: "label"	, mapping:"row.label"},
+						{name: "xmini"	, mapping:"row.xmini"},
+						{name: "ymini"	, mapping:"row.ymini"},
+						{name: "xmaxi"	, mapping:"row.xmaxi"},
+						{name: "ymaxi"	, mapping:"row.ymaxi"},
+						{name: "gsns"	, mapping:"row.gsns"},
+						{name: "gsln"	, mapping:"row.gsln"},
+						{name: "idcol"	, mapping:"row.idcol"},
+						{name: "idval"	, mapping:"row.idval"},
+						{name: "ld"	, mapping:"row.ld"}
+					],
+					proxy: new Ext.data.ScriptTagProxy({
+						url: JSONconf.servicesHost + JSONconf.searchEndPoint
+					}),
+					listeners: {
+						load: prop_by_prop_num_handler
+					}
+				});
  
- 
- 		        }
+ 			}
 			else
 			{
 				onConfigurationLoaded();
 			}
-                },
-                failure: function(request) {
-                    var obj;
-                    try {
-                        obj = Ext.util.JSON.decode(request.responseText);
-                    } catch (err) {
-                        // pass
-                    }
-                    var msg = this.loadConfigErrorText;
-                    if (obj && obj.error) {
-                        msg += obj.error;
-                    } else {
-                        msg += this.loadConfigErrorDefaultText;
-                    }
-                    this.on({
-                        ready: function() {
-                            this.displayXHRTrouble(msg, request.status);
-                        },
-                        scope: this
-                    });
-                },
-                scope: this
+		},
+		failure: function(request) {
+			var obj;
+			try {
+				obj = Ext.util.JSON.decode(request.responseText);
+			} catch (err) {
+				// pass
+			}
+			var msg = this.loadConfigErrorText;
+			if (obj && obj.error) {
+				msg += obj.error;
+			} else {
+				msg += this.loadConfigErrorDefaultText;
+			}
+			this.on({
+				ready: function() {
+					this.displayXHRTrouble(msg, request.status);
+				},
+				scope: this
+			});
+		},
+		scope: this
 	});
 	
 });

@@ -115,7 +115,7 @@
         {
             "source": "backend",
             "name": "VICMAP:VW_DSE_VMPLAN_ZONE",
-            "title": "Planning Zones (Vicmap)",
+            "title": "Planning Zones",
             "visibility": false,
             "opacity": 0.5,
             "format": "image/png8",
@@ -126,7 +126,7 @@
         {
             "source": "backend",
             "name": "VICMAP:VW_DSE_VMPLAN_OVERLAY",
-            "title": "Planning Overlays (Vicmap)",
+            "title": "Planning Overlays",
             "visibility": false,
             "opacity": 0.5,
             "format": "image/png8",
@@ -137,7 +137,7 @@
         {
 		"source":"local",
 		"name":"WESTWIMMERA:AAV_CULTURAL_SENSITIVITY",
-		"title":"Cultural Sensitivity (AAV, 12/2011)",
+		"title":"Cultural Sensitivity",
 		"visibility":false,
 		"opacity":0.5,
 		"format":"image/png8",
@@ -159,7 +159,7 @@
 	{
             "source": "backend",
             "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
-            "title": "Property (Vicmap)",
+            "title": "Property",
             "visibility": true,
             "opacity": 0.25,
             "format": "image/GIF",
@@ -170,7 +170,7 @@
         {
 		"source":"local",
 		"name":"WESTWIMMERA:VW_WWSC_ASSETS_MOLONEY_ROAD",
-		"title":"Road Details (Moloney)",
+		"title":"Road Details",
 		"visibility":false,
 		"opacity":0.8,
 		"format":"image/png8",
@@ -238,7 +238,7 @@
  	{
 		"source":"dse_iws_cascaded",
 		"name" :"WESTWIMMERA:AERIAL_WIMMERA-CMA_2004NOV01_AIR_VIS_60CM_MGA54",
-		"title":"Aerial Photo (WCMA 2004)",
+		"title":"Aerial Photo",
 		"visibility":false,
 		"opacity":1,
 		"group":"background",

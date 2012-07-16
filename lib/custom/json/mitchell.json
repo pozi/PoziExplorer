@@ -131,7 +131,7 @@
         {
             "source": "backend",
             "name": "VICMAP:VW_DSE_VMPLAN_ZONE",
-            "title": "Planning Zones (Vicmap)",
+            "title": "Planning Zones",
             "visibility": false,
             "opacity": 0.5,
             "format": "image/png8",
@@ -142,7 +142,7 @@
         {
             "source": "backend",
             "name": "VICMAP:VW_DSE_VMPLAN_OVERLAY",
-            "title": "Planning Overlays (Vicmap)",
+            "title": "Planning Overlays",
             "visibility": false,
             "opacity": 0.5,
             "format": "image/png8",
@@ -163,7 +163,7 @@
         {
             "source": "backend",
             "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
-            "title": "Property (Vicmap)",
+            "title": "Property",
             "visibility": true,
             "opacity": 0.25,
             "format": "image/GIF",
