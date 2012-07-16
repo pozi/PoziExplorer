@@ -1,0 +1,191 @@
+{
+    "servicesHost":"http://49.156.17.41",
+    "tools": [
+        {
+            "ptype": "gxp_layermanager",
+            "groups": {
+                "top": {
+                    "title": "Top Layers",
+                    "collapsed": true
+                },
+                "default": "Overlays",
+                "background": {
+                    "title": "Base Maps",
+                    "exclusive": true
+                }
+            },
+            "outputConfig": {
+                "id": "tree",
+                "border": false,
+                "tbar": [
+                    
+                ]
+            },
+            "outputTarget": "westpanel"
+        },
+        {
+            "ptype": "gxp_layerproperties",
+            "id": "layerproperties",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_zoomtolayerextent",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_removelayer",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_wmsgetfeatureinfo",
+            "format": "grid",
+            "toggleGroup": "interaction",
+            "showButtonText": false
+        },
+        {
+            "ptype": "gxp_print",
+            "customParams": {
+                "outputFilename": "PoziExplorer-print"
+            },
+            "printService": "/geoserver/pdf",
+            "showButtonText": false
+        },
+        {
+            "ptype": "gxp_measure",
+            "toggleGroup": "interaction",
+            "controlOptions": {
+                "immediate": true
+            },
+            "showButtonText": false
+        }
+    ],
+    "sources": {
+        "local": {
+            "url": "/geoserver/CREEKLINK/ows",
+            "title": "Creeklink Layers",
+            "ptype": "gxp_wmscsource",
+            "tiled": false
+        },
+        "mapquest": {
+            "ptype": "gxp_mapquestsource"
+        },
+        "google": {
+            "ptype": "gxp_googlesource"
+        },
+        "ol": {
+            "ptype": "gxp_olsource"
+        },
+        "backend": {
+            "url": [
+                "http://m1.pozi.com/geoserver/ows",
+                "http://m2.pozi.com/geoserver/ows",
+                "http://m3.pozi.com/geoserver/ows",
+                "http://m4.pozi.com/geoserver/ows"
+            ],
+            "title": "Pozi Data Server",
+            "ptype": "gxp_wmscsource",
+            "transition": null
+        }
+    },
+    "layers": [
+        {
+		"source":"local",
+		"name":"CREEKLINK:CREEK",
+		"title":"Creeks",
+		"visibility":true,
+		"opacity":0.85,
+		"format":"image/png8",
+		"styles":"",
+		"transparent":true,
+		"tiled":false,
+		"transition":""
+	},
+	{
+		"source":"local",
+		"name":"creek_segments",
+		"title":"Creek Tiles",
+		"visibility":true,
+		"opacity":0.66,
+		"format":"image/png8",
+		"styles":"",
+		"transparent":true,
+		"tiled":false,
+		"transition":""
+	},
+	{
+		"source":"backend",
+		"name":"VICMAP:VMPROP_PROPERTY_OPTI",
+		"title":"Properties (Vicmap)",
+		"visibility":false,
+		"opacity":1,
+		"queryable": false,
+		"format":"image/png8",
+		"styles":"",
+		"transparent":true,
+		"tiled":false,
+		"transition":""
+	},
+	{
+		"source":"backend",
+		"name":"VICMAP:VMPROP_PARCEL_OPTI",
+		"title":"Parcels (Vicmap)",
+		"visibility":true,
+		"opacity":0.25,
+		"queryable": false,
+		"format":"image/png8",
+		"styles":"creek_parcel",
+		"transparent":true,
+		"tiled":false,
+		"transition":""
+	},
+	{
+	    "source": "google",
+	    "name": "HYBRID",
+	    "visibility": true
+        },
+        {
+            "source": "mapquest",
+            "name": "osm",
+            "visibility": false,
+            "group": "background"
+        },
+        {
+            "source": "ol",
+            "group": "background",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "None",
+                {
+                    "visibility": false
+                }
+            ]
+        }
+    ],
+    "center": [
+        16024006,
+        -4632500
+    ],
+    "zoom": 12,
+    "workspace": "CREEKLINK",
+    "highlightSymboliser": {
+        "name": "test",
+        "strokeColor": "purple",
+        "strokeWidth": 15,
+        "strokeOpacity": 0.5,
+        "fillColor": "purple",
+        "fillOpacity": 0.2
+    },
+    "liveDataEndPoints": [
+        {
+            "urlLayout": "http://103.29.64.29/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://103.29.64.29/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "pgsql",
+            "storeName": "creeklinkgis"
+        }
+    ],
+    "zoomMax":18,
+    "printMapTitle":"Creek-link",
+	"collapseWestPanel":true,
+	"hideNorthRegion":true
+}
