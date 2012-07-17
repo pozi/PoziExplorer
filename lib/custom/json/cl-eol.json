@@ -110,7 +110,8 @@
 		"styles":"",
 		"transparent":true,
 		"tiled":false,
-		"transition":""
+		"transition":"",
+		"fieldsToExclude":["seg_id","interested","interested_date","visited","visited_date"]
 	},
 	{
 		"source":"backend",

@@ -122,23 +122,23 @@ Ext.onReady(function() {
 				}
 				doNotHTMLEncode = true;
 			}else	{
-				// Presentation de la date is now done on the server side using the template marker
-				//rv = val.replace(/ 12:00 AM/g,"");
-
 				try {
 					// Decoding those strings that have been URI-encoded
 					rv = decodeURI(val);
 				}
 				catch (e)
 				{
+					// Or presenting them as is, if they can't be decoded
 					rv = val;
 				}
-				// Converting line returns to HTML line breaks
+				// Converting line returns to HTML line breaks (needs to be after URI-decoding)
 				rv=rv.replace(/\n/g, '<br />');
+				
 				// Better presentation of boolean values (they are not detected as boolean in the tests above)
 				if (val == "true")  {rv="<input type='checkbox' name='a' value='a' checked='checked' disabled='disabled'/>";}
 				if (val == "false") {rv="<input type='checkbox' name='b' value='b' disabled='disabled'/>";}
-				// On encode rien!
+				
+				// We HTML-encode nothing!
 				doNotHTMLEncode = true;
 			}
 		}
@@ -1682,7 +1682,29 @@ Ext.onReady(function() {
 											var val;
 											var item_array=new Array();
 											var has_gsv = false;
-											var fa = [];
+											var fa = [], fte= [];
+
+											// Working out if there are any fields to exclude for this layer
+											// Current layer name
+											var cl = record.get("layer");													
+											
+											// Finding the fields to exclude in the JSON configuration file
+											for (l in JSONconf.layers)
+											{
+												if (JSONconf.layers[l].name == cl)
+												{
+													if (JSONconf.layers[l].fieldsToExclude)
+													{
+														fte = JSONconf.layers[l].fieldsToExclude;
+													}
+													else
+													{
+														fte = [];
+													}
+													// fte contains an array of fields to exclude
+													break;
+												}
+											}
 
 											for(var k in record.data.content)
 											{
@@ -1726,9 +1748,17 @@ Ext.onReady(function() {
 													{
 														val=val.replace(/ 12:00 AM/g,"");
 													}
-
-													// Building the source of a property grid
-													fa[toTitleCase(trim(lab.replace(/_/g," ")))]=trim(val);
+													
+													// Make sure the fields are not excluded
+													if (fte && fte.indexOf(lab) > -1)
+													{
+														// Skipping this element
+													}
+													else
+													{
+														// Pushing this element in the source of the property grid
+														fa[toTitleCase(trim(lab.replace(/_/g," ")))]=trim(val);
+													}
 												}
 
 											}
