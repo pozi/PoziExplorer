@@ -125,8 +125,14 @@ Ext.onReady(function() {
 				// Presentation de la date is now done on the server side using the template marker
 				//rv = val.replace(/ 12:00 AM/g,"");
 
-				// Decoding those strings that have been URI-encoded
-				rv = decodeURI(rv);
+				try {
+					// Decoding those strings that have been URI-encoded
+					rv = decodeURI(val);
+				}
+				catch (e)
+				{
+					rv = val;
+				}
 				// Converting line returns to HTML line breaks
 				rv=rv.replace(/\n/g, '<br />');
 				// Better presentation of boolean values (they are not detected as boolean in the tests above)
