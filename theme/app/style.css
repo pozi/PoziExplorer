@@ -27,3 +27,7 @@ body {
 .x-btn .logout {
 	background-image: url(img/silk/door_out.png);
 }
+
+.x-grid3-cell-inner, .x-grid3-hd-inner {
+  white-space: normal; /* changed from nowrap */
+}
