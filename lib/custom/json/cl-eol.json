@@ -192,5 +192,16 @@
     "hideSelectedFeaturePanel":true,
     "eastPanelCollapsible":false,
     "infoTitle":"",
-    "hideScaleCombo":true
+    "hideScaleCombo":true,
+    "layerPresentation": {
+    	"creek_segments":[
+		{"attr_name":"credit"},
+		{"attr_name":"creek_name"},
+    		{"attr_name":"stock_excluded"},
+		{"attr_name":"stock_excluded_date"},
+		{"attr_name":"native_vegetation"},
+		{"attr_name":"revegetated_date"},
+		{"attr_name":"comments"}
+    	]
+    }
 }

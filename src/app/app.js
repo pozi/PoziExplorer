@@ -1136,7 +1136,6 @@ Ext.onReady(function() {
 			if ('infoTitle' in JSONconf) {gtInfoTitle = JSONconf.infoTitle;};
 
 			// This structure deals with fields to show, in which order and with which name
-			// TODO: augment this structure with the client-specific JSON configuration
 			var gtLayerPresentationConfiguration =
 			{
 				"VICMAP_PROPERTY_ADDRESS":
@@ -1149,6 +1148,13 @@ Ext.onReady(function() {
 						{"attr_name":"pr_multass","alt_name":"Multi Assessment"},
 						{"attr_name":"pfi","alt_name":"PFI"}
 					]
+			};
+			// Augment this structure with the client-specific JSON configuration
+			if (JSONconf.layerPresentation) {
+				for (l in JSONconf.layerPresentation)
+				{
+					gtLayerPresentationConfiguration[l]=JSONconf.layerPresentation[l];
+				}
 			};
 
 			poziLinkClickHandler = function () {
@@ -1745,7 +1751,7 @@ Ext.onReady(function() {
 											
 											for(var k in record.data.content)
 											{
-												if (k=="the_geom")
+												if (k=="the_geom" || k=="SHAPE")
 												{
 													var featureToRead = record.data.content[k];
 													var wktObj = new OpenLayers.Format.WKT({
