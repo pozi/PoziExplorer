@@ -1005,6 +1005,27 @@ Ext.onReady(function() {
 	// Function to execute on successful return of the JSON configuration file loading
 	var onConfigurationLoaded = function() {
 
+		// Customising the scale combo visibility
+		gxp.ScaleOverlay.prototype.bind = function(map) {
+			this.map = map;
+			this.addScaleLine();
+			// Hiding the scale combo
+			if ('hideScaleCombo' in JSONconf)
+			{
+				if (!(JSONconf.hideScaleCombo))
+				{
+					this.addScaleCombo();
+				}
+			}
+			else
+			{
+				this.addScaleCombo();
+			}
+			this.doLayout();
+		}		
+
+
+
 		// Based on the previous JSON configuration, we may decide to dynamically load an additional Javascript file of interaction customisations
 
 		// Function that is able to dynamically load the extra Javascript
@@ -1046,7 +1067,6 @@ Ext.onReady(function() {
 			var gtLoadingText = "Loading ...";
 			var gtDetailsTitle = "Details";
 			var gtClearButton = "Clear";
-			var gtInfoTitle = "Info";
 			var gtEmptyTextSelectFeature = "Selected features ...";
 			var gtEmptyTextQuickZoom = "Zoom to town ...";
 			
@@ -1101,10 +1121,19 @@ Ext.onReady(function() {
 			if (JSONconf.quickZoomDatastore) {gtQuickZoomDatastore = JSONconf.quickZoomDatastore;};
 
 			var gtCollapseWestPanel = false;
-			if (JSONconf.collapseWestPanel) {gtCollapseWestPanel=JSONconf.collapseWestPanel;};
+			if ('collapseWestPanel' in JSONconf) {gtCollapseWestPanel=JSONconf.collapseWestPanel;};
 
 			var gtHideNorthRegion = false;
-			if (JSONconf.hideNorthRegion) {gtHideNorthRegion=JSONconf.hideNorthRegion;};
+			if ('hideNorthRegion' in JSONconf) {gtHideNorthRegion=JSONconf.hideNorthRegion;};
+			
+			var gtHideSelectedFeaturePanel = false;
+			if ('hideSelectedFeaturePanel' in JSONconf) {gtHideSelectedFeaturePanel=JSONconf.hideSelectedFeaturePanel;};
+
+			var gtEastPanelCollapsible = true;
+			if ('eastPanelCollapsible' in JSONconf) {gtEastPanelCollapsible=JSONconf.eastPanelCollapsible;};
+
+			var gtInfoTitle = "Info";
+			if ('infoTitle' in JSONconf) {gtInfoTitle = JSONconf.infoTitle;};
 
 			poziLinkClickHandler = function () {
 				var appInfo = new Ext.Panel({
@@ -1649,6 +1678,7 @@ Ext.onReady(function() {
 			var northPart = new Ext.Panel({
 				region: "north",
 				border: false,
+				hidden: gtHideSelectedFeaturePanel,
 				layout: 'column',
 				height: 23,
 				bodyStyle: " background-color: transparent ",
@@ -1877,7 +1907,7 @@ Ext.onReady(function() {
 				layout: "anchor",
 				region: "east",
 				title: gtInfoTitle,
-				collapsible: true,
+				collapsible: gtEastPanelCollapsible,
 				collapseMode: "mini",
 				width: 250,
 				split: true,

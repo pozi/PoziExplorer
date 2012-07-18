@@ -5,7 +5,7 @@
             "ptype": "gxp_layermanager",
             "groups": {
                 "top": {
-                    "title": "Top Layers",
+                    "title": "Surface Layers",
                     "collapsed": true
                 },
                 "default": "Overlays",
@@ -187,6 +187,10 @@
     ],
     "zoomMax":18,
     "printMapTitle":"Creek-link",
-	"collapseWestPanel":true,
-	"hideNorthRegion":true
+    "collapseWestPanel":true,
+    "hideNorthRegion":true,
+    "hideSelectedFeaturePanel":true,
+    "eastPanelCollapsible":false,
+    "infoTitle":"",
+    "hideScaleCombo":true
 }
