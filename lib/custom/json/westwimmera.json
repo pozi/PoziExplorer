@@ -8,7 +8,7 @@
             "ptype": "gxp_layermanager",
             "groups": {
                 "top": {
-                    "title": "Top Layers",
+                    "title": "Surface Layers",
                     "collapsed": true
                 },
                 "default": "Overlays",
