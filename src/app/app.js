@@ -1135,6 +1135,22 @@ Ext.onReady(function() {
 			var gtInfoTitle = "Info";
 			if ('infoTitle' in JSONconf) {gtInfoTitle = JSONconf.infoTitle;};
 
+			// This structure deals with fields to show, in which order and with which name
+			// TODO: augment this structure with the client-specific JSON configuration
+			var gtLayerPresentationConfiguration =
+			{
+				"VICMAP_PROPERTY_ADDRESS":
+					[
+						{"attr_name":"ezi_add","alt_name":"EZI address"},
+						{"attr_name":"pr_propnum","alt_name":"Property Number"},
+						{"attr_name":"pfi","alt_name":"PFI"},
+						{"attr_name":"locality"},
+						{"attr_name":"postcode"},
+						{"attr_name":"lga_code","alt_name":"LGA"},
+						{"attr_name":"pr_multass","alt_name":"Multi Assessment"}
+					]
+			};
+
 			poziLinkClickHandler = function () {
 				var appInfo = new Ext.Panel({
 					title: "GeoExplorer",
@@ -1714,28 +1730,19 @@ Ext.onReady(function() {
 											var has_gsv = false;
 											var fa = [], fte= [];
 
-											// Working out if there are any fields to exclude for this layer
+											// Working out the layer presentation configuration
 											// Current layer name
-											var cl = record.get("layer");													
-											
-											// Finding the fields to exclude in the JSON configuration file
-											for (l in JSONconf.layers)
+											var cl = record.get("layer");
+											// Configuration field array
+											var fti_arr = gtLayerPresentationConfiguration[cl];
+											// Arrays to store ordered attribute names and values
+											var an_arr,av_arr;
+											if (fti_arr)
 											{
-												if (JSONconf.layers[l].name == cl)
-												{
-													if (JSONconf.layers[l].fieldsToExclude)
-													{
-														fte = JSONconf.layers[l].fieldsToExclude;
-													}
-													else
-													{
-														fte = [];
-													}
-													// fte contains an array of fields to exclude
-													break;
-												}
+												an_arr = new Array(fti_arr.length);
+												av_arr = new Array(fti_arr.length);
 											}
-
+											
 											for(var k in record.data.content)
 											{
 												if (k=="the_geom")
@@ -1763,26 +1770,30 @@ Ext.onReady(function() {
 												{
 													lab=k;
 													val=record.data.content[k];
-													if (val.search(/^http/)>-1)
-													{
-														if (val.search(/\.jpg/)>-1)
-														{
-															val="<a href='"+val+"' target='_blank'><img src='"+val+"' height='20' width='20' /></a>";
-														}
-														else
-														{
-															val="<a href='"+val+"' target='_blank'>link</a>";
-														}
-													}
-													else
-													{
-														val=val.replace(/ 12:00 AM/g,"");
-													}
 													
-													// Make sure the fields are not excluded
-													if (fte && fte.indexOf(lab) > -1)
+													// Processing the fields according to presentation configuration array
+													if (fti_arr)
 													{
-														// Skipping this element
+														// Locating the index the current attribute should be positioned at
+														for(q=0;q<fti_arr.length;q++)
+														{
+															if(fti_arr[q].attr_name == lab)
+															{
+																// Substitution with a optional alternate name
+																if (fti_arr[q].alt_name)
+																{
+																	an_arr[q]=fti_arr[q].alt_name;
+																}
+																else
+																{
+																	// If no alternate name, just the normal clean title case
+																	an_arr[q]=toTitleCase(trim(lab.replace(/_/g," ")));
+																}
+																av_arr[q]=trim(val);
+																break;
+															}
+														}
+	
 													}
 													else
 													{
@@ -1791,6 +1802,16 @@ Ext.onReady(function() {
 													}
 												}
 
+											}
+											
+											// Ordered population of the source data for the grid
+											if (fti_arr)
+											{
+												// We build the fa object based on the 2 arrays of attributes names and values
+												for(q=0;q<fti_arr.length;q++)
+												{
+													fa[an_arr[q]]=av_arr[q];
+												}
 											}
 
 											var p = new Ext.grid.PropertyGrid({
