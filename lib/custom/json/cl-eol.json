@@ -110,8 +110,7 @@
 		"styles":"",
 		"transparent":true,
 		"tiled":false,
-		"transition":"",
-		"fieldsToExclude":["seg_id","interested","interested_date","visited","visited_date"]
+		"transition":""
 	},
 	{
 		"source":"backend",
@@ -179,8 +178,8 @@
     },
     "liveDataEndPoints": [
         {
-            "urlLayout": "http://103.29.64.29/ws/rest/v3/ws_get_layouts.php",
-            "urlLiveData": "http://103.29.64.29/ws/rest/v3/ws_get_live_data.php",
+            "urlLayout": "http://new.pozi.com/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://new.pozi.com/ws/rest/v3/ws_get_live_data.php",
             "storeMode": "pgsql",
             "storeName": "creeklinkgis"
         }
@@ -197,6 +196,7 @@
     	"creek_segments":[
 		{"attr_name":"credit"},
 		{"attr_name":"creek_name"},
+		{"attr_name":"management_group"},		
     		{"attr_name":"stock_excluded"},
 		{"attr_name":"stock_excluded_date"},
 		{"attr_name":"native_vegetation"},
