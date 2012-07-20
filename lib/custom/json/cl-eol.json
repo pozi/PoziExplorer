@@ -203,5 +203,10 @@
 		{"attr_name":"revegetated_date"},
 		{"attr_name":"comments"}
     	]
+    },
+    "bottomEastItem":{
+    	"title":"Legend",
+    	"URL": "http://www.creeklink.org.au/resources/img/creeklink-legend-final.png",
+    	"height":270
     }
 }

@@ -23,6 +23,7 @@
  * @require widgets/WMSLayerPanel.js
  * @require widgets/ScaleOverlay.js
  * @require RowExpander.js
+ * @require RowLayout.js
  * @require GeoExt/widgets/PrintMapPanel.js
  * @require GeoExt/plugins/PrintProviderField.js
  * @require GeoExt/plugins/PrintPageField.js
@@ -1928,15 +1929,9 @@ Ext.onReady(function() {
 				layout:'accordion',
 				region: "center",
 				border: false,
+				rowHeight:1,
 				collapsible: false,
 				autoScroll:true,
-				listeners:{
-						scope: this,
-						resize:function(p){
-							// This is required to get the content of the accordion tabs to resize
-							p.doLayout();
-						}
-				},
 				defaults: {
 					// applied to each contained panel
 					bodyStyle: " background-color: transparent ",
@@ -1955,21 +1950,58 @@ Ext.onReady(function() {
 					fill: false 
 				}
 			});
-
+	
+			var bottomEastItem = {};
+			if (JSONconf.bottomEastItem)
+			{
+				bottomEastItem = 
+				{ 
+					title:JSONconf.bottomEastItem.title,
+					html:"<iframe src='"+JSONconf.bottomEastItem.URL+"' height='"+JSONconf.bottomEastItem.height+"' frameborder='0' />" ,
+					collapsible:true,
+					animCollapse:false,
+					height:JSONconf.bottomEastItem.height,
+					listeners: {
+						scope:this,
+						expand: function(p){
+							eastPanel.doLayout();
+						},
+						collapse: function(p){
+							eastPanel.doLayout();
+						}
+					}
+				};
+			}	
+			
 			var eastPanel = new Ext.Panel({
 				border: true,
-				layout: "anchor",
+				layout: "ux.row",
 				region: "east",
 				title: gtInfoTitle,
 				collapsible: gtEastPanelCollapsible,
 				collapseMode: "mini",
 				width: 250,
+				listeners:{
+						scope: this,
+						resize:function(p){
+							// This is required to get the content of the accordion tabs to resize
+							for (i in p.items.items)
+							{	
+								if (!(isNaN(i)))
+								{						
+									p.items.items[i].doLayout();
+								}
+							}
+						}
+				},
 				split: true,
 				items: [
 					northPart,
-					accordion
+					accordion,
+					bottomEastItem
 				]
 			});
+			
 
 			var toolbar = new Ext.Toolbar({
 				disabled: true,
