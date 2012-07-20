@@ -938,7 +938,7 @@ Ext.onReady(function() {
 							}							
 						}
 						// If too long for the drop down, we truncate the string to the space remaining after "<LAYER NAME>:"
-						var num_char_in_drop_down = 28;
+						var num_char_in_drop_down = 25;
 						if (lab.length>num_char_in_drop_down-typ.length)
 						{
 							
@@ -1374,7 +1374,7 @@ Ext.onReady(function() {
 								cont["the_geom_WFS"]=this.features[k];										
 
 								// If too long for the drop down, we truncate the string to the space remaining after "<LAYER NAME>:"
-								var num_char_in_drop_down = 33;
+								var num_char_in_drop_down = 28;
 								if (lab.length>num_char_in_drop_down-typ.length)
 								{
 									lab = lab.substring(0,num_char_in_drop_down-typ.length-2)+"..";
