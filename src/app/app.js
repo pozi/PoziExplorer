@@ -62,7 +62,7 @@ if (debugMode)
 {
 	gtProxy = "proxy/?url=";
 	gtLoginEndpoint = "http://localhost:8080/geoexplorer/login/";
-	gtLocalLayerSourcePrefix = "http://103.29.64.29";
+	gtLocalLayerSourcePrefix = "http://new.pozi.com";
 }
 else
 {
@@ -72,7 +72,7 @@ else
 }
 
 var app;
-var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurrentExpandedTabIdx=[],gCurrentLoggedRole="NONE",JSONconf,propertyDataInit;
+var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurrentExpandedTabIdx=[],gCurrentLoggedRole="NONE",JSONconf,propertyDataInit,gtLayerPresentationConfiguration;
 var poziLinkClickHandler;
 
 // Helper functions
@@ -911,13 +911,7 @@ Ext.onReady(function() {
 						if (simpleTitle) {typ=trim(simpleTitle[1]);}
 						// All the attributes are contained in a serialised JSON object
 						var cont=res.rows[i].row;
-						// Label - for now, nothing									
-						var lab='';
-						// We select the first attribute that is not the_geom as the label
-						for (l in cont)
-						{
-							if (l!="the_geom" && l!="projection"){var lab=cont[l];break;}
-						}
+
 						// Layer name (without namespace), to enable additional accordion panels
 						var lay=x.data.layer.params.LAYERS.split(":")[1];
 						// Catering for layer groups (they don't have a workspace name as a prefix)
@@ -925,6 +919,32 @@ Ext.onReady(function() {
 						{
 							lay=x.data.layer.params.LAYERS;
 						}
+
+						// Label									
+						var lab='';
+						var fti_arr = gtLayerPresentationConfiguration[lay];
+						// We select the right attribute as the label
+						if (fti_arr)
+						{
+							// If the layer presentation is configured, we select the first configured field value
+							lab = cont[fti_arr[0].attr_name];
+						}
+						else
+						{
+							for (l in cont)
+							{						
+								// If not, we select the first field that comes along (provided it's not a geometry)
+								if (l!="the_geom" && l!="SHAPE" && l!="projection"){var lab=cont[l];break;}
+							}							
+						}
+						// If too long for the drop down, we truncate the string to the space remaining after "<LAYER NAME>:"
+						var num_char_in_drop_down = 28;
+						if (lab.length>num_char_in_drop_down-typ.length)
+						{
+							
+							lab = lab.substring(0,num_char_in_drop_down-typ.length-2)+"..";
+						}
+
 						// Building a row and pushing it to an array																		
 						row_array = new Array(id_ct,typ,cont,idx,lab,lay); 
 
@@ -1136,7 +1156,7 @@ Ext.onReady(function() {
 			if ('infoTitle' in JSONconf) {gtInfoTitle = JSONconf.infoTitle;};
 
 			// This structure deals with fields to show, in which order and with which name
-			var gtLayerPresentationConfiguration =
+			gtLayerPresentationConfiguration =
 			{
 				"VICMAP_PROPERTY_ADDRESS":
 					[
@@ -1352,6 +1372,13 @@ Ext.onReady(function() {
 								cont=this.features[k].data;
 								// Capturing the feature as well (it contains the geometry)
 								cont["the_geom_WFS"]=this.features[k];										
+
+								// If too long for the drop down, we truncate the string to the space remaining after "<LAYER NAME>:"
+								var num_char_in_drop_down = 33;
+								if (lab.length>num_char_in_drop_down-typ.length)
+								{
+									lab = lab.substring(0,num_char_in_drop_down-typ.length-2)+"..";
+								}
 
 								// Building a record and inserting it into an array											
 								//row_array = new Array(k,typ,lab,cont,null,null,this.features[k].layer.protocol.featureType); 
