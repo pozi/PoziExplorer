@@ -361,6 +361,12 @@
             "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
             "storeMode": "pgsql",
             "storeName": "vicmap"
+        },
+        {
+            "urlLayout": "http://new.pozi.com/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://new.pozi.com/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "pgsql",
+            "storeName": "mitchellgis"
         }
     ],
     "logoClientSrc":"theme/app/img/custom/mitchell_logo.jpg",

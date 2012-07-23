@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Creek-link</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+	<style>
+		body {
+			padding-top: 12px;
+		}
+	</style>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+  </head>
+ 
+  <body>
+    <div class="container">
+	<div class="row">
+		<div class="span1">Open <a id='lynxButton' class="btn" href="#" onClick="javascript:launchLynx();return false;">Lynx</a> for this property</div>
+	</div>
+    </div> <!-- /container -->
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>	
+	<script type="text/javascript">
+			var property_id;
+
+		function getInternetExplorerVersion()
+		// Returns the version of Internet Explorer or a -1
+		// (indicating the use of another browser).
+		{
+		  var rv = -1; // Return value assumes failure.
+		  if (navigator.appName == 'Microsoft Internet Explorer')
+		  {
+			var ua = navigator.userAgent;
+			var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+			if (re.exec(ua) != null)
+			  rv = parseFloat( RegExp.$1 );
+		  }
+		  return rv;
+		}
+
+		$(document).ready(function(){
+			// The button click should reference the proeprty ID of the parent component
+
+			if (parent)
+			{
+				if (parent.Ext.getCmp('tblayout-win-generic'))
+				{
+					property_id = parent.Ext.getCmp('tblayout-win-generic').initialConfig.idFeature;
+				}
+			}
+
+			if (property_id)
+			{
+				// Behaviour of the button
+				launchLynx = function(){	
+					// This is the destination link to open
+					var dest = "pozilaunch:lynx:property:"+property_id;
+
+					if (getInternetExplorerVersion()>8)
+					{
+						// IE9: use ActiveX controls
+						var WshShell=new ActiveXObject("wscript.shell");
+						alert(dest);
+						WshShell.run(dest);
+						WshShell=null;
+					}
+					else
+					{
+						// Other browsers: just use the direct protocol handling
+						window.location = dest;
+					}
+				}
+			}
+		});
+	</script>
+  </body>
+</html>
