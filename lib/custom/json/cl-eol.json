@@ -88,7 +88,19 @@
         }
     },
     "layers": [
-        {
+	{
+		"source":"local",
+		"name":"creek_segments",
+		"title":"Creek Tiles",
+		"visibility":true,
+		"opacity":0.85,
+		"format":"image/png8",
+		"styles":"",
+		"transparent":true,
+		"tiled":false,
+		"transition":""
+	},
+       {
 		"source":"local",
 		"name":"CREEKLINK:CREEK",
 		"title":"Creeks",
@@ -100,12 +112,12 @@
 		"tiled":false,
 		"transition":""
 	},
-	{
+       {
 		"source":"local",
-		"name":"creek_segments",
-		"title":"Creek Tiles",
+		"name":"CREEKLINK:CREEK_SEGMENT",
+		"title":"Creek Segments Run",
 		"visibility":true,
-		"opacity":0.66,
+		"opacity":0.85,
 		"format":"image/png8",
 		"styles":"",
 		"transparent":true,
