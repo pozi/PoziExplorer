@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Creek-link</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="../bootstrap/css/datepicker.css" rel="stylesheet">
+	<style>
+		body {
+			padding-top: 5px;
+		}
+
+		.form-horizontal .control-group {
+			margin-top: 2px;
+		}
+
+		.controls > .radio:first-child, .controls > .checkbox:first-child {	
+			padding-top: 0;
+		}	
+
+		.width-date {
+			width: 70px;
+		}
+	</style>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+  </head>
+ 
+  <body>
+    <div class="container">
+		<div id="alertPlaceHolder"></div>
+		<form class="form-horizontal">
+			<fieldset>
+			<div class="control-group">
+				<label class="control-label" for="addressLandholder">Address</label>
+				<div class="controls">
+					<input type="text" class="input-large" id="addressLandholder">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="interestedCheckbox">Interested?</label>
+				<div class="controls">
+					<label class="checkbox">
+						<input type="checkbox" id="interestedCheckbox" value="option1">
+					</label>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="visitedCheckbox">Visited?</label>
+				<div class="controls">
+					<label class="checkbox">
+						<input type="checkbox" id="visitedCheckbox" value="option2">
+					</label>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="dp1">Date visited</label>
+				<div class="controls">
+					<input type="text" class="width-date" value="" id="dp1" >
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="stockExcludedCheckbox">Stock excluded?</label>
+				<div class="controls">
+					<label class="checkbox">
+						<input type="checkbox" id="stockExcludedCheckbox" value="option3">
+					</label>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="dp2">Date stock excluded</label>
+				<div class="controls">
+					<input type="text" class="width-date" value="" id="dp2" >
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="nativeVegetationCheckbox">Native vegetation?</label>
+				<div class="controls">
+					<label class="checkbox">
+						<input type="checkbox" id="nativeVegetationCheckbox" value="option4">
+					</label>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="dp3">Date revegetation</label>
+				<div class="controls">
+					<input type="text" class="width-date" value="" id="dp3" >
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="textarea">Credits</label>
+				<div class="controls">
+					<textarea class="input-large" id="creditsTextArea" rows="4"></textarea>
+				</div>
+			</div>
+
+			<!-- Buttons for this form -->
+			<div class="form-actions">
+				<input class="btn btn-primary btn-large" type="button" value="Save" id="saveButton">
+				<input class="btn" type="button" value="Close" id="cancelButton">
+			</div>
+			</fieldset>
+		</form>
+
+	</div>
+
+
+
+    </div> <!-- /container -->
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>	
+	<script src="../bootstrap/js/bootstrap-dropdown.js"></script>
+	<script src="../bootstrap/js/bootstrap-modal.js"></script>
+	<script src="../bootstrap/js/bootstrap-datepicker.js"></script>
+	<script src="../bootstrap/js/bootstrap-alert.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			$('#dp1').datepicker({format: 'dd-mm-yyyy',weekStart:1})
+				  .on('changeDate', function(ev){$('#dp1').datepicker('hide').blur();});
+
+			$('#dp2').datepicker({format: 'dd-mm-yyyy',weekStart:1})
+				  .on('changeDate', function(ev){$('#dp2').datepicker('hide').blur();});
+
+			$('#dp3').datepicker({format: 'dd-mm-yyyy',weekStart:1})
+				  .on('changeDate', function(ev){$('#dp3').datepicker('hide').blur();});
+
+			function getURLParameter(name) {	
+				return decodeURI(	
+					(RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]	
+				);
+			}
+		
+			// Extracting the creek segment ID
+			var seg_id = getURLParameter('seg_id');
+
+			// AJAX call to retrieve the values of this segment
+			$.ajaxSetup ({  
+				cache: false,
+				type: "POST"
+			});  
+
+			var jsonUrl = "http://103.29.64.29/ws/rest/v3/ws_get_creek_segment_by_id.php?callback=?";  
+
+			$.getJSON(   
+				jsonUrl,  
+				{seg_id: seg_id,config:'creeklinkgis'},  
+				function(json) {  
+					// Decoding the path to the different variables
+					var rec = json.rows[0].row;
+					$('#addressLandholder').val(rec.address);
+					if (rec.interested =="t")
+					{
+						$('#interestedCheckbox').attr('checked',true);
+					}
+					if (rec.visited =="t")
+					{
+						$('#visitedCheckbox').attr('checked',true);
+					}
+					$('#dp1').val(rec.visited_date);
+					if (rec.stock_excluded =="t")
+					{
+						$('#stockExcludedCheckbox').attr('checked',true);
+					}
+					$('#dp2').val(rec.stock_excluded_date);
+					if (rec.native_vegetation =="t")
+					{
+						$('#nativeVegetationCheckbox').attr('checked',true);
+					}
+					$('#dp3').val(rec.revegetated_date);
+					$('#creditsTextArea').val(decodeURI(rec.credit));					
+				}  
+			);
+
+			// AJAX update call
+			var postUrl = "http://103.29.64.29/ws/rest/v3/ws_set_creek_segment.php?callback=?";  
+			
+			$('#saveButton').click(function(){  
+				$.post(
+					postUrl,
+					{
+						seg_id: seg_id,
+						config:'creeklinkgis',		
+						address: 		$('#addressLandholder').val(),
+						interested: 		$('#interestedCheckbox').attr('checked')!=undefined,
+						visited: 		$('#visitedCheckbox').attr('checked')!=undefined,
+						visited_date: 	$('#dp1').val(),
+						stock_excluded: 	$('#stockExcludedCheckbox').attr('checked')!=undefined,
+						stock_excluded_date: $('#dp2').val(),
+						native_vegetation: 	$('#nativeVegetationCheckbox').attr('checked')!=undefined,
+						revegetated_date: 	$('#dp3').val(),
+						credit: 		encodeURI($('#creditsTextArea').val())
+					},  
+					function(responseText){  
+						//alert(responseText);  
+						// Showing a success message
+						if (responseText.success)
+						{
+							$('#alertPlaceHolder').addClass('alert').addClass('alert-success').html('The creek segment has been updated successfully!');
+
+							// Hence we need to refresh the WMS layer to reflect potential changes in creek tiles appeareance
+							if (parent)
+							{
+								// Referencing the layer by its name, which is not ideal
+								var la = parent.app.mapPanel.map.getLayersByName("Creek Tiles");
+								if (la.length > 0)
+								{
+									la[0].redraw(true);
+								}
+							}
+
+							window.setInterval(function() {
+								$('#alertPlaceHolder').removeClass('alert').removeClass('alert-success').html('');
+							}, 2000);
+						}
+						else
+						{
+							$('#alertPlaceHolder').addClass('alert').addClass('alert-error').html('There has been an issue with the update.');
+						}
+					},  
+					"json"  
+				);				
+			});
+
+			// Populating the form with the values
+			$('#cancelButton').click(function(){
+				if (parent)
+				{
+					// The parent exists as long as the iframe exists, so we clear the highlight in the parent before destroying the window / iframe
+					// But in fact, it does not really make sense to clear highlight on the cancel button ..
+					parent.clear_highlight();	
+					parent.Ext.getCmp('editCreekLinkForm').hide();
+					parent.Ext.getCmp('editCreekLinkForm').destroy();
+				}
+			});			
+		});				
+	</script>
+  </body>
+</html>

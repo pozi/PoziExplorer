@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Creek-link</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="../bootstrap/css/datepicker.css" rel="stylesheet">
+	<style>
+		body {
+			padding-top: 12px;
+		}
+	</style>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+  </head>
+ 
+  <body>
+    <div class="container">
+	<div class="row">
+		<div class="span1"><a id='editButton' class="btn" href="javascript:openExtModal();">Edit</a><a id='splitButton' class="btn" href="javascript:toggleSplit();">Split/Combine</a></div>
+	</div>
+    </div> <!-- /container -->
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>	
+	<script type="text/javascript">
+		var openExtModal,toggleSplit,win2;
+
+
+
+
+
+
+
+		$(document).ready(function(){
+			// Opening up an Ext modal Window (containing the iFrame form) in the parent document, with the right seg_id parameter
+			var seg_id;
+			if (parent)
+			{
+				if (parent.Ext.getCmp('tblayout-win-generic'))
+				{
+					seg_id = parent.Ext.getCmp('tblayout-win-generic').initialConfig.idFeature;
+				}
+			}
+
+			if (seg_id)
+			{
+				// Behaviour of the button
+				openExtModal = function(){	
+
+					var win = new parent.Ext.Window({
+						title: "Edit a creek link",
+						id: 'editCreekLinkForm',
+						modal: true,
+						layout: "fit",
+						width: 520,
+						height: 635,
+						items: [
+							{
+							html: "<iframe style='border: none; height: 100%; width: 100%' src='/pozi/cl-edit.html?seg_id="+seg_id+"' frameborder='0' border='0'></iframe>"
+							}
+						]
+					});
+	
+					win.show();
+			
+				}
+
+					var doSplit = function(){
+						// AJAX update call
+						var postUrl = "http://103.29.64.29/ws/rest/v3/ws_set_creek_segment.php?callback=?";  
+
+						$.post(
+							postUrl,
+							{
+								seg_id: seg_id,
+								config:'creeklinkgis',		
+								toggle_split: true
+							},  
+							function(responseText){  
+								// Showing a success message
+								if (responseText.success)
+								{
+									// Hence we need to refresh the WMS layer to reflect potential changes in creek tiles appeareance
+									if (parent)
+									{
+										// Referencing the layer by its name, which is not ideal
+										var la = parent.app.mapPanel.map.getLayersByName("Creek Tiles");
+										if (la.length > 0)
+										{
+											la[0].redraw(true);
+										}
+									}	
+
+									parent.clear_highlight();	
+								}
+								else
+								{
+									alert('There has been an issue with the split/combine.');
+								}
+								
+								win2.close();
+							},  
+							"json"  
+						);
+					};	
+
+				toggleSplit = function(){
+					win2 = new parent.Ext.Window({
+						title: "Split/combine a creek link",
+						id: 'splitCreekLinkForm',
+						modal: true,
+						layout: "border",
+						width: 300,
+						height: 120,
+						items: [
+							{
+								region:'center',
+								html:"<b>Warning</b>: combining the 2 sides of a creek segment into a single creek segment will result in potential data loss if both sides do not have the same values. Are you sure you want to proceed?",
+								height:50,
+								border:false		
+							},
+							{
+								xtype:'panel',
+								region: 'south',
+								layout:'column',
+								height: 25,
+								border: false,
+								items:	[{
+									xtype:'button',
+									text:'OK',
+									columnWidth: .5,
+									handler:doSplit,
+									flex:1
+								},
+								{
+									xtype:'button',
+									text:'Cancel',
+									columnWidth: .5,
+									handler:function(){
+										win2.close();
+									},
+									flex:1
+								}]
+							}
+						]
+					});
+	
+					win2.show();
+
+			
+				}
+			}
+		});
+	</script>
+  </body>
+</html>
