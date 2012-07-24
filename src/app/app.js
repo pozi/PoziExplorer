@@ -1529,6 +1529,7 @@ Ext.onReady(function() {
 												res_data = recs[m].json.row;
 												var has_gsv = false;	
 												var src_attr_array = new Array();
+												var first_element="";
 
 												for (j in res_data)
 												{
@@ -1545,6 +1546,19 @@ Ext.onReady(function() {
 														{	
 															// Building the source array for a property grid
 															src_attr_array[toTitleCase(trim(j.replace(/_/g," ")))]=trim(val);
+															
+															// Setting the title of the horizontal panel - first property encountered
+															if (first_element.length==0)
+															{
+																if (trim(val)>10)
+																{
+																	first_element=trim(val).substring(0,8)+'..';
+																}
+																else
+																{
+																	first_element=trim(val);
+																}
+															}
 														}
 													}
 												}
@@ -1594,7 +1608,7 @@ Ext.onReady(function() {
 													// but if it's the only property grid, we deny it to be rendered
 													// Based on API doc: http://docs.sencha.com/ext-js/3-4/#!/api/Ext.Panel-cfg-header
 													tab_el = new Ext.grid.PropertyGrid({
-															title:m+1,
+															title:first_element,
 															header: (recs.length>1),
 															listeners: {
 																'beforeedit': function (e) { 
