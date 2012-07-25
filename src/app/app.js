@@ -1587,7 +1587,7 @@ Ext.onReady(function() {
 													if (gsv_lat && gsv_lon)
 													{
 														// Adjusted to the size of the column
-														var size_thumb = 245;
+														var size_thumb = 275;
 														var gsvthumb = "http://maps.googleapis.com/maps/api/streetview?location="+gsv_lat+","+gsv_lon+"&fov=90&heading="+gsv_head+"&pitch=-10&sensor=false&size="+size_thumb+"x"+size_thumb;
 														var gsvlink = "http://maps.google.com.au/maps?layer=c&cbll="+gsv_lat+","+gsv_lon+"&cbp=12,"+gsv_head+",,0,0";
 
@@ -1596,7 +1596,7 @@ Ext.onReady(function() {
 															layout	: 'fit',
 															height  : size_thumb,
 															items	: [{
-																html:"<div style='font-size:10pt;'><a href='"+gsvlink+"' target='_blank'><img src='"+gsvthumb+"'/></a></div>"
+																html:"<div><a href='"+gsvlink+"' target='_blank'><img src='"+gsvthumb+"' style='display:block;margin:auto;'/></a></div>"
 															}]
 														};
 													}
@@ -1938,7 +1938,6 @@ Ext.onReady(function() {
 			});
 
 			var accordion = new Ext.Panel({
-				//title: 'Accordion Layout',
 				id:'gtAccordion',
 				layout:'accordion',
 				region: "center",
@@ -1949,6 +1948,7 @@ Ext.onReady(function() {
 				defaults: {
 					// applied to each contained panel
 					bodyStyle: " background-color: transparent ",
+					style:"padding:10px;",
 					collapsed: true,
 					listeners: {
 						scope:this,
@@ -1994,7 +1994,7 @@ Ext.onReady(function() {
 				title: gtInfoTitle,
 				collapsible: gtEastPanelCollapsible,
 				collapseMode: "mini",
-				width: 250,
+				width: 300,
 				listeners:{
 						scope: this,
 						resize:function(p){
