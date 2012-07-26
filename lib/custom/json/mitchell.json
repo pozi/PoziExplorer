@@ -86,7 +86,8 @@
             "url": "/geoserver/MITCHELL/ows",
             "title": "Mitchell Shire Council Layers",
             "ptype": "gxp_wmscsource",
-            "tiled": false
+            "tiled": false,
+            "restUrl": "/geoserver/rest"
         },
         "backend_cascaded": {
             "url": "http://basemap.pozi.com/geoserver/DSE/ows",

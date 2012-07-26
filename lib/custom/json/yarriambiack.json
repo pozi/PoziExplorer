@@ -74,7 +74,8 @@
         "backend_cascaded": {
             "url": "http://basemap.pozi.com/geoserver/DSE/ows",
             "title": "DSE Vicmap Layers",
-            "ptype": "gxp_wmscsource"
+            "ptype": "gxp_wmscsource",
+            "restUrl": "/geoserver/rest"
         },
         "mapquest": {
             "ptype": "gxp_mapquestsource"
