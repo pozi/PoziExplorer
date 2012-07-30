@@ -57,6 +57,17 @@
                 "immediate": true
             },
             "showButtonText": false
+        },
+        {
+            "ptype": "gxp_featuremanager",
+            "id": "featuremanager",
+            "maxFeatures": 20
+        },
+        {
+            "ptype": "gxp_featureeditor",
+            "featureManager": "featuremanager",
+            "autoLoadFeature": true,
+            "toggleGroup": "interaction"
         }
     ],
     "sources": {
