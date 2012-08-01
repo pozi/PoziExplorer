@@ -62,7 +62,7 @@ var gtProxy,gtLoginEndpoint,gtLocalLayerSourcePrefix;
 if (debugMode)
 {
 	gtProxy = "proxy/?url=";
-	gtLoginEndpoint = "http://new.pozi.com/geoexplorer/login/";
+	gtLoginEndpoint = "http://v3.pozi.com/geoexplorer/login/";
 	gtLocalLayerSourcePrefix = "http://new.pozi.com";
 }
 else
@@ -1296,53 +1296,6 @@ Ext.onReady(function() {
 				gtyp=record.data.ld;
 				glab=record.data.label;
 
-				glayerLocSel.events.on({
-					featuresadded: function(event) {
-						if (gfromWFS=="Y")
-						{
-							var typ=gtyp;
-							var lab=glab;
-
-							var row_array = [];
-							var cont;
-							gComboDataArray=[];
-
-							for (var k=0;k<this.features.length;k++)
-							{
-								// We capture the attributes brought back by the WFS call
-								cont=this.features[k].data;
-								// Capturing the feature as well (it contains the geometry)
-								cont["the_geom_WFS"]=this.features[k];										
-
-								// If too long for the drop down, we truncate the string to the space remaining after "<LAYER NAME>:"
-								var num_char_in_drop_down = 28;
-								if (lab.length>num_char_in_drop_down-typ.length)
-								{
-									lab = lab.substring(0,num_char_in_drop_down-typ.length-2)+"..";
-								}
-
-								// Building a record and inserting it into an array											
-								//row_array = new Array(k,typ,lab,cont,null,null,this.features[k].layer.protocol.featureType); 
-								row_array = new Array(k,typ,cont,0,lab,this.features[k].layer.protocol.featureType); 
-								gComboDataArray.push(row_array);
-							}
-
-							// Clearing existing value from the drop-down list
-							var cb = Ext.getCmp('gtInfoCombobox');
-							cb.clearValue();
-
-							// If there is a record (and there should be at least one - by construction of the search table)
-							if (gComboDataArray.length)
-							{							
-								if (cb.disabled) {cb.enable();}
-								gCombostore.removeAll();
-								gCombostore.loadData(gComboDataArray);
-								gComboDataArray=[];
-							}									
-						}
-					}
-				});
-
 				// Refreshing the WFS layer so that the highlight appears and triggers the featuresadded event handler above
 				glayerLocSel.refresh({force:true});
 
@@ -1893,7 +1846,63 @@ Ext.onReady(function() {
 					listeners: {
 						scope:this,
 						expand: tabExpand
+//						afterRender: function(stick){
+//							stick.dd = new Ext.dd.DDProxy(stick.el.dom.id, 'group');
+//						}
 					}
+/*					
+					draggable:
+					{
+						// Config option of Ext.Panel.DD class.
+						// It's a floating Panel, so do not show a placeholder proxy in the original position.
+						insertProxy: true,
+
+						// Called for each mousemove event while dragging the DD object.
+						onDrag : function(e){
+						// Record the x,y position of the drag proxy so that we can
+						// position the Panel at end of drag.
+						    var pel = this.proxy.getEl();
+						    this.x = pel.getLeft(true);
+						    this.y = pel.getTop(true);
+
+						// Keep the Shadow aligned if there is one.
+						    var s = this.panel.getEl().shadow;
+						    if (s) {
+							s.realign(this.x, this.y, pel.getWidth(), pel.getHeight());
+						    }
+						},
+
+						onDragDrop : function(evtObj, targetElId) {
+						    // Wrap the drop target element with Ext.Element
+						    var dropEl = Ext.get(targetElId);
+
+						    // Perform the node move only if the drag element's 
+						    // parent is not the same as the drop target
+						    if (this.el.dom.parentNode.id != targetElId) {
+
+							// Move the element
+							dropEl.appendChild(this.el);
+
+							// Remove the drag invitation
+							this.onDragOut(evtObj, targetElId);
+
+							// Clear the styles
+							this.el.dom.style.position ='';
+							this.el.dom.style.top = '';
+							this.el.dom.style.left = '';
+						    }
+						    else {
+							// This was an invalid drop, initiate a repair
+							//this.onInvalidDrop();
+						    }
+						},
+
+						// Called on the mouseup event.
+						endDrag : function(e){
+						    this.panel.setPosition(this.x, this.y);
+						}
+					}
+*/
 				},
 				layoutConfig: {
 					// layout-specific configs go here
@@ -1904,7 +1913,7 @@ Ext.onReady(function() {
 					fill: false 
 				}
 			});
-	
+			
 			var bottomEastItem = {};
 			if (JSONconf.bottomEastItem)
 			{
@@ -1941,7 +1950,9 @@ Ext.onReady(function() {
 							// This is required to get the content of the accordion tabs to resize
 							for (i in p.items.items)
 							{	
-								if (!(isNaN(i)))
+								// hasOwnProperty appropriate way to deal with direct property of this object, not inherited ones
+								// In the case on an array, direct members are indexes
+								if (p.items.items.hasOwnProperty(i))
 								{						
 									p.items.items[i].doLayout();
 								}
@@ -2111,7 +2122,51 @@ Ext.onReady(function() {
 						}
 					}
 				};
-				
+
+				glayerLocSel.events.on({
+					featuresadded: function(event) {
+						if (gfromWFS=="Y")
+						{
+							var row_array = [];
+							var cont;
+							gComboDataArray=[];
+
+							for (var k=0;k<this.features.length;k++)
+							{
+								// We capture the attributes brought back by the WFS call
+								cont=this.features[k].data;
+								// Capturing the feature as well (it contains the geometry)
+								cont["the_geom_WFS"]=this.features[k];										
+
+								// If too long for the drop down, we truncate the string to the space remaining after "<LAYER NAME>:"
+								var num_char_in_drop_down = 28;
+								if (glab.length>num_char_in_drop_down-gtyp.length)
+								{
+									glab = glab.substring(0,num_char_in_drop_down-gtyp.length-2)+"..";
+								}
+
+								// Building a record and inserting it into an array											
+								//row_array = new Array(k,typ,lab,cont,null,null,this.features[k].layer.protocol.featureType); 
+								row_array = new Array(k,gtyp,cont,0,glab,this.features[k].layer.protocol.featureType); 
+								gComboDataArray.push(row_array);
+							}
+
+							// Clearing existing value from the drop-down list
+							var cb = Ext.getCmp('gtInfoCombobox');
+							cb.clearValue();
+
+							// If there is a record (and there should be at least one - by construction of the search table)
+							if (gComboDataArray.length)
+							{							
+								if (cb.disabled) {cb.enable();}
+								gCombostore.removeAll();
+								gCombostore.loadData(gComboDataArray);
+								gComboDataArray=[];
+							}									
+						}
+					}
+				});
+
 				// If we have found a property to zoom to, well, zoom to and highlight it
 				if (propertyDataInit)
 				{
@@ -2416,7 +2471,7 @@ Ext.onReady(function() {
 				var ds;
 				for (urlIdx in gtGetLiveDataEndPoints)
 				{
-					if (urlIdx != "remove")
+					if (gtGetLiveDataEndPoints.hasOwnProperty(urlIdx))
 					{
 						ds = new Ext.data.Store({
 							autoLoad:true,
