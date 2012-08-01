@@ -174,7 +174,7 @@
         },
         {
             "source": "local",
-            "name": "MITCHELL:MSC_GARBAGE_COLLECTION",
+            "name": "MSC_GARBAGE_COLLECTION",
             "title": "Waste Collection",
             "visibility": false,
             "opacity": 0.6,
@@ -185,7 +185,7 @@
         },
         {
             "source": "local",
-            "name": "MITCHELL:MSC_LEISURE_CENTRE",
+            "name": "MSC_LEISURE_CENTRE",
             "title": "Leisure Centres",
             "visibility": false,
             "format": "image/png8",
@@ -195,7 +195,7 @@
         },
         {
             "source": "local",
-            "name": "MITCHELL:MSC_SPORTS_RESERVE",
+            "name": "MSC_SPORTS_RESERVE",
             "title": "Sports Reserves",
             "visibility": false,
             "format": "image/png8",
@@ -205,7 +205,7 @@
         },
         {
             "source": "local",
-            "name": "MITCHELL:MSC_CUSTOMER_SERVICE_CENTRE",
+            "name": "MSC_CUSTOMER_SERVICE_CENTRE",
             "title": "Customer Service Centres",
             "visibility": false,
             "format": "image/png8",
@@ -215,7 +215,7 @@
         },
         {
             "source": "local",
-            "name": "MITCHELL:MSC_LIBRARY",
+            "name": "MSC_LIBRARY",
             "title": "Libraries",
             "visibility": false,
             "format": "image/png8",
@@ -225,7 +225,7 @@
         },
         {
             "source": "local",
-            "name": "MITCHELL:MSC_KINDERGARTEN",
+            "name": "MSC_KINDERGARTEN",
             "title": "Kindergartens",
             "visibility": false,
             "format": "image/png8",

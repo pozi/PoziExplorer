@@ -113,20 +113,8 @@
 	},
        {
 		"source":"local",
-		"name":"CREEKLINK:CREEK",
+		"name":"CREEK",
 		"title":"Creeks",
-		"visibility":true,
-		"opacity":0.85,
-		"format":"image/png8",
-		"styles":"",
-		"transparent":true,
-		"tiled":false,
-		"transition":""
-	},
-       {
-		"source":"local",
-		"name":"CREEKLINK:CREEK_SEGMENT",
-		"title":"Creek Segments Run",
 		"visibility":true,
 		"opacity":0.85,
 		"format":"image/png8",
@@ -201,8 +189,8 @@
     },
     "liveDataEndPoints": [
         {
-            "urlLayout": "http://new.pozi.com/ws/rest/v3/ws_get_layouts.php",
-            "urlLiveData": "http://new.pozi.com/ws/rest/v3/ws_get_live_data.php",
+            "urlLayout": "http://v3.pozi.com/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://v3.pozi.com/ws/rest/v3/ws_get_live_data.php",
             "storeMode": "pgsql",
             "storeName": "creeklinkgis"
         }
