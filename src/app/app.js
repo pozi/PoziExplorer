@@ -63,7 +63,7 @@ if (debugMode)
 {
 	gtProxy = "proxy/?url=";
 	gtLoginEndpoint = "http://v3.pozi.com/geoexplorer/login/";
-	gtLocalLayerSourcePrefix = "http://new.pozi.com";
+	gtLocalLayerSourcePrefix = "http://v3.pozi.com";
 }
 else
 {
