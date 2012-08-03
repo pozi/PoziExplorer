@@ -43,14 +43,6 @@
             "showButtonText": false
         },
         {
-            "ptype": "gxp_print",
-            "customParams": {
-                "outputFilename": "PoziExplorer-print"
-            },
-            "printService": "/geoserver/pdf",
-            "showButtonText": false
-        },
-        {
             "ptype": "gxp_measure",
             "toggleGroup": "interaction",
             "controlOptions": {
