@@ -129,19 +129,6 @@
 	},
 	{
 		"source":"backend",
-		"name":"VICMAP:VMPROP_PROPERTY_OPTI",
-		"title":"Properties (Vicmap)",
-		"visibility":false,
-		"opacity":1,
-		"queryable": false,
-		"format":"image/png8",
-		"styles":"",
-		"transparent":true,
-		"tiled":false,
-		"transition":""
-	},
-	{
-		"source":"backend",
 		"name":"VICMAP:VMPROP_PARCEL_OPTI",
 		"title":"Parcels (Vicmap)",
 		"visibility":true,
@@ -153,9 +140,22 @@
 		"tiled":false,
 		"transition":""
 	},
+        {
+            "source": "backend",
+            "name": "LabelClassic",
+            "title": "Labels",
+            "visibility": true,
+            "opacity": 1,
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "group": "top"
+        },
 	{
 	    "source": "google",
-	    "name": "HYBRID",
+	    "name": "SATELLITE",
 	    "visibility": true
         },
         {
