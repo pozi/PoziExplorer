@@ -291,12 +291,6 @@
             "group": "background"
         },
         {
-            "source": "bing",
-            "name": "Aerial",
-            "visibility": false,
-            "group": "background"
-        },
-        {
             "source": "dse_iws_cascaded",
             "name ": "MITCHELL:AERIAL_MITCHELL_2007JAN26_AIR_VIS_50CM_MGA55",
             "title": "Aerial Photo (CIP 2007)",
