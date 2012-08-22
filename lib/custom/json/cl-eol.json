@@ -93,6 +93,18 @@
     "layers": [
 	{
 		"source":"local",
+		"name":"GROUP_BOUNDARY",
+		"title":"Landcare Group Boundaries",
+		"visibility":false,
+		"opacity":0.85,
+		"format":"image/png8",
+		"styles":"",
+		"transparent":true,
+		"tiled":false,
+		"transition":""
+	},
+	{
+		"source":"local",
 		"name":"creek_segments",
 		"title":"Creek Tiles",
 		"visibility":true,
