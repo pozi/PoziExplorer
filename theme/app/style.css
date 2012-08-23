@@ -34,4 +34,56 @@ body {
 
 .x-panel-header-text {
 	font-size: 15px;
+	color: white;
+	font-weight: bolder;
+	font-family: tahoma,arial,verdana,sans-serif;
 }
+
+.x-panel-collapsed .x-accordion-hd .x-tool-toggle {
+    background-image: url(img/panel/plus-white.png);
+    background-position: 0 0;
+    padding: 2px;
+}
+
+.x-accordion-hd .x-tool-toggle {
+    background-image: url(img/panel/minus-white.png);
+    background-position: 0 0;
+    padding: 2px;
+}
+
+.x-panel-header-blue {
+	background-image: url(img/panel/blue1.png);
+	padding-left: 10px;
+}
+
+.x-panel-header-green {
+	background-image: url(img/panel/green1.png);
+	padding-left: 10px;
+}
+
+.x-panel-header-purple {
+	background-image: url(img/panel/purple1.png);
+	padding-left: 10px;
+}
+
+.x-panel-header-red {
+	background-image: url(img/panel/red1.png);
+	padding-left: 10px;
+}
+
+.x-panel-header-grey {
+	background-image: url(img/panel/grey1.png);
+	padding-left: 10px;
+}
+
+#gtInfoCombobox {
+	height:50px;
+	font-size: 16px;
+	font-weight: bolder;
+	color: white;
+	font-family: tahoma,arial,verdana,sans-serif;
+	background-image: url();
+	background-color: #DE932A;
+	border-color: #FFFFFF;
+}
+

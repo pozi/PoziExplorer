@@ -191,8 +191,7 @@ Ext.onReady(function() {
         	// TODO: we could trigger the zoomToExtent but only if we are outside the extent
             //this.target.mapPanel.map.zoomToExtent(extent);
         }
-        if (records.length === 1 && record) {
-		// The layer is not available yet for selection (just set a break point on previous line)	
+        if (records.length === 1 && record) {	
             // select the added layer
             this.target.selectLayer(record);
             if (isUpload && this.postUploadAction) {
@@ -262,6 +261,19 @@ Ext.onReady(function() {
 		}
 		this.createAction.setDisabled(disable);
 		this.editAction.setDisabled(disable);
+		
+		/*
+		// Activating or deactivating the getFeatureInfo controls based on the feature editor being enabled or disabled
+		var controls = app.mapPanel.map.controls.filter(function(a){return a.CLASS_NAME=="OpenLayers.Control.WMSGetFeatureInfo";})
+                for (var i = 0, len = controls.length; i < len; i++){
+                    if (disable) {
+                        controls[i].activate();
+                    } else {
+                        controls[i].deactivate();
+                    }
+                }
+		*/
+		
 		return disable;
 	};
 
@@ -1023,7 +1035,7 @@ Ext.onReady(function() {
 			}
 			
 			// Global variables all clients
-			var gtEmptyTextSearch = 'Find properties, roads, features, etc...';
+			var gtEmptyTextSearch = 'Find address, road, feature, etc...';
 			var gtLoadingText = 'Searching...';
 			var gtLoadingText = "Loading ...";
 			var gtDetailsTitle = "Details";
@@ -1201,7 +1213,14 @@ Ext.onReady(function() {
 			       'content',
 			       'index',
 			       'label',
-			       'layer'
+			       'layer',
+			       {
+					name : 'labelx',
+					convert : function(v, rec) {                        
+						return rec[1] + ': ' + rec[4];
+					}
+				}
+			       
 			    ],
 			    listeners: {
 				    load: function(ds,records,o) {
@@ -1217,7 +1236,7 @@ Ext.onReady(function() {
 						// Restoring the color to a normal white
 						cb.removeClass("x-form-multi");
 					}
-					cb.setValue(rec.data.type);
+					cb.setValue(rec.data.type+': '+rec.data.label);
 					cb.fireEvent('select',cb,rec);
 					},
 				    scope: this
@@ -1325,7 +1344,7 @@ Ext.onReady(function() {
 			var tabExpand = function(p){
 				// Current layer (cl) as per content of the drop down (cb)
 				var cb = Ext.getCmp('gtInfoCombobox');
-				var cl = cb.getStore().data.items[cb.getStore().find("type",cb.getValue())].data.layer;
+				var cl = cb.getStore().data.items[cb.getStore().find("labelx",cb.getValue())].data.layer;
 
 				// Updating the index of the currently opened tab
 				for(k in p.ownerCt.items.items)
@@ -1636,198 +1655,218 @@ Ext.onReady(function() {
 				region: "north",
 				border: false,
 				hidden: gtHideSelectedFeaturePanel,
-				layout: 'column',
-				height: 23,
+				layout: 'fit',
+				height: 55,
 				bodyStyle: " background-color: transparent ",
 				items: [
-					new Ext.Panel({
-						border: false,
-						layout: 'fit',
-						height: 22,
-						columnWidth: 1,
-						items: [
-							new Ext.form.ComboBox({
-								id: 'gtInfoCombobox',
-								store: gCombostore,
-								displayField:'type',
-								disabled: true,
-								mode: 'local',
-								typeAhead: true,
-								forceSelection: true,
-								editable:false,
-								triggerAction: 'all',
-								emptyText: gtEmptyTextSelectFeature,
-								tpl: '<tpl for="."><div class="info-item" style="height: 16px;">{type}: {label}</div></tpl>',
-								itemSelector: 'div.info-item',
-								listeners: {'select': function (combo,record){
-											var e0=Ext.getCmp('gtAccordion');
+					new Ext.form.ComboBox({
+						id: 'gtInfoCombobox',
+						store: gCombostore,
+						displayField:'labelx',
+						disabled: true,
+						mode: 'local',
+						typeAhead: true,
+						hideTrigger: true,
+						forceSelection: true,
+						editable:false,
+						triggerAction: 'all',
+						emptyText: gtEmptyTextSelectFeature,
+						tpl: '<tpl for="."><div class="info-item" style="height: 50px;"><b>{type}</b><br>{label}</div></tpl>',
+						itemSelector: 'div.info-item',
+						listeners: {'select': function (combo,record){
+									var e0=Ext.getCmp('gtAccordion');
 
-											e0.removeAll();
+									e0.removeAll();
 
-											// Whatever the current expanded tab is, we populate the direct attributes accordion panel
-											var lab;
-											var val;
-											var item_array=new Array();
-											var has_gsv = false;
-											var fa = [], fte= [];
+									// Whatever the current expanded tab is, we populate the direct attributes accordion panel
+									var lab;
+									var val;
+									var item_array=new Array();
+									var has_gsv = false;
+									var fa = [], fte= [];
 
-											// Working out the layer presentation configuration
-											// Current layer name
-											var cl = record.get("layer");
-											// Configuration field array
-											var fti_arr = gtLayerPresentationConfiguration[cl];
-											// Arrays to store ordered attribute names and values
-											var an_arr,av_arr;
+									// Working out the layer presentation configuration
+									// Current layer name
+									var cl = record.get("layer");
+									// Configuration field array
+									var fti_arr = gtLayerPresentationConfiguration[cl];
+									// Arrays to store ordered attribute names and values
+									var an_arr,av_arr;
+									if (fti_arr)
+									{
+										an_arr = new Array(fti_arr.length);
+										av_arr = new Array(fti_arr.length);
+									}
+
+									for(var k in record.data.content)
+									{
+										if (k=="the_geom" || k=="SHAPE")
+										{
+											var featureToRead = record.data.content[k];
+											var wktObj = new OpenLayers.Format.WKT({
+												externalProjection: new OpenLayers.Projection("EPSG:4326"), //projection your data is in
+												internalProjection: new OpenLayers.Projection("EPSG:900913") //projection you map uses to display stuff
+											});
+											var wktfeatures = wktObj.read(featureToRead);
+
+											// Should be able to select several if the control key is pressed
+											glayerLocSel.removeAllFeatures();
+											glayerLocSel.addFeatures(wktfeatures);
+
+										}
+										else if (k=="the_geom_WFS")
+										{
+											var wktfeatures=record.data.content[k];
+											gfromWFS="N";
+											glayerLocSel.removeAllFeatures();
+											glayerLocSel.addFeatures(wktfeatures);
+										}
+										else
+										{
+											lab=k;
+											val=record.data.content[k];
+
+											// Processing the fields according to presentation configuration array
 											if (fti_arr)
 											{
-												an_arr = new Array(fti_arr.length);
-												av_arr = new Array(fti_arr.length);
-											}
-											
-											for(var k in record.data.content)
-											{
-												if (k=="the_geom" || k=="SHAPE")
-												{
-													var featureToRead = record.data.content[k];
-													var wktObj = new OpenLayers.Format.WKT({
-														externalProjection: new OpenLayers.Projection("EPSG:4326"), //projection your data is in
-														internalProjection: new OpenLayers.Projection("EPSG:900913") //projection you map uses to display stuff
-													});
-													var wktfeatures = wktObj.read(featureToRead);
-
-													// Should be able to select several if the control key is pressed
-													glayerLocSel.removeAllFeatures();
-													glayerLocSel.addFeatures(wktfeatures);
-
-												}
-												else if (k=="the_geom_WFS")
-												{
-													var wktfeatures=record.data.content[k];
-													gfromWFS="N";
-													glayerLocSel.removeAllFeatures();
-													glayerLocSel.addFeatures(wktfeatures);
-												}
-												else
-												{
-													lab=k;
-													val=record.data.content[k];
-													
-													// Processing the fields according to presentation configuration array
-													if (fti_arr)
-													{
-														// Locating the index the current attribute should be positioned at
-														for(q=0;q<fti_arr.length;q++)
-														{
-															if(fti_arr[q].attr_name == lab)
-															{
-																// Substitution with a optional alternate name
-																if (fti_arr[q].alt_name)
-																{
-																	an_arr[q]=fti_arr[q].alt_name;
-																}
-																else
-																{
-																	// If no alternate name, just the normal clean title case
-																	an_arr[q]=toTitleCase(trim(lab.replace(/_/g," ")));
-																}
-																av_arr[q]=trim(val);
-																break;
-															}
-														}
-	
-													}
-													else
-													{
-														// Pushing this element in the source of the property grid
-														fa[toTitleCase(trim(lab.replace(/_/g," ")))]=trim(val);
-													}
-												}
-
-											}
-											
-											// Ordered population of the source data for the grid
-											if (fti_arr)
-											{
-												// We build the fa object based on the 2 arrays of attributes names and values
+												// Locating the index the current attribute should be positioned at
 												for(q=0;q<fti_arr.length;q++)
 												{
-													fa[an_arr[q]]=av_arr[q];
-												}
-											}
-
-											var p = new Ext.grid.PropertyGrid({
-													listeners: {
-														'beforeedit': function (e) { 
-															return false; 
-														} 
-													},
-													stripeRows: true,
-													autoHeight: true,
-													hideHeaders: true,
-													viewConfig: {
-														forceFit: true,
-														scrollOffset: 0
+													if(fti_arr[q].attr_name == lab)
+													{
+														// Substitution with a optional alternate name
+														if (fti_arr[q].alt_name)
+														{
+															an_arr[q]=fti_arr[q].alt_name;
+														}
+														else
+														{
+															// If no alternate name, just the normal clean title case
+															an_arr[q]=toTitleCase(trim(lab.replace(/_/g," ")));
+														}
+														av_arr[q]=trim(val);
+														break;
 													}
-											});
+												}
 
-											// Remove default sorting
-											delete p.getStore().sortInfo;
-											p.getColumnModel().getColumnById('name').sortable = false;
-											// Managing column width ratio
-											p.getColumnModel().getColumnById('name').width = 35;
-											p.getColumnModel().getColumnById('value').width = 65;										
-											// Now load data
-											p.setSource(fa);
-
-											var panel = new Ext.Panel({
-												  id:'attributeAcc',
-												  title: gtDetailsTitle,
-												  layout: 'fit',
-												  items: [p],
-												  listeners:{
-													scope:this,
-													expand:tabExpand
-												  }
-											});
-
-											e0.add(panel);
-
-											// Layout configuration the global variable array loaded at application start										
-											var configArray = gLayoutsArr[record.data.layer];
-											if (configArray)
-											{
-												e0.add(configArray);
 											}
-
-											// Refreshing the DOM with the newly added parts
-											e0.doLayout();	
-
-											/// Expanding the tab whose index has been memorised
-											if (!(gCurrentExpandedTabIdx[record.data.layer]))
+											else
 											{
-												gCurrentExpandedTabIdx[record.data.layer]="0";
+												// Pushing this element in the source of the property grid
+												fa[toTitleCase(trim(lab.replace(/_/g," ")))]=trim(val);
 											}
-											e0.items.itemAt(gCurrentExpandedTabIdx[record.data.layer]).expand();
+										}
 
-										},
-									    scope:this}
+									}
 
-								})
-							]}),
+									// Ordered population of the source data for the grid
+									if (fti_arr)
+									{
+										// We build the fa object based on the 2 arrays of attributes names and values
+										for(q=0;q<fti_arr.length;q++)
+										{
+											fa[an_arr[q]]=av_arr[q];
+										}
+									}
 
-					new Ext.Panel({
-						border: false,
-						layout: 'fit',
-						width: 35,
-						height: 22,
-						items: [
-								new Ext.Button({
-									text: gtClearButton,
-									handler: clear_highlight
-								})
-						]
-					})
-				]
+									var p = new Ext.grid.PropertyGrid({
+											listeners: {
+												'beforeedit': function (e) { 
+													return false; 
+												} 
+											},
+											stripeRows: true,
+											autoHeight: true,
+											hideHeaders: true,
+											viewConfig: {
+												forceFit: true,
+												scrollOffset: 0
+											}
+									});
+
+									// Remove default sorting
+									delete p.getStore().sortInfo;
+									p.getColumnModel().getColumnById('name').sortable = false;
+									// Managing column width ratio
+									p.getColumnModel().getColumnById('name').width = 35;
+									p.getColumnModel().getColumnById('value').width = 65;										
+									// Now load data
+									p.setSource(fa);
+
+									var panel = new Ext.Panel({
+										  id:'attributeAcc',
+										  //title: gtDetailsTitle,
+										  headerCfg:{
+											tag: 'div',
+											cls: 'x-panel-header'+'-'+'grey',
+											children: [
+											    { tag: 'div', 'html': gtDetailsTitle }
+											]
+										  },
+										  layout: 'fit',
+										  items: [p],
+										  listeners:{
+											scope:this,
+											expand:tabExpand
+										  }
+									});
+
+									e0.add(panel);
+
+									// Layout configuration the global variable array loaded at application start										
+									var configArray = gLayoutsArr[record.data.layer];
+									if (configArray)
+									{
+										// Here we should do the styling substitution to transform a config option into a proper style element
+										for (c in configArray)
+										{
+											if (!(configArray[c].headerCfg))
+											{	
+												var t = configArray[c].title;
+												// Header config would not work if the title was part of the initial config
+												delete configArray[c].title;
+
+												// 
+												var col_arr={
+													"GoogleStreetView":"blue",
+													"ParcelDetails":"green",
+													"PlanningInfo":"purple",
+													"PropertyDetails":"red"
+												};
+
+												configArray[c].headerCfg={
+													tag: 'div',
+													cls: 'x-panel-header-'+col_arr[configArray[c].id],
+													children: [
+													    { tag: 'div', 'html': t }
+													]
+												};
+											}
+										}											
+
+										// And initialisation of the accordion items
+										e0.add(configArray);
+									}
+
+
+
+									//
+
+									// Refreshing the DOM with the newly added parts
+									e0.doLayout();	
+
+									/// Expanding the tab whose index has been memorised
+									if (!(gCurrentExpandedTabIdx[record.data.layer]))
+									{
+										gCurrentExpandedTabIdx[record.data.layer]="0";
+									}
+									e0.items.itemAt(gCurrentExpandedTabIdx[record.data.layer]).expand();
+
+								},
+							    scope:this}
+
+						})
+					]
 			});
 
 			var accordion = new Ext.Panel({
@@ -1841,68 +1880,12 @@ Ext.onReady(function() {
 				defaults: {
 					// applied to each contained panel
 					bodyStyle: " background-color: transparent ",
-					style:"padding:10px;",
+					style:"padding:10px 0px 0px;",
 					collapsed: true,
 					listeners: {
 						scope:this,
 						expand: tabExpand
-//						afterRender: function(stick){
-//							stick.dd = new Ext.dd.DDProxy(stick.el.dom.id, 'group');
-//						}
 					}
-/*					
-					draggable:
-					{
-						// Config option of Ext.Panel.DD class.
-						// It's a floating Panel, so do not show a placeholder proxy in the original position.
-						insertProxy: true,
-
-						// Called for each mousemove event while dragging the DD object.
-						onDrag : function(e){
-						// Record the x,y position of the drag proxy so that we can
-						// position the Panel at end of drag.
-						    var pel = this.proxy.getEl();
-						    this.x = pel.getLeft(true);
-						    this.y = pel.getTop(true);
-
-						// Keep the Shadow aligned if there is one.
-						    var s = this.panel.getEl().shadow;
-						    if (s) {
-							s.realign(this.x, this.y, pel.getWidth(), pel.getHeight());
-						    }
-						},
-
-						onDragDrop : function(evtObj, targetElId) {
-						    // Wrap the drop target element with Ext.Element
-						    var dropEl = Ext.get(targetElId);
-
-						    // Perform the node move only if the drag element's 
-						    // parent is not the same as the drop target
-						    if (this.el.dom.parentNode.id != targetElId) {
-
-							// Move the element
-							dropEl.appendChild(this.el);
-
-							// Remove the drag invitation
-							this.onDragOut(evtObj, targetElId);
-
-							// Clear the styles
-							this.el.dom.style.position ='';
-							this.el.dom.style.top = '';
-							this.el.dom.style.left = '';
-						    }
-						    else {
-							// This was an invalid drop, initiate a repair
-							//this.onInvalidDrop();
-						    }
-						},
-
-						// Called on the mouseup event.
-						endDrag : function(e){
-						    this.panel.setPosition(this.x, this.y);
-						}
-					}
-*/
 				},
 				layoutConfig: {
 					// layout-specific configs go here
@@ -1937,13 +1920,12 @@ Ext.onReady(function() {
 			}	
 			
 			var eastPanel = new Ext.Panel({
-				border: true,
+				border: false,
 				layout: "ux.row",
 				region: "east",
-				title: gtInfoTitle,
-				collapsible: gtEastPanelCollapsible,
+				style:"padding: 0px 15px; background-color:white;",
 				collapseMode: "mini",
-				width: 300,
+				width: 350,
 				listeners:{
 						scope: this,
 						resize:function(p){
