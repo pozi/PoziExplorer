@@ -1834,9 +1834,14 @@ Ext.onReady(function() {
 													"PropertyDetails":"#D0564B"
 												};
 
+												var col = col_arr[configArray[c].id];
+												if (!(col))
+												{
+													col = "#C2BEBB";
+												}
 												configArray[c].headerCfg={
 													tag: 'div',
-													style:'	background-image: url();background-color: '+col_arr[configArray[c].id]+';padding-left: 10px;',
+													style:'	background-image: url();background-color: '+col+';padding-left: 10px;',
 													children: [
 													    { tag: 'div', 'html': t }
 													]
