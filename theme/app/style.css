@@ -51,39 +51,21 @@ body {
     padding: 2px;
 }
 
-.x-panel-header-blue {
-	background-image: url(img/panel/blue1.png);
-	padding-left: 10px;
-}
-
-.x-panel-header-green {
-	background-image: url(img/panel/green1.png);
-	padding-left: 10px;
-}
-
-.x-panel-header-purple {
-	background-image: url(img/panel/purple1.png);
-	padding-left: 10px;
-}
-
-.x-panel-header-red {
-	background-image: url(img/panel/red1.png);
-	padding-left: 10px;
-}
-
-.x-panel-header-grey {
-	background-image: url(img/panel/grey1.png);
-	padding-left: 10px;
-}
-
 #gtInfoCombobox {
-	height:50px;
+	height:28px;
 	font-size: 16px;
 	font-weight: bolder;
 	color: white;
 	font-family: tahoma,arial,verdana,sans-serif;
 	background-image: url();
-	background-color: #DE932A;
 	border-color: #FFFFFF;
+	border: 0px;
 }
 
+#gtSearchCombobox {
+	border: 2px solid; 
+	width: 400px; 
+	height: 30px; 
+	font-size: 16px;
+	font-family: tahoma,arial,verdana,sans-serif;
+}

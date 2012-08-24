@@ -891,7 +891,7 @@ Ext.onReady(function() {
 							}							
 						}
 						// If too long for the drop down, we truncate the string to the space remaining after "<LAYER NAME>:"
-						var num_char_in_drop_down = 25;
+						var num_char_in_drop_down = 38;
 						if (lab.length>num_char_in_drop_down-typ.length)
 						{
 							
@@ -1217,10 +1217,9 @@ Ext.onReady(function() {
 			       {
 					name : 'labelx',
 					convert : function(v, rec) {                        
-						return rec[1] + ': ' + rec[4];
+						return rec[4];
 					}
 				}
-			       
 			    ],
 			    listeners: {
 				    load: function(ds,records,o) {
@@ -1236,7 +1235,7 @@ Ext.onReady(function() {
 						// Restoring the color to a normal white
 						cb.removeClass("x-form-multi");
 					}
-					cb.setValue(rec.data.type+': '+rec.data.label);
+					cb.setValue(rec.data.label);
 					cb.fireEvent('select',cb,rec);
 					},
 				    scope: this
@@ -1656,8 +1655,8 @@ Ext.onReady(function() {
 				border: false,
 				hidden: gtHideSelectedFeaturePanel,
 				layout: 'fit',
-				height: 55,
-				bodyStyle: " background-color: transparent ",
+				height: 30,
+				bodyStyle: "background-color: transparent;",
 				items: [
 					new Ext.form.ComboBox({
 						id: 'gtInfoCombobox',
@@ -1665,13 +1664,14 @@ Ext.onReady(function() {
 						displayField:'labelx',
 						disabled: true,
 						mode: 'local',
+						style: 'background-color: '+gtBannerLineColor+';',
 						typeAhead: true,
 						hideTrigger: true,
 						forceSelection: true,
 						editable:false,
 						triggerAction: 'all',
 						emptyText: gtEmptyTextSelectFeature,
-						tpl: '<tpl for="."><div class="info-item" style="height: 50px;"><b>{type}</b><br>{label}</div></tpl>',
+						tpl: '<tpl for="."><div class="info-item" style="height: 40px;padding:5px;"><b>{type}</b><br>{label}</div></tpl>',
 						itemSelector: 'div.info-item',
 						listeners: {'select': function (combo,record){
 									var e0=Ext.getCmp('gtAccordion');
@@ -1798,7 +1798,7 @@ Ext.onReady(function() {
 										  //title: gtDetailsTitle,
 										  headerCfg:{
 											tag: 'div',
-											cls: 'x-panel-header'+'-'+'grey',
+											style:'	background-image: url();background-color: #C2BEBB;padding-left: 10px;',
 											children: [
 											    { tag: 'div', 'html': gtDetailsTitle }
 											]
@@ -1828,15 +1828,15 @@ Ext.onReady(function() {
 
 												// 
 												var col_arr={
-													"GoogleStreetView":"blue",
-													"ParcelDetails":"green",
-													"PlanningInfo":"purple",
-													"PropertyDetails":"red"
+													"GoogleStreetView":"#4F7AC8",
+													"ParcelDetails":"#7EC84B",
+													"PlanningInfo":"#9A4CC3",
+													"PropertyDetails":"#D0564B"
 												};
 
 												configArray[c].headerCfg={
 													tag: 'div',
-													cls: 'x-panel-header-'+col_arr[configArray[c].id],
+													style:'	background-image: url();background-color: '+col_arr[configArray[c].id]+';padding-left: 10px;',
 													children: [
 													    { tag: 'div', 'html': t }
 													]
@@ -1948,25 +1948,12 @@ Ext.onReady(function() {
 					bottomEastItem
 				]
 			});
-			
-
-			var toolbar = new Ext.Toolbar({
-				disabled: true,
-				id: 'paneltbar',
-				items: []
-			});
 
 			var portalItems = [
 			{
 				region: "north",
 				layout: "column",
 				height: 100,
-				footerCfg: {
-					// Required to have the footer display
-					html: '<p style="font-size:8px;"><br></p>'
-				},
-				footerStyle:'background-color:'+gtBannerLineColor+';border:0px;',
-				// Removes the grey border around the footer (and around the whole container body)
 				bodyStyle:'border:0px;',
 				items:
 					[
@@ -2001,7 +1988,7 @@ Ext.onReady(function() {
 								typeAhead: false,
 								loadingText: gtLoadingText,
 								width: 450,
-								style: "border: 2px solid #BBBBBB; width: 490px; height: 24px; font-size: 11pt;",
+								style: "border-color: "+gtBannerLineColor+";",
 								pageSize:0,
 								emptyText:gtEmptyTextSearch,
 								hideTrigger:true,
@@ -2035,7 +2022,7 @@ Ext.onReady(function() {
 			// HS MOD END
 				region: "center",
 				layout: "border",
-				tbar: toolbar,
+//				tbar: toolbar,
 				items: [
 					{
 						id: "centerpanel",
@@ -2043,7 +2030,13 @@ Ext.onReady(function() {
 						layout: "fit",
 						region: "center",
 						border: false,
-						items: ["mymap"]
+						items: ["mymap"],
+						headerCfg: {
+							// Required to have the footer display
+							html: '<p style="font-size:16px;font-family: tahoma,arial,verdana,sans-serif;">Property Map</p>',
+							bodyStyle: " background-color: white; "
+						},
+						headerStyle:'background-color:'+gtBannerLineColor+';border:0px; margin:0px 0px 0px; padding: 5px;'						
 					},
 					westPanel,
 					eastPanel
@@ -2121,7 +2114,7 @@ Ext.onReady(function() {
 								cont["the_geom_WFS"]=this.features[k];										
 
 								// If too long for the drop down, we truncate the string to the space remaining after "<LAYER NAME>:"
-								var num_char_in_drop_down = 28;
+								var num_char_in_drop_down = 38;
 								if (glab.length>num_char_in_drop_down-gtyp.length)
 								{
 									glab = glab.substring(0,num_char_in_drop_down-gtyp.length-2)+"..";
