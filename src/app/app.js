@@ -1228,12 +1228,17 @@ Ext.onReady(function() {
 					if (records.length>1)
 					{
 						// Multiple records, color of the combo background is different
+						cb.removeClass("x-form-single");
 						cb.addClass("x-form-multi");
 					}
 					else
 					{
 						// Restoring the color to a normal white
 						cb.removeClass("x-form-multi");
+						cb.addClass("x-form-single");
+						
+						// Collapsing the drop down
+						cb.collapse();
 					}
 					cb.setValue(rec.data.label);
 					cb.fireEvent('select',cb,rec);
@@ -1274,6 +1279,7 @@ Ext.onReady(function() {
 				cb.clearValue();
 				cb.disable();
 				cb.removeClass("x-form-multi");
+				cb.addClass("x-form-single");
 				// Removing all values from the combo
 				gCombostore.removeAll();
 				// Clearing the details from the panel
@@ -1332,7 +1338,14 @@ Ext.onReady(function() {
 				collapseMode: "mini",
 				collapsed: gtCollapseWestPanel,
 				autoScroll:true,
-				header: false,
+				// Only padding on the right as all other sides covered by the parent container
+				style:"padding: 0px 10px 0px 0px; background-color:white;",
+				headerCfg: {
+					// Required to have the footer display
+					html: '<p style="font-size:16px;font-family: tahoma,arial,verdana,sans-serif;">Layers</p>',
+					bodyStyle: " background-color: white; "
+				},
+				headerStyle:'background-color:'+gtBannerLineColor+';border:0px; margin:0px 0px 0px; padding: 5px;',
 				items: [{
 					region: 'center',
 					border: false,
@@ -1654,10 +1667,33 @@ Ext.onReady(function() {
 				region: "north",
 				border: false,
 				hidden: gtHideSelectedFeaturePanel,
-				layout: 'fit',
-				height: 30,
+				layout: {
+					type:'vbox',
+					align:'stretch'
+				},
+				height: 60,
 				bodyStyle: "background-color: transparent;",
 				items: [
+					{
+						html:"<p style='background-color:"+gtBannerLineColor+";height:19px;padding:5px; cursor: hand;' id='gtInfoTypeLabel'>&nbsp;</p>",
+						id:'gtInfoType',
+						bodyCssClass: 'selectedFeatureType',
+						listeners: {
+							render: function(c) {
+								// Expanding the drop down on click
+								c.el.on('click', function() { 
+									var infoComboBox = Ext.getCmp('gtInfoCombobox');
+									// Expand does not work directly (because custom style in drop down), using this workaround
+									infoComboBox.keyNav.down.call(infoComboBox);
+								});
+								// Using the pointer cursor when hovering over the element
+								c.el.on('mouseover', function() { 
+									this.dom.style.cursor = 'pointer';
+								});
+							},
+							scope: this
+						}
+					},
 					new Ext.form.ComboBox({
 						id: 'gtInfoCombobox',
 						store: gCombostore,
@@ -1665,6 +1701,8 @@ Ext.onReady(function() {
 						disabled: true,
 						mode: 'local',
 						style: 'background-color: '+gtBannerLineColor+';',
+						// Setting the background image initially to nothing
+						cls: 'x-form-single',
 						typeAhead: true,
 						hideTrigger: true,
 						forceSelection: true,
@@ -1674,8 +1712,12 @@ Ext.onReady(function() {
 						tpl: '<tpl for="."><div class="info-item" style="height: 40px;padding:5px;"><b>{type}</b><br>{label}</div></tpl>',
 						itemSelector: 'div.info-item',
 						listeners: {'select': function (combo,record){
-									var e0=Ext.getCmp('gtAccordion');
+									// Displaying the feature type
+									var ft = record.get("type");
+									Ext.get('gtInfoTypeLabel').dom.innerHTML=ft;
 
+									// Displaying the different tabs in the accordion
+									var e0=Ext.getCmp('gtAccordion');
 									e0.removeAll();
 
 									// Whatever the current expanded tab is, we populate the direct attributes accordion panel
@@ -1853,10 +1895,6 @@ Ext.onReady(function() {
 										e0.add(configArray);
 									}
 
-
-
-									//
-
 									// Refreshing the DOM with the newly added parts
 									e0.doLayout();	
 
@@ -1902,15 +1940,19 @@ Ext.onReady(function() {
 				}
 			});
 			
-			var bottomEastItem = {};
+			var bottomEastItem = {
+				border:false
+			};
 			if (JSONconf.bottomEastItem)
 			{
 				bottomEastItem = 
 				{ 
+					id:'bottomEastItem',
 					title:JSONconf.bottomEastItem.title,
 					html:"<iframe src='"+JSONconf.bottomEastItem.URL+"' height='"+JSONconf.bottomEastItem.height+"' frameborder='0' />" ,
 					collapsible:true,
 					animCollapse:false,
+					border:false,
 					height:JSONconf.bottomEastItem.height,
 					listeners: {
 						scope:this,
@@ -1928,7 +1970,8 @@ Ext.onReady(function() {
 				border: false,
 				layout: "ux.row",
 				region: "east",
-				style:"padding: 0px 15px; background-color:white;",
+				// Padding only on the left, as all over basis are covered by the parent container
+				style:"padding: 0px 0px 0px 10px; background-color:white;",
 				collapseMode: "mini",
 				width: 350,
 				listeners:{
@@ -2027,21 +2070,65 @@ Ext.onReady(function() {
 			// HS MOD END
 				region: "center",
 				layout: "border",
-//				tbar: toolbar,
+				style: " background-color:white;padding:0px 10px 10px;",
 				items: [
 					{
 						id: "centerpanel",
 						xtype: "panel",
-						layout: "fit",
-						region: "center",
-						border: false,
-						items: ["mymap"],
-						headerCfg: {
-							// Required to have the footer display
-							html: '<p style="font-size:16px;font-family: tahoma,arial,verdana,sans-serif;">Property Map</p>',
-							bodyStyle: " background-color: white; "
+						layout: {
+							type: "vbox",
+							align: "stretch"
 						},
-						headerStyle:'background-color:'+gtBannerLineColor+';border:0px; margin:0px 0px 0px; padding: 5px;'						
+						region: "center",
+						border: true,
+						items: [{
+								height: 28,
+								border:false,
+								bodyStyle:{
+									backgroundColor:gtBannerLineColor,
+									border:'0px',
+									margin:'0px 0px 0px',
+									padding: '5px',
+									fontSize:'16px',
+									fontFamily: 'tahoma,arial,verdana,sans-serif',
+									color:'#FFFFFF',
+									fontWeight:'bolder'
+								},
+								defaults:{
+									bodyStyle: {
+										backgroundColor:gtBannerLineColor
+									},
+									border:false
+								},
+								layout:'column',
+								items:[
+									{
+										html: '<div id="headerContainer">Property Map</p></div>',
+										width: 150
+									},
+									{
+										columnWidth: 1,
+										html:"",
+										height: 28
+									},
+									{
+										id:"toolPlaceHolder",
+										style:{
+											// Haven't bee able to find a configuration to replicate:
+											//  div align='right'
+											//
+										},
+										width:50
+									}
+								]
+							},
+							{
+								xtype: "panel",
+								layout: 'fit',
+								flex:1,
+								items:["mymap"]
+							}
+						]					
 					},
 					westPanel,
 					eastPanel
@@ -2061,8 +2148,7 @@ Ext.onReady(function() {
 					layout: "border",
 					region: "center",
 					// by configuring items here, we don't need to configure portalItems and save a wrapping container
-					items: portalItems,
-					bbar: {id: "mybbar"}
+					items: portalItems
 				},
 				// configuration of all tool plugins for this application
 				tools: JSONconf.tools,
@@ -2154,58 +2240,15 @@ Ext.onReady(function() {
 					r["data"] = propertyDataInit;
 					search_record_select_handler(null, r);
 				} 
-
 				// The main toolbar containing tools to be activated / deactivated on login/logout
 				// TODO: determine if this is still relevant
 				toolbar = app.mapPanel.toolbars[0];
 
 				// Tree toolbar to add the login button to
-				westpaneltoolbar = Ext.getCmp('tree').getTopToolbar();
+				var westpaneltoolbar = Ext.getCmp('tree').getTopToolbar();
 				westpaneltoolbar.addFill();
 				westpaneltoolbar.items.add(new Ext.Button({id:"loginbutton"}));
 				westpaneltoolbar.doLayout();
-
-				// Zoom to town tool, to add to the map toolbar
-				Ext.namespace('Ext.selectdata');
-				Ext.selectdata.zooms = gtQuickZoomDatastore;
-				var zoomstore = new Ext.data.ArrayStore({
-					fields: [{ name : 'xmin', type: 'float'},
-						{ name : 'ymin', type: 'float'},
-						{ name : 'xmax', type: 'float'},
-						{ name : 'ymax', type: 'float'},
-						{ name : 'label', type: 'string'}],
-					data : Ext.selectdata.zooms
-				});
-				// additional tools at the end of the map toolbar:
-				var addTool1 = "->";
-				var addTool2 = "->";
-				// Not displaying the zoom to combo if the underlying store is empty
-				if (zoomstore.data.length>0)
-				{
-					var addTool2 = new Ext.form.ComboBox({
-						tpl: '<tpl for="."><div ext:qtip="{label}" class="x-combo-list-item">{label}</div></tpl>',
-						store: zoomstore,
-						displayField:'label',
-						mode: 'local',
-						typeAhead: true,
-						editable:false,
-						forceSelection: true,
-						triggerAction: 'all',
-						width:125,
-						emptyText:gtEmptyTextQuickZoom,
-						listeners: {'select': function (combo,record){
-									var projsrc = new OpenLayers.Projection("EPSG:4326");
-									var projdest = new OpenLayers.Projection("EPSG:900913");
-									var bd = new OpenLayers.Bounds(record.data.xmin,record.data.ymin,record.data.xmax,record.data.ymax).transform(projsrc, projdest);
-									this.mapPanel.map.zoomToExtent(bd);},
-								scope:this}
-						}
-					);
-				}
-				// Adding to the list of tools			
-				toolbar.add(addTool1,addTool2);
-				toolbar.doLayout();
-
 
 				// Login management via cookie and internal this.authorizedRoles variable
 				// Variable and functions copied across from GeoExplorer' Composer.js:

@@ -55,6 +55,7 @@
         },
         {
             "ptype": "gxp_print",
+            "actionTarget":"toolPlaceHolder",
             "customParams": {
                 "outputFilename": "PoziExplorer-print"
             },

@@ -18,7 +18,15 @@ body {
 }
 
 /* Extra styles */
-.x-form-multi {border-color:red;}
+.x-form-multi {
+	background-image: url(img/panel/down_arrow.png);
+	background-repeat:no-repeat;
+	background-position:98% 50%; 
+}
+
+.x-form-single {
+	background-image: url();
+}
 
 .x-btn .login {
 	background-image: url(img/silk/door_in.png);
@@ -52,12 +60,11 @@ body {
 }
 
 #gtInfoCombobox {
-	height:28px;
+	height:27px;
 	font-size: 16px;
 	font-weight: bolder;
 	color: white;
 	font-family: tahoma,arial,verdana,sans-serif;
-	background-image: url();
 	border-color: #FFFFFF;
 	border: 0px;
 }
@@ -68,4 +75,34 @@ body {
 	height: 30px; 
 	font-size: 16px;
 	font-family: tahoma,arial,verdana,sans-serif;
+	padding:1px 5px;
+}
+
+.selectedFeatureType {
+	font-size: 18px;
+	font-weight: bolder;
+	color: white;
+	font-family: tahoma,arial,verdana,sans-serif;
+	border: 0px;
+}
+
+div.olMap {
+    cursor: default;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 0;
+}
+
+.advancedOverlay {
+	background-image: url(img/panel/advanced.png);
+	background-repeat:no-repeat;
+	background-position:100% 50%; 
+}
+
+.x-btn .gxp-icon-print, .x-menu-item .gxp-icon-print, .x-tree-node .gxp-icon-print {
+    background-image: url(img/panel/print.png);
+}
+
+.x-btn-tl, .x-btn-tr, .x-btn-tc, .x-btn-ml, .x-btn-mr, .x-btn-mc, .x-btn-bl, .x-btn-br, .x-btn-bc {
+    background-image: url();
 }
