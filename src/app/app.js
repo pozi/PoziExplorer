@@ -1853,7 +1853,7 @@ Ext.onReady(function() {
 										  //title: gtDetailsTitle,
 										  headerCfg:{
 											tag: 'div',
-											style:'	background-image: url();background-color: #C2BEBB;padding-left: 10px;',
+											style:'	background-image: url();background-color: #A0A0A0;padding-left: 10px;',
 											children: [
 											    { tag: 'div', 'html': gtDetailsTitle }
 											]
@@ -1883,10 +1883,10 @@ Ext.onReady(function() {
 
 												// 
 												var col_arr={
-													"GoogleStreetView":"#4F7AC8",
-													"ParcelDetails":"#7EC84B",
-													"PlanningInfo":"#9A4CC3",
-													"PropertyDetails":"#D0564B"
+													"GoogleStreetView":"#6C88D4",
+													"ParcelDetails":"#92D46C",
+													"PlanningInfo":"#AF6CD4",
+													"PropertyDetails":"#D4796C"
 												};
 
 												var col = col_arr[configArray[c].id];
