@@ -43,6 +43,7 @@
  * @require OpenLayers/Layer/Vector.js
  * @require OpenLayers/Layer/OSM.js
  * @require OpenLayers/Control/ScaleLine.js
+ * @require OpenLayers/Control/Zoom.js
  * @require OpenLayers/Projection.js
  * @require PrintPreview.js
  * @require OpenLayers/StyleMap.js
@@ -73,7 +74,7 @@ else
 }
 
 var app;
-var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurrentExpandedTabIdx=[],gCurrentLoggedRole="NONE",JSONconf,propertyDataInit,gtLayerPresentationConfiguration;
+var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurrentExpandedTabIdx=[],gCurrentLoggedRole="NONE",JSONconf,propertyDataInit,gtLayerPresentationConfiguration,eastPanel;
 var poziLinkClickHandler;
 
 // Helper functions
@@ -918,6 +919,14 @@ Ext.onReady(function() {
 						gComboDataArray.sort(function(a,b){return b[3]-a[3]});
 						gfromWFS="N";
 						gCombostore.loadData(gComboDataArray);
+						
+						// Features found during the getFeatureInfo: showing the tab
+						eastPanel.expand();
+					}
+					else
+					{
+						// No records returned by the getFeatureInfo: masking the tab
+						eastPanel.collapse();
 					}
 					
 					gComboDataArray=[];
@@ -1322,6 +1331,9 @@ Ext.onReady(function() {
 
 				// Refreshing the WFS layer so that the highlight appears and triggers the featuresadded event handler above
 				glayerLocSel.refresh({force:true});
+				
+				// 
+				eastPanel.expand();
 
 			};
 
@@ -1337,6 +1349,7 @@ Ext.onReady(function() {
 				collapsible: true,
 				collapseMode: "mini",
 				collapsed: gtCollapseWestPanel,
+				hideCollapseTool: true,
 				autoScroll:true,
 				// Only padding on the right as all other sides covered by the parent container
 				style:"padding: 0px 10px 0px 0px; background-color:white;",
@@ -1345,7 +1358,7 @@ Ext.onReady(function() {
 					html: '<p style="font-size:16px;font-family: tahoma,arial,verdana,sans-serif;">Layers</p>',
 					bodyStyle: " background-color: white; "
 				},
-				headerStyle:'background-color:'+gtBannerLineColor+';border:0px; margin:0px 0px 0px; padding: 5px;',
+				headerStyle:'background-color:'+gtBannerLineColor+';border:0px; margin:0px 0px 0px; padding: 5px 8px;',
 				items: [{
 					region: 'center',
 					border: false,
@@ -1675,7 +1688,7 @@ Ext.onReady(function() {
 				bodyStyle: "background-color: transparent;",
 				items: [
 					{
-						html:"<p style='background-color:"+gtBannerLineColor+";height:19px;padding:5px; cursor: hand;' id='gtInfoTypeLabel'>&nbsp;</p>",
+						html:"<p style='background-color:"+gtBannerLineColor+";height:19px;padding:5px 8px; cursor: hand;' id='gtInfoTypeLabel'>&nbsp;</p>",
 						id:'gtInfoType',
 						bodyCssClass: 'selectedFeatureType',
 						listeners: {
@@ -1709,7 +1722,7 @@ Ext.onReady(function() {
 						editable:false,
 						triggerAction: 'all',
 						emptyText: gtEmptyTextSelectFeature,
-						tpl: '<tpl for="."><div class="info-item" style="height: 40px;padding:5px;"><b>{type}</b><br>{label}</div></tpl>',
+						tpl: '<tpl for="."><div class="info-item" style="height: 40px;padding:5px 8px;"><b>{type}</b><br>{label}</div></tpl>',
 						itemSelector: 'div.info-item',
 						listeners: {'select': function (combo,record){
 									// Displaying the feature type
@@ -1966,13 +1979,14 @@ Ext.onReady(function() {
 				};
 			}	
 			
-			var eastPanel = new Ext.Panel({
+			eastPanel = new Ext.Panel({
 				border: false,
 				layout: "ux.row",
 				region: "east",
 				// Padding only on the left, as all over basis are covered by the parent container
 				style:"padding: 0px 0px 0px 10px; background-color:white;",
 				collapseMode: "mini",
+				collapsed:true,
 				width: 350,
 				listeners:{
 						scope: this,
@@ -2080,15 +2094,14 @@ Ext.onReady(function() {
 							align: "stretch"
 						},
 						region: "center",
-						border: true,
+						border: false,
 						items: [{
-								height: 28,
+								height: 29,
 								border:false,
 								bodyStyle:{
 									backgroundColor:gtBannerLineColor,
-									border:'0px',
 									margin:'0px 0px 0px',
-									padding: '5px',
+									padding: '5px 8px',
 									fontSize:'16px',
 									fontFamily: 'tahoma,arial,verdana,sans-serif',
 									color:'#FFFFFF',
@@ -2104,7 +2117,32 @@ Ext.onReady(function() {
 								items:[
 									{
 										html: '<div id="headerContainer">Property Map</p></div>',
-										width: 150
+										width: 130
+									},
+									{
+										html:"<img src='theme/app/img/panel/list-white-final.png' style='padding:2px;' alt='Layers' title='Layers' />",
+										id:'layerListButton',
+										width: 20,
+										listeners: {
+											render: function(c) {
+												// Expanding the drop down on click
+												c.el.on('click', function() { 
+													if (westPanel.collapsed)
+													{
+														westPanel.expand();
+													}
+													else
+													{
+														westPanel.collapse();
+													}
+												});
+												// Using the pointer cursor when hovering over the element
+												c.el.on('mouseover', function() { 
+													this.dom.style.cursor = 'pointer';
+												});
+											},
+											scope: this
+										}
 									},
 									{
 										columnWidth: 1,
@@ -2118,13 +2156,14 @@ Ext.onReady(function() {
 											//  div align='right'
 											//
 										},
-										width:50
+										width:20
 									}
 								]
 							},
 							{
 								xtype: "panel",
 								layout: 'fit',
+								border:false,
 								flex:1,
 								items:["mymap"]
 							}
@@ -2160,13 +2199,16 @@ Ext.onReady(function() {
 					projection: "EPSG:900913",
 					center: JSONconf.center,
 					zoom: JSONconf.zoom,
-					layers: JSONconf.layers ,
-					items: [{
+					layers: JSONconf.layers,
+					// Setting controls manually to have the simple OpenLayers zoom control
+					controls: [
+						new OpenLayers.Control.Navigation(),
+						new OpenLayers.Control.Zoom(),
+						new OpenLayers.Control.Attribution(),
+						new OpenLayers.Control.ScaleLine()
+					],
+					mapItems: [{
 						xtype: "gxp_scaleoverlay"
-					},{
-						xtype: "gx_zoomslider",
-						vertical: true,
-						height: 100
 					}]
 				}
 			});

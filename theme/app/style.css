@@ -17,6 +17,32 @@ body {
     bottom: 2px;
 }
 
+.olControlScaleLine {
+    background-color: #FFFFFF;
+    border: 1px solid #BDBDBD;
+    bottom: 15px;
+    display: block;
+    font-size: small;
+    left: auto; /* important: resets the left position */
+    right: 10px;
+    position: absolute;
+    padding: 5px;
+}
+
+div.olControlZoom {
+    background: none repeat scroll 0 0 rgba(164, 164, 164, 0.8);
+}
+
+div.olControlZoom a {
+    background: none repeat scroll 0 0 #F2F2F2;
+    color: black;
+    font-size: 17px;
+}
+
+div.olControlZoom a:hover {
+    background: none repeat scroll 0 0 #585858;
+}
+
 /* Extra styles */
 .x-form-multi {
 	background-image: url(img/panel/down_arrow.png);
@@ -67,6 +93,7 @@ body {
 	font-family: tahoma,arial,verdana,sans-serif;
 	border-color: #FFFFFF;
 	border: 0px;
+	padding-left:8px;
 }
 
 #gtSearchCombobox {
