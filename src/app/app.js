@@ -1524,7 +1524,7 @@ Ext.onReady(function() {
 													if (gsv_lat && gsv_lon)
 													{
 														// Adjusted to the size of the column
-														var size_thumb = 275;
+														var size_thumb = 335;
 														var gsvthumb = "http://maps.googleapis.com/maps/api/streetview?location="+gsv_lat+","+gsv_lon+"&fov=90&heading="+gsv_head+"&pitch=-10&sensor=false&size="+size_thumb+"x"+size_thumb;
 														var gsvlink = "http://maps.google.com.au/maps?layer=c&cbll="+gsv_lat+","+gsv_lon+"&cbp=12,"+gsv_head+",,0,0";
 
