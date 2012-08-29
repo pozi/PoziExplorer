@@ -83,6 +83,20 @@ function toTitleCase(str)
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
 
+function gotNum(str){
+	return /\d/.test(str);
+}
+
+function toSmartTitleCase(str)
+{
+    return str.replace(/\w\S*/g, function(txt){
+    	if (gotNum(txt)) 
+    	{return txt;} 
+    	else 
+    	{return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}
+    });
+}
+
 function trim(str)
 {
 	if (str) 
@@ -1225,8 +1239,8 @@ Ext.onReady(function() {
 			       'layer',
 			       {
 					name : 'labelx',
-					convert : function(v, rec) {                        
-						return rec[4];
+					convert : function(v, rec) {          
+						return toSmartTitleCase(rec[4]);
 					}
 				}
 			    ],
@@ -1249,7 +1263,7 @@ Ext.onReady(function() {
 						// Collapsing the drop down
 						cb.collapse();
 					}
-					cb.setValue(rec.data.label);
+					cb.setValue(rec.data.labelx);
 					cb.fireEvent('select',cb,rec);
 					},
 				    scope: this
@@ -1367,9 +1381,10 @@ Ext.onReady(function() {
 			});
 
 			var tabExpand = function(p){
-				// Current layer (cl) as per content of the drop down (cb)
-				var cb = Ext.getCmp('gtInfoCombobox');
-				var cl = cb.getStore().data.items[cb.getStore().find("labelx",cb.getValue())].data.layer;
+				// Current layer (cl) as per content of the current type (ct) and current drop down (cb)
+				var ct = Ext.get('gtInfoTypeLabel').dom.innerHTML; // that contains the type of the currently selected feature
+				var cb = Ext.getCmp('gtInfoCombobox'); // the Ext JS component containing the combo - used to link type to layer name
+				var cl = cb.getStore().data.items[cb.getStore().find("type",ct)].data.layer;
 
 				// Updating the index of the currently opened tab
 				for(k in p.ownerCt.items.items)
@@ -1685,27 +1700,55 @@ Ext.onReady(function() {
 					align:'stretch'
 				},
 				height: 60,
-				bodyStyle: "background-color: transparent;",
+				bodyStyle: "background-color:"+gtBannerLineColor+";",
 				items: [
 					{
-						html:"<p style='background-color:"+gtBannerLineColor+";height:19px;padding:5px 8px; cursor: hand;' id='gtInfoTypeLabel'>&nbsp;</p>",
-						id:'gtInfoType',
-						bodyCssClass: 'selectedFeatureType',
-						listeners: {
-							render: function(c) {
-								// Expanding the drop down on click
-								c.el.on('click', function() { 
-									var infoComboBox = Ext.getCmp('gtInfoCombobox');
-									// Expand does not work directly (because custom style in drop down), using this workaround
-									infoComboBox.keyNav.down.call(infoComboBox);
-								});
-								// Using the pointer cursor when hovering over the element
-								c.el.on('mouseover', function() { 
-									this.dom.style.cursor = 'pointer';
-								});
-							},
-							scope: this
-						}
+						layout:'column',
+						border:false,
+						bodyStyle: "background-color:"+gtBannerLineColor+";",
+						items:[
+							{
+								html:"<p style='background-color:"+gtBannerLineColor+";height:19px;padding:5px 8px; cursor: hand;' id='gtInfoTypeLabel'>&nbsp;</p>",
+								columnWidth:1,
+								bodyCssClass: 'selectedFeatureType',
+								listeners: {
+									render: function(c) {
+										// Expanding the drop down on click
+										c.el.on('click', function() { 
+											var infoComboBox = Ext.getCmp('gtInfoCombobox');
+											// Expand does not work directly (because custom style in drop down), using this workaround
+											infoComboBox.keyNav.down.call(infoComboBox);
+										});
+										// Using the pointer cursor when hovering over the element
+										c.el.on('mouseover', function() { 
+											this.dom.style.cursor = 'pointer';
+										});
+									},
+									scope: this
+								}
+							},{
+								html:"<p style='background-color:"+gtBannerLineColor+";'><img src='theme/app/img/panel/cross-white.png' style='padding:2px;' alt='Clear' title='Clear' /></p>",
+								width:17,
+								bodyCssClass: 'selectedFeatureType',
+								listeners: {
+									render: function(c) {
+										// Expanding the drop down on click
+										c.el.on('click', function() { 
+											// Clearing the feature type
+											Ext.get('gtInfoTypeLabel').dom.innerHTML="&nbsp;";
+											// Removing highlight and emptying combo
+											clear_highlight();
+											// Collapsing panel
+											eastPanel.collapse();
+										});
+										// Using the pointer cursor when hovering over the element
+										c.el.on('mouseover', function() { 
+											this.dom.style.cursor = 'pointer';
+										});
+									},
+									scope: this
+								}
+						}]
 					},
 					new Ext.form.ComboBox({
 						id: 'gtInfoCombobox',
@@ -1722,7 +1765,7 @@ Ext.onReady(function() {
 						editable:false,
 						triggerAction: 'all',
 						emptyText: gtEmptyTextSelectFeature,
-						tpl: '<tpl for="."><div class="info-item" style="height: 40px;padding:5px 8px;"><b>{type}</b><br>{label}</div></tpl>',
+						tpl: '<tpl for="."><div class="info-item" style="height:40px;padding:5px 8px;"><b>{type}</b><br>{labelx}</div></tpl>',
 						itemSelector: 'div.info-item',
 						listeners: {'select': function (combo,record){
 									// Displaying the feature type
@@ -1892,7 +1935,7 @@ Ext.onReady(function() {
 												var col = col_arr[configArray[c].id];
 												if (!(col))
 												{
-													col = "#C2BEBB";
+													col = "#A0A0A0";
 												}
 												configArray[c].headerCfg={
 													tag: 'div',
@@ -2156,7 +2199,7 @@ Ext.onReady(function() {
 											//  div align='right'
 											//
 										},
-										width:20
+										width:25
 									}
 								]
 							},
@@ -2181,6 +2224,7 @@ Ext.onReady(function() {
 			}
 
 			app = new gxp.Viewer({
+				authorizedRoles: ['ROLE_ADMINISTRATOR'],
 				proxy: gtProxy,
 				//defaultSourceType: "gxp_wmscsource",
 				portalConfig: {
