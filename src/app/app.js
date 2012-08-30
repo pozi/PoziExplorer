@@ -1488,7 +1488,7 @@ Ext.onReady(function() {
 										mode: gtGetLiveDataEndPoints[configArray[i].definition].storeMode,
 										// Passing the database name to query
 										config: gtGetLiveDataEndPoints[configArray[i].definition].storeName,
-										// Passing the LGA code, so that the query can be narrowed down (unused)
+										// Passing the LGA code, so that the query can be narrowed down (used for planning tab schedules links)
 										lga: gtLGACode
 									},
 									listeners:
