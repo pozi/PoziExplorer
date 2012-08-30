@@ -1098,7 +1098,7 @@ Ext.onReady(function() {
 			var gtZoomMax = 18;
 			if (JSONconf.zoomMax) {gtZoomMax = JSONconf.zoomMax;};
 
-			var gtBannerLineColor="#DE932A";
+			var gtBannerLineColor="#A0A0A0";
 			if (JSONconf.bannerLineColor) {gtBannerLineColor = JSONconf.bannerLineColor;};
 
 			var gtBannerRightCornerLine1="Mitchell Shire Council";
@@ -1130,6 +1130,27 @@ Ext.onReady(function() {
 
 			var gtInfoTitle = "Info";
 			if ('infoTitle' in JSONconf) {gtInfoTitle = JSONconf.infoTitle;};
+
+			var gtMapContexts = [{"name":"Property Map","size":120}];
+			if ('mapContexts' in JSONconf) {gtMapContexts = JSONconf.mapContexts;};
+			// Transforming the map contexts variable into the right format
+			if (gtMapContexts.length==0)
+			{
+				gtMapContexts = "&nbsp;";
+				gtMapContextsSize = 0;
+			}
+			else
+			{
+				if (gtMapContexts.length==1)
+				{
+					gtMapContextsSize = gtMapContexts[0].size;
+					gtMapContexts = gtMapContexts[0].name;
+				}
+				else
+				{
+					// TODO: format the contexts into a drop down loading different layers
+				}
+			}
 
 			// This structure deals with fields to show, in which order and with which name
 			gtLayerPresentationConfiguration =
@@ -1960,7 +1981,6 @@ Ext.onReady(function() {
 										gCurrentExpandedTabIdx[record.data.layer]="0";
 									}
 									e0.items.itemAt(gCurrentExpandedTabIdx[record.data.layer]).expand();
-
 								},
 							    scope:this}
 
@@ -2159,8 +2179,8 @@ Ext.onReady(function() {
 								layout:'column',
 								items:[
 									{
-										html: '<div id="headerContainer">Property Map</p></div>',
-										width: 130
+										html: '<div id="headerContainer">'+gtMapContexts+'</p></div>',
+										width: gtMapContextsSize
 									},
 									{
 										html:"<img src='theme/app/img/panel/list-white-final.png' style='padding:2px;' alt='Layers' title='Layers' />",
