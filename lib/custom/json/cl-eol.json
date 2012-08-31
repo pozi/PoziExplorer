@@ -217,6 +217,7 @@
     "hideNorthRegion":true,
     "hideSelectedFeaturePanel":true,
     "eastPanelCollapsible":false,
+    "bannerLineColor":"#90C4B6",
     "infoTitle":"",
     "hideScaleCombo":true,
     "layerPresentation": {
