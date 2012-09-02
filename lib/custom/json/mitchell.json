@@ -252,7 +252,7 @@
             "visibility": true,
             "opacity": 0.6,
             "format": "image/png8",
-            "styles": "",
+            "styles": "white_polygon_346",
             "transparent": true,
             "tiled": false,
             "transition": "resize",
@@ -368,7 +368,7 @@
     "logoClientSrc":"theme/app/img/custom/mitchell_logo.jpg",
     "logoClientWidth":238,
     "zoomMax":18,
-    "bannerLineColor":"#DE932A",
+    "bannerLineColor":"#D4AA6C",
     "bannerRightCornerLine1":"Mitchell Shire Council",
     "bannerRightCornerLine2":"Victoria, Australia",
     "quickZoomDatastore": [

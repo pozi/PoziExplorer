@@ -169,7 +169,7 @@
             "visibility": true,
             "opacity": 0.6,
             "format": "image/png8",
-            "styles": "",
+            "styles": "white_polygon_311",
             "transparent": true,
             "tiled": false,
             "transition": "resize",
