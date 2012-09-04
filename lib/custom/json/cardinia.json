@@ -246,6 +246,12 @@
             "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
             "storeMode": "pgsql",
             "storeName": "vicmap"
+        },
+        {
+            "urlLayout": "http://v3.pozi.com/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://v3.pozi.com/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "pgsql",
+            "storeName": "cardiniagis"
         }
     ],
     "logoClientSrc":"theme/app/img/custom/cardinia_logo.png",
