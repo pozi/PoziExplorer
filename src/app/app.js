@@ -128,12 +128,13 @@ Ext.onReady(function() {
 			if (val.search(/^http/)>-1){
 				if (val.search(/\.jpg/)>-1)
 				{
-					rv ="<a href='"+val+"' target='_blank'><img src='"+val+"' height='20' width='20' /></a>";
+					rv ="<a href='"+val+"' target='_blank'><img src='"+val+"' /></a>";
 				}
 				else
 				{
 					var linkName=val.split("/").pop();
 					if (linkName.length<1) {linkName = 'link';}
+					if (linkName.length>25) {linkName = 'link';}
 					rv ="<a href='"+val+"' target='_blank'>"+linkName+"</a>";
 				}
 				doNotHTMLEncode = true;
@@ -153,6 +154,12 @@ Ext.onReady(function() {
 				// Better presentation of boolean values (they are not detected as boolean in the tests above)
 				if (val == "true")  {rv="<input type='checkbox' name='a' value='a' checked='checked' disabled='disabled'/>";}
 				if (val == "false") {rv="<input type='checkbox' name='b' value='b' disabled='disabled'/>";}
+				
+				// Presentation of email addresses
+				if (/^[-+.\w]{1,64}@[-.\w]{1,64}\.[-.\w]{2,6}$/.test(val))
+				{
+					rv="<a href='mailto:"+val+"'>address</a>";
+				}
 				
 				// We HTML-encode nothing!
 				doNotHTMLEncode = true;
@@ -1460,7 +1467,34 @@ Ext.onReady(function() {
 							{
 								selectedRecordIndex=0;
 							}
-							var idFeature = cb.store.data.items[selectedRecordIndex].data.content[configArray[i].idName];
+							
+							// Property to pass to the queries
+							var idFeature, idEpsg;
+
+							// Special case when requesting the geometry
+							if (configArray[i].idName=="the_geom")
+							{
+								// 2 scenarios
+								if (cb.store.data.items[selectedRecordIndex].data.content.the_geom_WFS)
+								{
+									// Comes from a WFS call (search)
+									idFeature=cb.store.data.items[selectedRecordIndex].data.content.the_geom_WFS.geometry.toString();
+									idEpsg = "900913";
+									
+								}
+								else
+								{
+									// Comes from a getFeatureInfo click
+									idFeature=cb.store.data.items[selectedRecordIndex].data.content.the_geom;
+									idEpsg = "4326";
+								}
+								idFeature="'"+idFeature+"',"+idEpsg;
+							}
+							else
+							{
+								// Using the name configured
+								idFeature = cb.store.data.items[selectedRecordIndex].data.content[configArray[i].idName];
+							}
 
 							if (configArray[i].id.substring(0,1)!='X')
 							{
@@ -1656,8 +1690,7 @@ Ext.onReady(function() {
 											else
 											{
 												// The target div for placing this data: the loading div's parent
-												var targ = Ext.getCmp(recs[0].json.row["target"]);
-												targ.removeAll();
+												targ2.removeAll();
 
 												// Rendering as a table
 												var win3 = new Ext.Panel({
@@ -1673,11 +1706,11 @@ Ext.onReady(function() {
 													,defaults:{height:26}
 													,renderTo: targ
 													,items: [
-														{html:'<p style="font-size:12px;">No result found</p>',border:false,padding:'5'}
+														{html:'<p style="font-size:12px;font-family: tahoma,arial,verdana,sans-serif;">No result found</p>',border:false,padding:'5'}
 													]
 												});
-												targ.add(win3);
-												targ.doLayout();
+												targ2.add(win3);
+												targ2.doLayout();
 											}
 											g++;
 										}
