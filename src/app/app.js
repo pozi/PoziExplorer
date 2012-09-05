@@ -1641,8 +1641,8 @@ Ext.onReady(function() {
 													delete tab_el.getStore().sortInfo;
 													tab_el.getColumnModel().getColumnById('name').sortable = false;
 													// Managing column width ratio
-													tab_el.getColumnModel().getColumnById('name').width = 35;
-													tab_el.getColumnModel().getColumnById('value').width = 65;
+													tab_el.getColumnModel().getColumnById('name').width = 30;
+													tab_el.getColumnModel().getColumnById('value').width = 70;
 													// Now load data
 													tab_el.setSource(src_attr_array);
 
@@ -1942,8 +1942,8 @@ Ext.onReady(function() {
 									delete p.getStore().sortInfo;
 									p.getColumnModel().getColumnById('name').sortable = false;
 									// Managing column width ratio
-									p.getColumnModel().getColumnById('name').width = 35;
-									p.getColumnModel().getColumnById('value').width = 65;										
+									p.getColumnModel().getColumnById('name').width = 30;
+									p.getColumnModel().getColumnById('value').width = 70;										
 									// Now load data
 									p.setSource(fa);
 

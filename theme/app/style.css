@@ -138,3 +138,8 @@ div.olMap {
     height: 18px;
     width: 18px;
 }
+
+/* Controls the size of most of the text */
+.x-tree-node, .x-grid3-cell-inner {
+	font-size: 13px;
+}
