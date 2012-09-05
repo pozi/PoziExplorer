@@ -74,7 +74,7 @@ else
 }
 
 var app;
-var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurrentExpandedTabIdx=[],gCurrentLoggedRole="NONE",JSONconf,propertyDataInit,gtLayerPresentationConfiguration,eastPanel;
+var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurrentExpandedTabIdx=[],gCurrentLoggedRole="NONE",JSONconf,propertyDataInit,gtLayerPresentationConfiguration,eastPanel,gLayoutsArr;
 var poziLinkClickHandler;
 
 // Helper functions
@@ -128,7 +128,7 @@ Ext.onReady(function() {
 			if (val.search(/^http/)>-1){
 				if (val.search(/\.jpg/)>-1)
 				{
-					rv ="<a href='"+val+"' target='_blank'><img src='"+val+"' /></a>";
+					rv ="<a href='"+val+"' target='_blank'><img src='"+val+"' style='display:block;margin-left:auto;margin-right:auto;' /></a>";
 				}
 				else
 				{
@@ -158,7 +158,7 @@ Ext.onReady(function() {
 				// Presentation of email addresses
 				if (/^[-+.\w]{1,64}@[-.\w]{1,64}\.[-.\w]{2,6}$/.test(val))
 				{
-					rv="<a href='mailto:"+val+"'>address</a>";
+					rv="<a href='mailto:"+val+"'>"+val+"</a>";
 				}
 				
 				// We HTML-encode nothing!
@@ -1212,7 +1212,7 @@ Ext.onReady(function() {
 			var gtRedirectIfDeclined="http://www.mitchellshire.vic.gov.au/";
 
 			// Layout for the extra tabs
-			var gLayoutsArr = [];
+			gLayoutsArr = [];
 
 			// Flag to track the origin of the store refresh
 			var gfromWFS="N";
@@ -1501,6 +1501,8 @@ Ext.onReady(function() {
 								// Live query using the script tag
 								var ds = new Ext.data.Store({
 									autoLoad:true,
+									// Script tag proxy uses a GET method (can not be overriden to a POST)
+									// Source: http://www.sencha.com/forum/showthread.php?15916-ScriptTagProxy-with-POST-method-in-grid-with-paging
 									proxy: new Ext.data.ScriptTagProxy({
 										url: gtGetLiveDataEndPoints[configArray[i].definition].urlLiveData
 									}),
@@ -1983,7 +1985,8 @@ Ext.onReady(function() {
 													"GoogleStreetView":"#6C88D4",
 													"ParcelDetails":"#92D46C",
 													"PlanningInfo":"#AF6CD4",
-													"PropertyDetails":"#D4796C"
+													"PropertyDetails":"#D4796C",
+													"CouncillorDetails":"#D4AA6C"
 												};
 
 												var col = col_arr[configArray[c].id];
@@ -2665,6 +2668,10 @@ Ext.onReady(function() {
 										{
 											// If this key (layer) already exists, we add the JSON element (tab) to its value (tab array)
 											gLayoutsArr[recs[key].json.row.key_arr]= gLayoutsArr[recs[key].json.row.key_arr].concat(a);
+											// Reordering the array elements inside the array for this key, according to orderNum
+											gLayoutsArr[recs[key].json.row.key_arr].sort(function(a,b){
+												return parseInt(a.orderNum) - parseInt(b.orderNum);
+											});
 										}
 										else
 										{
