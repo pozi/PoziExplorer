@@ -163,6 +163,17 @@
             "tiled": false
         },
         {
+            "source": "local",
+            "name": "CSC_COLLECTION_WASTE_GREEN",
+            "title": "Green Waste Collection",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
             "source": "backend",
             "name": "VICMAP:VW_CARDINIA_MASK",
             "title": "Municipal Boundary",
