@@ -1986,7 +1986,8 @@ Ext.onReady(function() {
 													"ParcelDetails":"#92D46C",
 													"PlanningInfo":"#AF6CD4",
 													"PropertyDetails":"#D4796C",
-													"CouncillorDetails":"#D4AA6C"
+													"CouncillorDetails":"#D4AA6C",
+													"CollectionDetails":"#D4BE6C"
 												};
 
 												var col = col_arr[configArray[c].id];
