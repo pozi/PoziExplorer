@@ -95,7 +95,7 @@
 		"source":"local",
 		"name":"GROUP_BOUNDARY",
 		"title":"Landcare Group Boundaries",
-		"visibility":false,
+		"visibility":true,
 		"opacity":0.85,
 		"format":"image/png8",
 		"styles":"",
