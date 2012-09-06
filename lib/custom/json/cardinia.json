@@ -119,6 +119,83 @@
     },
     "layers": [
         {
+            "source": "local",
+            "name": "CSC_COLLECTION_WASTE_GREEN",
+            "title": "Green Waste Collection",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "CSC_COLLECTION_WASTE_HARD",
+            "title": "Hard Waste Collection",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "CSC_COLLECTION_RECYCLE",
+            "title": "Recycle Collection",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "CSC_COLLECTION_RUBBISH",
+            "title": "Rubbish Collection",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "CSC_AREA_DOG_OF_LEASH",
+            "title": "Dog Off Leash Area",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "CSC_AREA_FIRE_BAN",
+            "title": "Fire Ban Area",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "backend",
+            "name": "VICMAP:VW_TRANSFER_STATION",
+            "title": "Transfer Stations",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
             "source": "backend",
             "name": "VICMAP:VW_DSE_VMPLAN_ZONE",
             "title": "Planning Zones",
@@ -147,28 +224,6 @@
             "visibility": true,
             "opacity": 0.25,
             "format": "image/GIF",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "backend",
-            "name": "VICMAP:VW_TRANSFER_STATION",
-            "title": "Transfer Stations",
-            "visibility": false,
-            "opacity": 0.85,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "local",
-            "name": "CSC_COLLECTION_WASTE_GREEN",
-            "title": "Green Waste Collection",
-            "visibility": false,
-            "opacity": 0.85,
-            "format": "image/png8",
             "styles": "",
             "transparent": true,
             "tiled": false
