@@ -944,12 +944,7 @@ Ext.onReady(function() {
 						// Features found during the getFeatureInfo: showing the tab
 						eastPanel.expand();
 					}
-					else
-					{
-						// No records returned by the getFeatureInfo: masking the tab
-						eastPanel.collapse();
-					}
-					
+
 					gComboDataArray=[];
 					layerCounter=0;
 				}
@@ -1132,8 +1127,8 @@ Ext.onReady(function() {
 			var gtHideSelectedFeaturePanel = false;
 			if ('hideSelectedFeaturePanel' in JSONconf) {gtHideSelectedFeaturePanel=JSONconf.hideSelectedFeaturePanel;};
 
-			var gtEastPanelCollapsible = true;
-			if ('eastPanelCollapsible' in JSONconf) {gtEastPanelCollapsible=JSONconf.eastPanelCollapsible;};
+			var gtEastPanelCollapsed = false;
+			if ('eastPanelCollapsed' in JSONconf) {gtEastPanelCollapsed=JSONconf.eastPanelCollapsed;};
 
 			var gtInfoTitle = "Info";
 			if ('infoTitle' in JSONconf) {gtInfoTitle = JSONconf.infoTitle;};
@@ -1335,6 +1330,8 @@ Ext.onReady(function() {
 				gCombostore.removeAll();
 				// Clearing the details from the panel
 				accordion.removeAll();
+				// Clearing the feature type
+				Ext.get('gtInfoTypeLabel').dom.innerHTML="&nbsp;";			
 			};
 
 			// Handler called when:
@@ -1790,12 +1787,8 @@ Ext.onReady(function() {
 									render: function(c) {
 										// Expanding the drop down on click
 										c.el.on('click', function() { 
-											// Clearing the feature type
-											Ext.get('gtInfoTypeLabel').dom.innerHTML="&nbsp;";
 											// Removing highlight and emptying combo
 											clear_highlight();
-											// Collapsing panel
-											eastPanel.collapse();
 										});
 										// Using the pointer cursor when hovering over the element
 										c.el.on('mouseover', function() { 
@@ -2086,7 +2079,7 @@ Ext.onReady(function() {
 				// Padding only on the left, as all over basis are covered by the parent container
 				style:"padding: 0px 0px 0px 10px; background-color:white;",
 				collapseMode: "mini",
-				collapsed:true,
+				collapsed: gtEastPanelCollapsed,
 				width: 350,
 				listeners:{
 						scope: this,
