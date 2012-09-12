@@ -94,7 +94,7 @@
 	{
 		"source":"local",
 		"name":"GROUP_BOUNDARY",
-		"title":"Landcare Group Boundaries",
+		"title":"Landcare Boundary",
 		"visibility":true,
 		"opacity":0.85,
 		"format":"image/png8",
@@ -118,7 +118,7 @@
 	{
 		"source":"local",
 		"name":"CREEK",
-		"title":"Creeks",
+		"title":"Named Waterways",
 		"visibility":true,
 		"opacity":0.85,
 		"format":"image/png8",
