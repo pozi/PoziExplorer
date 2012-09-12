@@ -73,8 +73,8 @@
     ],
     "sources": {
         "local": {
-            "url": "/geoserver/CARDINIA/ows",
-            "title": "Cardinia Shire Council Layers",
+            "url": "/geoserver/ypagis/ows",
+            "title": "ypagis Layers",
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
@@ -152,6 +152,17 @@
             "tiled": false
         },
         {
+            "source": "local",
+            "name": "LISTING",
+            "title": "Listings",
+            "visibility": true,
+            "opacity": 0.8,
+            "format": "image/GIF",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
             "source": "backend",
             "name": "VICMAP:VW_TRANSFER_STATION",
             "title": "Transfer Stations",
@@ -209,7 +220,7 @@
         }
     ],
     "center": [
-        16205074, -4591164
+        16119430, -4543824
     ],
     "zoom": 11,
     "workspace": "BRIMBANK",
