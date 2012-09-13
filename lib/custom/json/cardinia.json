@@ -197,7 +197,7 @@
         },
         {
             "source": "local",
-            "name": "CSC_COLECTION_WASTE_GREEN",
+            "name": "CSC_COLLECTION_WASTE_GREEN",
             "title": "Green Waste Collection",
             "visibility": false,
             "opacity": 0.85,
