@@ -908,8 +908,15 @@ Ext.onReady(function() {
 						{
 							for (l in cont)
 							{						
-								// If not, we select the first field that comes along (provided it's not a geometry)
-								if (l!="the_geom" && l!="SHAPE" && l!="projection"){var lab=cont[l];break;}
+								// If not, we select the first field that comes along (provided it's not a geometry and it's value is non null)
+								if (l!="the_geom" && l!="SHAPE" && l!="projection")
+								{
+									var lab=cont[l];
+									if (lab) 
+									{
+										break;
+									}
+								}
 							}							
 						}
 						// If too long for the drop down, we truncate the string to the space remaining after "<LAYER NAME>:"
@@ -1065,7 +1072,7 @@ Ext.onReady(function() {
 			var gtLoadingText = "Loading ...";
 			var gtDetailsTitle = "Details";
 			var gtClearButton = "Clear";
-			var gtEmptyTextSelectFeature = "Selected features ...";
+			var gtEmptyTextSelectFeature = "Selected feature ...";
 			var gtEmptyTextQuickZoom = "Zoom to town ...";
 			
 			// Client-specific overridable variables
@@ -1553,7 +1560,7 @@ Ext.onReady(function() {
 															// Building the source array for a property grid
 															src_attr_array[toTitleCase(trim(j.replace(/_/g," ")))]=trim(val);
 															
-															// Setting the title of the horizontal panel - first property encountered
+															// Setting the title of the horizontal panel - first non-null value encountered
 															if (first_element.length==0)
 															{
 																if (trim(val)>10)
@@ -1942,7 +1949,6 @@ Ext.onReady(function() {
 
 									var panel = new Ext.Panel({
 										  id:'attributeAcc',
-										  //title: gtDetailsTitle,
 										  headerCfg:{
 											tag: 'div',
 											style:'	background-image: url();background-color: #A0A0A0;padding-left: 10px;',
