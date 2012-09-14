@@ -73,8 +73,8 @@
     ],
     "sources": {
         "local": {
-            "url": "/geoserver/ypagis/ows",
-            "title": "ypagis Layers",
+            "url": "/geoserver/YPA/ows",
+            "title": "YPA Layers",
             "ptype": "gxp_wmscsource",
             "tiled": false
         },

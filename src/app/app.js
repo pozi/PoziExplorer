@@ -128,7 +128,7 @@ Ext.onReady(function() {
 			if (val.search(/^http/)>-1){
 				if (val.search(/\.jpg/)>-1)
 				{
-					rv ="<a href='"+val+"' target='_blank'><img src='"+val+"' style='display:block;margin-left:auto;margin-right:auto;' /></a>";
+					rv ="<a href='"+val+"' target='_blank'><img src='"+val+"' style='display:block;width:230px;height:auto;margin-left:auto;margin-right:auto;' /></a>";
 				}
 				else
 				{
