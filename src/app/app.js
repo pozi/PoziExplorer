@@ -74,7 +74,7 @@ else
 }
 
 var app;
-var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurrentExpandedTabIdx=[],gCurrentLoggedRole="NONE",JSONconf,propertyDataInit,gtLayerPresentationConfiguration,eastPanel,gLayoutsArr;
+var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurrentExpandedTabIdx=[],gCurrentLoggedRole="NONE",JSONconf,propertyDataInit,gtLayerPresentationConfiguration,eastPanel,gLayoutsArr,gLoggedUsername,gLoggedPassword;
 var poziLinkClickHandler;
 
 // Helper functions
@@ -2476,6 +2476,9 @@ Ext.onReady(function() {
 								var user = form.findField('username').getValue();
 								app.setCookieValue(app.cookieParamName, user);
 								app.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
+								// Keeping username and password in variables for injection in WMS queries of local source
+								gLoggedUsername = form.findField('username').getValue();
+								gLoggedPassword = form.findField('password').getValue();
 								// Only showing the username without its workspace
 								var typedUsername = user;
 								if (user.split(".")[1])
@@ -2743,7 +2746,7 @@ Ext.onReady(function() {
 						{name: "ld"	, mapping:"row.ld"}
 					],
 					proxy: new Ext.data.ScriptTagProxy({
-						url: JSONconf.servicesHost + JSONconf.searchEndPoint
+						url: JSONconf.servicesHost + "/ws/rest/v3/ws_property_id_by_propnum.php"
 					}),
 					listeners: {
 						load: prop_by_prop_num_handler
