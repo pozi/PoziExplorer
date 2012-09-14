@@ -2746,7 +2746,7 @@ Ext.onReady(function() {
 						{name: "ld"	, mapping:"row.ld"}
 					],
 					proxy: new Ext.data.ScriptTagProxy({
-						url: JSONconf.servicesHost + JSONconf.searchEndPoint
+						url: JSONconf.servicesHost + "/ws/rest/v3/ws_property_id_by_propnum.php"
 					}),
 					listeners: {
 						load: prop_by_prop_num_handler
