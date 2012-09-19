@@ -57,7 +57,7 @@
  */
 
 // Toggle value from true to false to switch between local (debug) and remote (deployed)
-var debugMode = false;
+var debugMode = true;
 
 var gtProxy,gtLoginEndpoint,gtLocalLayerSourcePrefix;
 if (debugMode)
@@ -74,8 +74,10 @@ else
 }
 
 var app;
-var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurrentExpandedTabIdx=[],gCurrentLoggedRole="NONE",JSONconf,propertyDataInit,gtLayerPresentationConfiguration,eastPanel,gLayoutsArr,gLoggedUsername,gLoggedPassword;
+var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurrentExpandedTabIdx=[],gCurrentLoggedRole="NONE",JSONconf,propertyDataInit,gtLayerPresentationConfiguration,eastPanel,gLayoutsArr,gLoggedUsername,gLoggedPassword,gtZoomMax;
 var poziLinkClickHandler;
+var vector_layer = new OpenLayers.Layer.Vector("WKT",{displayInLayerSwitcher:false});
+var wkt_format = new OpenLayers.Format.WKT();
 
 // Helper functions
 function toTitleCase(str)
@@ -1104,7 +1106,7 @@ Ext.onReady(function() {
 			var gtLogoClientWidth=238;
 			if (JSONconf.logoClientWidth) {gtLogoClientWidth = JSONconf.logoClientWidth;};
 
-			var gtZoomMax = 18;
+			gtZoomMax = 18;
 			if (JSONconf.zoomMax) {gtZoomMax = JSONconf.zoomMax;};
 
 			var gtBannerLineColor="#A0A0A0";
@@ -1499,6 +1501,17 @@ Ext.onReady(function() {
 								// Using the name configured
 								idFeature = cb.store.data.items[selectedRecordIndex].data.content[configArray[i].idName];
 							}
+							
+							// Triggering the tab-wide actions
+							if (configArray[i].onTabOpen)
+							{
+								// Avoiding the use of the 'eval' function
+								var fn = window[configArray[i].onTabOpen];
+								if (typeof fn === 'function') {
+									// Context passed: the id of the clicked feature
+									fn(idFeature);
+								}
+							}
 
 							if (configArray[i].id.substring(0,1)!='X')
 							{
@@ -1537,6 +1550,7 @@ Ext.onReady(function() {
 										{
 											// Looping thru the records returned by the query
 											tab_array = new Array();
+											var geom_array = new Array();
 											for (m = 0 ; m < recs.length; m++)
 											{
 												res_data = recs[m].json.row;
@@ -1546,7 +1560,7 @@ Ext.onReady(function() {
 
 												for (j in res_data)
 												{
-													if (j!="target")
+													if (j!="target" && j!="tabaction" && j!="the_geom")
 													{
 														var val=res_data[j];
 
@@ -1563,7 +1577,7 @@ Ext.onReady(function() {
 															// Setting the title of the horizontal panel - first non-null value encountered
 															if (first_element.length==0)
 															{
-																if (trim(val)>10)
+																if (trim(val).length>10)
 																{
 																	first_element=trim(val).substring(0,8)+'..';
 																}
@@ -1573,6 +1587,16 @@ Ext.onReady(function() {
 																}
 															}
 														}
+													}
+												}
+
+												// Getting all geometries in an associative array
+												// so that we're able to pass the right parameter to the subtab activate function
+												// Note: the geometry name is necessarily "the_geom"
+												for (j in res_data)
+												{
+													if (j=="the_geom"){
+														geom_array[first_element] = res_data[j];
 													}
 												}
 
@@ -1636,9 +1660,6 @@ Ext.onReady(function() {
 																forceFit: true,
 																scrollOffset: 0
 															}
-															//,customRenderers:{
-															//	doc:attributeRenderer
-															//}
 													});
 
 													// Remove default sorting
@@ -1662,6 +1683,28 @@ Ext.onReady(function() {
 												var targ = Ext.getCmp(recs[0].json.row["target"]);
 												targ.removeAll();
 
+												// Adding the listener to each subtab
+												if (recs[0].json.row["tabaction"])
+												{
+													// Avoiding the use of the 'eval' function
+													var fn2 = window[recs[0].json.row["tabaction"]];
+													if (typeof fn2 === 'function') {
+														// Going thru all the elements in the tab_array to add the listener
+														// Note: we can not just add a default listener in the containing panel/tabpanel
+														// because the elements have already been instantiated
+														for(b in tab_array)
+														{
+															if (tab_array.hasOwnProperty(b))
+															{
+																tab_array[b].addListener('activate',function(tab) {
+																	tab.the_geom = geom_array[tab.title];
+																	fn2(tab);
+																});
+															}
+														}
+													}													
+												}
+
 												// The container depends on the number of records returned
 												if (tab_array.length==1)
 												{
@@ -1674,7 +1717,7 @@ Ext.onReady(function() {
 														id:'tblayout-win'+g,
 														layout:'fit',
 														border:false,
-														items: tab_array[0]													
+														items: tab_array[0]
 													});
 												}
 												else
@@ -1690,6 +1733,7 @@ Ext.onReady(function() {
 														items: tab_array
 													});
 												}
+												
 												targ.add(win);
 												targ.doLayout();	
 											}
