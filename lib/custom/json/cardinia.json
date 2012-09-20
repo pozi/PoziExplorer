@@ -328,5 +328,6 @@
     "bannerRightCornerLine2":"Victoria, Australia",
     "printMapTitle":"Cardinia Shire Council",
     "linkToCouncilWebsite":"http://www.cardinia.vic.gov.au/",
-    "collapseWestPanel":true
+    "collapseWestPanel":true,
+    "customJS":"cardinia.js"
 }
