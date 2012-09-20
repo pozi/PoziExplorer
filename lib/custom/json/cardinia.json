@@ -145,7 +145,7 @@
             "name": "VICMAP:DSE_VMADMIN_WARD_2008",
             "title": "Wards (2008)",
             "visibility": false,
-            "opacity": 0.5,
+            "opacity": 0.30,
             "format": "image/png8",
             "styles": "Cardinia_Wards",
             "transparent": true,
