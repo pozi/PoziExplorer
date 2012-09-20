@@ -128,7 +128,7 @@ Ext.onReady(function() {
 			if (val.search(/^http/)>-1){
 				if (val.search(/\.jpg/)>-1)
 				{
-					rv ="<a href='"+val+"' target='_blank'><img src='"+val+"' style='display:block;width:230px;height:auto;margin-left:auto;margin-right:auto;' /></a>";
+					rv ="<a href='"+val+"' target='_blank'><img src='"+val+"' style='display:block; max-height:150px; max-width:230px; height:auto; margin-right:auto;' /></a>";
 				}
 				else
 				{
@@ -1986,6 +1986,7 @@ Ext.onReady(function() {
 													"PlanningInfo":"#AF6CD4",
 													"PropertyDetails":"#D4796C",
 													"CouncillorDetails":"#D4AA6C",
+													"CouncillorDetails2":"#D4AA6C",
 													"CollectionDetails":"#D4BE6C"
 												};
 
