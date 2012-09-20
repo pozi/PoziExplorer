@@ -229,6 +229,17 @@
             "tiled": false
         },
         {
+            "source": "local",
+            "name": "CSC_TEST",
+            "title": "Test",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },        
+        {
             "source": "backend",
             "name": "VICMAP:VW_CARDINIA_MASK",
             "title": "Municipal Boundary",
