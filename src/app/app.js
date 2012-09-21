@@ -2463,6 +2463,35 @@ Ext.onReady(function() {
 				// TODO: determine if this is still relevant
 				toolbar = app.mapPanel.toolbars[0];
 
+				// Selecting the layer that the opacity slider will select
+				var l_to_os;
+				for (k in JSONconf.layers)
+				{
+					if (JSONconf.layers[k].displayInOpacitySlider)
+					{
+						for(l in app.mapPanel.map.layers)
+						{
+							if (JSONconf.layers[k].title==app.mapPanel.map.layers[l].name)
+							{
+								l_to_os=app.mapPanel.map.layers[l];
+								break;
+							}
+						}
+					}
+				}
+				
+				if (l_to_os)
+				{
+					// Adding an opacity slider to the toolbar
+					var os = new GeoExt.LayerOpacitySlider({
+						layer:l_to_os,
+						aggressive:true,
+						width:100
+					});
+					toolbar.items.add(os);
+					toolbar.doLayout();
+				}
+				
 				// Tree toolbar to add the login button to
 				var westpaneltoolbar = Ext.getCmp('tree').getTopToolbar();
 				westpaneltoolbar.addFill();

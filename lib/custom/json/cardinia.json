@@ -120,15 +120,16 @@
     "layers": [
         {
             "source": "dse_iws_cascaded",
-            "name": "CARDINIA:AERIAL_CARDINIA_2009NOV09_AIR_VIS_15CM_MGA55",
-            "title": "Aerial Photo (09/11/2009)",
-            "visibility": false,
-            "opacity": 1,
+            "name": "CARDINIA:AERIAL_CARDINIA_2006NOV18_AIR_VIS_35CM_MGA55",
+            "title": "Aerial Photo (18/11/2006)",
+            "visibility": true,
+            "opacity": 0,
             "format": "image/JPEG",
             "tiled": true,
             "group":"default",
             "transparent": true,
-            "styles":""
+            "styles":"",
+            "displayInOpacitySlider":true
         },
         {
             "source": "backend",
