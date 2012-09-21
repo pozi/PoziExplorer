@@ -2251,7 +2251,7 @@ Ext.onReady(function() {
 						width: 200,
 						height: 100,
 						bodyStyle: " background-color: transparent; ",
-						html: '<p style="text-align:right;padding: 15px;font-size:12px;"><a href="'+gtLinkToCouncilWebsite+'" target="_blank">'+ gtBannerRightCornerLine1 +'</a><br> '+ gtBannerRightCornerLine2 +' <br><br>Map powered by <a href="javascript:poziLinkClickHandler()">Pozi</a></p>'
+						html: '<p style="text-align:right;padding: 15px;font-size:12px;"><a href="'+gtLinkToCouncilWebsite+'" target="_blank">'+ gtBannerRightCornerLine1 +'</a><br> '+ gtBannerRightCornerLine2 +' <br><br>Map powered by <a href="http://www.pozi.com" target="_blank">Pozi</a></p>'
 
 					})
 					]
