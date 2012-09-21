@@ -85,10 +85,10 @@
         },
         "dse_iws_cascaded": {
             "url": [
-                "http://m1.pozi.com/geoserver/CARDINIA/ows",
-                "http://m2.pozi.com/geoserver/CARDINIA/ows",
-                "http://m3.pozi.com/geoserver/CARDINIA/ows",
-                "http://m4.pozi.com/geoserver/CARDINIA/ows"
+                "http://m1.pozi.com/geoserver/YPA/ows",
+                "http://m2.pozi.com/geoserver/YPA/ows",
+                "http://m3.pozi.com/geoserver/YPA/ows",
+                "http://m4.pozi.com/geoserver/YPA/ows"
             ],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
@@ -142,6 +142,17 @@
         },
         {
             "source": "backend",
+            "name": "VICMAP:VMADMIN_LOCALITY",
+            "title": "Locality",
+            "visibility": true,
+            "opacity": 0.25,
+            "format": "image/png8",
+            "styles": "locality",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "backend",
             "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
             "title": "Property",
             "visibility": true,
@@ -164,20 +175,9 @@
         },
         {
             "source": "backend",
-            "name": "VICMAP:VW_TRANSFER_STATION",
-            "title": "Transfer Stations",
-            "visibility": false,
-            "opacity": 0.85,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "backend",
             "name": "LabelClassic",
             "title": "Labels",
-            "visibility": true,
+            "visibility": false,
             "opacity": 1,
             "selected": false,
             "format": "image/png8",
@@ -185,20 +185,6 @@
             "transparent": true,
             "tiled": false,
             "group": "top"
-        },
-        {
-            "source": "backend",
-            "name": "VicmapClassic",
-            "title": "Vicmap Classic",
-            "visibility": false,
-            "opacity": 1,
-            "group": "background",
-            "selected": false,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "cached": true,
-            "transition": "resize"
         },
         {
             "source": "mapquest",

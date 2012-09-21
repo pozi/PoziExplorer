@@ -92,7 +92,7 @@
             ],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
-            "defaultType": "image/JPEG",
+            "format": "image/JPEG",
             "group": "background",
             "transition": "resize"
         },
@@ -118,19 +118,6 @@
         }
     },
     "layers": [
-        {
-            "source": "dse_iws_cascaded",
-            "name": "CARDINIA:AERIAL_CARDINIA_2006NOV18_AIR_VIS_35CM_MGA55",
-            "title": "Aerial Photo (18/11/2006)",
-            "visibility": true,
-            "opacity": 0,
-            "format": "image/JPEG",
-            "tiled": true,
-            "group":"default",
-            "transparent": true,
-            "styles":"",
-            "displayInOpacitySlider":true
-        },
         {
             "source": "backend",
             "name": "VICMAP:VW_DSE_VMPLAN_ZONE",
@@ -158,7 +145,7 @@
             "name": "VICMAP:DSE_VMADMIN_WARD_2008",
             "title": "Wards (2008)",
             "visibility": false,
-            "opacity": 0.30,
+            "opacity": 0.5,
             "format": "image/png8",
             "styles": "Cardinia_Wards",
             "transparent": true,
@@ -242,17 +229,6 @@
             "tiled": false
         },
         {
-            "source": "local",
-            "name": "CSC_TEST",
-            "title": "Test",
-            "visibility": false,
-            "opacity": 0.85,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },        
-        {
             "source": "backend",
             "name": "VICMAP:VW_CARDINIA_MASK",
             "title": "Municipal Boundary",
@@ -298,17 +274,6 @@
             "visibility": false,
             "group": "background"
         },
-        {
-			"source": "dse_iws_cascaded",
-			"name": "CARDINIA:AERIAL_CARDINIA_2009NOV09_AIR_VIS_15CM_MGA55",
-			"title": "Aerial Photo (CIP, 2009)",
-			"visibility": false,
-			"opacity": 1,
-			"group": "background",
-			"selected": false,
-			"format": "image/JPEG",
-			"transparent": true
-		},
         {
             "source": "ol",
             "group": "background",
@@ -363,6 +328,5 @@
     "bannerRightCornerLine2":"Victoria, Australia",
     "printMapTitle":"Cardinia Shire Council",
     "linkToCouncilWebsite":"http://www.cardinia.vic.gov.au/",
-    "collapseWestPanel":true,
-    "customJS":"cardinia.js"
+    "collapseWestPanel":true
 }
