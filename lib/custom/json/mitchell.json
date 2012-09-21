@@ -293,14 +293,14 @@
         },
         {
             "source": "dse_iws_cascaded",
-            "name ": "MITCHELL:AERIAL_MITCHELL_2007JAN26_AIR_VIS_50CM_MGA55",
+            "name": "MITCHELL:AERIAL_MITCHELL_2007JAN26_AIR_VIS_50CM_MGA55",
             "title": "Aerial Photo (CIP 2007)",
             "visibility": false,
             "opacity": 1,
             "group": "background",
             "selected": false,
             "format": "image/JPEG",
-            "transparent": true
+            "transparent": false
         },
         {
             "source": "ol",

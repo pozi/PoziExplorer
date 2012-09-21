@@ -1,7 +1,7 @@
 {
     "servicesHost":"http://49.156.17.41",
     "searchEndPoint":"/ws/rest/v3/ws_all_features_by_string_and_lga.php",
-    "LGACode":"308",
+    "LGACode":"311",
     "databaseConfig":"vicmap",
     "tools": [
         {
@@ -73,8 +73,8 @@
     ],
     "sources": {
         "local": {
-            "url": "/geoserver/YPA/ows",
-            "title": "YPA Layers",
+            "url": "/geoserver/CARDINIA/ows",
+            "title": "Cardinia Shire Council Layers",
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
@@ -85,10 +85,10 @@
         },
         "dse_iws_cascaded": {
             "url": [
-                "http://m1.pozi.com/geoserver/YPA/ows",
-                "http://m2.pozi.com/geoserver/YPA/ows",
-                "http://m3.pozi.com/geoserver/YPA/ows",
-                "http://m4.pozi.com/geoserver/YPA/ows"
+                "http://m1.pozi.com/geoserver/CARDINIA/ows",
+                "http://m2.pozi.com/geoserver/CARDINIA/ows",
+                "http://m3.pozi.com/geoserver/CARDINIA/ows",
+                "http://m4.pozi.com/geoserver/CARDINIA/ows"
             ],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
@@ -142,12 +142,67 @@
         },
         {
             "source": "backend",
-            "name": "VICMAP:VMADMIN_LOCALITY",
-            "title": "Locality",
-            "visibility": true,
-            "opacity": 0.25,
+            "name": "VICMAP:DSE_VMADMIN_WARD_2008",
+            "title": "Wards (2008)",
+            "visibility": false,
+            "opacity": 0.5,
             "format": "image/png8",
-            "styles": "locality",
+            "styles": "Cardinia_Wards",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "CSC_COLLECTION_WASTE_HARD",
+            "title": "Hard Waste Collection",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "CSC_COLLECTION_RECYCLE",
+            "title": "Recycle Collection",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "CSC_COLLECTION_RUBBISH",
+            "title": "Rubbish Collection",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "CSC_AREA_FIRE_BAN",
+            "title": "Fire Ban Area",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "CSC_COLLECTION_WASTE_GREEN",
+            "title": "Green Waste Collection",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
             "transparent": true,
             "tiled": false
         },
@@ -164,20 +219,33 @@
         },
         {
             "source": "local",
-            "name": "LISTING",
-            "title": "Listings",
-            "visibility": true,
-            "opacity": 0.8,
-            "format": "image/GIF",
+            "name": "CSC_AREA_DOG_OF_LEASH",
+            "title": "Dog Off Leash Area",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
             "styles": "",
             "transparent": true,
             "tiled": false
         },
         {
             "source": "backend",
+            "name": "VICMAP:VW_CARDINIA_MASK",
+            "title": "Municipal Boundary",
+            "visibility": true,
+            "opacity": 0.6,
+            "format": "image/png8",
+            "styles": "white_polygon_311",
+            "transparent": true,
+            "tiled": false,
+            "transition": "resize",
+            "group": "top"
+        },
+        {
+            "source": "backend",
             "name": "LabelClassic",
             "title": "Labels",
-            "visibility": false,
+            "visibility": true,
             "opacity": 1,
             "selected": false,
             "format": "image/png8",
@@ -187,9 +255,23 @@
             "group": "top"
         },
         {
+            "source": "backend",
+            "name": "VicmapClassic",
+            "title": "Vicmap Classic",
+            "visibility": true,
+            "opacity": 1,
+            "group": "background",
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "cached": true,
+            "transition": "resize"
+        },
+        {
             "source": "mapquest",
             "name": "osm",
-            "visibility": true,
+            "visibility": false,
             "group": "background"
         },
         {
@@ -206,17 +288,17 @@
         }
     ],
     "center": [
-        16119430, -4543824
+        16205074, -4591164
     ],
     "zoom": 11,
-    "workspace": "BRIMBANK",
+    "workspace": "CARDINIA",
     "highlightSymboliser": {
         "name": "test",
-        "strokeColor": "#fbff0b",
-        "strokeWidth": 5,
-        "strokeOpacity": 0.9,
-        "fillColor": "#fbff0b",
-        "fillOpacity": 0.3
+        "strokeColor": "yellow",
+        "strokeWidth": 15,
+        "strokeOpacity": 0.5,
+        "fillColor": "yellow",
+        "fillOpacity": 0.2
     },
     "liveDataEndPoints": [
         {
@@ -230,15 +312,21 @@
             "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
             "storeMode": "pgsql",
             "storeName": "vicmap"
+        },
+        {
+            "urlLayout": "http://v3.pozi.com/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://v3.pozi.com/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "pgsql",
+            "storeName": "cardiniagis"
         }
     ],
-    "logoClientSrc":"theme/app/img/custom/ypa_logo.jpg",
+    "logoClientSrc":"theme/app/img/custom/cardinia_logo.png",
     "logoClientWidth":214,
     "zoomMax":18,
-    "bannerLineColor":"#105c91",
-    "bannerRightCornerLine1":"Brimbank City Council",
+    "bannerLineColor":"#6C9ED4",
+    "bannerRightCornerLine1":"Cardinia Shire Council",
     "bannerRightCornerLine2":"Victoria, Australia",
-    "printMapTitle":"Brimbank City Council",
-    "linkToCouncilWebsite":"http://www.brimbank.vic.gov.au/",
+    "printMapTitle":"Cardinia Shire Council",
+    "linkToCouncilWebsite":"http://www.cardinia.vic.gov.au/",
     "collapseWestPanel":true
 }

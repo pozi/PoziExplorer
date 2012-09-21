@@ -106,7 +106,7 @@
 	{
 		"source":"local",
 		"name":"creek_segments",
-		"title":"Creek Tiles",
+		"title":"Creek Segments",
 		"visibility":true,
 		"opacity":0.85,
 		"format":"image/png8",
@@ -130,7 +130,7 @@
 	{
 		"source":"local",
 		"name":"CREEK_SEGMENT",
-		"title":"Creek Tiles (for edit)",
+		"title":"Creek Segments (for edit)",
 		"visibility":false,
 		"opacity":0.6,
 		"format":"image/png8",
