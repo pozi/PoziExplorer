@@ -97,14 +97,14 @@
         },
         "dse_iws_cascaded": {
             "url": [
-                "http://m1.pozi.com/geoserver/MITCHELL/ows",
-                "http://m2.pozi.com/geoserver/MITCHELL/ows",
-                "http://m3.pozi.com/geoserver/MITCHELL/ows",
-                "http://m4.pozi.com/geoserver/MITCHELL/ows"
+            	"http://m1.pozi.com/geoserver/MITCHELL/ows",
+            	"http://m2.pozi.com/geoserver/MITCHELL/ows",
+            	"http://m3.pozi.com/geoserver/MITCHELL/ows",
+            	"http://m4.pozi.com/geoserver/MITCHELL/ows"            	
             ],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
-            "format": "image/JPEG",
+            "defaultType": "image/JPEG",            
             "group": "background",
             "transition": "resize"
         },
@@ -278,7 +278,6 @@
             "visibility": true,
             "opacity": 1,
             "group": "background",
-            "selected": false,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
@@ -295,12 +294,15 @@
             "source": "dse_iws_cascaded",
             "name": "MITCHELL:AERIAL_MITCHELL_2007JAN26_AIR_VIS_50CM_MGA55",
             "title": "Aerial Photo (CIP 2007)",
-            "visibility": false,
+            "visibility": true,
             "opacity": 1,
             "group": "background",
-            "selected": false,
             "format": "image/JPEG",
-            "transparent": false
+            "tiled": true,
+            "cached": true,
+            "transparent": true,
+            "styles":"",
+            "visibility":false
         },
         {
             "source": "ol",

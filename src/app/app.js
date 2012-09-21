@@ -572,9 +572,9 @@ Ext.onReady(function() {
 			{
 				if (!('format' in config))
 				{
-					if ('format' in JSONconf.sources[config.source])
+					if ('defaultType' in JSONconf.sources[config.source])
 					{
-						config.format=JSONconf.sources[config.source].format;
+						config.format=JSONconf.sources[config.source].defaultType;
 					}
 				}
 				if (!('group' in config))
@@ -1414,6 +1414,37 @@ Ext.onReady(function() {
 				}]
 			});
 
+			var tabCollapse = function(p){
+				// Current layer (cl) as per content of the current type (ct) and current drop down (cb)
+				var ct = Ext.get('gtInfoTypeLabel').dom.innerHTML; // that contains the type of the currently selected feature
+				var cb = Ext.getCmp('gtInfoCombobox'); // the Ext JS component containing the combo - used to link type to layer name
+				var cl = cb.getStore().data.items[cb.getStore().find("type",ct)].data.layer;
+
+				if (gCurrentExpandedTabIdx[cl] != 0)
+				{
+					//alert("Requesting data on demand!");
+					var configArray = gLayoutsArr[cl];
+					if (configArray)
+					{
+						// This could be further refined by sending only the query corresponding to the open accordion part
+						for (var i=gCurrentExpandedTabIdx[cl]-1; i< gCurrentExpandedTabIdx[cl]; i++)
+						{
+							// Triggering the tab-wide actions
+							if (configArray[i].onTabClose)
+							{
+								// Avoiding the use of the 'eval' function
+								var fn = window[configArray[i].onTabClose];
+								if (typeof fn === 'function') {
+									// Context passed: the id of the clicked feature
+									fn();
+								}
+							}
+						}
+					}
+				}
+				
+			};
+
 			var tabExpand = function(p){
 				// Current layer (cl) as per content of the current type (ct) and current drop down (cb)
 				var ct = Ext.get('gtInfoTypeLabel').dom.innerHTML; // that contains the type of the currently selected feature
@@ -2084,7 +2115,8 @@ Ext.onReady(function() {
 					collapsed: true,
 					listeners: {
 						scope:this,
-						expand: tabExpand
+						expand: tabExpand,
+						collapse: tabCollapse
 					}
 				},
 				layoutConfig: {

@@ -92,7 +92,7 @@
             ],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
-            "format": "image/JPEG",
+            "defaultType": "image/JPEG",
             "group": "background",
             "transition": "resize"
         },
@@ -118,6 +118,18 @@
         }
     },
     "layers": [
+        {
+            "source": "dse_iws_cascaded",
+            "name": "CARDINIA:AERIAL_CARDINIA_2009NOV09_AIR_VIS_15CM_MGA55",
+            "title": "Aerial Photo (09/11/2009)",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group":"default",
+            "transparent": true,
+            "styles":""
+        },
         {
             "source": "backend",
             "name": "VICMAP:VW_DSE_VMPLAN_ZONE",
@@ -228,6 +240,17 @@
             "transparent": true,
             "tiled": false
         },
+        {
+            "source": "local",
+            "name": "CSC_TEST",
+            "title": "Test",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },        
         {
             "source": "backend",
             "name": "VICMAP:VW_CARDINIA_MASK",
