@@ -236,9 +236,8 @@
     "logoClientWidth":188,
     "zoomMax":18,
     "bannerLineColor":"#105c91",
-    "bannerRightCornerLine1":"Brimbank City Council",
-    "bannerRightCornerLine2":"Victoria, Australia",
-    "printMapTitle":"Brimbank City Council",
-    "linkToCouncilWebsite":"http://www.brimbank.vic.gov.au/",
+    "bannerRightCornerLine1":"YPA Home",
+    "printMapTitle":"YPA",
+    "linkToCouncilWebsite":"http://www.ypa.com.au",
     "collapseWestPanel":true
 }
