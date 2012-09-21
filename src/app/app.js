@@ -572,9 +572,9 @@ Ext.onReady(function() {
 			{
 				if (!('format' in config))
 				{
-					if ('format' in JSONconf.sources[config.source])
+					if ('defaultType' in JSONconf.sources[config.source])
 					{
-						config.format=JSONconf.sources[config.source].format;
+						config.format=JSONconf.sources[config.source].defaultType;
 					}
 				}
 				if (!('group' in config))
