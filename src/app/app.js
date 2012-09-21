@@ -2482,7 +2482,14 @@ Ext.onReady(function() {
 				
 				if (l_to_os)
 				{
+					//
+					var s = new Ext.Toolbar.Separator();
+					toolbar.items.add(s);
 					// Adding an opacity slider to the toolbar
+					var l_os = new Ext.form.Label({
+						text:"Aerial Imagery:"
+					});
+					toolbar.items.add(l_os);
 					var os = new GeoExt.LayerOpacitySlider({
 						layer:l_to_os,
 						aggressive:true,
