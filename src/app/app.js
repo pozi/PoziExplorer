@@ -2589,6 +2589,10 @@ Ext.onReady(function() {
 								var user = form.findField('username').getValue();
 								app.setCookieValue(app.cookieParamName, user);
 								app.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
+								// Reloading the tabs
+								gCurrentLoggedRole = app.authorizedRoles[0];
+								loadTabConfig();
+								clear_highlight();
 								// Keeping username and password in variables for injection in WMS queries of local source
 								gLoggedUsername = form.findField('username').getValue();
 								gLoggedPassword = form.findField('password').getValue();
@@ -2748,58 +2752,65 @@ Ext.onReady(function() {
 					}
 				};
 
-				// Information panel layouts for the current authorized role - we should degrade nicely if the service is not found
-				var ds;
-				for (urlIdx in gtGetLiveDataEndPoints)
-				{
-					if (gtGetLiveDataEndPoints.hasOwnProperty(urlIdx))
-					{
-						ds = new Ext.data.Store({
-							autoLoad:true,
-							proxy: new Ext.data.ScriptTagProxy({
-								url: gtGetLiveDataEndPoints[urlIdx].urlLayout
-							}),
-							reader: new Ext.data.JsonReader({	
-								root: 'rows',
-								totalProperty: 'total_rows',
-								id: 'key_arr'	
-								}, 
-								[	{name: 'key_arr', mapping: 'row.key_arr'}
-							]),
-							baseParams: {
-								role: gCurrentLoggedRole,
-								mode: gtGetLiveDataEndPoints[urlIdx].storeMode,
-								config: gtGetLiveDataEndPoints[urlIdx].storeName
-							},
-							listeners:
-							{
-								load: function(store, recs)
-								{
-									// Setting up a global variable array to define the info panel layouts
-									for (key=0;key<recs.length;key++)
-									{
-										var a = recs[key].json.row.val_arr;
 
-										if (gLayoutsArr[recs[key].json.row.key_arr])
+				var loadTabConfig = function(){
+
+					// Information panel layouts for the current authorized role - we should degrade nicely if the service is not found
+					var ds;
+					for (urlIdx in gtGetLiveDataEndPoints)
+					{
+						if (gtGetLiveDataEndPoints.hasOwnProperty(urlIdx))
+						{
+							ds = new Ext.data.Store({
+								autoLoad:true,
+								proxy: new Ext.data.ScriptTagProxy({
+									url: gtGetLiveDataEndPoints[urlIdx].urlLayout
+								}),
+								reader: new Ext.data.JsonReader({	
+									root: 'rows',
+									totalProperty: 'total_rows',
+									id: 'key_arr'	
+									}, 
+									[	{name: 'key_arr', mapping: 'row.key_arr'}
+								]),
+								baseParams: {
+									role: gCurrentLoggedRole,
+									mode: gtGetLiveDataEndPoints[urlIdx].storeMode,
+									config: gtGetLiveDataEndPoints[urlIdx].storeName
+								},
+								listeners:
+								{
+									load: function(store, recs)
+									{
+										// Setting up a global variable array to define the info panel layouts
+										for (key=0;key<recs.length;key++)
 										{
-											// If this key (layer) already exists, we add the JSON element (tab) to its value (tab array)
-											gLayoutsArr[recs[key].json.row.key_arr]= gLayoutsArr[recs[key].json.row.key_arr].concat(a);
-											// Reordering the array elements inside the array for this key, according to orderNum
-											gLayoutsArr[recs[key].json.row.key_arr].sort(function(a,b){
-												return parseInt(a.orderNum) - parseInt(b.orderNum);
-											});
-										}
-										else
-										{
-											// We create this key if it didn't exist
-											gLayoutsArr[recs[key].json.row.key_arr]=a; 
+											var a = recs[key].json.row.val_arr;
+
+											if (gLayoutsArr[recs[key].json.row.key_arr])
+											{
+												// If this key (layer) already exists, we add the JSON element (tab) to its value (tab array)
+												gLayoutsArr[recs[key].json.row.key_arr]= gLayoutsArr[recs[key].json.row.key_arr].concat(a);
+												// Reordering the array elements inside the array for this key, according to orderNum
+												gLayoutsArr[recs[key].json.row.key_arr].sort(function(a,b){
+													return parseInt(a.orderNum) - parseInt(b.orderNum);
+												});
+											}
+											else
+											{
+												// We create this key if it didn't exist
+												gLayoutsArr[recs[key].json.row.key_arr]=a; 
+											}
 										}
 									}
 								}
-							}
-						});
-					}
+							});
+						}
+					};
 				};
+				
+				// Loading the tabs on initial page load
+				loadTabConfig();
 
 			});
 
