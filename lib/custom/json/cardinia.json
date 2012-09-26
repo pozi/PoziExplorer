@@ -117,6 +117,16 @@
             "transition": null
         }
     },
+    "layerPresentation": 
+    {
+		"CSC_RESERVES_FOR_HIRE":
+		[
+			{"attr_name":"reserve_name"},
+			{"attr_name":"photo_url","alt_name":"Photo"},
+			{"attr_name":"address"},			
+			{"attr_name":"facilities"}
+		]
+	},
     "layers": [
         {
             "source": "dse_iws_cascaded",
@@ -226,6 +236,17 @@
             "visibility": true,
             "opacity": 0.25,
             "format": "image/GIF",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "CSC_RESERVES_FOR_HIRE",
+            "title": "Reserves For Hire",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
             "styles": "",
             "transparent": true,
             "tiled": false
