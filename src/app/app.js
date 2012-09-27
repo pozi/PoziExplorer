@@ -74,7 +74,7 @@ else
 }
 
 var app;
-var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurrentExpandedTabIdx=[],gCurrentLoggedRole="NONE",JSONconf,propertyDataInit,gtLayerPresentationConfiguration,eastPanel,gLayoutsArr,gLoggedUsername,gLoggedPassword,gtZoomMax;
+var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurrentExpandedTabIdx=[],gCurrentLoggedRole="NONE",JSONconf,propertyDataInit,gtLayerPresentationConfiguration,eastPanel,northPart,gLayoutsArr,gLoggedUsername,gLoggedPassword,gtZoomMax,gtHideSelectedFeaturePanel,add_default_tabs;
 var poziLinkClickHandler;
 var vector_layer = new OpenLayers.Layer.Vector("WKT",{displayInLayerSwitcher:false});
 var wkt_format = new OpenLayers.Format.WKT();
@@ -951,6 +951,10 @@ Ext.onReady(function() {
 						gCombostore.loadData(gComboDataArray);
 						
 						// Features found during the getFeatureInfo: showing the tab
+						if (!(gtHideSelectedFeaturePanel))
+						{
+							northPart.setVisible(true);
+						}
 						eastPanel.expand();
 					}
 
@@ -1133,7 +1137,7 @@ Ext.onReady(function() {
 			var gtHideNorthRegion = false;
 			if ('hideNorthRegion' in JSONconf) {gtHideNorthRegion=JSONconf.hideNorthRegion;};
 			
-			var gtHideSelectedFeaturePanel = false;
+			gtHideSelectedFeaturePanel = false;
 			if ('hideSelectedFeaturePanel' in JSONconf) {gtHideSelectedFeaturePanel=JSONconf.hideSelectedFeaturePanel;};
 
 			var gtEastPanelCollapsed = false;
@@ -1323,6 +1327,67 @@ Ext.onReady(function() {
 				})
 			});
 
+			// Adding the default tabs
+			add_default_tabs = function(){
+				// Clearing the details from the panel
+				accordion.removeAll();
+
+				// Layout configuration the global variable array loaded at application start										
+				var configArray = gLayoutsArr["NONE"];
+				if (configArray)
+				{
+
+
+					// Here we should do the styling substitution to transform a config option into a proper style element
+					for (c in configArray)
+					{
+						// Correcting the top padding to have the first tab to stick to the top
+						if (c==0)
+						{
+							configArray[c].style='padding:0px;';
+						}
+						
+						if (!(configArray[c].headerCfg))
+						{	
+							var t = configArray[c].title;
+							// headerCfg would not work if the title was part of the initial config
+							delete configArray[c].title;
+
+							// 
+							var col_arr={
+								"GoogleStreetView":"#6C88D4",
+								"ParcelDetails":"#92D46C",
+								"PlanningInfo":"#AF6CD4",
+								"PropertyDetails":"#D4796C",
+								"CouncillorDetails":"#D4AA6C",
+								"CouncillorDetails2":"#D4AA6C",
+								"CollectionDetails":"#D4BE6C"
+							};
+
+							var col = col_arr[configArray[c].id];
+							if (!(col))
+							{
+								col = "#A0A0A0";
+							}
+							configArray[c].headerCfg={
+								tag: 'div',
+								style:'	background-image: url();background-color: '+col+';padding-left: 10px;',
+								children: [
+								    { tag: 'div', 'html': t }
+								]
+							};
+						}
+					}											
+
+					// And initialisation of the accordion items
+					accordion.add(configArray);
+
+				}			
+
+				// Refreshing the DOM with the newly added parts
+				accordion.doLayout();
+			};
+
 			// Remove the WFS highlight, clear and disable the select feature combo, empty the combostore and clean the details panel 
 			clear_highlight = function(){ 
 				// Removing the highlight by clearing the selected features in the WFS layer
@@ -1335,12 +1400,19 @@ Ext.onReady(function() {
 				cb.disable();
 				cb.removeClass("x-form-multi");
 				cb.addClass("x-form-single");
+				
 				// Removing all values from the combo
 				gCombostore.removeAll();
-				// Clearing the details from the panel
-				accordion.removeAll();
+				
+				// Add default tabs
+				add_default_tabs()
+				
+				// Hiding the north part of the east panel
+				northPart.setVisible(false);
+				
 				// Clearing the feature type
-				Ext.get('gtInfoTypeLabel').dom.innerHTML="&nbsp;";			
+				Ext.get('gtInfoTypeLabel').dom.innerHTML="&nbsp;";
+				
 			};
 
 			// Handler called when:
@@ -1380,8 +1452,13 @@ Ext.onReady(function() {
 				// Refreshing the WFS layer so that the highlight appears and triggers the featuresadded event handler above
 				glayerLocSel.refresh({force:true});
 				
-				// 
+				//
+				if (!(gtHideSelectedFeaturePanel))
+				{
+					northPart.setVisible(true);
+				}
 				eastPanel.expand();
+				
 
 			};
 
@@ -1418,8 +1495,18 @@ Ext.onReady(function() {
 				// Current layer (cl) as per content of the current type (ct) and current drop down (cb)
 				var ct = Ext.get('gtInfoTypeLabel').dom.innerHTML; // that contains the type of the currently selected feature
 				var cb = Ext.getCmp('gtInfoCombobox'); // the Ext JS component containing the combo - used to link type to layer name
-				var cl = cb.getStore().data.items[cb.getStore().find("type",ct)].data.layer;
 
+				var cl;
+				if (cb.getStore().data.items[cb.getStore().find("type",ct)])
+				{
+					cl = cb.getStore().data.items[cb.getStore().find("type",ct)].data.layer;
+				}
+				else
+				{
+					cl="NONE";
+					gCurrentExpandedTabIdx[cl] = 1;
+				}
+				
 				if (gCurrentExpandedTabIdx[cl] != 0)
 				{
 					//alert("Requesting data on demand!");
@@ -1449,17 +1536,30 @@ Ext.onReady(function() {
 				// Current layer (cl) as per content of the current type (ct) and current drop down (cb)
 				var ct = Ext.get('gtInfoTypeLabel').dom.innerHTML; // that contains the type of the currently selected feature
 				var cb = Ext.getCmp('gtInfoCombobox'); // the Ext JS component containing the combo - used to link type to layer name
-				var cl = cb.getStore().data.items[cb.getStore().find("type",ct)].data.layer;
+				
+				var cl;
+				// If the item can be found, then we extract the layer name
+				if (cb.getStore().data.items[cb.getStore().find("type",ct)])
+				{
+					cl = cb.getStore().data.items[cb.getStore().find("type",ct)].data.layer;
 
-				// Updating the index of the currently opened tab
-				for(k in p.ownerCt.items.items)
-				{	
-					if (p.ownerCt.items.items[k].id==p.id)
-					{
-						// Layer name of the currently selected item in the combo
-						gCurrentExpandedTabIdx[cl] = k;
-						break;
-					}
+					// Updating the index of the currently opened tab
+					for(k in p.ownerCt.items.items)
+					{	
+						if (p.ownerCt.items.items[k].id==p.id)
+						{
+							// Layer name of the currently selected item in the combo
+							gCurrentExpandedTabIdx[cl] = k;
+							break;
+						}
+					}					
+					
+				}
+				else 
+				// There is no item in the drop down and the current layer is "NONE"
+				{
+					cl="NONE";
+					gCurrentExpandedTabIdx[cl] = 1;
 				}
 
 				// Sending in the query to populate this specific tab (tab on demand)
@@ -1529,8 +1629,11 @@ Ext.onReady(function() {
 							}
 							else
 							{
-								// Using the name configured
-								idFeature = cb.store.data.items[selectedRecordIndex].data.content[configArray[i].idName];
+								if (cl != "NONE")
+								{
+									// Using the name configured
+									idFeature = cb.store.data.items[selectedRecordIndex].data.content[configArray[i].idName];
+								}
 							}
 							
 							// Triggering the tab-wide actions
@@ -1826,10 +1929,10 @@ Ext.onReady(function() {
 			};
 
 			// Defines the north part of the east panel
-			var northPart = new Ext.Panel({
+			northPart = new Ext.Panel({
 				region: "north",
 				border: false,
-				hidden: gtHideSelectedFeaturePanel,
+				hidden: true,
 				layout: {
 					type:'vbox',
 					align:'stretch'
@@ -1839,6 +1942,7 @@ Ext.onReady(function() {
 				items: [
 					{
 						layout:'column',
+						height:30,
 						border:false,
 						bodyStyle: "background-color:"+gtBannerLineColor+";",
 						items:[
@@ -2021,7 +2125,7 @@ Ext.onReady(function() {
 									p.getColumnModel().getColumnById('value').width = 70;										
 									// Now load data
 									p.setSource(fa);
-
+									
 									var panel = new Ext.Panel({
 										  id:'attributeAcc',
 										  headerCfg:{
@@ -2032,6 +2136,7 @@ Ext.onReady(function() {
 											]
 										  },
 										  layout: 'fit',
+										  // style: couldn't find a way to override the style inherited from the parent (gtAccordion)
 										  items: [p],
 										  listeners:{
 											scope:this,
@@ -2459,6 +2564,7 @@ Ext.onReady(function() {
 					r["data"] = propertyDataInit;
 					search_record_select_handler(null, r);
 				} 
+
 				// The main toolbar containing tools to be activated / deactivated on login/logout
 				// TODO: determine if this is still relevant
 				toolbar = app.mapPanel.toolbars[0];
@@ -2816,6 +2922,8 @@ Ext.onReady(function() {
 												gLayoutsArr[recs[key].json.row.key_arr]=a; 
 											}
 										}
+										
+										add_default_tabs();
 									}
 								}
 							});
