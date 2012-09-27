@@ -2482,22 +2482,36 @@ Ext.onReady(function() {
 				
 				if (l_to_os)
 				{
-					//
-					var s = new Ext.Toolbar.Separator();
-					toolbar.items.add(s);
+					// Adding a label
+					toolbar.items.add(new Ext.form.Label({
+						text:"Aerial Photo",
+						style:'font: normal 13px verdana'
+					}));
+
+					// Adding a bit of space
+					toolbar.items.add(new Ext.Toolbar.Spacer({width:8}));
+					
+					// Adding the eye-con
+					toolbar.items.add(new Ext.Component({
+						html:'<img src="theme/app/img/panel/eye.png"/>'
+					}));
+					
+					// Adding a bit of space
+					toolbar.items.add(new Ext.Toolbar.Spacer({width:8}));
+					
 					// Adding an opacity slider to the toolbar
-					var l_os = new Ext.form.Label({
-						text:"Aerial Imagery:"
-					});
-					toolbar.items.add(l_os);
 					var os = new GeoExt.LayerOpacitySlider({
 						layer:l_to_os,
 						aggressive:true,
 						width:100
 					});
 					toolbar.items.add(os);
+
+					// Rendering the toolbar
 					toolbar.doLayout();
 				}
+				
+
 				
 				// Tree toolbar to add the login button to
 				var westpaneltoolbar = Ext.getCmp('tree').getTopToolbar();

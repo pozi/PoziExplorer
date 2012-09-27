@@ -61,14 +61,6 @@
             },
             "printService": "/geoserver/pdf",
             "showButtonText": false
-        },
-        {
-            "ptype": "gxp_measure",
-            "toggleGroup": "interaction",
-            "controlOptions": {
-                "immediate": true
-            },
-            "showButtonText": false
         }
     ],
     "sources": {
