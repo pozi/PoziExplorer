@@ -1496,24 +1496,39 @@ Ext.onReady(function() {
 				var ct = Ext.get('gtInfoTypeLabel').dom.innerHTML; // that contains the type of the currently selected feature
 				var cb = Ext.getCmp('gtInfoCombobox'); // the Ext JS component containing the combo - used to link type to layer name
 
-				var cl;
+				var cl;				
+				// If the item can be found, then we extract the layer name
 				if (cb.getStore().data.items[cb.getStore().find("type",ct)])
 				{
-					cl = cb.getStore().data.items[cb.getStore().find("type",ct)].data.layer;
+					cl = cb.getStore().data.items[cb.getStore().find("type",ct)].data.layer;					
 				}
-				else
+				else 
+				// There is no item in the drop down and the current layer is "NONE"
 				{
 					cl="NONE";
-					gCurrentExpandedTabIdx[cl] = 1;
+					
 				}
+
+				// Updating the index of the currently opened tab
+				for(k in p.ownerCt.items.items)
+				{	
+					if (p.ownerCt.items.items[k].id==p.id)
+					{
+						// Layer name of the currently selected item in the combo
+						gCurrentExpandedTabIdx[cl] = k;
+						break;
+					}
+				}	
+				
+				// Fix for the NONE layer so that the index is not 0 and the loop just below is entered
+				if (cl=="NONE")	{gCurrentExpandedTabIdx[cl]++;}
 				
 				if (gCurrentExpandedTabIdx[cl] != 0)
 				{
-					//alert("Requesting data on demand!");
 					var configArray = gLayoutsArr[cl];
 					if (configArray)
 					{
-						// This could be further refined by sending only the query corresponding to the open accordion part
+						// This only performs the query corresponding to the currently open tab
 						for (var i=gCurrentExpandedTabIdx[cl]-1; i< gCurrentExpandedTabIdx[cl]; i++)
 						{
 							// Triggering the tab-wide actions
@@ -1536,42 +1551,41 @@ Ext.onReady(function() {
 				// Current layer (cl) as per content of the current type (ct) and current drop down (cb)
 				var ct = Ext.get('gtInfoTypeLabel').dom.innerHTML; // that contains the type of the currently selected feature
 				var cb = Ext.getCmp('gtInfoCombobox'); // the Ext JS component containing the combo - used to link type to layer name
-				
-				var cl;
+
+				var cl;				
 				// If the item can be found, then we extract the layer name
 				if (cb.getStore().data.items[cb.getStore().find("type",ct)])
 				{
-					cl = cb.getStore().data.items[cb.getStore().find("type",ct)].data.layer;
-
-					// Updating the index of the currently opened tab
-					for(k in p.ownerCt.items.items)
-					{	
-						if (p.ownerCt.items.items[k].id==p.id)
-						{
-							// Layer name of the currently selected item in the combo
-							gCurrentExpandedTabIdx[cl] = k;
-							break;
-						}
-					}					
-					
+					cl = cb.getStore().data.items[cb.getStore().find("type",ct)].data.layer;					
 				}
 				else 
-				// There is no item in the drop down and the current layer is "NONE"
+				// There is no item in the drop down so the current layer is "NONE"
 				{
 					cl="NONE";
-					gCurrentExpandedTabIdx[cl] = 1;
+					
 				}
 
-				// Sending in the query to populate this specific tab (tab on demand)
-				// Could be further refined by keeping track of which tab has already been opened, so that we don't re-request the data
+				// Updating the index of the currently opened tab
+				for(k in p.ownerCt.items.items)
+				{	
+					if (p.ownerCt.items.items[k].id==p.id)
+					{
+						// Layer name of the currently selected item in the combo
+						gCurrentExpandedTabIdx[cl] = k;
+						break;
+					}
+				}	
+				
+				// Fix for the NONE layer so that the index is not 0 and the loop just below is entered
+				if (cl=="NONE")	{gCurrentExpandedTabIdx[cl]++;}
 
+				// Sending in the query to populate this specific tab (tab on demand)
 				if (gCurrentExpandedTabIdx[cl] != 0)
 				{
-					//alert("Requesting data on demand!");
 					var configArray = gLayoutsArr[cl];
 					if (configArray)
 					{
-						// This could be further refined by sending only the query corresponding to the open accordion part
+						// This only performs the query corresponding to the currently open tab
 						for (var i=gCurrentExpandedTabIdx[cl]-1; i< gCurrentExpandedTabIdx[cl]; i++)
 						{
 							var g=0;
@@ -2709,6 +2723,9 @@ Ext.onReady(function() {
 								var user = form.findField('username').getValue();
 								app.setCookieValue(app.cookieParamName, user);
 								app.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
+								// Reloading the layer tree (TODO)
+								////Ext.getCmp('tree').body=null;
+								////app.addLayers();
 								// Reloading the tabs
 								gCurrentLoggedRole = app.authorizedRoles[0];
 								loadTabConfig();
