@@ -1341,43 +1341,45 @@ Ext.onReady(function() {
 					// Here we should do the styling substitution to transform a config option into a proper style element
 					for (c in configArray)
 					{
-						// Correcting the top padding to have the first tab to stick to the top
-						if (c==0)
+						if (configArray.hasOwnProperty(c))
 						{
-							configArray[c].style='padding:0px;';
-						}
-						
-						if (!(configArray[c].headerCfg))
-						{	
-							var t = configArray[c].title;
-							// headerCfg would not work if the title was part of the initial config
-							delete configArray[c].title;
-
-							// 
-							var col_arr={
-								"GoogleStreetView":"#6C88D4",
-								"ParcelDetails":"#92D46C",
-								"PlanningInfo":"#AF6CD4",
-								"PropertyDetails":"#D4796C",
-								"CouncillorDetails":"#D4AA6C",
-								"CouncillorDetails2":"#D4AA6C",
-								"CollectionDetails":"#D4BE6C"
-							};
-
-							var col = col_arr[configArray[c].id];
-							if (!(col))
+							if (configArray[c].id=="XPoziHelp")
 							{
-								col = "#A0A0A0";
+								configArray[c].style='padding:0px;';
 							}
-							configArray[c].headerCfg={
-								tag: 'div',
-								style:'	background-image: url();background-color: '+col+';padding-left: 10px;',
-								children: [
-								    { tag: 'div', 'html': t }
-								]
-							};
+						
+							if (!(configArray[c].headerCfg))
+							{	
+								var t = configArray[c].title;
+								// headerCfg would not work if the title was part of the initial config
+								delete configArray[c].title;
+
+								// 
+								var col_arr={
+									"GoogleStreetView":"#6C88D4",
+									"ParcelDetails":"#92D46C",
+									"PlanningInfo":"#AF6CD4",
+									"PropertyDetails":"#D4796C",
+									"CouncillorDetails":"#D4AA6C",
+									"CouncillorDetails2":"#D4AA6C",
+									"CollectionDetails":"#D4BE6C"
+								};
+
+								var col = col_arr[configArray[c].id];
+								if (!(col))
+								{
+									col = "#A0A0A0";
+								}
+								configArray[c].headerCfg={
+									tag: 'div',
+									style:'	background-image: url();background-color: '+col+';padding-left: 10px;',
+									children: [
+									    { tag: 'div', 'html': t }
+									]
+								};
+							}
 						}
-					}											
+					}
 
 					// And initialisation of the accordion items
 					accordion.add(configArray);
@@ -1508,24 +1510,11 @@ Ext.onReady(function() {
 					cl="NONE";
 					
 				}
-
-				// Updating the index of the currently opened tab
-				for(k in p.ownerCt.items.items)
-				{	
-					if (p.ownerCt.items.items[k].id==p.id)
-					{
-						// Layer name of the currently selected item in the combo
-						gCurrentExpandedTabIdx[cl] = k;
-						break;
-					}
-				}	
-				
-				// Fix for the NONE layer so that the index is not 0 and the loop just below is entered
-				if (cl=="NONE")	{gCurrentExpandedTabIdx[cl]++;}
 				
 				if (gCurrentExpandedTabIdx[cl] != 0)
 				{
 					var configArray = gLayoutsArr[cl];
+
 					if (configArray)
 					{
 						// This only performs the query corresponding to the currently open tab
@@ -2209,7 +2198,7 @@ Ext.onReady(function() {
 									/// Expanding the tab whose index has been memorised
 									if (!(gCurrentExpandedTabIdx[record.data.layer]))
 									{
-										gCurrentExpandedTabIdx[record.data.layer]="0";
+										gCurrentExpandedTabIdx[record.data.layer]=0;
 									}
 									e0.items.itemAt(gCurrentExpandedTabIdx[record.data.layer]).expand();
 								},
