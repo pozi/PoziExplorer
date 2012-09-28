@@ -2599,7 +2599,7 @@ Ext.onReady(function() {
 					
 					// Adding the eye-con
 					toolbar.items.add(new Ext.Component({
-						html:'<img src="theme/app/img/panel/eye.png"/>'
+						html:'<img src="theme/app/img/panel/eye-con.png"/>'
 					}));
 					
 					// Adding a bit of space
