@@ -1711,9 +1711,9 @@ Ext.onReady(function() {
 															// Setting the title of the horizontal panel - first non-null value encountered
 															if (first_element.length==0)
 															{
-																if (trim(val).length>10)
+																if (trim(val).length>14)
 																{
-																	first_element=trim(val).substring(0,8)+'..';
+																	first_element=trim(val).substring(0,12)+'..';
 																}
 																else
 																{
@@ -1861,8 +1861,8 @@ Ext.onReady(function() {
 														activeTab       : 0,
 														id              : 'tblayout-win'+g,
 														enableTabScroll : true,
-														resizeTabs      : false,
-														minTabWidth     : 15,																
+														resizeTabs      : true,
+														minTabWidth     : 20,																
 														border:false,
 														items: tab_array
 													});
