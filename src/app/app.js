@@ -1341,43 +1341,45 @@ Ext.onReady(function() {
 					// Here we should do the styling substitution to transform a config option into a proper style element
 					for (c in configArray)
 					{
-						// Correcting the top padding to have the first tab to stick to the top
-						if (c==0)
+						if (configArray.hasOwnProperty(c))
 						{
-							configArray[c].style='padding:0px;';
-						}
-						
-						if (!(configArray[c].headerCfg))
-						{	
-							var t = configArray[c].title;
-							// headerCfg would not work if the title was part of the initial config
-							delete configArray[c].title;
-
-							// 
-							var col_arr={
-								"GoogleStreetView":"#6C88D4",
-								"ParcelDetails":"#92D46C",
-								"PlanningInfo":"#AF6CD4",
-								"PropertyDetails":"#D4796C",
-								"CouncillorDetails":"#D4AA6C",
-								"CouncillorDetails2":"#D4AA6C",
-								"CollectionDetails":"#D4BE6C"
-							};
-
-							var col = col_arr[configArray[c].id];
-							if (!(col))
+							if (configArray[c].id=="XPoziHelp")
 							{
-								col = "#A0A0A0";
+								configArray[c].style='padding:0px;';
 							}
-							configArray[c].headerCfg={
-								tag: 'div',
-								style:'	background-image: url();background-color: '+col+';padding-left: 10px;',
-								children: [
-								    { tag: 'div', 'html': t }
-								]
-							};
+						
+							if (!(configArray[c].headerCfg))
+							{	
+								var t = configArray[c].title;
+								// headerCfg would not work if the title was part of the initial config
+								delete configArray[c].title;
+
+								// 
+								var col_arr={
+									"GoogleStreetView":"#6C88D4",
+									"ParcelDetails":"#92D46C",
+									"PlanningInfo":"#AF6CD4",
+									"PropertyDetails":"#D4796C",
+									"CouncillorDetails":"#D4AA6C",
+									"CouncillorDetails2":"#D4AA6C",
+									"CollectionDetails":"#D4BE6C"
+								};
+
+								var col = col_arr[configArray[c].id];
+								if (!(col))
+								{
+									col = "#A0A0A0";
+								}
+								configArray[c].headerCfg={
+									tag: 'div',
+									style:'	background-image: url();background-color: '+col+';padding-left: 10px;',
+									children: [
+									    { tag: 'div', 'html': t }
+									]
+								};
+							}
 						}
-					}											
+					}
 
 					// And initialisation of the accordion items
 					accordion.add(configArray);
@@ -1496,24 +1498,26 @@ Ext.onReady(function() {
 				var ct = Ext.get('gtInfoTypeLabel').dom.innerHTML; // that contains the type of the currently selected feature
 				var cb = Ext.getCmp('gtInfoCombobox'); // the Ext JS component containing the combo - used to link type to layer name
 
-				var cl;
+				var cl;				
+				// If the item can be found, then we extract the layer name
 				if (cb.getStore().data.items[cb.getStore().find("type",ct)])
 				{
-					cl = cb.getStore().data.items[cb.getStore().find("type",ct)].data.layer;
+					cl = cb.getStore().data.items[cb.getStore().find("type",ct)].data.layer;					
 				}
-				else
+				else 
+				// There is no item in the drop down and the current layer is "NONE"
 				{
 					cl="NONE";
-					gCurrentExpandedTabIdx[cl] = 1;
+					
 				}
 				
 				if (gCurrentExpandedTabIdx[cl] != 0)
 				{
-					//alert("Requesting data on demand!");
 					var configArray = gLayoutsArr[cl];
+
 					if (configArray)
 					{
-						// This could be further refined by sending only the query corresponding to the open accordion part
+						// This only performs the query corresponding to the currently open tab
 						for (var i=gCurrentExpandedTabIdx[cl]-1; i< gCurrentExpandedTabIdx[cl]; i++)
 						{
 							// Triggering the tab-wide actions
@@ -1536,42 +1540,41 @@ Ext.onReady(function() {
 				// Current layer (cl) as per content of the current type (ct) and current drop down (cb)
 				var ct = Ext.get('gtInfoTypeLabel').dom.innerHTML; // that contains the type of the currently selected feature
 				var cb = Ext.getCmp('gtInfoCombobox'); // the Ext JS component containing the combo - used to link type to layer name
-				
-				var cl;
+
+				var cl;				
 				// If the item can be found, then we extract the layer name
 				if (cb.getStore().data.items[cb.getStore().find("type",ct)])
 				{
-					cl = cb.getStore().data.items[cb.getStore().find("type",ct)].data.layer;
-
-					// Updating the index of the currently opened tab
-					for(k in p.ownerCt.items.items)
-					{	
-						if (p.ownerCt.items.items[k].id==p.id)
-						{
-							// Layer name of the currently selected item in the combo
-							gCurrentExpandedTabIdx[cl] = k;
-							break;
-						}
-					}					
-					
+					cl = cb.getStore().data.items[cb.getStore().find("type",ct)].data.layer;					
 				}
 				else 
-				// There is no item in the drop down and the current layer is "NONE"
+				// There is no item in the drop down so the current layer is "NONE"
 				{
 					cl="NONE";
-					gCurrentExpandedTabIdx[cl] = 1;
+					
 				}
 
-				// Sending in the query to populate this specific tab (tab on demand)
-				// Could be further refined by keeping track of which tab has already been opened, so that we don't re-request the data
+				// Updating the index of the currently opened tab
+				for(k in p.ownerCt.items.items)
+				{	
+					if (p.ownerCt.items.items[k].id==p.id)
+					{
+						// Layer name of the currently selected item in the combo
+						gCurrentExpandedTabIdx[cl] = k;
+						break;
+					}
+				}	
+				
+				// Fix for the NONE layer so that the index is not 0 and the loop just below is entered
+				if (cl=="NONE")	{gCurrentExpandedTabIdx[cl]++;}
 
+				// Sending in the query to populate this specific tab (tab on demand)
 				if (gCurrentExpandedTabIdx[cl] != 0)
 				{
-					//alert("Requesting data on demand!");
 					var configArray = gLayoutsArr[cl];
 					if (configArray)
 					{
-						// This could be further refined by sending only the query corresponding to the open accordion part
+						// This only performs the query corresponding to the currently open tab
 						for (var i=gCurrentExpandedTabIdx[cl]-1; i< gCurrentExpandedTabIdx[cl]; i++)
 						{
 							var g=0;
@@ -2195,7 +2198,7 @@ Ext.onReady(function() {
 									/// Expanding the tab whose index has been memorised
 									if (!(gCurrentExpandedTabIdx[record.data.layer]))
 									{
-										gCurrentExpandedTabIdx[record.data.layer]="0";
+										gCurrentExpandedTabIdx[record.data.layer]=0;
 									}
 									e0.items.itemAt(gCurrentExpandedTabIdx[record.data.layer]).expand();
 								},
@@ -2709,6 +2712,9 @@ Ext.onReady(function() {
 								var user = form.findField('username').getValue();
 								app.setCookieValue(app.cookieParamName, user);
 								app.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
+								// Reloading the layer tree (TODO)
+								////Ext.getCmp('tree').body=null;
+								////app.addLayers();
 								// Reloading the tabs
 								gCurrentLoggedRole = app.authorizedRoles[0];
 								loadTabConfig();

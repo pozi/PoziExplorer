@@ -9,6 +9,10 @@
                     "collapsed": true
                 },
                 "default": "Overlays",
+                "editing": { 
+                	"title":"Editing",
+                	"collapsed":true
+                },
                 "background": {
                     "title": "Base Maps",
                     "exclusive": true
@@ -137,7 +141,8 @@
 		"styles":"",
 		"transparent":true,
 		"tiled":false,
-		"transition":""
+		"transition":"",
+		"group":"editing"
 	},
 	{
 		"source":"backend",
@@ -222,9 +227,9 @@
     "hideScaleCombo":true,
     "layerPresentation": {
     	"creek_segments":[
-		{"attr_name":"credit"},
 		{"attr_name":"creek_name"},
 		{"attr_name":"management_group"},		
+		{"attr_name":"credit"},
     		{"attr_name":"stock_excluded"},
 		{"attr_name":"stock_excluded_date"},
 		{"attr_name":"native_vegetation"},
