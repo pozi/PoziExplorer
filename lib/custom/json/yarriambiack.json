@@ -71,6 +71,12 @@
         }
     ],
     "sources": {
+    	"local": {
+            "url": "/geoserver/YARRIAMBIACK/ows",
+            "title": "YARRIAMBIACK Layers",
+            "ptype": "gxp_wmscsource",
+            "tiled": false
+        },
         "backend_cascaded": {
             "url": "http://basemap.pozi.com/geoserver/DSE/ows",
             "title": "DSE Vicmap Layers",
@@ -134,6 +140,17 @@
             "title": "Property",
             "visibility": true,
             "opacity": 0.25,
+            "format": "image/GIF",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "YSC_COUNCILOFFICE",
+            "title": "Council Offices",
+            "visibility": false,
+            "opacity": 0.8,
             "format": "image/GIF",
             "styles": "",
             "transparent": true,
