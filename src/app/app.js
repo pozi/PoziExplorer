@@ -1864,7 +1864,7 @@ Ext.onReady(function() {
 														activeTab       : 0,
 														id              : 'tblayout-win'+g,
 														enableTabScroll : true,
-														resizeTabs      : true,
+														resizeTabs      : false,
 														minTabWidth     : 20,																
 														border:false,
 														items: tab_array
