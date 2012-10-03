@@ -306,6 +306,7 @@ Ext.onReady(function() {
      */
  	// Reasons for override:
 	// - configuration for expanded / collapsed initial display of layer groups (controlled by layer manager's group config)
+	// - handling of checkbox changes to select/deselect the node with the same click
 	
     gxp.plugins.LayerTree.prototype.createOutputConfig = function() {
         var treeRoot = new Ext.tree.TreeNode({
@@ -370,7 +371,19 @@ Ext.onReady(function() {
             }),
             listeners: {
                 contextmenu: this.handleTreeContextMenu,
-                beforemovenode: this.handleBeforeMoveNode,                
+                beforemovenode: this.handleBeforeMoveNode,   
+                checkchange:function(n,c){
+                	// If the node checkbox is clicked then we select the node
+                	if (c)
+                	{
+                		n.select();
+                	}
+                	else 
+                	// We deselect any selected nodes
+                	{	
+                		this.output[0].getSelectionModel().clearSelections();
+                	}
+                },
                 scope: this
             },
             contextMenu: new Ext.menu.Menu({
