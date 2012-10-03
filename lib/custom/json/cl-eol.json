@@ -254,5 +254,6 @@
     	"URL": "http://www.creeklink.org.au/resources/img/creeklink-legend-final.png",
     	"height":270
     },
-    "mapContexts":[{"name":"Creek Map","size":95}]
+    "mapContexts":[{"name":"Creek Map","size":95}],
+    "reloadOnLogin":true
 }
