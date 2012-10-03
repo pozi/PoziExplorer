@@ -1354,22 +1354,13 @@ Ext.onReady(function() {
 								// headerCfg would not work if the title was part of the initial config
 								delete configArray[c].title;
 
-								// 
-								var col_arr={
-									"GoogleStreetView":"#6C88D4",
-									"ParcelDetails":"#92D46C",
-									"PlanningInfo":"#AF6CD4",
-									"PropertyDetails":"#D4796C",
-									"CouncillorDetails":"#D4AA6C",
-									"CouncillorDetails2":"#D4AA6C",
-									"CollectionDetails":"#D4BE6C"
-								};
-
-								var col = col_arr[configArray[c].id];
+								var col = configArray[c].col;
+								
 								if (!(col))
 								{
 									col = "#A0A0A0";
 								}
+								
 								configArray[c].headerCfg={
 									tag: 'div',
 									style:'	background-image: url();background-color: '+col+';padding-left: 10px;',
@@ -2161,23 +2152,14 @@ Ext.onReady(function() {
 												var t = configArray[c].title;
 												// Header config would not work if the title was part of the initial config
 												delete configArray[c].title;
-
-												// 
-												var col_arr={
-													"GoogleStreetView":"#6C88D4",
-													"ParcelDetails":"#92D46C",
-													"PlanningInfo":"#AF6CD4",
-													"PropertyDetails":"#D4796C",
-													"CouncillorDetails":"#D4AA6C",
-													"CouncillorDetails2":"#D4AA6C",
-													"CollectionDetails":"#D4BE6C"
-												};
-
-												var col = col_arr[configArray[c].id];
+												
+												var col = configArray[c].col;
+												
 												if (!(col))
 												{
 													col = "#A0A0A0";
 												}
+												
 												configArray[c].headerCfg={
 													tag: 'div',
 													style:'	background-image: url();background-color: '+col+';padding-left: 10px;',
