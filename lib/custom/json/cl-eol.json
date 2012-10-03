@@ -265,5 +265,6 @@
     	"height":270
     },
     "mapContexts":[{"name":"Creek Map","size":95}],
-    "reloadOnLogin":true
+    "reloadOnLogin":true,
+    "openFirstDefaultTab":true
 }
