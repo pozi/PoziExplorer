@@ -1189,6 +1189,9 @@ Ext.onReady(function() {
 				}
 			};
 
+			var gtReloadOnLogin = false;
+			if ('reloadOnLogin' in JSONconf) {gtReloadOnLogin = JSONconf.reloadOnLogin;};
+
 			poziLinkClickHandler = function () {
 				var appInfo = new Ext.Panel({
 					title: "GeoExplorer",
@@ -2713,6 +2716,13 @@ Ext.onReady(function() {
 								app.showLogout(typedUsername);
 								win.un("beforedestroy", this.cancelAuthentication, this);
 								win.close();
+
+								if (gtReloadOnLogin)
+								{
+									// Issue with users having to refresh the page to access their priviledged functionalities
+									// This section should disappear when we're able to reload the layer tree / manager properly
+									window.location.reload();
+								}
 							},
 							failure: function(form, action) {
 								// Reset the username to what was initially typed, and show the login window

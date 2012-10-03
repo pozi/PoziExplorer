@@ -121,6 +121,30 @@
 	},
 	{
 		"source":"local",
+		"name":"CREEK_SEGMENT_VISITED",
+		"title":"Creek Segments (visited)",
+		"visibility":false,
+		"opacity":0.85,
+		"format":"image/png8",
+		"styles":"",
+		"transparent":true,
+		"tiled":false,
+		"transition":""
+	},
+	{
+		"source":"backend",
+		"name":"VICMAP:VMHYDRO_WATERCOURSE",
+		"title":"All Waterways",
+		"visibility":false,
+		"opacity":0.85,
+		"format":"image/png8",
+		"styles":"Classic_Watercourse_NoMaxScale",
+		"transparent":true,
+		"tiled":false,
+		"transition":""
+	},
+	{
+		"source":"local",
 		"name":"CREEK",
 		"title":"Named Waterways",
 		"visibility":true,
@@ -229,12 +253,10 @@
     	"creek_segments":[
 		{"attr_name":"creek_name"},
 		{"attr_name":"management_group"},		
-		{"attr_name":"credit"},
     		{"attr_name":"stock_excluded"},
 		{"attr_name":"stock_excluded_date"},
 		{"attr_name":"native_vegetation"},
-		{"attr_name":"revegetated_date"},
-		{"attr_name":"comments"}
+		{"attr_name":"revegetated_date"}
     	]
     },
     "bottomEastItem":{
@@ -242,5 +264,6 @@
     	"URL": "http://www.creeklink.org.au/resources/img/creeklink-legend-final.png",
     	"height":270
     },
-    "mapContexts":[{"name":"Creek Map","size":95}]
+    "mapContexts":[{"name":"Creek Map","size":95}],
+    "reloadOnLogin":true
 }
