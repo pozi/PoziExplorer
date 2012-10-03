@@ -241,12 +241,10 @@
     	"creek_segments":[
 		{"attr_name":"creek_name"},
 		{"attr_name":"management_group"},		
-		{"attr_name":"credit"},
     		{"attr_name":"stock_excluded"},
 		{"attr_name":"stock_excluded_date"},
 		{"attr_name":"native_vegetation"},
-		{"attr_name":"revegetated_date"},
-		{"attr_name":"comments"}
+		{"attr_name":"revegetated_date"}
     	]
     },
     "bottomEastItem":{
