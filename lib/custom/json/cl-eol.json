@@ -121,6 +121,18 @@
 	},
 	{
 		"source":"local",
+		"name":"CREEK_SEGMENT_VISITED",
+		"title":"Creek Segments (visited)",
+		"visibility":false,
+		"opacity":0.85,
+		"format":"image/png8",
+		"styles":"",
+		"transparent":true,
+		"tiled":false,
+		"transition":""
+	},
+	{
+		"source":"local",
 		"name":"CREEK",
 		"title":"Named Waterways",
 		"visibility":true,
