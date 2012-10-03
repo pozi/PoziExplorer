@@ -132,6 +132,18 @@
 		"transition":""
 	},
 	{
+		"source":"backend",
+		"name":"VICMAP:VMHYDRO_WATERCOURSE",
+		"title":"All Waterways",
+		"visibility":false,
+		"opacity":0.85,
+		"format":"image/png8",
+		"styles":"Classic_Watercourse_NoMaxScale",
+		"transparent":true,
+		"tiled":false,
+		"transition":""
+	},
+	{
 		"source":"local",
 		"name":"CREEK",
 		"title":"Named Waterways",
