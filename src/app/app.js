@@ -78,6 +78,7 @@ var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurren
 var poziLinkClickHandler;
 var vector_layer = new OpenLayers.Layer.Vector("WKT",{displayInLayerSwitcher:false});
 var wkt_format = new OpenLayers.Format.WKT();
+var gtVariable;
 
 // Helper functions
 function toTitleCase(str)
@@ -1489,14 +1490,14 @@ Ext.onReady(function() {
 
 			var tabCollapse = function(p){
 				// Current layer (cl) as per content of the current type (ct) and current drop down (cb)
-				var ct = Ext.get('gtInfoTypeLabel').dom.innerHTML; // that contains the type of the currently selected feature
+				var ct = gtVariable; // that contains the type of the currently selected feature
 				var cb = Ext.getCmp('gtInfoCombobox'); // the Ext JS component containing the combo - used to link type to layer name
 
 				var cl;				
 				// If the item can be found, then we extract the layer name
-				if (cb.getStore().data.items[cb.getStore().find("type",ct)])
+				if (gtVariable)
 				{
-					cl = cb.getStore().data.items[cb.getStore().find("type",ct)].data.layer;					
+					cl = gtVariable.layer;					
 				}
 				else 
 				// There is no item in the drop down and the current layer is "NONE"
@@ -1532,14 +1533,14 @@ Ext.onReady(function() {
 
 			var tabExpand = function(p){
 				// Current layer (cl) as per content of the current type (ct) and current drop down (cb)
-				var ct = Ext.get('gtInfoTypeLabel').dom.innerHTML; // that contains the type of the currently selected feature
+				var ct = gtVariable; // that contains the type of the currently selected feature
 				var cb = Ext.getCmp('gtInfoCombobox'); // the Ext JS component containing the combo - used to link type to layer name
 
 				var cl;				
 				// If the item can be found, then we extract the layer name
-				if (cb.getStore().data.items[cb.getStore().find("type",ct)])
+				if (gtVariable)
 				{
-					cl = cb.getStore().data.items[cb.getStore().find("type",ct)].data.layer;					
+					cl = gtVariable.layer;					
 				}
 				else 
 				// There is no item in the drop down so the current layer is "NONE"
@@ -2002,8 +2003,13 @@ Ext.onReady(function() {
 						listeners: {'select': function (combo,record){
 									// Displaying the feature type
 									var ft = record.get("type");
-									Ext.get('gtInfoTypeLabel').dom.innerHTML=ft;
-
+									gtVariable = ft;
+									
+									if(ft.charAt(ft.length-2) != 's')
+										ft = ft.replace(/s$/,"");
+						
+									Ext.get('gtInfoTypeLabel').dom.innerHTML = ft.replace(/ie$/,"y");
+									
 									// Displaying the different tabs in the accordion
 									var e0=Ext.getCmp('gtAccordion');
 									e0.removeAll();
