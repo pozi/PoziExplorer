@@ -2032,7 +2032,7 @@ Ext.onReady(function() {
 									var replaced = false;
 									gtVariable = ft;
 									
-									if(ft.charAt(ft.length-2) != 's')
+									if(ft.charAt(ft.length-2) != 's' && ft.charAt(ft.length-1) == 's')
 									{			
 										ft = ft.replace(/s$/,"");
 										replaced = true;
