@@ -2029,19 +2029,13 @@ Ext.onReady(function() {
 						listeners: {'select': function (combo,record){
 									// Displaying the feature type
 									var ft = record.get("type");
-									var replaced = false;
+
 									gtVariable = ft;
 									
 									if(ft.charAt(ft.length-2) != 's' && ft.charAt(ft.length-1) == 's')
 									{			
 										ft = ft.replace(/s$/,"");
-										replaced = true;
-									}
-									
-									if(replaced == true)
-									{
 										Ext.get('gtInfoTypeLabel').dom.innerHTML = ft.replace(/ie$/,"y");
-										replaced = false;
 									}
 									else 
 									{
