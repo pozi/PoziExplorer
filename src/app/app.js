@@ -307,6 +307,7 @@ Ext.onReady(function() {
      */
  	// Reasons for override:
 	// - configuration for expanded / collapsed initial display of layer groups (controlled by layer manager's group config)
+	// - handling of checkbox changes to select/deselect the node with the same click
 	
     gxp.plugins.LayerTree.prototype.createOutputConfig = function() {
         var treeRoot = new Ext.tree.TreeNode({
@@ -371,7 +372,19 @@ Ext.onReady(function() {
             }),
             listeners: {
                 contextmenu: this.handleTreeContextMenu,
-                beforemovenode: this.handleBeforeMoveNode,                
+                beforemovenode: this.handleBeforeMoveNode,   
+                checkchange:function(n,c){
+                	// If the node checkbox is clicked then we select the node
+                	if (c)
+                	{
+                		n.select();
+                	}
+                	else 
+                	// We deselect any selected nodes
+                	{	
+                		this.output[0].getSelectionModel().clearSelections();
+                	}
+                },
                 scope: this
             },
             contextMenu: new Ext.menu.Menu({
@@ -1193,6 +1206,9 @@ Ext.onReady(function() {
 			var gtReloadOnLogin = false;
 			if ('reloadOnLogin' in JSONconf) {gtReloadOnLogin = JSONconf.reloadOnLogin;};
 
+			var gtOpenFirstDefaultTab = false;
+			if ('openFirstDefaultTab' in JSONconf) {gtOpenFirstDefaultTab = JSONconf.openFirstDefaultTab;};
+
 			poziLinkClickHandler = function () {
 				var appInfo = new Ext.Panel({
 					title: "GeoExplorer",
@@ -1340,13 +1356,12 @@ Ext.onReady(function() {
 				var configArray = gLayoutsArr["NONE"];
 				if (configArray)
 				{
-
-
 					// Here we should do the styling substitution to transform a config option into a proper style element
 					for (c in configArray)
 					{
 						if (configArray.hasOwnProperty(c))
 						{
+							// If it's the help tab (i.e. the first tab), we remove the padding
 							if (configArray[c].id=="XPoziHelp")
 							{
 								configArray[c].style='padding:0px;';
@@ -1383,6 +1398,12 @@ Ext.onReady(function() {
 
 				// Refreshing the DOM with the newly added parts
 				accordion.doLayout();
+
+				// Expanding the first tab if configured to do so
+				if (gtOpenFirstDefaultTab)
+				{
+					accordion.items.items[0].expand();
+				}
 			};
 
 			// Remove the WFS highlight, clear and disable the select feature combo, empty the combostore and clean the details panel 
@@ -1813,61 +1834,66 @@ Ext.onReady(function() {
 											{
 												// The target div for placing this data
 												var targ = Ext.getCmp(recs[0].json.row["target"]);
-												targ.removeAll();
-
-												// Adding the listener to each subtab
-												if (recs[0].json.row["tabaction"])
-												{
-													// Avoiding the use of the 'eval' function
-													var fn2 = window[recs[0].json.row["tabaction"]];
-													if (typeof fn2 === 'function') {
-														// Going thru all the elements in the tab_array to add the listener
-														// Note: we can not just add a default listener in the containing panel/tabpanel
-														// because the elements have already been instantiated
-														for(b in tab_array)
-														{
-															if (tab_array.hasOwnProperty(b))
-															{
-																tab_array[b].addListener('activate',function(tab) {
-																	tab.the_geom = geom_array[tab.title];
-																	fn2(tab);
-																});
-															}
-														}
-													}													
-												}
-
-												// The container depends on the number of records returned
-												if (tab_array.length==1)
-												{
-													// Removing the title - it's useless
-													// We should be able to remove the header that was created with a non-null title
-													tab_array[0].title = undefined;
-
-													// Rendering as a table
-													var win = new Ext.Panel({
-														id:'tblayout-win'+g,
-														layout:'fit',
-														border:false,
-														items: tab_array[0]
-													});
-												}
-												else
-												{
-													// Renderng as a tab panel of tables
-													var win = new Ext.TabPanel({
-														activeTab       : 0,
-														id              : 'tblayout-win'+g,
-														enableTabScroll : true,
-														resizeTabs      : false,
-														minTabWidth     : 20,																
-														border:false,
-														items: tab_array
-													});
-												}
 												
-												targ.add(win);
-												targ.doLayout();	
+												// In some cases the tab has already been removed (i.e. targ is null)
+												if (targ)
+												{
+													targ.removeAll();
+
+													// Adding the listener to each subtab
+													if (recs[0].json.row["tabaction"])
+													{
+														// Avoiding the use of the 'eval' function
+														var fn2 = window[recs[0].json.row["tabaction"]];
+														if (typeof fn2 === 'function') {
+															// Going thru all the elements in the tab_array to add the listener
+															// Note: we can not just add a default listener in the containing panel/tabpanel
+															// because the elements have already been instantiated
+															for(b in tab_array)
+															{
+																if (tab_array.hasOwnProperty(b))
+																{
+																	tab_array[b].addListener('activate',function(tab) {
+																		tab.the_geom = geom_array[tab.title];
+																		fn2(tab);
+																	});
+																}
+															}
+														}													
+													}
+
+													// The container depends on the number of records returned
+													if (tab_array.length==1)
+													{
+														// Removing the title - it's useless
+														// We should be able to remove the header that was created with a non-null title
+														tab_array[0].title = undefined;
+
+														// Rendering as a table
+														var win = new Ext.Panel({
+															id:'tblayout-win'+g,
+															layout:'fit',
+															border:false,
+															items: tab_array[0]
+														});
+													}
+													else
+													{
+														// Renderng as a tab panel of tables
+														var win = new Ext.TabPanel({
+															activeTab       : 0,
+															id              : 'tblayout-win'+g,
+															enableTabScroll : true,
+															resizeTabs      : false,
+															minTabWidth     : 20,																
+															border:false,
+															items: tab_array
+														});
+													}
+
+													targ.add(win);
+													targ.doLayout();
+												}
 											}
 											else
 											{
