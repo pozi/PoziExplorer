@@ -1579,9 +1579,11 @@ Ext.onReady(function() {
 				}	
 				
 				// Fix for the NONE layer so that the index is not 0 and the loop just below is entered
-				if (cl=="NONE")	
+				if (cl=="NONE")
+				{
 					gCurrentExpandedTabIdx[cl]++;
-
+				}
+				
 				// Sending in the query to populate this specific tab (tab on demand)
 				if (gCurrentExpandedTabIdx[cl] != 0)
 				{
