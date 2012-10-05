@@ -57,7 +57,7 @@
  */
 
 // Toggle value from true to false to switch between local (debug) and remote (deployed)
-var debugMode = false;
+var debugMode = true;
 
 var gtProxy,gtLoginEndpoint,gtLocalLayerSourcePrefix;
 if (debugMode)
@@ -78,7 +78,7 @@ var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurren
 var poziLinkClickHandler;
 var vector_layer = new OpenLayers.Layer.Vector("WKT",{displayInLayerSwitcher:false});
 var wkt_format = new OpenLayers.Format.WKT();
-var gtVariable;
+var gtLayerLabel;
 
 // Helper functions
 function toTitleCase(str)
@@ -1511,14 +1511,14 @@ Ext.onReady(function() {
 
 			var tabCollapse = function(p){
 				// Current layer (cl) as per content of the current type (ct) and current drop down (cb)
-				var ct = gtVariable; // that contains the type of the currently selected feature
+				var ct = gtLayerLabel; // that contains the type of the currently selected feature
 				var cb = Ext.getCmp('gtInfoCombobox'); // the Ext JS component containing the combo - used to link type to layer name
 
 				var cl;				
 				// If the item can be found, then we extract the layer name
-				if (gtVariable)
+				if (gtLayerLabel)
 				{
-					cl = gtVariable;					
+					cl = gtLayerLabel;					
 				}
 				else 
 				// There is no item in the drop down and the current layer is "NONE"
@@ -1552,7 +1552,7 @@ Ext.onReady(function() {
 
 			var tabExpand = function(p){
 				// Current layer (cl) as per content of the current type (ct) and current drop down (cb)
-				var ct = gtVariable; // that contains the type of the currently selected feature
+				var ct = gtLayerLabel; // that contains the type of the currently selected feature
 				var cb = Ext.getCmp('gtInfoCombobox'); // the Ext JS component containing the combo - used to link type to layer name
 
 				var cl;				
@@ -2030,7 +2030,7 @@ Ext.onReady(function() {
 									// Displaying the feature type
 									var ft = record.get("type");
 
-									gtVariable = ft;
+									gtLayerLabel = ft;
 									
 									if(ft.charAt(ft.length-2) != 's' && ft.charAt(ft.length-1) == 's')
 									{			
