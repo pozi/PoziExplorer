@@ -1362,7 +1362,7 @@ Ext.onReady(function() {
 						if (configArray.hasOwnProperty(c))
 						{
 							// If it's the help tab (i.e. the first tab), we remove the padding
-							if (configArray[c].id=="XPoziHelp")
+							if (configArray[c].id=="XWelcome")
 							{
 								configArray[c].style='padding:0px;';
 							}
@@ -1523,8 +1523,7 @@ Ext.onReady(function() {
 				else 
 				// There is no item in the drop down and the current layer is "NONE"
 				{
-					cl="NONE";
-					
+					cl="NONE";				
 				}
 				
 				if (gCurrentExpandedTabIdx[cl] != 0)
@@ -1548,8 +1547,7 @@ Ext.onReady(function() {
 							}
 						}
 					}
-				}
-				
+				}				
 			};
 
 			var tabExpand = function(p){
@@ -1566,8 +1564,7 @@ Ext.onReady(function() {
 				else 
 				// There is no item in the drop down so the current layer is "NONE"
 				{
-					cl="NONE";
-					
+					cl="NONE";				
 				}
 
 				// Updating the index of the currently opened tab
@@ -1582,7 +1579,8 @@ Ext.onReady(function() {
 				}	
 				
 				// Fix for the NONE layer so that the index is not 0 and the loop just below is entered
-				if (cl=="NONE")	{gCurrentExpandedTabIdx[cl]++;}
+				if (cl=="NONE")	
+					gCurrentExpandedTabIdx[cl]++;
 
 				// Sending in the query to populate this specific tab (tab on demand)
 				if (gCurrentExpandedTabIdx[cl] != 0)
