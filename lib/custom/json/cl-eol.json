@@ -109,6 +109,19 @@
 	},
 	{
 		"source":"local",
+		"name":"GROUP_BOUNDARY_EDIT",
+		"title":"Landcare Boundary (for edit)",
+		"visibility":false,
+		"opacity":0.85,
+		"format":"image/png8",
+		"styles":"",
+		"transparent":true,
+		"tiled":false,
+		"transition":"",
+		"group":"editing"
+	},
+	{
+		"source":"local",
 		"name":"creek_segments",
 		"title":"Creek Segments",
 		"visibility":true,
