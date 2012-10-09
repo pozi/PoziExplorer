@@ -256,6 +256,28 @@
         },
         {
             "source": "local",
+            "name": "CSC_TRACK_BMX",
+            "title": "BMX Tracks",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "CSC_PLAYGROUND_SKATE",
+            "title": "Skate Parks",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
             "name": "CSC_AREA_DOG_OF_LEASH",
             "title": "Dog Off Leash Area",
             "visibility": false,
