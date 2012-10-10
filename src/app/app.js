@@ -967,7 +967,10 @@ Ext.onReady(function() {
 						// Features found during the getFeatureInfo: showing the tab
 						if (!(gtHideSelectedFeaturePanel))
 						{
-							northPart.setVisible(true);
+							northPart.setHeight(60);
+							Ext.getCmp('gtInfoCombobox').setVisible(true);
+							// Collapsing the drop-down
+							Ext.getCmp('gtInfoCombobox').collapse();
 						}
 						eastPanel.expand();
 					}
@@ -1361,12 +1364,6 @@ Ext.onReady(function() {
 					{
 						if (configArray.hasOwnProperty(c))
 						{
-							// If it's the help tab (i.e. the first tab), we remove the padding
-							if (configArray[c].id=="XWelcome")
-							{
-								configArray[c].style='padding:0px;';
-							}
-						
 							if (!(configArray[c].headerCfg))
 							{	
 								var t = configArray[c].title;
@@ -1426,7 +1423,8 @@ Ext.onReady(function() {
 				add_default_tabs()
 				
 				// Hiding the north part of the east panel
-				northPart.setVisible(false);
+				northPart.setHeight(30);
+				cb.setVisible(false);
 				
 				// Clearing the feature type
 				Ext.get('gtInfoTypeLabel').dom.innerHTML="&nbsp;";
@@ -1473,7 +1471,10 @@ Ext.onReady(function() {
 				//
 				if (!(gtHideSelectedFeaturePanel))
 				{
-					northPart.setVisible(true);
+					northPart.setHeight(60);
+					Ext.getCmp('gtInfoCombobox').setVisible(true);
+					// Collapsing the drop-down
+					Ext.getCmp('gtInfoCombobox').collapse();
 				}
 				eastPanel.expand();
 				
@@ -1956,12 +1957,12 @@ Ext.onReady(function() {
 			northPart = new Ext.Panel({
 				region: "north",
 				border: false,
-				hidden: true,
+				//hidden: true,
 				layout: {
 					type:'vbox',
 					align:'stretch'
 				},
-				height: 60,
+				height: 30,
 				bodyStyle: "background-color:"+gtBannerLineColor+";",
 				items: [
 					{
@@ -1973,6 +1974,7 @@ Ext.onReady(function() {
 							{
 								html:"<p style='background-color:"+gtBannerLineColor+";height:19px;padding:5px 8px; cursor: hand;' id='gtInfoTypeLabel'>&nbsp;</p>",
 								columnWidth:1,
+								id: 'gtInfoTypeCmp',
 								bodyCssClass: 'selectedFeatureType',
 								listeners: {
 									render: function(c) {
@@ -2008,9 +2010,10 @@ Ext.onReady(function() {
 									scope: this
 								}
 						}]
-					},
+					},					
 					new Ext.form.ComboBox({
 						id: 'gtInfoCombobox',
+						hidden:true,
 						store: gCombostore,
 						displayField:'labelx',
 						disabled: true,
