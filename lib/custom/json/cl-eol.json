@@ -257,7 +257,7 @@
     "printMapTitle":"Creek-link",
     "collapseWestPanel":true,
     "hideNorthRegion":true,
-    "hideSelectedFeaturePanel":true,
+    "hideSelectedFeaturePanel":false,
     "eastPanelCollapsible":false,
     "bannerLineColor":"#90C4B6",
     "infoTitle":"",
