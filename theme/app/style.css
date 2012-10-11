@@ -126,11 +126,12 @@ div.olMap {
 	background-position:100% 50%; 
 }
 
+
 .x-btn .gxp-icon-print, .x-menu-item .gxp-icon-print, .x-tree-node .gxp-icon-print {
     background-image: url(img/panel/print.png);
 }
 
-.x-btn-tl, .x-btn-tr, .x-btn-tc, .x-btn-ml, .x-btn-mr, .x-btn-mc, .x-btn-bl, .x-btn-br, .x-btn-bc {
+.x-btn-mc {
     background-image: url();
 }
 
