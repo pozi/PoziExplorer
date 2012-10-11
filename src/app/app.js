@@ -401,12 +401,17 @@ Ext.onReady(function() {
 
  	// Reasons for override:
 	// - managing URL parameters that are arrays
+	// - add a random parameter to burst the cache in IE (for users to see protected layers on page refresh after login in IE)
 
     gxp.plugins.WMSSource.prototype.createStore = function() {
         var baseParams = this.baseParams || {
             SERVICE: "WMS",
             REQUEST: "GetCapabilities"
         };
+
+	// Adding random parameter to base params, wherever these base params are coming from        
+        baseParams.EXTRA=Math.floor(Math.random()*1000);
+
         if (this.version) {
             baseParams.VERSION = this.version;
         }
