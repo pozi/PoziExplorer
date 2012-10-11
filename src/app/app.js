@@ -1167,6 +1167,9 @@ Ext.onReady(function() {
 
 			var gtInfoTitle = "Info";
 			if ('infoTitle' in JSONconf) {gtInfoTitle = JSONconf.infoTitle;};
+			
+			var gtHideLayerPanelButton = false;
+			if ('hideLayerPanelButton' in JSONconf) {gtHideLayerPanelButton = JSONconf.hideLayerPanelButton;};
 
 			var gtMapContexts = [{"name":"Property Map","size":120}];
 			if ('mapContexts' in JSONconf) {gtMapContexts = JSONconf.mapContexts;};
@@ -2438,6 +2441,7 @@ Ext.onReady(function() {
 										html:"<img src='theme/app/img/panel/list-white-final.png' style='padding:2px;' alt='Layers' title='Layers' />",
 										id:'layerListButton',
 										width: 20,
+										hidden: gtHideLayerPanelButton,
 										listeners: {
 											render: function(c) {
 												// Expanding the drop down on click
