@@ -222,24 +222,6 @@
 	    "name": "HYBRID",
 	    "visibility": true
         },
-        {
-            "source": "mapquest",
-            "name": "osm",
-            "visibility": false,
-            "group": "background"
-        },
-        {
-            "source": "ol",
-            "group": "background",
-            "fixed": true,
-            "type": "OpenLayers.Layer",
-            "args": [
-                "None",
-                {
-                    "visibility": false
-                }
-            ]
-        }
     ],
     "center": [
         16024006,
