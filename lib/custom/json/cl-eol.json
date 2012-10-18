@@ -173,7 +173,7 @@
 		"name":"CREEK_SEGMENT",
 		"title":"Creek Segments (for edit)",
 		"visibility":false,
-		"opacity":0.6,
+		"opacity":0.8,
 		"format":"image/png8",
 		"styles":"",
 		"transparent":true,
