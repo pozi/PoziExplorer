@@ -10,7 +10,7 @@
                 },
                 "default": "Overlays",
                 "editing": { 
-                	"title":"Editing",
+                	"title":"Editable Layers",
                 	"collapsed":true
                 },
                 "background": {
