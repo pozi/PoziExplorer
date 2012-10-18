@@ -142,10 +142,21 @@
         },
         {
             "source": "backend",
-            "name": "VICMAP:DSE_VMADMIN_WARD_2008",
-            "title": "Wards (2008)",
+            "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
+            "title": "Property",
+            "visibility": true,
+            "opacity": 0.25,
+            "format": "image/GIF",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "backend",
+            "name": "DSE:VMFEAT_FOI_POINT_RESOURCE_RECREATIONAL",
+            "title": "Recreational Resources",
             "visibility": false,
-            "opacity": 0.5,
+            "opacity": 0.8,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
@@ -153,11 +164,11 @@
         },
         {
             "source": "backend",
-            "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
-            "title": "Property",
-            "visibility": true,
-            "opacity": 0.25,
-            "format": "image/GIF",
+            "name": "DSE:VMFEAT_FOI_POINT_FACILITY_SPORT",
+            "title": "Sport Faclities",
+            "visibility": false,
+            "opacity": 0.8,
+            "format": "image/png8",
             "styles": "",
             "transparent": true,
             "tiled": false
@@ -257,10 +268,11 @@
     "logoClientSrc":"theme/app/img/custom/wangaratta_logo.png",
     "logoClientWidth":150,
     "zoomMax":18,
-    "bannerLineColor":"#d1d8b4",
+    "bannerLineColor":"#1A4375",
     "bannerRightCornerLine1":"Wangaratta Shire Council",
     "bannerRightCornerLine2":"Victoria, Australia",
     "printMapTitle":"Wangaratta Shire Council",
     "linkToCouncilWebsite":"http://www.wangaratta.vic.gov.au/",
-    "collapseWestPanel":true
+    "collapseWestPanel":true,
+    "openFirstDefaultTab":true
 }
