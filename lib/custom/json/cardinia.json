@@ -117,6 +117,10 @@
 			{"attr_name":"photo_url","alt_name":"Photo"},
 			{"attr_name":"address"},			
 			{"attr_name":"facilities"}
+		],
+		"CSC_AREA_DOG_OF_LEASH":
+		[
+			{"attr_name":"reserve_na"}
 		]
 	},
     "layers": [
