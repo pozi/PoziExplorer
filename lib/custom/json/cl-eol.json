@@ -8,14 +8,18 @@
                     "title": "Surface Layers",
                     "collapsed": true
                 },
-                "default": "Overlays",
+                "default": {
+                	"title": "Overlays",
+                	"collapsed": true
+                },
                 "editing": { 
                 	"title":"Editable Layers",
-                	"collapsed":true
+                	"collapsed":false
                 },
                 "background": {
                     "title": "Base Maps",
-                    "exclusive": true
+                    "exclusive": true,
+                    "collapsed":true
                 }
             },
             "outputConfig": {
@@ -247,7 +251,7 @@
     ],
     "zoomMax":18,
     "printMapTitle":"Creek-link",
-    "collapseWestPanel":true,
+    "collapseWestPanel":false,
     "hideNorthRegion":true,
     "hideSelectedFeaturePanel":false,
     "eastPanelCollapsible":false,
