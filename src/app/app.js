@@ -1525,9 +1525,9 @@ Ext.onReady(function() {
 
 				var cl;				
 				// If the item can be found, then we extract the layer name
-				if (gtLayerLabel)
+				if (cb.getStore().data.items[cb.getStore().find("type",ct)])
 				{
-					cl = gtLayerLabel;					
+					cl = cb.getStore().data.items[cb.getStore().find("type",ct)].data.layer;  					
 				}
 				else 
 				// There is no item in the drop down and the current layer is "NONE"
