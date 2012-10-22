@@ -261,8 +261,9 @@
     "layerPresentation": {
     	"creek_segments":[
 		{"attr_name":"creek_name"},
-		{"attr_name":"management_group"},		
-    		{"attr_name":"stock_excluded"},
+		{"attr_name":"management_group"},
+		{"attr_name":"contact_datails"},
+    	{"attr_name":"stock_excluded"},
 		{"attr_name":"stock_excluded_date"},
 		{"attr_name":"native_vegetation"},
 		{"attr_name":"revegetated_date"}
