@@ -13,7 +13,8 @@
                 },
                 "aerial": {
                     "title": "Aerial Photos",
-                    "collapsed": true
+                    "collapsed": true,
+                    "exclusive": true
                 },
                 "default": "Overlays",
                 "background": {
@@ -128,19 +129,6 @@
 		]
 	},
     "layers": [
-        {
-            "source": "dse_iws_cascaded",
-            "name": "CARDINIA:AERIAL_CARDINIA_2006NOV18_AIR_VIS_35CM_MGA55",
-            "title": "Aerial Photo (18/11/2006)",
-            "visibility": true,
-            "opacity": 0,
-            "format": "image/JPEG",
-            "tiled": true,
-            "group":"default",
-            "transparent": true,
-            "styles":"",
-            "displayInOpacitySlider":true
-        },
         {
             "source": "backend",
             "name": "VICMAP:VW_DSE_VMPLAN_ZONE",
@@ -311,140 +299,167 @@
             "name": "CARDINIA:AERIAL_PAKENHAM_2011DEC30_AIR_VIS_10CM_MGA55",
             "title": "Aerial Photo (Pakenham, Dec 2011)",
             "visibility": false,
-            "opacity": 0,
+            "opacity": 1,
             "format": "image/JPEG",
-            "tiled": true,
+            "tiled": false,
             "group":"aerial",
+            "selected": false,
             "transparent": true,
-            "styles":"",
-            "displayInOpacitySlider":true
+            "styles":""
         },
         {
             "source": "dse_iws_cascaded",
             "name": "CARDINIA:AERIAL_PAKENHAM_2011AUG20_AIR_VIS_10CM_MGA55",
             "title": "Aerial Photo (Pakenham, Aug 2011)",
             "visibility": false,
-            "opacity": 0,
+            "opacity": 1,
             "format": "image/JPEG",
-            "tiled": true,
+            "tiled": false,
             "group":"aerial",
+            "selected": false,
             "transparent": true,
-            "styles":"",
-            "displayInOpacitySlider":true
+            "styles":""
         },
         {
             "source": "dse_iws_cascaded",
             "name": "CARDINIA:AERIAL_PAKENHAM_2011APR08_AIR_VIS_10CM_MGA55",
             "title": "Aerial Photo (Pakenham, Apr 2011)",
             "visibility": false,
-            "opacity": 0,
+            "opacity": 1,
             "format": "image/JPEG",
-            "tiled": true,
+            "tiled": false,
             "group":"aerial",
+            "selected": false,
             "transparent": true,
-            "styles":"",
-            "displayInOpacitySlider":true
+            "styles":""
         },
         {
             "source": "dse_iws_cascaded",
             "name": "CARDINIA:AERIAL_PAKENHAM_2010DEC30_AIR_VIS_10CM_MGA55",
             "title": "Aerial Photo (Pakenham, Dec 2010)",
             "visibility": false,
-            "opacity": 0,
+            "opacity": 1,
             "format": "image/JPEG",
-            "tiled": true,
+            "tiled": false,
             "group":"aerial",
+            "selected": false,
             "transparent": true,
-            "styles":"",
-            "displayInOpacitySlider":true
+            "styles":""
         },
         {
             "source": "dse_iws_cascaded",
             "name": "CARDINIA:AERIAL_LILYDALE_2011DEC30_AIR_VIS_10CM_MGA55",
             "title": "Aerial Photo (Lilydale, Dec 2011)",
             "visibility": false,
-            "opacity": 0,
+            "opacity": 1,
             "format": "image/JPEG",
-            "tiled": true,
+            "tiled": false,
             "group":"aerial",
+            "selected": false,
             "transparent": true,
-            "styles":"",
-            "displayInOpacitySlider":true
+            "styles":""
         },
         {
             "source": "dse_iws_cascaded",
             "name": "CARDINIA:AERIAL_LILYDALE_2011AUG20_AIR_VIS_10CM_MGA55",
             "title": "Aerial Photo (Lilydale, Aug 2011)",
             "visibility": false,
-            "opacity": 0,
+            "opacity": 1,
             "format": "image/JPEG",
-            "tiled": true,
+            "tiled": false,
             "group":"aerial",
+            "selected": false,
             "transparent": true,
-            "styles":"",
-            "displayInOpacitySlider":true
+            "styles":""
         },
         {
             "source": "dse_iws_cascaded",
             "name": "CARDINIA:AERIAL_LILYDALE_2011APR08_AIR_VIS_10CM_MGA55",
             "title": "Aerial Photo (Lilydale, Apr 2011)",
             "visibility": false,
-            "opacity": 0,
+            "opacity": 1,
             "format": "image/JPEG",
-            "tiled": true,
+            "tiled": false,
             "group":"aerial",
+            "selected": false,
             "transparent": true,
-            "styles":"",
-            "displayInOpacitySlider":true
+            "styles":""
         },
         {
             "source": "dse_iws_cascaded",
             "name": "CARDINIA:AERIAL_LILYDALE_2010DEC30_AIR_VIS_10CM_MGA55",
             "title": "Aerial Photo (Lilydale, Dec 2010)",
             "visibility": false,
-            "opacity": 0,
+            "opacity": 1,
             "format": "image/JPEG",
-            "tiled": true,
+            "tiled": false,
             "group":"aerial",
+            "selected": false,
             "transparent": true,
-            "styles":"",
-            "displayInOpacitySlider":true
+            "styles":""
         },
         {
             "source": "dse_iws_cascaded",
             "name": "CARDINIA:AERIAL_PORTPHILLIP_2010DEC28_AIR_VIS_35CM_MGA55",
             "title": "Aerial Photo (Port Phillip, Dec 2010)",
             "visibility": false,
-            "opacity": 0,
+            "opacity": 1,
             "format": "image/JPEG",
-            "tiled": true,
+            "tiled": false,
             "group":"aerial",
+            "selected": false,
             "transparent": true,
-            "styles":"",
-            "displayInOpacitySlider":true
+            "styles":""
         },
         {
             "source": "dse_iws_cascaded",
             "name": "CARDINIA:AERIAL_PORTPHILLIP-OUTER_2011DEC30_AIR_VIS_35CM_MGA55",
             "title": "Aerial Photo (Port Phillip Outer, Dec 2011)",
             "visibility": false,
-            "opacity": 0,
+            "opacity": 1,
             "format": "image/JPEG",
-            "tiled": true,
+            "tiled": false,
             "group":"aerial",
+            "selected": false,
             "transparent": true,
-            "styles":"",
-            "displayInOpacitySlider":true
+            "styles":""
         },
         {
             "source": "dse_iws_cascaded",
             "name": "CARDINIA:AERIAL_PORTPHILLIP-OUTER_2011DEC30_AIR_CIR_35CM_MGA55",
             "title": "Aerial Photo (Port Phillip Outer, Dec 2011, IR)",
             "visibility": false,
+            "opacity": 1,
+            "format": "image/JPEG",
+            "tiled": false,
+            "group":"aerial",
+            "selected": false,
+            "transparent": true,
+            "styles":""
+        },
+        {
+            "source": "none",
+            "name": "CARDINIA:AERIAL_PORTPHILLIP-OUTER_2011DEC30_AIR_CIR_35CM_MGA55",
+            "title": "None",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/JPEG",
+            "tiled": false,
+            "group":"aerial",
+            "selected": false,
+            "transparent": true,
+            "styles":""
+        },
+        {
+            "source": "dse_iws_cascaded",
+            "name": "CARDINIA:AERIAL_CARDINIA_2006NOV18_AIR_VIS_35CM_MGA55",
+            "title": "Aerial Photo (18/11/2006)",
+            "visibility": true,
             "opacity": 0,
             "format": "image/JPEG",
             "tiled": true,
             "group":"aerial",
+            "selected": true,
             "transparent": true,
             "styles":"",
             "displayInOpacitySlider":true
