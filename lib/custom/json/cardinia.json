@@ -11,12 +11,12 @@
                     "title": "Surface Layers",
                     "collapsed": true
                 },
+                "default": "Overlays",
                 "aerial": {
                     "title": "Aerial Photos",
                     "collapsed": true,
                     "exclusive": true
                 },
-                "default": "Overlays",
                 "background": {
                     "title": "Base Maps",
                     "exclusive": true
