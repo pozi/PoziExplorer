@@ -1,0 +1,278 @@
+{
+    "servicesHost":"http://49.156.17.41",
+    "searchEndPoint":"/ws/rest/v3/ws_all_features_by_string_and_lga.php",
+    "LGACode":"315",
+    "databaseConfig":"vicmap",
+    "tools": [
+        {
+            "ptype": "gxp_layermanager",
+            "groups": {
+                "top": {
+                    "title": "Surface Layers",
+                    "collapsed": true
+                },
+                "default": "Overlays",
+                "background": {
+                    "title": "Base Maps",
+                    "exclusive": true
+                }
+            },
+            "outputConfig": {
+                "id": "tree",
+                "border": false,
+                "tbar": [
+                    
+                ]
+            },
+            "outputTarget": "westpanel"
+        },
+        {
+            "ptype": "gxp_addlayers",
+            "actionTarget": "tree.tbar"
+        },
+        {
+            "ptype": "gxp_layerproperties",
+            "id": "layerproperties",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_zoomtolayerextent",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_styler",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_removelayer",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_wmsgetfeatureinfo",
+            "format": "grid",
+            "toggleGroup": "interaction",
+            "showButtonText": false
+        },
+        {
+            "ptype": "gxp_print",
+            "actionTarget":"toolPlaceHolder",
+            "customParams": {
+                "outputFilename": "PoziExplorer-print"
+            },
+            "printService": "/geoserver/pdf",
+            "showButtonText": false
+        },
+        {
+            "ptype": "gxp_measure",
+            "toggleGroup": "interaction",
+            "controlOptions": {
+                "immediate": true
+            },
+            "showButtonText": false
+        }
+    ],
+    "sources": {
+        "local": {
+            "url": "/geoserver/CORANGAMITE/ows",
+            "title": "Corangamite Shire Council Layers",
+            "ptype": "gxp_wmscsource",
+            "tiled": false
+        },
+        "backend_cascaded": {
+            "url": "http://basemap.pozi.com/geoserver/DSE/ows",
+            "title": "DSE Vicmap Layers",
+            "ptype": "gxp_wmscsource"
+        },
+        "dse_iws_cascaded": {
+            "url": [
+                "http://m1.pozi.com/geoserver/CORANGAMITE/ows",
+                "http://m2.pozi.com/geoserver/CORANGAMITE/ows",
+                "http://m3.pozi.com/geoserver/CORANGAMITE/ows",
+                "http://m4.pozi.com/geoserver/CORANGAMITE/ows"
+            ],
+            "title": "DSE Image Web Server",
+            "ptype": "gxp_wmscsource",
+            "format": "image/JPEG",
+            "group": "background",
+            "transition": "resize"
+        },
+        "mapquest": {
+            "ptype": "gxp_mapquestsource"
+        },
+        "bing": {
+            "ptype": "gxp_bingsource"
+        },
+        "ol": {
+            "ptype": "gxp_olsource"
+        },
+        "backend": {
+            "url": [
+                "http://m1.pozi.com/geoserver/ows",
+                "http://m2.pozi.com/geoserver/ows",
+                "http://m3.pozi.com/geoserver/ows",
+                "http://m4.pozi.com/geoserver/ows"
+            ],
+            "title": "Pozi Data Server",
+            "ptype": "gxp_wmscsource",
+            "transition": null
+        }
+    },
+    "layers": [
+        {
+            "source": "backend",
+            "name": "VICMAP:VW_DSE_VMPLAN_ZONE",
+            "title": "Planning Zones",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "backend",
+            "name": "VICMAP:VW_DSE_VMPLAN_OVERLAY",
+            "title": "Planning Overlays",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "backend",
+            "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
+            "title": "Property",
+            "visibility": true,
+            "opacity": 0.25,
+            "format": "image/GIF",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "backend",
+            "name": "DSE:VMFEAT_FOI_POINT_RESOURCE_RECREATIONAL",
+            "title": "Recreational Resources",
+            "visibility": false,
+            "opacity": 0.8,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "backend",
+            "name": "DSE:VMFEAT_FOI_POINT_FACILITY_SPORT",
+            "title": "Sport Faclities",
+            "visibility": false,
+            "opacity": 0.8,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "backend",
+            "name": "VICMAP:VW_CORANGAMITE_MASK",
+            "title": "Municipal Boundary",
+            "visibility": true,
+            "opacity": 0.6,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "transition": "resize",
+            "group": "top"
+        },
+        {
+            "source": "backend",
+            "name": "LabelClassic",
+            "title": "Labels",
+            "visibility": true,
+            "opacity": 1,
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "group": "top"
+        },
+        {
+            "source": "backend",
+            "name": "VicmapClassic",
+            "title": "Vicmap Classic",
+            "visibility": true,
+            "opacity": 1,
+            "group": "background",
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "cached": true,
+            "transition": "resize"
+        },
+        {
+            "source": "mapquest",
+            "name": "osm",
+            "visibility": false,
+            "group": "background"
+        },
+        {
+            "source": "ol",
+            "group": "background",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "None",
+                {
+                    "visibility": false
+                }
+            ]
+        }
+    ],
+    "center": [
+        15940799, -4608323
+    ],
+    "zoom": 10,
+    "workspace": "CORANGAMITE",
+    "highlightSymboliser": {
+        "name": "test",
+        "strokeColor": "yellow",
+        "strokeWidth": 15,
+        "strokeOpacity": 0.5,
+        "fillColor": "yellow",
+        "fillOpacity": 0.2
+    },
+    "liveDataEndPoints": [
+        {
+            "urlLayout": "http://192.168.0.1/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://192.168.0.1/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "sqlite",
+            "storeName": "corangamite"
+        },
+        {
+            "urlLayout": "http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "pgsql",
+            "storeName": "vicmap"
+        },
+        {
+            "urlLayout": "http://v3.pozi.com/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://v3.pozi.com/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "pgsql",
+            "storeName": "corangamitegis"
+        }
+    ],
+    "logoClientSrc":"theme/app/img/custom/corangamite_logo.png",
+    "logoClientWidth":160,
+    "zoomMax":18,
+    "bannerLineColor":"#007CC2",
+    "bannerRightCornerLine1":"Corangamite Shire Council",
+    "bannerRightCornerLine2":"Victoria, Australia",
+    "printMapTitle":"Corangamite Shire Council",
+    "linkToCouncilWebsite":"http://www.corangamite.vic.gov.au/",
+    "collapseWestPanel":true,
+    "openFirstDefaultTab":true
+}

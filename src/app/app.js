@@ -2043,6 +2043,8 @@ Ext.onReady(function() {
 
 									gtLayerLabel = ft;
 									
+									ft = ft.replace(/es\s/g,"e ");
+									
 									if(ft.charAt(ft.length-2) != 's' && ft.charAt(ft.length-1) == 's')
 									{			
 										ft = ft.replace(/s$/,"");
