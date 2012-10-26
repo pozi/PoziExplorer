@@ -528,10 +528,10 @@
     "workspace": "CARDINIA",
     "highlightSymboliser": {
         "name": "test",
-        "strokeColor": "yellow",
-        "strokeWidth": 15,
+        "strokeColor": "orange",
+        "strokeWidth": 20,
         "strokeOpacity": 0.5,
-        "fillColor": "yellow",
+        "fillColor": "orange",
         "fillOpacity": 0.2
     },
     "liveDataEndPoints": [
