@@ -348,58 +348,6 @@
         },
         {
             "source": "dse_iws_cascaded",
-            "name": "CARDINIA:AERIAL_LILYDALE_2011DEC30_AIR_VIS_10CM_MGA55",
-            "title": "Aerial Photo (Lilydale, Dec 2011)",
-            "visibility": false,
-            "opacity": 1,
-            "format": "image/JPEG",
-            "tiled": true,
-            "group":"aerial",
-            "selected": false,
-            "transparent": true,
-            "styles":""
-        },
-        {
-            "source": "dse_iws_cascaded",
-            "name": "CARDINIA:AERIAL_LILYDALE_2011AUG20_AIR_VIS_10CM_MGA55",
-            "title": "Aerial Photo (Lilydale, Aug 2011)",
-            "visibility": false,
-            "opacity": 1,
-            "format": "image/JPEG",
-            "tiled": true,
-            "group":"aerial",
-            "selected": false,
-            "transparent": true,
-            "styles":""
-        },
-        {
-            "source": "dse_iws_cascaded",
-            "name": "CARDINIA:AERIAL_LILYDALE_2011APR08_AIR_VIS_10CM_MGA55",
-            "title": "Aerial Photo (Lilydale, Apr 2011)",
-            "visibility": false,
-            "opacity": 1,
-            "format": "image/JPEG",
-            "tiled": true,
-            "group":"aerial",
-            "selected": false,
-            "transparent": true,
-            "styles":""
-        },
-        {
-            "source": "dse_iws_cascaded",
-            "name": "CARDINIA:AERIAL_LILYDALE_2010DEC30_AIR_VIS_10CM_MGA55",
-            "title": "Aerial Photo (Lilydale, Dec 2010)",
-            "visibility": false,
-            "opacity": 1,
-            "format": "image/JPEG",
-            "tiled": true,
-            "group":"aerial",
-            "selected": false,
-            "transparent": true,
-            "styles":""
-        },
-        {
-            "source": "dse_iws_cascaded",
             "name": "CARDINIA:AERIAL_PORTPHILLIP_2010DEC28_AIR_VIS_35CM_MGA55",
             "title": "Aerial Photo (Port Phillip, Dec 2010)",
             "visibility": false,
@@ -441,7 +389,7 @@
         {
             "source": "dse_iws_cascaded",
             "name": "CARDINIA:AERIAL_CARDINIA_2006NOV18_AIR_VIS_35CM_MGA55",
-            "title": "Aerial Photo (18/11/2006)",
+            "title": "Aerial Photo (Cardinia, Nov 2006)",
             "visibility": false,
             "opacity": 1,
             "format": "image/JPEG",
@@ -511,6 +459,18 @@
         {
             "source": "ol",
             "group": "background",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "None",
+                {
+                    "visibility": false
+                }
+            ]
+        },
+        {
+            "source": "ol",
+            "group": "aerial",
             "fixed": true,
             "type": "OpenLayers.Layer",
             "args": [
