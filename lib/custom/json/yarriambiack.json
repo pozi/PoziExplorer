@@ -242,20 +242,26 @@
     },
     "liveDataEndPoints": [
         {
-            "urlLayout": "http://172.20.10.19: 9090/ws/rest/v3/ws_get_layouts.php",
-            "urlLiveData": "http://172.20.10.19: 9090/ws/rest/v3/ws_get_live_data.php",
+            "urlLayout": "http://0.0.0.0: 9090/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://0.0.0.0: 9090/ws/rest/v3/ws_get_live_data.php",
             "storeMode": "sqlite",
-            "storeName": "yaariambiack"
+            "storeName": "yarriambiack"
         },
         {
             "urlLayout": "http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php",
             "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
             "storeMode": "pgsql",
             "storeName": "vicmap"
+        },
+        {
+            "urlLayout": "http://v3.pozi.com/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://v3.pozi.com/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "pgsql",
+            "storeName": "yarriambiackgis"
         }
     ],
     "logoClientSrc":"theme/app/img/custom/yarriambiack_logo.png",
-    "logoClientWidth":122,
+    "logoClientWidth":160,
     "zoomMax":18,
     "bannerLineColor":"#CF5D38",
     "bannerRightCornerLine1":"Yarriambiack Shire Council",
@@ -276,5 +282,7 @@
 	["142.052","-35.771","142.057","-35.766","Yaapeet"]
     ],
     "printMapTitle":"Yarriambiack Shire Council",
-    "linkToCouncilWebsite":"http://www.yarriambiack.vic.gov.au/"
+    "linkToCouncilWebsite":"http://www.yarriambiack.vic.gov.au/",
+    "collapseWestPanel":true,
+    "openFirstDefaultTab":true
 }
