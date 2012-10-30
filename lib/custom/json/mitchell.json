@@ -153,6 +153,17 @@
             "tiled": false
         },
         {
+            "source": "backend",
+            "name": "VICMAP:DSE_VMADMIN_WARD_2012",
+            "title": "Wards (2012)",
+            "visibility": false,
+            "opacity": 0.30,
+            "format": "image/png8",
+            "styles": "Mitchell_Wards_2012",
+            "transparent": true,
+            "tiled": false
+        },
+        {
             "source": "backend_cascaded",
             "name": "DSE:CC_BUSHFIRE_PRONE_AREAS",
             "title": "Bushfire-Prone Areas",
