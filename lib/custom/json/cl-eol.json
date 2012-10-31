@@ -251,7 +251,7 @@
     ],
     "zoomMax":18,
     "printMapTitle":"Creek-link",
-    "collapseWestPanel":false,
+    "collapseWestPanel":true,
     "hideNorthRegion":true,
     "hideSelectedFeaturePanel":false,
     "eastPanelCollapsible":false,
