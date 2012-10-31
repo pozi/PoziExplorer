@@ -142,6 +142,17 @@
         },
         {
             "source": "backend",
+            "name": "VICMAP:DSE_VMADMIN_WARD_2012",
+            "title": "Wards (2012)",
+            "visibility": false,
+            "opacity": 0.30,
+            "format": "image/png8",
+            "styles": "Corangamite_Wards_2012",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "backend",
             "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
             "title": "Property",
             "visibility": true,
@@ -266,9 +277,9 @@
         }
     ],
     "logoClientSrc":"theme/app/img/custom/corangamite_logo.png",
-    "logoClientWidth":160,
+    "logoClientWidth":150,
     "zoomMax":18,
-    "bannerLineColor":"#007CC2",
+    "bannerLineColor":"#9BCD65",
     "bannerRightCornerLine1":"Corangamite Shire Council",
     "bannerRightCornerLine2":"Victoria, Australia",
     "printMapTitle":"Corangamite Shire Council",

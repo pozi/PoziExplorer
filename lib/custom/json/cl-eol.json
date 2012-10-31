@@ -190,10 +190,10 @@
 		"name":"VICMAP:VMPROP_PARCEL_OPTI",
 		"title":"Parcels (Vicmap)",
 		"visibility":true,
-		"opacity":0.25,
+		"opacity":0.5,
 		"queryable": false,
 		"format":"image/png8",
-		"styles":"creek_parcel",
+		"styles":"creeklink_parcel",
 		"transparent":true,
 		"tiled":false,
 		"transition":""
