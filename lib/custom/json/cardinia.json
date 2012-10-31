@@ -389,6 +389,18 @@
             "styles":""
         },
         {
+			"source": "dse_iws_cascaded",
+			"name": "CARDINIA:AERIAL_CARDINIA_2009NOV09_AIR_VIS_15CM_MGA55",
+			"title": "Aerial Photo (CIP, 2009)",
+			"visibility": false,
+			"opacity": 1,
+			"group": "aerial",
+			"selected": false,
+			"format": "image/JPEG",
+			"transparent": true,
+            "styles":""
+		},
+        {
             "source": "backend",
             "name": "VICMAP:VW_CARDINIA_MASK",
             "title": "Municipal Boundary",
@@ -434,17 +446,6 @@
             "visibility": false,
             "group": "background"
         },
-        {
-			"source": "dse_iws_cascaded",
-			"name": "CARDINIA:AERIAL_CARDINIA_2009NOV09_AIR_VIS_15CM_MGA55",
-			"title": "Aerial Photo (CIP, 2009)",
-			"visibility": false,
-			"opacity": 1,
-			"group": "background",
-			"selected": false,
-			"format": "image/JPEG",
-			"transparent": true
-		},
         {
             "source": "ol",
             "group": "background",
