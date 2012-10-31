@@ -74,7 +74,7 @@ else
 }
 
 var app;
-var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurrentExpandedTabIdx=[],gCurrentLoggedRole="NONE",JSONconf,propertyDataInit,gtLayerPresentationConfiguration,eastPanel,northPart,gLayoutsArr,gLoggedUsername,gLoggedPassword,gtZoomMax,gtHideSelectedFeaturePanel,add_default_tabs;
+var glayerLocSel,gComboDataArray=[],gfromWFS,clear_highlight,gCombostore,gCurrentExpandedTabIdx=[],gCurrentLoggedRole="NONE",JSONconf,propertyDataInit,gtLayerPresentationConfiguration,eastPanel,westPanel,northPart,gLayoutsArr,gLoggedUsername,gLoggedPassword,gtZoomMax,gtHideSelectedFeaturePanel,add_default_tabs;
 var poziLinkClickHandler;
 var vector_layer = new OpenLayers.Layer.Vector("WKT",{displayInLayerSwitcher:false});
 var wkt_format = new OpenLayers.Format.WKT();
@@ -1490,7 +1490,7 @@ Ext.onReady(function() {
 			};
 
 			// Panels and portals
-			var westPanel = new Ext.Panel({
+			westPanel = new Ext.Panel({
 				id:"westpanel",
 				border: false,
 				layout: "anchor",
@@ -2913,6 +2913,8 @@ Ext.onReady(function() {
 							typedUsername = user.split(".")[1];
 						}
 						app.showLogout(typedUsername);
+						// Showing the layer tree because we're logged in
+						westPanel.expand();						
 
 						if (app.authorizedRoles[0])
 						{
