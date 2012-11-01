@@ -2355,8 +2355,8 @@ Ext.onReady(function() {
 					,
 					new Ext.Panel({
 						region: "center",
-						width: 483,
-						padding: "34px",
+						width: 482,
+						padding: "31px",
 						border: false,
 						bodyStyle: " background-color: white ; ",
 						items: [
@@ -2383,10 +2383,11 @@ Ext.onReady(function() {
 					,
 					new Ext.Panel({
 						region: "center",
-						style:"padding:33px 0px 0px; text-align: center;",
+						style:"padding:31px 0px 0px; text-align: center;",
 						width: 80,
-						height: 71,
-						padding: "8px",
+						height: 67,
+						border:false,
+						padding: "7px",
 						bodyStyle: {backgroundColor:gtBannerLineColor},
 						html:'<img style="vertical-align: middle;"src="theme/app/img/panel/search_button.png"/>'
 					})
