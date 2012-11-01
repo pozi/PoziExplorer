@@ -2727,6 +2727,13 @@ Ext.onReady(function() {
 					//	}
 					//});
 					app.showLogin();
+
+					if (gtReloadOnLogin)
+					{
+						// Issue with users having to refresh the page to access their priviledged functionalities
+						// This section should disappear when we're able to reload the layer tree / manager properly
+						window.location.reload();
+					}
 				};
 
 
