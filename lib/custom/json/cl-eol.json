@@ -10,11 +10,7 @@
                 },
                 "default": {
                 	"title": "Overlays",
-                	"collapsed": true
-                },
-                "editing": { 
-                	"title":"Editable Layers",
-                	"collapsed":false
+                	"collapsed": false
                 },
                 "background": {
                     "title": "Base Maps",
@@ -101,6 +97,18 @@
     "layers": [
 	{
 		"source":"local",
+		"name":"GROUP_BOUNDARY_EDIT",
+		"title":"Landcare Boundary (for edit)",
+		"visibility":false,
+		"opacity":0.85,
+		"format":"image/png8",
+		"styles":"",
+		"transparent":true,
+		"tiled":false,
+		"transition":""
+	},
+	{
+		"source":"local",
 		"name":"GROUP_BOUNDARY",
 		"title":"Landcare Boundary",
 		"visibility":true,
@@ -113,20 +121,7 @@
 	},
 	{
 		"source":"local",
-		"name":"GROUP_BOUNDARY_EDIT",
-		"title":"Landcare Boundary (for edit)",
-		"visibility":false,
-		"opacity":0.85,
-		"format":"image/png8",
-		"styles":"",
-		"transparent":true,
-		"tiled":false,
-		"transition":"",
-		"group":"editing"
-	},
-	{
-		"source":"local",
-		"name":"creek_segments",
+		"name":"CREEK_SEGMENT_FINAL",
 		"title":"Creek Segments",
 		"visibility":true,
 		"opacity":0.85,
@@ -138,7 +133,7 @@
 	},
 	{
 		"source":"local",
-		"name":"CREEK_SEGMENT_VISITED",
+		"name":"CREEK_SEGMENT_FINAL_VISITED",
 		"title":"Creek Segments (visited)",
 		"visibility":false,
 		"opacity":0.85,
@@ -171,19 +166,6 @@
 		"transparent":true,
 		"tiled":false,
 		"transition":""
-	},
-	{
-		"source":"local",
-		"name":"CREEK_SEGMENT",
-		"title":"Creek Segments (for edit)",
-		"visibility":false,
-		"opacity":0.8,
-		"format":"image/png8",
-		"styles":"",
-		"transparent":true,
-		"tiled":false,
-		"transition":"",
-		"group":"editing"
 	},
 	{
 		"source":"backend",
@@ -259,11 +241,10 @@
     "infoTitle":"",
     "hideScaleCombo":true,
     "layerPresentation": {
-    	"creek_segments":[
-		{"attr_name":"creek_name"},
+    	"CREEK_SEGMENT_FINAL":[
+		{"attr_name":"label","alt_name":"Creek Name"},
 		{"attr_name":"management_group"},
-		{"attr_name":"contact_datails"},
-    	{"attr_name":"stock_excluded"},
+    		{"attr_name":"stock_excluded"},
 		{"attr_name":"stock_excluded_date"},
 		{"attr_name":"native_vegetation"},
 		{"attr_name":"revegetated_date"}
