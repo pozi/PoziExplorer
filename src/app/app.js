@@ -2355,7 +2355,7 @@ Ext.onReady(function() {
 					,
 					new Ext.Panel({
 						region: "center",
-						width: 500,
+						width: 492,
 						padding: "31px",
 						border: false,
 						bodyStyle: " background-color: white ; ",
