@@ -2355,7 +2355,7 @@ Ext.onReady(function() {
 					,
 					new Ext.Panel({
 						region: "center",
-						width: 500,
+						width: 483,
 						padding: "34px",
 						border: false,
 						bodyStyle: " background-color: white ; ",
@@ -2381,6 +2381,16 @@ Ext.onReady(function() {
 						]
 					})
 					,
+					new Ext.Panel({
+						region: "center",
+						style:"padding:33px 0px 0px; text-align: center;",
+						width: 80,
+						height: 71,
+						padding: "8px",
+						bodyStyle: {backgroundColor:gtBannerLineColor},
+						html:'<img style="vertical-align: middle;"src="theme/app/img/panel/search_button.png"/>'
+					})
+					,
 					{
 						columnWidth: 0.5,
 						html:"",
@@ -2388,7 +2398,6 @@ Ext.onReady(function() {
 						border:false
 					}
 					,
-
 					new Ext.Panel({
 						region: "east",
 						border: false,
