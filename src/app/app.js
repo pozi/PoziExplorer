@@ -57,7 +57,7 @@
  */
 
 // Toggle value from true to false to switch between local (debug) and remote (deployed)
-var debugMode = false;
+var debugMode = true;
 
 var gtProxy,gtLoginEndpoint,gtLocalLayerSourcePrefix;
 if (debugMode)
