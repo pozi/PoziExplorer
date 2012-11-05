@@ -2208,16 +2208,23 @@ Ext.onReady(function() {
 												
 												var col = configArray[c].col;
 												
+												var lock = configArray[c].lock;
+												
 												if (!(col))
 												{
 													col = "#A0A0A0";
 												}
 												
+												if(lock)
+												{
+													lock = "url(theme/app/img/panel/lock.png)";
+												}
+												
 												configArray[c].headerCfg={
 													tag: 'div',
-													style:'	background-image: url();background-color: '+col+';padding-left: 10px;',
+													style:'	background-image: '+lock+'; background-position: right; background-repeat:no-repeat; background-color: '+col+';padding-left: 10px;',
 													children: [
-													    { tag: 'div', 'html': t }
+													    { tag: 'div', 'html': t}
 													]
 												};
 											}
