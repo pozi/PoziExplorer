@@ -56,10 +56,14 @@
  * @require OpenLayers/Request/XMLHttpRequest.js
  */
 
+<<<<<<< HEAD
 // Toggle value from true to false to switch between local (debug) and remote (deployed)
 var debugMode = false;
 
+=======
+>>>>>>> 8de4afbee0979af7571952b630eef6b61fecb294
 var gtProxy,gtLoginEndpoint,gtLocalLayerSourcePrefix;
+var debugMode = (/(localhost|\.dev|\.local)/i).test(window.location.hostname);
 if (debugMode)
 {
 	gtProxy = "proxy/?url=";
