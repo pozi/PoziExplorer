@@ -2217,14 +2217,14 @@ Ext.onReady(function() {
 												
 												if(lock)
 												{
-													lock = "url(theme/app/img/panel/lock.png)";
+													lock = "background-image: url(theme/app/img/panel/lock.png);";
 												}
 												
 												configArray[c].headerCfg={
 													tag: 'div',
-													style:'	background-image: '+lock+'; background-position: right; background-repeat:no-repeat; background-color: '+col+';padding-left: 10px;',
+													style: lock+ 'background-position: right; background-repeat: no-repeat; background-color:' +col+ ';padding-left: 10px;',
 													children: [
-													    { tag: 'div', 'html': t}
+													    { tag: 'div', 'html': t }
 													]
 												};
 											}
