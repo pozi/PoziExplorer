@@ -179,6 +179,7 @@ Ext.onReady(function() {
      */
 	// Reasons for override:
 	// - increase size (height/width) of the popup
+	// - JSON customisation of the edit form by layer
 
     gxp.plugins.FeatureEditor.prototype.addActions = function() {
         var popup;
@@ -355,6 +356,38 @@ Ext.onReady(function() {
                         // deactivate will hide the layer, so show it again
                         featureManager.showLayer(this.id, this.showSelectedOnly && "selected");
                     }
+                    
+                    // JSON customisations to edit form
+                    // We need to identify what is the current selected layer
+                    // We do that thru featureLayer.features[0].fid which by construction starts with the laeyr name
+                    // Note: this could be done more elegantly
+                       
+                    if (featureLayer.features[0].fid)
+                    {
+                    	var layerName = featureLayer.features[0].fid.split(".")[0];
+                    	
+                    	// The JSON can contain a customisation for the edit form (presence and order of attributes):
+			//    "layerEditPresentation": {
+			//	"CREEK_SEGMENT_FINAL":[
+			//		"label",
+			//		"interested",
+			//		"visited",
+			//		"visited_date",
+			//		"stock_excluded",
+			//		"stock_excluded_date",
+			//		"native_vegetation",
+			//		"revegetated_date",
+			//		"comments",
+			//		"credits",
+			//		"management_group"
+			//	]
+			//    }, 
+                    	if (JSONconf.layerEditPresentation)
+                    	{
+	                    	this.fields = JSONconf.layerEditPresentation[layerName];
+	                }
+                    }
+                                       
                     popup = this.addOutput({
                         xtype: "gxp_featureeditpopup",
                         collapsible: true,
