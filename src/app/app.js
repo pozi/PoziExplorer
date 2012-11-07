@@ -366,8 +366,8 @@ Ext.onReady(function() {
                         editing: feature.state === OpenLayers.State.INSERT,
                         schema: this.schema,
                         allowDelete: true,
-                        width: 200,
-                        height: 250,
+                        width: 400,
+                        height: 450,
                         listeners: {
                             "close": function() {
                                 if (this.readOnly === false) {
