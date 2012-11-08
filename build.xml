@@ -104,6 +104,10 @@
         <copy todir="${app.build}/src/gxp/theme">
             <fileset dir="${app.fullpath}/src/gxp/theme"/>
         </copy>
+        <!-- copy PrintPreview resources -->
+        <copy todir="${app.build}/src/PrintPreview/resources">
+            <fileset dir="${app.fullpath}/src/PrintPreview/resources"/>
+        </copy>
         <!-- build app js -->
         <mkdir dir="${app.build}/lib"/>
         <java classname="org.ringojs.tools.launcher.Main" failonerror="true" fork="true" output="${sdk.logfile}" append="true">
@@ -121,6 +125,11 @@
         <!-- copy additional app resources -->
         <copy todir="${app.build}/theme">
             <fileset dir="${app.fullpath}/theme"/>
+        </copy>
+        <mkdir dir="${app.build}/lib/custom"/>        
+        <!-- copy custom app resources -->
+        <copy todir="${app.build}/lib/custom">
+            <fileset dir="${app.fullpath}/lib/custom"/>
         </copy>
         <copy todir="${app.build}">
             <fileset dir="${app.fullpath}">
