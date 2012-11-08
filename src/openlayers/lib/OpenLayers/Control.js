@@ -120,12 +120,6 @@ OpenLayers.Control = OpenLayers.Class({
      */
     active: null,
 
-    /**
-     * Property: handlerOptions
-     * {Object} Used to set non-default properties on the control's handler
-     */
-    handlerOptions: null,
-
     /** 
      * Property: handler 
      * {<OpenLayers.Handler>} null

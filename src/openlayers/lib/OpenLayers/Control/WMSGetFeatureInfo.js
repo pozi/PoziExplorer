@@ -140,6 +140,7 @@ OpenLayers.Control.WMSGetFeatureInfo = OpenLayers.Class(OpenLayers.Control, {
      * }
      * (end)
      */
+    handlerOptions: null,
     
     /**
      * Property: handler

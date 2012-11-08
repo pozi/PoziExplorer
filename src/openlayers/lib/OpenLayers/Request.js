@@ -5,7 +5,6 @@
 
 /**
  * @requires OpenLayers/Events.js
- * @requires OpenLayers/Request/XMLHttpRequest.js
  */
 
 /**
@@ -20,14 +19,7 @@ OpenLayers.ProxyHost = "";
  *     with XMLHttpRequests.  These methods work with a cross-browser
  *     W3C compliant <OpenLayers.Request.XMLHttpRequest> class.
  */
-if (!OpenLayers.Request) {
-    /**
-     * This allows for OpenLayers/Request/XMLHttpRequest.js to be included
-     * before or after this script.
-     */
-    OpenLayers.Request = {};
-}
-OpenLayers.Util.extend(OpenLayers.Request, {
+OpenLayers.Request = {
     
     /**
      * Constant: DEFAULT_CONFIG
@@ -427,4 +419,4 @@ OpenLayers.Util.extend(OpenLayers.Request, {
         return OpenLayers.Request.issue(config);
     }
 
-});
+};

@@ -398,12 +398,8 @@ OpenLayers.Control.OverviewMap = OpenLayers.Class(OpenLayers.Control, {
      * minimize - {Boolean} 
      */
     showToggle: function(minimize) {
-        if (this.maximizeDiv) {
-            this.maximizeDiv.style.display = minimize ? '' : 'none';
-        }
-        if (this.minimizeDiv) {
-            this.minimizeDiv.style.display = minimize ? 'none' : '';
-        }
+        this.maximizeDiv.style.display = minimize ? '' : 'none';
+        this.minimizeDiv.style.display = minimize ? 'none' : '';
     },
 
     /**

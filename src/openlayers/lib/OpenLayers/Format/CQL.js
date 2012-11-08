@@ -5,9 +5,6 @@
 
 /**
  * @requires OpenLayers/Format/WKT.js
- * @requires OpenLayers/Filter/Comparison.js
- * @requires OpenLayers/Filter/Logical.js
- * @requires OpenLayers/Filter/Spatial.js
  */
 
 /**

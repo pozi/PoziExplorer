@@ -5,7 +5,6 @@
 
 /**
  * @requires OpenLayers/Format/WMSDescribeLayer.js
- * @requires OpenLayers/Format/OGCExceptionReport.js
  */
 
 /**
@@ -91,12 +90,6 @@ OpenLayers.Format.WMSDescribeLayer.v1_1 = OpenLayers.Class(
                 }
                 describelayer.push({layerName: layerName, owsType: owsType, 
                     owsURL: owsURL, typeName: typeName}); 
-            } else if (nodeName == 'ServiceException') {
-                // an exception must have occurred, so parse it
-                var parser = new OpenLayers.Format.OGCExceptionReport();
-                return {
-                    error: parser.read(data)
-                };
             }
         }
         return describelayer;

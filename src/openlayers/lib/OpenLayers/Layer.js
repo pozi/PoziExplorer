@@ -328,11 +328,6 @@ OpenLayers.Layer = OpenLayers.Class({
 
         this.metadata = {};
         
-        options = OpenLayers.Util.extend({}, options);
-        // make sure we respect alwaysInRange if set on the prototype
-        if (this.alwaysInRange != null) {
-            options.alwaysInRange = this.alwaysInRange;
-        }
         this.addOptions(options);
 
         this.name = name;
@@ -849,7 +844,7 @@ OpenLayers.Layer = OpenLayers.Class({
                 alwaysInRange = false;
             }
         }
-        if(this.options.alwaysInRange == null) {
+        if(this.alwaysInRange == null) {
             this.alwaysInRange = alwaysInRange;
         }
 

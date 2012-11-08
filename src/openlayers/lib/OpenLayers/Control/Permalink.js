@@ -172,18 +172,11 @@ OpenLayers.Control.Permalink = OpenLayers.Class(OpenLayers.Control, {
     updateLink: function() {
         var separator = this.anchor ? '#' : '?';
         var href = this.base;
-        var anchor = null;
-        if (href.indexOf("#") != -1 && this.anchor == false) {
-            anchor = href.substring( href.indexOf("#"), href.length);
-        }
         if (href.indexOf(separator) != -1) {
             href = href.substring( 0, href.indexOf(separator) );
         }
-        var splits = href.split("#");
-        href = splits[0] + separator+ OpenLayers.Util.getParameterString(this.createParams());
-        if (anchor) {
-            href += anchor;
-        }
+
+        href += separator + OpenLayers.Util.getParameterString(this.createParams());
         if (this.anchor && !this.element) {
             window.location.href = href;
         }

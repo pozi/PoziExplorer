@@ -175,9 +175,6 @@ OpenLayers.Format.WPSExecute = OpenLayers.Class(OpenLayers.Format.XML, {
                 if (input.reference) {
                     this.writeNode("wps:Reference", input.reference, node);
                 }
-                if (input.boundingBoxData) {
-                    this.writeNode("wps:BoundingBoxData", input.boundingBoxData, node);
-                }
                 return node;
             },
             "Data": function(data) {
@@ -230,9 +227,6 @@ OpenLayers.Format.WPSExecute = OpenLayers.Class(OpenLayers.Format.XML, {
                     this.writeNode("wps:Body", reference.body, node);
                 }
                 return node;
-            },
-            "BoundingBoxData": function(node, obj) {
-                this.writers['ows']['BoundingBox'].apply(this, [node, obj, "wps:BoundingBoxData"]);
             },
             "Body": function(body) {
                 var node = this.createElementNSPlus("wps:Body", {});

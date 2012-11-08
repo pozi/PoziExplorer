@@ -189,18 +189,13 @@ OpenLayers.String = {
      * 
      * Parameters:
      * value - {String}
-     * trimWhitespace - {Boolean}
      *
      * Returns:
      * {Number|String} a Number if the passed value is a number, a String
      *     otherwise. 
      */
-    numericIf: function(value, trimWhitespace) {
-        var originalValue = value;
-        if (trimWhitespace === true && value != null && value.replace) {
-            value = value.replace(/^\s*|\s*$/g, "");
-        }
-        return OpenLayers.String.isNumeric(value) ? parseFloat(value) : originalValue;
+    numericIf: function(value) {
+        return OpenLayers.String.isNumeric(value) ? parseFloat(value) : value;
     }
 
 };

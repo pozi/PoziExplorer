@@ -41,6 +41,7 @@ OpenLayers.Control.Measure = OpenLayers.Class(OpenLayers.Control, {
      * APIProperty: handlerOptions
      * {Object} Used to set non-default properties on the control's handler
      */
+    handlerOptions: null,
     
     /**
      * Property: callbacks

@@ -6,8 +6,6 @@
 /**
  * @requires OpenLayers/Format/XML.js
  * @requires OpenLayers/Format/WFST.js
- * @requires OpenLayers/Filter/Spatial.js
- * @requires OpenLayers/Filter/FeatureId.js
  */
 
 /**

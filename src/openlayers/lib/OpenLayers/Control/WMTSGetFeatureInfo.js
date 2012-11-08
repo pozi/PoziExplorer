@@ -120,6 +120,7 @@ OpenLayers.Control.WMTSGetFeatureInfo = OpenLayers.Class(OpenLayers.Control, {
      * }
      * (end)
      */
+    handlerOptions: null,
     
     /**
      * Property: handler
