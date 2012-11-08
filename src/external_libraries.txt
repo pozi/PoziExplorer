@@ -1,6 +1,0 @@
-Ext
-GeoExt
-GXP
-OpenLayers 2.12
-PrintPreview
-ux
