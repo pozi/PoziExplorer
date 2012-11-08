@@ -1,6 +1,6 @@
 # PoziExplorer
 
-App based on the OpenGeo Suite SDK.
+App based on the [OpenGeo Suite SDK](http://opengeo.org/technology/sdk/).
 
 ## Getting it running
 
@@ -29,4 +29,8 @@ To deploy (GT internal use):
 
 This project  PHP scripts running.
 Please refer to `lib/custom/json` for more details.
+
+## SDK version
+
+This project began with SDK v2.5, but we're now using the v3.0 tooling.
 
