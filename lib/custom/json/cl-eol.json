@@ -250,6 +250,21 @@
 		{"attr_name":"revegetated_date"}
     	]
     },
+    "layerEditPresentation": {
+    	"CREEK_SEGMENT_FINAL":[
+		"label",
+		"interested",
+		"visited",
+		"visited_date",
+    		"stock_excluded",
+		"stock_excluded_date",
+		"native_vegetation",
+		"revegetated_date",
+		"comments",
+		"credits",
+		"management_group"
+    	]
+    },    
     "bottomEastItem":{
     	"title":"Legend",
     	"URL": "http://www.creeklink.org.au/resources/img/creeklink-legend-final.png",
