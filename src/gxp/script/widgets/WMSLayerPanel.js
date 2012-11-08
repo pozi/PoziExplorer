@@ -177,8 +177,7 @@ gxp.WMSLayerPanel = Ext.extend(Ext.TabPanel, {
             // TODO: revisit this
             var url = this.layerRecord.get("restUrl");
             if (!url) {
-                url = (this.source || this.layerRecord.get("layer")).url.split(
-                    "?").shift().replace(/\/(wms|ows)\/?$/, "/rest");
+                url = (this.source || this.layerRecord.get("layer")).url.split("?").shift().replace(/\/(wms|ows)\/?$/, "/rest");
             }
             if (this.sameOriginStyling) {
                 // this could be made more robust
@@ -239,6 +238,15 @@ gxp.WMSLayerPanel = Ext.extend(Ext.TabPanel, {
             config.plugins.push({
                 ptype: "gxp_wmsrasterstylesdialog"
             });
+        }
+        var ownerCt = this.ownerCt;
+        if (!(ownerCt.ownerCt instanceof Ext.Window)) {
+            config.dialogCls = Ext.Panel;
+            config.showDlg = function(dlg) {
+                dlg.layout = "fit";
+                dlg.autoHeight = false;
+                ownerCt.add(dlg);
+            };
         }
         return Ext.apply(config, {
             title: this.stylesText,

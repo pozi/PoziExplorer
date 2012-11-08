@@ -14,7 +14,7 @@ GeoExt.Lang.add("id", {
         addServerText: "Tambahkan server baru",
         addButtonText: "Add layers",
         untitledText: "Untitled",
-        addLayerSourceErrorText: "Kesalahan mendapatkan kemampuan WMS ({msg}). \ nSilakan cek url dan coba lagi.",
+        addLayerSourceErrorText: "Kesalahan mendapatkan kemampuan WMS ({msg}). \nSilakan cek url dan coba lagi.",
         availableLayersText: "Layer tersedia",
         expanderTemplateText: "<p><b>Abstract:</b> {abstract}</p>",
         panelTitleText: "Title",
@@ -31,6 +31,9 @@ GeoExt.Lang.add("id", {
     },    
 
     "gxp.plugins.FeatureEditor.prototype": {
+        splitButtonText: "Edit",
+        createFeatureActionText: "Create",
+        editFeatureActionText: "Modify",
         createFeatureActionTip: "Membuat sebuah fitur",
         editFeatureActionTip: "Edit fitur"
     },
@@ -101,6 +104,7 @@ GeoExt.Lang.add("id", {
     },
 
     "gxp.plugins.Measure.prototype": {
+        buttonText: "Pengukuran",
         lengthMenuText: "Panjang",
         areaMenuText: "Luas",
         lengthTooltip: "Pengukuran panjang",
@@ -127,6 +131,7 @@ GeoExt.Lang.add("id", {
     },
 
     "gxp.plugins.Print.prototype": {
+        buttonText:"Cetak",
         menuText: "Cetak peta",
         tooltip: "Cetak peta",
         previewText: "Preview cetak",
@@ -146,8 +151,7 @@ GeoExt.Lang.add("id", {
         queryActionText: "Query",
         queryMenuText: "Queryable Layer",
         queryActionTip: "Query layer yang dipilih",
-        queryByLocationText: "Query lokasi",
-        currentTextText: "Sampai saat ini",
+        queryByLocationText: "Query by current map extent",
         queryByAttributesText: "Query atribut",
         queryMsg: "Querying...",
         cancelButtonText: "Batal",
@@ -167,13 +171,16 @@ GeoExt.Lang.add("id", {
     },
 
     "gxp.plugins.WMSGetFeatureInfo.prototype": {
+        buttonText:"Identify",
         infoActionTip: "Get Feature Info",
         popupTitle: "Info fitur"
     },
 
     "gxp.plugins.Zoom.prototype": {
+        zoomMenuText: "Zoom Box",
         zoomInMenuText: "Memperbesar",
         zoomOutMenuText: "Memperkecil",
+        zoomTooltip: "Zoom by dragging a box",
         zoomInTooltip: "Memperbesar",
         zoomOutTooltip: "Memperkecil"
     },

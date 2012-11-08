@@ -70,6 +70,12 @@ gxp.plugins.Print = Ext.extend(gxp.plugins.Tool, {
      */
     tooltip: "Print Map",
 
+    /** api: config[text]
+     *  ``String``
+     *  Text for print action button (i18n).
+     */
+    buttonText: "Print",
+
     /** api: config[notAllNotPrintableText]
      *  ``String``
      *  Text for message when not all layers can be printed (i18n).
@@ -171,6 +177,7 @@ gxp.plugins.Print = Ext.extend(gxp.plugins.Tool, {
 
             var actions = gxp.plugins.Print.superclass.addActions.call(this, [{
                 menuText: this.menuText,
+                buttonText: this.buttonText,
                 tooltip: this.tooltip,
                 iconCls: "gxp-icon-print",
                 disabled: this.printCapabilities !== null ? false : true,
@@ -265,13 +272,12 @@ gxp.plugins.Print = Ext.extend(gxp.plugins.Tool, {
                     width: 360,
                     items: [
                         new GeoExt.ux.PrintPreview({
-                            autoHeight: true,
+                            minWidth: 336,
                             mapTitle: this.target.about && this.target.about["title"],
                             comment: this.target.about && this.target.about["abstract"],
-                            minWidth: 336,
                             printMapPanel: {
-                                height: Math.min(450, Ext.get(document.body).getHeight()-150),
                                 autoWidth: true,
+                                height: Math.min(420, Ext.get(document.body).getHeight()-150),
                                 limitScales: true,
                                 map: Ext.applyIf({
                                     controls: [
@@ -294,7 +300,13 @@ gxp.plugins.Print = Ext.extend(gxp.plugins.Tool, {
                                     vertical: true,
                                     height: 100,
                                     aggressive: true
-                                }]
+                                }],
+                                listeners: {
+                                    afterlayout: function(evt) {
+                                        printWindow.setWidth(Math.max(360, this.getWidth() + 24));
+                                        printWindow.center();
+                                    }
+                                }
                             },
                             printProvider: printProvider,
                             includeLegend: this.includeLegend,

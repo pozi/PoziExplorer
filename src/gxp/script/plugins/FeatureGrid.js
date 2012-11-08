@@ -128,12 +128,12 @@ gxp.plugins.FeatureGrid = Ext.extend(gxp.plugins.ClickableFeatures, {
      */
     displayTotalResults: function() {
         var featureManager = this.target.tools[this.featureManager];
-        if (this.showTotalResults === true && featureManager.numberOfFeatures !== null) {
+        if (this.showTotalResults === true) {
             this.displayItem.setText(
-                String.format(
+                featureManager.numberOfFeatures !== null ? String.format(
                     this.totalMsg,
                     featureManager.numberOfFeatures
-                )
+                ) : ""
             );
         }
     },
@@ -149,7 +149,7 @@ gxp.plugins.FeatureGrid = Ext.extend(gxp.plugins.ClickableFeatures, {
             featureManager.featureLayer, this.initialConfig.controlOptions
         );
         if (this.selectOnMap) {
-             if (featureManager.paging) {
+             if (this.autoLoadFeature || (featureManager.paging && featureManager.pagingType === gxp.plugins.FeatureManager.QUADTREE_PAGING)) {
                 this.selectControl.events.on({
                     "activate": function() {
                         map.events.register(
@@ -186,6 +186,7 @@ gxp.plugins.FeatureGrid = Ext.extend(gxp.plugins.ClickableFeatures, {
         this.displayItem = new Ext.Toolbar.TextItem({});
         config = Ext.apply({
             xtype: "gxp_featuregrid",
+            border: false,
             sm: new GeoExt.grid.FeatureSelectionModel(smCfg),
             autoScroll: true,
             bbar: (featureManager.paging ? [{
@@ -284,7 +285,7 @@ gxp.plugins.FeatureGrid = Ext.extend(gxp.plugins.ClickableFeatures, {
         }, config || {});
         var featureGrid = gxp.plugins.FeatureGrid.superclass.addOutput.call(this, config);
         
-        if (this.alwaysDisplayOnMap || this.selectOnMap) {
+        if (this.alwaysDisplayOnMap || (this.selectOnMap === true && this.displayMode === "selected")) {
             featureManager.showLayer(this.id, this.displayMode);
         }        
        
@@ -314,11 +315,20 @@ gxp.plugins.FeatureGrid = Ext.extend(gxp.plugins.ClickableFeatures, {
             });
             featureGrid.ignoreFields = ignoreFields;
             featureGrid.setStore(featureManager.featureStore, schema);
+            if (!featureManager.featureStore) {
+                // not a feature layer, reset toolbar
+                featureGrid.lastPageButton.disable();
+                featureGrid.nextPageButton.disable();
+                featureGrid.firstPageButton.disable();
+                featureGrid.prevPageButton.disable();
+                featureGrid.zoomToPageButton.disable();
+                this.displayTotalResults();
+            }
         }
 
         if (featureManager.featureStore) {
             onLayerChange.call(this);
-        }
+        } 
         featureManager.on("layerchange", onLayerChange, this);
         
         return featureGrid;

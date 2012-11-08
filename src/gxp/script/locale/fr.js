@@ -23,6 +23,9 @@ GeoExt.Lang.add("fr", {
     },    
 
     "gxp.plugins.FeatureEditor.prototype": {
+        splitButtonText: "Edit",
+        createFeatureActionText: "Create",
+        editFeatureActionText: "Modify",
         createFeatureActionTip: "Créer un nouvel objet",
         editFeatureActionTip: "Modifier un objet existant"
     },
@@ -72,6 +75,7 @@ GeoExt.Lang.add("fr", {
     },
 
     "gxp.plugins.Measure.prototype": {
+        buttonText: "Mesure",
         lengthMenuText: "Longueur",
         areaMenuText: "Surface",
         lengthTooltip: "Mesure de longueur",
@@ -119,6 +123,7 @@ GeoExt.Lang.add("fr", {
     },
 
     "gxp.plugins.Print.prototype": {
+        buttonText:"Imprimer",
         menuText: "Imprimer la carte",
         tooltip: "Imprimer la carte",
         previewText: "Aperçu avant impression",
@@ -138,8 +143,7 @@ GeoExt.Lang.add("fr", {
         queryActionText: "Interrogation",
         queryMenuText: "Couche de requêtes",
         queryActionTip: "Interroger la couche sélectionnée",
-        queryByLocationText: "Interroger par lieu",
-        currentTextText: "Étendue actuelle",
+        queryByLocationText: "Query by current map extent",
         queryByAttributesText: "Requête par attributs"
     },
 
@@ -149,13 +153,16 @@ GeoExt.Lang.add("fr", {
     },
 
     "gxp.plugins.WMSGetFeatureInfo.prototype": {
+        buttonText:"Identify",
         infoActionTip: "Get Feature Info",
         popupTitle: "Info sur l'objet"
     },
 
     "gxp.plugins.Zoom.prototype": {
+        zoomMenuText: "Zoom Box",
         zoomInMenuText: "Zoom avant",
         zoomOutMenuText: "Zoom arrière",
+        zoomTooltip: "Zoom by dragging a box",
         zoomInTooltip: "Zoom avant",
         zoomOutTooltip: "Zoom arrière"
     },
