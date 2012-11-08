@@ -80,8 +80,6 @@ var poziLinkClickHandler;
 var vector_layer = new OpenLayers.Layer.Vector("WKT",{displayInLayerSwitcher:false});
 var wkt_format = new OpenLayers.Format.WKT();
 var gtLayerLabel;
-var desc = "hello";
-var count = 0;
 
 // Helper functions
 function toTitleCase(str)
@@ -2339,10 +2337,10 @@ Ext.onReady(function() {
 															layout:'fit',
 															bbar:true,
 															bbarCfg: {
-																tag: 'center',
-        														html: '<p>' +configArray[i-1].desc+ '</p>'
+																tag: 'left',
+        														html: '<p style="background-color: #e8e8e8; padding: 4px; padding-left: 8px; font-size: 12px;font-family: tahoma,arial,verdana,sans-serif; font-style:italic;">' +configArray[i-1].desc+ '</p>'
         													},
-															border:true,
+															border:false,
 															items: tab_array[0]
 														});
 													}
@@ -2357,16 +2355,15 @@ Ext.onReady(function() {
 															minTabWidth     : 20,
 															bbar:true,
 															bbarCfg: {
-																tag: 'center',
-        														html: '<p>' +configArray[i-1].desc+ '</p>'
+																tag: 'left',
+        														html: '<p style="background-color: #e8e8e8; padding: 4px; padding-left: 8px; font-size: 12px;font-family: tahoma,arial,verdana,sans-serif; font-style:italic;">' +configArray[i-1].desc+ '</p>'
         													},
-															border:true,
+															border:false,
 															items: tab_array
 														});
 													}
 													targ.add(win);
-													targ.doLayout();
-													i++;
+													targ.doLayout();								
 												}
 											}
 											else
@@ -2675,7 +2672,8 @@ Ext.onReady(function() {
 												
 												var lock = configArray[c].lock;
 												
-												desc = configArray[c].desc;
+												if(!configArray[c].desc)
+													configArray[c].desc = "";
 												
 												if (!(col))
 												{
