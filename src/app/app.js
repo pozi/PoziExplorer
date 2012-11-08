@@ -78,6 +78,8 @@ var poziLinkClickHandler;
 var vector_layer = new OpenLayers.Layer.Vector("WKT",{displayInLayerSwitcher:false});
 var wkt_format = new OpenLayers.Format.WKT();
 var gtLayerLabel;
+var desc = "hello";
+var count = 0;
 
 // Helper functions
 function toTitleCase(str)
@@ -1869,7 +1871,7 @@ Ext.onReady(function() {
 															}
 														}													
 													}
-
+											
 													// The container depends on the number of records returned
 													if (tab_array.length==1)
 													{
@@ -1881,7 +1883,12 @@ Ext.onReady(function() {
 														var win = new Ext.Panel({
 															id:'tblayout-win'+g,
 															layout:'fit',
-															border:false,
+															bbar:true,
+															bbarCfg: {
+																tag: 'center',
+        														html: '<p>' +configArray[i-1].desc+ '</p>'
+        													},
+															border:true,
 															items: tab_array[0]
 														});
 													}
@@ -1893,14 +1900,19 @@ Ext.onReady(function() {
 															id              : 'tblayout-win'+g,
 															enableTabScroll : true,
 															resizeTabs      : false,
-															minTabWidth     : 20,																
-															border:false,
+															minTabWidth     : 20,
+															bbar:true,
+															bbarCfg: {
+																tag: 'center',
+        														html: '<p>' +configArray[i-1].desc+ '</p>'
+        													},
+															border:true,
 															items: tab_array
 														});
 													}
-
 													targ.add(win);
 													targ.doLayout();
+													i++;
 												}
 											}
 											else
@@ -1957,7 +1969,6 @@ Ext.onReady(function() {
 
 					}							
 				}
-
 			};
 
 			// Defines the north part of the east panel
@@ -2209,6 +2220,8 @@ Ext.onReady(function() {
 												var col = configArray[c].col;
 												
 												var lock = configArray[c].lock;
+												
+												desc = configArray[c].desc;
 												
 												if (!(col))
 												{
