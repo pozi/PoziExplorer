@@ -12,7 +12,7 @@ Then to get the code:
 
 Set up customized `build.xml` (this will affect SDK commands for all apps):
 
-    sudo cp /opt/opengeo/sdk/build.xml /opt/opengeo/sdk/build.xml.old
+    sudo mv /opt/opengeo/sdk/build.xml /opt/opengeo/sdk/build.xml.old
     sudo ln -s `pwd`/build.xml /opt/opengeo/sdk/build.xml
 
 To run in debug mode (for Groundtruth internal use):
