@@ -27,7 +27,7 @@ To deploy (GT internal use):
 
 ## Runtime dependencies
 
-This project  PHP scripts running.
+This project expects to be able to use certain PHP scripts.
 Please refer to `lib/custom/json` for more details.
 
 ## SDK version
