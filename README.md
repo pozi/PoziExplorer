@@ -10,6 +10,11 @@ Then to get the code:
 
     git clone https://github.com/groundtruth/PoziExplorer.git && cd PoziExplorer
 
+Set up customized `build.xml` (this will affect SDK commands for all apps):
+
+    sudo cp /opt/opengeo/sdk/build.xml /opt/opengeo/sdk/build.xml.old
+    sudo ln -s `pwd`/build.xml /opt/opengeo/sdk/build.xml
+
 To run in debug mode (for Groundtruth internal use):
 
     suite-sdk debug -l 9090 -g http://v3.pozi.com/geoserver .
