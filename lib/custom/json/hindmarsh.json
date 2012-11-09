@@ -1,7 +1,7 @@
 {
     "servicesHost":"http://49.156.17.41",
     "searchEndPoint":"/ws/rest/v3/ws_all_features_by_string_and_lga.php",
-    "LGACode":"347",
+    "LGACode":"330",
     "databaseConfig":"vicmap",
     "tools": [
         {
@@ -72,8 +72,8 @@
     ],
     "sources": {
 	 "local": {
-            "url": "http://www.pozi.com/geoserver/MOIRA/ows",
-            "title": "Mitchell Shire Council Layers",
+            "url": "http://www.pozi.com/geoserver/HINDMARSH/ows",
+            "title": "Indigo Shire Council Layers",
             "ptype": "gxp_wmscsource",
             "tiled": false,
             "restUrl": "/geoserver/rest"
@@ -85,10 +85,10 @@
         },
 	  "dse_iws_cascaded": {
             "url": [
-            	"http://m1.pozi.com/geoserver/MOIRA/ows",
-            	"http://m2.pozi.com/geoserver/MOIRA/ows",
-            	"http://m3.pozi.com/geoserver/MOIRA/ows",
-            	"http://m4.pozi.com/geoserver/MOIRA/ows"            	
+            	"http://m1.pozi.com/geoserver/HINDMARSH/ows",
+            	"http://m2.pozi.com/geoserver/HINDMARSH/ows",
+            	"http://m3.pozi.com/geoserver/HINDMARSH/ows",
+            	"http://m4.pozi.com/geoserver/HINDMARSH/ows"            	
             ],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
@@ -139,7 +139,18 @@
             "styles": "",
             "transparent": true,
             "tiled": false
-        },	
+        },
+        {
+        	"source": "backend",
+        	"name": "VICMAP:DSE_VMADMIN_WARD_2012",
+        	"title": "Wards (2012)",
+        	"visibility": false,
+        	"opacity": 0.30,
+        	"format": "image/png8",
+        	"styles": "Hindmarsh_Wards_2012",
+        	"transparent": true,
+        	"tiled": false
+    	},
 		{
             "source": "backend",
             "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
@@ -163,17 +174,6 @@
 			"tiled":false
 		},
 		{
-			"source":"local",
-			"name":"MOIRA:MSC_ASSETS_ROAD",
-			"title":"Bin Collection Day",
-			"visibility":false,
-			"opacity":0.85,
-			"format":"image/png8",
-			"styles":"",
-			"transparent":true,
-			"tiled":false
-		},
-		{
             "source": "backend",
             "name": "VICMAP:VW_TRANSFER_STATION",
             "title": "Transfer Stations",
@@ -186,29 +186,7 @@
         },
         {
             "source": "backend",
-            "name": "DSE:VMFEAT_FOI_POINT_RESOURCE_RECREATIONAL",
-            "title": "Recreational Resources",
-            "visibility": false,
-            "opacity": 0.8,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "backend",
-            "name": "DSE:VMFEAT_FOI_POINT_FACILITY_SPORT",
-            "title": "Sport Faclities",
-            "visibility": false,
-            "opacity": 0.8,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "backend",
-            "name": "VICMAP:VW_MOIRA_MASK",
+            "name": "VICMAP:VW_HINDMARSH_MASK",
             "title": "Municipal Boundary",
             "visibility": true,
             "opacity": 0.6,
@@ -252,20 +230,6 @@
             "visibility": false,
             "group": "background"
  		},
-       	{
-            "source": "dse_iws_cascaded",
-           	"name" :"MOIRA:AERIAL_MOIRA-SHEPPARTON_2009DEC14_AIR_VIS_30CM_MGA55",
-			"title":"Aerial Photo (CIP, Dec 2009)",
-            "visibility": true,
-            "opacity": 1,
-            "group": "background",
-            "format": "image/JPEG",
-            "tiled": true,
-            "cached": true,
-            "transparent": true,
-            "styles":"",
-            "visibility":false
-        },
         {
             "source": "ol",
             "group": "background",
@@ -280,10 +244,10 @@
         }
     ],
     "center": [
-        16202585, -4309147
+        15779835, -4307720
     ],
-    "zoom": 10,
-    "workspace": "MOIRA",
+    "zoom": 9,
+    "workspace": "HINDMARSH",
     "highlightSymboliser": {
         "name": "test",
         "strokeColor": "green",
@@ -297,7 +261,7 @@
             "urlLayout": "http://192.168.10.12/ws/rest/v3/ws_get_layouts.php",
             "urlLiveData": "http://192.168.10.12/ws/rest/v3/ws_get_live_data.php",
             "storeMode": "sqlite",
-            "storeName": "moira"
+            "storeName": "hindmarsh"
         },
         {
             "urlLayout": "http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php",
@@ -309,13 +273,13 @@
             "urlLayout": "http://www.pozi.com/ws/rest/v3/ws_get_layouts.php",
             "urlLiveData": "http://www.pozi.com/ws/rest/v3/ws_get_live_data.php",
             "storeMode": "pgsql",
-            "storeName": "moiragis"
+            "storeName": "hindmarsh"
         }
     ],
-    "logoClientSrc":"theme/app/img/custom/moira_logo.gif",
-    "logoClientWidth":290,
+    "logoClientSrc":"theme/app/img/custom/hindmarsh_logo.png",
+    "logoClientWidth":210,
     "zoomMax":18,
-    "bannerLineColor":"#026CE5",
+    "bannerLineColor":"#028918",
     "bannerRightCornerLine1":"Moira Shire Council",
     "bannerRightCornerLine2":"Victoria, Australia",
     "quickZoomDatastore": [
@@ -330,8 +294,8 @@
 	["141.339","-36.357","141.348","-36.353","Miram"],
 	["140.981","-36.379","140.993","-36.372","Serviceton"]
     ],
-    "printMapTitle":"Moira Shire Council",
-    "linkToCouncilWebsite":"http://www.moira.vic.gov.au/",
+    "printMapTitle":"Hindmarsh Shire Council",
+    "linkToCouncilWebsite":"http://www.hindmarsh.vic.gov.au/",
     "collapseWestPanel":true,
     "openFirstDefaultTab":true
 }

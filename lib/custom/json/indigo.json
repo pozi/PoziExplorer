@@ -1,7 +1,7 @@
 {
     "servicesHost":"http://49.156.17.41",
     "searchEndPoint":"/ws/rest/v3/ws_all_features_by_string_and_lga.php",
-    "LGACode":"347",
+    "LGACode":"334",
     "databaseConfig":"vicmap",
     "tools": [
         {
@@ -72,8 +72,8 @@
     ],
     "sources": {
 	 "local": {
-            "url": "http://www.pozi.com/geoserver/MOIRA/ows",
-            "title": "Mitchell Shire Council Layers",
+            "url": "http://www.pozi.com/geoserver/INDIGO/ows",
+            "title": "Indigo Shire Council Layers",
             "ptype": "gxp_wmscsource",
             "tiled": false,
             "restUrl": "/geoserver/rest"
@@ -85,10 +85,10 @@
         },
 	  "dse_iws_cascaded": {
             "url": [
-            	"http://m1.pozi.com/geoserver/MOIRA/ows",
-            	"http://m2.pozi.com/geoserver/MOIRA/ows",
-            	"http://m3.pozi.com/geoserver/MOIRA/ows",
-            	"http://m4.pozi.com/geoserver/MOIRA/ows"            	
+            	"http://m1.pozi.com/geoserver/INDIGO/ows",
+            	"http://m2.pozi.com/geoserver/INDIGO/ows",
+            	"http://m3.pozi.com/geoserver/INDIGO/ows",
+            	"http://m4.pozi.com/geoserver/INDIGO/ows"            	
             ],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
@@ -164,8 +164,19 @@
 		},
 		{
 			"source":"local",
-			"name":"MOIRA:MSC_ASSETS_ROAD",
-			"title":"Bin Collection Day",
+			"name":"INDIGO:ISC_ASSETS_FOOTPATH",
+			"title":"Footpaths (Assets)",
+			"visibility":false,
+			"opacity":0.85,
+			"format":"image/png8",
+			"styles":"",
+			"transparent":true,
+			"tiled":false
+		},
+		{
+			"source":"local",
+			"name":"INDIGO:ISC_ASSETS_BRIDGE",
+			"title":"Bridges (Assets)",
 			"visibility":false,
 			"opacity":0.85,
 			"format":"image/png8",
@@ -186,29 +197,7 @@
         },
         {
             "source": "backend",
-            "name": "DSE:VMFEAT_FOI_POINT_RESOURCE_RECREATIONAL",
-            "title": "Recreational Resources",
-            "visibility": false,
-            "opacity": 0.8,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "backend",
-            "name": "DSE:VMFEAT_FOI_POINT_FACILITY_SPORT",
-            "title": "Sport Faclities",
-            "visibility": false,
-            "opacity": 0.8,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "backend",
-            "name": "VICMAP:VW_MOIRA_MASK",
+            "name": "VICMAP:VW_INDIGO_MASK",
             "title": "Municipal Boundary",
             "visibility": true,
             "opacity": 0.6,
@@ -252,20 +241,6 @@
             "visibility": false,
             "group": "background"
  		},
-       	{
-            "source": "dse_iws_cascaded",
-           	"name" :"MOIRA:AERIAL_MOIRA-SHEPPARTON_2009DEC14_AIR_VIS_30CM_MGA55",
-			"title":"Aerial Photo (CIP, Dec 2009)",
-            "visibility": true,
-            "opacity": 1,
-            "group": "background",
-            "format": "image/JPEG",
-            "tiled": true,
-            "cached": true,
-            "transparent": true,
-            "styles":"",
-            "visibility":false
-        },
         {
             "source": "ol",
             "group": "background",
@@ -280,10 +255,10 @@
         }
     ],
     "center": [
-        16202585, -4309147
+        16333119, -4331688
     ],
     "zoom": 10,
-    "workspace": "MOIRA",
+    "workspace": "INDIGO",
     "highlightSymboliser": {
         "name": "test",
         "strokeColor": "green",
@@ -297,7 +272,7 @@
             "urlLayout": "http://192.168.10.12/ws/rest/v3/ws_get_layouts.php",
             "urlLiveData": "http://192.168.10.12/ws/rest/v3/ws_get_live_data.php",
             "storeMode": "sqlite",
-            "storeName": "moira"
+            "storeName": "indigo"
         },
         {
             "urlLayout": "http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php",
@@ -309,14 +284,14 @@
             "urlLayout": "http://www.pozi.com/ws/rest/v3/ws_get_layouts.php",
             "urlLiveData": "http://www.pozi.com/ws/rest/v3/ws_get_live_data.php",
             "storeMode": "pgsql",
-            "storeName": "moiragis"
+            "storeName": "indigogis"
         }
     ],
-    "logoClientSrc":"theme/app/img/custom/moira_logo.gif",
-    "logoClientWidth":290,
+    "logoClientSrc":"theme/app/img/custom/indigo_logo.png",
+    "logoClientWidth":145,
     "zoomMax":18,
-    "bannerLineColor":"#026CE5",
-    "bannerRightCornerLine1":"Moira Shire Council",
+    "bannerLineColor":"#9A2843",
+    "bannerRightCornerLine1":"Indigo Shire Council",
     "bannerRightCornerLine2":"Victoria, Australia",
     "quickZoomDatastore": [
 	["141.079","-36.971","141.090","-36.965","Apsley"],
@@ -330,8 +305,8 @@
 	["141.339","-36.357","141.348","-36.353","Miram"],
 	["140.981","-36.379","140.993","-36.372","Serviceton"]
     ],
-    "printMapTitle":"Moira Shire Council",
-    "linkToCouncilWebsite":"http://www.moira.vic.gov.au/",
+    "printMapTitle":"Indigo Shire Council",
+    "linkToCouncilWebsite":"http://www.indigoshire.vic.gov.au/",
     "collapseWestPanel":true,
     "openFirstDefaultTab":true
 }
