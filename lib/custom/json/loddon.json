@@ -21,7 +21,7 @@
                 "id": "tree",
                 "border": false,
                 "tbar": [
-                    
+
                 ]
             },
             "outputTarget": "westpanel"
@@ -71,7 +71,7 @@
         }
     ],
     "sources": {
-	 "local": {
+        "local": {
             "url": "http://www.pozi.com/geoserver/LODDON/ows",
             "title": "Loddon Shire Council Layers",
             "ptype": "gxp_wmscsource",
@@ -83,12 +83,12 @@
             "title": "DSE Vicmap Layers",
             "ptype": "gxp_wmscsource"
         },
-	  "dse_iws_cascaded": {
+        "dse_iws_cascaded": {
             "url": [
-            	"http://m1.pozi.com/geoserver/LODDON/ows",
-            	"http://m2.pozi.com/geoserver/LODDON/ows",
-            	"http://m3.pozi.com/geoserver/LODDON/ows",
-            	"http://m4.pozi.com/geoserver/LODDON/ows"            	
+                "http://m1.pozi.com/geoserver/LODDON/ows",
+                "http://m2.pozi.com/geoserver/LODDON/ows",
+                "http://m3.pozi.com/geoserver/LODDON/ows",
+                "http://m4.pozi.com/geoserver/LODDON/ows"            	
             ],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
@@ -97,13 +97,13 @@
             "transition": "resize"
         },
         "mapquest": {
-		"ptype": "gxp_mapquestsource"
+            "ptype": "gxp_mapquestsource"
         },
-	"osm": {
-		"ptype": "gxp_osmsource"
-	},
+        "osm": {
+            "ptype": "gxp_osmsource"
+        },
         "ol": {
-		"ptype": "gxp_olsource"
+            "ptype": "gxp_olsource"
         },
         "backend": {
             "url": [
@@ -141,17 +141,17 @@
             "tiled": false
         },
         {
-        	"source": "backend",
-        	"name": "VICMAP:DSE_VMADMIN_WARD_2012",
-        	"title": "Wards (2012)",
-        	"visibility": false,
-        	"opacity": 0.30,
-        	"format": "image/png8",
-        	"styles": "Loddon_Wards_2012",
-        	"transparent": true,
-        	"tiled": false
-    	},
-		{
+            "source": "backend",
+            "name": "VICMAP:DSE_VMADMIN_WARD_2012",
+            "title": "Wards (2012)",
+            "visibility": false,
+            "opacity": 0.30,
+            "format": "image/png8",
+            "styles": "Loddon_Wards_2012",
+            "transparent": true,
+            "tiled": false
+        },
+        {
             "source": "backend",
             "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
             "title": "Property",
@@ -163,193 +163,193 @@
             "tiled": false
         },
         {
-			"source":"backend",
-			"name":"VICMAP:VMPROP_PARCEL",
-			"title":"Parcel (Vicmap)",
-			"visibility":false,
-			"opacity":0.75,
-			"format":"image/png8",
-			"styles":"parcel_label",
-			"transparent":true,
-			"tiled":false
-		},
-		{
-			"source":"local",
-			"name":"LODDON:LSC_PROPERTY_VALUATION",
-			"title":"Stage 2:CIV Change (%)",
-			"visibility":false,
-			"opacity":0.6,
-			"format":"image/png8",
-			"styles":"",
-			"transparent":true,
-			"tiled":false
-		},
-		{
-			"source":"local",
-			"name":"LODDON:LSC_PROPERTY_VALUATION",
-			"title":"Stage 2:Level of Values ($ per ha)",
-			"visibility":false,
-			"opacity":0.6,
-			"format":"image/png8",
-			"styles":"LevelOfvalue($perha)",
-			"transparent":true,
-			"tiled":false
-		},
-		{
-			"source":"local",
-			"name":"LODDON:LSC_PROPERTY_VALUATION",
-			"title":"Stage 2:SV Change (%)",
-			"visibility":false,
-			"opacity":0.6,
-			"format":"image/png8",
-			"styles":"SV_Change(%)",
-			"transparent":true,
-			"tiled":false
-		},
-		{
-			"source":"local",
-			"name":"LODDON:LSC_PROPERTY_VALUATION",
-			"title":"Stage 2:SubMarket Groups",
-			"visibility":false,
-			"opacity":0.6,
-			"format":"image/png8",
-			"styles":"SubMarketsGroups",
-			"transparent":true,
-			"tiled":false
-		},
-		{
-			"source":"local",
-			"name":"LODDON:LSC_PROPERTY_VALUATION",
-			"title":"Stage 2:Sales Use",
-			"visibility":false,
-			"opacity":0.6,
-			"format":"image/png8",
-			"styles":"PointGrad",
-			"transparent":true,
-			"tiled":false
-		},
-		{
-			"source":"local",
-			"name":"LODDON:LSC_STAGE4_RESIDENTIAL",
-			"title":"Stage 4: Residential data:Sales Use",
-			"visibility":false,
-			"opacity":0.6,
-			"format":"image/png8",
-			"styles":"PointGrad_ST4",
-			"transparent":true,
-			"tiled":false
-		},
-		{
-			"source":"local",
-			"name":"LODDON:LSC_STAGE4_RESIDENTIAL",
-			"title":"Stage 4: Residential data:CIV Change (%)",
-			"visibility":false,
-			"opacity":0.6,
-			"format":"image/png8",
-			"styles":"CIV_Change(%)",
-			"transparent":true,
-			"tiled":false
-		},
-		{
-			"source":"local",
-			"name":"LODDON:LSC_STAGE4_RESIDENTIAL",
-			"title":"Stage 4: Residential data:SV Change(%)",
-			"visibility":false,
-			"opacity":0.6,
-			"format":"image/png8",
-			"styles":"SV_Change(%)",
-			"transparent":true,
-			"tiled":false
-		},
-		{
-			"source":"local",
-			"name":"LODDON:LSC_STAGE4_RESIDENTIAL",
-			"title":"Stage 4: Residential data:SubMarkets Groups",
-			"visibility":false,
-			"opacity":0.6,
-			"format":"image/png8",
-			"styles":"SubMarketsGroups_Residential_ST4",
-			"transparent":true,
-			"tiled":false
-		},
-		{
-			"source":"local",
-			"name":"LODDON:LSC_STAGE4_RESIDENTIAL",
-			"title":"Stage 4: Residential data:Level of values ($ per ha)",
-			"visibility":false,
-			"opacity":0.6,
-			"format":"image/png8",
-			"styles":"LevelOfvalue($perha)_ST4",
-			"transparent":true,
-			"tiled":false
-		},
-		{
-			"source":"local",
-			"name":"LODDON:LSC_STAGE4_RURAL",
-			"title":"Stage 4: Rural data:Sales Use",
-			"visibility":false,
-			"opacity":0.6,
-			"format":"image/png8",
-			"styles":"PointGrad_ST4",
-			"transparent":true,
-			"tiled":false
-		},
-		{
-			"source":"local",
-			"name":"LODDON:LSC_STAGE4_RURAL",
-			"title":"Stage 4: Rural data:CIV Change (%)",
-			"visibility":false,
-			"opacity":0.6,
-			"format":"image/png8",
-			"styles":"CIV_Change(%)",
-			"transparent":true,
-			"tiled":false
-		},
-		{
-			"source":"local",
-			"name":"LODDON:LSC_STAGE4_RURAL",
-			"title":"Stage 4: Rural data:SV Change (%)",
-			"visibility":false,
-			"opacity":0.6,
-			"format":"image/png8",
-			"styles":"SV_Change(%)",
-			"transparent":true,
-			"tiled":false
-		},
-		{
-			"source":"local",
-			"name":"LODDON:LSC_STAGE4_RURAL",
-			"title":"Stage 4: Rural data:Level of Values ($ per ha)",
-			"visibility":false,
-			"opacity":0.6,
-			"format":"image/png8",
-			"styles":"LevelOfvalue($perha)_ST4",
-			"transparent":true,
-			"tiled":false
-		},
-		{
-			"source":"local",
-			"name":"LODDON:LSC_STAGE4_RURAL",
-			"title":"Stage 4: Rural data:SubMarkets Groups",
-			"visibility":false,
-			"opacity":0.6,
-			"format":"image/png8",
-			"styles":"SubMarketsGroups",
-			"transparent":true,
-			"tiled":false
-		},
-		{
-			"source":"local",
-			"name":"LODDON:LSC_ASSETS_ROAD",
-			"title":"Road Moloney",
-			"visibility":false,
-			"opacity":1,
-			"format":"image/png8",
-			"styles":"",
-			"transparent":true,
-			"tiled":false
-		},
-		{
+            "source":"backend",
+            "name":"VICMAP:VMPROP_PARCEL",
+            "title":"Parcel (Vicmap)",
+            "visibility":false,
+            "opacity":0.75,
+            "format":"image/png8",
+            "styles":"parcel_label",
+            "transparent":true,
+            "tiled":false
+        },
+        {
+            "source":"local",
+            "name":"LODDON:LSC_PROPERTY_VALUATION",
+            "title":"Stage 2:CIV Change (%)",
+            "visibility":false,
+            "opacity":0.6,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true,
+            "tiled":false
+        },
+        {
+            "source":"local",
+            "name":"LODDON:LSC_PROPERTY_VALUATION",
+            "title":"Stage 2:Level of Values ($ per ha)",
+            "visibility":false,
+            "opacity":0.6,
+            "format":"image/png8",
+            "styles":"LevelOfvalue($perha)",
+            "transparent":true,
+            "tiled":false
+        },
+        {
+            "source":"local",
+            "name":"LODDON:LSC_PROPERTY_VALUATION",
+            "title":"Stage 2:SV Change (%)",
+            "visibility":false,
+            "opacity":0.6,
+            "format":"image/png8",
+            "styles":"SV_Change(%)",
+            "transparent":true,
+            "tiled":false
+        },
+        {
+            "source":"local",
+            "name":"LODDON:LSC_PROPERTY_VALUATION",
+            "title":"Stage 2:SubMarket Groups",
+            "visibility":false,
+            "opacity":0.6,
+            "format":"image/png8",
+            "styles":"SubMarketsGroups",
+            "transparent":true,
+            "tiled":false
+        },
+        {
+            "source":"local",
+            "name":"LODDON:LSC_PROPERTY_VALUATION",
+            "title":"Stage 2:Sales Use",
+            "visibility":false,
+            "opacity":0.6,
+            "format":"image/png8",
+            "styles":"PointGrad",
+            "transparent":true,
+            "tiled":false
+        },
+        {
+            "source":"local",
+            "name":"LODDON:LSC_STAGE4_RESIDENTIAL",
+            "title":"Stage 4: Residential data:Sales Use",
+            "visibility":false,
+            "opacity":0.6,
+            "format":"image/png8",
+            "styles":"PointGrad_ST4",
+            "transparent":true,
+            "tiled":false
+        },
+        {
+            "source":"local",
+            "name":"LODDON:LSC_STAGE4_RESIDENTIAL",
+            "title":"Stage 4: Residential data:CIV Change (%)",
+            "visibility":false,
+            "opacity":0.6,
+            "format":"image/png8",
+            "styles":"CIV_Change(%)",
+            "transparent":true,
+            "tiled":false
+        },
+        {
+            "source":"local",
+            "name":"LODDON:LSC_STAGE4_RESIDENTIAL",
+            "title":"Stage 4: Residential data:SV Change(%)",
+            "visibility":false,
+            "opacity":0.6,
+            "format":"image/png8",
+            "styles":"SV_Change(%)",
+            "transparent":true,
+            "tiled":false
+        },
+        {
+            "source":"local",
+            "name":"LODDON:LSC_STAGE4_RESIDENTIAL",
+            "title":"Stage 4: Residential data:SubMarkets Groups",
+            "visibility":false,
+            "opacity":0.6,
+            "format":"image/png8",
+            "styles":"SubMarketsGroups_Residential_ST4",
+            "transparent":true,
+            "tiled":false
+        },
+        {
+            "source":"local",
+            "name":"LODDON:LSC_STAGE4_RESIDENTIAL",
+            "title":"Stage 4: Residential data:Level of values ($ per ha)",
+            "visibility":false,
+            "opacity":0.6,
+            "format":"image/png8",
+            "styles":"LevelOfvalue($perha)_ST4",
+            "transparent":true,
+            "tiled":false
+        },
+        {
+            "source":"local",
+            "name":"LODDON:LSC_STAGE4_RURAL",
+            "title":"Stage 4: Rural data:Sales Use",
+            "visibility":false,
+            "opacity":0.6,
+            "format":"image/png8",
+            "styles":"PointGrad_ST4",
+            "transparent":true,
+            "tiled":false
+        },
+        {
+            "source":"local",
+            "name":"LODDON:LSC_STAGE4_RURAL",
+            "title":"Stage 4: Rural data:CIV Change (%)",
+            "visibility":false,
+            "opacity":0.6,
+            "format":"image/png8",
+            "styles":"CIV_Change(%)",
+            "transparent":true,
+            "tiled":false
+        },
+        {
+            "source":"local",
+            "name":"LODDON:LSC_STAGE4_RURAL",
+            "title":"Stage 4: Rural data:SV Change (%)",
+            "visibility":false,
+            "opacity":0.6,
+            "format":"image/png8",
+            "styles":"SV_Change(%)",
+            "transparent":true,
+            "tiled":false
+        },
+        {
+            "source":"local",
+            "name":"LODDON:LSC_STAGE4_RURAL",
+            "title":"Stage 4: Rural data:Level of Values ($ per ha)",
+            "visibility":false,
+            "opacity":0.6,
+            "format":"image/png8",
+            "styles":"LevelOfvalue($perha)_ST4",
+            "transparent":true,
+            "tiled":false
+        },
+        {
+            "source":"local",
+            "name":"LODDON:LSC_STAGE4_RURAL",
+            "title":"Stage 4: Rural data:SubMarkets Groups",
+            "visibility":false,
+            "opacity":0.6,
+            "format":"image/png8",
+            "styles":"SubMarketsGroups",
+            "transparent":true,
+            "tiled":false
+        },
+        {
+            "source":"local",
+            "name":"LODDON:LSC_ASSETS_ROAD",
+            "title":"Road Moloney",
+            "visibility":false,
+            "opacity":1,
+            "format":"image/png8",
+            "styles":"",
+            "transparent":true,
+            "tiled":false
+        },
+        {
             "source": "backend",
             "name": "VICMAP:VW_TRANSFER_STATION",
             "title": "Transfer Stations",
@@ -405,7 +405,7 @@
             "name": "osm",
             "visibility": false,
             "group": "background"
- 		},
+        },
         {
             "source": "ol",
             "group": "background",
@@ -459,16 +459,16 @@
     "bannerRightCornerLine1":"Loddon Shire Council",
     "bannerRightCornerLine2":"Victoria, Australia",
     "quickZoomDatastore": [
-	["141.079","-36.971","141.090","-36.965","Apsley"],
-	["141.416","-37.282","141.423","-37.276","Chetwynd"],
-	["141.212","-37.374","141.218","-37.367","Dergholm"],
-	["141.276","-37.043","141.306","-37.019","Edenhope"],
-	["141.469","-36.724","141.479","-36.715","Goroke"],
-	["141.588","-37.170","141.595","-37.163","Harrow"],
-	["141.233","-36.383","141.251","-36.370","Kaniva"],
-	["141.127","-36.363","141.129","-36.362","Lillimur"],
-	["141.339","-36.357","141.348","-36.353","Miram"],
-	["140.981","-36.379","140.993","-36.372","Serviceton"]
+        ["141.079","-36.971","141.090","-36.965","Apsley"],
+        ["141.416","-37.282","141.423","-37.276","Chetwynd"],
+        ["141.212","-37.374","141.218","-37.367","Dergholm"],
+        ["141.276","-37.043","141.306","-37.019","Edenhope"],
+        ["141.469","-36.724","141.479","-36.715","Goroke"],
+        ["141.588","-37.170","141.595","-37.163","Harrow"],
+        ["141.233","-36.383","141.251","-36.370","Kaniva"],
+        ["141.127","-36.363","141.129","-36.362","Lillimur"],
+        ["141.339","-36.357","141.348","-36.353","Miram"],
+        ["140.981","-36.379","140.993","-36.372","Serviceton"]
     ],
     "printMapTitle":"Loddon Shire Council",
     "linkToCouncilWebsite":"http://www.loddon.vic.gov.au/",
