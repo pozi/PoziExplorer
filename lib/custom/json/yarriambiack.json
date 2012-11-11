@@ -235,7 +235,7 @@
     "highlightSymboliser": {
         "name": "test",
         "strokeColor": "orange",
-        "strokeWidth": 15,
+        "strokeWidth": 20,
         "strokeOpacity": 0.5,
         "fillColor": "orange",
         "fillOpacity": 0.2

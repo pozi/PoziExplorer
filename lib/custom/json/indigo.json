@@ -261,10 +261,10 @@
     "workspace": "INDIGO",
     "highlightSymboliser": {
         "name": "test",
-        "strokeColor": "green",
-        "strokeWidth": 15,
+        "strokeColor": "orange",
+        "strokeWidth": 20,
         "strokeOpacity": 0.5,
-        "fillColor": "green",
+        "fillColor": "orange",
         "fillOpacity": 0.2
     },
     "liveDataEndPoints": [
