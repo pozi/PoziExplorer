@@ -127,10 +127,6 @@ div.olMap {
 }
 
 
-.x-btn .gxp-icon-print, .x-menu-item .gxp-icon-print, .x-tree-node .gxp-icon-print {
-    background-image: url(img/panel/print.png);
-}
-
 .x-btn-mc {
     background-image: url();
 }
