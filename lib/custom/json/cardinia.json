@@ -27,7 +27,6 @@
                 "id": "tree",
                 "border": false,
                 "tbar": [
-                    
                 ]
             },
             "outputTarget": "westpanel"
@@ -115,20 +114,17 @@
             "transition": null
         }
     },
-    "layerPresentation": 
-    {
-		"CSC_RESERVES_FOR_HIRE":
-		[
-			{"attr_name":"reserve_name"},
-			{"attr_name":"photo_url","alt_name":"Photo"},
-			{"attr_name":"address"},			
-			{"attr_name":"facilities"}
-		],
-		"CSC_AREA_DOG_OF_LEASH":
-		[
-			{"attr_name":"reserve_na"}
-		]
-	},
+    "layerPresentation": {
+        "CSC_RESERVES_FOR_HIRE": [
+            {"attr_name":"reserve_name"},
+            {"attr_name":"photo_url","alt_name":"Photo"},
+            {"attr_name":"address"},			
+            {"attr_name":"facilities"}
+        ],
+        "CSC_AREA_DOG_OF_LEASH": [
+            {"attr_name":"reserve_na"}
+        ]
+	  },
     "layers": [
         {
             "source": "backend",
@@ -390,17 +386,17 @@
             "styles":""
         },
         {
-			"source": "dse_iws_cascaded",
-			"name": "CARDINIA:AERIAL_CARDINIA_2009NOV09_AIR_VIS_15CM_MGA55",
-			"title": "Aerial Photo (Cardinia, Nov 2009)",
-			"visibility": false,
-			"opacity": 1,
-			"group": "aerial",
-			"selected": false,
-			"format": "image/JPEG",
-			"transparent": true,
-            "styles":""
-		},
+            "source": "dse_iws_cascaded",
+            "name": "CARDINIA:AERIAL_CARDINIA_2009NOV09_AIR_VIS_15CM_MGA55",
+            "title": "Aerial Photo (Cardinia, Nov 2009)",
+            "visibility": false,
+            "opacity": 1,
+            "group": "aerial",
+            "selected": false,
+            "format": "image/JPEG",
+            "transparent": true,
+            "styles": ""
+        },
         {
             "source": "backend",
             "name": "VICMAP:VW_CARDINIA_MASK",
