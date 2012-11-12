@@ -111,26 +111,7 @@ function requestConfig() {
                 onConfigurationLoaded();
             }
         },
-        failure: function(request) {
-            var obj;
-            try {
-                obj = Ext.util.JSON.decode(request.responseText);
-            } catch(err) {
-                // pass
-            }
-            var msg = this.loadConfigErrorText;
-            if (obj && obj.error) {
-                msg += obj.error;
-            } else {
-                msg += this.loadConfigErrorDefaultText;
-            }
-            this.on({
-                ready: function() {
-                    this.displayXHRTrouble(msg, request.status);
-                },
-                scope: this
-            });
-        },
+        failure: function(request) { alert("Configuration data could not be loaded!"); },
         scope: this
     });
 };
