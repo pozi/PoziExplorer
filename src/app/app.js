@@ -58,6 +58,7 @@
  * @require overrides/ext/widgets/grid/PropertyGrid.js
  * @require overrides/gxp/plugins/FeatureEditor.js
  * @require overrides/gxp/plugins/AddLayers.js
+ * @require overrides/geoext/plugins/TreeNodeComponent.js
  */
 
 var gtProxy,gtLoginEndpoint,gtLocalLayerSourcePrefix;
@@ -113,75 +114,7 @@ function trim(str)
 
 Ext.onReady(function() {
 
-	/** private: method[onRenderNode]
-	 *  :param node: ``Ext.tree.TreeNode``
-	 */
- 	// Reasons for override:
-	// - initial collapse of the legend for each node
-	
-	GeoExt.plugins.TreeNodeComponent.prototype.onRenderNode = function(node) {
-		var rendered = node.rendered;
-		var attr = node.attributes;
-		var component = attr.component || this.component;
-		if(!rendered && component) {
-		    // We're initially hiding the component
-		    component.hidden=true;
-		    var elt = Ext.DomHelper.append(node.ui.elNode, [
-			{"tag": "div"}
-		    ]);
-		    if(typeof component == "function") {
-			component = component(node, elt);
-		    } else if (typeof component == "object" &&
-			       typeof component.fn == "function") {
-			component = component.fn.apply(
-			    component.scope, [node, elt]
-			);
-		    }
-		    if(typeof component == "object" &&
-		       typeof component.xtype == "string") {
-			component = Ext.ComponentMgr.create(component);
-		    }
-		    if(component instanceof Ext.Component) {
-			component.render(elt);
-			node.component = component;
-		    }
-		}
-	};
 
-	/** api: constructor
-	 *  .. class:: FeatureEditor(config)
-	 *
-	 *    Plugin for feature editing. Requires a
-	 *    :class:`gxp.plugins.FeatureManager`.
-	 */ 
-
- 	// Reasons for override:
-	// - layer change activates create/edit control irrespective of user being logged in
-
-	gxp.plugins.FeatureEditor.prototype.enableOrDisable = function() {
-		// disable editing if no schema or non authorized
-		// TODO: entire control to be deactivated (so that describe layers are not sent to the server)
-		var disable = !this.schema || !this.target.isAuthorized(this.roles);
-		if (this.splitButton) {
-		    this.splitButton.setDisabled(disable);
-		}
-		this.createAction.setDisabled(disable);
-		this.editAction.setDisabled(disable);
-		
-		/*
-		// Activating or deactivating the getFeatureInfo controls based on the feature editor being enabled or disabled
-		var controls = app.mapPanel.map.controls.filter(function(a){return a.CLASS_NAME=="OpenLayers.Control.WMSGetFeatureInfo";})
-                for (var i = 0, len = controls.length; i < len; i++){
-                    if (disable) {
-                        controls[i].activate();
-                    } else {
-                        controls[i].deactivate();
-                    }
-                }
-		*/
-		
-		return disable;
-	};
 
     /** private: method[createOutputConfig]
      *  :returns: ``Object`` Configuration object for an Ext.tree.TreePanel

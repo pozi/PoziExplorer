@@ -514,3 +514,39 @@ gxp.plugins.FeatureEditor.prototype.addActions = function() {
     return actions;
 };
 
+
+/** api: constructor
+ *  .. class:: FeatureEditor(config)
+ *
+ *    Plugin for feature editing. Requires a
+ *    :class:`gxp.plugins.FeatureManager`.
+ */ 
+
+// Reasons for override:
+// - layer change activates create/edit control irrespective of user being logged in
+
+gxp.plugins.FeatureEditor.prototype.enableOrDisable = function() {
+  // disable editing if no schema or non authorized
+  // TODO: entire control to be deactivated (so that describe layers are not sent to the server)
+  var disable = !this.schema || !this.target.isAuthorized(this.roles);
+  if (this.splitButton) {
+      this.splitButton.setDisabled(disable);
+  }
+  this.createAction.setDisabled(disable);
+  this.editAction.setDisabled(disable);
+  
+  /*
+  // Activating or deactivating the getFeatureInfo controls based on the feature editor being enabled or disabled
+  var controls = app.mapPanel.map.controls.filter(function(a){return a.CLASS_NAME=="OpenLayers.Control.WMSGetFeatureInfo";})
+              for (var i = 0, len = controls.length; i < len; i++){
+                  if (disable) {
+                      controls[i].activate();
+                  } else {
+                      controls[i].deactivate();
+                  }
+              }
+  */
+  
+  return disable;
+};
+
