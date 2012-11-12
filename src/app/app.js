@@ -230,9 +230,6 @@ Ext.onReady(function() {
 			var gtLGACode = "346";
 			if (JSONconf.LGACode) {gtLGACode = JSONconf.LGACode;};
 
-			var gtDatabaseConfig = "vicmap";
-			if (JSONconf.databaseConfig) {gtDatabaseConfig = JSONconf.databaseConfig;};
-
 			var gtWorkspace = "";
 			if (JSONconf.workspace) {gtWorkspace = JSONconf.workspace;};		
 			
@@ -453,6 +450,9 @@ Ext.onReady(function() {
 			});
 
 			// Datastore definition for the web service search results 
+			var gtDatabaseConfig = "vicmap";
+			if (JSONconf.databaseConfig) { gtDatabaseConfig = JSONconf.databaseConfig; }
+
 			var ds = new Ext.data.JsonStore({
 				autoLoad: false, //autoload the data
 				root: 'rows',
