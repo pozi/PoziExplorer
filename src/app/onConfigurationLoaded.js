@@ -526,7 +526,7 @@ var onConfigurationLoaded = function() {
 		// Handler called when:
 		// - a record is selected in the search drop down list
 		// - a property number is passed in the URL and has returned a valid property record
-		var search_record_select_handler = function(combo, record) {
+		var searchRecordSelectHandler = function(combo, record) {
 			// Zooming to the relevant area (covering the selected record)
 			var bd = new OpenLayers.Bounds(record.data.xmini, record.data.ymini, record.data.xmaxi, record.data.ymaxi).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
 			var z = app.mapPanel.map.getZoomForExtent(bd);
@@ -1548,7 +1548,7 @@ var onConfigurationLoaded = function() {
 					tpl: '<tpl for="."><div class="search-item" style="height: 28px;"><font color="#666666">{ld}</font> : {[values.label.replace(new RegExp( "(" +  Ext.get(\'gtSearchCombobox\').getValue()  + ")" , \'gi\' ), "<b>$1</b>" )]} <br></div></tpl>',
 					itemSelector: 'div.search-item',
 					listeners: {
-						'select': search_record_select_handler,
+						'select': searchRecordSelectHandler,
 						scope: this
 					}
 				})
@@ -1795,7 +1795,7 @@ var onConfigurationLoaded = function() {
 			{
 				var r = [];
 				r["data"] = propertyDataInit;
-				search_record_select_handler(null, r);
+				searchRecordSelectHandler(null, r);
 			}
 
 			// The main toolbar containing tools to be activated / deactivated on login/logout
