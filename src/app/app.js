@@ -63,21 +63,23 @@
  * @require overrides/gxp/plugins/WMSSource.js
  * @require overrides/gxp/widgets/WMSLayerPanel.js
  * @require overrides/gxp/plugins/WMSGetFeatureInfo.js
+ *
+ * @require helpers.js
  */
 
 var gtProxy,
-gtLoginEndpoint,
-gtLocalLayerSourcePrefix;
+    gtLoginEndpoint,
+    gtLocalLayerSourcePrefix;
 var debugMode = (/(localhost|\.dev|\.local)/i).test(window.location.hostname);
 
 if (debugMode)
- {
+{
     gtProxy = "proxy/?url=";
     gtLoginEndpoint = "http://v3.pozi.com/geoexplorer/login/";
     gtLocalLayerSourcePrefix = "http://v3.pozi.com";
 }
- else
- {
+else
+{
     gtProxy = "/geoexplorer/proxy/?url=";
     gtLoginEndpoint = "/geoexplorer/login";
     gtLocalLayerSourcePrefix = "";
@@ -85,70 +87,30 @@ if (debugMode)
 
 var app;
 var glayerLocSel,
-gComboDataArray = [],
-gfromWFS,
-clear_highlight,
-gCombostore,
-gCurrentExpandedTabIdx = [],
-gCurrentLoggedRole = "NONE",
-JSONconf,
-propertyDataInit,
-gtLayerPresentationConfiguration,
-eastPanel,
-westPanel,
-northPart,
-gLayoutsArr,
-gLoggedUsername,
-gLoggedPassword,
-gtZoomMax,
-gtHideSelectedFeaturePanel,
-add_default_tabs;
+    gComboDataArray = [],
+    gfromWFS,
+    clear_highlight,
+    gCombostore,
+    gCurrentExpandedTabIdx = [],
+    gCurrentLoggedRole = "NONE",
+    JSONconf,
+    propertyDataInit,
+    gtLayerPresentationConfiguration,
+    eastPanel,
+    westPanel,
+    northPart,
+    gLayoutsArr,
+    gLoggedUsername,
+    gLoggedPassword,
+    gtZoomMax,
+    gtHideSelectedFeaturePanel,
+    add_default_tabs;
 var poziLinkClickHandler;
 var vector_layer = new OpenLayers.Layer.Vector("WKT", {
-    displayInLayerSwitcher: false
-});
+        displayInLayerSwitcher: false
+    });
 var wkt_format = new OpenLayers.Format.WKT();
 var gtLayerLabel;
-
-// Helper functions
-function toTitleCase(str)
- {
-    return str.replace(/\w\S*/g,
-    function(txt) {
-        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
-}
-
-function gotNum(str) {
-    return /\d/.test(str);
-}
-
-function toSmartTitleCase(str)
- {
-    return str.replace(/\w\S*/g,
-    function(txt) {
-        if (gotNum(txt))
-        {
-            return txt;
-        }
-        else
-        {
-            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-        }
-    });
-}
-
-function trim(str)
- {
-    if (str)
-    {
-        return str.replace(/^\s*/, "").replace(/\s*$/, "");
-    }
-    else
-    {
-        return "";
-    }
-}
 
 Ext.onReady(function() {
 
