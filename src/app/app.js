@@ -115,3 +115,4 @@ var wkt_format = new OpenLayers.Format.WKT();
 var gtLayerLabel;
 
 Ext.onReady(requestConfig);
+

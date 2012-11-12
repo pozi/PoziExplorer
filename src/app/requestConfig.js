@@ -1,14 +1,7 @@
-// Extraction of parameters from the URL to load the correct configuration file, and an optional property number to focus on
-function getURLParameter(name) {
-	return decodeURI(
-	(RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, ''])[1]
-	);
-}
-
 function requestConfig() {	
     // Extracting parameters values: config and property
-    var configScript = getURLParameter('config');
-    var propnum = getURLParameter('property');
+    var configScript = Ext.urlDecode(location.search.substr(1))['config'];
+    var propNum = Ext.urlDecode(location.search.substr(1))['property'];
 
     // If the URL does not offer itself to splitting according to the rules above, it means, we are having Apache clean URL: http://www.pozi.com/mitchell/property/45633
     // We extract the information according to this pattern
@@ -22,7 +15,7 @@ function requestConfig() {
             if (urlquery[urlquery.length - 2] == "property")
             {
                 configScript = urlquery[urlquery.length - 3];
-                propnum = urlquery[urlquery.length - 1];
+                propNum = urlquery[urlquery.length - 1];
             }
             else
             {
@@ -38,7 +31,7 @@ function requestConfig() {
             // Decoding the configuration file - it's a JSON file
             JSONconf = Ext.util.JSON.decode(request.responseText);
             // If a property number has been passed
-            if (propnum)
+            if (propNum)
             {
                 // Handler for result of retrieving the property details by its number
                 var prop_by_prop_num_handler = function(request) {
@@ -50,7 +43,7 @@ function requestConfig() {
                     }
                     else
                     {
-                        alert("No property found in " + toTitleCase(configScript) + " with number: " + propnum + ".");
+                        alert("No property found in " + toTitleCase(configScript) + " with number: " + propNum + ".");
                     }
 
                     onConfigurationLoaded();
@@ -61,7 +54,7 @@ function requestConfig() {
                     //autoload the data
                     root: 'rows',
                     baseParams: {
-                        query: propnum,
+                        query: propNum,
                         config: JSONconf.databaseConfig,
                         lga: JSONconf.LGACode
                     },
@@ -113,7 +106,6 @@ function requestConfig() {
                         load: prop_by_prop_num_handler
                     }
                 });
-
             }
             else
             {
@@ -126,7 +118,7 @@ function requestConfig() {
                 obj = Ext.util.JSON.decode(request.responseText);
             } catch(err) {
                 // pass
-                }
+            }
             var msg = this.loadConfigErrorText;
             if (obj && obj.error) {
                 msg += obj.error;
