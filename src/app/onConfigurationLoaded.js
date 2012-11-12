@@ -1,5 +1,5 @@
 // Function to execute on successful return of the JSON configuration file loading
-var onConfigurationLoaded = function() {
+var onConfigurationLoaded = function(JSONconf) {
 
     // Customising the scale combo visibility
     gxp.ScaleOverlay.prototype.bind = function(map) {

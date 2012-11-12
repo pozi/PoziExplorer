@@ -95,7 +95,6 @@ var glayerLocSel,
     gCombostore,
     gCurrentExpandedTabIdx = [],
     gCurrentLoggedRole = "NONE",
-    JSONconf,
     propertyDataInit,
     gtLayerPresentationConfiguration,
     eastPanel,
@@ -114,5 +113,12 @@ var vector_layer = new OpenLayers.Layer.Vector("WKT", {
 var wkt_format = new OpenLayers.Format.WKT();
 var gtLayerLabel;
 
-Ext.onReady(requestConfig);
+Ext.onReady(function() {
+    requestConfig({
+        onLoad: function(clientConfig) {
+            JSONconf = clientConfig; // This is still necessary because JSONconf is used as a global in some gxp overrides.
+            onConfigurationLoaded(clientConfig);
+        }
+    })
+});
 

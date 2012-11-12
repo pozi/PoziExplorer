@@ -1,4 +1,4 @@
-function requestConfig() {	
+function requestConfig(options) {	
 
     var configScript = Ext.urlDecode(location.search.substr(1))['config'];
     var propNum = Ext.urlDecode(location.search.substr(1))['property'];
@@ -28,9 +28,8 @@ function requestConfig() {
     OpenLayers.Request.GET({
         url: "lib/custom/json/" + configScript + ".json",
         success: function(request) {
-            // Decoding the configuration file - it's a JSON file
-            JSONconf = Ext.util.JSON.decode(request.responseText);
-            // If a property number has been passed
+            var JSONconf = Ext.util.JSON.decode(request.responseText);
+
             if (propNum)
             {
                 var ds = new Ext.data.JsonStore({
@@ -64,14 +63,14 @@ function requestConfig() {
                                 alert("No property found in " + toTitleCase(configScript) + " with number: " + propNum + ".");
                             }
 
-                            onConfigurationLoaded();
+                            options.onLoad(JSONconf);
                         }
                     }
                 });
             }
             else
             {
-                onConfigurationLoaded();
+                options.onLoad(JSONconf);
             }
         },
         failure: function(request) { alert("Configuration data could not be loaded!"); },
