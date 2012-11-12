@@ -75,14 +75,18 @@ div.olControlZoom a:hover {
 
 .x-panel-collapsed .x-accordion-hd .x-tool-toggle {
     background-image: url(img/panel/plus-white.png);
-    background-position: 0 0;
+	vertical-align: middle;
+    background-position: center;
     padding: 2px;
+    padding-right: 5px;
 }
 
 .x-accordion-hd .x-tool-toggle {
     background-image: url(img/panel/minus-white.png);
-    background-position: 0 0;
+    vertical-align: middle;
+    background-position: center;
     padding: 2px;
+    padding-right: 5px;
 }
 
 #gtInfoCombobox {

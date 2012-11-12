@@ -2338,7 +2338,7 @@ Ext.onReady(function() {
 															bbar:true,
 															bbarCfg: {
 																tag: 'left',
-        														html: '<p style="background-color: #e8e8e8; padding: 4px; padding-left: 8px; font-size: 12px;font-family: tahoma,arial,verdana,sans-serif; font-style:italic;">' +configArray[i-1].desc+ '</p>'
+        														html: '<p style="background-color: #ecedef; padding: 4px; padding-left: 8px; font-size: 12px;font-family: tahoma,arial,verdana,sans-serif; font-style:italic;">' +configArray[i-1].desc+ '</p>'
         													},
 															border:false,
 															items: tab_array[0]
@@ -2356,7 +2356,7 @@ Ext.onReady(function() {
 															bbar:true,
 															bbarCfg: {
 																tag: 'left',
-        														html: '<p style="background-color: #e8e8e8; padding: 4px; padding-left: 8px; font-size: 12px;font-family: tahoma,arial,verdana,sans-serif; font-style:italic;">' +configArray[i-1].desc+ '</p>'
+        														html: '<p style="background-color: #ecedef; padding: 4px; padding-left: 8px; font-size: 12px;font-family: tahoma,arial,verdana,sans-serif; font-style:italic;">' +configArray[i-1].desc+ '</p>'
         													},
 															border:false,
 															items: tab_array
@@ -2672,6 +2672,8 @@ Ext.onReady(function() {
 												
 												var lock = configArray[c].lock;
 												
+												var icon = configArray[c].icon;
+												
 												if(!configArray[c].desc)
 													configArray[c].desc = "";
 												
@@ -2685,11 +2687,16 @@ Ext.onReady(function() {
 													lock = "background-image: url(theme/app/img/panel/lock.png);";
 												}
 												
+												if(!icon)
+												{
+													icon = '<img style="vertical-align: middle;"src="theme/app/img/panel/earth.png"/>';
+												}
+												
 												configArray[c].headerCfg={
 													tag: 'div',
-													style: lock+ 'background-position: right; background-repeat: no-repeat; background-color:' +col+ ';padding-left: 10px;',
+													style: lock + 'background-position: right; background-repeat: no-repeat; background-color:' +col+ ';padding-left: 10px; vertical-align: middle;',
 													children: [
-													    { tag: 'div', 'html': t }
+													    { tag: 'div', 'html': icon + '&nbsp &nbsp' + t }
 													]
 												};
 											}
