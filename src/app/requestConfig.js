@@ -1,5 +1,5 @@
 function requestConfig() {	
-    // Extracting parameters values: config and property
+
     var configScript = Ext.urlDecode(location.search.substr(1))['config'];
     var propNum = Ext.urlDecode(location.search.substr(1))['property'];
 
@@ -51,7 +51,6 @@ function requestConfig() {
 
                 var ds = new Ext.data.JsonStore({
                     autoLoad: true,
-                    //autoload the data
                     root: 'rows',
                     baseParams: {
                         query: propNum,
