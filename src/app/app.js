@@ -1303,7 +1303,7 @@ Ext.onReady(function() {
 											tag: 'div',
 											style:'	background-image: url();background-color: #A0A0A0;padding-left: 10px;',
 											children: [
-											    { tag: 'div', 'html': gtDetailsTitle }
+											    { tag: 'div', 'html': '<img style="vertical-align: middle;"src="theme/app/img/panel/details.png"/>' + '&nbsp &nbsp' + gtDetailsTitle }
 											]
 										  },
 										  layout: 'fit',
