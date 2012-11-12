@@ -33,22 +33,6 @@ function requestConfig() {
             // If a property number has been passed
             if (propNum)
             {
-                // Handler for result of retrieving the property details by its number
-                var prop_by_prop_num_handler = function(request) {
-                    // The first row returned contains our property record
-                    // We populate the global variable with that
-                    if (request.data && request.data.items[0])
-                    {
-                        propertyDataInit = request.data.items[0].json.row;
-                    }
-                    else
-                    {
-                        alert("No property found in " + toTitleCase(configScript) + " with number: " + propNum + ".");
-                    }
-
-                    onConfigurationLoaded();
-                };
-
                 var ds = new Ext.data.JsonStore({
                     autoLoad: true,
                     root: 'rows',
@@ -57,52 +41,31 @@ function requestConfig() {
                         config: JSONconf.databaseConfig,
                         lga: JSONconf.LGACode
                     },
-                    fields: [{
-                        name: "label",
-                        mapping: "row.label"
-                    },
-                    {
-                        name: "xmini",
-                        mapping: "row.xmini"
-                    },
-                    {
-                        name: "ymini",
-                        mapping: "row.ymini"
-                    },
-                    {
-                        name: "xmaxi",
-                        mapping: "row.xmaxi"
-                    },
-                    {
-                        name: "ymaxi",
-                        mapping: "row.ymaxi"
-                    },
-                    {
-                        name: "gsns",
-                        mapping: "row.gsns"
-                    },
-                    {
-                        name: "gsln",
-                        mapping: "row.gsln"
-                    },
-                    {
-                        name: "idcol",
-                        mapping: "row.idcol"
-                    },
-                    {
-                        name: "idval",
-                        mapping: "row.idval"
-                    },
-                    {
-                        name: "ld",
-                        mapping: "row.ld"
-                    }
+                    fields: [
+                        { name: "label", mapping: "row.label" },
+                        { name: "xmini", mapping: "row.xmini" },
+                        { name: "ymini", mapping: "row.ymini" },
+                        { name: "xmaxi", mapping: "row.xmaxi" },
+                        { name: "ymaxi", mapping: "row.ymaxi" },
+                        { name: "gsns",  mapping: "row.gsns" },
+                        { name: "gsln",  mapping: "row.gsln" },
+                        { name: "idcol", mapping: "row.idcol" },
+                        { name: "idval", mapping: "row.idval" },
+                        { name: "ld",    mapping: "row.ld" }
                     ],
                     proxy: new Ext.data.ScriptTagProxy({
                         url: JSONconf.servicesHost + "/ws/rest/v3/ws_property_id_by_propnum.php"
                     }),
                     listeners: {
-                        load: prop_by_prop_num_handler
+                        load: function(request) {
+                            if (request.data && request.data.items[0]) {
+                                propertyDataInit = request.data.items[0].json.row; // property record
+                            } else {
+                                alert("No property found in " + toTitleCase(configScript) + " with number: " + propNum + ".");
+                            }
+
+                            onConfigurationLoaded();
+                        }
                     }
                 });
             }
