@@ -1,32 +1,6 @@
 // Function to execute on successful return of the JSON configuration file loading
 var onConfigurationLoaded = function(JSONconf) {
 
-    // Based on the previous JSON configuration, we may decide to dynamically load an additional Javascript file of interaction customisations
-    // Function that is able to dynamically load the extra Javascript
-    var loadjscssfile = function(filename, cbk) {
-        var fileref = document.createElement('script');
-        fileref.setAttribute("type", 'text/javascript');
-
-        // The onload callback option does not work as expected in IE so we are using the following work-around
-        // From: http://www.nczonline.net/blog/2009/07/28/the-best-way-to-load-external-javascript/
-        if (fileref.readyState) {
-            //IE
-            fileref.onreadystatechange = function() {
-                if (fileref.readyState == "loaded" || fileref.readyState == "complete") {
-                    fileref.onreadystatechange = null;
-                    cbk();
-                }
-            };
-        } else {
-            //Others
-            fileref.onload = function() {
-                cbk();
-            };
-        }
-        fileref.setAttribute("src", filename);
-        document.getElementsByTagName('head')[0].appendChild(fileref);
-    };
-
     // Encapsulating the loading of the main app in a callback
     var extraJSScriptLoaded = function() {
         // Fixing local URL source for debug mode
@@ -2165,7 +2139,7 @@ var onConfigurationLoaded = function(JSONconf) {
     // Loading the extra Javascript if the configuration file contains a name
     if (JSONconf.customJS)
     {
-        loadjscssfile('lib/custom/js/' + JSONconf.customJS, extraJSScriptLoaded);
+        loadJSFile('lib/custom/js/' + JSONconf.customJS, extraJSScriptLoaded);
     }
     else
     {

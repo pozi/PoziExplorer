@@ -66,6 +66,7 @@
  * @require overrides/gxp/widgets/ScaleOverlay.js
  *
  * @require helpers.js
+ * @require loadJSFile.js
  * @require onConfigurationLoaded.js
  * @require requestConfig.js
  */
