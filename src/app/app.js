@@ -105,8 +105,6 @@ var glayerLocSel,
     gLayoutsArr,
     gLoggedUsername,
     gLoggedPassword,
-    gtZoomMax,
-    gtHideSelectedFeaturePanel,
     add_default_tabs;
 var poziLinkClickHandler;
 var vector_layer = new OpenLayers.Layer.Vector("WKT", {

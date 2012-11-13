@@ -54,7 +54,6 @@ function requestConfig(options) {
                 hideNorthRegion: false,
                 hideSelectedFeaturePanel: false,
                 eastPanelCollapsed: false,
-                infoTitle: "Info",
                 hideLayerPanelButton: false,
                 mapContexts: [{
                     name: "Property Map",
@@ -62,7 +61,7 @@ function requestConfig(options) {
                 }],
                 reloadOnLogin: false,
                 openFirstDefaultTab: false,
-                databaseConfig: "vicmap",
+                databaseConfig: "vicmap", // Datastore definition for the web service search results
                 layerPresentation: {}
             };
 

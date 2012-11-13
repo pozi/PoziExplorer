@@ -28,33 +28,6 @@ var onConfigurationLoaded = function(JSONconf) {
             gtSearchComboEndPoint = JSONconf.servicesHost + JSONconf.searchEndPoint;
         };
 
-        // Simple overrides
-
-        var gtLGACode = JSONconf.LGACode;
-        var gtWorkspace = JSONconf.workspace;
-        var gtSymbolizer = JSONconf.highlightSymboliser;
-        var gtGetLiveDataEndPoints = JSONconf.liveDataEndPoints;
-        var gtLogoClientSrc = JSONconf.logoClientSrc;
-        var gtLogoClientWidth = JSONconf.logoClientWidth;
-        var gtZoomMax = JSONconf.zoomMax;
-        var gtBannerLineColor = JSONconf.bannerLineColor;
-        var gtBannerRightCornerLine1 = JSONconf.bannerRightCornerLine1;
-        var gtBannerRightCornerLine2 = JSONconf.bannerRightCornerLine2;
-        var gtPrintMapTitle = JSONconf.printMapTitle;
-        var gtLinkToCouncilWebsite = JSONconf.linkToCouncilWebsite;
-        var gtQuickZoomDatastore = JSONconf.quickZoomDatastore;
-        var gtCollapseWestPanel = JSONconf.collapseWestPanel;
-        var gtHideNorthRegion = JSONconf.hideNorthRegion;
-        var gtHideSelectedFeaturePanel = JSONconf.hideSelectedFeaturePanel;
-        var gtEastPanelCollapsed = JSONconf.eastPanelCollapsed;
-        var gtInfoTitle = JSONconf.infoTitle;
-        var gtHideLayerPanelButton = JSONconf.hideLayerPanelButton;
-
-        var gtReloadOnLogin = JSONconf.reloadOnLogin;
-        var gtOpenFirstDefaultTab = JSONconf.openFirstDefaultTab;
-        var gtDatabaseConfig = JSONconf.databaseConfig; // Datastore definition for the web service search results
-
-
         // Transforming the map contexts variable into the right format
         var gtMapContexts = JSONconf.mapContexts;
         if (gtMapContexts.length == 0) {
@@ -125,7 +98,7 @@ var onConfigurationLoaded = function(JSONconf) {
         // WFS layer: style , definition , namespaces
         var gtStyleMap = new OpenLayers.StyleMap();
         var rule_for_all = new OpenLayers.Rule({
-            symbolizer: gtSymbolizer,
+            symbolizer: JSONconf.highlightSymboliser,
             elseFilter: true
         });
         rule_for_all.title = " ";
@@ -215,8 +188,8 @@ var onConfigurationLoaded = function(JSONconf) {
             //autoload the data
             root: 'rows',
             baseParams: {
-                config: gtDatabaseConfig,
-                lga: gtLGACode
+                config: JSONconf.databaseConfig,
+                lga: JSONconf.LGACode
             },
             fields: [
                 { name: "label", mapping: "row.label" },
@@ -285,7 +258,7 @@ var onConfigurationLoaded = function(JSONconf) {
             accordion.doLayout();
 
             // Expanding the first tab if configured to do so
-            if (gtOpenFirstDefaultTab)
+            if (JSONconf.openFirstDefaultTab)
             {
                 accordion.items.items[0].expand();
             }
@@ -327,14 +300,14 @@ var onConfigurationLoaded = function(JSONconf) {
             var bd = new OpenLayers.Bounds(record.data.xmini, record.data.ymini, record.data.xmaxi, record.data.ymaxi).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
             var z = app.mapPanel.map.getZoomForExtent(bd);
 
-            if (z < gtZoomMax)
+            if (z < JSONconf.zoomMax)
             {
                 app.mapPanel.map.zoomToExtent(bd);
             }
             else
             {
-                // If zooming too close, taking step back to level gtZoomMax , centered on the center of the bounding box for this record
-                app.mapPanel.map.moveTo(new OpenLayers.LonLat((bd.left + bd.right) / 2, (bd.top + bd.bottom) / 2), gtZoomMax);
+                // If zooming too close, taking step back to level JSONconf.zoomMax , centered on the center of the bounding box for this record
+                app.mapPanel.map.moveTo(new OpenLayers.LonLat((bd.left + bd.right) / 2, (bd.top + bd.bottom) / 2), JSONconf.zoomMax);
             }
 
             // Updating the WFS protocol to fetch this record
@@ -364,7 +337,7 @@ var onConfigurationLoaded = function(JSONconf) {
             });
 
             //
-            if (! (gtHideSelectedFeaturePanel))
+            if (! (JSONconf.hideSelectedFeaturePanel))
             {
                 northPart.setHeight(60);
                 Ext.getCmp('gtInfoCombobox').setVisible(true);
@@ -387,7 +360,7 @@ var onConfigurationLoaded = function(JSONconf) {
             border: true,
             collapsible: true,
             collapseMode: "mini",
-            collapsed: gtCollapseWestPanel,
+            collapsed: JSONconf.collapseWestPanel,
             hideCollapseTool: true,
             autoScroll: true,
             // Only padding on the right as all other sides covered by the parent container
@@ -397,7 +370,7 @@ var onConfigurationLoaded = function(JSONconf) {
                 html: '<p style="font-size:16px;font-family: tahoma,arial,verdana,sans-serif;">Layers</p>',
                 bodyStyle: " background-color: white; "
             },
-            headerStyle: 'background-color:' + gtBannerLineColor + ';border:0px; margin:0px 0px 0px; padding: 5px 8px;',
+            headerStyle: 'background-color:' + JSONconf.bannerLineColor + ';border:0px; margin:0px 0px 0px; padding: 5px 8px;',
             items: [{
                 region: 'center',
                 border: false,
@@ -584,7 +557,7 @@ var onConfigurationLoaded = function(JSONconf) {
                                 // Script tag proxy uses a GET method (can not be overriden to a POST)
                                 // Source: http://www.sencha.com/forum/showthread.php?15916-ScriptTagProxy-with-POST-method-in-grid-with-paging
                                 proxy: new Ext.data.ScriptTagProxy({
-                                    url: gtGetLiveDataEndPoints[configArray[i].definition].urlLiveData
+                                    url: JSONconf.liveDataEndPoints[configArray[i].definition].urlLiveData
                                 }),
                                 reader: new Ext.data.JsonReader({
                                     root: 'rows',
@@ -604,11 +577,11 @@ var onConfigurationLoaded = function(JSONconf) {
                                     // Passing the tab name
                                     infoGroup: configArray[i].id,
                                     // Passing the database type to query
-                                    mode: gtGetLiveDataEndPoints[configArray[i].definition].storeMode,
+                                    mode: JSONconf.liveDataEndPoints[configArray[i].definition].storeMode,
                                     // Passing the database name to query
-                                    config: gtGetLiveDataEndPoints[configArray[i].definition].storeName,
+                                    config: JSONconf.liveDataEndPoints[configArray[i].definition].storeName,
                                     // Passing the LGA code, so that the query can be narrowed down (used for planning tab schedules links)
-                                    lga: gtLGACode
+                                    lga: JSONconf.LGACode
                                 },
                                 listeners:
                                 {
@@ -904,16 +877,16 @@ var onConfigurationLoaded = function(JSONconf) {
                 align: 'stretch'
             },
             height: 30,
-            bodyStyle: "background-color:" + gtBannerLineColor + ";",
+            bodyStyle: "background-color:" + JSONconf.bannerLineColor + ";",
             items: [
             {
                 layout: 'column',
                 height: 30,
                 border: false,
-                bodyStyle: "background-color:" + gtBannerLineColor + ";",
+                bodyStyle: "background-color:" + JSONconf.bannerLineColor + ";",
                 items: [
                 {
-                    html: "<p style='background-color:" + gtBannerLineColor + ";height:19px;padding:5px 8px; cursor: hand;' id='gtInfoTypeLabel'>&nbsp;</p>",
+                    html: "<p style='background-color:" + JSONconf.bannerLineColor + ";height:19px;padding:5px 8px; cursor: hand;' id='gtInfoTypeLabel'>&nbsp;</p>",
                     columnWidth: 1,
                     id: 'gtInfoTypeCmp',
                     bodyCssClass: 'selectedFeatureType',
@@ -936,7 +909,7 @@ var onConfigurationLoaded = function(JSONconf) {
                     }
                 },
                 {
-                    html: "<p style='background-color:" + gtBannerLineColor + ";'><img src='theme/app/img/panel/cross-white.png' style='padding:2px;' alt='Clear' title='Clear' /></p>",
+                    html: "<p style='background-color:" + JSONconf.bannerLineColor + ";'><img src='theme/app/img/panel/cross-white.png' style='padding:2px;' alt='Clear' title='Clear' /></p>",
                     width: 17,
                     bodyCssClass: 'selectedFeatureType',
                     listeners: {
@@ -964,7 +937,7 @@ var onConfigurationLoaded = function(JSONconf) {
                 displayField: 'labelx',
                 disabled: true,
                 mode: 'local',
-                style: 'background-color: ' + gtBannerLineColor + ';',
+                style: 'background-color: ' + JSONconf.bannerLineColor + ';',
                 // Setting the background image initially to nothing
                 cls: 'x-form-single',
                 typeAhead: true,
@@ -1273,7 +1246,7 @@ var onConfigurationLoaded = function(JSONconf) {
             // Padding only on the left, as all over basis are covered by the parent container
             style: "padding: 0px 0px 0px 10px; background-color:white;",
             collapseMode: "mini",
-            collapsed: gtEastPanelCollapsed,
+            collapsed: JSONconf.eastPanelCollapsed,
             width: 350,
             listeners: {
                 scope: this,
@@ -1308,9 +1281,9 @@ var onConfigurationLoaded = function(JSONconf) {
             [
             new Ext.BoxComponent({
                 region: "west",
-                width: gtLogoClientWidth,
+                width: JSONconf.logoClientWidth,
                 bodyStyle: " background-color: transparent ",
-                html: '<img style="height: 90px" src="' + gtLogoClientSrc + '" align="right"/>'
+                html: '<img style="height: 90px" src="' + JSONconf.logoClientSrc + '" align="right"/>'
             })
             ,
             {
@@ -1337,7 +1310,7 @@ var onConfigurationLoaded = function(JSONconf) {
                     typeAhead: false,
                     loadingText: gtLoadingText,
                     width: 450,
-                    style: "border-color: " + gtBannerLineColor + ";",
+                    style: "border-color: " + JSONconf.bannerLineColor + ";",
                     pageSize: 0,
                     emptyText: gtEmptyTextSearch,
                     hideTrigger: true,
@@ -1359,7 +1332,7 @@ var onConfigurationLoaded = function(JSONconf) {
                 border: false,
                 padding: "7px",
                 bodyStyle: {
-                    backgroundColor: gtBannerLineColor
+                    backgroundColor: JSONconf.bannerLineColor
                 },
                 html: '<img style="vertical-align: middle;"src="theme/app/img/panel/search_button.png"/>'
             })
@@ -1377,7 +1350,7 @@ var onConfigurationLoaded = function(JSONconf) {
                 width: 200,
                 height: 100,
                 bodyStyle: " background-color: transparent; ",
-                html: '<p style="text-align:right;padding: 15px;font-size:12px;"><a href="' + gtLinkToCouncilWebsite + '" target="_blank">' + gtBannerRightCornerLine1 + '</a><br> ' + gtBannerRightCornerLine2 + ' <br><br>Map powered by <a href="http://www.pozi.com" target="_blank">Pozi</a></p>'
+                html: '<p style="text-align:right;padding: 15px;font-size:12px;"><a href="' + JSONconf.linkToCouncilWebsite + '" target="_blank">' + JSONconf.bannerRightCornerLine1 + '</a><br> ' + JSONconf.bannerRightCornerLine2 + ' <br><br>Map powered by <a href="http://www.pozi.com" target="_blank">Pozi</a></p>'
 
             })
             ]
@@ -1401,7 +1374,7 @@ var onConfigurationLoaded = function(JSONconf) {
                     height: 29,
                     border: false,
                     bodyStyle: {
-                        backgroundColor: gtBannerLineColor,
+                        backgroundColor: JSONconf.bannerLineColor,
                         margin: '0px 0px 0px',
                         padding: '5px 8px',
                         fontSize: '16px',
@@ -1411,7 +1384,7 @@ var onConfigurationLoaded = function(JSONconf) {
                     },
                     defaults: {
                         bodyStyle: {
-                            backgroundColor: gtBannerLineColor
+                            backgroundColor: JSONconf.bannerLineColor
                         },
                         border: false
                     },
@@ -1425,7 +1398,7 @@ var onConfigurationLoaded = function(JSONconf) {
                         html: "<img src='theme/app/img/panel/list-white-final.png' style='padding:2px;' alt='Layers' title='Layers' />",
                         id: 'layerListButton',
                         width: 20,
-                        hidden: gtHideLayerPanelButton,
+                        hidden: JSONconf.hideLayerPanelButton,
                         listeners: {
                             render: function(c) {
                                 // Expanding the drop down on click
@@ -1481,7 +1454,7 @@ var onConfigurationLoaded = function(JSONconf) {
         ];
 
         // Masking the north region
-        if (gtHideNorthRegion)
+        if (JSONconf.hideNorthRegion)
         {
             portalItems = [portalItems[1]];
         }
@@ -1525,7 +1498,7 @@ var onConfigurationLoaded = function(JSONconf) {
         function() {
             // Setting the title of the map to print
             app.about = {};
-            app.about["title"] = gtPrintMapTitle;
+            app.about["title"] = JSONconf.printMapTitle;
 
             // This is when we want to find the handle to the WFS layer
             for (x in app.mapPanel.layers.data.items) {
@@ -1717,7 +1690,7 @@ var onConfigurationLoaded = function(JSONconf) {
                 //});
                 app.showLogin();
 
-                if (gtReloadOnLogin)
+                if (JSONconf.reloadOnLogin)
                 {
                     // Issue with users having to refresh the page to access their priviledged functionalities
                     // This section should disappear when we're able to reload the layer tree / manager properly
@@ -1739,7 +1712,7 @@ var onConfigurationLoaded = function(JSONconf) {
                     var typedUsername = panel.getForm().items.items[0].getValue();
                     if (typedUsername != "admin")
                     {
-                        panel.getForm().items.items[0].setValue(gtWorkspace + "." + typedUsername);
+                        panel.getForm().items.items[0].setValue(JSONconf.workspace + "." + typedUsername);
                     }
                     //
                     panel.getForm().submit({
@@ -1772,8 +1745,7 @@ var onConfigurationLoaded = function(JSONconf) {
                             win.un("beforedestroy", this.cancelAuthentication, this);
                             win.close();
 
-                            if (gtReloadOnLogin)
-                            {
+                            if (JSONconf.reloadOnLogin) {
                                 // Issue with users having to refresh the page to access their priviledged functionalities
                                 // This section should disappear when we're able to reload the layer tree / manager properly
                                 window.location.reload();
@@ -1945,14 +1917,14 @@ var onConfigurationLoaded = function(JSONconf) {
 
                 // Information panel layouts for the current authorized role - we should degrade nicely if the service is not found
                 var ds;
-                for (urlIdx in gtGetLiveDataEndPoints)
+                for (urlIdx in JSONconf.liveDataEndPoints)
                 {
-                    if (gtGetLiveDataEndPoints.hasOwnProperty(urlIdx))
+                    if (JSONconf.liveDataEndPoints.hasOwnProperty(urlIdx))
                     {
                         ds = new Ext.data.Store({
                             autoLoad: true,
                             proxy: new Ext.data.ScriptTagProxy({
-                                url: gtGetLiveDataEndPoints[urlIdx].urlLayout
+                                url: JSONconf.liveDataEndPoints[urlIdx].urlLayout
                             }),
                             reader: new Ext.data.JsonReader({
                                 root: 'rows',
@@ -1966,8 +1938,8 @@ var onConfigurationLoaded = function(JSONconf) {
                             ]),
                             baseParams: {
                                 role: gCurrentLoggedRole,
-                                mode: gtGetLiveDataEndPoints[urlIdx].storeMode,
-                                config: gtGetLiveDataEndPoints[urlIdx].storeName
+                                mode: JSONconf.liveDataEndPoints[urlIdx].storeMode,
+                                config: JSONconf.liveDataEndPoints[urlIdx].storeName
                             },
                             listeners:
                             {

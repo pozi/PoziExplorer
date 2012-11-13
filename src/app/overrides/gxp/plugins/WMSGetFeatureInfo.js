@@ -176,7 +176,7 @@
           gCombostore.loadData(gComboDataArray);
           
           // Features found during the getFeatureInfo: showing the tab
-          if (!(gtHideSelectedFeaturePanel))
+          if (!(JSONconf.hideSelectedFeaturePanel))
           {
             northPart.setHeight(60);
             Ext.getCmp('gtInfoCombobox').setVisible(true);
