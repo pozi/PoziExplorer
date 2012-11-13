@@ -1486,8 +1486,7 @@ var onConfigurationLoaded = function(JSONconf) {
             }
         });
 
-        app.on("ready",
-        function() {
+        app.on("ready", function() {
             // Setting the title of the map to print
             app.about = {};
             app.about["title"] = JSONconf.printMapTitle;
