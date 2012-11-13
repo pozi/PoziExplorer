@@ -63,8 +63,10 @@
  * @require overrides/gxp/plugins/WMSSource.js
  * @require overrides/gxp/widgets/WMSLayerPanel.js
  * @require overrides/gxp/plugins/WMSGetFeatureInfo.js
+ * @require overrides/gxp/widgets/ScaleOverlay.js
  *
  * @require helpers.js
+ * @require loadJSFile.js
  * @require onConfigurationLoaded.js
  * @require requestConfig.js
  */
@@ -95,7 +97,6 @@ var glayerLocSel,
     gCombostore,
     gCurrentExpandedTabIdx = [],
     gCurrentLoggedRole = "NONE",
-    JSONconf,
     propertyDataInit,
     gtLayerPresentationConfiguration,
     eastPanel,
@@ -114,4 +115,12 @@ var vector_layer = new OpenLayers.Layer.Vector("WKT", {
 var wkt_format = new OpenLayers.Format.WKT();
 var gtLayerLabel;
 
-Ext.onReady(requestConfig);
+Ext.onReady(function() {
+    requestConfig({
+        onLoad: function(clientConfig) {
+            JSONconf = clientConfig; // This is still necessary because JSONconf is used as a global in some gxp overrides.
+            onConfigurationLoaded(clientConfig);
+        }
+    })
+});
+
