@@ -106,7 +106,6 @@ var glayerLocSel,
     gLoggedUsername,
     gLoggedPassword,
     add_default_tabs;
-var poziLinkClickHandler;
 var vector_layer = new OpenLayers.Layer.Vector("WKT", {
         displayInLayerSwitcher: false
     });

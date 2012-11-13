@@ -50,32 +50,6 @@ var onConfigurationLoaded = function(JSONconf) {
         Ext.apply(gtLayerPresentationConfiguration, JSONconf.layerPresentation)
 
 
-        poziLinkClickHandler = function() {
-            var appInfo = new Ext.Panel({
-                title: "GeoExplorer",
-                html: "<iframe style='border: none; height: 100%; width: 100%' src='about.html' frameborder='0' border='0'><a target='_blank' href='about.html'>" + this.aboutText + "</a> </iframe>"
-            });
-            var poziInfo = new Ext.Panel({
-                title: "Pozi Explorer",
-                html: "<iframe style='border: none; height: 100%; width: 100%' src='about-pozi.html' frameborder='0' border='0'><a target='_blank' href='about-pozi.html'>" + "</a> </iframe>"
-            });
-            var tabs = new Ext.TabPanel({
-                activeTab: 0,
-                items: [
-                poziInfo, appInfo]
-            });
-            var win = new Ext.Window({
-                title: "About this map",
-                modal: true,
-                layout: "fit",
-                width: 300,
-                height: 320,
-                items: [
-                tabs]
-            });
-            win.show();
-        };
-
         var gtInitialDisclaimerFlag = true;
         var gtDisclaimer = "disclaimer.html";
         var gtRedirectIfDeclined = "http://www.mitchellshire.vic.gov.au/";
