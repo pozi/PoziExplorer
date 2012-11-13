@@ -1,27 +1,6 @@
 // Function to execute on successful return of the JSON configuration file loading
 var onConfigurationLoaded = function(JSONconf) {
 
-    // Customising the scale combo visibility
-    gxp.ScaleOverlay.prototype.bind = function(map) {
-        this.map = map;
-        this.addScaleLine();
-        // Hiding the scale combo
-        if ('hideScaleCombo' in JSONconf)
-        {
-            if (! (JSONconf.hideScaleCombo))
-            {
-                this.addScaleCombo();
-            }
-        }
-        else
-        {
-            this.addScaleCombo();
-        }
-        this.doLayout();
-    }
-
-
-
     // Based on the previous JSON configuration, we may decide to dynamically load an additional Javascript file of interaction customisations
     // Function that is able to dynamically load the extra Javascript
     var loadjscssfile = function(filename, cbk) {

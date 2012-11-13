@@ -63,6 +63,7 @@
  * @require overrides/gxp/plugins/WMSSource.js
  * @require overrides/gxp/widgets/WMSLayerPanel.js
  * @require overrides/gxp/plugins/WMSGetFeatureInfo.js
+ * @require overrides/gxp/widgets/ScaleOverlay.js
  *
  * @require helpers.js
  * @require onConfigurationLoaded.js
