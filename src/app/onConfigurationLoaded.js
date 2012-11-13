@@ -3,6 +3,7 @@ var onConfigurationLoaded = function(JSONconf) {
 
     // Encapsulating the loading of the main app in a callback
     var extraJSScriptLoaded = function() {
+
         // Fixing local URL source for debug mode
         if (JSONconf.sources.local)
         {
@@ -17,16 +18,6 @@ var onConfigurationLoaded = function(JSONconf) {
         var gtClearButton = "Clear";
         var gtEmptyTextSelectFeature = "Selected feature ...";
         var gtEmptyTextQuickZoom = "Zoom to town ...";
-
-        // Not sure it would make sense to override the WFS endpoint
-        var gtWFSEndPoint = JSONconf.servicesHost + "/geoserver/wfs";
-
-        // Client-specific overridable variables
-
-        var gtSearchComboEndPoint = JSONconf.servicesHost + "/ws/rest/v3/ws_all_features_by_string_and_lga.php";
-        if (JSONconf.searchEndPoint) {
-            gtSearchComboEndPoint = JSONconf.servicesHost + JSONconf.searchEndPoint;
-        };
 
         // Transforming the map contexts variable into the right format
         var gtMapContexts = JSONconf.mapContexts;
@@ -121,12 +112,12 @@ var onConfigurationLoaded = function(JSONconf) {
                 })],
                 protocol: new OpenLayers.Protocol.WFS({
                     version: "1.1.0",
-                    url: gtWFSEndPoint,
+                    url: JSONconf.servicesHost + JSONconf.WFSEndPoint,
                     featureType: "VMPROP_PROPERTY",
                     srsName: gtWFSsrsName,
                     featureNS: gtFeatureNS,
                     geometryName: gtWFSgeometryName,
-                    schema: gtWFSEndPoint + "?service=WFS&version=1.1.0&request=DescribeFeatureType&TypeName=" + "VICMAP:VMPROP_PROPERTY"
+                    schema: JSONconf.servicesHost + JSONconf.WFSEndPoint + "?service=WFS&version=1.1.0&request=DescribeFeatureType&TypeName=" + "VICMAP:VMPROP_PROPERTY"
                 }),
                 filter: new OpenLayers.Filter.Comparison({
                     type: OpenLayers.Filter.Comparison.EQUAL_TO,
@@ -204,7 +195,7 @@ var onConfigurationLoaded = function(JSONconf) {
                 { name: "ld",    mapping: "row.ld" }
             ],
             proxy: new Ext.data.ScriptTagProxy({
-                url: gtSearchComboEndPoint
+                url: JSONconf.servicesHost + JSONconf.searchEndPoint
             })
         });
 
@@ -299,6 +290,7 @@ var onConfigurationLoaded = function(JSONconf) {
             // Zooming to the relevant area (covering the selected record)
             var bd = new OpenLayers.Bounds(record.data.xmini, record.data.ymini, record.data.xmaxi, record.data.ymaxi).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
             var z = app.mapPanel.map.getZoomForExtent(bd);
+            var fullWFSEndPoint = JSONconf.servicesHost + JSONconf.WFSEndPoint;
 
             if (z < JSONconf.zoomMax)
             {
@@ -313,12 +305,12 @@ var onConfigurationLoaded = function(JSONconf) {
             // Updating the WFS protocol to fetch this record
             glayerLocSel.protocol = new OpenLayers.Protocol.WFS({
                 version: "1.1.0",
-                url: gtWFSEndPoint,
+                url: fullWFSEndPoint,
                 featureType: record.data.gsln,
                 srsName: gtWFSsrsName,
                 featureNS: gtFeatureNS,
                 geometryName: gtWFSgeometryName,
-                schema: gtWFSEndPoint + "?service=WFS&version=1.1.0&request=DescribeFeatureType&TypeName=" + record.data.gsns + ":" + record.data.gsln
+                schema: fullWFSEndPoint + "?service=WFS&version=1.1.0&request=DescribeFeatureType&TypeName=" + record.data.gsns + ":" + record.data.gsln
             });
 
             // Filtering the WFS layer on a column name and value - if the value contains a \, we escape it by doubling it

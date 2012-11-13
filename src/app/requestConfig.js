@@ -31,6 +31,8 @@ function requestConfig(options) {
 
             var defaultConf = {
                 servicesHost: "http://49.156.17.41",
+                searchEndPoint: "/ws/rest/v3/ws_all_features_by_string_and_lga.php",
+                WFSEndPoint: "/geoserver/wfs",
                 LGACode: "346",
                 workspace: "",
                 highlightSymboliser: {
