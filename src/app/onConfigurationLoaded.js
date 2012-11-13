@@ -18,194 +18,73 @@ var onConfigurationLoaded = function(JSONconf) {
         var gtEmptyTextSelectFeature = "Selected feature ...";
         var gtEmptyTextQuickZoom = "Zoom to town ...";
 
-        // Client-specific overridable variables
-        var gtServicesHost = "http://49.156.17.41";
-        if (JSONconf.servicesHost) {
-            gtServicesHost = JSONconf.servicesHost;
-        };
         // Not sure it would make sense to override the WFS endpoint
-        var gtWFSEndPoint = gtServicesHost + "/geoserver/wfs";
+        var gtWFSEndPoint = JSONconf.servicesHost + "/geoserver/wfs";
 
-        var gtSearchComboEndPoint = gtServicesHost + "/ws/rest/v3/ws_all_features_by_string_and_lga.php";
+        // Client-specific overridable variables
+
+        var gtSearchComboEndPoint = JSONconf.servicesHost + "/ws/rest/v3/ws_all_features_by_string_and_lga.php";
         if (JSONconf.searchEndPoint) {
-            gtSearchComboEndPoint = gtServicesHost + JSONconf.searchEndPoint;
+            gtSearchComboEndPoint = JSONconf.servicesHost + JSONconf.searchEndPoint;
         };
 
-        var gtLGACode = "346";
-        if (JSONconf.LGACode) {
-            gtLGACode = JSONconf.LGACode;
-        };
+        // Simple overrides
 
-        var gtWorkspace = "";
-        if (JSONconf.workspace) {
-            gtWorkspace = JSONconf.workspace;
-        };
-
-        var gtSymbolizer = {
-            "name": "test",
-            "strokeColor": "yellow",
-            "strokeWidth": 15,
-            "strokeOpacity": 0.5,
-            "fillColor": "yellow",
-            "fillOpacity": 0.2
-        };
-        if (JSONconf.highlightSymboliser) {
-            gtSymbolizer = JSONconf.highlightSymboliser;
-        };
-
+        var gtLGACode = JSONconf.LGACode;
+        var gtWorkspace = JSONconf.workspace;
+        var gtSymbolizer = JSONconf.highlightSymboliser;
         var gtGetLiveDataEndPoints = JSONconf.liveDataEndPoints;
+        var gtLogoClientSrc = JSONconf.logoClientSrc;
+        var gtLogoClientWidth = JSONconf.logoClientWidth;
+        var gtZoomMax = JSONconf.zoomMax;
+        var gtBannerLineColor = JSONconf.bannerLineColor;
+        var gtBannerRightCornerLine1 = JSONconf.bannerRightCornerLine1;
+        var gtBannerRightCornerLine2 = JSONconf.bannerRightCornerLine2;
+        var gtPrintMapTitle = JSONconf.printMapTitle;
+        var gtLinkToCouncilWebsite = JSONconf.linkToCouncilWebsite;
+        var gtQuickZoomDatastore = JSONconf.quickZoomDatastore;
+        var gtCollapseWestPanel = JSONconf.collapseWestPanel;
+        var gtHideNorthRegion = JSONconf.hideNorthRegion;
+        var gtHideSelectedFeaturePanel = JSONconf.hideSelectedFeaturePanel;
+        var gtEastPanelCollapsed = JSONconf.eastPanelCollapsed;
+        var gtInfoTitle = JSONconf.infoTitle;
+        var gtHideLayerPanelButton = JSONconf.hideLayerPanelButton;
 
-        var gtLogoClientSrc = "http://www.pozi.com/theme/app/img/mitchell_banner.jpg";
-        if (JSONconf.logoClientSrc) {
-            gtLogoClientSrc = JSONconf.logoClientSrc;
-        };
+        var gtReloadOnLogin = JSONconf.reloadOnLogin;
+        var gtOpenFirstDefaultTab = JSONconf.openFirstDefaultTab;
+        var gtDatabaseConfig = JSONconf.databaseConfig; // Datastore definition for the web service search results
 
-        var gtLogoClientWidth = 238;
-        if (JSONconf.logoClientWidth) {
-            gtLogoClientWidth = JSONconf.logoClientWidth;
-        };
 
-        gtZoomMax = 18;
-        if (JSONconf.zoomMax) {
-            gtZoomMax = JSONconf.zoomMax;
-        };
-
-        var gtBannerLineColor = "#A0A0A0";
-        if (JSONconf.bannerLineColor) {
-            gtBannerLineColor = JSONconf.bannerLineColor;
-        };
-
-        var gtBannerRightCornerLine1 = "Mitchell Shire Council";
-        if (JSONconf.bannerRightCornerLine1) {
-            gtBannerRightCornerLine1 = JSONconf.bannerRightCornerLine1;
-        };
-
-        var gtBannerRightCornerLine2 = "Victoria, Australia";
-        if (JSONconf.bannerRightCornerLine2) {
-            gtBannerRightCornerLine2 = JSONconf.bannerRightCornerLine2;
-        };
-
-        var gtPrintMapTitle = "";
-        if (JSONconf.printMapTitle) {
-            gtPrintMapTitle = JSONconf.printMapTitle;
-        };
-
-        var gtLinkToCouncilWebsite = "http://www.mitchellshire.vic.gov.au/";
-        if (JSONconf.linkToCouncilWebsite) {
-            gtLinkToCouncilWebsite = JSONconf.linkToCouncilWebsite;
-        };
-
-        var gtQuickZoomDatastore = [];
-        if (JSONconf.quickZoomDatastore) {
-            gtQuickZoomDatastore = JSONconf.quickZoomDatastore;
-        };
-
-        var gtCollapseWestPanel = false;
-        if ('collapseWestPanel' in JSONconf) {
-            gtCollapseWestPanel = JSONconf.collapseWestPanel;
-        };
-
-        var gtHideNorthRegion = false;
-        if ('hideNorthRegion' in JSONconf) {
-            gtHideNorthRegion = JSONconf.hideNorthRegion;
-        };
-
-        gtHideSelectedFeaturePanel = false;
-        if ('hideSelectedFeaturePanel' in JSONconf) {
-            gtHideSelectedFeaturePanel = JSONconf.hideSelectedFeaturePanel;
-        };
-
-        var gtEastPanelCollapsed = false;
-        if ('eastPanelCollapsed' in JSONconf) {
-            gtEastPanelCollapsed = JSONconf.eastPanelCollapsed;
-        };
-
-        var gtInfoTitle = "Info";
-        if ('infoTitle' in JSONconf) {
-            gtInfoTitle = JSONconf.infoTitle;
-        };
-
-        var gtHideLayerPanelButton = false;
-        if ('hideLayerPanelButton' in JSONconf) {
-            gtHideLayerPanelButton = JSONconf.hideLayerPanelButton;
-        };
-
-        var gtMapContexts = [{
-            "name": "Property Map",
-            "size": 120
-        }];
-        if ('mapContexts' in JSONconf) {
-            gtMapContexts = JSONconf.mapContexts;
-        };
         // Transforming the map contexts variable into the right format
-        if (gtMapContexts.length == 0)
-        {
+        var gtMapContexts = JSONconf.mapContexts;
+        if (gtMapContexts.length == 0) {
             gtMapContexts = "&nbsp;";
             gtMapContextsSize = 0;
-        }
-        else
-        {
-            if (gtMapContexts.length == 1)
-            {
+        } else {
+            if (gtMapContexts.length == 1) {
                 gtMapContextsSize = gtMapContexts[0].size;
                 gtMapContexts = gtMapContexts[0].name;
-            }
-            else
-            {
+            } else {
                 // TODO: format the contexts into a drop down loading different layers
-                }
+            }
         }
 
+
         // This structure deals with fields to show, in which order and with which name
-        gtLayerPresentationConfiguration =
-        {
-            "VICMAP_PROPERTY_ADDRESS":
-            [
-            {
-                "attr_name": "ezi_add",
-                "alt_name": "Address"
-            },
-            {
-                "attr_name": "pr_propnum",
-                "alt_name": "Property Number"
-            },
-            {
-                "attr_name": "locality"
-            },
-            {
-                "attr_name": "postcode"
-            },
-            {
-                "attr_name": "lga_code",
-                "alt_name": "LGA"
-            },
-            {
-                "attr_name": "pr_multass",
-                "alt_name": "Multi Assessment"
-            },
-            {
-                "attr_name": "pfi",
-                "alt_name": "PFI"
-            }
+        gtLayerPresentationConfiguration = {
+            "VICMAP_PROPERTY_ADDRESS": [
+                { attr_name: "ezi_add", alt_name: "Address" },
+                { attr_name: "pr_propnum", alt_name: "Property Number" },
+                { attr_name: "locality" },
+                { attr_name: "postcode" },
+                { attr_name: "lga_code", alt_name: "LGA" },
+                { attr_name: "pr_multass", alt_name: "Multi Assessment" },
+                { attr_name: "pfi", alt_name: "PFI" }
             ]
         };
         // Augment this structure with the client-specific JSON configuration
-        if (JSONconf.layerPresentation) {
-            for (l in JSONconf.layerPresentation)
-            {
-                gtLayerPresentationConfiguration[l] = JSONconf.layerPresentation[l];
-            }
-        };
+        Ext.apply(gtLayerPresentationConfiguration, JSONconf.layerPresentation)
 
-        var gtReloadOnLogin = false;
-        if ('reloadOnLogin' in JSONconf) {
-            gtReloadOnLogin = JSONconf.reloadOnLogin;
-        };
-
-        var gtOpenFirstDefaultTab = false;
-        if ('openFirstDefaultTab' in JSONconf) {
-            gtOpenFirstDefaultTab = JSONconf.openFirstDefaultTab;
-        };
 
         poziLinkClickHandler = function() {
             var appInfo = new Ext.Panel({
@@ -330,12 +209,6 @@ var onConfigurationLoaded = function(JSONconf) {
                 scope: this
             }
         });
-
-        // Datastore definition for the web service search results
-        var gtDatabaseConfig = "vicmap";
-        if (JSONconf.databaseConfig) {
-            gtDatabaseConfig = JSONconf.databaseConfig;
-        }
 
         var ds = new Ext.data.JsonStore({
             autoLoad: false,
