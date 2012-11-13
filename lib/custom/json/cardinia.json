@@ -281,6 +281,18 @@
             "tiled": false
         },
         {
+            "source": "ol",
+            "group": "aerial",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "None",
+                {
+                    "visibility": false
+                }
+            ]
+        },
+        {
             "source": "dse_iws_cascaded",
             "name": "CARDINIA:AERIAL_PAKENHAM_2011DEC30_AIR_VIS_10CM_MGA55",
             "title": "Aerial Photo (Pakenham, Dec 2011)",
@@ -347,33 +359,6 @@
         },
         {
             "source": "dse_iws_cascaded",
-            "name": "CARDINIA:AERIAL_PORTPHILLIP-OUTER_2011DEC30_AIR_VIS_35CM_MGA55",
-            "title": "Aerial Photo (Port Phillip Outer, Dec 2011)",
-            "visibility": true,
-            "opacity": 0,
-            "format": "image/JPEG",
-            "tiled": true,
-            "group":"aerial",
-            "selected": false,
-            "transparent": true,
-            "styles":"",
-            "displayInOpacitySlider":true
-        },
-        {
-            "source": "dse_iws_cascaded",
-            "name": "CARDINIA:AERIAL_PORTPHILLIP-OUTER_2011DEC30_AIR_CIR_35CM_MGA55",
-            "title": "Aerial Photo (Port Phillip Outer, Dec 2011, IR)",
-            "visibility": false,
-            "opacity": 1,
-            "format": "image/JPEG",
-            "tiled": true,
-            "group":"aerial",
-            "selected": false,
-            "transparent": true,
-            "styles":""
-        },
-        {
-            "source": "dse_iws_cascaded",
             "name": "CARDINIA:AERIAL_CARDINIA_2006NOV18_AIR_VIS_35CM_MGA55",
             "title": "Aerial Photo (Cardinia, Nov 2006)",
             "visibility": false,
@@ -396,6 +381,33 @@
             "format": "image/JPEG",
             "transparent": true,
             "styles": ""
+        },
+        {
+            "source": "dse_iws_cascaded",
+            "name": "CARDINIA:AERIAL_PORTPHILLIP-OUTER_2011DEC30_AIR_CIR_35CM_MGA55",
+            "title": "Aerial Photo (Port Phillip Outer, Dec 2011, IR)",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group":"aerial",
+            "selected": false,
+            "transparent": true,
+            "styles":""
+        },
+        {
+            "source": "dse_iws_cascaded",
+            "name": "CARDINIA:AERIAL_PORTPHILLIP-OUTER_2011DEC30_AIR_VIS_35CM_MGA55",
+            "title": "Aerial Photo (Port Phillip Outer, Dec 2011)",
+            "visibility": true,
+            "opacity": 0,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group":"aerial",
+            "selected": false,
+            "transparent": true,
+            "styles":"",
+            "displayInOpacitySlider":true
         },
         {
             "source": "backend",
@@ -446,18 +458,6 @@
         {
             "source": "ol",
             "group": "background",
-            "fixed": true,
-            "type": "OpenLayers.Layer",
-            "args": [
-                "None",
-                {
-                    "visibility": false
-                }
-            ]
-        },
-        {
-            "source": "ol",
-            "group": "aerial",
             "fixed": true,
             "type": "OpenLayers.Layer",
             "args": [
