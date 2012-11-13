@@ -23,12 +23,52 @@ function requestConfig(options) {
             }
         }
     }
-   
+
     // Loading the JSON configuration based on the council name
     OpenLayers.Request.GET({
         url: "lib/custom/json/" + configScript + ".json",
         success: function(request) {
-            var JSONconf = Ext.util.JSON.decode(request.responseText);
+
+            var defaultConf = {
+                servicesHost: "http://49.156.17.41",
+                LGACode: "346",
+                workspace: "",
+                highlightSymboliser: {
+                    name: "test",
+                    strokeColor: "yellow",
+                    strokeWidth: 15,
+                    strokeOpacity: 0.5,
+                    fillColor: "yellow",
+                    fillOpacity: 0.2
+                },
+                logoClientSrc: "http://www.pozi.com/theme/app/img/mitchell_banner.jpg",
+                logoClientWidth: 238,
+                zoomMax: 18,
+                bannerLineColor: "#A0A0A0",
+                bannerRightCornerLine1: "Mitchell Shire Council",
+                bannerRightCornerLine2: "Victoria, Australia",
+                printMapTitle: "",
+                linkToCouncilWebsite: "http://www.mitchellshire.vic.gov.au/",
+                quickZoomDatastore: [],
+                collapseWestPanel: false,
+                hideNorthRegion: false,
+                hideSelectedFeaturePanel: false,
+                eastPanelCollapsed: false,
+                infoTitle: "Info",
+                hideLayerPanelButton: false,
+                mapContexts: [{
+                    name: "Property Map",
+                    size: 120
+                }],
+                reloadOnLogin: false,
+                openFirstDefaultTab: false,
+                databaseConfig: "vicmap",
+                layerPresentation: {}
+            };
+
+            var loadedConf = Ext.util.JSON.decode(request.responseText);
+            var JSONconf = {}
+            Ext.apply(JSONconf, loadedConf, defaultConf)
 
             if (propNum)
             {
