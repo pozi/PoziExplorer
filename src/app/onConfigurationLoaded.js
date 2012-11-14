@@ -1177,18 +1177,20 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                                             render: function(c) {
                                                 // Expanding the drop down on click
                                                 c.el.on('click',
-                                                function() {
-                                                    if (westPanel.collapsed) {
-                                                        westPanel.expand();
-                                                    } else {
-                                                        westPanel.collapse();
+                                                    function() {
+                                                        if (westPanel.collapsed) {
+                                                            westPanel.expand();
+                                                        } else {
+                                                            westPanel.collapse();
+                                                        }
                                                     }
-                                                });
+                                                );
                                                 // Using the pointer cursor when hovering over the element
                                                 c.el.on('mouseover',
-                                                function() {
-                                                    this.dom.style.cursor = 'pointer';
-                                                });
+                                                    function() {
+                                                        this.dom.style.cursor = 'pointer';
+                                                    }
+                                                );
                                             },
                                             scope: this
                                         }
