@@ -93,8 +93,7 @@ else
 }
 
 var app;
-var glayerLocSel,
-    gComboDataArray = [],
+var gComboDataArray = [],
     gfromWFSFlag,
     clear_highlight,
     gCombostore,
