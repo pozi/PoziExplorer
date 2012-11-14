@@ -1017,7 +1017,9 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
             }
         });
 
-        var bottomEastItem;
+        var bottomEastItem = {
+            border: false
+        };
         if (JSONconf.bottomEastItem) {
             bottomEastItem = {
                 id: 'bottomEastItem',
@@ -1037,8 +1039,6 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                     }
                 }
             };
-        } else {
-            bottomEastItem = { border: false };
         }
 
         eastPanel = new Ext.Panel({
