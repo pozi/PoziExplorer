@@ -2,7 +2,7 @@
 // - a record is selected in the search drop down list
 // - a property number is passed in the URL and has returned a valid property record
 
-searchRecordSelectHandler = function(combo, record, app, JSONconf, glayerLocSel, northPart, eastPanel, gtWFSsrsName, gtFeatureNS, gtWFSgeometryName) {
+searchRecordSelectHandler = function(combo, record, app, JSONconf, glayerLocSel, northPart, eastPanel) {
     // Zooming to the relevant area (covering the selected record)
     var bd = new OpenLayers.Bounds(record.data.xmini, record.data.ymini, record.data.xmaxi, record.data.ymaxi).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
     var z = app.mapPanel.map.getZoomForExtent(bd);
@@ -23,9 +23,9 @@ searchRecordSelectHandler = function(combo, record, app, JSONconf, glayerLocSel,
         version: "1.1.0",
         url: fullWFSEndPoint,
         featureType: record.data.gsln,
-        srsName: gtWFSsrsName,
-        featureNS: gtFeatureNS,
-        geometryName: gtWFSgeometryName,
+        srsName: JSONconf.WFSsrsName,
+        featureNS: JSONconf.FeatureNS,
+        geometryName: JSONconf.WFSgeometryName,
         schema: fullWFSEndPoint + "?service=WFS&version=1.1.0&request=DescribeFeatureType&TypeName=" + record.data.gsns + ":" + record.data.gsln
     });
 

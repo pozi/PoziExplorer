@@ -68,9 +68,6 @@ var onConfigurationLoaded = function(JSONconf) {
         });
         rule_for_all.title = " ";
         gtStyleMap.styles["default"].addRules([rule_for_all]);
-        var gtWFSsrsName = "EPSG:4326";
-        var gtWFSgeometryName = "the_geom";
-        var gtFeatureNS = "http://www.pozi.com/vicmap";
 
         // Pushing the WFS layer in the layer store
         JSONconf.layers.push({
@@ -88,9 +85,9 @@ var onConfigurationLoaded = function(JSONconf) {
                     version: "1.1.0",
                     url: JSONconf.servicesHost + JSONconf.WFSEndPoint,
                     featureType: "VMPROP_PROPERTY",
-                    srsName: gtWFSsrsName,
-                    featureNS: gtFeatureNS,
-                    geometryName: gtWFSgeometryName,
+                    srsName: JSONconf.WFSsrsName,
+                    featureNS: JSONconf.FeatureNS,
+                    geometryName: JSONconf.WFSgeometryName,
                     schema: JSONconf.servicesHost + JSONconf.WFSEndPoint + "?service=WFS&version=1.1.0&request=DescribeFeatureType&TypeName=" + "VICMAP:VMPROP_PROPERTY"
                 }),
                 filter: new OpenLayers.Filter.Comparison({
@@ -1226,7 +1223,7 @@ var onConfigurationLoaded = function(JSONconf) {
                     itemSelector: 'div.search-item',
                     listeners: {
                         'select': function(combo, record) {
-                            var result = searchRecordSelectHandler(combo, record, app, JSONconf, glayerLocSel, northPart, eastPanel, gtWFSsrsName, gtFeatureNS, gtWFSgeometryName);
+                            var result = searchRecordSelectHandler(combo, record, app, JSONconf, glayerLocSel, northPart, eastPanel);
                             gfromWFS = result.gfromWFS;
                             gtyp = result.gtyp;
                             glab = result.glab;
@@ -1476,7 +1473,7 @@ var onConfigurationLoaded = function(JSONconf) {
             {
                 var r = [];
                 r["data"] = propertyDataInit;
-                var result = searchRecordSelectHandler(null, r, app, JSONconf, glayerLocSel, northPart, eastPanel, gtWFSsrsName, gtFeatureNS, gtWFSgeometryName);
+                var result = searchRecordSelectHandler(null, r, app, JSONconf, glayerLocSel, northPart, eastPanel);
                 gfromWFS = result.gfromWFS;
                 gtyp = result.gtyp;
                 glab = result.glab;
