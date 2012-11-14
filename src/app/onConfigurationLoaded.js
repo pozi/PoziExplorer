@@ -30,12 +30,13 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
 
         // WFS layer: style , definition , namespaces
         var gtStyleMap = new OpenLayers.StyleMap();
-        var rule_for_all = new OpenLayers.Rule({
-            symbolizer: JSONconf.highlightSymboliser,
-            elseFilter: true
-        });
-        rule_for_all.title = " ";
-        gtStyleMap.styles["default"].addRules([rule_for_all]);
+        gtStyleMap.styles["default"].addRules([
+            new OpenLayers.Rule({
+                symbolizer: JSONconf.highlightSymboliser,
+                elseFilter: true,
+                title: " "
+            })
+        ]);
 
         // Pushing the WFS layer in the layer store
         JSONconf.layers.push({
