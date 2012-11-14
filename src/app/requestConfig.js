@@ -67,7 +67,11 @@ requestConfig = function(options) {
                 layerPresentation: {},
                 WFSsrsName: "EPSG:4326",
                 WFSgeometryName: "the_geom",
-                FeatureNS: "http://www.pozi.com/vicmap"
+                FeatureNS: "http://www.pozi.com/vicmap",
+                emptyTextSearch: 'Find address, road, feature, etc...',
+                loadingText: "Loading ...",
+                detailsTitle: "Details",
+                emptyTextSelectFeature: "Selected feature ..."
             };
 
             var loadedConf = Ext.util.JSON.decode(request.responseText);
