@@ -220,8 +220,8 @@ var onConfigurationLoaded = function(JSONconf) {
         // Remove the WFS highlight, clear and disable the select feature combo, empty the combostore and clean the details panel
         clear_highlight = function() {
             // Removing the highlight by clearing the selected features in the WFS layer
-            glayerLocSel.removeAllFeatures();
-            glayerLocSel.redraw();
+            app.getSelectionLayer().removeAllFeatures();
+            app.getSelectionLayer().redraw();
             // Clearing combo
             var cb = Ext.getCmp('gtInfoCombobox');
             cb.collapse();
@@ -845,14 +845,14 @@ var onConfigurationLoaded = function(JSONconf) {
                                     var wktfeatures = wktObj.read(featureToRead);
 
                                     // Should be able to select several if the control key is pressed
-                                    glayerLocSel.removeAllFeatures();
-                                    glayerLocSel.addFeatures(wktfeatures);
+                                    app.getSelectionLayer().removeAllFeatures();
+                                    app.getSelectionLayer().addFeatures(wktfeatures);
 
                                 } else if (k == "the_geom_WFS") {
                                     var wktfeatures = record.data.content[k];
                                     gfromWFSFlag = "N";
-                                    glayerLocSel.removeAllFeatures();
-                                    glayerLocSel.addFeatures(wktfeatures);
+                                    app.getSelectionLayer().removeAllFeatures();
+                                    app.getSelectionLayer().addFeatures(wktfeatures);
                                 } else {
                                     lab = k;
                                     val = record.data.content[k];
@@ -1129,7 +1129,7 @@ var onConfigurationLoaded = function(JSONconf) {
                             itemSelector: 'div.search-item',
                             listeners: {
                                 'select': function(combo, record) {
-                                    var result = searchRecordSelectHandler(combo, record, app, JSONconf, glayerLocSel, northPart, eastPanel);
+                                    var result = searchRecordSelectHandler(combo, record, app, JSONconf, northPart, eastPanel);
                                     gfromWFSFlag = result.gfromWFSFlag;
                                     gtyp = result.gtyp;
                                     glab = result.glab;
@@ -1303,17 +1303,31 @@ var onConfigurationLoaded = function(JSONconf) {
             }
         });
 
+        app.getLayerByName = function(name) {
+            return _(app.mapPanel.map.layers).find(function(layer) {
+                return layer.name === name;
+            });
+        };
+
+        app.getSelectionLayer = function() {
+            return app.getLayerByName("Selection");
+        };
+
+        app.getLayerForOpacitySlider = function() {
+            var layerConfForOpacitySlider = _(JSONconf.layers).find(function(layerConf) { 
+                return layerConf.displayInOpacitySlider; 
+            });
+            if (layerConfForOpacitySlider) {
+                return app.getLayerByName(layerConfForOpacitySlider.title);
+            }
+        }
+
         app.on("ready", function() {
             // Setting the title of the map to print
             app.about = {};
             app.about["title"] = JSONconf.printMapTitle;
 
-            // The handle to the WFS layer - assigned to global for easier access
-            glayerLocSel = _(app.mapPanel.layers.data.items).find(function(item) {
-                return item.data && item.data.name === "Selection";
-            }).getLayer();
-
-            glayerLocSel.events.on({
+            app.getSelectionLayer().events.on({
                 featuresadded: function(event) {
 
                     if (gfromWFSFlag == "Y") {
@@ -1362,7 +1376,7 @@ var onConfigurationLoaded = function(JSONconf) {
             if (propertyDataInit) {
                 var r = []; // should probably be {}
                 r["data"] = propertyDataInit;
-                var result = searchRecordSelectHandler(null, r, app, JSONconf, glayerLocSel, northPart, eastPanel);
+                var result = searchRecordSelectHandler(null, r, app, JSONconf, northPart, eastPanel);
                 gfromWFSFlag = result.gfromWFSFlag;
                 gtyp = result.gtyp;
                 glab = result.glab;
@@ -1373,19 +1387,8 @@ var onConfigurationLoaded = function(JSONconf) {
             toolbar = app.mapPanel.toolbars[0];
 
             // Selecting the layer that the opacity slider will select
-            var l_to_os;
-            for (k in JSONconf.layers) {
-                if (JSONconf.layers[k].displayInOpacitySlider) {
-                    for (l in app.mapPanel.map.layers) {
-                        if (JSONconf.layers[k].title == app.mapPanel.map.layers[l].name) {
-                            l_to_os = app.mapPanel.map.layers[l];
-                            break;
-                        }
-                    }
-                }
-            }
 
-            if (l_to_os) {
+            if (app.getLayerForOpacitySlider()) {
                 // Adding a label
                 toolbar.items.add(new Ext.form.Label({
                     text: "Aerial Photo",
@@ -1409,7 +1412,7 @@ var onConfigurationLoaded = function(JSONconf) {
 
                 // Adding an opacity slider to the toolbar
                 var os = new GeoExt.LayerOpacitySlider({
-                    layer: l_to_os,
+                    layer: app.getLayerForOpacitySlider(),
                     aggressive: true,
                     width: 100,
                     changeVisibility: true,
