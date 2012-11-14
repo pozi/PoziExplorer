@@ -102,7 +102,6 @@ var gComboDataArray = [],
     gCombostore,
     gCurrentExpandedTabIdx = [],
     gCurrentLoggedRole = "NONE",
-    propertyDataInit,
     gtLayerPresentationConfiguration,
     eastPanel,
     westPanel,
@@ -119,9 +118,9 @@ var gtLayerLabel;
 
 Ext.onReady(function() {
     requestConfig({
-        onLoad: function(clientConfig) {
+        onLoad: function(clientConfig, propertyDataInit) {
             JSONconf = clientConfig; // This is still necessary because JSONconf is used as a global in some gxp overrides.
-            onConfigurationLoaded(clientConfig);
+            onConfigurationLoaded(clientConfig, propertyDataInit);
         }
     })
 });

@@ -72,7 +72,7 @@
     ],
     "sources": {
 	 "local": {
-            "url": "http://www.pozi.com/geoserver/HINDMARSH/ows",
+            "url": "/geoserver/HINDMARSH/ows",
             "title": "Indigo Shire Council Layers",
             "ptype": "gxp_wmscsource",
             "tiled": false,
@@ -143,7 +143,7 @@
         {
         	"source": "backend",
         	"name": "VICMAP:DSE_VMADMIN_WARD_2012",
-        	"title": "Wards (2012)",
+        	"title": "Wards",
         	"visibility": false,
         	"opacity": 0.30,
         	"format": "image/png8",
@@ -151,10 +151,21 @@
         	"transparent": true,
         	"tiled": false
     	},
+    	{
+			"source":"backend",
+			"name":"VICMAP:VMPROP_PARCEL",
+			"title":"Parcels",
+			"visibility":false,
+			"opacity":0.75,
+			"format":"image/png8",
+			"styles":"parcel_label",
+			"transparent":true,
+			"tiled":false
+		},
 		{
             "source": "backend",
             "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
-            "title": "Property",
+            "title": "Properties",
             "visibility": true,
             "opacity": 0.25,
             "format": "image/GIF",
@@ -228,17 +239,6 @@
             "transparent": true,
             "tiled": false
         },
-        {
-			"source":"backend",
-			"name":"VICMAP:VMPROP_PARCEL",
-			"title":"Parcel (Vicmap)",
-			"visibility":false,
-			"opacity":0.75,
-			"format":"image/png8",
-			"styles":"parcel_label",
-			"transparent":true,
-			"tiled":false
-		},
 		{
             "source": "backend",
             "name": "VICMAP:VW_TRANSFER_STATION",
@@ -336,10 +336,10 @@
             "storeName": "vicmap"
         },
         {
-            "urlLayout": "http://www.pozi.com/ws/rest/v3/ws_get_layouts.php",
-            "urlLiveData": "http://www.pozi.com/ws/rest/v3/ws_get_live_data.php",
+            "urlLayout": "http://v3.pozi.com/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://v3.pozi.com/ws/rest/v3/ws_get_live_data.php",
             "storeMode": "pgsql",
-            "storeName": "hindmarsh"
+            "storeName": "hindmarshgis"
         }
     ],
     "logoClientSrc":"theme/app/img/custom/hindmarsh_logo.png",

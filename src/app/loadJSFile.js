@@ -1,5 +1,5 @@
 // Function that is able to dynamically load extra Javascript
-loadJSFile = function(filename, cbk) {
+loadJSFile = function(filename, callback) {
     var fileref = document.createElement('script');
     fileref.setAttribute("type", 'text/javascript');
 
@@ -10,13 +10,13 @@ loadJSFile = function(filename, cbk) {
         fileref.onreadystatechange = function() {
             if (fileref.readyState == "loaded" || fileref.readyState == "complete") {
                 fileref.onreadystatechange = null;
-                cbk();
+                callback();
             }
         };
     } else {
         //Others
         fileref.onload = function() {
-            cbk();
+            callback();
         };
     }
     fileref.setAttribute("src", filename);
