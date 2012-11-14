@@ -55,6 +55,8 @@
  * @require OpenLayers/Filter/Comparison.js
  * @require OpenLayers/Request/XMLHttpRequest.js
  *
+ * @require underscore.js
+ *
  * @require overrides/ext/widgets/grid/PropertyGrid.js
  * @require overrides/gxp/plugins/FeatureEditor.js
  * @require overrides/gxp/plugins/AddLayers.js
