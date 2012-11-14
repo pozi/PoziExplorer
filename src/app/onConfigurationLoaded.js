@@ -10,17 +10,16 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
         }
 
         // Transforming the map contexts variable into the right format
-        var gtMapContexts = JSONconf.mapContexts;
-        if (gtMapContexts.length == 0) {
-            gtMapContexts = "&nbsp;";
+        var gtMapContextsSize;
+        var gtMapContexts;
+        if (JSONconf.mapContexts.length === 0) {
             gtMapContextsSize = 0;
+            gtMapContexts = "&nbsp;";
+        } else if (JSONconf.mapContexts.length === 1) {
+            gtMapContextsSize = JSONconf.mapContexts[0].size;
+            gtMapContexts = JSONconf.mapContexts[0].name;
         } else {
-            if (gtMapContexts.length == 1) {
-                gtMapContextsSize = gtMapContexts[0].size;
-                gtMapContexts = gtMapContexts[0].name;
-            } else {
-                // TODO: format the contexts into a drop down loading different layers
-            }
+            // TODO: format the contexts into a drop down loading different layers
         }
 
         // Layout for the extra tabs
