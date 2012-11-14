@@ -172,7 +172,7 @@
           var cb = Ext.getCmp('gtInfoCombobox');
           if (cb.disabled) {cb.enable();}
           gComboDataArray.sort(function(a,b){return b[3]-a[3]});
-          gfromWFS="N";
+          gfromWFSFlag="N";
           gCombostore.loadData(gComboDataArray);
           
           // Features found during the getFeatureInfo: showing the tab

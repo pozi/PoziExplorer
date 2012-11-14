@@ -51,6 +51,6 @@ searchRecordSelectHandler = function(combo, record, app, JSONconf, glayerLocSel,
     }
     eastPanel.expand();
 
-    return { gfromWFS: "Y", gtyp: record.data.ld, glab: record.data.label };
+    return { gfromWFSFlag: "Y", gtyp: record.data.ld, glab: record.data.label };
 };
 

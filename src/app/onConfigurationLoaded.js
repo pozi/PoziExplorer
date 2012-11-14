@@ -58,7 +58,7 @@ var onConfigurationLoaded = function(JSONconf) {
         gLayoutsArr = [];
 
         // Flag to track the origin of the store refresh
-        var gfromWFS = "N";
+        var gfromWFSFlag = "N";
 
         // WFS layer: style , definition , namespaces
         var gtStyleMap = new OpenLayers.StyleMap();
@@ -919,7 +919,7 @@ var onConfigurationLoaded = function(JSONconf) {
                             else if (k == "the_geom_WFS")
                             {
                                 var wktfeatures = record.data.content[k];
-                                gfromWFS = "N";
+                                gfromWFSFlag = "N";
                                 glayerLocSel.removeAllFeatures();
                                 glayerLocSel.addFeatures(wktfeatures);
                             }
@@ -1224,7 +1224,7 @@ var onConfigurationLoaded = function(JSONconf) {
                     listeners: {
                         'select': function(combo, record) {
                             var result = searchRecordSelectHandler(combo, record, app, JSONconf, glayerLocSel, northPart, eastPanel);
-                            gfromWFS = result.gfromWFS;
+                            gfromWFSFlag = result.gfromWFSFlag;
                             gtyp = result.gtyp;
                             glab = result.glab;
                         },
@@ -1424,7 +1424,7 @@ var onConfigurationLoaded = function(JSONconf) {
 
             glayerLocSel.events.on({
                 featuresadded: function(event) {
-                    if (gfromWFS == "Y")
+                    if (gfromWFSFlag == "Y")
                     {
                         var row_array = [];
                         var cont;
@@ -1474,7 +1474,7 @@ var onConfigurationLoaded = function(JSONconf) {
                 var r = [];
                 r["data"] = propertyDataInit;
                 var result = searchRecordSelectHandler(null, r, app, JSONconf, glayerLocSel, northPart, eastPanel);
-                gfromWFS = result.gfromWFS;
+                gfromWFSFlag = result.gfromWFSFlag;
                 gtyp = result.gtyp;
                 glab = result.glab;
             }

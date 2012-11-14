@@ -93,7 +93,7 @@ else
 var app;
 var glayerLocSel,
     gComboDataArray = [],
-    gfromWFS,
+    gfromWFSFlag,
     clear_highlight,
     gCombostore,
     gCurrentExpandedTabIdx = [],
