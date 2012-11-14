@@ -286,9 +286,9 @@
             "fixed": true,
             "type": "OpenLayers.Layer",
             "args": [
-                "None",
+                "No Aerial",
                 {
-                    "visibility": false
+                    "visibility": true
                 }
             ]
         },
@@ -399,7 +399,7 @@
             "source": "dse_iws_cascaded",
             "name": "CARDINIA:AERIAL_PORTPHILLIP-OUTER_2011DEC30_AIR_VIS_35CM_MGA55",
             "title": "Aerial Photo (Port Phillip Outer, Dec 2011)",
-            "visibility": true,
+            "visibility": false,
             "opacity": 0,
             "format": "image/JPEG",
             "tiled": true,

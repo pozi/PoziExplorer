@@ -25,6 +25,7 @@
  * @require RowExpander.js
  * @require RowLayout.js
  * @require GeoExt/widgets/PrintMapPanel.js
+ * @require GeoExt/widgets/LayerOpacitySlider.js
  * @require GeoExt/plugins/PrintProviderField.js
  * @require GeoExt/plugins/PrintPageField.js
  * @require GeoExt/plugins/PrintExtent.js
@@ -61,6 +62,7 @@
  * @require overrides/gxp/plugins/FeatureEditor.js
  * @require overrides/gxp/plugins/AddLayers.js
  * @require overrides/geoext/plugins/TreeNodeComponent.js
+ * @require overrides/geoext/widgets/LayerOpacitySlider.js
  * @require overrides/gxp/plugins/LayerTree.js
  * @require overrides/gxp/plugins/WMSSource.js
  * @require overrides/gxp/widgets/WMSLayerPanel.js

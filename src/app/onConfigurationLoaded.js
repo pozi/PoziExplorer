@@ -1411,7 +1411,9 @@ var onConfigurationLoaded = function(JSONconf) {
                 var os = new GeoExt.LayerOpacitySlider({
                     layer: l_to_os,
                     aggressive: true,
-                    width: 100
+                    width: 100,
+                    changeVisibility: true,
+                    delay: 50
                 });
                 toolbar.items.add(os);
 
