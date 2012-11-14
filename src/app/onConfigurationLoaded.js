@@ -1415,8 +1415,7 @@ var onConfigurationLoaded = function(JSONconf) {
                     layer: app.getLayerForOpacitySlider(),
                     aggressive: true,
                     width: 100,
-                    changeVisibility: true,
-                    delay: 50
+                    changeVisibility: true
                 });
                 toolbar.items.add(os);
 
