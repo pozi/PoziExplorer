@@ -28,6 +28,7 @@ To deploy (for Groundtruth use):
 
     suite-sdk deploy -d v3.pozi.com -r 8080 -u username -p password -c tomcat6x .
     open http://v3.pozi.com/corangamite    # for example
+    open http://v3.pozi.com/PoziExplorer/rev.txt   # for revision details of live code
 
 ## Other runtime dependencies
 
