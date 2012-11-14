@@ -1374,19 +1374,19 @@ var onConfigurationLoaded = function(JSONconf) {
             toolbar = app.mapPanel.toolbars[0];
 
             // Selecting the layer that the opacity slider will select
-            var l_to_os;
+            var layerForOpacitySlider;
             for (k in JSONconf.layers) {
                 if (JSONconf.layers[k].displayInOpacitySlider) {
                     for (l in app.mapPanel.map.layers) {
                         if (JSONconf.layers[k].title == app.mapPanel.map.layers[l].name) {
-                            l_to_os = app.mapPanel.map.layers[l];
+                            layerForOpacitySlider = app.mapPanel.map.layers[l];
                             break;
                         }
                     }
                 }
             }
 
-            if (l_to_os) {
+            if (layerForOpacitySlider) {
                 // Adding a label
                 toolbar.items.add(new Ext.form.Label({
                     text: "Aerial Photo",
@@ -1410,7 +1410,7 @@ var onConfigurationLoaded = function(JSONconf) {
 
                 // Adding an opacity slider to the toolbar
                 var os = new GeoExt.LayerOpacitySlider({
-                    layer: l_to_os,
+                    layer: layerForOpacitySlider,
                     aggressive: true,
                     width: 100
                 });
