@@ -23,22 +23,6 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
             }
         }
 
-
-        // This structure deals with fields to show, in which order and with which name
-        gtLayerPresentationConfiguration = {
-            "VICMAP_PROPERTY_ADDRESS": [
-                { attr_name: "ezi_add", alt_name: "Address" },
-                { attr_name: "pr_propnum", alt_name: "Property Number" },
-                { attr_name: "locality" },
-                { attr_name: "postcode" },
-                { attr_name: "lga_code", alt_name: "LGA" },
-                { attr_name: "pr_multass", alt_name: "Multi Assessment" },
-                { attr_name: "pfi", alt_name: "PFI" }
-            ]
-        };
-        // Augment this structure with the client-specific JSON configuration
-        Ext.apply(gtLayerPresentationConfiguration, JSONconf.layerPresentation)
-
         // Layout for the extra tabs
         gLayoutsArr = [];
 
@@ -731,7 +715,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                             // Current layer name
                             var cl = record.get("layer");
                             // Configuration field array
-                            var fti_arr = gtLayerPresentationConfiguration[cl];
+                            var fti_arr = JSONconf.layerPresentation[cl];
                             // Arrays to store ordered attribute names and values
                             var an_arr,
                             av_arr;
