@@ -1471,7 +1471,7 @@ var onConfigurationLoaded = function(JSONconf) {
             // If we have found a property to zoom to, well, zoom to and highlight it
             if (propertyDataInit)
             {
-                var r = [];
+                var r = []; // should probably be {}
                 r["data"] = propertyDataInit;
                 var result = searchRecordSelectHandler(null, r, app, JSONconf, glayerLocSel, northPart, eastPanel);
                 gfromWFSFlag = result.gfromWFSFlag;
