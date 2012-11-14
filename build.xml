@@ -89,15 +89,13 @@
             </filterset>
         </copy>
         <!-- add revision and date info -->
-        <exec executable="git" output="${app.build}/rev.txt">
+        <exec executable="git" dir="${app.fullpath}" output="${app.build}/rev.txt">
           <arg value="log"/>
           <arg value="-n1"/>
-          <arg value="--pretty=oneline"/>
+          <arg value="--pretty=format:Commit:  %H%nAuthor:  %an (%ae)%nDate:    %ad%nSubject: %s%n%n"/>
         </exec>
-        <exec executable="git" output="${app.build}/rev.txt" append="true">
+        <exec executable="git" dir="${app.fullpath}" output="${app.build}/rev.txt" append="true">
           <arg value="status"/>
-        </exec>
-        <exec executable="date" output="${app.build}/date.txt">
         </exec>
         <!-- copy Ext resources -->
         <copy todir="${app.build}/src/ext">
