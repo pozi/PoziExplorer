@@ -1483,12 +1483,6 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                 app.clearCookieValue("JSESSIONID");
                 app.clearCookieValue(app.cookieParamName);
                 app.setAuthorizedRoles([]);
-                // This section became useless for tools which are actively monitoring the authorization status
-                //toolbar.items.each(function(tool) {
-                //	if (tool.needsAuthorization === true) {
-                //		tool.disable();
-                //	}
-                //});
                 app.showLogin();
 
                 if (JSONconf.reloadOnLogin) {
