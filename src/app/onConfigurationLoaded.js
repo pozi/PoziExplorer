@@ -1,5 +1,5 @@
 // Function to execute on successful return of the JSON configuration file loading
-var onConfigurationLoaded = function(JSONconf) {
+var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
 
     // Encapsulating the loading of the main app in a callback
     var extraJSScriptLoaded = function() {
