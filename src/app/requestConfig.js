@@ -64,7 +64,10 @@ function requestConfig(options) {
                 reloadOnLogin: false,
                 openFirstDefaultTab: false,
                 databaseConfig: "vicmap", // Datastore definition for the web service search results
-                layerPresentation: {}
+                layerPresentation: {},
+                WFSsrsName: "EPSG:4326",
+                WFSgeometryName: "the_geom",
+                FeatureNS: "http://www.pozi.com/vicmap"
             };
 
             var loadedConf = Ext.util.JSON.decode(request.responseText);
