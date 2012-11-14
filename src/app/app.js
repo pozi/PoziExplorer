@@ -74,6 +74,7 @@
  * @require loadJSFile.js
  * @require searchRecordSelectHandler.js
  * @require buildWestPanel.js
+ * @require buildComboStore.js
  * @require onConfigurationLoaded.js
  * @require requestConfig.js
  */
