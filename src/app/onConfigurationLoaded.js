@@ -1303,11 +1303,24 @@ var onConfigurationLoaded = function(JSONconf) {
             }
         });
 
-        app.getSelectionLayer = function() {
-          return _(app.mapPanel.layers.data.items).find(function(item) {
-              return item.data && item.data.name === "Selection";
-          }).getLayer();
+        app.getLayerByName = function(name) {
+            return _(app.mapPanel.map.layers).find(function(layer) {
+                return layer.name === name;
+            });
         };
+
+        app.getSelectionLayer = function() {
+            return app.getLayerByName("Selection");
+        };
+
+        app.getLayerForOpacitySlider = function() {
+            var layerConfForOpacitySlider = _(JSONconf.layers).find(function(layerConf) { 
+                return layerConf.displayInOpacitySlider; 
+            });
+            if (layerConfForOpacitySlider) {
+                return app.getLayerByName(layerConfForOpacitySlider.title);
+            }
+        }
 
         app.on("ready", function() {
             // Setting the title of the map to print
@@ -1374,19 +1387,8 @@ var onConfigurationLoaded = function(JSONconf) {
             toolbar = app.mapPanel.toolbars[0];
 
             // Selecting the layer that the opacity slider will select
-            var layerForOpacitySlider;
-            for (k in JSONconf.layers) {
-                if (JSONconf.layers[k].displayInOpacitySlider) {
-                    for (l in app.mapPanel.map.layers) {
-                        if (JSONconf.layers[k].title == app.mapPanel.map.layers[l].name) {
-                            layerForOpacitySlider = app.mapPanel.map.layers[l];
-                            break;
-                        }
-                    }
-                }
-            }
 
-            if (layerForOpacitySlider) {
+            if (app.getLayerForOpacitySlider()) {
                 // Adding a label
                 toolbar.items.add(new Ext.form.Label({
                     text: "Aerial Photo",
@@ -1410,7 +1412,7 @@ var onConfigurationLoaded = function(JSONconf) {
 
                 // Adding an opacity slider to the toolbar
                 var os = new GeoExt.LayerOpacitySlider({
-                    layer: layerForOpacitySlider,
+                    layer: app.getLayerForOpacitySlider(),
                     aggressive: true,
                     width: 100
                 });
