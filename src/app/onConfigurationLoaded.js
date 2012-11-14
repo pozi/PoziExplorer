@@ -1308,16 +1308,10 @@ var onConfigurationLoaded = function(JSONconf) {
             app.about = {};
             app.about["title"] = JSONconf.printMapTitle;
 
-            // This is when we want to find the handle to the WFS layer
-            for (x in app.mapPanel.layers.data.items) {
-                var u = app.mapPanel.layers.data.items[x];
-                if (u.data) {
-                    // Assigning the selection layer to a global variable for easier access
-                    if (u.data.name == "Selection") {
-                        glayerLocSel = u.getLayer();
-                    }
-                }
-            };
+            // The handle to the WFS layer - assigned to global for easier access
+            glayerLocSel = _(app.mapPanel.layers.data.items).find(function(item) {
+                return item.data && item.data.name === "Selection";
+            }).getLayer();
 
             glayerLocSel.events.on({
                 featuresadded: function(event) {
