@@ -1,5 +1,5 @@
 // Function to execute on successful return of the JSON configuration file loading
-var onConfigurationLoaded = function(JSONconf) {
+var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
 
     // Encapsulating the loading of the main app in a callback
     var extraJSScriptLoaded = function() {
@@ -8,15 +8,6 @@ var onConfigurationLoaded = function(JSONconf) {
         if (JSONconf.sources.local) {
             JSONconf.sources.local.url = gtLocalLayerSourcePrefix + JSONconf.sources.local.url;
         }
-
-        // Global variables all clients
-        var gtEmptyTextSearch = 'Find address, road, feature, etc...';
-        var gtLoadingText = 'Searching...';
-        var gtLoadingText = "Loading ...";
-        var gtDetailsTitle = "Details";
-        var gtClearButton = "Clear";
-        var gtEmptyTextSelectFeature = "Selected feature ...";
-        var gtEmptyTextQuickZoom = "Zoom to town ...";
 
         // Transforming the map contexts variable into the right format
         var gtMapContexts = JSONconf.mapContexts;
@@ -47,11 +38,6 @@ var onConfigurationLoaded = function(JSONconf) {
         };
         // Augment this structure with the client-specific JSON configuration
         Ext.apply(gtLayerPresentationConfiguration, JSONconf.layerPresentation)
-
-
-        var gtInitialDisclaimerFlag = true;
-        var gtDisclaimer = "disclaimer.html";
-        var gtRedirectIfDeclined = "http://www.mitchellshire.vic.gov.au/";
 
         // Layout for the extra tabs
         gLayoutsArr = [];
@@ -789,7 +775,7 @@ var onConfigurationLoaded = function(JSONconf) {
                     forceSelection: true,
                     editable: false,
                     triggerAction: 'all',
-                    emptyText: gtEmptyTextSelectFeature,
+                    emptyText: JSONconf.emptyTextSelectFeature,
                     tpl: '<tpl for="."><div class="info-item" style="height:40px;padding:5px 8px;"><b>{type}</b><br>{labelx}</div></tpl>',
                     itemSelector: 'div.info-item',
                     listeners: {
@@ -922,7 +908,7 @@ var onConfigurationLoaded = function(JSONconf) {
                                     children: [
                                         {
                                             tag: 'div',
-                                            'html': '<img style="vertical-align: middle;"src="theme/app/img/panel/details.png"/>' + '&nbsp &nbsp' + gtDetailsTitle
+                                            'html': '<img style="vertical-align: middle;"src="theme/app/img/panel/details.png"/>' + '&nbsp &nbsp' + JSONconf.detailsTitle
                                         }
                                     ]
                                 },
@@ -1119,11 +1105,11 @@ var onConfigurationLoaded = function(JSONconf) {
                             selectOnFocus: true,
                             minChars: 3,
                             typeAhead: false,
-                            loadingText: gtLoadingText,
+                            loadingText: JSONconf.loadingText,
                             width: 450,
                             style: "border-color: " + JSONconf.bannerLineColor + ";",
                             pageSize: 0,
-                            emptyText: gtEmptyTextSearch,
+                            emptyText: JSONconf.emptyTextSearch,
                             hideTrigger: true,
                             tpl: '<tpl for="."><div class="search-item" style="height: 28px;"><font color="#666666">{ld}</font> : {[values.label.replace(new RegExp( "(" +  Ext.get(\'gtSearchCombobox\').getValue()  + ")" , \'gi\' ), "<b>$1</b>" )]} <br></div></tpl>',
                             itemSelector: 'div.search-item',
@@ -1320,7 +1306,13 @@ var onConfigurationLoaded = function(JSONconf) {
             if (layerConfForOpacitySlider) {
                 return app.getLayerByName(layerConfForOpacitySlider.title);
             }
-        }
+        };
+
+        app.getToolbar = function() {
+            // The main toolbar containing tools to be activated / deactivated on login/logout
+            // TODO: determine if this is still relevant
+            return app.mapPanel.toolbars[0];
+        };
 
         app.on("ready", function() {
             // Setting the title of the map to print
@@ -1382,31 +1374,27 @@ var onConfigurationLoaded = function(JSONconf) {
                 glab = result.glab;
             }
 
-            // The main toolbar containing tools to be activated / deactivated on login/logout
-            // TODO: determine if this is still relevant
-            toolbar = app.mapPanel.toolbars[0];
-
             // Selecting the layer that the opacity slider will select
 
             if (app.getLayerForOpacitySlider()) {
                 // Adding a label
-                toolbar.items.add(new Ext.form.Label({
+                app.getToolbar().items.add(new Ext.form.Label({
                     text: "Aerial Photo",
                     style: 'font: normal 13px verdana'
                 }));
 
                 // Adding a bit of space
-                toolbar.items.add(new Ext.Toolbar.Spacer({
+                app.getToolbar().items.add(new Ext.Toolbar.Spacer({
                     width: 8
                 }));
 
                 // Adding the eye-con
-                toolbar.items.add(new Ext.Component({
+                app.getToolbar().items.add(new Ext.Component({
                     html: '<img src="theme/app/img/panel/eye-con.png"/>'
                 }));
 
                 // Adding a bit of space
-                toolbar.items.add(new Ext.Toolbar.Spacer({
+                app.getToolbar().items.add(new Ext.Toolbar.Spacer({
                     width: 8
                 }));
 
@@ -1418,10 +1406,10 @@ var onConfigurationLoaded = function(JSONconf) {
                     changeVisibility: true,
                     delay: 50
                 });
-                toolbar.items.add(os);
+                app.getToolbar().items.add(os);
 
                 // Rendering the toolbar
-                toolbar.doLayout();
+                app.getToolbar().doLayout();
             }
 
 
@@ -1483,12 +1471,6 @@ var onConfigurationLoaded = function(JSONconf) {
                 app.clearCookieValue("JSESSIONID");
                 app.clearCookieValue(app.cookieParamName);
                 app.setAuthorizedRoles([]);
-                // This section became useless for tools which are actively monitoring the authorization status
-                //toolbar.items.each(function(tool) {
-                //	if (tool.needsAuthorization === true) {
-                //		tool.disable();
-                //	}
-                //});
                 app.showLogin();
 
                 if (JSONconf.reloadOnLogin) {

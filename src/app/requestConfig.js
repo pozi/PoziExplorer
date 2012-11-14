@@ -1,4 +1,4 @@
-function requestConfig(options) {	
+requestConfig = function(options) {	
 
     var configScript = Ext.urlDecode(location.search.substr(1))['config'];
     var propNum = Ext.urlDecode(location.search.substr(1))['property'];
@@ -67,15 +67,18 @@ function requestConfig(options) {
                 layerPresentation: {},
                 WFSsrsName: "EPSG:4326",
                 WFSgeometryName: "the_geom",
-                FeatureNS: "http://www.pozi.com/vicmap"
+                FeatureNS: "http://www.pozi.com/vicmap",
+                emptyTextSearch: 'Find address, road, feature, etc...',
+                loadingText: "Loading ...",
+                detailsTitle: "Details",
+                emptyTextSelectFeature: "Selected feature ..."
             };
 
             var loadedConf = Ext.util.JSON.decode(request.responseText);
             var JSONconf = {}
             Ext.apply(JSONconf, loadedConf, defaultConf)
 
-            if (propNum)
-            {
+            if (propNum) {
                 var ds = new Ext.data.JsonStore({
                     autoLoad: true,
                     root: 'rows',
@@ -102,18 +105,17 @@ function requestConfig(options) {
                     listeners: {
                         load: function(request) {
                             if (request.data && request.data.items[0]) {
-                                propertyDataInit = request.data.items[0].json.row; // property record
+                                var propertyDataInit = request.data.items[0].json.row; // property record
                             } else {
                                 alert("No property found in " + helpers.toTitleCase(configScript) + " with number: " + propNum + ".");
                             }
 
-                            options.onLoad(JSONconf);
+                            options.onLoad(JSONconf, propertyDataInit);
                         }
                     }
                 });
-            }
-            else
-            {
+
+            } else {
                 options.onLoad(JSONconf);
             }
         },
@@ -121,3 +123,4 @@ function requestConfig(options) {
         scope: this
     });
 };
+
