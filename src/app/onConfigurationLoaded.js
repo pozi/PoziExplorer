@@ -566,31 +566,24 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
 
                                             // Rendering as a table
                                             var win3 = new Ext.Panel({
-                                                id: 'tblayout-win-noresult'
-                                                //,width:227
-                                                ,
-                                                layout: 'hbox'
-                                                ,
+                                                id: 'tblayout-win-noresult',
+                                                layout: 'hbox',
                                                 layoutConfig: {
                                                     padding: '5',
                                                     pack: 'center',
                                                     align: 'middle'
-                                                }
-                                                ,
-                                                border: false
-                                                ,
+                                                },
+                                                border: false,
                                                 defaults: {
                                                     height: 26
-                                                }
-                                                ,
-                                                renderTo: targ
-                                                ,
+                                                },
+                                                renderTo: targ,
                                                 items: [
-                                                {
-                                                    html: '<p style="font-size:12px;font-family: tahoma,arial,verdana,sans-serif;">No result found</p>',
-                                                    border: false,
-                                                    padding: '5'
-                                                }
+                                                    {
+                                                        html: '<p style="font-size:12px;font-family: tahoma,arial,verdana,sans-serif;">No result found</p>',
+                                                        border: false,
+                                                        padding: '5'
+                                                    }
                                                 ]
                                             });
                                             targ2.add(win3);
