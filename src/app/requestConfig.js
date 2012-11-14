@@ -104,7 +104,7 @@ function requestConfig(options) {
                             if (request.data && request.data.items[0]) {
                                 propertyDataInit = request.data.items[0].json.row; // property record
                             } else {
-                                alert("No property found in " + toTitleCase(configScript) + " with number: " + propNum + ".");
+                                alert("No property found in " + helpers.toTitleCase(configScript) + " with number: " + propNum + ".");
                             }
 
                             options.onLoad(JSONconf);

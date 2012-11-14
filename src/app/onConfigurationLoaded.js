@@ -115,7 +115,7 @@ var onConfigurationLoaded = function(JSONconf) {
                 {
                     name: 'labelx',
                     convert: function(v, rec) {
-                        return toSmartTitleCase(rec[4]);
+                        return helpers.toSmartTitleCase(rec[4]);
                     }
                 }
             ],
@@ -475,18 +475,18 @@ var onConfigurationLoaded = function(JSONconf) {
                                                     else
                                                     {
                                                         // Building the source array for a property grid
-                                                        src_attr_array[toTitleCase(trim(j.replace(/_/g, " ")))] = trim(val);
+                                                        src_attr_array[helpers.toTitleCase(helpers.trim(j.replace(/_/g, " ")))] = helpers.trim(val);
 
                                                         // Setting the title of the horizontal panel - first non-null value encountered
                                                         if (first_element.length == 0)
                                                         {
-                                                            if (trim(val).length > 14)
+                                                            if (helpers.trim(val).length > 14)
                                                             {
-                                                                first_element = trim(val).substring(0, 12) + '..';
+                                                                first_element = helpers.trim(val).substring(0, 12) + '..';
                                                             }
                                                             else
                                                             {
-                                                                first_element = trim(val);
+                                                                first_element = helpers.trim(val);
                                                             }
                                                         }
                                                     }
@@ -867,16 +867,16 @@ var onConfigurationLoaded = function(JSONconf) {
                                                     an_arr[q] = fti_arr[q].alt_name;
                                                 } else {
                                                     // If no alternate name, just the normal clean title case
-                                                    an_arr[q] = toTitleCase(trim(lab.replace(/_/g, " ")));
+                                                    an_arr[q] = helpers.toTitleCase(helpers.trim(lab.replace(/_/g, " ")));
                                                 }
-                                                av_arr[q] = trim(val);
+                                                av_arr[q] = helpers.trim(val);
                                                 break;
                                             }
                                         }
 
                                     } else {
                                         // Pushing this element in the source of the property grid
-                                        fa[toTitleCase(trim(lab.replace(/_/g, " ")))] = trim(val);
+                                        fa[helpers.toTitleCase(helpers.trim(lab.replace(/_/g, " ")))] = helpers.trim(val);
                                     }
                                 }
 
@@ -1303,11 +1303,24 @@ var onConfigurationLoaded = function(JSONconf) {
             }
         });
 
-        app.getSelectionLayer = function() {
-          return _(app.mapPanel.layers.data.items).find(function(item) {
-              return item.data && item.data.name === "Selection";
-          }).getLayer();
+        app.getLayerByName = function(name) {
+            return _(app.mapPanel.map.layers).find(function(layer) {
+                return layer.name === name;
+            });
         };
+
+        app.getSelectionLayer = function() {
+            return app.getLayerByName("Selection");
+        };
+
+        app.getLayerForOpacitySlider = function() {
+            var layerConfForOpacitySlider = _(JSONconf.layers).find(function(layerConf) { 
+                return layerConf.displayInOpacitySlider; 
+            });
+            if (layerConfForOpacitySlider) {
+                return app.getLayerByName(layerConfForOpacitySlider.title);
+            }
+        }
 
         app.on("ready", function() {
             // Setting the title of the map to print
@@ -1374,19 +1387,8 @@ var onConfigurationLoaded = function(JSONconf) {
             toolbar = app.mapPanel.toolbars[0];
 
             // Selecting the layer that the opacity slider will select
-            var layerForOpacitySlider;
-            for (k in JSONconf.layers) {
-                if (JSONconf.layers[k].displayInOpacitySlider) {
-                    for (l in app.mapPanel.map.layers) {
-                        if (JSONconf.layers[k].title == app.mapPanel.map.layers[l].name) {
-                            layerForOpacitySlider = app.mapPanel.map.layers[l];
-                            break;
-                        }
-                    }
-                }
-            }
 
-            if (layerForOpacitySlider) {
+            if (app.getLayerForOpacitySlider()) {
                 // Adding a label
                 toolbar.items.add(new Ext.form.Label({
                     text: "Aerial Photo",
@@ -1410,9 +1412,11 @@ var onConfigurationLoaded = function(JSONconf) {
 
                 // Adding an opacity slider to the toolbar
                 var os = new GeoExt.LayerOpacitySlider({
-                    layer: layerForOpacitySlider,
+                    layer: app.getLayerForOpacitySlider(),
                     aggressive: true,
-                    width: 100
+                    width: 100,
+                    changeVisibility: true,
+                    delay: 50
                 });
                 toolbar.items.add(os);
 
