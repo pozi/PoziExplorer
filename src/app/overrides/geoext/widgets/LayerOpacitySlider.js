@@ -45,8 +45,8 @@ GeoExt.LayerOpacitySlider.prototype.changeLayerOpacity = function(slider, value)
 	value = 1 - value;
     }
     
-    // When below 10% opacity, we set the slider value to 0
-    if (value > 0.1)
+    // When below 2% opacity, we set the slider value to 0
+    if (value > 0.02)
     {
       this._settingOpacity = true;
       this.layer.setOpacity(value);
