@@ -39,11 +39,6 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
         // Augment this structure with the client-specific JSON configuration
         Ext.apply(gtLayerPresentationConfiguration, JSONconf.layerPresentation)
 
-
-        var gtInitialDisclaimerFlag = true;
-        var gtDisclaimer = "disclaimer.html";
-        var gtRedirectIfDeclined = "http://www.mitchellshire.vic.gov.au/";
-
         // Layout for the extra tabs
         gLayoutsArr = [];
 
