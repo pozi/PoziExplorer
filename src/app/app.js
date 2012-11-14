@@ -67,6 +67,7 @@
  *
  * @require helpers.js
  * @require loadJSFile.js
+ * @require searchRecordSelectHandler.js
  * @require onConfigurationLoaded.js
  * @require requestConfig.js
  */
