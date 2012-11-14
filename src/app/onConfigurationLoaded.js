@@ -607,19 +607,12 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
 
                             // Rendering as a table
                             var win4 = new Ext.Panel({
-                                id: 'tblayout-win-generic'
-                                //,width:227
-                                ,
-                                idFeature: idFeature
-                                ,
-                                layout: 'fit'
-                                ,
-                                border: false
-                                ,
+                                id: 'tblayout-win-generic',
+                                idFeature: idFeature,
+                                layout: 'fit',
+                                border: false,
                                 items: [
-                                {
-                                    html: configArray[i].html_to_render
-                                }
+                                    { html: configArray[i].html_to_render }
                                 ]
                             });
                             targ2.add(win4);
