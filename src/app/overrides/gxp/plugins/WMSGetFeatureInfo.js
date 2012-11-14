@@ -110,7 +110,7 @@
           var typ=x.data.title;
           // Attempt to format it nicely (removing the parenthesis content)
           var simpleTitle=x.data.title.match(/(.*) ?\(.*\)/);
-          if (simpleTitle) {typ=trim(simpleTitle[1]);}
+          if (simpleTitle) { typ = helpers.trim(simpleTitle[1]); }
           // All the attributes are contained in a serialised JSON object
           var cont=res.rows[i].row;
 
