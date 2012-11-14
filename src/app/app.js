@@ -73,6 +73,7 @@
  * @require helpers.js
  * @require loadJSFile.js
  * @require searchRecordSelectHandler.js
+ * @require buildWestPanel.js
  * @require onConfigurationLoaded.js
  * @require requestConfig.js
  */
