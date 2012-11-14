@@ -59,6 +59,7 @@
  * @require underscore.js
  *
  * @require overrides/ext/widgets/grid/PropertyGrid.js
+ * @require overrides/ext/dd/DragTracker.js
  * @require overrides/gxp/plugins/FeatureEditor.js
  * @require overrides/gxp/plugins/AddLayers.js
  * @require overrides/geoext/plugins/TreeNodeComponent.js
