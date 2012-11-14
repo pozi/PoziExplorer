@@ -73,6 +73,7 @@
  * @require helpers.js
  * @require loadJSFile.js
  * @require searchRecordSelectHandler.js
+ * @require buildWFSLayer.js
  * @require buildWestPanel.js
  * @require buildComboStore.js
  * @require onConfigurationLoaded.js
