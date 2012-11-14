@@ -260,7 +260,7 @@ var onConfigurationLoaded = function(JSONconf) {
         // Handler called when:
         // - a record is selected in the search drop down list
         // - a property number is passed in the URL and has returned a valid property record
-        var searchRecordSelectHandler = function(combo, record) {
+        var searchRecordSelectHandler = function(combo, record, app, JSONconf, glayerLocSel, northPart, eastPanel, gtWFSsrsName, gtFeatureNS, gtWFSgeometryName) {
             // Zooming to the relevant area (covering the selected record)
             var bd = new OpenLayers.Bounds(record.data.xmini, record.data.ymini, record.data.xmaxi, record.data.ymaxi).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
             var z = app.mapPanel.map.getZoomForExtent(bd);
@@ -293,9 +293,6 @@ var onConfigurationLoaded = function(JSONconf) {
                 property: record.data.idcol,
                 value: record.data.idval.replace('\\', '\\\\')
             });
-            gfromWFS = "Y";
-            gtyp = record.data.ld;
-            glab = record.data.label;
 
             // Refreshing the WFS layer so that the highlight appears and triggers the featuresadded event handler above
             glayerLocSel.refresh({
@@ -312,7 +309,7 @@ var onConfigurationLoaded = function(JSONconf) {
             }
             eastPanel.expand();
 
-
+            return { gfromWFS: "Y", gtyp: record.data.ld, glab: record.data.label };
         };
 
         // Panels and portals
@@ -1283,7 +1280,12 @@ var onConfigurationLoaded = function(JSONconf) {
                     tpl: '<tpl for="."><div class="search-item" style="height: 28px;"><font color="#666666">{ld}</font> : {[values.label.replace(new RegExp( "(" +  Ext.get(\'gtSearchCombobox\').getValue()  + ")" , \'gi\' ), "<b>$1</b>" )]} <br></div></tpl>',
                     itemSelector: 'div.search-item',
                     listeners: {
-                        'select': searchRecordSelectHandler,
+                        'select': function(combo, record) {
+                            var result = searchRecordSelectHandler(combo, record, app, JSONconf, glayerLocSel, northPart, eastPanel, gtWFSsrsName, gtFeatureNS, gtWFSgeometryName);
+                            gfromWFS = result.gfromWFS;
+                            gtyp = result.gtyp;
+                            glab = result.glab;
+                        },
                         scope: this
                     }
                 })
@@ -1529,7 +1531,10 @@ var onConfigurationLoaded = function(JSONconf) {
             {
                 var r = [];
                 r["data"] = propertyDataInit;
-                searchRecordSelectHandler(null, r);
+                var result = searchRecordSelectHandler(null, r, app, JSONconf, glayerLocSel, northPart, eastPanel, gtWFSsrsName, gtFeatureNS, gtWFSgeometryName);
+                gfromWFS = result.gfromWFS;
+                gtyp = result.gtyp;
+                glab = result.glab;
             }
 
             // The main toolbar containing tools to be activated / deactivated on login/logout
