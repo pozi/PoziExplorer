@@ -28,16 +28,6 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
         // Flag to track the origin of the store refresh
         var gfromWFSFlag = "N";
 
-        // WFS layer: style , definition , namespaces
-        var gtStyleMap = new OpenLayers.StyleMap();
-        gtStyleMap.styles["default"].addRules([
-            new OpenLayers.Rule({
-                symbolizer: JSONconf.highlightSymboliser,
-                elseFilter: true,
-                title: " "
-            })
-        ]);
-
         // Pushing the WFS layer in the layer store
         JSONconf.layers.push({
             source: "ol",
@@ -47,7 +37,18 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
             args: [
                 "Selection",
                 {
-                    styleMap: gtStyleMap,
+                    styleMap: function() {
+                        // WFS layer: style , definition , namespaces
+                        var styleMap = new OpenLayers.StyleMap();
+                        styleMap.styles["default"].addRules([
+                            new OpenLayers.Rule({
+                                symbolizer: JSONconf.highlightSymboliser,
+                                elseFilter: true,
+                                title: " "
+                            })
+                        ]);
+                        return styleMap;
+                    }(),
                     strategies: [new OpenLayers.Strategy.BBOX({
                         ratio: 100
                     })],
