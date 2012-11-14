@@ -302,8 +302,8 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                         }
 
                         // Property to pass to the queries
-                        var idFeature,
-                        idEpsg;
+                        var idFeature;
+                        var idEpsg;
 
                         // Special case when requesting the geometry
                         if (configArray[i].idName == "the_geom") {
