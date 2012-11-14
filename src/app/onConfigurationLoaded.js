@@ -1320,7 +1320,13 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
             if (layerConfForOpacitySlider) {
                 return app.getLayerByName(layerConfForOpacitySlider.title);
             }
-        }
+        };
+
+        app.getToolbar = function() {
+            // The main toolbar containing tools to be activated / deactivated on login/logout
+            // TODO: determine if this is still relevant
+            return app.mapPanel.toolbars[0];
+        };
 
         app.on("ready", function() {
             // Setting the title of the map to print
@@ -1382,31 +1388,27 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                 glab = result.glab;
             }
 
-            // The main toolbar containing tools to be activated / deactivated on login/logout
-            // TODO: determine if this is still relevant
-            toolbar = app.mapPanel.toolbars[0];
-
             // Selecting the layer that the opacity slider will select
 
             if (app.getLayerForOpacitySlider()) {
                 // Adding a label
-                toolbar.items.add(new Ext.form.Label({
+                app.getToolbar().items.add(new Ext.form.Label({
                     text: "Aerial Photo",
                     style: 'font: normal 13px verdana'
                 }));
 
                 // Adding a bit of space
-                toolbar.items.add(new Ext.Toolbar.Spacer({
+                app.getToolbar().items.add(new Ext.Toolbar.Spacer({
                     width: 8
                 }));
 
                 // Adding the eye-con
-                toolbar.items.add(new Ext.Component({
+                app.getToolbar().items.add(new Ext.Component({
                     html: '<img src="theme/app/img/panel/eye-con.png"/>'
                 }));
 
                 // Adding a bit of space
-                toolbar.items.add(new Ext.Toolbar.Spacer({
+                app.getToolbar().items.add(new Ext.Toolbar.Spacer({
                     width: 8
                 }));
 
@@ -1418,10 +1420,10 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                     changeVisibility: true,
                     delay: 50
                 });
-                toolbar.items.add(os);
+                app.getToolbar().items.add(os);
 
                 // Rendering the toolbar
-                toolbar.doLayout();
+                app.getToolbar().doLayout();
             }
 
 
