@@ -12,6 +12,8 @@ addDefaultTabs = function(accordion, gLayoutsArr, JSONconf) {
 
         if (!config.headerCfg) {
             
+            // Saving the tab title in a temporary variable
+            var tab_title = config.title;
             delete config.title; // headerCfg would not work if the title was part of the initial config
 
             config.headerCfg = {
@@ -24,7 +26,7 @@ addDefaultTabs = function(accordion, gLayoutsArr, JSONconf) {
                 children: [
                     {
                         tag: 'div',
-                        'html': config.title
+                        'html': tab_title
                     }
                 ]
             };
