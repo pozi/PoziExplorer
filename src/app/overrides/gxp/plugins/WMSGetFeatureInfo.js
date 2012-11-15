@@ -165,7 +165,7 @@
       if (layerCounter==layerMax)
       {
         // Remove any previous results						
-        clearHighlight();
+        app.clearHighlight();
 
         if (gComboDataArray.length)
         {

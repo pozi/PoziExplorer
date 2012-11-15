@@ -23,34 +23,6 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
         gCombostore = buildComboStore();
 
 
-        // Remove the WFS highlight, clear and disable the select feature combo, empty the combostore and clean the details panel
-        clearHighlight = function() {
-            // Removing the highlight by clearing the selected features in the WFS layer
-            app.getSelectionLayer().removeAllFeatures();
-            app.getSelectionLayer().redraw();
-            // Clearing combo
-            var cb = Ext.getCmp('gtInfoCombobox');
-            cb.collapse();
-            cb.clearValue();
-            cb.disable();
-            cb.removeClass("x-form-multi");
-            cb.addClass("x-form-single");
-
-            // Removing all values from the combo
-            gCombostore.removeAll();
-
-            // Add default tabs
-            addDefaultTabs(accordion, gLayoutsArr, JSONconf);
-
-            // Hiding the north part of the east panel
-            northPart.setHeight(30);
-            cb.setVisible(false);
-
-            // Clearing the feature type
-            Ext.get('gtInfoTypeLabel').dom.innerHTML = "&nbsp;";
-
-        };
-
         // Panels and portals
         westPanel = buildWestPanel(JSONconf);
 
@@ -526,16 +498,9 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                             listeners: {
                                 render: function(c) {
                                     // Expanding the drop down on click
-                                    c.el.on('click',
-                                    function() {
-                                        // Removing highlight and emptying combo
-                                        clearHighlight();
-                                    });
+                                    c.el.on('click', app.clearHighlight);
                                     // Using the pointer cursor when hovering over the element
-                                    c.el.on('mouseover',
-                                    function() {
-                                        this.dom.style.cursor = 'pointer';
-                                    });
+                                    c.el.on('mouseover', function() { this.dom.style.cursor = 'pointer'; });
                                 },
                                 scope: this
                             }
@@ -1107,6 +1072,10 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
             return app.mapPanel.toolbars[0];
         };
 
+        app.clearHighlight = function() {
+          doClearHighlight(app, gCombostore, addDefaultTabs, accordion, gLayoutsArr, JSONconf, northPart);
+        }
+
         app.on("ready", function() {
             // Setting the title of the map to print
             app.about = {};
@@ -1304,7 +1273,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                             // Reloading the tabs
                             gCurrentLoggedRole = app.authorizedRoles[0];
                             loadTabConfig();
-                            clearHighlight();
+                            app.clearHighlight();
                             // Keeping username and password in variables for injection in WMS queries of local source
                             gLoggedUsername = form.findField('username').getValue();
                             gLoggedPassword = form.findField('password').getValue();
