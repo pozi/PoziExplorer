@@ -103,7 +103,6 @@ else
 var app;
 var gComboDataArray = [],
     gfromWFSFlag,
-    clear_highlight,
     gCombostore,
     gCurrentExpandedTabIdx = [],
     gCurrentLoggedRole = "NONE",
@@ -113,8 +112,7 @@ var gComboDataArray = [],
     northPart,
     gLayoutsArr,
     gLoggedUsername,
-    gLoggedPassword,
-    add_default_tabs;
+    gLoggedPassword;
 var vector_layer = new OpenLayers.Layer.Vector("WKT", {
         displayInLayerSwitcher: false
     });

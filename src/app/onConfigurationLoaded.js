@@ -24,7 +24,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
 
 
         // Remove the WFS highlight, clear and disable the select feature combo, empty the combostore and clean the details panel
-        clear_highlight = function() {
+        clearHighlight = function() {
             // Removing the highlight by clearing the selected features in the WFS layer
             app.getSelectionLayer().removeAllFeatures();
             app.getSelectionLayer().redraw();
@@ -529,7 +529,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                                     c.el.on('click',
                                     function() {
                                         // Removing highlight and emptying combo
-                                        clear_highlight();
+                                        clearHighlight();
                                     });
                                     // Using the pointer cursor when hovering over the element
                                     c.el.on('mouseover',
@@ -1304,7 +1304,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                             // Reloading the tabs
                             gCurrentLoggedRole = app.authorizedRoles[0];
                             loadTabConfig();
-                            clear_highlight();
+                            clearHighlight();
                             // Keeping username and password in variables for injection in WMS queries of local source
                             gLoggedUsername = form.findField('username').getValue();
                             gLoggedPassword = form.findField('password').getValue();
