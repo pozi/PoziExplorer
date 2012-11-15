@@ -75,9 +75,14 @@
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
-        "backend_cascaded": {
+        "backend_cascaded1": {
             "url": "http://basemap.pozi.com/geoserver/DSE/ows",
             "title": "DSE Vicmap Layers",
+            "ptype": "gxp_wmscsource"
+        },
+        "backend_cascaded2":{
+            "url": "http://basemap.pozi.com/geoserver/DSE_ADMINISTRATIVE_BOUNDARIES/ows",
+            "title": "DSE - Adminstrative Boundaries",
             "ptype": "gxp_wmscsource"
         },
         "dse_iws_cascaded": {
