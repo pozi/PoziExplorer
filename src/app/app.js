@@ -79,6 +79,7 @@
  * @require buildAllFeaturesDataStore.js
  * @require addDefaultTabs.js
  * @require doClearHighlight.js
+ * @require buildAccordion.js
  * @require onConfigurationLoaded.js
  * @require requestConfig.js
  */
