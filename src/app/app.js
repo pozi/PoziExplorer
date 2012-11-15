@@ -76,6 +76,7 @@
  * @require buildWFSLayer.js
  * @require buildWestPanel.js
  * @require buildComboStore.js
+ * @require buildAllFeaturesDataStore.js
  * @require onConfigurationLoaded.js
  * @require requestConfig.js
  */
