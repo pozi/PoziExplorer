@@ -77,6 +77,7 @@
  * @require buildWestPanel.js
  * @require buildComboStore.js
  * @require buildAllFeaturesDataStore.js
+ * @require addDefaultTabs.js
  * @require onConfigurationLoaded.js
  * @require requestConfig.js
  */
