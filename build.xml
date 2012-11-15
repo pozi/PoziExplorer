@@ -92,7 +92,21 @@
         <exec executable="git" dir="${app.fullpath}" output="${app.build}/rev.txt">
           <arg value="log"/>
           <arg value="-n1"/>
-          <arg value="--pretty=format:Commit:  %H%nAuthor:  %an (%ae)%nDate:    %ad%nSubject: %s%n%n"/>
+          <arg value="--pretty=format:Commit:   %H%nAuthor:   %an (%ae)%nDate:     %ad%nSubject:  %s%n%n"/>
+        </exec>
+        <exec executable="git" dir="${app.fullpath}" output="${app.build}/rev.txt" append="true">
+          <arg value="log"/>
+          <arg value="-n1"/>
+          <arg value="--pretty=format:DEPLOYER: "/>
+        </exec>
+        <exec executable="git" dir="${app.fullpath}" output="${app.build}/rev.txt" append="true">
+          <arg value="config"/>
+          <arg value="user.name"/>
+        </exec>
+        <exec executable="git" dir="${app.fullpath}" output="${app.build}/rev.txt" append="true">
+          <arg value="log"/>
+          <arg value="-n1"/>
+          <arg value="--pretty=format:%n"/>
         </exec>
         <exec executable="git" dir="${app.fullpath}" output="${app.build}/rev.txt" append="true">
           <arg value="status"/>
