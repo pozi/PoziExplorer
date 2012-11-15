@@ -17,7 +17,7 @@ addDefaultTabs = function(accordion, gLayoutsArr, JSONconf) {
             config.headerCfg = {
                 tag: 'div',
                 style: [
-                    'background-image: url(); ',
+                    'background-image: none; ',
                     'background-color: ', (config.col || "#A0A0A0"), '; ',
                     'padding-left: 10px;'
                 ].join(''),

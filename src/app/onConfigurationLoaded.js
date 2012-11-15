@@ -229,11 +229,11 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                                 id: 'attributeAcc',
                                 headerCfg: {
                                     tag: 'div',
-                                    style: '	background-image: url();background-color: #A0A0A0;padding-left: 10px;',
+                                    style: '	background-image: none;background-color: #A0A0A0;padding-left: 10px;',
                                     children: [
                                         {
                                             tag: 'div',
-                                            'html': '<img style="vertical-align: middle;"src="theme/app/img/panel/details.png"/>' + '&nbsp &nbsp' + JSONconf.detailsTitle
+                                            'html': '<img style="vertical-align: middle;" src="theme/app/img/panel/details.png"/>' + '&nbsp &nbsp' + JSONconf.detailsTitle
                                         }
                                     ]
                                 },
