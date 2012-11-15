@@ -23,7 +23,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
         gCombostore = buildComboStore();
 
         // Adding the default tabs
-        add_default_tabs = function() {
+        addDefaultTabs = function() {
             // Clearing the details from the panel
             accordion.removeAll();
 
@@ -89,7 +89,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
             gCombostore.removeAll();
 
             // Add default tabs
-            add_default_tabs()
+            addDefaultTabs()
 
             // Hiding the north part of the east panel
             northPart.setHeight(30);
@@ -1563,7 +1563,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                                     }
                                 }
 
-                                add_default_tabs();
+                                addDefaultTabs();
                             }
                         }
                     });
