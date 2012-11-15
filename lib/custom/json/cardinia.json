@@ -75,9 +75,79 @@
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
-        "backend_cascaded": {
+        "backend_cascaded1": {
             "url": "http://basemap.pozi.com/geoserver/DSE/ows",
             "title": "DSE Vicmap Layers",
+            "ptype": "gxp_wmscsource"
+        },
+        "backend_cascaded2":{
+            "url": "http://basemap.pozi.com/geoserver/DSE_ADMINISTRATIVE_BOUNDARIES/ows",
+            "title": "DSE - Adminstrative Boundaries",
+            "ptype": "gxp_wmscsource"
+        },
+        "backend_cascaded3":{
+            "url": "http://basemap.pozi.com/geoserver/DSE_AGRICULTURE/ows",
+            "title": "DSE - Agriculture",
+            "ptype": "gxp_wmscsource"
+        },
+        "backend_cascaded4":{
+            "url": "http://basemap.pozi.com/geoserver/DSE_CULTURE_AND_DEMOGRAPHY/ows",
+            "title": "DSE - Culture And Demography",
+            "ptype": "gxp_wmscsource"
+        },
+        "backend_cascaded5":{
+            "url": "http://basemap.pozi.com/geoserver/DSE_FEATURES_OF_INTEREST/ows",
+            "title": "DSE - Features Of interest",
+            "ptype": "gxp_wmscsource"
+        },
+        "backend_cascaded6":{
+            "url": "http://basemap.pozi.com/geoserver/DSE_GENERALISED_DATA/ows",
+            "title": "DSE - Generalised Data",
+            "ptype": "gxp_wmscsource"
+        },
+        "backend_cascaded7":{
+            "url": "http://basemap.pozi.com/geoserver/DSE_GEOLOGICAL_AND_GEOPHYSICAL/ows",
+            "title": "DSE - Geological And Geophysical",
+            "ptype": "gxp_wmscsource"
+        },
+        "backend_cascaded8": {
+            "url": "http://basemap.pozi.com/geoserver/DSE_IMAGERY/ows",
+            "title": "DSE - Imagery",
+            "ptype": "gxp_wmscsource"
+        },
+        "backend_cascaded9": {
+            "url": "http://basemap.pozi.com/geoserver/DSE_METEOROLOGY/ows",
+            "title": "DSE - Meteorology",
+            "ptype": "gxp_wmscsource"
+        },
+        "backend_cascaded10": {
+            "url": "http://basemap.pozi.com/geoserver/DSE_NATURAL_ENVIRONMENT/ows",
+            "title": "DSE - Natural Environment",
+            "ptype": "gxp_wmscsource"
+        },
+        "backend_cascaded11": {
+            "url": "http://basemap.pozi.com/geoserver/DSE_PLANNING/ows",
+            "title": "DSE - Planning",
+            "ptype": "gxp_wmscsource"
+        },
+        "backend_cascaded12": {
+            "url": "http://basemap.pozi.com/geoserver/DSE_PROPERTY/ows",
+            "title": "DSE - Property",
+            "ptype": "gxp_wmscsource"
+        },
+        "backend_cascaded13": {
+            "url": "http://basemap.pozi.com/geoserver/DSE_TOPOGRAPHY/ows",
+            "title": "DSE - Topography",
+            "ptype": "gxp_wmscsource"
+        },
+        "backend_cascaded14": {
+            "url": "http://basemap.pozi.com/geoserver/DSE_TRANSPORT/ows",
+            "title": "DSE - Transport",
+            "ptype": "gxp_wmscsource"
+        },
+        "backend_cascaded15": {
+            "url": "http://basemap.pozi.com/geoserver/DSE_WATER/ows",
+            "title": "DSE - Water",
             "ptype": "gxp_wmscsource"
         },
         "dse_iws_cascaded": {
