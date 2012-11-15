@@ -9,18 +9,6 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
             JSONconf.sources.local.url = gtLocalLayerSourcePrefix + JSONconf.sources.local.url;
         }
 
-        // Transforming the map contexts variable into the right format
-        var gtMapContextsSize;
-        var gtMapContexts;
-        if (JSONconf.mapContexts.length === 0) {
-            gtMapContextsSize = 0;
-            gtMapContexts = "&nbsp;";
-        } else if (JSONconf.mapContexts.length === 1) {
-            gtMapContextsSize = JSONconf.mapContexts[0].size;
-            gtMapContexts = JSONconf.mapContexts[0].name;
-        } else {
-            // TODO: format the contexts into a drop down loading different layers
-        }
 
         // Layout for the extra tabs
         gLayoutsArr = [];
@@ -1056,10 +1044,19 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                                 },
                                 layout: 'column',
                                 items: [
-                                    {
-                                        html: '<div id="headerContainer">' + gtMapContexts + '</p></div>',
-                                        width: gtMapContextsSize
-                                    },
+                                    function() {
+                                        var mapContextsSize = function() {
+                                            return (JSONconf.mapContexts.length === 0) ? 0 : JSONconf.mapContexts[0].size;
+                                        };
+                                        var mapContexts = function() {
+                                            return (JSONconf.mapContexts.length === 0) ? "&nbsp;" : JSONconf.mapContexts[0].name;
+                                        };
+                                        // TODO: format the contexts into a drop down loading different layers if more than 1.
+                                        return {
+                                            html: '<div id="headerContainer">' + mapContexts() + '</p></div>',
+                                            width: mapContextsSize()
+                                        };
+                                    }(),
                                     {
                                         html: "<img src='theme/app/img/panel/list-white-final.png' style='padding:2px;' alt='Layers' title='Layers' />",
                                         id: 'layerListButton',
