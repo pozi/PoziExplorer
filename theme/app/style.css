@@ -51,7 +51,7 @@ div.olControlZoom a:hover {
 }
 
 .x-form-single {
-	background-image: url();
+	background-image: none;
 }
 
 .x-btn .login {
@@ -132,7 +132,7 @@ div.olMap {
 
 
 .x-btn-mc {
-    background-image: url();
+    background-image: none;
 }
 
 .x-btn-icon .x-btn-small .x-btn-text {

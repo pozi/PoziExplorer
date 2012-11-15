@@ -124,7 +124,7 @@
 
           // Label									
           var lab='';
-          var fti_arr = gtLayerPresentationConfiguration[lay];
+          var fti_arr = JSONconf.layerPresentation[lay];
           // We select the right attribute as the label
           if (fti_arr)
           {
@@ -165,7 +165,7 @@
       if (layerCounter==layerMax)
       {
         // Remove any previous results						
-        clear_highlight();
+        app.clearHighlight();
 
         if (gComboDataArray.length)
         {

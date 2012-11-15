@@ -242,7 +242,7 @@
 				{
 					// The parent exists as long as the iframe exists, so we clear the highlight in the parent before destroying the window / iframe
 					// But in fact, it does not really make sense to clear highlight on the cancel button ..
-					parent.clear_highlight();	
+					parent.app.clearHighlight();	
 					parent.Ext.getCmp('editCreekLinkForm').hide();
 					parent.Ext.getCmp('editCreekLinkForm').destroy();
 				}

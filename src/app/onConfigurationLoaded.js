@@ -9,35 +9,6 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
             JSONconf.sources.local.url = gtLocalLayerSourcePrefix + JSONconf.sources.local.url;
         }
 
-        // Transforming the map contexts variable into the right format
-        var gtMapContexts = JSONconf.mapContexts;
-        if (gtMapContexts.length == 0) {
-            gtMapContexts = "&nbsp;";
-            gtMapContextsSize = 0;
-        } else {
-            if (gtMapContexts.length == 1) {
-                gtMapContextsSize = gtMapContexts[0].size;
-                gtMapContexts = gtMapContexts[0].name;
-            } else {
-                // TODO: format the contexts into a drop down loading different layers
-            }
-        }
-
-
-        // This structure deals with fields to show, in which order and with which name
-        gtLayerPresentationConfiguration = {
-            "VICMAP_PROPERTY_ADDRESS": [
-                { attr_name: "ezi_add", alt_name: "Address" },
-                { attr_name: "pr_propnum", alt_name: "Property Number" },
-                { attr_name: "locality" },
-                { attr_name: "postcode" },
-                { attr_name: "lga_code", alt_name: "LGA" },
-                { attr_name: "pr_multass", alt_name: "Multi Assessment" },
-                { attr_name: "pfi", alt_name: "PFI" }
-            ]
-        };
-        // Augment this structure with the client-specific JSON configuration
-        Ext.apply(gtLayerPresentationConfiguration, JSONconf.layerPresentation)
 
         // Layout for the extra tabs
         gLayoutsArr = [];
@@ -45,656 +16,17 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
         // Flag to track the origin of the store refresh
         var gfromWFSFlag = "N";
 
-        // WFS layer: style , definition , namespaces
-        var gtStyleMap = new OpenLayers.StyleMap();
-        var rule_for_all = new OpenLayers.Rule({
-            symbolizer: JSONconf.highlightSymboliser,
-            elseFilter: true
-        });
-        rule_for_all.title = " ";
-        gtStyleMap.styles["default"].addRules([rule_for_all]);
-
         // Pushing the WFS layer in the layer store
-        JSONconf.layers.push({
-            source: "ol",
-            visibility: true,
-            type: "OpenLayers.Layer.Vector",
-            group: "top",
-            args: [
-                "Selection",
-                {
-                    styleMap: gtStyleMap,
-                    strategies: [new OpenLayers.Strategy.BBOX({
-                        ratio: 100
-                    })],
-                    protocol: new OpenLayers.Protocol.WFS({
-                        version: "1.1.0",
-                        url: JSONconf.servicesHost + JSONconf.WFSEndPoint,
-                        featureType: "VMPROP_PROPERTY",
-                        srsName: JSONconf.WFSsrsName,
-                        featureNS: JSONconf.FeatureNS,
-                        geometryName: JSONconf.WFSgeometryName,
-                        schema: JSONconf.servicesHost + JSONconf.WFSEndPoint + "?service=WFS&version=1.1.0&request=DescribeFeatureType&TypeName=" + "VICMAP:VMPROP_PROPERTY"
-                    }),
-                    filter: new OpenLayers.Filter.Comparison({
-                        type: OpenLayers.Filter.Comparison.EQUAL_TO,
-                        property: 'pr_propnum',
-                        value: -1
-                    }),
-                    projection: new OpenLayers.Projection("EPSG:4326")
-                }
-            ]
-        });
+        JSONconf.layers.push(buildWFSLayer(JSONconf));
 
         // Store behind the info drop-down list
-        gCombostore = new Ext.data.ArrayStore({
-            //autoDestroy: true,
-            storeId: 'myStore',
-            idIndex: 0,
-            fields: [
-                'id',
-                'type',
-                'content',
-                'index',
-                'label',
-                'layer',
-                {
-                    name: 'labelx',
-                    convert: function(v, rec) {
-                        return helpers.toSmartTitleCase(rec[4]);
-                    }
-                }
-            ],
-            listeners: {
-                load: function(ds, records, o) {
-                    var cb = Ext.getCmp('gtInfoCombobox');
-                    var rec = records[0];
-                    if (records.length > 1) {
-                        // Multiple records, color of the combo background is different
-                        cb.removeClass("x-form-single");
-                        cb.addClass("x-form-multi");
-                    } else {
-                        // Restoring the color to a normal white
-                        cb.removeClass("x-form-multi");
-                        cb.addClass("x-form-single");
+        gCombostore = buildComboStore();
 
-                        // Collapsing the drop down
-                        cb.collapse();
-                    }
-                    cb.setValue(rec.data.labelx);
-                    cb.fireEvent('select', cb, rec);
-                },
-                scope: this
-            }
-        });
-
-        var ds = new Ext.data.JsonStore({
-            autoLoad: false,
-            //autoload the data
-            root: 'rows',
-            baseParams: {
-                config: JSONconf.databaseConfig,
-                lga: JSONconf.LGACode
-            },
-            fields: [
-                { name: "label", mapping: "row.label" },
-                { name: "xmini", mapping: "row.xmini" },
-                { name: "ymini", mapping: "row.ymini" },
-                { name: "xmaxi", mapping: "row.xmaxi" },
-                { name: "ymaxi", mapping: "row.ymaxi" },
-                { name: "gsns",  mapping: "row.gsns" },
-                { name: "gsln",  mapping: "row.gsln" },
-                { name: "idcol", mapping: "row.idcol" },
-                { name: "idval", mapping: "row.idval" },
-                { name: "ld",    mapping: "row.ld" }
-            ],
-            proxy: new Ext.data.ScriptTagProxy({
-                url: JSONconf.servicesHost + JSONconf.searchEndPoint
-            })
-        });
-
-        // Adding the default tabs
-        add_default_tabs = function() {
-            // Clearing the details from the panel
-            accordion.removeAll();
-
-            // Layout configuration the global variable array loaded at application start										
-            var configArray = gLayoutsArr["NONE"];
-            if (configArray) {
-                // Here we should do the styling substitution to transform a config option into a proper style element
-                for (c in configArray) {
-                    if (configArray.hasOwnProperty(c)) {
-                        if (! (configArray[c].headerCfg)) {
-                            var t = configArray[c].title;
-                            // headerCfg would not work if the title was part of the initial config
-                            delete configArray[c].title;
-
-                            var col = configArray[c].col;
-
-                            if (! (col)) {
-                                col = "#A0A0A0";
-                            }
-
-                            configArray[c].headerCfg = {
-                                tag: 'div',
-                                style: '	background-image: url();background-color: ' + col + ';padding-left: 10px;',
-                                children: [
-                                    {
-                                        tag: 'div',
-                                        'html': t
-                                    }
-                                ]
-                            };
-                        }
-                    }
-                }
-
-                // And initialisation of the accordion items
-                accordion.add(configArray);
-
-            }
-
-            // Refreshing the DOM with the newly added parts
-            accordion.doLayout();
-
-            // Expanding the first tab if configured to do so
-            if (JSONconf.openFirstDefaultTab) {
-                accordion.items.items[0].expand();
-            }
-        };
-
-        // Remove the WFS highlight, clear and disable the select feature combo, empty the combostore and clean the details panel
-        clear_highlight = function() {
-            // Removing the highlight by clearing the selected features in the WFS layer
-            app.getSelectionLayer().removeAllFeatures();
-            app.getSelectionLayer().redraw();
-            // Clearing combo
-            var cb = Ext.getCmp('gtInfoCombobox');
-            cb.collapse();
-            cb.clearValue();
-            cb.disable();
-            cb.removeClass("x-form-multi");
-            cb.addClass("x-form-single");
-
-            // Removing all values from the combo
-            gCombostore.removeAll();
-
-            // Add default tabs
-            add_default_tabs()
-
-            // Hiding the north part of the east panel
-            northPart.setHeight(30);
-            cb.setVisible(false);
-
-            // Clearing the feature type
-            Ext.get('gtInfoTypeLabel').dom.innerHTML = "&nbsp;";
-
-        };
 
         // Panels and portals
-        westPanel = new Ext.Panel({
-            id: "westpanel",
-            border: false,
-            layout: "anchor",
-            region: "west",
-            width: 250,
-            split: true,
-            border: true,
-            collapsible: true,
-            collapseMode: "mini",
-            collapsed: JSONconf.collapseWestPanel,
-            hideCollapseTool: true,
-            autoScroll: true,
-            // Only padding on the right as all other sides covered by the parent container
-            style: "padding: 0px 10px 0px 0px; background-color:white;",
-            headerCfg: {
-                // Required to have the footer display
-                html: '<p style="font-size:16px;font-family: tahoma,arial,verdana,sans-serif;">Layers</p>',
-                bodyStyle: " background-color: white; "
-            },
-            headerStyle: 'background-color:' + JSONconf.bannerLineColor + ';border:0px; margin:0px 0px 0px; padding: 5px 8px;',
-            items: [{
-                region: 'center',
-                border: false,
-                id: 'tree'
-            }]
-        });
+        westPanel = buildWestPanel(JSONconf);
 
-        var tabCollapse = function(p) {
-            // Current layer (cl) as per content of the current type (ct) and current drop down (cb)
-            var ct = gtLayerLabel;
-            // that contains the type of the currently selected feature
-            var cb = Ext.getCmp('gtInfoCombobox');
-            // the Ext JS component containing the combo - used to link type to layer name
-            var cl;
-            // If the item can be found, then we extract the layer name
-            if (cb.getStore().data.items[cb.getStore().find("type", ct)]) {
-                cl = cb.getStore().data.items[cb.getStore().find("type", ct)].data.layer;
-            } else { 
-                // There is no item in the drop down and the current layer is "NONE"
-                cl = "NONE";
-            }
-
-            if (gCurrentExpandedTabIdx[cl] != 0) {
-                var configArray = gLayoutsArr[cl];
-
-                if (configArray) {
-                    // This only performs the query corresponding to the currently open tab
-                    for (var i = gCurrentExpandedTabIdx[cl] - 1; i < gCurrentExpandedTabIdx[cl]; i++) {
-                        // Triggering the tab-wide actions
-                        if (configArray[i].onTabClose) {
-                            // Avoiding the use of the 'eval' function
-                            var fn = window[configArray[i].onTabClose];
-                            if (typeof fn === 'function') {
-                                // Context passed: the id of the clicked feature
-                                fn();
-                            }
-                        }
-                    }
-                }
-            }
-        };
-
-        var tabExpand = function(p) {
-            // Current layer (cl) as per content of the current type (ct) and current drop down (cb)
-            var ct = gtLayerLabel;
-            // that contains the type of the currently selected feature
-            var cb = Ext.getCmp('gtInfoCombobox');
-            // the Ext JS component containing the combo - used to link type to layer name
-            var cl;
-            // If the item can be found, then we extract the layer name
-            if (cb.getStore().data.items[cb.getStore().find("type", ct)]) {
-                cl = cb.getStore().data.items[cb.getStore().find("type", ct)].data.layer;
-            } else {
-                // There is no item in the drop down so the current layer is "NONE"
-                cl = "NONE";
-            }
-
-            // Updating the index of the currently opened tab
-            for (k in p.ownerCt.items.items) {
-                if (p.ownerCt.items.items[k].id == p.id) {
-                    // Layer name of the currently selected item in the combo
-                    gCurrentExpandedTabIdx[cl] = k;
-                    break;
-                }
-            }
-
-            // Fix for the NONE layer so that the index is not 0 and the loop just below is entered
-            if (cl == "NONE") {
-                gCurrentExpandedTabIdx[cl]++;
-            }
-
-            // Sending in the query to populate this specific tab (tab on demand)
-            if (gCurrentExpandedTabIdx[cl] != 0) {
-                var configArray = gLayoutsArr[cl];
-                if (configArray) {
-                    // This only performs the query corresponding to the currently open tab
-                    for (var i = gCurrentExpandedTabIdx[cl] - 1; i < gCurrentExpandedTabIdx[cl]; i++) {
-                        var g = 0;
-
-                        // Adding a loading indicator for user feedback		
-                        var targ2 = Ext.getCmp(configArray[i].id);
-                        targ2.removeAll();
-
-                        // Rendering as a table
-                        var win2 = new Ext.Panel({
-                            id: 'tblayout-win-loading',
-                            layout: 'hbox',
-                            layoutConfig: {
-                                padding: '5',
-                                pack: 'center',
-                                align: 'middle'
-                            },
-                            border: false,
-                            defaults: {
-                                height: 26
-                            },
-                            items: [
-                                {
-                                    html: '<img src="http://www.pozi.com/externals/ext/resources/images/default/grid/loading.gif"/>',
-                                    border: false,
-                                    padding: '5'
-                                }
-                            ]
-                        });
-                        targ2.add(win2);
-                        targ2.doLayout();
-
-                        // Finding the unique ID of the selected record, to pass to the live query
-                        var selectedRecordIndex = cb.selectedIndex;
-                        if ((selectedRecordIndex == -1) || (selectedRecordIndex >= cb.store.data.items.length)) {
-                            selectedRecordIndex = 0;
-                        }
-
-                        // Property to pass to the queries
-                        var idFeature,
-                        idEpsg;
-
-                        // Special case when requesting the geometry
-                        if (configArray[i].idName == "the_geom") {
-                            // 2 scenarios
-                            if (cb.store.data.items[selectedRecordIndex].data.content.the_geom_WFS) {
-                                // Comes from a WFS call (search)
-                                idFeature = cb.store.data.items[selectedRecordIndex].data.content.the_geom_WFS.geometry.toString();
-                                idEpsg = "900913";
-                            } else {
-                                // Comes from a getFeatureInfo click
-                                idFeature = cb.store.data.items[selectedRecordIndex].data.content.the_geom;
-                                idEpsg = "4326";
-                            }
-                            idFeature = "'" + idFeature + "'," + idEpsg;
-                        } else {
-                            if (cl != "NONE") {
-                                // Using the name configured
-                                idFeature = cb.store.data.items[selectedRecordIndex].data.content[configArray[i].idName];
-                            }
-                        }
-
-                        // Triggering the tab-wide actions
-                        if (configArray[i].onTabOpen) {
-                            // Avoiding the use of the 'eval' function
-                            var fn = window[configArray[i].onTabOpen];
-                            if (typeof fn === 'function') {
-                                // Context passed: the id of the clicked feature
-                                fn(idFeature);
-                            }
-                        }
-
-                        if (configArray[i].id.substring(0, 1) != 'X') {
-                            // Live query using the script tag
-                            var ds = new Ext.data.Store({
-                                autoLoad: true,
-                                // Script tag proxy uses a GET method (can not be overriden to a POST)
-                                // Source: http://www.sencha.com/forum/showthread.php?15916-ScriptTagProxy-with-POST-method-in-grid-with-paging
-                                proxy: new Ext.data.ScriptTagProxy({
-                                    url: JSONconf.liveDataEndPoints[configArray[i].definition].urlLiveData
-                                }),
-                                reader: new Ext.data.JsonReader({
-                                    root: 'rows',
-                                    totalProperty: 'total_rows',
-                                    id: 'id'
-                                },
-                                [{
-                                    name: 'id',
-                                    mapping: 'row.id'
-                                }
-                                ]),
-                                baseParams: {
-                                    // Logged in role
-                                    role: gCurrentLoggedRole,
-                                    // Passing the value of the property defined as containing the common ID
-                                    id: idFeature,
-                                    // Passing the tab name
-                                    infoGroup: configArray[i].id,
-                                    // Passing the database type to query
-                                    mode: JSONconf.liveDataEndPoints[configArray[i].definition].storeMode,
-                                    // Passing the database name to query
-                                    config: JSONconf.liveDataEndPoints[configArray[i].definition].storeName,
-                                    // Passing the LGA code, so that the query can be narrowed down (used for planning tab schedules links)
-                                    lga: JSONconf.LGACode
-                                },
-                                listeners:
-                                {
-                                    load: function(store, recs)
-                                    {
-                                        // Looping thru the records returned by the query
-                                        tab_array = new Array();
-                                        var geom_array = new Array();
-                                        for (m = 0; m < recs.length; m++)
-                                        {
-                                            res_data = recs[m].json.row;
-                                            var has_gsv = false;
-                                            var src_attr_array = new Array();
-                                            var first_element = "";
-
-                                            for (j in res_data)
-                                            {
-                                                if (j != "target" && j != "tabaction" && j != "the_geom")
-                                                {
-                                                    var val = res_data[j];
-
-                                                    if (j.search(/^gsv/) > -1)
-                                                    {
-                                                        // Not showing the cells - technical properties for Google Street View
-                                                        has_gsv = true;
-                                                    }
-                                                    else
-                                                    {
-                                                        // Building the source array for a property grid
-                                                        src_attr_array[helpers.toTitleCase(helpers.trim(j.replace(/_/g, " ")))] = helpers.trim(val);
-
-                                                        // Setting the title of the horizontal panel - first non-null value encountered
-                                                        if (first_element.length == 0)
-                                                        {
-                                                            if (helpers.trim(val).length > 14)
-                                                            {
-                                                                first_element = helpers.trim(val).substring(0, 12) + '..';
-                                                            }
-                                                            else
-                                                            {
-                                                                first_element = helpers.trim(val);
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-
-                                            // Getting all geometries in an associative array
-                                            // so that we're able to pass the right parameter to the subtab activate function
-                                            // Note: the geometry name is necessarily "the_geom"
-                                            for (j in res_data) {
-                                                if (j == "the_geom") {
-                                                    geom_array[first_element] = res_data[j];
-                                                }
-                                            }
-
-                                            // Adding a Google Street View link for selected datasets
-                                            if (has_gsv) {
-                                                var gsv_lat,
-                                                gsv_lon,
-                                                gsv_head = 0;
-
-                                                for (var k in res_data) {
-                                                    if (k == "gsv_lat") {
-                                                        gsv_lat = res_data[k];
-                                                    }
-                                                    if (k == "gsv_lon") {
-                                                        gsv_lon = res_data[k];
-                                                    }
-                                                    if (k == "gsv_head") {
-                                                        gsv_head = res_data[k];
-                                                    }
-                                                }
-
-                                                if (gsv_lat && gsv_lon) {
-                                                    // Adjusted to the size of the column
-                                                    var size_thumb = 335;
-                                                    var gsvthumb = "http://maps.googleapis.com/maps/api/streetview?location=" + gsv_lat + "," + gsv_lon + "&fov=90&heading=" + gsv_head + "&pitch=-10&sensor=false&size=" + size_thumb + "x" + size_thumb;
-                                                    var gsvlink = "http://maps.google.com.au/maps?layer=c&cbll=" + gsv_lat + "," + gsv_lon + "&cbp=12," + gsv_head + ",,0,0";
-
-
-                                                    tab_el = {
-                                                        layout: 'fit',
-                                                        height: size_thumb,
-                                                        items: [{
-                                                            html: "<div><a href='" + gsvlink + "' target='_blank'><img src='" + gsvthumb + "' style='display:block;margin:auto;'/></a></div>"
-                                                        }]
-                                                    };
-                                                }
-                                            } else {
-                                                // This is a different tab than Google Street View, we push the attribute names and values
-                                                // By setting a title, we create a header (required to number the different tabs if multiple elements)
-                                                // but if it's the only property grid, we deny it to be rendered
-                                                // Based on API doc: http://docs.sencha.com/ext-js/3-4/#!/api/Ext.Panel-cfg-header
-                                                tab_el = new Ext.grid.PropertyGrid({
-                                                    title: first_element,
-                                                    header: (recs.length > 1),
-                                                    listeners: {
-                                                        'beforeedit': function(e) {
-                                                            return false;
-                                                        }
-                                                    },
-                                                    stripeRows: true,
-                                                    autoHeight: true,
-                                                    hideHeaders: true,
-                                                    // Removing the space on the right usually reserved for scrollbar
-                                                    viewConfig: {
-                                                        forceFit: true,
-                                                        scrollOffset: 0
-                                                    }
-                                                });
-
-                                                // Remove default sorting
-                                                delete tab_el.getStore().sortInfo;
-                                                tab_el.getColumnModel().getColumnById('name').sortable = false;
-                                                // Managing column width ratio
-                                                tab_el.getColumnModel().getColumnById('name').width = 30;
-                                                tab_el.getColumnModel().getColumnById('value').width = 70;
-                                                // Now load data
-                                                tab_el.setSource(src_attr_array);
-
-                                            }
-
-                                            tab_array.push(tab_el);
-                                        }
-
-                                        // Identification of the div to render the attributes to, if there is anything to render
-                                        if (recs[0]) {
-                                            // The target div for placing this data
-                                            var targ = Ext.getCmp(recs[0].json.row["target"]);
-
-                                            // In some cases the tab has already been removed (i.e. targ is null)
-                                            if (targ) {
-                                                targ.removeAll();
-
-                                                // Adding the listener to each subtab
-                                                if (recs[0].json.row["tabaction"]) {
-                                                    // Avoiding the use of the 'eval' function
-                                                    var fn2 = window[recs[0].json.row["tabaction"]];
-                                                    if (typeof fn2 === 'function') {
-                                                        // Going thru all the elements in the tab_array to add the listener
-                                                        // Note: we can not just add a default listener in the containing panel/tabpanel
-                                                        // because the elements have already been instantiated
-                                                        for (b in tab_array) {
-                                                            if (tab_array.hasOwnProperty(b)) {
-                                                                tab_array[b].addListener('activate',
-                                                                function(tab) {
-                                                                    tab.the_geom = geom_array[tab.title];
-                                                                    fn2(tab);
-                                                                });
-                                                            }
-                                                        }
-                                                    }
-                                                }
-
-                                                // The container depends on the number of records returned
-                                                if (tab_array.length == 1) {
-                                                    // Removing the title - it's useless
-                                                    // We should be able to remove the header that was created with a non-null title
-                                                    tab_array[0].title = undefined;
-
-                                                    // Rendering as a table
-                                                    var win = new Ext.Panel({
-                                                        id: 'tblayout-win' + g,
-                                                        layout: 'fit',
-                                                        bbar: true,
-                                                        bbarCfg: {
-                                                            tag: 'left',
-                                                            html: '<p style="background-color: #ecedef; padding: 4px; padding-left: 8px; font-size: 12px;font-family: tahoma,arial,verdana,sans-serif; font-style:italic;">' + configArray[i - 1].desc + '</p>'
-                                                        },
-                                                        border: false,
-                                                        items: tab_array[0]
-                                                    });
-                                                } else {
-                                                    // Renderng as a tab panel of tables
-                                                    var win = new Ext.TabPanel({
-                                                        activeTab: 0,
-                                                        id: 'tblayout-win' + g,
-                                                        enableTabScroll: true,
-                                                        resizeTabs: false,
-                                                        minTabWidth: 20,
-                                                        bbar: true,
-                                                        bbarCfg: {
-                                                            tag: 'left',
-                                                            html: '<p style="background-color: #ecedef; padding: 4px; padding-left: 8px; font-size: 12px;font-family: tahoma,arial,verdana,sans-serif; font-style:italic;">' + configArray[i - 1].desc + '</p>'
-                                                        },
-                                                        border: false,
-                                                        items: tab_array
-                                                    });
-                                                }
-                                                targ.add(win);
-                                                targ.doLayout();
-                                            }
-                                        } else {
-                                            // The target div for placing this data: the loading div's parent
-                                            targ2.removeAll();
-
-                                            // Rendering as a table
-                                            var win3 = new Ext.Panel({
-                                                id: 'tblayout-win-noresult'
-                                                //,width:227
-                                                ,
-                                                layout: 'hbox'
-                                                ,
-                                                layoutConfig: {
-                                                    padding: '5',
-                                                    pack: 'center',
-                                                    align: 'middle'
-                                                }
-                                                ,
-                                                border: false
-                                                ,
-                                                defaults: {
-                                                    height: 26
-                                                }
-                                                ,
-                                                renderTo: targ
-                                                ,
-                                                items: [
-                                                {
-                                                    html: '<p style="font-size:12px;font-family: tahoma,arial,verdana,sans-serif;">No result found</p>',
-                                                    border: false,
-                                                    padding: '5'
-                                                }
-                                                ]
-                                            });
-                                            targ2.add(win3);
-                                            targ2.doLayout();
-                                        }
-                                        g++;
-                                    }
-                                }
-                            });
-                        } else {
-                            // Rendering a generic tab based on its HTML definition
-                            // The target div for placing this data: the loading div's parent
-                            targ2.removeAll();
-
-                            // Rendering as a table
-                            var win4 = new Ext.Panel({
-                                id: 'tblayout-win-generic'
-                                //,width:227
-                                ,
-                                idFeature: idFeature
-                                ,
-                                layout: 'fit'
-                                ,
-                                border: false
-                                ,
-                                items: [
-                                {
-                                    html: configArray[i].html_to_render
-                                }
-                                ]
-                            });
-                            targ2.add(win4);
-                            targ2.doLayout();
-                        }
-                    }
-
-                }
-            }
-        };
+        var tabExpand = buildTabExpand(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, JSONconf, gLoggedRole, helpers);
 
         // Defines the north part of the east panel
         northPart = new Ext.Panel({
@@ -744,16 +76,9 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                             listeners: {
                                 render: function(c) {
                                     // Expanding the drop down on click
-                                    c.el.on('click',
-                                    function() {
-                                        // Removing highlight and emptying combo
-                                        clear_highlight();
-                                    });
+                                    c.el.on('click', app.clearHighlight);
                                     // Using the pointer cursor when hovering over the element
-                                    c.el.on('mouseover',
-                                    function() {
-                                        this.dom.style.cursor = 'pointer';
-                                    });
+                                    c.el.on('mouseover', function() { this.dom.style.cursor = 'pointer'; });
                                 },
                                 scope: this
                             }
@@ -783,7 +108,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                             // Displaying the feature type
                             var ft = record.get("type");
 
-                            gtLayerLabel = ft;
+                            gtLayerLabel.value = ft;
 
                             ft = ft.replace(/es\s/g, "e ");
 
@@ -810,7 +135,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                             // Current layer name
                             var cl = record.get("layer");
                             // Configuration field array
-                            var fti_arr = gtLayerPresentationConfiguration[cl];
+                            var fti_arr = JSONconf.layerPresentation[cl];
                             // Arrays to store ordered attribute names and values
                             var an_arr,
                             av_arr;
@@ -904,11 +229,11 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                                 id: 'attributeAcc',
                                 headerCfg: {
                                     tag: 'div',
-                                    style: '	background-image: url();background-color: #A0A0A0;padding-left: 10px;',
+                                    style: '	background-image: none;background-color: #A0A0A0;padding-left: 10px;',
                                     children: [
                                         {
                                             tag: 'div',
-                                            'html': '<img style="vertical-align: middle;"src="theme/app/img/panel/details.png"/>' + '&nbsp &nbsp' + JSONconf.detailsTitle
+                                            'html': '<img style="vertical-align: middle;" src="theme/app/img/panel/details.png"/>' + '&nbsp &nbsp' + JSONconf.detailsTitle
                                         }
                                     ]
                                 },
@@ -988,34 +313,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
             ]
         });
 
-        var accordion = new Ext.Panel({
-            id: 'gtAccordion',
-            layout: 'accordion',
-            region: "center",
-            border: false,
-            rowHeight: 1,
-            collapsible: false,
-            autoScroll: true,
-            defaults: {
-                // applied to each contained panel
-                bodyStyle: " background-color: transparent ",
-                style: "padding:10px 0px 0px;",
-                collapsed: true,
-                listeners: {
-                    scope: this,
-                    expand: tabExpand,
-                    collapse: tabCollapse
-                }
-            },
-            layoutConfig: {
-                // layout-specific configs go here
-                animate: false,
-                titleCollapse: true,
-                activeOnTop: false,
-                hideCollapseTool: false,
-                fill: false
-            }
-        });
+        var accordion = buildAccordion(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, tabExpand);
 
         var bottomEastItem = {
             border: false
@@ -1100,7 +398,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                         new Ext.form.ComboBox({
                             id: 'gtSearchCombobox',
                             queryParam: 'query',
-                            store: ds,
+                            store: buildAllFeaturesDataStore(JSONconf),
                             displayField: 'label',
                             selectOnFocus: true,
                             minChars: 3,
@@ -1190,10 +488,19 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                                 },
                                 layout: 'column',
                                 items: [
-                                    {
-                                        html: '<div id="headerContainer">' + gtMapContexts + '</p></div>',
-                                        width: gtMapContextsSize
-                                    },
+                                    function() {
+                                        var mapContextsSize = function() {
+                                            return (JSONconf.mapContexts.length === 0) ? 0 : JSONconf.mapContexts[0].size;
+                                        };
+                                        var mapContexts = function() {
+                                            return (JSONconf.mapContexts.length === 0) ? "&nbsp;" : JSONconf.mapContexts[0].name;
+                                        };
+                                        // TODO: format the contexts into a drop down loading different layers if more than 1.
+                                        return {
+                                            html: '<div id="headerContainer">' + mapContexts() + '</p></div>',
+                                            width: mapContextsSize()
+                                        };
+                                    }(),
                                     {
                                         html: "<img src='theme/app/img/panel/list-white-final.png' style='padding:2px;' alt='Layers' title='Layers' />",
                                         id: 'layerListButton',
@@ -1203,18 +510,20 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                                             render: function(c) {
                                                 // Expanding the drop down on click
                                                 c.el.on('click',
-                                                function() {
-                                                    if (westPanel.collapsed) {
-                                                        westPanel.expand();
-                                                    } else {
-                                                        westPanel.collapse();
+                                                    function() {
+                                                        if (westPanel.collapsed) {
+                                                            westPanel.expand();
+                                                        } else {
+                                                            westPanel.collapse();
+                                                        }
                                                     }
-                                                });
+                                                );
                                                 // Using the pointer cursor when hovering over the element
                                                 c.el.on('mouseover',
-                                                function() {
-                                                    this.dom.style.cursor = 'pointer';
-                                                });
+                                                    function() {
+                                                        this.dom.style.cursor = 'pointer';
+                                                    }
+                                                );
                                             },
                                             scope: this
                                         }
@@ -1313,6 +622,10 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
             // TODO: determine if this is still relevant
             return app.mapPanel.toolbars[0];
         };
+
+        app.clearHighlight = function() {
+          doClearHighlight(app, gCombostore, addDefaultTabs, accordion, gLayoutsArr, JSONconf, northPart);
+        }
 
         app.on("ready", function() {
             // Setting the title of the map to print
@@ -1509,9 +822,9 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                             ////Ext.getCmp('tree').body=null;
                             ////app.addLayers();
                             // Reloading the tabs
-                            gCurrentLoggedRole = app.authorizedRoles[0];
+                            gLoggedRole['current'] = app.authorizedRoles[0];
                             loadTabConfig();
-                            clear_highlight();
+                            app.clearHighlight();
                             // Keeping username and password in variables for injection in WMS queries of local source
                             gLoggedUsername = form.findField('username').getValue();
                             gLoggedPassword = form.findField('password').getValue();
@@ -1652,7 +965,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                 var user = app.getCookieValue(app.cookieParamName);
                 if (user !== null) {
                     app.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
-                    gCurrentLoggedRole = app.authorizedRoles[0];
+                    gLoggedRole['current'] = app.authorizedRoles[0];
                 }
 
                 // unauthorized, show login button
@@ -1673,7 +986,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                     westPanel.expand();
 
                     if (app.authorizedRoles[0]) {
-                        gCurrentLoggedRole = app.authorizedRoles[0];
+                        gLoggedRole['current'] = app.authorizedRoles[0];
                     }
 
                 }
@@ -1683,52 +996,49 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
             var loadTabConfig = function() {
 
                 // Information panel layouts for the current authorized role - we should degrade nicely if the service is not found
-                var ds;
-                for (urlIdx in JSONconf.liveDataEndPoints) {
-                    if (JSONconf.liveDataEndPoints.hasOwnProperty(urlIdx)) {
-                        ds = new Ext.data.Store({
-                            autoLoad: true,
-                            proxy: new Ext.data.ScriptTagProxy({
-                                url: JSONconf.liveDataEndPoints[urlIdx].urlLayout
-                            }),
-                            reader: new Ext.data.JsonReader(
-                                {
-                                    root: 'rows',
-                                    totalProperty: 'total_rows',
-                                    id: 'key_arr'
-                                },
-                                [ { name: 'key_arr', mapping: 'row.key_arr' } ]
-                            ),
-                            baseParams: {
-                                role: gCurrentLoggedRole,
-                                mode: JSONconf.liveDataEndPoints[urlIdx].storeMode,
-                                config: JSONconf.liveDataEndPoints[urlIdx].storeName
+                _(JSONconf.liveDataEndPoints).each(function(endPoint) {
+                    new Ext.data.Store({
+                        autoLoad: true,
+                        proxy: new Ext.data.ScriptTagProxy({
+                            url: endPoint.urlLayout
+                        }),
+                        reader: new Ext.data.JsonReader(
+                            {
+                                root: 'rows',
+                                totalProperty: 'total_rows',
+                                id: 'key_arr'
                             },
-                            listeners: {
-                                load: function(store, recs) {
-                                    // Setting up a global variable array to define the info panel layouts
-                                    for (key = 0; key < recs.length; key++) {
-                                        var a = recs[key].json.row.val_arr;
+                            [ { name: 'key_arr', mapping: 'row.key_arr' } ]
+                        ),
+                        baseParams: {
+                            role: gLoggedRole['current'],
+                            mode: endPoint.storeMode,
+                            config: endPoint.storeName
+                        },
+                        listeners: {
+                            load: function(store, recs) {
+                                // Setting up a global variable array to define the info panel layouts
+                                for (key = 0; key < recs.length; key++) {
+                                    var a = recs[key].json.row.val_arr;
 
-                                        if (gLayoutsArr[recs[key].json.row.key_arr]) {
-                                            // If this key (layer) already exists, we add the JSON element (tab) to its value (tab array)
-                                            gLayoutsArr[recs[key].json.row.key_arr] = gLayoutsArr[recs[key].json.row.key_arr].concat(a);
-                                            // Reordering the array elements inside the array for this key, according to orderNum
-                                            gLayoutsArr[recs[key].json.row.key_arr].sort(function(a, b) {
-                                                return parseInt(a.orderNum) - parseInt(b.orderNum);
-                                            });
-                                        } else {
-                                            // We create this key if it didn't exist
-                                            gLayoutsArr[recs[key].json.row.key_arr] = a;
-                                        }
+                                    if (gLayoutsArr[recs[key].json.row.key_arr]) {
+                                        // If this key (layer) already exists, we add the JSON element (tab) to its value (tab array)
+                                        gLayoutsArr[recs[key].json.row.key_arr] = gLayoutsArr[recs[key].json.row.key_arr].concat(a);
+                                        // Reordering the array elements inside the array for this key, according to orderNum
+                                        gLayoutsArr[recs[key].json.row.key_arr].sort(function(a, b) {
+                                            return parseInt(a.orderNum) - parseInt(b.orderNum);
+                                        });
+                                    } else {
+                                        // We create this key if it didn't exist
+                                        gLayoutsArr[recs[key].json.row.key_arr] = a;
                                     }
-
-                                    add_default_tabs();
                                 }
+
+                                addDefaultTabs(accordion, gLayoutsArr, JSONconf);
                             }
-                        });
-                    }
-                };
+                        }
+                    });
+                });
             };
 
             // Loading the tabs on initial page load
