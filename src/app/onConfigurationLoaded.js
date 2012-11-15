@@ -22,31 +22,6 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
         // Store behind the info drop-down list
         gCombostore = buildComboStore();
 
-        var ds = new Ext.data.JsonStore({
-            autoLoad: false,
-            //autoload the data
-            root: 'rows',
-            baseParams: {
-                config: JSONconf.databaseConfig,
-                lga: JSONconf.LGACode
-            },
-            fields: [
-                { name: "label", mapping: "row.label" },
-                { name: "xmini", mapping: "row.xmini" },
-                { name: "ymini", mapping: "row.ymini" },
-                { name: "xmaxi", mapping: "row.xmaxi" },
-                { name: "ymaxi", mapping: "row.ymaxi" },
-                { name: "gsns",  mapping: "row.gsns" },
-                { name: "gsln",  mapping: "row.gsln" },
-                { name: "idcol", mapping: "row.idcol" },
-                { name: "idval", mapping: "row.idval" },
-                { name: "ld",    mapping: "row.ld" }
-            ],
-            proxy: new Ext.data.ScriptTagProxy({
-                url: JSONconf.servicesHost + JSONconf.searchEndPoint
-            })
-        });
-
         // Adding the default tabs
         add_default_tabs = function() {
             // Clearing the details from the panel
@@ -270,6 +245,8 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
 
                         if (configArray[i].id.substring(0, 1) != 'X') {
                             // Live query using the script tag
+              
+                            // ds INSIDE tabExpand()
                             var ds = new Ext.data.Store({
                                 autoLoad: true,
                                 // Script tag proxy uses a GET method (can not be overriden to a POST)
@@ -925,6 +902,31 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
             ]
         });
 
+        var allFeaturesDataStore = new Ext.data.JsonStore({
+            autoLoad: false,
+            //autoload the data
+            root: 'rows',
+            baseParams: {
+                config: JSONconf.databaseConfig,
+                lga: JSONconf.LGACode
+            },
+            fields: [
+                { name: "label", mapping: "row.label" },
+                { name: "xmini", mapping: "row.xmini" },
+                { name: "ymini", mapping: "row.ymini" },
+                { name: "xmaxi", mapping: "row.xmaxi" },
+                { name: "ymaxi", mapping: "row.ymaxi" },
+                { name: "gsns",  mapping: "row.gsns" },
+                { name: "gsln",  mapping: "row.gsln" },
+                { name: "idcol", mapping: "row.idcol" },
+                { name: "idval", mapping: "row.idval" },
+                { name: "ld",    mapping: "row.ld" }
+            ],
+            proxy: new Ext.data.ScriptTagProxy({
+                url: JSONconf.servicesHost + JSONconf.searchEndPoint
+            })
+        });
+
         var portalItems = [
             {
                 region: "north",
@@ -954,7 +956,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                         new Ext.form.ComboBox({
                             id: 'gtSearchCombobox',
                             queryParam: 'query',
-                            store: ds,
+                            store: allFeaturesDataStore,
                             displayField: 'label',
                             selectOnFocus: true,
                             minChars: 3,
