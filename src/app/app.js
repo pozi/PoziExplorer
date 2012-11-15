@@ -80,6 +80,7 @@
  * @require addDefaultTabs.js
  * @require doClearHighlight.js
  * @require buildAccordion.js
+ * @require buildTabExpand.js
  * @require onConfigurationLoaded.js
  * @require requestConfig.js
  */
@@ -107,7 +108,7 @@ var gComboDataArray = [],
     gfromWFSFlag,
     gCombostore,
     gCurrentExpandedTabIdx = [],
-    gCurrentLoggedRole = "NONE",
+    gLoggedRole = { current: "NONE" },
     eastPanel,
     westPanel,
     northPart,
@@ -118,7 +119,7 @@ var vector_layer = new OpenLayers.Layer.Vector("WKT", {
         displayInLayerSwitcher: false
     });
 var wkt_format = new OpenLayers.Format.WKT();
-var gtLayerLabel;
+var gtLayerLabel = { value: undefined };
 
 Ext.onReady(function() {
     requestConfig({

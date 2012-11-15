@@ -2,7 +2,7 @@ buildAccordion = function(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, tab
 
     var tabCollapse = function(p) {
         // Current layer (cl) as per content of the current type (ct) and current drop down (cb)
-        var ct = gtLayerLabel;
+        var ct = gtLayerLabel.value;
         // that contains the type of the currently selected feature
         var cb = Ext.getCmp('gtInfoCombobox');
         // the Ext JS component containing the combo - used to link type to layer name
