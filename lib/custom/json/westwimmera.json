@@ -77,11 +77,36 @@
 		"ptype": "gxp_wmscsource",
 		"tiled": false,
 		"restUrl": "/geoserver/rest"
-	},    
-        "backend_cascaded": {
-            "url": "http://basemap.pozi.com/geoserver/DSE/ows",
-            "title": "DSE Vicmap Layers",
+		},    
+        "backend_cascaded1":{
+            "url": "http://basemap.pozi.com/geoserver/DSE_ADMINISTRATIVE_BOUNDARIES/ows",
+            "title": "DSE - Adminstrative Boundaries",
             "ptype": "gxp_wmscsource"
+        },
+        "backend_cascaded2":{	  	
+            "url": "http://basemap.pozi.com/geoserver/DSE_FEATURES_OF_INTEREST/ows",	  	
+			"title": "DSE - Features Of interest",
+			"ptype": "gxp_wmscsource"  	
+        },
+        "backend_cascaded3":{	  	
+            "url": "http://basemap.pozi.com/geoserver/DSE_PLANNING/ows",	  	
+			"title": "DSE - Planning",
+			"ptype": "gxp_wmscsource"  	
+        },
+        "backend_cascaded4":{	  	
+            "url": "http://basemap.pozi.com/geoserver/DSE_PROPERTY/ows",	  	
+			"title": "DSE - Property",
+			"ptype": "gxp_wmscsource"  	
+        },
+        "backend_cascaded5":{	  	
+            "url": "http://basemap.pozi.com/geoserver/DSE_TRANSPORT/ows",	  	
+			"title": "DSE - Transport",
+			"ptype": "gxp_wmscsource"  	
+        },
+        "backend_cascaded6":{	  	
+            "url": "http://basemap.pozi.com/geoserver/DSE_TOPOGRAPHY/ows",	  	
+			"title": "DSE - Topography",
+			"ptype": "gxp_wmscsource"  	
         },
 	"dse_iws_cascaded": {
 		"url": ["http://m1.pozi.com/geoserver/WESTWIMMERA/ows","http://m2.pozi.com/geoserver/WESTWIMMERA/ows","http://m3.pozi.com/geoserver/WESTWIMMERA/ows","http://m4.pozi.com/geoserver/WESTWIMMERA/ows"],
@@ -136,31 +161,31 @@
             "tiled": false
         },
         {
-		"source":"local",
-		"name":"WESTWIMMERA:AAV_CULTURAL_SENSITIVITY",
-		"title":"Cultural Sensitivity",
-		"visibility":false,
-		"opacity":0.5,
-		"format":"image/png8",
-		"styles":"",
-		"transparent":true,
-		"tiled": false
-	},
-	{
-		"source":"local",
-		"name":"WESTWIMMERA:WWSC_MAINTENANCE_ZONE",
-		"title":"Maintenance Zones",
-		"visibility":false,
-		"opacity":0.8,
-		"format":"image/png8",
-		"styles":"",
-		"transparent":true,
-		"tiled":false
-	},
-	{
+			"source":"local",
+			"name":"WESTWIMMERA:AAV_CULTURAL_SENSITIVITY",
+			"title":"Cultural Sensitivity",
+			"visibility":false,
+			"opacity":0.5,
+			"format":"image/png8",
+			"styles":"",
+			"transparent":true,
+			"tiled": false
+		},
+		{
+			"source":"local",
+			"name":"WESTWIMMERA:WWSC_MAINTENANCE_ZONE",
+			"title":"Maintenance Zones",
+			"visibility":false,
+			"opacity":0.8,
+			"format":"image/png8",
+			"styles":"",
+			"transparent":true,
+			"tiled":false
+		},
+		{
             "source": "backend",
             "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
-            "title": "Property",
+            "title": "Properties",
             "visibility": true,
             "opacity": 0.25,
             "format": "image/GIF",
@@ -169,17 +194,17 @@
             "tiled": false
         },
         {
-		"source":"local",
-		"name":"WESTWIMMERA:VW_WWSC_ASSETS_MOLONEY_ROAD",
-		"title":"Road Details",
-		"visibility":false,
-		"opacity":0.8,
-		"format":"image/png8",
-		"styles":"",
-		"transparent":true,
-		"tiled":false
-	},
-	{
+			"source":"local",
+			"name":"WESTWIMMERA:VW_WWSC_ASSETS_MOLONEY_ROAD",
+			"title":"Road Details",
+			"visibility":false,
+			"opacity":0.8,
+			"format":"image/png8",
+			"styles":"",
+			"transparent":true,
+			"tiled":false
+		},
+		{
             "source": "backend",
             "name": "VICMAP:VW_TRANSFER_STATION",
             "title": "Transfer Stations",
@@ -235,18 +260,18 @@
             "name": "osm",
             "visibility": false,
             "group": "background"
- 	},
- 	{
-		"source":"dse_iws_cascaded",
-		"name" :"WESTWIMMERA:AERIAL_WIMMERA-CMA_2004NOV01_AIR_VIS_60CM_MGA54",
-		"title":"Aerial Photo",
-		"visibility":false,
-		"opacity":1,
-		"group":"background",
-		"selected":false,
-		"format":"image/JPEG",
-		"transparent":true
-       },
+ 		},
+ 		{
+			"source":"dse_iws_cascaded",
+			"name" :"WESTWIMMERA:AERIAL_WIMMERA-CMA_2004NOV01_AIR_VIS_60CM_MGA54",
+			"title":"Aerial Photo",
+			"visibility":false,
+			"opacity":1,
+			"group":"background",
+			"selected":false,
+			"format":"image/JPEG",
+			"transparent":true
+       	},
         {
             "source": "ol",
             "group": "background",

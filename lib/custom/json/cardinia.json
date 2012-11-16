@@ -176,7 +176,7 @@
         {
             "source": "backend",
             "name": "VICMAP:DSE_VMADMIN_WARD_2012",
-            "title": "Wards (2012)",
+            "title": "Wards",
             "visibility": false,
             "opacity": 0.30,
             "format": "image/png8",
@@ -242,7 +242,7 @@
         {
             "source": "backend",
             "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
-            "title": "Property",
+            "title": "Properties",
             "visibility": true,
             "opacity": 0.25,
             "format": "image/GIF",
