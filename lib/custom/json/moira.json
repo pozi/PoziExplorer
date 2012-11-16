@@ -164,17 +164,6 @@
             "styles": "",
             "transparent": true,
             "tiled": false
-        },	
-		{
-            "source": "backend",
-            "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
-            "title": "Properties",
-            "visibility": true,
-            "opacity": 0.25,
-            "format": "image/GIF",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
         },
         {
 			"source":"backend",
@@ -187,6 +176,17 @@
 			"transparent":true,
 			"tiled":false
 		},
+		{
+            "source": "backend",
+            "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
+            "title": "Properties",
+            "visibility": true,
+            "opacity": 0.25,
+            "format": "image/GIF",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
 		{
 			"source":"local",
 			"name":"MOIRA:MSC_ASSETS_ROAD",

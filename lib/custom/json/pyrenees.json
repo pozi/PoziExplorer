@@ -176,17 +176,6 @@
         	"transparent": true,
         	"tiled": false
     	},
-		{
-            "source": "backend",
-            "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
-            "title": "Properties",
-            "visibility": true,
-            "opacity": 0.25,
-            "format": "image/GIF",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
         {
 			"source":"backend",
 			"name":"VICMAP:VMPROP_PARCEL",
@@ -198,6 +187,17 @@
 			"transparent":true,
 			"tiled":false
 		},
+		{
+            "source": "backend",
+            "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
+            "title": "Properties",
+            "visibility": true,
+            "opacity": 0.25,
+            "format": "image/GIF",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
 		{
             "source": "backend",
             "name": "VICMAP:VW_TRANSFER_STATION",
