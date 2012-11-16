@@ -284,6 +284,6 @@
     "bannerRightCornerLine2":"Victoria, Australia",
     "printMapTitle":"Corangamite Shire Council",
     "linkToCouncilWebsite":"http://www.corangamite.vic.gov.au/",
-    "collapseWestPanel":true,
+    "collapseWestPanel":false,
     "openFirstDefaultTab":true
 }
