@@ -90,12 +90,15 @@ var gtProxy,
     gtLocalLayerSourcePrefix;
 var debugMode = (/(localhost|\.dev|\.local)/i).test(window.location.hostname);
 
-if (debugMode) {
+if (debugMode)
+{
     gtProxy = "proxy/?url=";
     gtLoginEndpoint = "http://v3.pozi.com/geoexplorer/login/";
     gtLocalLayerSourcePrefix = "http://v3.pozi.com";
-} else {
-    gtProxy = "/geoserver/rest/proxy/?url=";
+}
+else
+{
+    gtProxy = "/geoexplorer/proxy/?url=";
     gtLoginEndpoint = "/geoexplorer/login";
     gtLocalLayerSourcePrefix = "";
 }
