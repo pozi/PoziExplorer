@@ -51,7 +51,7 @@ gxp.plugins.AddLayers.prototype.initCapGrid = function() {
             colModel: new Ext.grid.ColumnModel([
                 expander,
                 {id: "title", header: this.panelTitleText, dataIndex: "title", sortable: true},
-                {header: "Id", dataIndex: "name", width: 250, sortable: true}
+                {header: "Id", dataIndex: "name", width: 300, sortable: true}
             ]),
             listeners: {
                 rowdblclick: addLayers,

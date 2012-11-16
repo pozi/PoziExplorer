@@ -85,6 +85,21 @@
             "title": "DSE - Adminstrative Boundaries",
             "ptype": "gxp_wmscsource"
         },
+        "backend_cascaded3":{	  	
+            "url": "http://basemap.pozi.com/geoserver/DSE_FEATURES_OF_INTEREST/ows",	  	
+			"title": "DSE - Features Of interest",
+			"ptype": "gxp_wmscsource"  	
+        },
+        "backend_cascaded4":{	  	
+            "url": "http://basemap.pozi.com/geoserver/DSE_PLANNING/ows",	  	
+			"title": "DSE - Planning",
+			"ptype": "gxp_wmscsource"  	
+        },
+        "backend_cascaded5":{	  	
+            "url": "http://basemap.pozi.com/geoserver/DSE_PROPERTY/ows",	  	
+			"title": "DSE - Property",
+			"ptype": "gxp_wmscsource"  	
+        },
         "dse_iws_cascaded": {
             "url": [
                 "http://m1.pozi.com/geoserver/CARDINIA/ows",
