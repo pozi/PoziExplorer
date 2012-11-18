@@ -10,7 +10,7 @@
                 },
                 "default": {
                 	"title": "Overlays",
-                	"collapsed": false
+                	"collapsed": true
                 },
                 "background": {
                     "title": "Base Maps",
