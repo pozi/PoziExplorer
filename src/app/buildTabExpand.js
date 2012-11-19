@@ -295,6 +295,10 @@ buildTabExpand = function(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, JSO
 
                                             // The container depends on the number of records returned
                                             var win;
+                                            
+                                            if(!configArray[i - 1].desc)
+                                            	configArray[i - 1].desc = "";
+                                            	
                                             if (tab_array.length == 1) {
                                                 // Removing the title - it's useless
                                                 // We should be able to remove the header that was created with a non-null title

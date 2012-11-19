@@ -264,10 +264,6 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
 
                                         var icon = configArray[c].icon;
 
-                                        if (!configArray[c].desc) {
-                                            configArray[c].desc = "";
-                                        }
-
                                         if (! (col)) {
                                             col = "#A0A0A0";
                                         }
