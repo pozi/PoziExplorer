@@ -73,7 +73,7 @@
     "sources": {
 	 "local": {
             "url": "/geoserver/STRATHBOGIE/ows",
-            "title": "Towong Shire Council Layers",
+            "title": "Strathbogie Shire Council Layers",
             "ptype": "gxp_wmscsource",
             "tiled": false,
             "restUrl": "/geoserver/rest"
@@ -198,12 +198,12 @@
             "transparent": true,
             "tiled": false
         },
-		{
-            "source": "backend",
-            "name": "VICMAP:VW_TRANSFER_STATION",
-            "title": "Transfer Stations",
+        {
+            "source": "local",
+            "name": "SSC_DEPOT_WASTE",
+            "title": "Waste Depots",
             "visibility": false,
-            "opacity": 0.85,
+            "opacity": 0.8,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
