@@ -81,6 +81,7 @@
  * @require doClearHighlight.js
  * @require buildAccordion.js
  * @require buildTabExpand.js
+ * @require buildNorthPart.js
  * @require onConfigurationLoaded.js
  * @require requestConfig.js
  */
@@ -105,7 +106,7 @@ else
 
 var app;
 var gComboDataArray = [],
-    gfromWFSFlag,
+    gfromWFSFlag = { value: undefined },
     gCombostore,
     gCurrentExpandedTabIdx = [],
     gLoggedRole = { current: "NONE" },
