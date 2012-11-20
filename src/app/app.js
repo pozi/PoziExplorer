@@ -98,7 +98,7 @@ if (debugMode)
 }
 else
 {
-    gtProxy = "/geoexplorer/proxy/?url=";
+    gtProxy = "/geoserver/rest/proxy?url=";
     gtLoginEndpoint = "/geoexplorer/login";
     gtLocalLayerSourcePrefix = "";
 }
