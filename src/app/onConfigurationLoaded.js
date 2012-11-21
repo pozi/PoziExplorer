@@ -6,8 +6,9 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
         var tabExpand;
         var accordion;
         var portalItems;
+        var gLayoutsArr;
 
-        gLayoutsArr = []; // Layout for the extra tabs // GLOBAL
+        gLayoutsArr = []; // Layout for the extra tabs
         gfromWFSFlag.value = "N"; // Flag to track the origin of the store refresh
 
         // Pushing the WFS layer in the layer store TODO: don't modify config like this, have a different layers store
