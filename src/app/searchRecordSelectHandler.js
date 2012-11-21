@@ -2,7 +2,7 @@
 // - a record is selected in the search drop down list
 // - a property number is passed in the URL and has returned a valid property record
 
-searchRecordSelectHandler = function(combo, record, app, JSONconf, northPart, eastPanel) {
+searchRecordSelectHandler = function(combo, record, app, JSONconf, northPart, eastPanel, gfromWFSFlag, gtyp, glab) {
     // Zooming to the relevant area (covering the selected record)
     var bd = new OpenLayers.Bounds(record.data.xmini, record.data.ymini, record.data.xmaxi, record.data.ymaxi).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
     var z = app.mapPanel.map.getZoomForExtent(bd);
@@ -51,6 +51,9 @@ searchRecordSelectHandler = function(combo, record, app, JSONconf, northPart, ea
     }
     eastPanel.expand();
 
-    return { gfromWFSFlagValue: "Y", gtyp: record.data.ld, glab: record.data.label };
+    gfromWFSFlag.value = "Y";
+    gtyp.value = record.data.ld;
+    glab.value = record.data.label;
+
 };
 
