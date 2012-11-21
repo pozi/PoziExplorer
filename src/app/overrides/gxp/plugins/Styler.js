@@ -26,7 +26,12 @@ gxp.plugins.Styler.prototype.checkIfStyleable = function(layerRec, describeRec) 
 		if (restUrl) {
 			url = restUrl + "/styles";
 		} else {
-			url = source.url.split("?").shift().replace(/\/(wms|ows)\/?$/, "/rest/styles");
+			var first_url = source.url;
+			if (typeof first_url == "object")
+			{
+				first_url = source.url[0];
+			}
+			url = first_url.split("?").shift().replace(/\/(wms|ows)\/?$/, "/rest/styles");
 		}
 		if (this.sameOriginStyling) {
 			// this could be made more robust
