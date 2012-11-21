@@ -84,6 +84,7 @@
  * @require buildTabExpand.js
  * @require buildNorthPart.js
  * @require buildEastPanel.js
+ * @require buildPortalItems.js
  * @require onConfigurationLoaded.js
  * @require requestConfig.js
  */
@@ -112,6 +113,8 @@ var gComboDataArray = [],
     gCombostore,
     gCurrentExpandedTabIdx = [],
     gLoggedRole = { current: "NONE" },
+    gtyp = { value: undefined },
+    glab = { value: undefined },
     eastPanel,
     westPanel,
     northPart,
