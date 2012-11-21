@@ -89,6 +89,7 @@
  * @require buildApp.js
  * @require buildFeaturesAddedHandler.js
  * @require addOpacitySlider.js
+ * @require initAuthorization.js
  * @require onConfigurationLoaded.js
  * @require requestConfig.js
  */
