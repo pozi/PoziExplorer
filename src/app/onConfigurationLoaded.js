@@ -41,51 +41,8 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
 
             app.getSelectionLayer().events.on({ featuresadded: buildFeaturesAddedHandler(gfromWFSFlag, gComboDataArray, glab, gtyp, gCombostore) });
 
-            // If we have found a property to zoom to, well, zoom to and highlight it
-            if (propertyDataInit) {
-                var r = []; // should probably be {}
-                r["data"] = propertyDataInit;
-                searchRecordSelectHandler(null, r, app, JSONconf, northPart, eastPanel, gfromWFSFlag, gtyp, glab);
-            }
-
-            // Selecting the layer that the opacity slider will select
-
-            if (app.getLayerForOpacitySlider()) {
-                // Adding a label
-                app.getToolbar().items.add(new Ext.form.Label({
-                    text: "Aerial Photo",
-                    style: 'font: normal 13px verdana'
-                }));
-
-                // Adding a bit of space
-                app.getToolbar().items.add(new Ext.Toolbar.Spacer({
-                    width: 8
-                }));
-
-                // Adding the eye-con
-                app.getToolbar().items.add(new Ext.Component({
-                    html: '<img src="theme/app/img/panel/eye-con.png"/>'
-                }));
-
-                // Adding a bit of space
-                app.getToolbar().items.add(new Ext.Toolbar.Spacer({
-                    width: 8
-                }));
-
-                // Adding an opacity slider to the toolbar
-                var os = new GeoExt.LayerOpacitySlider({
-                    layer: app.getLayerForOpacitySlider(),
-                    aggressive: true,
-                    width: 100,
-                    changeVisibility: true
-                });
-                app.getToolbar().items.add(os);
-
-                // Rendering the toolbar
-                app.getToolbar().doLayout();
-            }
-
-
+            searchRecordSelectHandler(null, { data: propertyDataInit }, app, JSONconf, northPart, eastPanel, gfromWFSFlag, gtyp, glab);
+            addOpacitySlider(app);
 
             // Tree toolbar to add the login button to
             var westpaneltoolbar = Ext.getCmp('tree').getTopToolbar();
@@ -97,37 +54,36 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
 
 
             app.authorizedRoles = [];
-            if (app.authorizedRoles) {
-                // If there is a cookie, the user is authorized
+
+            // If there is a cookie, the user is authorized
+            var user = app.getCookieValue(app.cookieParamName);
+            if (user !== null) {
+                app.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
+                gCurrentLoggedRole.value = app.authorizedRoles[0];
+            }
+
+            // unauthorized, show login button
+            if (app.authorizedRoles.length === 0) {
+                app.showLogin();
+            } else {
                 var user = app.getCookieValue(app.cookieParamName);
-                if (user !== null) {
-                    app.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
+                if (user === null) {
+                    user = "unknown";
+                }
+                // Only showing the username without its workspace
+                var typedUsername = user;
+                if (user.split(".")[1]) {
+                    typedUsername = user.split(".")[1];
+                }
+                app.showLogout(typedUsername);
+                // Showing the layer tree because we're logged in
+                westPanel.expand();
+
+                if (app.authorizedRoles[0]) {
                     gCurrentLoggedRole.value = app.authorizedRoles[0];
                 }
+            }
 
-                // unauthorized, show login button
-                if (app.authorizedRoles.length === 0) {
-                    app.showLogin();
-                } else {
-                    var user = app.getCookieValue(app.cookieParamName);
-                    if (user === null) {
-                        user = "unknown";
-                    }
-                    // Only showing the username without its workspace
-                    var typedUsername = user;
-                    if (user.split(".")[1]) {
-                        typedUsername = user.split(".")[1];
-                    }
-                    app.showLogout(typedUsername);
-                    // Showing the layer tree because we're logged in
-                    westPanel.expand();
-
-                    if (app.authorizedRoles[0]) {
-                        gCurrentLoggedRole.value = app.authorizedRoles[0];
-                    }
-
-                }
-            };
 
             // Loading the tabs on initial page load
             loadTabConfig(JSONconf, gCurrentLoggedRole, gLayoutsArr, addDefaultTabs, accordion);

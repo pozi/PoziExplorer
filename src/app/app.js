@@ -88,6 +88,7 @@
  * @require loadTabConfig.js
  * @require buildApp.js
  * @require buildFeaturesAddedHandler.js
+ * @require addOpacitySlider.js
  * @require onConfigurationLoaded.js
  * @require requestConfig.js
  */
