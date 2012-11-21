@@ -1,6 +1,6 @@
 buildWestPanel = function(JSONconf) {
 
-    return {
+    return Ext.create({
         xtype: "panel",
         id: "westpanel",
         border: false,
@@ -27,7 +27,7 @@ buildWestPanel = function(JSONconf) {
             border: false,
             id: 'tree'
         }]
-    };
+    });
 
 };
 
