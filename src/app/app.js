@@ -107,10 +107,6 @@ var gComboDataArray = { value: [] },
     westPanel,
     northPart,
     gLayoutsArr;
-var vector_layer = new OpenLayers.Layer.Vector("WKT", {
-        displayInLayerSwitcher: false
-    });
-var wkt_format = new OpenLayers.Format.WKT();
 var gtLayerLabel = { value: undefined };
 
 Ext.onReady(function() {
