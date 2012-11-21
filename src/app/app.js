@@ -86,6 +86,7 @@
  * @require buildEastPanel.js
  * @require buildPortalItems.js
  * @require loadTabConfig.js
+ * @require buildApp.js
  * @require onConfigurationLoaded.js
  * @require requestConfig.js
  */
