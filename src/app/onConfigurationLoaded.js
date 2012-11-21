@@ -24,7 +24,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
         // Panels and portals
         westPanel = buildWestPanel(JSONconf);
 
-        var tabExpand = buildTabExpand(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, JSONconf, gLoggedRole, helpers);
+        var tabExpand = buildTabExpand(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, JSONconf, gCurrentLoggedRole, helpers);
 
         northPart = buildNorthPart(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpand, gLayoutsArr, gCurrentExpandedTabIdx);
 
@@ -290,8 +290,8 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                             ////Ext.getCmp('tree').body=null;
                             ////app.addLayers();
                             // Reloading the tabs
-                            gLoggedRole['current'] = app.authorizedRoles[0];
-                            loadTabConfig(JSONconf, gLoggedRole, gLayoutsArr, addDefaultTabs, accordion);
+                            gCurrentLoggedRole.value = app.authorizedRoles[0];
+                            loadTabConfig(JSONconf, gCurrentLoggedRole, gLayoutsArr, addDefaultTabs, accordion);
                             app.clearHighlight();
                             // Keeping username and password in variables for injection in WMS queries of local source
                             gLoggedUsername = form.findField('username').getValue();
@@ -433,7 +433,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                 var user = app.getCookieValue(app.cookieParamName);
                 if (user !== null) {
                     app.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
-                    gLoggedRole['current'] = app.authorizedRoles[0];
+                    gCurrentLoggedRole.value = app.authorizedRoles[0];
                 }
 
                 // unauthorized, show login button
@@ -454,14 +454,14 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                     westPanel.expand();
 
                     if (app.authorizedRoles[0]) {
-                        gLoggedRole['current'] = app.authorizedRoles[0];
+                        gCurrentLoggedRole.value = app.authorizedRoles[0];
                     }
 
                 }
             };
 
             // Loading the tabs on initial page load
-            loadTabConfig(JSONconf, gLoggedRole, gLayoutsArr, addDefaultTabs, accordion);
+            loadTabConfig(JSONconf, gCurrentLoggedRole, gLayoutsArr, addDefaultTabs, accordion);
 
         });
 

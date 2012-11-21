@@ -1,4 +1,4 @@
-buildTabExpand = function(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, JSONconf, gLoggedRole, helpers) {
+buildTabExpand = function(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, JSONconf, gCurrentLoggedRole, helpers) {
 
     return function(p) {
         // Current layer (cl) as per content of the current type (ct) and current drop down (cb)
@@ -127,7 +127,7 @@ buildTabExpand = function(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, JSO
                             ]),
                             baseParams: {
                                 // Logged in role
-                                role: gLoggedRole['current'],
+                                role: gCurrentLoggedRole.value,
                                 // Passing the value of the property defined as containing the common ID
                                 id: idFeature,
                                 // Passing the tab name

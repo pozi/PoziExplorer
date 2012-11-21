@@ -1,4 +1,4 @@
-var loadTabConfig = function(JSONconf, gLoggedRole, gLayoutsArr, addDefaultTabs, accordion) {
+var loadTabConfig = function(JSONconf, gCurrentLoggedRole, gLayoutsArr, addDefaultTabs, accordion) {
 
     // Information panel layouts for the current authorized role - we should degrade nicely if the service is not found
     _(JSONconf.liveDataEndPoints).each(function(endPoint) {
@@ -16,7 +16,7 @@ var loadTabConfig = function(JSONconf, gLoggedRole, gLayoutsArr, addDefaultTabs,
                 [ { name: 'key_arr', mapping: 'row.key_arr' } ]
             ),
             baseParams: {
-                role: gLoggedRole['current'],
+                role: gCurrentLoggedRole.value,
                 mode: endPoint.storeMode,
                 config: endPoint.storeName
             },
