@@ -82,6 +82,7 @@
  * @require buildAccordion.js
  * @require buildTabExpand.js
  * @require buildNorthPart.js
+ * @require buildEastPanel.js
  * @require onConfigurationLoaded.js
  * @require requestConfig.js
  */

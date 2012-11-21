@@ -9,7 +9,6 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
             JSONconf.sources.local.url = gtLocalLayerSourcePrefix + JSONconf.sources.local.url;
         }
 
-
         // Layout for the extra tabs
         gLayoutsArr = [];
 
@@ -22,7 +21,6 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
         // Store behind the info drop-down list
         gCombostore = buildComboStore();
 
-
         // Panels and portals
         westPanel = buildWestPanel(JSONconf);
 
@@ -32,59 +30,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
 
         var accordion = buildAccordion(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, tabExpand);
 
-        var bottomEastItem = {
-            border: false
-        };
-        if (JSONconf.bottomEastItem) {
-            bottomEastItem = {
-                id: 'bottomEastItem',
-                title: JSONconf.bottomEastItem.title,
-                html: "<iframe src='" + JSONconf.bottomEastItem.URL + "' height='" + JSONconf.bottomEastItem.height + "' frameborder='0' />",
-                collapsible: true,
-                animCollapse: false,
-                border: false,
-                height: JSONconf.bottomEastItem.height,
-                listeners: {
-                    scope: this,
-                    expand: function(p) {
-                        eastPanel.doLayout();
-                    },
-                    collapse: function(p) {
-                        eastPanel.doLayout();
-                    }
-                }
-            };
-        }
-
-        eastPanel = new Ext.Panel({
-            border: false,
-            layout: "ux.row",
-            region: "east",
-            // Padding only on the left, as all over basis are covered by the parent container
-            style: "padding: 0px 0px 0px 10px; background-color:white;",
-            collapseMode: "mini",
-            collapsed: JSONconf.eastPanelCollapsed,
-            width: 350,
-            listeners: {
-                scope: this,
-                resize: function(p) {
-                    // This is required to get the content of the accordion tabs to resize
-                    for (i in p.items.items) {
-                        // hasOwnProperty appropriate way to deal with direct property of this object, not inherited ones
-                        // In the case on an array, direct members are indexes
-                        if (p.items.items.hasOwnProperty(i)) {
-                            p.items.items[i].doLayout();
-                        }
-                    }
-                }
-            },
-            split: true,
-            items: [
-                northPart,
-                accordion,
-                bottomEastItem
-            ]
-        });
+        var eastPanel = buildEastPanel(JSONconf, northPart, accordion);
 
         var portalItems = [
             {
