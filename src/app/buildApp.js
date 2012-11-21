@@ -36,6 +36,9 @@ buildApp = function(gtProxy, portalItems, JSONconf, doClearHighlight, gCombostor
         }
     });
 
+    // Setting the title of the map to print
+    app.about = { title: JSONconf.printMapTitle };
+
     app.getLayerByName = function(name) {
         return _(app.mapPanel.map.layers).find(function(layer) {
             return layer.name === name;

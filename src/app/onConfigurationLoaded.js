@@ -38,12 +38,10 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                        gCurrentLoggedRole, loadTabConfig, gtLoginEndpoint);
 
         app.on("ready", function() {
-            // Setting the title of the map to print
-            app.about = {};
-            app.about["title"] = JSONconf.printMapTitle;
 
             app.getSelectionLayer().events.on({
                 featuresadded: function(event) {
+
 
                     if (gfromWFSFlag.value == "Y") {
                         var row_array = [];
@@ -84,6 +82,8 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                             gComboDataArray = [];
                         }
                     }
+
+
                 }
             });
 
