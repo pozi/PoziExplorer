@@ -94,7 +94,6 @@
  * @require requestConfig.js
  */
 
-
 var app;
 var gCombostore;
 var eastPanel;

@@ -1,5 +1,5 @@
 // Function to execute on successful return of the JSON configuration file loading
-var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
+var onConfigurationLoaded = function(JSONconf, propertyDataInit) { // AND GLOBALS INCLUDING: gCombostore, westPanel, northPart, eastPanel, app
 
     // Encapsulating the loading of the main app in a callback
     var extraJSScriptLoaded = function() {
@@ -11,14 +11,14 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
         gLayoutsArr = []; // Layout for the extra tabs
         gfromWFSFlag.value = "N"; // Flag to track the origin of the store refresh
 
-        gCombostore = buildComboStore(); // Store behind the info drop-down list // GLOBAL
-        westPanel = buildWestPanel(JSONconf); // GLOBAL
+        gCombostore = buildComboStore(); // Store behind the info drop-down list
+        westPanel = buildWestPanel(JSONconf);
         tabExpand = buildTabExpand(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, JSONconf, gCurrentLoggedRole, helpers);
-        northPart = buildNorthPart(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpand, gLayoutsArr, gCurrentExpandedTabIdx); // GLOBAL
+        northPart = buildNorthPart(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpand, gLayoutsArr, gCurrentExpandedTabIdx);
         accordion = buildAccordion(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, tabExpand);
-        eastPanel = buildEastPanel(JSONconf, northPart, accordion); // GLOBAL
+        eastPanel = buildEastPanel(JSONconf, northPart, accordion);
         portalItems = buildPortalItems(JSONconf, buildAllFeaturesDataStore, searchRecordSelectHandler, gfromWFSFlag, gtyp, glab, westPanel, eastPanel);
-        app = buildApp(portalItems, JSONconf, doClearHighlight, gCombostore, addDefaultTabs, accordion, gLayoutsArr, northPart, gCurrentLoggedRole, loadTabConfig, buildWFSLayer); // GLOBAL
+        app = buildApp(portalItems, JSONconf, doClearHighlight, gCombostore, addDefaultTabs, accordion, gLayoutsArr, northPart, gCurrentLoggedRole, loadTabConfig, buildWFSLayer);
 
         app.on("ready", function() {
             app.getSelectionLayer().events.on({ featuresadded: buildFeaturesAddedHandler(gfromWFSFlag, gComboDataArray, glab, gtyp, gCombostore) });

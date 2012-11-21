@@ -1,4 +1,4 @@
-buildNorthPart = function(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpand, gLayoutsArr, gCurrentExpandedTabIdx) { // Also uses app!
+buildNorthPart = function(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpand, gLayoutsArr, gCurrentExpandedTabIdx) { // AND GLOBAL: app
 
     // Defines the north part of the east panel
     return new Ext.Panel({
