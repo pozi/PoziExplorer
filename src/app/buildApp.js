@@ -163,9 +163,6 @@ buildApp = function(gtProxy, portalItems, JSONconf, doClearHighlight, gCombostor
                     gCurrentLoggedRole.value = app.authorizedRoles[0];
                     loadTabConfig(JSONconf, gCurrentLoggedRole, gLayoutsArr, addDefaultTabs, accordion);
                     app.clearHighlight();
-                    // Keeping username and password in variables for injection in WMS queries of local source
-                    gLoggedUsername = form.findField('username').getValue();
-                    gLoggedPassword = form.findField('password').getValue();
                     // Only showing the username without its workspace
                     var typedUsername = user;
                     if (user.split(".")[1]) {

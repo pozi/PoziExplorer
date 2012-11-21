@@ -122,9 +122,7 @@ var gComboDataArray = { value: [] },
     eastPanel,
     westPanel,
     northPart,
-    gLayoutsArr,
-    gLoggedUsername,
-    gLoggedPassword;
+    gLayoutsArr;
 var vector_layer = new OpenLayers.Layer.Vector("WKT", {
         displayInLayerSwitcher: false
     });
