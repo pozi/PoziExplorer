@@ -1,4 +1,4 @@
-buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDefaultTabs, accordion, gLayoutsArr, northPart, gCurrentLoggedRole, loadTabConfig) {
+buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDefaultTabs, accordion, gLayoutsArr, northPart, gCurrentLoggedRole, loadTabConfig, buildWFSLayer) {
 
     var app = new gxp.Viewer({
         authorizedRoles: ['ROLE_ADMINISTRATOR'],
@@ -21,7 +21,7 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
             projection: "EPSG:900913",
             center: JSONconf.center,
             zoom: JSONconf.zoom,
-            layers: JSONconf.layers,
+            layers: _.union(JSONconf.layers, [buildWFSLayer(JSONconf)]),
             // Setting controls manually to have the simple OpenLayers zoom control
             controls: [
                 new OpenLayers.Control.Navigation(),
