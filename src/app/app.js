@@ -87,6 +87,7 @@
  * @require buildPortalItems.js
  * @require loadTabConfig.js
  * @require buildApp.js
+ * @require buildFeaturesAddedHandler.js
  * @require onConfigurationLoaded.js
  * @require requestConfig.js
  */
@@ -110,7 +111,7 @@ else
 }
 
 var app;
-var gComboDataArray = [],
+var gComboDataArray = { value: [] },
     gfromWFSFlag = { value: undefined },
     gCombostore,
     gCurrentExpandedTabIdx = [],

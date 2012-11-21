@@ -157,7 +157,7 @@
           // Building a row and pushing it to an array																		
           row_array = new Array(id_ct,typ,cont,idx,lab,lay); 
 
-          gComboDataArray.push(row_array);
+          gComboDataArray.value.push(row_array);
         }
       }
 
@@ -167,13 +167,13 @@
         // Remove any previous results						
         app.clearHighlight();
 
-        if (gComboDataArray.length)
+        if (gComboDataArray.value.length)
         {
           var cb = Ext.getCmp('gtInfoCombobox');
           if (cb.disabled) {cb.enable();}
-          gComboDataArray.sort(function(a,b){return b[3]-a[3]});
+          gComboDataArray.value.sort(function(a,b){return b[3]-a[3]});
           gfromWFSFlag.value = "N";
-          gCombostore.loadData(gComboDataArray);
+          gCombostore.loadData(gComboDataArray.value);
           
           // Features found during the getFeatureInfo: showing the tab
           if (!(JSONconf.hideSelectedFeaturePanel))
@@ -186,7 +186,7 @@
           eastPanel.expand();
         }
 
-        gComboDataArray=[];
+        gComboDataArray.value=[];
         layerCounter=0;
       }
     },
