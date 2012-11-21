@@ -527,7 +527,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
                     //
                     panel.getForm().submit({
                         success: function(form, action) {
-                            toolbar.items.each(function(tool) {
+                            app.getToolbar().items.each(function(tool) {
                                 if (tool.needsAuthorization === true) {
                                     tool.enable();
                                 }
