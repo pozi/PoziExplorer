@@ -94,6 +94,23 @@ requestConfig = function(options) {
             };
             JSONconf.layerPresentation = Ext.apply({}, JSONconf.layerPresentation, layerPresentationDefaults);
 
+            // This is environment config - dev vs prod
+            var debugMode = (/(localhost|\.dev|\.local)/i).test(window.location.hostname);
+            var localLayerSourcePrefix;
+            if (debugMode) {
+                JSONconf.proxy = "proxy/?url=";
+                JSONconf.loginEndpoint = "http://v3.pozi.com/geoexplorer/login/";
+                localLayerSourcePrefix = "http://v3.pozi.com";
+            } else {
+                JSONconf.proxy = "/geoexplorer/proxy/?url=";
+                JSONconf.loginEndpoint = "/geoexplorer/login";
+                localLayerSourcePrefix = "";
+            }
+            // Fixing local URL source for debug mode
+            if (JSONconf.sources.local) {
+                JSONconf.sources.local.url = localLayerSourcePrefix + JSONconf.sources.local.url;
+            }
+
             if (propNum) {
                 var ds = new Ext.data.JsonStore({
                     autoLoad: true,

@@ -3,42 +3,26 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
 
     // Encapsulating the loading of the main app in a callback
     var extraJSScriptLoaded = function() {
+        var tabExpand;
+        var accordion;
+        var portalItems;
 
-        // Fixing local URL source for debug mode
-        if (JSONconf.sources.local) {
-            JSONconf.sources.local.url = gtLocalLayerSourcePrefix + JSONconf.sources.local.url;
-        }
+        gLayoutsArr = []; // Layout for the extra tabs
+        gfromWFSFlag.value = "N"; // Flag to track the origin of the store refresh
 
-        // Layout for the extra tabs
-        gLayoutsArr = [];
-
-        // Flag to track the origin of the store refresh
-        gfromWFSFlag.value = "N";
-
-        // Pushing the WFS layer in the layer store
+        // Pushing the WFS layer in the layer store TODO: don't modify config like this, have a different layers store
         JSONconf.layers.push(buildWFSLayer(JSONconf));
 
-        // Store behind the info drop-down list
-        gCombostore = buildComboStore();
-
-        // Panels and portals
+        gCombostore = buildComboStore(); // Store behind the info drop-down list
         westPanel = buildWestPanel(JSONconf);
-
-        var tabExpand = buildTabExpand(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, JSONconf, gCurrentLoggedRole, helpers);
-
+        tabExpand = buildTabExpand(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, JSONconf, gCurrentLoggedRole, helpers);
         northPart = buildNorthPart(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpand, gLayoutsArr, gCurrentExpandedTabIdx);
-
-        var accordion = buildAccordion(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, tabExpand);
-
+        accordion = buildAccordion(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, tabExpand);
         eastPanel = buildEastPanel(JSONconf, northPart, accordion);
-
-        var portalItems = buildPortalItems(JSONconf, buildAllFeaturesDataStore, searchRecordSelectHandler, gfromWFSFlag, gtyp, glab, westPanel, eastPanel);
-
-        app = buildApp(gtProxy, portalItems, JSONconf, doClearHighlight, gCombostore, addDefaultTabs, accordion, gLayoutsArr, northPart,
-                       gCurrentLoggedRole, loadTabConfig, gtLoginEndpoint);
+        portalItems = buildPortalItems(JSONconf, buildAllFeaturesDataStore, searchRecordSelectHandler, gfromWFSFlag, gtyp, glab, westPanel, eastPanel);
+        app = buildApp(portalItems, JSONconf, doClearHighlight, gCombostore, addDefaultTabs, accordion, gLayoutsArr, northPart, gCurrentLoggedRole, loadTabConfig);
 
         app.on("ready", function() {
-
             app.getSelectionLayer().events.on({ featuresadded: buildFeaturesAddedHandler(gfromWFSFlag, gComboDataArray, glab, gtyp, gCombostore) });
 
             searchRecordSelectHandler(null, { data: propertyDataInit }, app, JSONconf, northPart, eastPanel, gfromWFSFlag, gtyp, glab);
@@ -54,7 +38,6 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
 
             // Loading the tabs on initial page load
             loadTabConfig(JSONconf, gCurrentLoggedRole, gLayoutsArr, addDefaultTabs, accordion);
-
         });
 
     };

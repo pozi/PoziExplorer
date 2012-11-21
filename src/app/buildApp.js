@@ -1,9 +1,8 @@
-buildApp = function(gtProxy, portalItems, JSONconf, doClearHighlight, gCombostore, addDefaultTabs, accordion, gLayoutsArr, northPart,
-                    gCurrentLoggedRole, loadTabConfig, gtLoginEndpoint) {
+buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDefaultTabs, accordion, gLayoutsArr, northPart, gCurrentLoggedRole, loadTabConfig) {
 
     var app = new gxp.Viewer({
         authorizedRoles: ['ROLE_ADMINISTRATOR'],
-        proxy: gtProxy,
+        proxy: JSONconf.proxy,
         //defaultSourceType: "gxp_wmscsource",
         portalConfig: {
             layout: "border",
@@ -195,7 +194,7 @@ buildApp = function(gtProxy, portalItems, JSONconf, doClearHighlight, gCombostor
         };
 
         panel = new Ext.FormPanel({
-            url: gtLoginEndpoint,
+            url: JSONconf.loginEndpoint,
             frame: true,
             labelWidth: 60,
             defaultType: "textfield",
