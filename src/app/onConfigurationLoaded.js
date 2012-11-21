@@ -7,20 +7,20 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
         var accordion;
         var portalItems;
 
-        gLayoutsArr = []; // Layout for the extra tabs
+        gLayoutsArr = []; // Layout for the extra tabs // GLOBAL
         gfromWFSFlag.value = "N"; // Flag to track the origin of the store refresh
 
         // Pushing the WFS layer in the layer store TODO: don't modify config like this, have a different layers store
         JSONconf.layers.push(buildWFSLayer(JSONconf));
 
-        gCombostore = buildComboStore(); // Store behind the info drop-down list
-        westPanel = buildWestPanel(JSONconf);
+        gCombostore = buildComboStore(); // Store behind the info drop-down list // GLOBAL
+        westPanel = buildWestPanel(JSONconf); // GLOBAL
         tabExpand = buildTabExpand(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, JSONconf, gCurrentLoggedRole, helpers);
-        northPart = buildNorthPart(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpand, gLayoutsArr, gCurrentExpandedTabIdx);
+        northPart = buildNorthPart(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpand, gLayoutsArr, gCurrentExpandedTabIdx); // GLOBAL
         accordion = buildAccordion(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, tabExpand);
-        eastPanel = buildEastPanel(JSONconf, northPart, accordion);
+        eastPanel = buildEastPanel(JSONconf, northPart, accordion); // GLOBAL
         portalItems = buildPortalItems(JSONconf, buildAllFeaturesDataStore, searchRecordSelectHandler, gfromWFSFlag, gtyp, glab, westPanel, eastPanel);
-        app = buildApp(portalItems, JSONconf, doClearHighlight, gCombostore, addDefaultTabs, accordion, gLayoutsArr, northPart, gCurrentLoggedRole, loadTabConfig);
+        app = buildApp(portalItems, JSONconf, doClearHighlight, gCombostore, addDefaultTabs, accordion, gLayoutsArr, northPart, gCurrentLoggedRole, loadTabConfig); // GLOBAL
 
         app.on("ready", function() {
             app.getSelectionLayer().events.on({ featuresadded: buildFeaturesAddedHandler(gfromWFSFlag, gComboDataArray, glab, gtyp, gCombostore) });
