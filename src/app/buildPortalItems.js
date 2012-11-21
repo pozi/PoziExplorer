@@ -44,10 +44,7 @@ buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSel
                         itemSelector: 'div.search-item',
                         listeners: {
                             'select': function(combo, record) {
-                                var result = searchRecordSelectHandler(combo, record, app, JSONconf, northPart, eastPanel);
-                                gfromWFSFlag.value = result.gfromWFSFlagValue;
-                                gtyp.value = result.gtyp;
-                                glab.value = result.glab;
+                                searchRecordSelectHandler(combo, record, app, JSONconf, northPart, eastPanel, gfromWFSFlag, gtyp, glab);
                             },
                             scope: this
                         }

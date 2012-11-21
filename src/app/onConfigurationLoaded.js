@@ -152,10 +152,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) {
             if (propertyDataInit) {
                 var r = []; // should probably be {}
                 r["data"] = propertyDataInit;
-                var result = searchRecordSelectHandler(null, r, app, JSONconf, northPart, eastPanel);
-                gfromWFSFlag.value = result.gfromWFSFlagValue;
-                gtyp.value = result.gtyp;
-                glab.value = result.glab;
+                searchRecordSelectHandler(null, r, app, JSONconf, northPart, eastPanel, gfromWFSFlag, gtyp, glab);
             }
 
             // Selecting the layer that the opacity slider will select
