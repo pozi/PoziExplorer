@@ -96,17 +96,17 @@
 
 
 var app;
-var gComboDataArray = { value: [] },
-    gfromWFSFlag = { value: undefined },
-    gCombostore,
-    gCurrentExpandedTabIdx = [],
-    gCurrentLoggedRole = { value: "NONE" },
-    gtyp = { value: undefined },
-    glab = { value: undefined },
-    eastPanel,
-    westPanel,
-    northPart,
-    gLayoutsArr;
+var gCombostore;
+var eastPanel;
+var westPanel;
+var northPart;
+var gLayoutsArr;
+var gCurrentExpandedTabIdx = [];
+var gComboDataArray = { value: [] };
+var gfromWFSFlag = { value: undefined };
+var gCurrentLoggedRole = { value: "NONE" };
+var gtyp = { value: undefined };
+var glab = { value: undefined };
 var gtLayerLabel = { value: undefined };
 
 Ext.onReady(function() {
