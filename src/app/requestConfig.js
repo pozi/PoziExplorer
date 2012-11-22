@@ -102,7 +102,7 @@ requestConfig = function(options) {
                 JSONconf.loginEndpoint = "http://v3.pozi.com/geoexplorer/login/";
                 localLayerSourcePrefix = "http://v3.pozi.com";
             } else {
-                JSONconf.proxy = "/geoexplorer/proxy/?url=";
+                JSONconf.proxy = "/geoserver/rest/proxy?url=";
                 JSONconf.loginEndpoint = "/geoexplorer/login";
                 localLayerSourcePrefix = "";
             }
