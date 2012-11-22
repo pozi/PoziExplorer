@@ -86,6 +86,7 @@ buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSel
             layout: "border",
             style: " background-color:white;padding:0px 10px 10px;",
             items: [
+                westPanel,
                 {
                     id: "centerpanel",
                     xtype: "panel",
@@ -180,7 +181,6 @@ buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSel
                         }
                     ]
                 },
-                westPanel,
                 eastPanel
             ]
         }
