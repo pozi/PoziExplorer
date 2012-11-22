@@ -12,6 +12,10 @@
                 	"title": "Overlays",
                 	"collapsed": true
                 },
+                "editing": {
+                	"title": "Editing",
+                	"collapsed": false
+                },
                 "background": {
                     "title": "Base Maps",
                     "exclusive": true,
@@ -105,7 +109,8 @@
 		"styles":"",
 		"transparent":true,
 		"tiled":false,
-		"transition":""
+		"transition":"",
+		"group":"editing"
 	},
 	{
 		"source":"local",
@@ -118,6 +123,19 @@
 		"transparent":true,
 		"tiled":false,
 		"transition":""
+	},
+	{
+		"source":"local",
+		"name":"CREEK_SEGMENT_FINAL_EDIT",
+		"title":"Creek Segments (for edit)",
+		"visibility":false,
+		"opacity":0.85,
+		"format":"image/png8",
+		"styles":"",
+		"transparent":true,
+		"tiled":false,
+		"transition":"",
+		"group":"editing"
 	},
 	{
 		"source":"local",
