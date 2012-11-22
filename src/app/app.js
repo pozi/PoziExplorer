@@ -106,6 +106,10 @@ var gfromWFSFlag = { value: undefined };
 var gCurrentLoggedRole = { value: "NONE" };
 var gtyp = { value: undefined };
 var glab = { value: undefined };
+var vector_layer = new OpenLayers.Layer.Vector("WKT", {
+        displayInLayerSwitcher: false
+    });
+var wkt_format = new OpenLayers.Format.WKT();
 var gtLayerLabel = { value: undefined };
 
 Ext.onReady(function() {
