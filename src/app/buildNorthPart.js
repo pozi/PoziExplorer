@@ -210,6 +210,11 @@ buildNorthPart = function(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpan
                                 ]
                             },
                             layout: 'fit',
+                            bbar: true,
+                            bbarCfg: {
+                                tag: 'left',
+                                html: '<p style="background-color: #ecedef; padding: 4px; padding-left: 8px; font-size: 12px;font-family: tahoma,arial,verdana,sans-serif; font-style:italic;">' + '</p>'
+                            },
                             // style: couldn't find a way to override the style inherited from the parent (gtAccordion)
                             items: [p],
                             listeners: {
