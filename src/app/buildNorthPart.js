@@ -213,7 +213,18 @@ buildNorthPart = function(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpan
                             bbar: true,
                             bbarCfg: {
                                 tag: 'left',
-                                html: '<p style="background-color: #ecedef; padding: 4px; padding-left: 8px; font-size: 12px;font-family: tahoma,arial,verdana,sans-serif; font-style:italic;">' + '</p>'
+                                html: function() {
+                                    var styles = [
+                                        'background-color: #ecedef;',
+                                        'padding: 4px;',
+                                        'padding-left: 8px;',
+                                        'font-size: 12px;',
+                                        'font-family: tahoma,arial,verdana,sans-serif;',
+                                        'font-style:italic;'
+                                    ]
+                                    var content = app.getWMSLayerByName(record.get('layer')).get('abstract');
+                                    return '<p style="' + styles.join('') + '">' + content + '</p>';
+                                }(),
                             },
                             // style: couldn't find a way to override the style inherited from the parent (gtAccordion)
                             items: [p],

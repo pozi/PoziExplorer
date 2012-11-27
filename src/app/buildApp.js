@@ -51,7 +51,11 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
     app.getWMSLayerByName = function(name) { // Gets the layer as an OpenLayers.Layer.WMS object
         return _(app.mapPanel.layers.data.map).chain()
             .values()
-            .find(function(layer) { return layer.get('name') === name; })
+            .find(function(layer) { 
+                var nameWithWorkspace = layer.get('name');
+                var nameWithoutWorkspace = _(String(nameWithWorkspace).split(':')).last();
+                return nameWithoutWorkspace === name;
+            })
             .value();
     };
 
