@@ -48,6 +48,13 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
         return app.getLayerByName("Selection");
     };
 
+    app.getWMSLayerByName = function(name) { // Gets the layer as an OpenLayers.Layer.WMS object
+        return _(app.mapPanel.layers.data.map).chain()
+            .values()
+            .find(function(layer) { return layer.get('name') === name; })
+            .value();
+    };
+
     app.getLayerForOpacitySlider = function() {
         var layerConfForOpacitySlider = _(JSONconf.layers).find(function(layerConf) { 
             return layerConf.displayInOpacitySlider; 
