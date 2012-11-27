@@ -10,12 +10,9 @@ searchRecordSelectHandler = function(combo, record, app, JSONconf, northPart, ea
     var z = app.mapPanel.map.getZoomForExtent(bd);
     var fullWFSEndPoint = JSONconf.servicesHost + JSONconf.WFSEndPoint;
 
-    if (z < JSONconf.zoomMax)
-    {
+    if (z < JSONconf.zoomMax) {
         app.mapPanel.map.zoomToExtent(bd);
-    }
-    else
-    {
+    } else {
         // If zooming too close, taking step back to level JSONconf.zoomMax , centered on the center of the bounding box for this record
         app.mapPanel.map.moveTo(new OpenLayers.LonLat((bd.left + bd.right) / 2, (bd.top + bd.bottom) / 2), JSONconf.zoomMax);
     }
@@ -24,9 +21,9 @@ searchRecordSelectHandler = function(combo, record, app, JSONconf, northPart, ea
     app.getSelectionLayer().protocol = new OpenLayers.Protocol.WFS({
         version: "1.1.0",
         url: fullWFSEndPoint,
-        featureType: record.data.gsln,
+        featureType: record.data.gsln, // GeoServer Layer Name
         srsName: JSONconf.WFSsrsName,
-        featureNS: JSONconf.FeatureNS,
+        featureNS: JSONconf.FeatureNS, // Feature Name Space (e.g. http://www.pozi.com/cardinia - referencing a workspace)
         geometryName: JSONconf.WFSgeometryName,
         schema: fullWFSEndPoint + "?service=WFS&version=1.1.0&request=DescribeFeatureType&TypeName=" + record.data.gsns + ":" + record.data.gsln
     });
@@ -34,18 +31,15 @@ searchRecordSelectHandler = function(combo, record, app, JSONconf, northPart, ea
     // Filtering the WFS layer on a column name and value - if the value contains a \, we escape it by doubling it
     app.getSelectionLayer().filter = new OpenLayers.Filter.Comparison({
         type: OpenLayers.Filter.Comparison.EQUAL_TO,
-        property: record.data.idcol,
-        value: record.data.idval.replace('\\', '\\\\')
+        property: record.data.idcol, // ID column
+        value: record.data.idval.replace('\\', '\\\\') // ID value
     });
 
     // Refreshing the WFS layer so that the highlight appears and triggers the featuresadded event handler above
-    app.getSelectionLayer().refresh({
-        force: true
-    });
+    app.getSelectionLayer().refresh({ force: true });
 
     //
-    if (! (JSONconf.hideSelectedFeaturePanel))
-    {
+    if (! (JSONconf.hideSelectedFeaturePanel)) {
         northPart.setHeight(60);
         Ext.getCmp('gtInfoCombobox').setVisible(true);
         // Collapsing the drop-down

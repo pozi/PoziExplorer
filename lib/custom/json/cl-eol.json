@@ -8,13 +8,13 @@
                     "title": "Surface Layers",
                     "collapsed": true
                 },
-                "editable layers": {
-                    "title": "Editable Layers",
-                    "collapsed":true
-                },
                 "default": {
                 	"title": "Overlays",
                 	"collapsed": true
+                },
+                "editing": {
+                	"title": "Editable Layers",
+                	"collapsed": false
                 },
                 "background": {
                     "title": "Base Maps",
@@ -109,7 +109,8 @@
 		"styles":"",
 		"transparent":true,
 		"tiled":false,
-		"transition":""
+		"transition":"",
+		"group":"editing"
 	},
 	{
 		"source":"local",
@@ -122,6 +123,19 @@
 		"transparent":true,
 		"tiled":false,
 		"transition":""
+	},
+	{
+		"source":"local",
+		"name":"CREEK_SEGMENT_FINAL_EDIT",
+		"title":"Creek Segments (for edit)",
+		"visibility":false,
+		"opacity":0.85,
+		"format":"image/png8",
+		"styles":"",
+		"transparent":true,
+		"tiled":false,
+		"transition":"",
+		"group":"editing"
 	},
 	{
 		"source":"local",
@@ -197,32 +211,6 @@
         "tiled": false,
         "group": "top"
     },
-    {
-		"source":"local",
-		"name":"GROUP_BOUNDARY_EDIT",
-		"title":"Landcare Boundary (for edit)",
-		"visibility":false,
-		"opacity":0.85,
-		"format":"image/png8",
-		"styles":"",
-		"transparent":true,
-		"tiled":false,
-		"transition":"",
-		"group":"editable layers"
-	},
-    {
-		"source":"local",
-		"name":"CREEK_SEGMENT_FINAL",
-		"title":"Creek Segments",
-		"visibility":true,
-		"opacity":0.85,
-		"format":"image/png8",
-		"styles":"",
-		"transparent":true,
-		"tiled":false,
-		"transition":"",
-		"group":"editable layers"
-	},
 		{
 	    	"source": "google",
 	    	"name": "SATELLITE",
@@ -281,7 +269,7 @@
     	]
     },
     "layerEditPresentation": {
-    	"CREEK_SEGMENT_FINAL":[
+    	"CREEK_SEGMENT_FINAL_EDIT":[
 		"label",
 		"interested",
 		"visited",

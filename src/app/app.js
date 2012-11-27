@@ -95,20 +95,18 @@
  */
 
 var app;
-var gCombostore;
+var gCombostore; // store powering northPart dropdown
+var gComboDataArray = { value: [] }; // maybe don't need this if we have the gCombostore (?)
 var eastPanel;
 var westPanel;
 var northPart;
-var gLayoutsArr;
-var gCurrentExpandedTabIdx = [];
-var gComboDataArray = { value: [] };
-var gfromWFSFlag = { value: undefined };
-var gCurrentLoggedRole = { value: "NONE" };
-var gtyp = { value: undefined };
-var glab = { value: undefined };
-var vector_layer = new OpenLayers.Layer.Vector("WKT", {
-        displayInLayerSwitcher: false
-    });
+var gLayoutsArr; // for each layer (e.g. property address), lists additional tabs
+var gCurrentExpandedTabIdx = []; // index of currently opened tab, per layer (feature type)
+var gfromWFSFlag = { value: undefined }; // tracks whether combostore was populated via seach selection or direct click on map
+                                         // (true = WFS = search selection, false = get feature info which is text not XML or JSON)
+var gCurrentLoggedRole = { value: "NONE" }; // 'NONE', 'ROLE_ADMINISTRATOR' - role that user is currently logged in as
+var gtyp = { value: undefined }; // feature type (e.g Address)
+var glab = { value: undefined }; // feature label (e.g. 12 Acorn Lane Packenham 3810)
 var gtLayerLabel = { value: undefined };
 
 Ext.onReady(function() {
