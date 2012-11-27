@@ -196,7 +196,7 @@ buildNorthPart = function(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpan
                         p.getColumnModel().getColumnById('value').width = 70;
                         // Now load data
                         p.setSource(fa);
-
+                     
                         var panel = new Ext.Panel({
                             id: 'attributeAcc',
                             headerCfg: {
@@ -222,6 +222,7 @@ buildNorthPart = function(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpan
                                 expand: tabExpand
                             }
                         });
+                
 
                         e0.add(panel);
 
