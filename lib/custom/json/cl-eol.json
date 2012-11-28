@@ -8,13 +8,13 @@
                     "title": "Surface Layers",
                     "collapsed": true
                 },
-                "default": {
-                	"title": "Overlays",
-                	"collapsed": true
-                },
                 "editing": {
                 	"title": "Editable Layers",
                 	"collapsed": false
+                },
+                "default": {
+                	"title": "Overlays",
+                	"collapsed": true
                 },
                 "background": {
                     "title": "Base Maps",
@@ -279,7 +279,7 @@
 		"native_vegetation",
 		"revegetated_date",
 		"comments",
-		"credits",
+		"local_legends",
 		"management_group"
     	]
     },    
