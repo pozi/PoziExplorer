@@ -127,6 +127,9 @@
         "osm": {
             "ptype": "gxp_osmsource"
         },
+        "bing": {
+            "ptype": "gxp_bingsource"
+        },
         "ol": {
             "ptype": "gxp_olsource"
         },
