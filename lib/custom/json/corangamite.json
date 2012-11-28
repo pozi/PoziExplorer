@@ -189,6 +189,17 @@
         },
         {
             "source": "backend",
+            "name": "VICMAP:VW_TRANSFER_STATION",
+            "title": "Transfer Stations",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "backend",
             "name": "DSE:VMFEAT_FOI_POINT_RESOURCE_RECREATIONAL",
             "title": "Recreational Resources",
             "visibility": false,
