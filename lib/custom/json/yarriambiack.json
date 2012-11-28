@@ -107,6 +107,19 @@
 			"title": "DSE - Topography",
 			"ptype": "gxp_wmscsource"  	
         },
+        "dse_iws_cascaded": {
+            "url": [
+            	"http://m1.pozi.com/geoserver/YARRIAMBIACK/ows",
+            	"http://m2.pozi.com/geoserver/YARRIAMBIACK/ows",
+            	"http://m3.pozi.com/geoserver/YARRIAMBIACK/ows",
+            	"http://m4.pozi.com/geoserver/YARRIAMBIACK/ows"            	
+            ],
+            "title": "DSE Image Web Server",
+            "ptype": "gxp_wmscsource",
+            "defaultType": "image/JPEG",            
+            "group": "background",
+            "transition": "resize"
+        },
         "mapquest": {
             "ptype": "gxp_mapquestsource"
         },
@@ -236,6 +249,34 @@
             "name": "osm",
             "visibility": false,
             "group": "background"
+        },
+        {
+            "source": "dse_iws_cascaded",
+           	"name" :"YARRIAMBIACK:AERIAL_MALLEE_2009JAN_AIR_VIS_50CM_MGA54",
+			"title":"Aerial Photo (CIP, Dec 2009)",
+            "visibility": true,
+            "opacity": 1,
+            "group": "background",
+            "format": "image/JPEG",
+            "tiled": true,
+            "cached": true,
+            "transparent": true,
+            "styles":"",
+            "visibility":false
+        },
+        {
+            "source": "dse_iws_cascaded",
+           	"name" :"YARRIAMBIACK:AERIAL_WIMMERA-CMA_2004NOV01_AIR_VIS_60CM_MGA54",
+			"title":"Aerial Photo (CIP, Nov 2004)",
+            "visibility": true,
+            "opacity": 1,
+            "group": "background",
+            "format": "image/JPEG",
+            "tiled": true,
+            "cached": true,
+            "transparent": true,
+            "styles":"",
+            "visibility":false
         },
         {
             "source": "ol",
