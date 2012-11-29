@@ -126,7 +126,7 @@ buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSel
                                     };
                                     // TODO: format the contexts into a drop down loading different layers if more than 1.
                                     return {
-                                        html: '<div id="headerContainer">' + mapContexts() + '</p></div>',
+                                        html: '<div id="headerContainer">' + mapContexts() + '</div>',
                                         width: mapContextsSize()
                                     };
                                 }(),
