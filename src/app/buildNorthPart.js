@@ -201,7 +201,7 @@ buildNorthPart = function(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpan
                             id: 'attributeAcc',
                             headerCfg: {
                                 tag: 'div',
-                                style: '	background-image: none;background-color: #A0A0A0;padding-left: 10px;',
+                                style: 'background-image: none;background-color: #A0A0A0;padding-left: 10px;',
                                 children: [
                                     {
                                         tag: 'div',
