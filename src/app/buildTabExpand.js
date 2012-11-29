@@ -308,8 +308,7 @@ buildTabExpand = function(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, JSO
                                                 win = new Ext.Panel({
                                                     id: 'tblayout-win' + g,
                                                     layout: 'fit',
-                                                    bbar: true,
-                                                    bbarCfg: {
+                                                    bbar: {
                                                         tag: 'left',
                                                         html: '<p style="background-color: #ecedef; padding: 4px; padding-left: 8px; font-size: 12px;font-family: tahoma,arial,verdana,sans-serif; font-style:italic;">' + configArray[i - 1].desc + '</p>'
                                                     },
@@ -324,8 +323,7 @@ buildTabExpand = function(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, JSO
                                                     enableTabScroll: true,
                                                     resizeTabs: false,
                                                     minTabWidth: 20,
-                                                    bbar: true,
-                                                    bbarCfg: {
+                                                    bbar: {
                                                         tag: 'left',
                                                         html: '<p style="background-color: #ecedef; padding: 4px; padding-left: 8px; font-size: 12px;font-family: tahoma,arial,verdana,sans-serif; font-style:italic;">' + configArray[i - 1].desc + '</p>'
                                                     },

@@ -210,8 +210,7 @@ buildNorthPart = function(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpan
                                 ]
                             },
                             layout: 'fit',
-                            bbar: true,
-                            bbarCfg: {
+                            bbar: {
                                 tag: 'left',
                                 html: function() {
                                     var styles = [
