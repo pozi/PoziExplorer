@@ -196,12 +196,22 @@ buildNorthPart = function(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpan
                         p.getColumnModel().getColumnById('value').width = 70;
                         // Now load data
                         p.setSource(fa);
-                     
+
+                        // Browser specific style for correct presentation of tab title, icons and +/- sign on a single line
+                        var displayBlock = "flex";
+                        if (Ext.isIE)
+                        {
+                            if (Ext.isIE6 || Ext.isIE7 || Ext.isIE8)
+                            {
+                                displayBlock = "block";
+                            }
+                        }
+                        
                         var panel = new Ext.Panel({
                             id: 'attributeAcc',
                             headerCfg: {
                                 tag: 'div',
-                                style: 'background-image: none;background-color: #A0A0A0;padding-left: 10px;',
+                                style: 'background-image: none;background-color: #A0A0A0;padding-left: 10px; display: inline-'+displayBlock+';',
                                 children: [
                                     {
                                         tag: 'div',
@@ -232,7 +242,6 @@ buildNorthPart = function(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpan
                                 expand: tabExpand
                             }
                         });
-                
 
                         e0.add(panel);
 
@@ -266,7 +275,7 @@ buildNorthPart = function(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpan
 
                                     configArray[c].headerCfg = {
                                         tag: 'div',
-                                        style: lock + 'background-position: right; background-repeat: no-repeat; background-color:' + col + ';padding-left: 10px; vertical-align: middle;',
+                                        style: lock + 'background-position: right; background-repeat: no-repeat; background-color:' + col + ';padding-left: 10px; vertical-align: middle; display: inline-'+displayBlock+';',
                                         children: [
                                             {
                                                 tag: 'div',

@@ -16,12 +16,23 @@ addDefaultTabs = function(accordion, gLayoutsArr, JSONconf) {
             var tab_title = config.title;
             delete config.title; // headerCfg would not work if the title was part of the initial config
 
+            // Browser specific style for correct presentation of tab title, icons and +/- sign on a single line
+            var displayBlock = "flex";
+            if (Ext.isIE)
+            {
+                if (Ext.isIE6 || Ext.isIE7 || Ext.isIE8)
+                {
+                    displayBlock = "block";
+                }
+            }
+
             config.headerCfg = {
                 tag: 'div',
                 style: [
                     'background-image: none; ',
                     'background-color: ', (config.col || "#A0A0A0"), '; ',
-                    'padding-left: 10px;'
+                    'padding-left: 10px;',
+                    'display: inline-'+displayBlock+';'
                 ].join(''),
                 children: [
                     {
