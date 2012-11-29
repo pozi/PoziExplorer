@@ -96,20 +96,30 @@ requestConfig = function(options) {
 
             // This is environment config - dev vs prod
             var debugMode = (/(localhost|\.dev|\.local)/i).test(window.location.hostname);
-            var localLayerSourcePrefix;
+            var localLayerSourcePrefix,localPrintServicePrefix;
             if (debugMode) {
                 JSONconf.proxy = "proxy/?url=";
                 JSONconf.loginEndpoint = "http://v3.pozi.com/geoexplorer/login/";
                 localLayerSourcePrefix = "http://v3.pozi.com";
+                localPrintServicePrefix = "http://v3.pozi.com";
             } else {
                 JSONconf.proxy = "/geoserver/rest/proxy?url=";
                 JSONconf.loginEndpoint = "/geoexplorer/login";
                 localLayerSourcePrefix = "";
+                localPrintServicePrefix = "";
             }
             // Fixing local URL source for debug mode
             if (JSONconf.sources.local) {
                 JSONconf.sources.local.url = localLayerSourcePrefix + JSONconf.sources.local.url;
             }
+
+            // Fixing local print service for debug mode
+            _(JSONconf.tools).each(function(t){
+                if (t.ptype == "gxp_print")
+                {
+                    t.printService = localPrintServicePrefix + t.printService;
+                }
+            });
 
             if (propNum) {
                 var ds = new Ext.data.JsonStore({
