@@ -435,6 +435,17 @@
             "group": "background"
         },
         {
+			"source":"dse_iws_cascaded",
+			"name":"LODDON:AERIAL_LODDON_2009APR14_AIR_VIS_35CM_MGA54",
+			"title":"Aerial Photo (CIP 2009)",
+			"visibility":false,
+			"opacity":1,
+			"group":"background",
+			"selected":false,
+			"format":"image/JPEG",
+			"transparent":true
+		},
+        {
             "source": "ol",
             "group": "background",
             "fixed": true,
