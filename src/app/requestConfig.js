@@ -83,13 +83,10 @@ requestConfig = function(options) {
             var layerPresentationDefaults = {
                 // This structure deals with fields to show, in which order and with which name
                 "VICMAP_PROPERTY_ADDRESS": [
-                    { attr_name: "ezi_add", alt_name: "Address" },
-                    { attr_name: "pr_propnum", alt_name: "Property Number" },
+                    { attr_name: "ezi_add", alt_name: "Address" },            
                     { attr_name: "locality" },
                     { attr_name: "postcode" },
-                    { attr_name: "lga_code", alt_name: "LGA" },
-                    { attr_name: "pr_multass", alt_name: "Multi Assessment" },
-                    { attr_name: "pfi", alt_name: "PFI" }
+                    { attr_name: "pr_propnum", alt_name: "Property Number" }
                 ]
             };
             JSONconf.layerPresentation = Ext.apply({}, JSONconf.layerPresentation, layerPresentationDefaults);
