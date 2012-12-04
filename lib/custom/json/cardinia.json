@@ -148,6 +148,9 @@
         ],
         "CSC_AREA_DOG_OF_LEASH": [
             {"attr_name":"reserve_na"}
+        ],
+        "VMFEAT_FOI_POINT_CENTRE_EDUCATIONAL": [
+            {"attr_name":"name_label"}
         ]
 	  },
     "layers": [
