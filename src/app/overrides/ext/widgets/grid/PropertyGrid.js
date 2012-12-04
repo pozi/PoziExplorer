@@ -4,10 +4,15 @@
 // Based on the source code: http://docs.sencha.com/ext-js/3-4/source/Column.html
 // TODO: this is a good candidate for a custom type extending the PropertyGrid if we find ourselves modifying its core functionalities anymore	
 
+var photoLink;
+
 Ext.grid.PropertyColumnModel.prototype.renderCell = function(val, meta, rec){
   var renderer = this.grid.customRenderers[rec.get('name')], doNotHTMLEncode = false, rv = val;
   if(renderer){
     return renderer.apply(this, arguments);
+  }
+  if (val.search(/\page_Id/)>-1 || val.search(/\Page_Id/)>-1){
+  	photoLink = val;
   }
   if(Ext.isDate(val)){
     rv = this.renderDate(val);
@@ -17,13 +22,16 @@ Ext.grid.PropertyColumnModel.prototype.renderCell = function(val, meta, rec){
     if (val.search(/^http/)>-1){
       if (val.search(/\.jpg/)>-1)
       {
-        rv ="<a href='"+val+"' target='_blank'><img src='"+val+"' style='display:block; max-height:150px; max-width:230px; height:auto; margin-right:auto;' /></a>";
+      	if(!photoLink){
+      		photoLink = val;
+      	}
+        rv ="<a href='"+photoLink+"' target='_blank'><img src='"+val+"' style='display:block; max-height:150px; max-width:230px; height:auto; margin-right:auto;' /></a>";
       }
       else
       {
         var linkName=val.split("/").pop();
         if (linkName.length<1) {linkName = 'link';}
-        if (linkName.length>25) {linkName = 'link';}
+        if (linkName.length>15) {linkName = 'link';}
         rv ="<a href='"+val+"' target='_blank'>"+linkName+"</a>";
       }
       doNotHTMLEncode = true;
