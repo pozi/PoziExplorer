@@ -11,7 +11,7 @@ Ext.grid.PropertyColumnModel.prototype.renderCell = function(val, meta, rec){
   if(renderer){
     return renderer.apply(this, arguments);
   }
-  if (val.search(/\page_Id/)>-1 || val.search(/\Page_Id/)>-1){
+  if (val.search(/\page_Id/)>-1 || val.search(/\Page_Id/)>-1 || val.search(/\Page_id/)>-1){
   	photoLink = val;
   }
   if(Ext.isDate(val)){
