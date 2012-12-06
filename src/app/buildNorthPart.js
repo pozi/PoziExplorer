@@ -198,14 +198,7 @@ buildNorthPart = function(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpan
                         p.setSource(fa);
 
                         // Browser specific style for correct presentation of tab title, icons and +/- sign on a single line
-                        var displayBlock = "flex";
-                        if (Ext.isIE)
-                        {
-                            if (Ext.isIE6 || Ext.isIE7 || Ext.isIE8)
-                            {
-                                displayBlock = "block";
-                            }
-                        }
+                        var displayBlock = (Ext.isIE6 || Ext.isIE7)?"block":"flex";
                         
                         var panel = new Ext.Panel({
                             id: 'attributeAcc',
