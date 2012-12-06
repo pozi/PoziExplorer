@@ -1,25 +1,24 @@
 requestConfig = function(options) {	
 
     var configScript = Ext.urlDecode(location.search.substr(1))['config'];
+    // Here are the optional arguments that can be extracted from the query string
+    // At the moment, we only use the property number, passed using the "property" attribute
     var propNum = Ext.urlDecode(location.search.substr(1))['property'];
 
-    // If the URL does not offer itself to splitting according to the rules above, it means, we are having Apache clean URL: http://www.pozi.com/mitchell/property/45633
-    // We extract the information according to this pattern
+    // If the config script is not passed as a URL parameter, it means we are having Apache clean URL like: http://www.pozi.com/mitchell?property=45633
+    // We need to extract the config script according to this pattern
     if (! (configScript))
     {
-        // We extract the end of the URL
-        // This will no longer work when we consider saved maps
-        var urlquery = location.href.split("/");
-        if (urlquery[urlquery.length - 2])
+        // We extract the end of the URL (after the last /)
+        var urlparts = location.href.split("/");
+        // This contains the client name and optional arguments
+        if (urlparts[urlparts.length - 1])
         {
-            if (urlquery[urlquery.length - 2] == "property")
+            // Before the interrogation mark is the client name needed to retrieve the correct JSON
+            var endparts=urlparts[urlparts.length - 1].split("?");
+            if (endparts[0])
             {
-                configScript = urlquery[urlquery.length - 3];
-                propNum = urlquery[urlquery.length - 1];
-            }
-            else
-            {
-                configScript = urlquery[urlquery.length - 1];
+                configScript = endparts[0];
             }
         }
     }
