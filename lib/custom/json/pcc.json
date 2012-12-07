@@ -155,6 +155,28 @@
         }
     },
     "layers": [
+        {
+		    "source":"local",
+		    "name":"PCC_SCHOOL_ZONES",
+		    "title":"School Zones",
+		    "visibility":true,
+		    "opacity":0.85,
+		    "format":"image/png8",
+		    "styles":"",
+		    "transparent":true,
+		    "tiled":false
+	    },
+	    {
+		    "source":"local",
+		    "name":"PCC_SCHOOLS",
+		    "title":"Schools",
+		    "visibility":true,
+		    "opacity":0.85,
+		    "format":"image/png8",
+		    "styles":"",
+		    "transparent":true,
+		    "tiled":false
+	    },
 		{
             "source": "backend",
             "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
