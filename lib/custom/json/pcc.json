@@ -1,0 +1,240 @@
+{
+    "servicesHost":"http://49.156.17.41",
+    "searchEndPoint":"/ws/rest/v3/ws_all_features_by_string_and_lga.php",
+    "LGACode":"375",
+    "databaseConfig":"vicmap",
+    "tools": [
+        {
+            "ptype": "gxp_layermanager",
+            "groups": {
+                "top": {
+                    "title": "Surface Layers",
+                    "collapsed": true
+                },
+                "default": "Overlays",
+                "background": {
+                    "title": "Base Maps",
+                    "exclusive": true
+                }
+            },
+            "outputConfig": {
+                "id": "tree",
+                "border": false,
+                "tbar": [
+                    
+                ]
+            },
+            "outputTarget": "westpanel"
+        },
+        {
+            "ptype": "gxp_addlayers",
+            "actionTarget": "tree.tbar"
+        },
+        {
+            "ptype": "gxp_layerproperties",
+            "id": "layerproperties",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_zoomtolayerextent",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_styler",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_removelayer",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_wmsgetfeatureinfo",
+            "format": "grid",
+            "toggleGroup": "interaction",
+            "showButtonText": false
+        },
+        {
+            "ptype": "gxp_print",
+            "customParams": {
+                "outputFilename": "PoziExplorer-print"
+            },
+            "printService": "/geoserver/pdf",
+            "showButtonText": false
+        },
+        {
+            "ptype": "gxp_measure",
+            "toggleGroup": "interaction",
+            "controlOptions": {
+                "immediate": true
+            },
+            "showButtonText": false
+        }
+    ],
+    "sources": {
+	 "local": {
+            "url": "/geoserver/PCC/ows",
+            "title": "PCC Shire Council Layers",
+            "ptype": "gxp_wmscsource",
+            "tiled": false,
+            "restUrl": "/geoserver/rest"
+        },
+        "backend_cascaded1":{
+            "url": "http://basemap.pozi.com/geoserver/DSE_ADMINISTRATIVE_BOUNDARIES/ows",
+            "title": "DSE - Adminstrative Boundaries",
+            "ptype": "gxp_wmscsource"
+        },
+        "backend_cascaded2":{	  	
+            "url": "http://basemap.pozi.com/geoserver/DSE_FEATURES_OF_INTEREST/ows",	  	
+			"title": "DSE - Features Of interest",
+			"ptype": "gxp_wmscsource"  	
+        },
+        "backend_cascaded3":{	  	
+            "url": "http://basemap.pozi.com/geoserver/DSE_PLANNING/ows",	  	
+			"title": "DSE - Planning",
+			"ptype": "gxp_wmscsource"  	
+        },
+        "backend_cascaded4":{	  	
+            "url": "http://basemap.pozi.com/geoserver/DSE_PROPERTY/ows",	  	
+			"title": "DSE - Property",
+			"ptype": "gxp_wmscsource"  	
+        },
+        "backend_cascaded5":{	  	
+            "url": "http://basemap.pozi.com/geoserver/DSE_TRANSPORT/ows",	  	
+			"title": "DSE - Transport",
+			"ptype": "gxp_wmscsource"  	
+        },
+        "backend_cascaded6":{	  	
+            "url": "http://basemap.pozi.com/geoserver/DSE_TOPOGRAPHY/ows",	  	
+			"title": "DSE - Topography",
+			"ptype": "gxp_wmscsource"  	
+        },
+	  	"dse_iws_cascaded": {
+            "url": [
+            	"http://m1.pozi.com/geoserver/HINDMARSH/ows",
+            	"http://m2.pozi.com/geoserver/HINDMARSH/ows",
+            	"http://m3.pozi.com/geoserver/HINDMARSH/ows",
+            	"http://m4.pozi.com/geoserver/HINDMARSH/ows"            	
+            ],
+            "title": "DSE Image Web Server",
+            "ptype": "gxp_wmscsource",
+            "defaultType": "image/JPEG",            
+            "group": "background",
+            "transition": "resize"
+        },
+        "mapquest": {
+		"ptype": "gxp_mapquestsource"
+        },
+	"osm": {
+		"ptype": "gxp_osmsource"
+	},
+        "ol": {
+		"ptype": "gxp_olsource"
+        },
+        "backend": {
+            "url": [
+                "http://m1.pozi.com/geoserver/ows",
+                "http://m2.pozi.com/geoserver/ows",
+                "http://m3.pozi.com/geoserver/ows",
+                "http://m4.pozi.com/geoserver/ows"
+            ],
+            "title": "Pozi Data Server",
+            "ptype": "gxp_wmscsource",
+            "transition": null
+        }
+    },
+    "layers": [
+		{
+            "source": "backend",
+            "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
+            "title": "Properties",
+            "visibility": true,
+            "opacity": 0.25,
+            "format": "image/GIF",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "backend",
+            "name": "LabelClassic",
+            "title": "Labels",
+            "visibility": false,
+            "opacity": 1,
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "group": "top"
+        },
+        {
+            "source": "backend",
+            "name": "VicmapClassic",
+            "title": "Vicmap Classic",
+            "visibility": false,
+            "opacity": 1,
+            "group": "background",
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "cached": true,
+            "transition": "resize"
+        },
+        {
+            "source": "mapquest",
+            "name": "osm",
+            "visibility": true,
+            "group": "background"
+ 		},
+        {
+            "source": "ol",
+            "group": "background",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "None",
+                {
+                    "visibility": false
+                }
+            ]
+        }
+    ],
+    "center": [
+        16110734, -4564492
+    ],
+    "zoom": 14,
+    "workspace": "PCC",
+    "highlightSymboliser": {
+        "name": "test",
+        "strokeColor": "orange",
+        "strokeWidth": 20,
+        "strokeOpacity": 0.5,
+        "fillColor": "orange",
+        "fillOpacity": 0.2
+    },
+    "liveDataEndPoints": [
+        {
+            "urlLayout": "http://192.168.10.12/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://192.168.10.12/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "sqlite",
+            "storeName": "pcc"
+        },
+        {
+            "urlLayout": "http://v3.pozi.com/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://v3.pozi.com/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "pgsql",
+            "storeName": "pccgis"
+        }
+    ],
+    "logoClientSrc":"theme/app/img/custom/pcc_logo.jpg",
+    "logoClientWidth":190,
+    "zoomMax":18,
+    "bannerLineColor":"#3A72Ac",
+    "bannerRightCornerLine1":"Point Cook College",
+    "bannerRightCornerLine2":"Victoria, Australia",
+    "printMapTitle":"Point Cook College",
+    "linkToCouncilWebsite":"http://www.pcc.vic.edu.au/",
+    "collapseWestPanel":true,
+    "openFirstDefaultTab":true
+}
