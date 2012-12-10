@@ -255,6 +255,39 @@
         },
         {
             "source": "backend",
+            "name": "DSE:VMFEAT_FOI_POINT_VENUE_COMMUNITY",
+            "title": "Community Venues",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "backend",
+            "name": "DSE:VMFEAT_FOI_POINT_CENTRE_CULTURAL",
+            "title": "Cultural Centres",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "backend",
+            "name": "DSE:VMFEAT_FOI_POINT_FACILITY_ADMIN",
+            "title": "Admin Facilities",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "backend",
             "name": "DSE:VMFEAT_FOI_POINT_CENTRE_EDUCATIONAL",
             "title": "Schools",
             "visibility": false,
