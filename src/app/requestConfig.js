@@ -5,28 +5,15 @@ requestConfig = function(options) {
     // At the moment, we only use the property number, passed using the "property" attribute
     var propNum = Ext.urlDecode(location.search.substr(1))['property'];
 
-    // If the config script is not passed as a URL parameter, it means we are having Apache clean URL like: http://www.pozi.com/mitchell?property=45633
-    // We need to extract the config script according to this pattern
-    if (! (configScript))
-    {
-        // We extract the end of the URL (after the last /)
-        var urlparts = location.href.split("/");
-        // This contains the client name and optional arguments
-        if (urlparts[urlparts.length - 1])
-        {
-            // Before the interrogation mark is the client name needed to retrieve the correct JSON
-            var endparts=urlparts[urlparts.length - 1].split("?");
-            if (endparts[0])
-            {
-                configScript = endparts[0];
-            }
-        }
+    // If not in query string, extract from url like: http://www.pozi.com/clientname?property=45633
+    if (!configScript) {
+        var match = location.href.match(/.*\/([^\?]*)/);
+        if (match) { configScript = match[1]; }
     }
 
     // If still no config script, then assume it's in the subdomain
     if (!configScript) {
-        var subdomain = location.hostname.split(".")[0];
-        configScript = subdomain;
+        configScript = location.hostname.split(".")[0];
     }
 
     // Loading the JSON configuration based on the council name
