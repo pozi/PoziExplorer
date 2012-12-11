@@ -23,6 +23,12 @@ requestConfig = function(options) {
         }
     }
 
+    // If still no config script, then assume it's in the subdomain
+    if (!configScript) {
+        var subdomain = location.hostname.split(".")[0];
+        configScript = subdomain;
+    }
+
     // Loading the JSON configuration based on the council name
     OpenLayers.Request.GET({
         url: "lib/custom/json/" + configScript + ".json",
