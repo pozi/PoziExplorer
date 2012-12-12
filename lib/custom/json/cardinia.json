@@ -254,6 +254,17 @@
             "tiled": false
         },
         {
+            "source": "local",
+            "name": "CSC_AREA_DOG_OF_LEASH",
+            "title": "Dog Off Leash Area",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
             "source": "backend",
             "name": "DSE:VMFEAT_FOI_POINT_VENUE_COMMUNITY",
             "title": "Community Venues",
@@ -279,6 +290,17 @@
             "source": "backend",
             "name": "DSE:VMFEAT_FOI_POINT_FACILITY_ADMIN",
             "title": "Admin Facilities",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "backend",
+            "name": "DSE:VMFEAT_FOI_POINT_FACILTY_CARE",
+            "title": "Care Facilities",
             "visibility": false,
             "opacity": 0.85,
             "format": "image/png8",
@@ -323,17 +345,6 @@
             "source": "local",
             "name": "CSC_PLAYGROUND_SKATE",
             "title": "Skate Parks",
-            "visibility": false,
-            "opacity": 0.85,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "local",
-            "name": "CSC_AREA_DOG_OF_LEASH",
-            "title": "Dog Off Leash Area",
             "visibility": false,
             "opacity": 0.85,
             "format": "image/png8",
