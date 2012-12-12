@@ -130,6 +130,9 @@
         "bing": {
             "ptype": "gxp_bingsource"
         },
+        "google": {
+            "ptype": "gxp_googlesource"
+        },
         "ol": {
             "ptype": "gxp_olsource"
         },
@@ -455,6 +458,11 @@
             "name": "osm",
             "visibility": false,
             "group": "background"
+        },
+	{
+	    "source": "google",
+	    "name": "SATELLITE",
+	    "visibility": false
         },
         {
 			"source":"dse_iws_cascaded",
