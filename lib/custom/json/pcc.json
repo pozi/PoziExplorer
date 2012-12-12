@@ -263,19 +263,9 @@
     "bannerRightCornerLine1":"Point Cook College",
     "bannerRightCornerLine2":"Victoria, Australia",
     "hideSelectedFeaturePanel":false,
-    "layerEditPresentation": {
-    	"PCC_SCHOOL_ZONES":[
-		"name_full",
-		"phone_number",
-		"email",
-		"photo_link",
-    	"photo_url",
-		"school_id"
-    	]
-    },    
     "printMapTitle":"Point Cook College",
     "linkToCouncilWebsite":"http://www.pcc.vic.edu.au/",
     "collapseWestPanel":true,
     "reloadOnLogin":true,
-    "openFirstDefaultTab":true
+    "hideLayerPanelButton":true
 }
