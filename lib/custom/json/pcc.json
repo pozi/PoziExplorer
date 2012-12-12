@@ -40,10 +40,6 @@
             "actionTarget": "tree.contextMenu"
         },
         {
-            "ptype": "gxp_styler",
-            "actionTarget": "tree.contextMenu"
-        },
-        {
             "ptype": "gxp_removelayer",
             "actionTarget": "tree.contextMenu"
         },
@@ -266,6 +262,7 @@
     "bannerLineColor":"#3A72Ac",
     "bannerRightCornerLine1":"Point Cook College",
     "bannerRightCornerLine2":"Victoria, Australia",
+    "hideSelectedFeaturePanel":false,
     "layerEditPresentation": {
     	"PCC_SCHOOL_ZONES":[
 		"name_full",
@@ -279,5 +276,6 @@
     "printMapTitle":"Point Cook College",
     "linkToCouncilWebsite":"http://www.pcc.vic.edu.au/",
     "collapseWestPanel":true,
+    "reloadOnLogin":true,
     "openFirstDefaultTab":true
 }
