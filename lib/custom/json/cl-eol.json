@@ -1,75 +1,66 @@
 {
-    "servicesHost":"http://49.156.17.41",
-    "tools": [
-        {
-            "ptype": "gxp_layermanager",
-            "groups": {
-                "top": {
-                    "title": "Surface Layers",
-                    "collapsed": true
-                },
-                "editing": {
-                	"title": "Editable Layers",
-                	"collapsed": false
-                },
-                "default": {
-                	"title": "Overlays",
-                	"collapsed": true
-                },
-                "background": {
-                    "title": "Base Maps",
-                    "exclusive": true,
-                    "collapsed":true
-                }
+    "servicesHost": "http://49.156.17.41",
+    "tools": [{
+        "ptype": "gxp_layermanager",
+        "groups": {
+            "top": {
+                "title": "Surface Layers",
+                "collapsed": true
             },
-            "outputConfig": {
-                "id": "tree",
-                "border": false,
-                "tbar": [
-                    
-                ]
+            "editing": {
+                "title": "Editable Layers",
+                "collapsed": false
             },
-            "outputTarget": "westpanel"
-        },
-        {
-            "ptype": "gxp_layerproperties",
-            "id": "layerproperties",
-            "actionTarget": "tree.contextMenu"
-        },
-        {
-            "ptype": "gxp_zoomtolayerextent",
-            "actionTarget": "tree.contextMenu"
-        },
-        {
-            "ptype": "gxp_removelayer",
-            "actionTarget": "tree.contextMenu"
-        },
-        {
-            "ptype": "gxp_wmsgetfeatureinfo",
-            "format": "grid",
-            "toggleGroup": "interaction",
-            "showButtonText": false
-        },
-        {
-            "ptype": "gxp_measure",
-            "toggleGroup": "interaction",
-            "controlOptions": {
-                "immediate": true
+            "default": {
+                "title": "Overlays",
+                "collapsed": true
             },
-            "showButtonText": false
+            "background": {
+                "title": "Base Maps",
+                "exclusive": true,
+                "collapsed": true
+            }
         },
-        {
-            "ptype": "gxp_featuremanager",
-            "id": "featuremanager",
-            "maxFeatures": 20
+        "outputConfig": {
+            "id": "tree",
+            "border": false,
+            "tbar": [
+
+            ]
         },
-        {
-            "ptype": "gxp_featureeditor",
-            "featureManager": "featuremanager",
-            "autoLoadFeature": true,
-            "toggleGroup": "interaction"
-        }
-    ],
+        "outputTarget": "westpanel"
+    }, {
+        "ptype": "gxp_layerproperties",
+        "id": "layerproperties",
+        "actionTarget": "tree.contextMenu"
+    }, {
+        "ptype": "gxp_zoomtolayerextent",
+        "actionTarget": "tree.contextMenu"
+    }, {
+        "ptype": "gxp_removelayer",
+        "actionTarget": "tree.contextMenu"
+    }, {
+        "ptype": "gxp_wmsgetfeatureinfo",
+        "format": "grid",
+        "toggleGroup": "interaction",
+        "showButtonText": false
+    }, {
+        "ptype": "gxp_measure",
+        "toggleGroup": "interaction",
+        "controlOptions": {
+            "immediate": true
+        },
+        "showButtonText": false
+    }, {
+        "ptype": "gxp_featuremanager",
+        "id": "featuremanager",
+        "maxFeatures": 20
+    }, {
+        "ptype": "gxp_featureeditor",
+        "featureManager": "featuremanager",
+        "autoLoadFeature": true,
+        "toggleGroup": "interaction"
+    }],
     "sources": {
         "local": {
             "url": "/geoserver/CREEKLINK/ows",
@@ -87,122 +78,108 @@
             "ptype": "gxp_olsource"
         },
         "backend": {
-            "url": [
-                "http://m1.pozi.com/geoserver/ows",
-                "http://m2.pozi.com/geoserver/ows",
-                "http://m3.pozi.com/geoserver/ows",
-                "http://m4.pozi.com/geoserver/ows"
-            ],
+            "url": ["http://m1.pozi.com/geoserver/ows", "http://m2.pozi.com/geoserver/ows", "http://m3.pozi.com/geoserver/ows", "http://m4.pozi.com/geoserver/ows"],
             "title": "Pozi Data Server",
             "ptype": "gxp_wmscsource",
             "transition": null
         }
     },
-    "layers": [
-	{
-		"source":"local",
-		"name":"GROUP_BOUNDARY_EDIT",
-		"title":"Landcare Boundary (for edit)",
-		"visibility":false,
-		"opacity":0.85,
-		"format":"image/png8",
-		"styles":"",
-		"transparent":true,
-		"tiled":false,
-		"transition":"",
-		"group":"editing"
-	},
-	{
-		"source":"local",
-		"name":"GROUP_BOUNDARY",
-		"title":"Landcare Boundary",
-		"visibility":true,
-		"opacity":0.85,
-		"format":"image/png8",
-		"styles":"",
-		"transparent":true,
-		"tiled":false,
-		"transition":""
-	},
-	{
-		"source":"local",
-		"name":"CREEK_SEGMENT_FINAL_EDIT",
-		"title":"Creek Segments (for edit)",
-		"visibility":false,
-		"opacity":0.85,
-		"format":"image/png8",
-		"styles":"",
-		"transparent":true,
-		"tiled":false,
-		"transition":"",
-		"group":"editing"
-	},
-	{
-		"source":"local",
-		"name":"CREEK_SEGMENT_FINAL",
-		"title":"Creek Segments",
-		"visibility":true,
-		"opacity":0.85,
-		"format":"image/png8",
-		"styles":"",
-		"transparent":true,
-		"tiled":false,
-		"transition":""
-	},
-	{
-		"source":"local",
-		"name":"CREEK_SEGMENT_FINAL_VISITED",
-		"title":"Creek Segments (visited)",
-		"visibility":false,
-		"opacity":0.85,
-		"format":"image/png8",
-		"styles":"",
-		"transparent":true,
-		"tiled":false,
-		"transition":""
-	},
-	{
-		"source":"backend",
-		"name":"VICMAP:VMHYDRO_WATERCOURSE",
-		"title":"All Waterways",
-		"visibility":false,
-		"opacity":0.85,
-		"format":"image/png8",
-		"styles":"Classic_Watercourse_NoMaxScale",
-		"transparent":true,
-		"tiled":false,
-		"transition":""
-	},
-	{
-		"source":"local",
-		"name":"CREEK",
-		"title":"Named Waterways",
-		"visibility":true,
-		"opacity":0.85,
-		"format":"image/png8",
-		"styles":"",
-		"transparent":true,
-		"tiled":false,
-		"transition":""
-	},
-	{
-		"source":"backend",
-		"name":"VICMAP:VMPROP_PARCEL_OPTI",
-		"title":"Parcels (Vicmap)",
-		"visibility":true,
-		"opacity":0.5,
-		"queryable": false,
-		"format":"image/png8",
-		"styles":"creeklink_parcel",
-		"transparent":true,
-		"tiled":false,
-		"transition":""
-	},
-    {
+    "layers": [{
+        "source": "local",
+        "name": "GROUP_BOUNDARY_EDIT",
+        "title": "Landcare Boundary (for edit)",
+        "visibility": false,
+        "opacity": 0.85,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false,
+        "transition": "",
+        "group": "editing"
+    }, {
+        "source": "local",
+        "name": "GROUP_BOUNDARY",
+        "title": "Landcare Boundary",
+        "visibility": true,
+        "opacity": 0.85,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false,
+        "transition": ""
+    }, {
+        "source": "local",
+        "name": "CREEK_SEGMENT_FINAL_EDIT",
+        "title": "Creek Segments (for edit)",
+        "visibility": false,
+        "opacity": 0.85,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false,
+        "transition": "",
+        "group": "editing"
+    }, {
+        "source": "local",
+        "name": "CREEK_SEGMENT_FINAL",
+        "title": "Creek Segments",
+        "visibility": true,
+        "opacity": 0.85,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false,
+        "transition": ""
+    }, {
+        "source": "local",
+        "name": "CREEK_SEGMENT_FINAL_VISITED",
+        "title": "Creek Segments (visited)",
+        "visibility": false,
+        "opacity": 0.85,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false,
+        "transition": ""
+    }, {
+        "source": "backend",
+        "name": "VICMAP:VMHYDRO_WATERCOURSE",
+        "title": "All Waterways",
+        "visibility": false,
+        "opacity": 0.85,
+        "format": "image/png8",
+        "styles": "Classic_Watercourse_NoMaxScale",
+        "transparent": true,
+        "tiled": false,
+        "transition": ""
+    }, {
+        "source": "local",
+        "name": "CREEK",
+        "title": "Named Waterways",
+        "visibility": true,
+        "opacity": 0.85,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false,
+        "transition": ""
+    }, {
+        "source": "backend",
+        "name": "VICMAP:VMPROP_PARCEL_OPTI",
+        "title": "Parcels (Vicmap)",
+        "visibility": true,
+        "opacity": 0.5,
+        "queryable": false,
+        "format": "image/png8",
+        "styles": "creeklink_parcel",
+        "transparent": true,
+        "tiled": false,
+        "transition": ""
+    }, {
         "source": "backend",
         "name": "LabelClassic",
         "title": "Labels",
-	    "visibility": false,
+        "visibility": false,
         "opacity": 1,
         "selected": false,
         "format": "image/png8",
@@ -210,27 +187,21 @@
         "transparent": true,
         "tiled": false,
         "group": "top"
-    },
-		{
-	    	"source": "google",
-	    	"name": "SATELLITE",
-	    	"visibility": false
-        },
-        {
-        	"source": "google",
-	    	"name": "ROADMAP",
-	    	"visibility": false
-        },
-        {
-        	"source": "google",
-	    	"name": "HYBRID",
-	    	"visibility": true
-        },
-    ],
+    }, {
+        "source": "google",
+        "name": "SATELLITE",
+        "visibility": false
+    }, {
+        "source": "google",
+        "name": "ROADMAP",
+        "visibility": false
+    }, {
+        "source": "google",
+        "name": "HYBRID",
+        "visibility": true
+    }, ],
     "center": [
-        16024006,
-        -4632500
-    ],
+    16024006, -4632500],
     "zoom": 12,
     "workspace": "CREEKLINK",
     "highlightSymboliser": {
@@ -241,55 +212,50 @@
         "fillColor": "purple",
         "fillOpacity": 0.2
     },
-    "liveDataEndPoints": [
-        {
-            "urlLayout": "http://v3.pozi.com/ws/rest/v3/ws_get_layouts.php",
-            "urlLiveData": "http://v3.pozi.com/ws/rest/v3/ws_get_live_data.php",
-            "storeMode": "pgsql",
-            "storeName": "creeklinkgis"
-        }
-    ],
-    "zoomMax":18,
-    "printMapTitle":"Creek-link",
-    "collapseWestPanel":true,
-    "hideNorthRegion":true,
-    "hideSelectedFeaturePanel":false,
-    "eastPanelCollapsible":false,
-    "bannerLineColor":"#90C4B6",
-    "infoTitle":"",
-    "hideScaleCombo":true,
+    "liveDataEndPoints": [{
+        "urlLayout": "http://v3.pozi.com/ws/rest/v3/ws_get_layouts.php",
+        "urlLiveData": "http://v3.pozi.com/ws/rest/v3/ws_get_live_data.php",
+        "storeMode": "pgsql",
+        "storeName": "creeklinkgis"
+    }],
+    "zoomMax": 18,
+    "printMapTitle": "Creek-link",
+    "collapseWestPanel": true,
+    "hideNorthRegion": true,
+    "hideSelectedFeaturePanel": false,
+    "eastPanelCollapsible": false,
+    "bannerLineColor": "#90C4B6",
+    "infoTitle": "",
+    "hideScaleCombo": true,
     "layerPresentation": {
-    	"CREEK_SEGMENT_FINAL":[
-		{"attr_name":"label","alt_name":"Creek Name"},
-		{"attr_name":"management_group"},
-    		{"attr_name":"stock_excluded"},
-		{"attr_name":"stock_excluded_date"},
-		{"attr_name":"native_vegetation"},
-		{"attr_name":"revegetated_date"}
-    	]
+        "CREEK_SEGMENT_FINAL": [{
+            "attr_name": "label",
+            "alt_name": "Creek Name"
+        }, {
+            "attr_name": "management_group"
+        }, {
+            "attr_name": "stock_excluded"
+        }, {
+            "attr_name": "stock_excluded_date"
+        }, {
+            "attr_name": "native_vegetation"
+        }, {
+            "attr_name": "revegetated_date"
+        }]
     },
     "layerEditPresentation": {
-    	"CREEK_SEGMENT_FINAL_EDIT":[
-		"label",
-		"interested",
-		"visited",
-		"visited_date",
-    		"stock_excluded",
-		"stock_excluded_date",
-		"native_vegetation",
-		"revegetated_date",
-		"comments",
-		"local_legends",
-		"management_group"
-    	]
-    },    
-    "bottomEastItem":{
-    	"title":"Legend",
-    	"URL": "http://www.creeklink.org.au/resources/img/creeklink-legend-final.png",
-    	"height":270
+        "CREEK_SEGMENT_FINAL_EDIT": ["label", "interested", "visited", "visited_date", "stock_excluded", "stock_excluded_date", "native_vegetation", "revegetated_date", "comments", "local_legends", "management_group"]
     },
-    "mapContexts":[{"name":"Creek Map","size":95}],
-    "reloadOnLogin":true,
-    "openFirstDefaultTab":true,
-    "hideLayerPanelButton":true
+    "bottomEastItem": {
+        "title": "Legend",
+        "URL": "http://www.creeklink.org.au/resources/img/creeklink-legend-final.png",
+        "height": 270
+    },
+    "mapContexts": [{
+        "name": "Creek Map",
+        "size": 95
+    }],
+    "reloadOnLogin": true,
+    "openFirstDefaultTab": true,
+    "hideLayerPanelButton": true
 }
