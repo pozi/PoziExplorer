@@ -35,7 +35,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) { // AND GLOBAL
             initAuthorization(app, gCurrentLoggedRole, westPanel);
 
             // Loading the tabs on initial page load
-            loadTabConfig(JSONconf, gCurrentLoggedRole, gLayoutsArr, addDefaultTabs, accordion);
+            loadTabConfig(JSONconf, gCurrentLoggedRole, gLayoutsArr, addDefaultTabs, accordion, propertyDataInit);
         });
 
     };

@@ -1,4 +1,4 @@
-var loadTabConfig = function(JSONconf, gCurrentLoggedRole, gLayoutsArr, addDefaultTabs, accordion) {
+var loadTabConfig = function(JSONconf, gCurrentLoggedRole, gLayoutsArr, addDefaultTabs, accordion, propertyDataInit) {
 
     // Information panel layouts for the current authorized role - we should degrade nicely if the service is not found
     _(JSONconf.liveDataEndPoints).each(function(endPoint) {
@@ -38,8 +38,12 @@ var loadTabConfig = function(JSONconf, gCurrentLoggedRole, gLayoutsArr, addDefau
                             gLayoutsArr[recs[key].json.row.key_arr] = a;
                         }
                     }
-
-                    addDefaultTabs(accordion, gLayoutsArr, JSONconf);
+                    
+                    // Adding default tabs except if the app is called with a property number
+                    if (!(propertyDataInit))
+                    {
+	                addDefaultTabs(accordion, gLayoutsArr, JSONconf);
+	            }
                 }
             }
         });
