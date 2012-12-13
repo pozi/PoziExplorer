@@ -82,6 +82,7 @@
  * @require doClearHighlight.js
  * @require buildAccordion.js
  * @require buildTabExpand.js
+ * @require buildTabCollapse.js
  * @require buildNorthPart.js
  * @require buildEastPanel.js
  * @require buildPortalItems.js

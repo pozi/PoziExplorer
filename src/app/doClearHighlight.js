@@ -3,6 +3,10 @@ doClearHighlight = function(app, gCombostore, addDefaultTabs, accordion, gLayout
     // Removing the highlight by clearing the selected features in the WFS layer
     app.getSelectionLayer().removeAllFeatures();
     app.getSelectionLayer().redraw();
+
+    // Execute all closing functions of the currently open tab
+    tabCollapse();
+
     // Clearing combo
     var cb = Ext.getCmp('gtInfoCombobox');
     cb.collapse();

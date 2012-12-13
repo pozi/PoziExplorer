@@ -14,6 +14,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) { // AND GLOBAL
         gCombostore = buildComboStore(); // Store behind the info drop-down list
         westPanel = buildWestPanel(JSONconf);
         tabExpand = buildTabExpand(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, JSONconf, gCurrentLoggedRole, helpers);
+	tabCollapse = buildTabCollapse(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr);
         northPart = buildNorthPart(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpand, gLayoutsArr, gCurrentExpandedTabIdx);
         accordion = buildAccordion(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, tabExpand);
         eastPanel = buildEastPanel(JSONconf, northPart, accordion);
