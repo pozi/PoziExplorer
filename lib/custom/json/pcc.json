@@ -221,8 +221,8 @@
         "storeMode": "sqlite",
         "storeName": "pcc"
     }, {
-        "urlLayout": "http://v3.pozi.com/ws/rest/v3/ws_get_layouts.php",
-        "urlLiveData": "http://v3.pozi.com/ws/rest/v3/ws_get_live_data.php",
+        "urlLayout": "/ws/rest/v3/ws_get_layouts.php",
+        "urlLiveData": "/ws/rest/v3/ws_get_live_data.php",
         "storeMode": "pgsql",
         "storeName": "pccgis"
     }],
