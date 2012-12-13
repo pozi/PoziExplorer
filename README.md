@@ -22,13 +22,14 @@ Set up customized `build.xml` (this will affect SDK commands for all apps):
 To run in debug mode (for Groundtruth internal use):
 
     suite-sdk debug -l 9090 -g http://v3.pozi.com/geoserver .
-    open http://localhost:9090/?config=corangamite    # for example
+    open http://localhost:9090/?config=corangamite  # for example
+    open http://corangamite.pozi.dev:9090/          # for example (only if you've set the right alias for localhost)
 
 To deploy (for Groundtruth use):
 
     suite-sdk deploy -d v3.pozi.com -r 8080 -u username -p password -c tomcat6x .
-    open http://v3.pozi.com/corangamite    # for example
-    open http://v3.pozi.com/PoziExplorer/rev.txt   # for revision details of live code
+    open http://corangamite.pozi.com   # for example
+    open http://corangamite.pozi.com/rev.txt   # for revision details of live code
 
 ## Other runtime dependencies
 
