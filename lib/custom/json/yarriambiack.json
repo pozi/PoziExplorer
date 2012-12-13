@@ -85,27 +85,27 @@
         "backend_cascaded2":{	  	
             "url": "http://basemap.pozi.com/geoserver/DSE_FEATURES_OF_INTEREST/ows",	  	
 			"title": "DSE - Features Of interest",
-			"ptype": "gxp_wmscsource"  	
+			"ptype": "gxp_wmscsource", "tiled": false 	
         },
         "backend_cascaded3":{	  	
             "url": "http://basemap.pozi.com/geoserver/DSE_PLANNING/ows",	  	
 			"title": "DSE - Planning",
-			"ptype": "gxp_wmscsource"  	
+			"ptype": "gxp_wmscsource", "tiled": false 	
         },
         "backend_cascaded4":{	  	
             "url": "http://basemap.pozi.com/geoserver/DSE_PROPERTY/ows",	  	
 			"title": "DSE - Property",
-			"ptype": "gxp_wmscsource"  	
+			"ptype": "gxp_wmscsource", "tiled": false 	
         },
         "backend_cascaded5":{	  	
             "url": "http://basemap.pozi.com/geoserver/DSE_TRANSPORT/ows",	  	
 			"title": "DSE - Transport",
-			"ptype": "gxp_wmscsource"  	
+			"ptype": "gxp_wmscsource", "tiled": false 	
         },
         "backend_cascaded6":{	  	
             "url": "http://basemap.pozi.com/geoserver/DSE_TOPOGRAPHY/ows",	  	
 			"title": "DSE - Topography",
-			"ptype": "gxp_wmscsource"  	
+			"ptype": "gxp_wmscsource", "tiled": false 	
         },
         "dse_iws_cascaded": {
             "url": [
