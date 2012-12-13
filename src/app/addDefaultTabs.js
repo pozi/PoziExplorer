@@ -23,7 +23,7 @@ addDefaultTabs = function(accordion, gLayoutsArr, JSONconf) {
                 tag: 'div',
                 style: [
                     'background-image: none; ',
-                    'background-color: ', (config.col || "#A0A0A0"), '; ',
+                    'background-color: ', (config.col || "#7a7a7a"), '; ',
                     'padding-left: 10px;',
                     'display: inline-'+displayBlock+';'
                 ].join(''),

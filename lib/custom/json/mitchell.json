@@ -343,21 +343,6 @@
         {
             "source": "ol",
             "group": "background",
-            "visibility": false,
-            "fixed": true,
-            "type": "OpenLayers.Layer.OSM",
-            "args": [
-                "Aerial Photo (Nearmap)",
-                "https://mitchell:v55ngas6@www.nearmap.com/maps/nml=Vert&x=${x}&y=${y}&z=${z}",
-                {
-                    "numZoomLevels": 24,
-                    "transitionEffect": "resize"
-                }
-            ]
-        },
-        {
-            "source": "ol",
-            "group": "background",
             "fixed": true,
             "type": "OpenLayers.Layer",
             "args": [
@@ -377,10 +362,10 @@
     "workspace": "MITCHELL",
     "highlightSymboliser": {
         "name": "test",
-        "strokeColor": "orange",
+        "strokeColor": "#FFA500",
         "strokeWidth": 20,
         "strokeOpacity": 0.5,
-        "fillColor": "orange",
+        "fillColor": "#FFA500",
         "fillOpacity": 0.2
     },
     "liveDataEndPoints": [

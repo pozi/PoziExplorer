@@ -264,10 +264,10 @@
     "workspace": "WANGARATTA",
     "highlightSymboliser": {
         "name": "test",
-        "strokeColor": "orange",
+        "strokeColor": "#FFA500",
         "strokeWidth": 20,
         "strokeOpacity": 0.5,
-        "fillColor": "orange",
+        "fillColor": "#FFA500",
         "fillOpacity": 0.2
     },
     "liveDataEndPoints": [
