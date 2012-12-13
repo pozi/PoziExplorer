@@ -40,6 +40,8 @@ var loadTabConfig = function(JSONconf, gCurrentLoggedRole, gLayoutsArr, addDefau
                     }
                     
                     // Adding default tabs except if the app is called with a property number
+                    // Note: \several end points may have some tab configurations for the NONE layer
+                    // TODO: ideally, the default tabs should be added after the last JSON endpoint has arrived (and only if there is no property passed in the URL)
                     if (!(propertyDataInit))
                     {
 	                addDefaultTabs(accordion, gLayoutsArr, JSONconf);
