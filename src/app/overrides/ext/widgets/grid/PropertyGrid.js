@@ -33,7 +33,7 @@ Ext.grid.PropertyColumnModel.prototype.renderCell = function(val, meta, rec){
       {
         var linkName=val.split("/").pop();
         if (linkName.length<1) {linkName = 'link';}
-        if (linkName.length>15) {linkName = 'link';}
+        if (linkName.length>20) {linkName = 'link';}
         rv ="<a href='"+val+"' target='_blank'>"+linkName+"</a>";
       }
       doNotHTMLEncode = true;
