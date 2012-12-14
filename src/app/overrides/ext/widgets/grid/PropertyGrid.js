@@ -27,6 +27,7 @@ Ext.grid.PropertyColumnModel.prototype.renderCell = function(val, meta, rec){
       	}
       	else
           rv ="<a href='"+photoLink+"' target='_blank'><img src='"+val+"' style='display:block; max-height:150px; max-width:230px; height:auto; margin-right:auto;' /></a>";
+          photoLink = null;
       }
       else
       {
