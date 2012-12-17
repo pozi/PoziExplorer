@@ -128,6 +128,18 @@
         }
     },
     "layers": [{
+        "source": "dse_iws_cascaded",
+        "name": "INDIGO:TOWNS_RUTHERGLEN-WAHGUNYAH_2009OCT20_AIR_VIS_15CM_MGA55",
+        "title": "Aerial Photo (Rutherglen-Wahgunyah, Oct 2009)",
+        "visibility": false,
+        "opacity": 1,
+        "format": "image/JPEG",
+        "tiled": true,
+        "cached": true,
+        "transparent": true,
+        "styles": "",
+        "group": "default"
+    }, {
         "source": "backend",
         "name": "VICMAP:VW_DSE_VMPLAN_ZONE",
         "title": "Planning Zones",
