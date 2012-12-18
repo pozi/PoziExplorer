@@ -35,6 +35,9 @@
         "ptype": "gxp_zoomtolayerextent",
         "actionTarget": "tree.contextMenu"
     }, {
+        "ptype": "gxp_styler",
+        "actionTarget": "tree.contextMenu"
+    }, {
         "ptype": "gxp_removelayer",
         "actionTarget": "tree.contextMenu"
     }, {
@@ -144,22 +147,22 @@
         "transparent": true,
         "tiled": false
     }, {
-        "source": "local",
-        "name": "PCC_SCHOOLS",
-        "title": "Schools",
-        "visibility": true,
-        "opacity": 0.85,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
         "source": "backend",
         "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
         "title": "Properties",
         "visibility": true,
         "opacity": 0.25,
         "format": "image/GIF",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+    }, {
+        "source": "local",
+        "name": "PCC_SCHOOLS",
+        "title": "Schools",
+        "visibility": true,
+        "opacity": 0.85,
+        "format": "image/png8",
         "styles": "",
         "transparent": true,
         "tiled": false
@@ -221,6 +224,11 @@
         "storeMode": "sqlite",
         "storeName": "pcc"
     }, {
+        "urlLayout": "http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php",
+        "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
+        "storeMode": "pgsql",
+        "storeName": "vicmap"
+    }, {
         "urlLayout": "/ws/rest/v3/ws_get_layouts.php",
         "urlLiveData": "/ws/rest/v3/ws_get_live_data.php",
         "storeMode": "pgsql",
@@ -236,6 +244,5 @@
     "printMapTitle": "Point Cook College",
     "linkToCouncilWebsite": "http://www.pcc.vic.edu.au/",
     "collapseWestPanel": true,
-    "reloadOnLogin": true,
-    "hideLayerPanelButton": true
+    "reloadOnLogin": true
 }
