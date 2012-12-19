@@ -149,10 +149,15 @@
         <copy todir="${app.build}/theme">
             <fileset dir="${app.fullpath}/theme"/>
         </copy>
-        <mkdir dir="${app.build}/lib/custom"/>        
         <!-- copy custom app resources -->
+        <mkdir dir="${app.build}/lib/custom"/>        
         <copy todir="${app.build}/lib/custom">
             <fileset dir="${app.fullpath}/lib/custom"/>
+        </copy>
+        <!-- copy bootstrap -->
+        <mkdir dir="${app.build}/bootstrap"/>        
+        <copy todir="${app.build}/bootstrap">
+            <fileset dir="${app.fullpath}/bootstrap"/>
         </copy>
         <copy todir="${app.build}">
             <fileset dir="${app.fullpath}">
