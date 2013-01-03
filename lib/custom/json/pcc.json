@@ -77,49 +77,6 @@
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
-        "backend_cascaded1": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_ADMINISTRATIVE_BOUNDARIES/ows",
-            "title": "DSE - Adminstrative Boundaries",
-            "ptype": "gxp_wmscsource"
-        },
-        "backend_cascaded2": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_FEATURES_OF_INTEREST/ows",
-            "title": "DSE - Features Of interest",
-            "ptype": "gxp_wmscsource",
-            "tiled": false
-        },
-        "backend_cascaded3": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_PLANNING/ows",
-            "title": "DSE - Planning",
-            "ptype": "gxp_wmscsource",
-            "tiled": false
-        },
-        "backend_cascaded4": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_PROPERTY/ows",
-            "title": "DSE - Property",
-            "ptype": "gxp_wmscsource",
-            "tiled": false
-        },
-        "backend_cascaded5": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_TRANSPORT/ows",
-            "title": "DSE - Transport",
-            "ptype": "gxp_wmscsource",
-            "tiled": false
-        },
-        "backend_cascaded6": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_TOPOGRAPHY/ows",
-            "title": "DSE - Topography",
-            "ptype": "gxp_wmscsource",
-            "tiled": false
-        },
-        "dse_iws_cascaded": {
-            "url": ["http://m1.pozi.com/geoserver/PCC/ows", "http://m2.pozi.com/geoserver/PCC/ows", "http://m3.pozi.com/geoserver/PCC/ows", "http://m4.pozi.com/geoserver/PCC/ows"],
-            "title": "DSE Image Web Server",
-            "ptype": "gxp_wmscsource",
-            "defaultType": "image/JPEG",
-            "group": "background",
-            "transition": "resize"
-        },
         "mapquest": {
             "ptype": "gxp_mapquestsource"
         },
