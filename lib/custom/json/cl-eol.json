@@ -199,7 +199,7 @@
         "source": "google",
         "name": "HYBRID",
         "visibility": true
-    }, ],
+    }],
     "center": [
     16024006, -4632500],
     "zoom": 12,
