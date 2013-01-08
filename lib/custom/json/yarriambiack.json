@@ -289,7 +289,6 @@
         "storeName": "yarriambiackgis"
     }],
     "logoClientSrc": "theme/app/img/custom/yarriambiack_logo.png",
-    "logoClientWidth": 160,
     "zoomMax": 18,
     "bannerLineColor": "#CF5D38",
     "bannerRightCornerLine1": "Yarriambiack Shire Council",

@@ -301,7 +301,6 @@
         "storeName": "moiragis"
     }],
     "logoClientSrc": "theme/app/img/custom/moira_logo.gif",
-    "logoClientWidth": 290,
     "zoomMax": 18,
     "bannerLineColor": "#026CE5",
     "bannerRightCornerLine1": "Moira Shire Council",
