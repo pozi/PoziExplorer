@@ -301,7 +301,6 @@
         "storeName": "strathbogiegis"
     }],
     "logoClientSrc": "theme/app/img/custom/strathbogie_logo.png",
-    "logoClientWidth": 173,
     "zoomMax": 18,
     "bannerLineColor": "#1A376E",
     "bannerRightCornerLine1": "Strathbogie Shire Council",

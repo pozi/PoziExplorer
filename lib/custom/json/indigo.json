@@ -291,7 +291,6 @@
         "storeName": "indigogis"
     }],
     "logoClientSrc": "theme/app/img/custom/indigo_logo.png",
-    "logoClientWidth": 145,
     "zoomMax": 18,
     "bannerLineColor": "#9A2843",
     "bannerRightCornerLine1": "Indigo Shire Council",

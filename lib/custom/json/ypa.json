@@ -198,7 +198,6 @@
         "storeName": "vicmap"
     }],
     "logoClientSrc": "theme/app/img/custom/ypa_logo.jpg",
-    "logoClientWidth": 188,
     "zoomMax": 18,
     "bannerLineColor": "#105c91",
     "bannerRightCornerLine1": "YPA Home",

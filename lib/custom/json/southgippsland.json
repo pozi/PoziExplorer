@@ -298,7 +298,6 @@
         "storeName": "southgippslandgis"
     }],
     "logoClientSrc": "theme/app/img/custom/southgippsland_logo.png",
-    "logoClientWidth": 180,
     "zoomMax": 18,
     "bannerLineColor": "#497A7F",
     "bannerRightCornerLine1": "South Gippsland Shire Council",

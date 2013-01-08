@@ -328,7 +328,6 @@
         "storeName": "hindmarshgis"
     }],
     "logoClientSrc": "theme/app/img/custom/hindmarsh_logo.png",
-    "logoClientWidth": 210,
     "zoomMax": 18,
     "bannerLineColor": "#2BB742",
     "bannerRightCornerLine1": "Hindmarsh Shire Council",

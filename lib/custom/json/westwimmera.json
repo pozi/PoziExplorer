@@ -283,7 +283,6 @@
         "storeName": "vicmap"
     }],
     "logoClientSrc": "theme/app/img/custom/westwimmera_logo.gif",
-    "logoClientWidth": 167,
     "zoomMax": 18,
     "bannerLineColor": "#D0D2B9",
     "bannerRightCornerLine1": "West Wimmera Shire Council",

@@ -278,7 +278,6 @@
         "storeName": "towonggis"
     }],
     "logoClientSrc": "theme/app/img/custom/towong_logo.png",
-    "logoClientWidth": 225,
     "zoomMax": 18,
     "bannerLineColor": "#0053A8",
     "bannerRightCornerLine1": "Towong Shire Council",

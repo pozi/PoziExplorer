@@ -278,7 +278,6 @@
         "storeName": "corangamitegis"
     }],
     "logoClientSrc": "theme/app/img/custom/corangamite_logo.png",
-    "logoClientWidth": 150,
     "zoomMax": 18,
     "bannerLineColor": "#9BCD65",
     "bannerRightCornerLine1": "Corangamite Shire Council",
