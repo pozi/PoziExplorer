@@ -109,7 +109,7 @@
             "ptype": "gxp_wmscsource",
             "format": "image/JPEG",
             "group": "background",
-            "transition": 'resize'
+            "transition": "resize"
         },
         "mapquest": {
             "ptype": "gxp_mapquestsource"
