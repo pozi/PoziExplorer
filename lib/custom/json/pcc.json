@@ -96,6 +96,16 @@
     "layers": [{
         "source": "local",
         "name": "PCC_SCHOOL_ZONES",
+        "title": "School Zones (for edit)",
+        "visibility": true,
+        "opacity": 0.85,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+    }, {
+        "source": "local",
+        "name": "PCC_SCHOOL_ZONES2",
         "title": "School Zones",
         "visibility": true,
         "opacity": 0.85,
@@ -116,6 +126,16 @@
     }, {
         "source": "local",
         "name": "PCC_SCHOOLS",
+        "title": "Schools (for edit)",
+        "visibility": true,
+        "opacity": 0.85,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+    }, {
+        "source": "local",
+        "name": "PCC_SCHOOLS2",
         "title": "Schools",
         "visibility": true,
         "opacity": 0.85,
