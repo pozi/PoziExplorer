@@ -329,8 +329,8 @@
         "fillOpacity": 0.2
     },
     "liveDataEndPoints": [{
-        "urlLayout": "http://172.20.10.19:9090/ws_new/rest/v3/ws_get_layouts.php",
-        "urlLiveData": "http://172.20.10.19:9090/ws_new/rest/v3/ws_get_live_data.php",
+        "urlLayout": "http://172.20.10.19:9090/ws/rest/v3/ws_get_layouts.php",
+        "urlLiveData": "http://172.20.10.19:9090/ws/rest/v3/ws_get_live_data.php",
         "storeMode": "sqlite",
         "storeName": "mitchell"
     }, {
