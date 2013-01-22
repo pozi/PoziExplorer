@@ -9,11 +9,12 @@ buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSel
             items: [
                 new Ext.BoxComponent({
                     region: "west",
-                    bodyStyle: " background-color: transparent ",
+                    width: 250,
+                    bodyStyle: " background-color: transparent;",
                     html: '<img style="height: 60px; padding: 20px;" src="' + JSONconf.logoClientSrc + '" />'
                 }),
                 {
-                    columnWidth: 0.5,
+                    columnWidth: 0.48,
                     html: "",
                     height: 100,
                     border: false
