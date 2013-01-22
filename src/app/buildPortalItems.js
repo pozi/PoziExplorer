@@ -10,7 +10,7 @@ buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSel
                 new Ext.BoxComponent({
                     region: "west",
                     bodyStyle: " background-color: transparent ",
-                    html: '<img style="height: 60px; padding: 20px" src="' + JSONconf.logoClientSrc + '" align="right"/>'
+                    html: '<img style="height: 60px; padding: 20px;" src="' + JSONconf.logoClientSrc + '" />'
                 }),
                 {
                     columnWidth: 0.5,
@@ -63,7 +63,7 @@ buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSel
                     html: '<img style="vertical-align: middle;"src="theme/app/img/panel/search_button.png"/>'
                 }),
                 {
-                    columnWidth: 0.5,
+                    columnWidth: 0.48,
                     html: "",
                     height: 100,
                     border: false
@@ -71,7 +71,7 @@ buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSel
                 new Ext.Panel({
                     region: "east",
                     border: false,
-                    width: 200,
+                    width: 160,
                     height: 100,
                     bodyStyle: " background-color: transparent; ",
                     html: '<p style="text-align:right;padding: 15px;font-size:12px;"><a href="' + JSONconf.linkToCouncilWebsite + '" target="_blank">' + JSONconf.bannerRightCornerLine1 + '</a><br> ' + JSONconf.bannerRightCornerLine2 + ' <br><br>Map powered by <a href="http://www.pozi.com" target="_blank">Pozi</a></p>'
