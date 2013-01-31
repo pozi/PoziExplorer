@@ -290,7 +290,7 @@
     }],
     "logoClientSrc": "theme/app/img/custom/westwimmera_logo.gif",
     "zoomMax": 18,
-    "bannerLineColor": "#D0D2B9",
+    "bannerLineColor": "#AE5D12",
     "bannerRightCornerLine1": "West Wimmera Shire Council",
     "bannerRightCornerLine2": "Victoria, Australia",
     "quickZoomDatastore": [
