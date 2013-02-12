@@ -27,7 +27,7 @@ To run in debug mode (for Groundtruth internal use):
 
 To deploy (for Groundtruth use):
 
-    suite-sdk deploy -d v3.pozi.com -r 8080 -u username -p password -c tomcat6x .
+    suite-sdk deploy -d v3.pozi.com -r 8080 -u manager -p password -c tomcat6x .
     open http://corangamite.pozi.com   # for example
     open http://corangamite.pozi.com/rev.txt   # for revision details of live code
 
