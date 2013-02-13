@@ -124,6 +124,9 @@
         "mapquest": {
             "ptype": "gxp_mapquestsource"
         },
+        "google": {
+            "ptype": "gxp_googlesource"
+        },
         "bing": {
             "ptype": "gxp_bingsource"
         },
