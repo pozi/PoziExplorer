@@ -346,7 +346,7 @@
     }],
     "logoClientSrc": "theme/app/img/custom/mitchell_logo.jpg",
     "zoomMax": 18,
-    "bannerLineColor": "#E48D00",
+    "bannerLineColor": "#D18623",
     "bannerRightCornerLine1": "Mitchell Shire Council",
     "bannerRightCornerLine2": "Victoria, Australia",
     "quickZoomDatastore": [
