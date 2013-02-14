@@ -11,6 +11,11 @@
                 "collapsed": true
             },
             "default": "Overlays",
+            "aerial": {
+                "title": "Aerial Photos",
+                "collapsed": true,
+                "exclusive": true
+            },
             "background": {
                 "title": "Base Maps",
                 "exclusive": true
@@ -252,15 +257,24 @@
         "visibility": false,
         "group": "background"
     }, {
-        "source": "dse_iws_cascaded",
+        "source": "backend",
         "name": "WESTWIMMERA:AERIAL_WIMMERA-CMA_2004NOV01_AIR_VIS_60CM_MGA54",
-        "title": "Aerial Photo",
+        "title": "Aerial Photo (WCMA, Nov 2004)",
         "visibility": false,
-        "opacity": 1,
-        "group": "background",
+        "opacity": 0,
+        "group": "aerial",
         "selected": false,
         "format": "image/JPEG",
-        "transparent": true
+        "transparent": true,
+        "tiled": true,
+        "styles": "",
+        "displayInOpacitySlider": true
+    }, {
+        "source": "ol",
+        "group": "aerial",
+        "fixed": true,
+        "type": "OpenLayers.Layer",
+        "args": ["No Aerial", { "visibility": true }]
     }, {
         "source": "ol",
         "group": "background",
