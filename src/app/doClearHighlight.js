@@ -1,8 +1,12 @@
 // Remove the WFS highlight, clear and disable the select feature combo, empty the combostore and clean the details panel
 doClearHighlight = function(app, gCombostore, addDefaultTabs, accordion, gLayoutsArr, JSONconf, northPart) {
     // Removing the highlight by clearing the selected features in the WFS layer
-    app.getSelectionLayer().removeAllFeatures();
-    app.getSelectionLayer().redraw();
+    var selectionLayer = app.getSelectionLayer();
+    if (selectionLayer)
+    {
+        selectionLayer.removeAllFeatures();
+        selectionLayer.redraw();
+    }
 
     // Execute all closing functions of the currently open tab
     tabCollapse();

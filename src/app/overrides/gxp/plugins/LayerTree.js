@@ -79,7 +79,10 @@ gxp.plugins.LayerTree.prototype.createOutputConfig = function() {
               else 
               // We deselect any selected nodes
               {	
-                this.output[0].getSelectionModel().clearSelections();
+                  if (this.output[0])
+                  {
+                      this.output[0].getSelectionModel().clearSelections();
+                  }
               }
             },
             scope: this

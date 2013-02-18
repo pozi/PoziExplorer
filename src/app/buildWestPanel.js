@@ -22,11 +22,9 @@ buildWestPanel = function(JSONconf) {
             bodyStyle: " background-color: white; "
         },
         headerStyle: 'background-color:' + JSONconf.bannerLineColor + ';border:0px; margin:0px 0px 0px; padding: 5px 8px;',
-        items: [{
-            region: 'center',
-            border: false,
-            id: 'tree'
-        }]
+        items: [
+
+        ]
     });
 
 };
