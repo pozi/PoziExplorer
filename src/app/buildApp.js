@@ -1,6 +1,6 @@
 buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDefaultTabs, accordion, gLayoutsArr, northPart, gCurrentLoggedRole, loadTabConfig, buildWFSLayer) {
 
-    var viewerConfig = {
+    var app = new gxp.Viewer({
         authorizedRoles: ['ROLE_ADMINISTRATOR'],
         proxy: JSONconf.proxy,
         //defaultSourceType: "gxp_wmscsource",
@@ -33,9 +33,7 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
                 xtype: "gxp_scaleoverlay"
             }]
         }
-    };
-
-    var app = new gxp.Viewer(viewerConfig);
+    });
 
     // Setting the title of the map to print
     app.about = { title: JSONconf.printMapTitle };
@@ -147,8 +145,6 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
 
         var win;
         var panel;
-        var c_center = app.mapPanel.map.getCenter();
-        var c_zoom = app.mapPanel.map.getZoom();
 
         var submitLogin = function() {
             panel.buttons[0].disable();
@@ -170,72 +166,9 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
                     var user = form.findField('username').getValue();
                     app.setCookieValue(app.cookieParamName, user);
                     app.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
-
-                    // Removing the layer manager
-                    _(app.tools).each(function(t) {
-                        if (t.ptype)
-                        {
-                            if (t.ptype == "gxp_layermanager")
-                            {
-                                t.deactivate();
-                                t.removeOutput();
-                                delete app.tools[t.id];
-
-                                // Also removing the Ext div if it exists
-                                var div_tree = Ext.get('tree');
-                                if (div_tree)
-                                {
-                                    div_tree.remove();
-                                }
-                            }
-                        }
-                    });
-
-                    // Re-adding the layer manager, based on the layers accessible after login
-                    _(JSONconf.tools).each(function(t) {
-                        if (t.ptype)
-                        {
-                            if (t.ptype == "gxp_layermanager")
-                            {
-                                var lm = Ext.ComponentMgr.createPlugin(t);
-                                app.tools[lm.id] = lm;
-                                lm.target = app;
-                            }
-                        }
-                    });
-
-                    // initialize all layer source plugins (getCapabilities)
-                    var config, queue = [];
-                    for (var key in JSONconf.sources) {
-                        queue.push(app.createSourceLoader(key));
-                    }
-
-                    // Removing all layers from the map panel
-                    app.mapPanel.layers.removeAll();
-
-                    // Re-adding all layers
-                    var f = function() {
-                        // removing toolbar items to avoid duplicate tools
-                        app.getToolbar().removeAll();
-
-                        // add any layers from config
-                        app.addLayers();
-
-                        // recenter the map to where the user was before logging in
-                        app.mapPanel.map.setCenter(c_center,c_zoom);
-
-                        // respond to any queued requests for layer records
-                        app.checkLayerRecordQueue();
-
-                        // broadcast portal ready state (to render the layer tree and allow the tree div to be found for addition of login button)
-                        // both events are required, and in this order
-                        app.fireEvent("portalready");
-                        app.fireEvent("ready");
-                    }
-
-                    // This can only be performed when all sources have been reloaded and the tree re-inserted
-                    gxp.util.dispatch(queue, f, this);
-
+                    // Reloading the layer tree (TODO)
+                    ////Ext.getCmp('tree').body=null;
+                    ////app.addLayers();
                     // Reloading the tabs
                     gCurrentLoggedRole.value = app.authorizedRoles[0];
                     loadTabConfig(JSONconf, gCurrentLoggedRole, gLayoutsArr, addDefaultTabs, accordion);
@@ -346,12 +279,9 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
      */
     app.applyLoginState = function(iconCls, text, handler, scope) {
         var loginButton = Ext.getCmp("loginbutton");
-        if (loginButton)
-        {
-	        loginButton.setIconClass(iconCls);
-	        loginButton.setText(text);
-	        loginButton.setHandler(handler, scope);
-	}
+        loginButton.setIconClass(iconCls);
+        loginButton.setText(text);
+        loginButton.setHandler(handler, scope);
     };
 
     /** private: method[showLogin]
