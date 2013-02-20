@@ -187,6 +187,16 @@
         "transparent": true,
         "tiled": false
     }, {
+        "source": "backend",
+        "name": "VICMAP:VMPROP_PARCEL",
+        "title": "Parcels",
+        "visibility": false,
+        "opacity": 0.75,
+        "format": "image/png8",
+        "styles": "parcel_label",
+        "transparent": true,
+        "tiled": false
+    }, {
         "source": "local",
         "name": "WWSC_ROAD_DETAIL",
         "title": "Road Details",
