@@ -315,6 +315,6 @@
     ],
     "printMapTitle": "Indigo Shire Council",
     "linkToCouncilWebsite": "http://www.indigoshire.vic.gov.au/",
-    "collapseWestPanel": true,
+    "collapseWestPanel": false,
     "openFirstDefaultTab": true
 }
