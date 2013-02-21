@@ -21,6 +21,19 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) { // AND GLOBAL
         portalItems = buildPortalItems(JSONconf, buildAllFeaturesDataStore, searchRecordSelectHandler, gfromWFSFlag, gtyp, glab, westPanel, eastPanel);
         app = buildApp(portalItems, JSONconf, doClearHighlight, gCombostore, addDefaultTabs, accordion, gLayoutsArr, northPart, gCurrentLoggedRole, loadTabConfig, buildWFSLayer);
 
+	// Setting current logged role to request the correct tabs
+        app.authorizedRoles = [];
+
+        // If there is a cookie, the user is authorize
+        var user = app.getCookieValue(app.cookieParamName);
+        if (user !== null) {
+            app.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
+            gCurrentLoggedRole.value = app.authorizedRoles[0];
+        }
+
+        // Loading the tabs on initial page load
+        loadTabConfig(JSONconf, gCurrentLoggedRole, gLayoutsArr, addDefaultTabs, accordion, propertyDataInit);
+
         app.on("ready", function() {
             app.getSelectionLayer().events.on({ featuresadded: buildFeaturesAddedHandler(gfromWFSFlag, gComboDataArray, glab, gtyp, gCombostore) });
 
@@ -35,8 +48,6 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) { // AND GLOBAL
 
             initAuthorization(app, gCurrentLoggedRole, westPanel);
 
-            // Loading the tabs on initial page load
-            loadTabConfig(JSONconf, gCurrentLoggedRole, gLayoutsArr, addDefaultTabs, accordion, propertyDataInit);
         });
 
     };

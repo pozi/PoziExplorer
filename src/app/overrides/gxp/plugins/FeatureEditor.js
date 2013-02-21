@@ -532,8 +532,12 @@ gxp.plugins.FeatureEditor.prototype.enableOrDisable = function() {
   if (this.splitButton) {
       this.splitButton.setDisabled(disable);
   }
-  this.createAction.setDisabled(disable);
-  this.editAction.setDisabled(disable);
+  if (this.createAction) {
+      this.createAction.setDisabled(disable);
+  }
+  if (this.editAction) {
+      this.editAction.setDisabled(disable);
+  }
   
   /*
   // Activating or deactivating the getFeatureInfo controls based on the feature editor being enabled or disabled
