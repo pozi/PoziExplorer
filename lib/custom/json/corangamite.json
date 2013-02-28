@@ -107,7 +107,7 @@
             "url": ["http://m1.pozi.com/geoserver/CORANGAMITE/ows", "http://m2.pozi.com/geoserver/CORANGAMITE/ows", "http://m3.pozi.com/geoserver/CORANGAMITE/ows", "http://m4.pozi.com/geoserver/CORANGAMITE/ows"],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
-            "format": "image/JPEG",
+            "defaultType": "image/JPEG",
             "group": "background",
             "transition": "resize"
         },
@@ -242,6 +242,16 @@
         "name": "osm",
         "visibility": false,
         "group": "background"
+    }, {
+        "source": "dse_iws_cascaded",
+        "name": "CORANGAMITE:AERIAL_LANDCOVER54_2010FEB23_AIR_VIS_50CM_MGA54",
+        "title": "Aerial Photo (02/2010)",
+        "visibility": false,
+        "opacity": 1,
+        "group": "background",
+        "selected": false,
+        "format": "image/JPEG",
+        "transparent": true
     }, {
         "source": "ol",
         "group": "background",
