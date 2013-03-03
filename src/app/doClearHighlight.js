@@ -1,5 +1,5 @@
 // Remove the WFS highlight, clear and disable the select feature combo, empty the combostore and clean the details panel
-doClearHighlight = function(app, gCombostore, addDefaultTabs, accordion, gLayoutsArr, JSONconf, northPart) {
+doClearHighlight = function(app, gCombostore, addDefaultTabs, accordion, gLayoutsArr, JSONconf, northPart, collapseFlag) {
     // Removing the highlight by clearing the selected features in the WFS layer
     var selectionLayer = app.getSelectionLayer();
     if (selectionLayer)
@@ -8,8 +8,21 @@ doClearHighlight = function(app, gCombostore, addDefaultTabs, accordion, gLayout
         selectionLayer.redraw();
     }
 
-    // Execute all closing functions of the currently open tab
-    tabCollapse();
+    // Execute all closing functions of the currently open tab if specified by the collapse flag
+    if (collapseFlag)
+    {
+        tabCollapse();
+    }
+    else
+    {
+	// Cleaning up the screen by removing the WKT highlights from the subtabs (including the routing highlight)
+	var wktLayer = app.getLayerByName("WKT");
+	if (wktLayer)
+	{
+	    wktLayer.removeAllFeatures();
+	    wktLayer.redraw();
+	}
+    }
 
     // Clearing combo
     var cb = Ext.getCmp('gtInfoCombobox');

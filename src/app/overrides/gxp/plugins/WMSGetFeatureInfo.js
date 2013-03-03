@@ -164,7 +164,8 @@
       // Only to be executed when all queriable layers have been traversed (depends number of layers actually ticked in the layer tree)
       if (layerCounter==layerMax)
       {
-        // Remove any previous results						
+        // Remove any previous results, but without performing the collapse functions on subtabs
+        // This allows to keep layers that were switched on
         app.clearHighlight();
 
         if (gComboDataArray.value.length)

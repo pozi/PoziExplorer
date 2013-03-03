@@ -78,6 +78,9 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
       doClearHighlight(app, gCombostore, addDefaultTabs, accordion, gLayoutsArr, JSONconf, northPart);
     }
 
+    app.clearHighlightWithCollapse = function() {
+      doClearHighlight(app, gCombostore, addDefaultTabs, accordion, gLayoutsArr, JSONconf, northPart, true);
+    }
 
     // Login management via cookie and internal this.authorizedRoles variable
     // Variable and functions copied across from GeoExplorer' Composer.js:
@@ -172,7 +175,7 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
                     // Reloading the tabs
                     gCurrentLoggedRole.value = app.authorizedRoles[0];
                     loadTabConfig(JSONconf, gCurrentLoggedRole, gLayoutsArr, addDefaultTabs, accordion);
-                    app.clearHighlight();
+                    app.clearHighlightWithCollapse();
                     // Only showing the username without its workspace
                     var typedUsername = user;
                     if (user.split(".")[1]) {

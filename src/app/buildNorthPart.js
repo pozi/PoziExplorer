@@ -48,7 +48,7 @@ buildNorthPart = function(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpan
                         listeners: {
                             render: function(c) {
                                 // Expanding the drop down on click
-                                c.el.on('click', app.clearHighlight);
+                                c.el.on('click', app.clearHighlightWithCollapse);
                                 // Using the pointer cursor when hovering over the element
                                 c.el.on('mouseover', function() { this.dom.style.cursor = 'pointer'; });
                             },
