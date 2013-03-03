@@ -58,6 +58,8 @@
  *
  * @require underscore.js
  *
+ * @require overrides/OpenLayers/Control/WMSGetFeatureInfo.js
+ *
  * @require overrides/ext/widgets/grid/PropertyGrid.js
  * @require overrides/ext/dd/DragTracker.js
  * @require overrides/gxp/plugins/FeatureEditor.js
