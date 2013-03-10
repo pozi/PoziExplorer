@@ -6,7 +6,8 @@ initAuthorization = function(app, gCurrentLoggedRole, westPanel) {
     var user = app.getCookieValue(app.cookieParamName);
     if (user !== null) {
         app.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
-        gCurrentLoggedRole.value = app.authorizedRoles[0];
+        // Returning the last part of the username (after the dot e.g. 'planning' from 'MITCHELL.planning'), or the username (if there is no dot e.g. 'admin')
+        gCurrentLoggedRole.value = user.split(".")[1] || user;
     }
 
     // unauthorized, show login button
@@ -28,7 +29,7 @@ initAuthorization = function(app, gCurrentLoggedRole, westPanel) {
         westPanel.expand();
 
         if (app.authorizedRoles[0]) {
-            gCurrentLoggedRole.value = app.authorizedRoles[0];
+            gCurrentLoggedRole.value = typedUsername;
         }
     }
 

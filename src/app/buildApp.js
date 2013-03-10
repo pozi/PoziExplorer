@@ -172,16 +172,19 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
                     // Reloading the layer tree (TODO)
                     ////Ext.getCmp('tree').body=null;
                     ////app.addLayers();
-                    // Reloading the tabs
-                    gCurrentLoggedRole.value = app.authorizedRoles[0];
-                    loadTabConfig(JSONconf, gCurrentLoggedRole, gLayoutsArr, addDefaultTabs, accordion);
-                    app.clearHighlightWithCollapse();
+
                     // Only showing the username without its workspace
                     var typedUsername = user;
                     if (user.split(".")[1]) {
                         typedUsername = user.split(".")[1];
                     }
                     app.showLogout(typedUsername);
+
+                    // Reloading the tabs
+                    gCurrentLoggedRole.value = typedUsername;
+                    loadTabConfig(JSONconf, gCurrentLoggedRole, gLayoutsArr, addDefaultTabs, accordion);
+                    app.clearHighlightWithCollapse();
+
                     win.un("beforedestroy", this.cancelAuthentication, this);
                     win.close();
 

@@ -28,7 +28,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) { // AND GLOBAL
         var user = app.getCookieValue(app.cookieParamName);
         if (user !== null) {
             app.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
-            gCurrentLoggedRole.value = app.authorizedRoles[0];
+            gCurrentLoggedRole.value = user.split(".")[1] || user;
         }
 
         // Loading the tabs on initial page load
