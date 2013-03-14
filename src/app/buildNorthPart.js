@@ -224,7 +224,9 @@ buildNorthPart = function(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpan
                                         'font-family: tahoma,arial,verdana,sans-serif;',
                                         'font-style:italic;'
                                     ];
-                                    var content = app.getWMSLayerByName(record.get('layer')).get('abstract');
+                                    var content = "";
+                                    var foundLayer = app.getWMSLayerByName(record.get('layer'));
+                                    if (foundLayer) { content = foundLayer.get('abstract'); }
                                     return '<p style="' + styles.join('') + '">' + content + '</p>';
                                 }()
                             },
