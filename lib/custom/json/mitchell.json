@@ -375,5 +375,6 @@
         ["145.064", "-37.303", "145.069", "-37.297", "Waterford Park"]
     ],
     "printMapTitle": "Mitchell Shire Council",
-    "linkToCouncilWebsite": "http://www.mitchellshire.vic.gov.au/"
+    "linkToCouncilWebsite": "http://www.mitchellshire.vic.gov.au/",
+    "reloadOnLogin": true
 }
