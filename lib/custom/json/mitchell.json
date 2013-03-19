@@ -181,6 +181,16 @@
         "transparent": true
     }, {
         "source": "backend",
+        "name": "VICMAP:VMPROP_PARCEL",
+        "title": "Parcels",
+        "visibility": false,
+        "opacity": 0.75,
+        "format": "image/png8",
+        "styles": "parcel_label",
+        "transparent": true,
+        "tiled": false
+    }, {
+        "source": "backend",
         "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
         "title": "Properties",
         "visibility": true,
