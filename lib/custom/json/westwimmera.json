@@ -137,6 +137,25 @@
         }
     },
     "layers": [{
+        "source": "ol",
+        "group": "aerial",
+        "fixed": true,
+        "type": "OpenLayers.Layer",
+        "args": ["No Aerial", { "visibility": true }]
+    }, {
+        "source": "backend",
+        "name": "WESTWIMMERA:AERIAL_WIMMERA-CMA_2004NOV01_AIR_VIS_60CM_MGA54",
+        "title": "Aerial Photo (WCMA, Nov 2004)",
+        "visibility": false,
+        "opacity": 0,
+        "group": "aerial",
+        "selected": false,
+        "format": "image/JPEG",
+        "transparent": true,
+        "tiled": true,
+        "styles": "",
+        "displayInOpacitySlider": true
+    }, {
         "source": "backend",
         "name": "VICMAP:VW_DSE_VMPLAN_ZONE",
         "title": "Planning Zones",
@@ -258,25 +277,6 @@
         "name": "osm",
         "visibility": false,
         "group": "background"
-    }, {
-        "source": "ol",
-        "group": "aerial",
-        "fixed": true,
-        "type": "OpenLayers.Layer",
-        "args": ["No Aerial", { "visibility": true }]
-    }, {
-        "source": "backend",
-        "name": "WESTWIMMERA:AERIAL_WIMMERA-CMA_2004NOV01_AIR_VIS_60CM_MGA54",
-        "title": "Aerial Photo (WCMA, Nov 2004)",
-        "visibility": false,
-        "opacity": 0,
-        "group": "aerial",
-        "selected": false,
-        "format": "image/JPEG",
-        "transparent": true,
-        "tiled": true,
-        "styles": "",
-        "displayInOpacitySlider": true
     }, {
         "source": "ol",
         "group": "background",
