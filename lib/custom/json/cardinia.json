@@ -524,6 +524,7 @@
         "storeName": "cardiniagis"
     }],
     "logoClientSrc": "theme/app/img/custom/cardinia_logo.png",
+    "logoClientURL": "http://www.cardinia.vic.gov.au/",
     "zoomMax": 18,
     "bannerLineColor": "#006699",
     "bannerRightCornerLine1": "Cardinia Shire Council",

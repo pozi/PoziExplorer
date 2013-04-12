@@ -1,5 +1,11 @@
 buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSelectHandler, gfromWFSFlag, gtyp, glab, westPanel, eastPanel) {
 
+    var logoHtml = function() {
+        var img ='<img style="height: 60px; padding: 20px;" src="' + JSONconf.logoClientSrc + '" />';
+        if (JSONconf.logoClientURL) { return '<a href="' + JSONconf.logoClientURL + '">' + img + '</a>'; }
+        else { return img; }
+    };
+
     var portalItems = [
         {
             region: "north",
@@ -11,7 +17,7 @@ buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSel
                     region: "west",
                     width: 250,
                     bodyStyle: " background-color: transparent;",
-                    html: '<img style="height: 60px; padding: 20px;" src="' + JSONconf.logoClientSrc + '" />'
+                    html: logoHtml()
                 }),
                 {
                     columnWidth: 0.48,
