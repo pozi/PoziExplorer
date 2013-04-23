@@ -316,6 +316,6 @@
     ],
     "printMapTitle": "Yarriambiack Shire Council",
     "linkToCouncilWebsite": "http://www.yarriambiack.vic.gov.au/",
-    "collapseWestPanel": true,
+    "collapseWestPanel": false,
     "openFirstDefaultTab": true
 }
