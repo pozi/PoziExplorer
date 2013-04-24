@@ -130,26 +130,6 @@
         }
     },
     "layers": [{
-        "source": "backend",
-        "name": "VICMAP:VW_DSE_VMPLAN_ZONE",
-        "title": "Planning Zones",
-        "visibility": false,
-        "opacity": 0.5,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "backend",
-        "name": "VICMAP:VW_DSE_VMPLAN_OVERLAY",
-        "title": "Planning Overlays",
-        "visibility": false,
-        "opacity": 0.5,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
         "source": "backend_cascaded",
         "name": "DSE:CC_BUSHFIRE_PRONE_AREAS",
         "title": "Bushfire-Prone Areas",
@@ -180,8 +160,8 @@
         "tiled": false
     }, {
         "source": "backend",
-        "name": "VICMAP:DSE_VMADMIN_WARD_2008",
-        "title": "Wards (2008)",
+        "name": "VICMAP:DSE_VMADMIN_WARD_2012",
+        "title": "Wards (2012)",
         "visibility": false,
         "opacity": 0.30,
         "format": "image/png8",
@@ -191,7 +171,7 @@
     }, {
         "source": "backend",
         "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
-        "title": "Properties",
+        "title": "Properties (Vicmap)",
         "visibility": true,
         "opacity": 0.25,
         "format": "image/GIF",
@@ -206,16 +186,6 @@
         "opacity": 0.75,
         "format": "image/png8",
         "styles": "parcel_label",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "backend",
-        "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
-        "title": "Properties",
-        "visibility": true,
-        "opacity": 0.25,
-        "format": "image/GIF",
-        "styles": "",
         "transparent": true,
         "tiled": false
     }, {
