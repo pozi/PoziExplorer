@@ -213,6 +213,46 @@
         "tiled": false,
         "group": "top"
     }, {
+        "source": "local",
+        "name": "YARRIAMBIACK:YSC_UG_DRAINAGE_PIPE",
+        "title": "Underground Drainage Pipes",
+        "visibility": false,
+        "opacity": 0.6,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+    }, {
+        "source": "local",
+        "name": "YARRIAMBIACK:YSC_PIT",
+        "title": "Pits",
+        "visibility": false,
+        "opacity": 0.6,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+    }, {
+        "source": "local",
+        "name": "YARRIAMBIACK:YSC_PUBLIC_LIGHTING",
+        "title": "Public Lighting",
+        "visibility": false,
+        "opacity": 0.6,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+    }, {
+        "source": "local",
+        "name": "YARRIAMBIACK:YSC_URBAN_HYDRANT",
+        "title": "Urban Hydrants",
+        "visibility": false,
+        "opacity": 0.6,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+    }, {
         "source": "backend",
         "name": "VicmapClassic",
         "title": "Vicmap Classic",
