@@ -291,6 +291,10 @@
         "visibility": false,
         "group": "background"
     }, {
+        "source": "google",
+        "name": "SATELLITE",
+        "visibility": false
+    }, {
         "source": "dse_iws_cascaded",
         "name": "YARRIAMBIACK:AERIAL_WIMMERA-CMA_2004NOV01_AIR_VIS_60CM_MGA54",
         "title": "Aerial Photo (Wimmera CMA, Nov 2004)",
