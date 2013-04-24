@@ -214,7 +214,7 @@
         "group": "top"
     }, {
         "source": "local",
-        "name": "YARRIAMBIACK:YSC_UG_DRAINAGE_PIPE",
+        "name": "YSC_UG_DRAINAGE_PIPE",
         "title": "Underground Drainage Pipes",
         "visibility": false,
         "opacity": 0.6,
@@ -224,7 +224,7 @@
         "tiled": false
     }, {
         "source": "local",
-        "name": "YARRIAMBIACK:YSC_PIT",
+        "name": "YSC_PIT",
         "title": "Pits",
         "visibility": false,
         "opacity": 0.6,
@@ -234,7 +234,7 @@
         "tiled": false
     }, {
         "source": "local",
-        "name": "YARRIAMBIACK:YSC_PUBLIC_LIGHTING",
+        "name": "YSC_PUBLIC_LIGHTING",
         "title": "Public Lighting",
         "visibility": false,
         "opacity": 0.6,
@@ -244,7 +244,7 @@
         "tiled": false
     }, {
         "source": "local",
-        "name": "YARRIAMBIACK:YSC_URBAN_HYDRANT",
+        "name": "YSC_URBAN_HYDRANT",
         "title": "Urban Hydrants",
         "visibility": false,
         "opacity": 0.6,
