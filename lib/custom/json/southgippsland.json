@@ -62,7 +62,7 @@
     }],
     "sources": {
         "local": {
-            "url": "http://www.pozi.com/geoserver/SOUTHGIPPSLAND/ows",
+            "url": "/geoserver/SOUTHGIPPSLAND/ows",
             "title": "South Gippsland Shire Council Layers",
             "ptype": "gxp_wmscsource",
             "tiled": false,
@@ -298,8 +298,8 @@
         "storeMode": "pgsql",
         "storeName": "vicmap"
     }, {
-        "urlLayout": "http://www.pozi.com/ws/rest/v3/ws_get_layouts.php",
-        "urlLiveData": "http://www.pozi.com/ws/rest/v3/ws_get_live_data.php",
+        "urlLayout": "/ws/rest/v3/ws_get_layouts.php",
+        "urlLiveData": "/ws/rest/v3/ws_get_live_data.php",
         "storeMode": "pgsql",
         "storeName": "southgippslandgis"
     }],

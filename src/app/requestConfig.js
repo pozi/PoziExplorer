@@ -35,7 +35,7 @@ requestConfig = function(options) {
                     fillColor: "yellow",
                     fillOpacity: 0.2
                 },
-                logoClientSrc: "http://www.pozi.com/theme/app/img/mitchell_banner.jpg",
+                logoClientSrc: "theme/app/img/custom/mitchell_logo.jpg",
                 zoomMax: 18,
                 bannerLineColor: "#7a7a7a",
                 bannerRightCornerLine1: "Mitchell Shire Council",

@@ -62,7 +62,7 @@
     }],
     "sources": {
         "local": {
-            "url": "http://www.pozi.com/geoserver/MOIRA/ows",
+            "url": "/geoserver/MOIRA/ows",
             "title": "Mitchell Shire Council Layers",
             "ptype": "gxp_wmscsource",
             "tiled": false,
@@ -301,8 +301,8 @@
         "storeMode": "pgsql",
         "storeName": "vicmap"
     }, {
-        "urlLayout": "http://www.pozi.com/ws/rest/v3/ws_get_layouts.php",
-        "urlLiveData": "http://www.pozi.com/ws/rest/v3/ws_get_live_data.php",
+        "urlLayout": "/ws/rest/v3/ws_get_layouts.php",
+        "urlLiveData": "/ws/rest/v3/ws_get_live_data.php",
         "storeMode": "pgsql",
         "storeName": "moiragis"
     }],
