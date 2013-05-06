@@ -56,7 +56,7 @@ buildTabExpand = function(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, JSO
                         },
                         items: [
                             {
-                                html: '<img src="http://www.pozi.com/externals/ext/resources/images/default/grid/loading.gif"/>',
+                                html: '<img src="src/ext/resources/images/default/grid/loading.gif"/>',
                                 border: false,
                                 padding: '5'
                             }
