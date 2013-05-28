@@ -1,7 +1,7 @@
 {
     "servicesHost": "http://49.156.17.41",
     "searchEndPoint": "/ws/rest/v3/ws_all_features_by_string_and_lga.php",
-    "LGACode": "343,358,363,376",
+    "LGACode": "341,343,358,363,376",
     "databaseConfig": "vicmap",
     "tools": [{
         "ptype": "gxp_layermanager",
@@ -173,7 +173,7 @@
     }, {
         "source": "backend",
         "name": "DSE:VMFEAT_FOI_POINT_FACILITY_SPORT",
-        "title": "Sport Faclities",
+        "title": "Sport Facilities",
         "visibility": false,
         "opacity": 0.8,
         "format": "image/png8",
@@ -185,24 +185,13 @@
         "name": "DSE_ADMINISTRATIVE_BOUNDARIES:DSE_VMADMIN_LGA",
         "title": "LGAs",
         "visibility": true,
-        "opacity": 0.6,
+        "opacity": 0.5,
         "format": "image/png8",
         "styles": "",
+        "queryable": false,
         "transparent": true,
         "tiled": false,
-        "transition": "resize"
-    }, {
-        "source": "backend",
-        "name": "VICMAP:VW_IMAP_MASK",
-        "title": "IMAP Boundary",
-        "visibility": true,
-        "opacity": 0.6,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false,
-        "transition": "resize",
-        "group": "top"
+        "transition": ""
     }, {
         "source": "backend",
         "name": "LabelClassic",
@@ -214,6 +203,18 @@
         "styles": "",
         "transparent": true,
         "tiled": false,
+        "group": "top"
+    }, {
+        "source": "local",
+        "name": "IMAP_MASK",
+        "title": "IMAP Boundary",
+        "visibility": true,
+        "opacity": 0.6,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false,
+        "transition": "",
         "group": "top"
     }, {
         "source": "backend",
@@ -234,6 +235,10 @@
         "visibility": false,
         "group": "background"
     }, {
+        "source": "google",
+        "name": "SATELLITE",
+        "visibility": false
+    }, {
         "source": "ol",
         "group": "background",
         "fixed": true,
@@ -244,8 +249,8 @@
         }]
     }],
     "center": [
-    16300325, -4381884],
-    "zoom": 10,
+    16136560, -4554228],
+    "zoom": 12,
     "workspace": "IMAP",
     "highlightSymboliser": {
         "name": "test",
@@ -278,6 +283,6 @@
     "bannerRightCornerLine2": "",
     "printMapTitle": "IMAP",
     "linkToCouncilWebsite": "http://imap.vic.gov.au/",
-    "collapseWestPanel": true,
+    "collapseWestPanel": false,
     "openFirstDefaultTab": true
 }
