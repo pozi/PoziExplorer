@@ -173,7 +173,7 @@
     }, {
         "source": "backend",
         "name": "DSE:VMFEAT_FOI_POINT_FACILITY_SPORT",
-        "title": "Sport Faclities",
+        "title": "Sport Facilities",
         "visibility": false,
         "opacity": 0.8,
         "format": "image/png8",
