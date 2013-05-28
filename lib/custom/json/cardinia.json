@@ -527,10 +527,10 @@
     "logoClientURL": "http://www.cardinia.vic.gov.au/",
     "zoomMax": 18,
     "bannerLineColor": "#006699",
-    "bannerRightCornerLine1": "Cardinia Shire Council",
-    "bannerRightCornerLine2": "Victoria, Australia",
+    "bannerRightCornerLine1": "Return to Community Compass web page",
+    "bannerRightCornerLine2": "",
     "printMapTitle": "Cardinia Shire Council",
-    "linkToCouncilWebsite": "http://www.cardinia.vic.gov.au/",
+    "linkToCouncilWebsite": "http://www.cardinia.vic.gov.au/page/page.aspx?Page_id=4186",
     "collapseWestPanel": true,
     "customJS": "cardinia.js",
     "openFirstDefaultTab": true
