@@ -90,12 +90,12 @@ requestConfig = function(options) {
                 // To be able to login to v3 from the debug environment
                 JSONconf.loginEndpoint = "http://v3.pozi.com/geoexplorer/login/";
                 localLayerSourcePrefix = "http://v3.pozi.com";
-                localPrintServicePrefix = "http://v3.pozi.com";
+                JSONconf.localPrintServicePrefix = "http://v3.pozi.com";
             } else {
                 JSONconf.proxy = "/geoserver/rest/proxy?url=";
                 JSONconf.loginEndpoint = "/geoexplorer/login";
                 localLayerSourcePrefix = "";
-                localPrintServicePrefix = "";
+                JSONconf.localPrintServicePrefix = "";
             }
             // Fixing local URL source for debug mode
             if (JSONconf.sources.local) {
@@ -106,7 +106,7 @@ requestConfig = function(options) {
             _(JSONconf.tools).each(function(t){
                 if (t.ptype == "gxp_print")
                 {
-                    t.printService = localPrintServicePrefix + t.printService;
+                    t.printService = JSONconf.localPrintServicePrefix + t.printService;
                 }
             });
 

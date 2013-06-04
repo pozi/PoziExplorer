@@ -112,6 +112,19 @@ gxp.plugins.Print = Ext.extend(gxp.plugins.Tool, {
         // don't add any action if there is no print service configured
         if (this.printService !== null || this.printCapabilities != null) {
 
+            // Loading the custom parameters with the source location of the logo
+            // These are passed as is to the server-side printing service, for interpretation by the YAML specification
+            if (this.customParams)
+            {
+                // Includes the server base URL - as an absolute URL required by the server-side printing service
+                var root = window.location.origin;
+                if (JSONconf.localPrintServicePrefix)
+                {
+                    root = JSONconf.localPrintServicePrefix;
+                }
+                this.customParams["logo"] = root +"/"+ JSONconf.logoClientSrc;
+            }
+
             var printProvider = new GeoExt.data.PrintProvider({
                 capabilities: this.printCapabilities,
                 url: this.printService,
