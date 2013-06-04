@@ -193,18 +193,6 @@
         "tiled": false,
         "transition": ""
     }, {
-        "source": "backend",
-        "name": "LabelClassic",
-        "title": "Labels",
-        "visibility": true,
-        "opacity": 1,
-        "selected": false,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false,
-        "group": "top"
-    }, {
         "source": "local",
         "name": "IMAP_MASK",
         "title": "IMAP Boundary",
@@ -215,6 +203,18 @@
         "transparent": true,
         "tiled": false,
         "transition": "",
+        "group": "top"
+    }, {
+        "source": "backend",
+        "name": "LabelClassic",
+        "title": "Labels",
+        "visibility": true,
+        "opacity": 1,
+        "selected": false,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false,
         "group": "top"
     }, {
         "source": "backend",
