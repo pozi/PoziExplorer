@@ -2,7 +2,7 @@ buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSel
 
     var logoHtml = function() {
         var img ='<img style="height: 60px; padding: 20px;" src="' + JSONconf.logoClientSrc + '" />';
-        if (JSONconf.logoClientURL) { return '<a href="' + JSONconf.logoClientURL + '">' + img + '</a>'; }
+        if (JSONconf.logoClientURL) { return '<a href="' + JSONconf.logoClientURL + '" target="_blank">' + img + '</a>'; }
         else { return img; }
     };
 
