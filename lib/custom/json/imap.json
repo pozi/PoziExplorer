@@ -277,6 +277,7 @@
         "storeName": "imapgis"
     }],
     "logoClientSrc": "theme/app/img/custom/imap_logo.png",
+    "logoClientURL": "http://imap.vic.gov.au/",
     "zoomMax": 18,
     "bannerLineColor": "#007B82",
     "bannerRightCornerLine1": "",
