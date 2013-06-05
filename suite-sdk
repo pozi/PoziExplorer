@@ -78,32 +78,7 @@ List of options:
 "
 
 # find sdk home
-if [ -z "$0" ]; then
-    # as a last recourse, use the present working directory
-    SDK_HOME=$(pwd)
-else
-    # save original working directory
-    ORIG_PWD="$(pwd -P)"
-
-    # get the absolute path of the executable
-    SELF_PATH=$(
-        cd -P -- "$(dirname -- "$0")" \
-        && pwd -P
-    ) && SELF_PATH=$SELF_PATH/$(basename -- "$0")
-
-    # resolve symlinks
-    while [ -h "$SELF_PATH" ]; do
-        DIR=$(dirname -- "$SELF_PATH")
-        SYM=$(readlink -- "$SELF_PATH")
-        SELF_PATH=$(cd -- "$DIR" && cd -- $(dirname -- "$SYM") && pwd)/$(basename -- "$SYM")
-    done
-
-    SDK_HOME=$(dirname -- "$(dirname -- "$SELF_PATH")")
-
-    # restore original working directory
-    cd "$ORIG_PWD"
-
-fi
+SDK_HOME=$(pwd)/opengeo-suite-sdk
 
 COMMAND=help
 if [ $# -gt 0 ]; then
@@ -284,7 +259,8 @@ case $COMMAND in
 esac
 
 # run the command via ant
-ant -e -f "$SDK_HOME/build.xml" -Dsdk.logfile="$LOG_FILE" -Dsdk.home="$SDK_HOME" -Dbasedir=. $COMMAND $ANT_ARGS 2>> "$LOG_FILE"
+BUILD_FILE=./build.xml
+ant -e -f "$BUILD_FILE" -Dsdk.logfile="$LOG_FILE" -Dsdk.home="$SDK_HOME" -Dbasedir=. $COMMAND $ANT_ARGS 2>> "$LOG_FILE"
 STATUS=$?
 
 # handle results
