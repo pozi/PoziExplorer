@@ -1,0 +1,3 @@
+[submodule "opengeo-suite-sdk"]
+	path = opengeo-suite-sdk
+	url = git://github.com/groundtruth/opengeo-suite-sdk.git
