@@ -2,34 +2,34 @@
 
 App based on the [OpenGeo Suite SDK](http://opengeo.org/technology/sdk/).
 
-## SDK version
-
-This project began with SDK v2.5, but we're now using the v3.0 tooling.
-
 ## Getting it running
 
-First, [install the Suite SDK](http://suite.opengeo.org/opengeo-docs/apps/clientsdk.html#sdk-installation).
-
-Then get the PoziExplorer code:
+Get the code:
 
     git clone https://github.com/groundtruth/PoziExplorer.git && cd PoziExplorer
-
-Set up customized `build.xml` (this will affect SDK commands for all apps):
-
-    sudo mv /opt/opengeo/sdk/build.xml /opt/opengeo/sdk/build.xml.old
-    sudo ln -s `pwd`/build.xml /opt/opengeo/sdk/build.xml
+    git submodule init
+    git submodule update
 
 To run in debug mode (for Groundtruth internal use):
 
-    suite-sdk debug -l 9090 -g http://v3.pozi.com/geoserver .
-    open http://localhost:9090/?config=corangamite  # for example
-    open http://corangamite.pozi.dev:9090/          # for example (only if you've set the right alias for localhost)
+    ./suite-sdk debug -l 9090 -g http://v3.pozi.com/geoserver .
+    open http://localhost:9090/?config=cardinia   # for example
+    open http://cardinia.pozi.dev:9090/           # for example (only if you've set the right alias for localhost)
 
 To deploy (for Groundtruth use):
 
-    suite-sdk deploy -d v3.pozi.com -r 8080 -u manager -p password -c tomcat6x .
+    ./suite-sdk deploy -d v3.pozi.com -r 8080 -u manager -p password -c tomcat6x .
     open http://corangamite.pozi.com   # for example
     open http://corangamite.pozi.com/rev.txt   # for revision details of live code
+
+## About the SDK dependency
+
+Don't install the OpenGeo SDK on your system. It is bundled into PoziExplorer
+as a git submodule.
+
+Be sure to run all `suite-sdk` commands using the project-specific version of
+the script (`./suite-sdk`). This will use the bundled version of the SDK
+(under `opengeo-suite-sdk/`) and the project specific `build.xml` file.
 
 ## Other runtime dependencies
 
