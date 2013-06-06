@@ -203,7 +203,7 @@
         "group": "top"
     }, {
         "source": "basemap",
-        "name": "LabelClassic",
+        "name": "VICMAP_CLASSIC:LabelClassic",
         "title": "Labels",
         "visibility": true,
         "opacity": 1,
@@ -265,7 +265,7 @@
         "tiled": false
     }, {
         "source": "basemap",
-        "name": "VicmapClassic",
+        "name": "VICMAP_CLASSIC:VicmapClassic",
         "title": "Vicmap Classic",
         "visibility": true,
         "opacity": 1,

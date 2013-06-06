@@ -147,7 +147,7 @@
         "tiled": false
     }, {
         "source": "basemap",
-        "name": "LabelClassic",
+        "name": "VICMAP_CLASSIC:LabelClassic",
         "title": "Labels",
         "visibility": false,
         "opacity": 1,
