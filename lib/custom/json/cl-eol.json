@@ -1,5 +1,5 @@
 {
-    "servicesHost": "http://49.156.17.41",
+    "servicesHost": "http://s1.pozi.com",
     "tools": [{
         "ptype": "gxp_layermanager",
         "groups": {
@@ -80,8 +80,8 @@
         "ol": {
             "ptype": "gxp_olsource"
         },
-        "backend": {
-            "url": ["http://m1.pozi.com/geoserver/ows", "http://m2.pozi.com/geoserver/ows", "http://m3.pozi.com/geoserver/ows", "http://m4.pozi.com/geoserver/ows"],
+        "basemap": {
+            "url": ["http://basemap1.pozi.com/geoserver/ows", "http://basemap2.pozi.com/geoserver/ows", "http://basemap3.pozi.com/geoserver/ows", "http://basemap4.pozi.com/geoserver/ows"],
             "title": "Pozi Data Server",
             "ptype": "gxp_wmscsource",
             "transition": null
@@ -145,8 +145,8 @@
         "tiled": false,
         "transition": ""
     }, {
-        "source": "backend",
-        "name": "VICMAP:VMHYDRO_WATERCOURSE",
+        "source": "basemap",
+        "name": "VICMAP_CLASSIC:dse_vmhydro_hy_watercourse",
         "title": "All Waterways",
         "visibility": false,
         "opacity": 0.85,
@@ -167,8 +167,8 @@
         "tiled": false,
         "transition": ""
     }, {
-        "source": "backend",
-        "name": "VICMAP:VMPROP_PARCEL_OPTI",
+        "source": "basemap",
+        "name": "VICMAP_CLASSIC:dse_vmprop_parcel_mp_OPTI",
         "title": "Parcels (Vicmap)",
         "visibility": true,
         "opacity": 0.5,
@@ -179,7 +179,7 @@
         "tiled": false,
         "transition": ""
     }, {
-        "source": "backend",
+        "source": "basemap",
         "name": "LabelClassic",
         "title": "Labels",
         "visibility": false,

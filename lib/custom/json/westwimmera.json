@@ -1,8 +1,8 @@
 {
-    "servicesHost": "http://basemap.pozi.com",
+    "servicesHost": "http://s1.pozi.com",
     "searchEndPoint": "/ws/rest/v3/ws_all_features_by_string_and_lga.php",
     "LGACode": "371",
-    "databaseConfig": "vicmap",
+    "databaseConfig": "basemap",
     "tools": [{
         "ptype": "gxp_layermanager",
         "groups": {
@@ -79,37 +79,37 @@
           "ptype": "gxp_wmscsource",
           "tiled": false
         },
-        "backend_cascaded1": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_ADMINISTRATIVE_BOUNDARIES/ows",
+        "basemap_dse_administrative_boundaries": {
+            "url": "http://s1.pozi.com/geoserver/DSE_ADMINISTRATIVE_BOUNDARIES/ows",
             "title": "DSE - Adminstrative Boundaries",
             "ptype": "gxp_wmscsource"
         },
-        "backend_cascaded2": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_FEATURES_OF_INTEREST/ows",
+        "basemap_dse_features_of_interest": {
+            "url": "http://s1.pozi.com/geoserver/DSE_FEATURES_OF_INTEREST/ows",
             "title": "DSE - Features Of interest",
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
-        "backend_cascaded3": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_PLANNING/ows",
+        "basemap_dse_planning": {
+            "url": "http://s1.pozi.com/geoserver/DSE_PLANNING/ows",
             "title": "DSE - Planning",
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
-        "backend_cascaded4": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_PROPERTY/ows",
+        "basemap_dse_property": {
+            "url": "http://s1.pozi.com/geoserver/DSE_PROPERTY/ows",
             "title": "DSE - Property",
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
-        "backend_cascaded5": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_TRANSPORT/ows",
+        "basemap_dse_transport": {
+            "url": "http://s1.pozi.com/geoserver/DSE_TRANSPORT/ows",
             "title": "DSE - Transport",
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
-        "backend_cascaded6": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_TOPOGRAPHY/ows",
+        "basemap_dse_topography": {
+            "url": "http://s1.pozi.com/geoserver/DSE_TOPOGRAPHY/ows",
             "title": "DSE - Topography",
             "ptype": "gxp_wmscsource",
             "tiled": false
@@ -129,8 +129,8 @@
         "ol": {
             "ptype": "gxp_olsource"
         },
-        "backend": {
-            "url": ["http://m1.pozi.com/geoserver/ows", "http://m2.pozi.com/geoserver/ows", "http://m3.pozi.com/geoserver/ows", "http://m4.pozi.com/geoserver/ows"],
+        "basemap": {
+            "url": ["http://basemap1.pozi.com/geoserver/ows", "http://basemap2.pozi.com/geoserver/ows", "http://basemap3.pozi.com/geoserver/ows", "http://basemap4.pozi.com/geoserver/ows"],
             "title": "Pozi Data Server",
             "ptype": "gxp_wmscsource",
             "transition": null
@@ -143,7 +143,7 @@
         "type": "OpenLayers.Layer",
         "args": ["No Aerial", { "visibility": true }]
     }, {
-        "source": "backend",
+        "source": "basemap",
         "name": "WESTWIMMERA:AERIAL_WIMMERA-CMA_2004NOV01_AIR_VIS_60CM_MGA54",
         "title": "Aerial Photo (WCMA, Nov 2004)",
         "visibility": false,
@@ -156,8 +156,8 @@
         "styles": "",
         "displayInOpacitySlider": true
     }, {
-        "source": "backend",
-        "name": "VICMAP:VW_DSE_VMPLAN_ZONE",
+        "source": "basemap",
+        "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
         "title": "Planning Zones",
         "visibility": false,
         "opacity": 0.5,
@@ -166,8 +166,8 @@
         "transparent": true,
         "tiled": false
     }, {
-        "source": "backend",
-        "name": "VICMAP:VW_DSE_VMPLAN_OVERLAY",
+        "source": "basemap",
+        "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
         "title": "Planning Overlays",
         "visibility": false,
         "opacity": 0.5,
@@ -196,8 +196,8 @@
         "transparent": true,
         "tiled": false
     }, {
-        "source": "backend",
-        "name": "VICMAP:VMPROP_PARCEL",
+        "source": "basemap",
+        "name": "VICMAP_CLASSIC:dse_vmprop_parcel_mp",
         "title": "Parcels",
         "visibility": false,
         "opacity": 0.75,
@@ -206,8 +206,8 @@
         "transparent": true,
         "tiled": false
     }, {
-        "source": "backend",
-        "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
+        "source": "basemap",
+        "name": "VICMAP_CLASSIC:gt_property_address",
         "title": "Properties",
         "visibility": true,
         "opacity": 0.25,
@@ -236,8 +236,8 @@
         "transparent": true,
         "tiled": false
     }, {
-        "source": "backend",
-        "name": "VICMAP:VW_WEST_WIMMERA_MASK",
+        "source": "basemap",
+        "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_west_wimmera_mask",
         "title": "Municipal Boundary",
         "visibility": true,
         "opacity": 0.6,
@@ -248,7 +248,7 @@
         "transition": "resize",
         "group": "top"
     }, {
-        "source": "backend",
+        "source": "basemap",
         "name": "LabelClassic",
         "title": "Labels",
         "visibility": true,
@@ -260,7 +260,7 @@
         "tiled": false,
         "group": "top"
     }, {
-        "source": "backend",
+        "source": "basemap",
         "name": "VicmapClassic",
         "title": "Vicmap Classic",
         "visibility": true,
@@ -305,10 +305,10 @@
         "storeMode": "sqlite",
         "storeName": "westwimmera"
     }, {
-        "urlLayout": "http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php",
-        "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
+        "urlLayout": "http://s1.pozi.com/ws/rest/v3/ws_get_layouts.php",
+        "urlLiveData": "http://s1.pozi.com/ws/rest/v3/ws_get_live_data.php",
         "storeMode": "pgsql",
-        "storeName": "vicmap"
+        "storeName": "basemap"
     }],
     "logoClientSrc": "theme/app/img/custom/westwimmera_logo.gif",
     "zoomMax": 18,

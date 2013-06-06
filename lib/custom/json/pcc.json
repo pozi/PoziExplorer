@@ -1,8 +1,8 @@
 {
-    "servicesHost": "http://49.156.17.41",
+    "servicesHost": "http://s1.pozi.com",
     "searchEndPoint": "/ws/rest/v3/ws_all_features_by_string_and_lga.php",
     "LGACode": "375",
-    "databaseConfig": "vicmap",
+    "databaseConfig": "basemap",
     "tools": [{
         "ptype": "gxp_layermanager",
         "groups": {
@@ -92,8 +92,8 @@
         "ol": {
             "ptype": "gxp_olsource"
         },
-        "backend": {
-            "url": ["http://m1.pozi.com/geoserver/ows", "http://m2.pozi.com/geoserver/ows", "http://m3.pozi.com/geoserver/ows", "http://m4.pozi.com/geoserver/ows"],
+        "basemap": {
+            "url": ["http://basemap1.pozi.com/geoserver/ows", "http://basemap2.pozi.com/geoserver/ows", "http://basemap3.pozi.com/geoserver/ows", "http://basemap4.pozi.com/geoserver/ows"],
             "title": "Pozi Data Server",
             "ptype": "gxp_wmscsource",
             "transition": null
@@ -120,8 +120,8 @@
         "transparent": true,
         "tiled": false
     }, {
-        "source": "backend",
-        "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
+        "source": "basemap",
+        "name": "VICMAP_CLASSIC:gt_property_address",
         "title": "Properties",
         "visibility": true,
         "opacity": 0.25,
@@ -150,7 +150,7 @@
         "transparent": true,
         "tiled": false
     }, {
-        "source": "backend",
+        "source": "basemap",
         "name": "LabelClassic",
         "title": "Labels",
         "visibility": false,
@@ -162,7 +162,7 @@
         "tiled": false,
         "group": "top"
     }, {
-        "source": "backend",
+        "source": "basemap",
         "name": "VicmapClassic",
         "title": "Vicmap Classic",
         "visibility": false,
@@ -207,10 +207,10 @@
         "storeMode": "sqlite",
         "storeName": "pcc"
     }, {
-        "urlLayout": "http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php",
-        "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
+        "urlLayout": "http://s1.pozi.com/ws/rest/v3/ws_get_layouts.php",
+        "urlLiveData": "http://s1.pozi.com/ws/rest/v3/ws_get_live_data.php",
         "storeMode": "pgsql",
-        "storeName": "vicmap"
+        "storeName": "basemap"
     }, {
         "urlLayout": "/ws/rest/v3/ws_get_layouts.php",
         "urlLiveData": "/ws/rest/v3/ws_get_live_data.php",

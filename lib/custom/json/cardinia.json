@@ -1,8 +1,8 @@
 {
-    "servicesHost": "http://49.156.17.41",
+    "servicesHost": "http://s1.pozi.com",
     "searchEndPoint": "/ws/rest/v3/ws_all_features_by_string_and_lga.php",
     "LGACode": "311",
-    "databaseConfig": "vicmap",
+    "databaseConfig": "basemap",
     "tools": [{
         "ptype": "gxp_layermanager",
         "groups": {
@@ -65,44 +65,44 @@
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
-        "backend_cascaded1": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_ADMINISTRATIVE_BOUNDARIES/ows",
+        "basemap_dse_administrative_boundaries": {
+            "url": "http://s1.pozi.com/geoserver/DSE_ADMINISTRATIVE_BOUNDARIES/ows",
             "title": "DSE - Adminstrative Boundaries",
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
-        "backend_cascaded2": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_FEATURES_OF_INTEREST/ows",
+        "basemap_dse_features_of_interest": {
+            "url": "http://s1.pozi.com/geoserver/DSE_FEATURES_OF_INTEREST/ows",
             "title": "DSE - Features Of interest",
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
-        "backend_cascaded3": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_PLANNING/ows",
+        "basemap_dse_planning": {
+            "url": "http://s1.pozi.com/geoserver/DSE_PLANNING/ows",
             "title": "DSE - Planning",
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
-        "backend_cascaded4": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_PROPERTY/ows",
+        "basemap_dse_property": {
+            "url": "http://s1.pozi.com/geoserver/DSE_PROPERTY/ows",
             "title": "DSE - Property",
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
-        "backend_cascaded5": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_TRANSPORT/ows",
+        "basemap_dse_transport": {
+            "url": "http://s1.pozi.com/geoserver/DSE_TRANSPORT/ows",
             "title": "DSE - Transport",
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
-        "backend_cascaded6": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_TOPOGRAPHY/ows",
+        "basemap_dse_topography": {
+            "url": "http://s1.pozi.com/geoserver/DSE_TOPOGRAPHY/ows",
             "title": "DSE - Topography",
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
-        "dse_iws_cascaded": {
-            "url": ["http://m1.pozi.com/geoserver/CARDINIA/ows", "http://m2.pozi.com/geoserver/CARDINIA/ows", "http://m3.pozi.com/geoserver/CARDINIA/ows", "http://m4.pozi.com/geoserver/CARDINIA/ows"],
+        "local_cascaded_imagery": {
+            "url": ["http://cardinia1.pozi.com/geoserver/CARDINIA/ows", "http://cardinia2.pozi.com/geoserver/CARDINIA/ows", "http://cardinia3.pozi.com/geoserver/CARDINIA/ows", "http://cardinia4.pozi.com/geoserver/CARDINIA/ows"],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
             "defaultType": "image/JPEG",
@@ -121,8 +121,8 @@
         "ol": {
             "ptype": "gxp_olsource"
         },
-        "backend": {
-            "url": ["http://m1.pozi.com/geoserver/ows", "http://m2.pozi.com/geoserver/ows", "http://m3.pozi.com/geoserver/ows", "http://m4.pozi.com/geoserver/ows"],
+        "basemap": {
+            "url": ["http://basemap1.pozi.com/geoserver/ows", "http://basemap2.pozi.com/geoserver/ows", "http://basemap3.pozi.com/geoserver/ows", "http://basemap4.pozi.com/geoserver/ows"],
             "title": "Pozi Data Server",
             "ptype": "gxp_wmscsource",
             "transition": null
@@ -147,8 +147,8 @@
         }]
     },
     "layers": [{
-        "source": "backend",
-        "name": "VICMAP:VW_DSE_VMPLAN_ZONE",
+        "source": "basemap",
+        "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
         "title": "Planning Zones",
         "visibility": false,
         "opacity": 0.5,
@@ -157,8 +157,8 @@
         "transparent": true,
         "tiled": false
     }, {
-        "source": "backend",
-        "name": "VICMAP:VW_DSE_VMPLAN_OVERLAY",
+        "source": "basemap",
+        "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
         "title": "Planning Overlays",
         "visibility": false,
         "opacity": 0.5,
@@ -167,8 +167,8 @@
         "transparent": true,
         "tiled": false
     }, {
-        "source": "backend",
-        "name": "VICMAP:DSE_VMADMIN_WARD_2012",
+        "source": "basemap",
+        "name": "VICMAP_CLASSIC:dse_vmadmin_ward_2012",
         "title": "Wards",
         "visibility": false,
         "opacity": 0.30,
@@ -227,8 +227,8 @@
         "transparent": true,
         "tiled": false
     }, {
-        "source": "backend",
-        "name": "VICMAP:VICMAP_PROPERTY_ADDRESS",
+        "source": "basemap",
+        "name": "VICMAP_CLASSIC:gt_property_address",
         "title": "Properties",
         "visibility": true,
         "opacity": 0.25,
@@ -247,8 +247,8 @@
         "transparent": true,
         "tiled": false
     }, {
-        "source": "backend",
-        "name": "DSE:VMFEAT_FOI_POINT_VENUE_COMMUNITY",
+        "source": "basemap",
+        "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_venue_community",
         "title": "Community Venues",
         "visibility": false,
         "opacity": 0.85,
@@ -257,8 +257,8 @@
         "transparent": true,
         "tiled": false
     }, {
-        "source": "backend",
-        "name": "DSE:VMFEAT_FOI_POINT_CENTRE_CULTURAL",
+        "source": "basemap",
+        "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_centre_cultural",
         "title": "Cultural Centres",
         "visibility": false,
         "opacity": 0.85,
@@ -267,8 +267,8 @@
         "transparent": true,
         "tiled": false
     }, {
-        "source": "backend",
-        "name": "DSE:VMFEAT_FOI_POINT_FACILITY_ADMIN",
+        "source": "basemap",
+        "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facility_admin",
         "title": "Admin Facilities",
         "visibility": false,
         "opacity": 0.85,
@@ -277,8 +277,8 @@
         "transparent": true,
         "tiled": false
     }, {
-        "source": "backend",
-        "name": "DSE:VMFEAT_FOI_POINT_FACILTY_CARE",
+        "source": "basemap",
+        "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facilty_care",
         "title": "Care Facilities",
         "visibility": false,
         "opacity": 0.85,
@@ -287,8 +287,8 @@
         "transparent": true,
         "tiled": false
     }, {
-        "source": "backend",
-        "name": "DSE:VMFEAT_FOI_POINT_CENTRE_EDUCATIONAL",
+        "source": "basemap",
+        "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_centre_educational",
         "title": "Schools",
         "visibility": false,
         "opacity": 0.85,
@@ -336,7 +336,7 @@
             "visibility": true
         }]
     }, {
-        "source": "dse_iws_cascaded",
+        "source": "local_cascaded_imagery",
         "name": "CARDINIA:AERIAL_PAKENHAM_2011DEC30_AIR_VIS_10CM_MGA55",
         "title": "Aerial Photo (Pakenham, Dec 2011)",
         "visibility": false,
@@ -348,7 +348,7 @@
         "transparent": true,
         "styles": ""
     }, {
-        "source": "dse_iws_cascaded",
+        "source": "local_cascaded_imagery",
         "name": "CARDINIA:AERIAL_PAKENHAM_2011AUG20_AIR_VIS_10CM_MGA55",
         "title": "Aerial Photo (Pakenham, Aug 2011)",
         "visibility": false,
@@ -360,7 +360,7 @@
         "transparent": true,
         "styles": ""
     }, {
-        "source": "dse_iws_cascaded",
+        "source": "local_cascaded_imagery",
         "name": "CARDINIA:AERIAL_PAKENHAM_2011APR08_AIR_VIS_10CM_MGA55",
         "title": "Aerial Photo (Pakenham, Apr 2011)",
         "visibility": false,
@@ -372,7 +372,7 @@
         "transparent": true,
         "styles": ""
     }, {
-        "source": "dse_iws_cascaded",
+        "source": "local_cascaded_imagery",
         "name": "CARDINIA:AERIAL_PAKENHAM_2010DEC30_AIR_VIS_10CM_MGA55",
         "title": "Aerial Photo (Pakenham, Dec 2010)",
         "visibility": false,
@@ -384,7 +384,7 @@
         "transparent": true,
         "styles": ""
     }, {
-        "source": "dse_iws_cascaded",
+        "source": "local_cascaded_imagery",
         "name": "CARDINIA:AERIAL_PORTPHILLIP_2010DEC28_AIR_VIS_35CM_MGA55",
         "title": "Aerial Photo (Port Phillip, Dec 2010)",
         "visibility": false,
@@ -396,7 +396,7 @@
         "transparent": true,
         "styles": ""
     }, {
-        "source": "dse_iws_cascaded",
+        "source": "local_cascaded_imagery",
         "name": "CARDINIA:AERIAL_CARDINIA_2006NOV18_AIR_VIS_35CM_MGA55",
         "title": "Aerial Photo (Cardinia, Nov 2006)",
         "visibility": false,
@@ -408,7 +408,7 @@
         "transparent": true,
         "styles": ""
     }, {
-        "source": "dse_iws_cascaded",
+        "source": "local_cascaded_imagery",
         "name": "CARDINIA:AERIAL_CARDINIA_2009NOV09_AIR_VIS_15CM_MGA55",
         "title": "Aerial Photo (Cardinia, Nov 2009)",
         "visibility": false,
@@ -419,7 +419,7 @@
         "transparent": true,
         "styles": ""
     }, {
-        "source": "dse_iws_cascaded",
+        "source": "local_cascaded_imagery",
         "name": "CARDINIA:AERIAL_PORTPHILLIP-OUTER_2011DEC30_AIR_CIR_35CM_MGA55",
         "title": "Aerial Photo (Port Phillip Outer, Dec 2011, IR)",
         "visibility": false,
@@ -431,7 +431,7 @@
         "transparent": true,
         "styles": ""
     }, {
-        "source": "dse_iws_cascaded",
+        "source": "local_cascaded_imagery",
         "name": "CARDINIA:AERIAL_PORTPHILLIP-OUTER_2011DEC30_AIR_VIS_35CM_MGA55",
         "title": "Aerial Photo (Port Phillip Outer, Dec 2011)",
         "visibility": false,
@@ -444,8 +444,8 @@
         "styles": "",
         "displayInOpacitySlider": true
     }, {
-        "source": "backend",
-        "name": "VICMAP:VW_CARDINIA_MASK",
+        "source": "basemap",
+        "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_cardinia_mask",
         "title": "Municipal Boundary",
         "visibility": true,
         "opacity": 0.6,
@@ -456,7 +456,7 @@
         "transition": "resize",
         "group": "top"
     }, {
-        "source": "backend",
+        "source": "basemap",
         "name": "LabelClassic",
         "title": "Labels",
         "visibility": true,
@@ -468,7 +468,7 @@
         "tiled": false,
         "group": "top"
     }, {
-        "source": "backend",
+        "source": "basemap",
         "name": "VicmapClassic",
         "title": "Vicmap Classic",
         "visibility": true,
@@ -513,10 +513,10 @@
         "storeMode": "sqlite",
         "storeName": "cardinia"
     }, {
-        "urlLayout": "http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php",
-        "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
+        "urlLayout": "http://s1.pozi.com/ws/rest/v3/ws_get_layouts.php",
+        "urlLiveData": "http://s1.pozi.com/ws/rest/v3/ws_get_live_data.php",
         "storeMode": "pgsql",
-        "storeName": "vicmap"
+        "storeName": "basemap"
     }, {
         "urlLayout": "/ws/rest/v3/ws_get_layouts.php",
         "urlLiveData": "/ws/rest/v3/ws_get_live_data.php",
