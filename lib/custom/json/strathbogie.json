@@ -104,7 +104,7 @@
             "tiled": false
         },
         "local_cascaded_imagery": {
-            "url": ["http://strathbogie1.pozi.com/geoserver/STRATHBOGIE/ows", "http://strathbogie2.pozi.com/geoserver/STRATHBOGIE/ows", "http://strathbogie3.pozi.com/geoserver/STRATHBOGIE/ows", "http://strathbogie4.pozi.com/geoserver/STRATHBOGIE/ows"],
+            "url": ["http://strathbogie01.pozi.com/geoserver/STRATHBOGIE/ows", "http://strathbogie02.pozi.com/geoserver/STRATHBOGIE/ows", "http://strathbogie03.pozi.com/geoserver/STRATHBOGIE/ows", "http://strathbogie04.pozi.com/geoserver/STRATHBOGIE/ows"],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
             "defaultType": "image/JPEG",

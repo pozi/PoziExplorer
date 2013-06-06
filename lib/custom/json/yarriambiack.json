@@ -103,7 +103,7 @@
             "tiled": false
         },
         "local_cascaded_imagery": {
-            "url": ["http://yarriambiack1.pozi.com/geoserver/YARRIAMBIACK/ows", "http://yarriambiack2.pozi.com/geoserver/YARRIAMBIACK/ows", "http://yarriambiack3.pozi.com/geoserver/YARRIAMBIACK/ows", "http://yarriambiack4.pozi.com/geoserver/YARRIAMBIACK/ows"],
+            "url": ["http://yarriambiack01.pozi.com/geoserver/YARRIAMBIACK/ows", "http://yarriambiack02.pozi.com/geoserver/YARRIAMBIACK/ows", "http://yarriambiack03.pozi.com/geoserver/YARRIAMBIACK/ows", "http://yarriambiack04.pozi.com/geoserver/YARRIAMBIACK/ows"],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
             "defaultType": "image/JPEG",

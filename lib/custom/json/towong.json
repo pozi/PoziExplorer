@@ -104,7 +104,7 @@
             "tiled": false
         },
         "local_cascaded_imagery": {
-            "url": ["http://towong1.pozi.com/geoserver/TOWONG/ows", "http://towong2.pozi.com/geoserver/TOWONG/ows", "http://towong3.pozi.com/geoserver/TOWONG/ows", "http://towong4.pozi.com/geoserver/TOWONG/ows"],
+            "url": ["http://towong01.pozi.com/geoserver/TOWONG/ows", "http://towong02.pozi.com/geoserver/TOWONG/ows", "http://towong03.pozi.com/geoserver/TOWONG/ows", "http://towong04.pozi.com/geoserver/TOWONG/ows"],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
             "defaultType": "image/JPEG",

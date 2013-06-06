@@ -69,7 +69,7 @@
             "tiled": false
         },
         "local_cascaded_imagery": {
-            "url": ["http://ypa1.pozi.com/geoserver/YPA/ows", "http://ypa2.pozi.com/geoserver/YPA/ows", "http://ypa3.pozi.com/geoserver/YPA/ows", "http://ypa4.pozi.com/geoserver/YPA/ows"],
+            "url": ["http://ypa01.pozi.com/geoserver/YPA/ows", "http://ypa02.pozi.com/geoserver/YPA/ows", "http://ypa03.pozi.com/geoserver/YPA/ows", "http://ypa04.pozi.com/geoserver/YPA/ows"],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
             "format": "image/JPEG",

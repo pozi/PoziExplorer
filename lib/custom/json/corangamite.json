@@ -104,7 +104,7 @@
             "tiled": false
         },
         "local_cascaded_imagery": {
-            "url": ["http://corangamite1.pozi.com/geoserver/CORANGAMITE/ows", "http://corangamite2.pozi.com/geoserver/CORANGAMITE/ows", "http://corangamite3.pozi.com/geoserver/CORANGAMITE/ows", "http://corangamite4.pozi.com/geoserver/CORANGAMITE/ows"],
+            "url": ["http://corangamite01.pozi.com/geoserver/CORANGAMITE/ows", "http://corangamite02.pozi.com/geoserver/CORANGAMITE/ows", "http://corangamite03.pozi.com/geoserver/CORANGAMITE/ows", "http://corangamite04.pozi.com/geoserver/CORANGAMITE/ows"],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
             "defaultType": "image/JPEG",

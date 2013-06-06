@@ -114,7 +114,7 @@
             "tiled": false
         },
         "local_cascaded_imagery": {
-            "url": ["http://mitchell1.pozi.com/geoserver/MITCHELL/ows", "http://mitchell2.pozi.com/geoserver/MITCHELL/ows", "http://mitchell3.pozi.com/geoserver/MITCHELL/ows", "http://mitchell4.pozi.com/geoserver/MITCHELL/ows"],
+            "url": ["http://mitchell01.pozi.com/geoserver/MITCHELL/ows", "http://mitchell02.pozi.com/geoserver/MITCHELL/ows", "http://mitchell03.pozi.com/geoserver/MITCHELL/ows", "http://mitchell04.pozi.com/geoserver/MITCHELL/ows"],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
             "defaultType": "image/JPEG",

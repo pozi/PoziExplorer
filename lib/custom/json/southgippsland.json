@@ -104,7 +104,7 @@
             "tiled": false
         },
         "local_cascaded_imagery": {
-            "url": ["http://southgippsland1.pozi.com/geoserver/SOUTHGIPPSLAND/ows", "http://southgippsland2.pozi.com/geoserver/SOUTHGIPPSLAND/ows", "http://southgippsland3.pozi.com/geoserver/SOUTHGIPPSLAND/ows", "http://southgippsland4.pozi.com/geoserver/SOUTHGIPPSLAND/ows"],
+            "url": ["http://southgippsland01.pozi.com/geoserver/SOUTHGIPPSLAND/ows", "http://southgippsland02.pozi.com/geoserver/SOUTHGIPPSLAND/ows", "http://southgippsland03.pozi.com/geoserver/SOUTHGIPPSLAND/ows", "http://southgippsland04.pozi.com/geoserver/SOUTHGIPPSLAND/ows"],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
             "defaultType": "image/JPEG",

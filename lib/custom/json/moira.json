@@ -104,7 +104,7 @@
             "tiled": false
         },
         "local_cascaded_imagery": {
-            "url": ["http://moira1.pozi.com/geoserver/MOIRA/ows", "http://moira2.pozi.com/geoserver/MOIRA/ows", "http://moira3.pozi.com/geoserver/MOIRA/ows", "http://moira4.pozi.com/geoserver/MOIRA/ows"],
+            "url": ["http://moira01.pozi.com/geoserver/MOIRA/ows", "http://moira02.pozi.com/geoserver/MOIRA/ows", "http://moira03.pozi.com/geoserver/MOIRA/ows", "http://moira04.pozi.com/geoserver/MOIRA/ows"],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
             "defaultType": "image/JPEG",

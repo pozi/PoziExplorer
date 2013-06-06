@@ -104,7 +104,7 @@
             "tiled": false
         },
         "local_cascaded_imagery": {
-            "url": ["http://loddon1.pozi.com/geoserver/LODDON/ows", "http://loddon2.pozi.com/geoserver/LODDON/ows", "http://loddon3.pozi.com/geoserver/LODDON/ows", "http://loddon4.pozi.com/geoserver/LODDON/ows"],
+            "url": ["http://loddon01.pozi.com/geoserver/LODDON/ows", "http://loddon02.pozi.com/geoserver/LODDON/ows", "http://loddon03.pozi.com/geoserver/LODDON/ows", "http://loddon04.pozi.com/geoserver/LODDON/ows"],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
             "defaultType": "image/JPEG",

@@ -105,7 +105,7 @@
             "tiled": false
         },
         "local_cascaded_imagery": {
-            "url": ["http://indigo1.pozi.com/geoserver/INDIGO/ows", "http://indigo2.pozi.com/geoserver/INDIGO/ows", "http://indigo3.pozi.com/geoserver/INDIGO/ows", "http://indigo4.pozi.com/geoserver/INDIGO/ows"],
+            "url": ["http://indigo01.pozi.com/geoserver/INDIGO/ows", "http://indigo02.pozi.com/geoserver/INDIGO/ows", "http://indigo03.pozi.com/geoserver/INDIGO/ows", "http://indigo04.pozi.com/geoserver/INDIGO/ows"],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
             "defaultType": "image/JPEG",

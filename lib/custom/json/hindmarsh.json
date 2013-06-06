@@ -104,7 +104,7 @@
             "tiled": false
         },
         "local_cascaded_imagery": {
-            "url": ["http://hindmarsh1.pozi.com/geoserver/HINDMARSH/ows", "http://hindmarsh2.pozi.com/geoserver/HINDMARSH/ows", "http://hindmarsh3.pozi.com/geoserver/HINDMARSH/ows", "http://hindmarsh4.pozi.com/geoserver/HINDMARSH/ows"],
+            "url": ["http://hindmarsh01.pozi.com/geoserver/HINDMARSH/ows", "http://hindmarsh02.pozi.com/geoserver/HINDMARSH/ows", "http://hindmarsh03.pozi.com/geoserver/HINDMARSH/ows", "http://hindmarsh04.pozi.com/geoserver/HINDMARSH/ows"],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
             "defaultType": "image/JPEG",
