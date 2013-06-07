@@ -73,7 +73,7 @@ requestConfig = function(options) {
             // This is complicated because layerPresentation needs a deep merge
             var layerPresentationDefaults = {
                 // This structure deals with fields to show, in which order and with which name
-                "VICMAP_PROPERTY_ADDRESS": [
+                "gt_property_address": [
                     { attr_name: "ezi_add", alt_name: "Address" },            
                     { attr_name: "locality" },
                     { attr_name: "postcode" },
