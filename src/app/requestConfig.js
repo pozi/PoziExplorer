@@ -22,7 +22,7 @@ requestConfig = function(options) {
         success: function(request) {
 
             var defaultConf = {
-                servicesHost: "http://49.156.17.41",
+                servicesHost: "http://s1.pozi.com",
                 searchEndPoint: "/ws/rest/v3/ws_all_features_by_string_and_lga.php",
                 WFSEndPoint: "/geoserver/wfs",
                 LGACode: "346",
@@ -54,11 +54,11 @@ requestConfig = function(options) {
                 }],
                 reloadOnLogin: false,
                 openFirstDefaultTab: false,
-                databaseConfig: "vicmap", // Datastore definition for the web service search results
+                databaseConfig: "basemap", // Datastore definition for the web service search results
                 layerPresentation: {},
                 WFSsrsName: "EPSG:4326",
                 WFSgeometryName: "the_geom",
-                FeatureNS: "http://www.pozi.com/vicmap",
+                FeatureNS: "http://www.pozi.com/vicmap_classic",
                 emptyTextSearch: 'Find address, road, feature, etc...',
                 loadingText: "Loading ...",
                 detailsTitle: "Details",
