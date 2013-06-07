@@ -421,7 +421,7 @@
         "visibility": false
     }, {
         "source": "local_cascaded_imagery",
-        "name": "LODDON:AERIAL_LODDON_2009APR14_AIR_VIS_35CM_MGA54",
+        "name": "AERIAL_LODDON_2009APR14_AIR_VIS_35CM_MGA54",
         "title": "Aerial Photo (CIP 2009)",
         "visibility": false,
         "opacity": 1,

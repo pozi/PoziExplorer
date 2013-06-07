@@ -287,7 +287,7 @@
         "visibility": false
     }, {
         "source": "local_cascaded_imagery",
-        "name": "YARRIAMBIACK:AERIAL_WIMMERA-CMA_2004NOV01_AIR_VIS_60CM_MGA54",
+        "name": "AERIAL_WIMMERA-CMA_2004NOV01_AIR_VIS_60CM_MGA54",
         "title": "Aerial Photo (Wimmera CMA, Nov 2004)",
         "visibility": true,
         "opacity": 1,
@@ -300,7 +300,7 @@
         "visibility": false
     }, {
         "source": "local_cascaded_imagery",
-        "name": "YARRIAMBIACK:AERIAL_MALLEE_2009JAN_AIR_VIS_50CM_MGA54",
+        "name": "AERIAL_MALLEE_2009JAN_AIR_VIS_50CM_MGA54",
         "title": "Aerial Photo (CIP, Dec 2009)",
         "visibility": true,
         "opacity": 1,

@@ -244,7 +244,7 @@
         "group": "background"
     }, {
         "source": "local_cascaded_imagery",
-        "name": "CORANGAMITE:AERIAL_LANDCOVER54_2010FEB23_AIR_VIS_50CM_MGA54",
+        "name": "AERIAL_LANDCOVER54_2010FEB23_AIR_VIS_50CM_MGA54",
         "title": "Aerial Photo (02/2010)",
         "visibility": false,
         "opacity": 1,

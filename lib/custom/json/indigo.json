@@ -136,7 +136,7 @@
     },
     "layers": [{
         "source": "local_cascaded_imagery",
-        "name": "INDIGO:TOWNS_RUTHERGLEN-WAHGUNYAH_2009OCT20_AIR_VIS_15CM_MGA55",
+        "name": "TOWNS_RUTHERGLEN-WAHGUNYAH_2009OCT20_AIR_VIS_15CM_MGA55",
         "title": "Aerial Photo (Rutherglen-Wahgunyah, Oct 2009)",
         "visibility": false,
         "opacity": 1,

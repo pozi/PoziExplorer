@@ -257,7 +257,7 @@
         "group": "background"
     }, {
         "source": "local_cascaded_imagery",
-        "name": "MOIRA:AERIAL_MOIRA-SHEPPARTON_2009DEC14_AIR_VIS_30CM_MGA55",
+        "name": "AERIAL_MOIRA-SHEPPARTON_2009DEC14_AIR_VIS_30CM_MGA55",
         "title": "Aerial Photo (CIP, Dec 2009)",
         "visibility": true,
         "opacity": 1,
