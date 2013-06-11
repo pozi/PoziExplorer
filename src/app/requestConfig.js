@@ -87,10 +87,10 @@ requestConfig = function(options) {
             var localLayerSourcePrefix,localPrintServicePrefix;
             if (debugMode) {
                 JSONconf.proxy = "proxy/?url=";
-                // To be able to login to v3 from the debug environment
-                JSONconf.loginEndpoint = "http://v3.pozi.com/geoexplorer/login/";
-                localLayerSourcePrefix = "http://v3.pozi.com";
-                JSONconf.localPrintServicePrefix = "http://v3.pozi.com";
+                // To be able to login to s2 from the debug environment
+                JSONconf.loginEndpoint = "http://s2.pozi.com/geoexplorer/login/";
+                localLayerSourcePrefix = "http://s2.pozi.com";
+                JSONconf.localPrintServicePrefix = "http://s2.pozi.com";
             } else {
                 JSONconf.proxy = "/geoserver/rest/proxy?url=";
                 JSONconf.loginEndpoint = "/geoexplorer/login";
