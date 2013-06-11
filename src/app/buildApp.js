@@ -3,7 +3,7 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
     var app = new gxp.Viewer({
         authorizedRoles: ['ROLE_ADMINISTRATOR'],
         proxy: JSONconf.proxy,
-        //defaultSourceType: "gxp_wmscsource",
+        defaultSourceType: "gxp_wmscsource",
         portalConfig: {
             layout: "border",
             region: "center",
