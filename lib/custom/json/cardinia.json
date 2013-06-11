@@ -219,7 +219,17 @@
     }, {
         "source": "local",
         "name": "CSC_AREA_FIRE_BAN",
-        "title": "Fire Ban Area",
+        "title": "Fire Ban Areas",
+        "visibility": false,
+        "opacity": 0.85,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+    }, {
+        "source": "local",
+        "name": "CSC_VEGETATION_ZONE",
+        "title": "Vegetation Zones",
         "visibility": false,
         "opacity": 0.85,
         "format": "image/png8",
@@ -239,7 +249,7 @@
     }, {
         "source": "local",
         "name": "CSC_AREA_DOG_OF_LEASH",
-        "title": "Dog Off Leash Area",
+        "title": "Dog Off Leash Areas",
         "visibility": false,
         "opacity": 0.85,
         "format": "image/png8",
