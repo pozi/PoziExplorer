@@ -102,6 +102,14 @@ requestConfig = function(options) {
                 JSONconf.sources.local.url = localLayerSourcePrefix + JSONconf.sources.local.url;
             }
 
+            // Fixing tab endpoints for debug mode
+            _(JSONconf.liveDataEndPoints).each(function(l){
+                if (l.urlLayout.charAt(0) == "/")
+                {
+                    l.urlLayout = localLayerSourcePrefix + l.urlLayout;
+                }
+            });
+
             // Fixing local print service for debug mode
             _(JSONconf.tools).each(function(t){
                 if (t.ptype == "gxp_print")
