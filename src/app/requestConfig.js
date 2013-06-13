@@ -107,6 +107,7 @@ requestConfig = function(options) {
                 if (l.urlLayout.charAt(0) == "/")
                 {
                     l.urlLayout = localLayerSourcePrefix + l.urlLayout;
+                    l.urlLiveData = localLayerSourcePrefix + l.urlLiveData;
                 }
             });
 
