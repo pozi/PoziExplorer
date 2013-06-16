@@ -24,8 +24,8 @@ searchRecordSelectHandler = function(combo, record, app, JSONconf, northPart, ea
         featureType: record.data.gsln, // GeoServer Layer Name
         srsName: JSONconf.WFSsrsName,
         featureNS: JSONconf.FeatureNS, // Feature Name Space (e.g. http://www.pozi.com/cardinia - referencing a workspace)
-        geometryName: JSONconf.WFSgeometryName,
-        schema: fullWFSEndPoint + "?service=WFS&version=1.1.0&request=DescribeFeatureType&TypeName=" + record.data.gsns + ":" + record.data.gsln
+        geometryName: JSONconf.WFSgeometryName
+        // schema: fullWFSEndPoint + "?service=WFS&version=1.1.0&request=DescribeFeatureType&TypeName=" + record.data.gsns + ":" + record.data.gsln
     });
 
     // Filtering the WFS layer on a column name and value - if the value contains a \, we escape it by doubling it
