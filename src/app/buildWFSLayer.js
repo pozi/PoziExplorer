@@ -26,11 +26,11 @@ buildWFSLayer = function(JSONconf) {
                 protocol: new OpenLayers.Protocol.WFS({
                     version: "1.1.0",
                     url: JSONconf.servicesHost + JSONconf.WFSEndPoint,
-                    featureType: "VMPROP_PROPERTY",
+                    featureType: JSONconf.propertyLayerWS,
                     srsName: JSONconf.WFSsrsName,
                     featureNS: JSONconf.FeatureNS,
                     geometryName: JSONconf.WFSgeometryName,
-                    schema: JSONconf.servicesHost + JSONconf.WFSEndPoint + "?service=WFS&version=1.1.0&request=DescribeFeatureType&TypeName=" + "VICMAP:VMPROP_PROPERTY"
+                    schema: JSONconf.servicesHost + JSONconf.WFSEndPoint + "?service=WFS&version=1.1.0&request=DescribeFeatureType&TypeName=" + JSONconf.propertyLayerWS + ":" + JSONconf.propertyLayerName
                 }),
                 filter: new OpenLayers.Filter.Comparison({
                     type: OpenLayers.Filter.Comparison.EQUAL_TO,

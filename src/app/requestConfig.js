@@ -25,6 +25,8 @@ requestConfig = function(options) {
                 servicesHost: "http://s1.pozi.com",
                 searchEndPoint: "/ws/rest/v3/ws_all_features_by_string_and_lga.php",
                 WFSEndPoint: "/geoserver/wfs",
+                propertyLayerWS: "VICMAP_CLASSIC",
+                propertyLayerName: "dse_vmprop_property_mp",
                 LGACode: "346",
                 workspace: "",
                 highlightSymboliser: {
