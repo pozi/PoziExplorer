@@ -118,7 +118,8 @@ gxp.plugins.Print = Ext.extend(gxp.plugins.Tool, {
             {
                 // Includes the server base URL - as an absolute URL required by the server-side printing service
                 var root = window.location.origin;
-                if (JSONconf.localPrintServicePrefix)
+                var debugMode = (/(localhost|\.dev|\.local)/i).test(window.location.hostname);
+                if (debugMode)
                 {
                     root = JSONconf.localPrintServicePrefix;
                 }
