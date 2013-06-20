@@ -1,5 +1,5 @@
 {
-    "servicesHost": "http://s1.pozi.com",
+    "servicesHost": "http://basemap.pozi.com",
     "searchEndPoint": "/ws/rest/v3/ws_all_features_by_string_and_lga.php",
     "LGACode": "308",
     "databaseConfig": "basemap",
@@ -190,8 +190,8 @@
         "storeMode": "sqlite",
         "storeName": "cardinia"
     }, {
-        "urlLayout": "http://s1.pozi.com/ws/rest/v3/ws_get_layouts.php",
-        "urlLiveData": "http://s1.pozi.com/ws/rest/v3/ws_get_live_data.php",
+        "urlLayout": "http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php",
+        "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
         "storeMode": "pgsql",
         "storeName": "basemap"
     }],

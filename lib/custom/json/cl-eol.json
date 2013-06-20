@@ -1,5 +1,5 @@
 {
-    "servicesHost": "http://s1.pozi.com",
+    "servicesHost": "http://basemap.pozi.com",
     "tools": [{
         "ptype": "gxp_layermanager",
         "groups": {

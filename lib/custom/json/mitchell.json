@@ -1,5 +1,5 @@
 {
-    "servicesHost": "http://s1.pozi.com",
+    "servicesHost": "http://basemap.pozi.com",
     "searchEndPoint": "/ws/rest/v3/ws_all_features_by_string_and_lga.php",
     "LGACode": "346",
     "databaseConfig": "basemap",
@@ -79,36 +79,36 @@
             "restUrl": "/geoserver/rest"
         },
         "basemap_dse_administrative_boundaries": {
-            "url": "http://s1.pozi.com/geoserver/DSE_ADMINISTRATIVE_BOUNDARIES/ows",
+            "url": "http://basemap.pozi.com/geoserver/DSE_ADMINISTRATIVE_BOUNDARIES/ows",
             "title": "DSE - Adminstrative Boundaries",
             "ptype": "gxp_wmscsource"
         },
         "basemap_dse_features_of_interest": {
-            "url": "http://s1.pozi.com/geoserver/DSE_FEATURES_OF_INTEREST/ows",
+            "url": "http://basemap.pozi.com/geoserver/DSE_FEATURES_OF_INTEREST/ows",
             "title": "DSE - Features Of interest",
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
         "basemap_dse_planning": {
-            "url": "http://s1.pozi.com/geoserver/DSE_PLANNING/ows",
+            "url": "http://basemap.pozi.com/geoserver/DSE_PLANNING/ows",
             "title": "DSE - Planning",
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
         "basemap_dse_property": {
-            "url": "http://s1.pozi.com/geoserver/DSE_PROPERTY/ows",
+            "url": "http://basemap.pozi.com/geoserver/DSE_PROPERTY/ows",
             "title": "DSE - Property",
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
         "basemap_dse_transport": {
-            "url": "http://s1.pozi.com/geoserver/DSE_TRANSPORT/ows",
+            "url": "http://basemap.pozi.com/geoserver/DSE_TRANSPORT/ows",
             "title": "DSE - Transport",
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
         "basemap_dse_topography": {
-            "url": "http://s1.pozi.com/geoserver/DSE_TOPOGRAPHY/ows",
+            "url": "http://basemap.pozi.com/geoserver/DSE_TOPOGRAPHY/ows",
             "title": "DSE - Topography",
             "ptype": "gxp_wmscsource",
             "tiled": false
@@ -348,8 +348,8 @@
         "storeMode": "sqlite",
         "storeName": "mitchell"
     }, {
-        "urlLayout": "http://s1.pozi.com/ws/rest/v3/ws_get_layouts.php",
-        "urlLiveData": "http://s1.pozi.com/ws/rest/v3/ws_get_live_data.php",
+        "urlLayout": "http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php",
+        "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
         "storeMode": "pgsql",
         "storeName": "basemap"
     }, {

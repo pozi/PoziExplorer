@@ -22,7 +22,7 @@ requestConfig = function(options) {
         success: function(request) {
 
             var defaultConf = {
-                servicesHost: "http://s1.pozi.com",
+                servicesHost: "http://basemap.pozi.com",
                 searchEndPoint: "/ws/rest/v3/ws_all_features_by_string_and_lga.php",
                 WFSEndPoint: "/geoserver/wfs",
                 propertyLayerWS: "VICMAP_CLASSIC",
@@ -89,10 +89,10 @@ requestConfig = function(options) {
             var localLayerSourcePrefix,localPrintServicePrefix;
             if (debugMode) {
                 JSONconf.proxy = "proxy/?url=";
-                // To be able to login to s2 from the debug environment
-                JSONconf.loginEndpoint = "http://s2.pozi.com/geoexplorer/login/";
-                localLayerSourcePrefix = "http://s2.pozi.com";
-                JSONconf.localPrintServicePrefix = "http://s2.pozi.com";
+                // To be able to login to a demo client from the debug environment
+                JSONconf.loginEndpoint = "http://demo.pozi.com/geoexplorer/login/";
+                localLayerSourcePrefix = "http://demo.pozi.com";
+                JSONconf.localPrintServicePrefix = "http://demo.pozi.com";
             } else {
                 JSONconf.proxy = "/geoserver/rest/proxy?url=";
                 JSONconf.loginEndpoint = "/geoexplorer/login";
