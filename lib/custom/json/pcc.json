@@ -164,7 +164,7 @@
     }, {
         "source": "basemap",
         "name": "VICMAP_CLASSIC:VicmapClassic",
-        "title": "Vicmap Classic",
+        "title": "Pozi Vicmap",
         "visibility": false,
         "opacity": 1,
         "group": "background",
