@@ -19,6 +19,7 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
             id: "mymap",
             // id needed to reference map in portalConfig above
             projection: "EPSG:900913",
+            scales: JSONconf.scales,
             center: JSONconf.center,
             zoom: JSONconf.zoom,
             layers: _.union(JSONconf.layers, [buildWFSLayer(JSONconf)]),
