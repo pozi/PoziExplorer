@@ -30,6 +30,7 @@
  * @require GeoExt/plugins/PrintPageField.js
  * @require GeoExt/plugins/PrintExtent.js
  * @require OpenLayers/Layer.js
+ * @require OpenLayers/Control/Scale.js
  * @require OpenLayers/Handler/Path.js
  * @require OpenLayers/Handler/Point.js
  * @require OpenLayers/Handler/Polygon.js
