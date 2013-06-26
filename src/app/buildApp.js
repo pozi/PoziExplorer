@@ -28,8 +28,7 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
                 new OpenLayers.Control.Navigation(),
                 new OpenLayers.Control.Zoom(),
                 new OpenLayers.Control.Attribution(),
-                new OpenLayers.Control.ScaleLine(),
-                new OpenLayers.Control.Scale()
+                new OpenLayers.Control.ScaleLine()
             ],
             mapItems: [{
                 xtype: "gxp_scaleoverlay"
