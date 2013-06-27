@@ -103,6 +103,12 @@
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
+        "basemap_wms_cascaded": {
+            "url": "http://basemap.pozi.com/geoserver/DEPI_CASCADED/ows",
+            "title": "DSE - WMS cascaded",
+            "ptype": "gxp_wmscsource",
+            "tiled": false
+        },
         "local_cascaded_imagery": {
             "url": ["http://imap01.pozi.com/geoserver/IMAP/ows", "http://imap02.pozi.com/geoserver/IMAP/ows", "http://imap03.pozi.com/geoserver/IMAP/ows", "http://imap04.pozi.com/geoserver/IMAP/ows"],
             "title": "DSE Image Web Server",
@@ -182,7 +188,7 @@
         "tiled": false
     }, {
         "source": "basemap",
-        "name": "DSE_ADMINISTRATIVE_BOUNDARIES:DSE_VMADMIN_LGA",
+        "name": "DSE_ADMINISTRATIVE_BOUNDARIES:dse_vmadmin_lga_polygon",
         "title": "LGAs",
         "visibility": true,
         "opacity": 0.5,
@@ -208,7 +214,7 @@
         "source": "basemap",
         "name": "VICMAP_CLASSIC:LabelClassic",
         "title": "Labels",
-        "visibility": true,
+        "visibility": false,
         "opacity": 1,
         "selected": false,
         "format": "image/png8",
@@ -217,10 +223,38 @@
         "tiled": false,
         "group": "top"
     }, {
+        "source": "ol",
+        "group": "background",
+        "visibility": true,
+        "fixed": true,
+        "type": "OpenLayers.Layer.XYZ",
+        "args": [
+            "Nokia Maps",
+            [
+                "http://1.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ",
+                "http://2.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ",
+                "http://3.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ",
+                "http://4.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ"
+            ],
+            {
+                "attribution": "&copy; 2013 Nokia</span>&nbsp;<a href='http://maps.nokia.com/services/terms' target='_blank' title='Terms of Use' style='color:#333;text-decoration: underline;'>Terms of Use</a></div> <img src='http://api.maps.nokia.com/2.2.4/assets/ovi/mapsapi/by_here.png' border='0'>",
+                "transitionEffect": "resize"
+            }
+        ]
+    }, {
+        "source": "mapquest",
+        "name": "osm",
+        "visibility": false,
+        "group": "background"
+    }, {
+        "source": "google",
+        "name": "HYBRID",
+        "visibility": false
+    }, {
         "source": "basemap",
         "name": "VICMAP_CLASSIC:VicmapClassic",
         "title": "Pozi Vicmap",
-        "visibility": true,
+        "visibility": false,
         "opacity": 1,
         "group": "background",
         "selected": false,
@@ -229,15 +263,6 @@
         "transparent": true,
         "cached": true,
         "transition": "resize"
-    }, {
-        "source": "mapquest",
-        "name": "osm",
-        "visibility": false,
-        "group": "background"
-    }, {
-        "source": "google",
-        "name": "SATELLITE",
-        "visibility": false
     }, {
         "source": "ol",
         "group": "background",
