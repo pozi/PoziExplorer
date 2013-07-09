@@ -109,14 +109,6 @@
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
-        "local_cascaded_imagery": {
-            "url": ["http://imap01.pozi.com/geoserver/IMAP/ows", "http://imap02.pozi.com/geoserver/IMAP/ows", "http://imap03.pozi.com/geoserver/IMAP/ows", "http://imap04.pozi.com/geoserver/IMAP/ows"],
-            "title": "DSE Image Web Server",
-            "ptype": "gxp_wmscsource",
-            "format": "image/JPEG",
-            "group": "background",
-            "transition": "resize"
-        },
         "mapquest": {
             "ptype": "gxp_mapquestsource"
         },
