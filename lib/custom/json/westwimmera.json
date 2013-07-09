@@ -143,8 +143,8 @@
         "type": "OpenLayers.Layer",
         "args": ["No Aerial", { "visibility": true }]
     }, {
-        "source": "basemap",
-        "name": "WESTWIMMERA:AERIAL_WIMMERA-CMA_2004NOV01_AIR_VIS_60CM_MGA54",
+        "source": "local",
+        "name": "AERIAL_WIMMERA-CMA_2004NOV01_AIR_VIS_60CM_MGA54",
         "title": "Aerial Photo (WCMA, Nov 2004)",
         "visibility": false,
         "opacity": 0,
