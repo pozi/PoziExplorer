@@ -235,10 +235,10 @@
         "tiled": false
     }, {
         "source": "local",
-        "name": "WWSC_TRANSFER_STATION",
-        "title": "Transfer Stations",
+        "name": "WWSC_TREE",
+        "title": "Street Trees (Data Capture)",
         "visibility": false,
-        "opacity": 0.85,
+        "opacity": 1,
         "format": "image/png8",
         "styles": "",
         "transparent": true,
