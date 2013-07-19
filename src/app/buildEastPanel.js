@@ -1,10 +1,11 @@
 buildEastPanel = function(JSONconf, northPart, accordion) {
 
     var eastPanel;
-    var bottomEastItem = {
-        border: false
-    };
+    var eastPanelItems = [northPart,accordion];
+    var bottomEastItem;
+
     if (JSONconf.bottomEastItem) {
+        // Create a panel for the bottom right
         bottomEastItem = {
             id: 'bottomEastItem',
             title: JSONconf.bottomEastItem.title,
@@ -23,6 +24,8 @@ buildEastPanel = function(JSONconf, northPart, accordion) {
                 }
             }
         };
+        // Adding this panel as a child item
+        eastPanelItems.push(bottomEastItem);
     }
 
     eastPanel = new Ext.Panel({
@@ -48,11 +51,7 @@ buildEastPanel = function(JSONconf, northPart, accordion) {
             }
         },
         split: true,
-        items: [
-            northPart,
-            accordion,
-            bottomEastItem
-        ]
+        items: eastPanelItems
     });
 
     return eastPanel;
