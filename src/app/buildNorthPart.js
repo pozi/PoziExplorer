@@ -270,7 +270,7 @@ buildNorthPart = function(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpan
 
                                     configArray[c].headerCfg = {
                                         tag: 'div',
-                                        style: lock + 'background-position: right; background-repeat: no-repeat; background-color:' + col + ';padding-left: 10px; vertical-align: middle; display: inline-'+displayBlock+';',
+                                        style: lock + 'background-position: right; background-repeat: no-repeat; background-color:' + col + ';padding-left: 10px;'+displayBlock,
                                         children: [
                                             {
                                                 tag: 'div',
