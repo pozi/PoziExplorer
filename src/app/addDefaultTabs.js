@@ -19,14 +19,19 @@ addDefaultTabs = function(accordion, gLayoutsArr, JSONconf) {
             // Browser specific style for correct presentation of tab title, icons and +/- sign on a single line
             var displayBlock = (Ext.isIE6 || Ext.isIE7)?"block":"flex";
 
+            var stylesArr = [
+                'background-image: none; ',
+                'background-color: ', (config.col || "#7a7a7a"), '; ',
+                'padding-left: 10px;'
+            ];
+            if (Ext.isIE6 || Ext.isIE7)
+            {
+                stylesArr.push('display: inline-block;');
+            }
+
             config.headerCfg = {
                 tag: 'div',
-                style: [
-                    'background-image: none; ',
-                    'background-color: ', (config.col || "#7a7a7a"), '; ',
-                    'padding-left: 10px;',
-                    'display: inline-'+displayBlock+';'
-                ].join(''),
+                style: stylesArr.join(''),
                 children: [
                     {
                         tag: 'div',

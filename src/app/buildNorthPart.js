@@ -198,13 +198,13 @@ buildNorthPart = function(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpan
                         p.setSource(fa);
 
                         // Browser specific style for correct presentation of tab title, icons and +/- sign on a single line
-                        var displayBlock = (Ext.isIE6 || Ext.isIE7)?"block":"flex";
+                        var displayBlock = (Ext.isIE6 || Ext.isIE7)?"display:inline-block;":"";
                         
                         var panel = new Ext.Panel({
                             id: 'attributeAcc',
                             headerCfg: {
                                 tag: 'div',
-                                style: 'background-image: none;background-color: #7a7a7a;padding-left: 10px; display: inline-'+displayBlock+';',
+                                style: 'background-image: none;background-color: #7a7a7a;padding-left: 10px;'+displayBlock,
                                 children: [
                                     {
                                         tag: 'div',
