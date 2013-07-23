@@ -29,6 +29,10 @@ helpers = function() {
 
         trim: function(str) {
             if (str) {
+                if (typeof str !== 'string')
+                {
+                    str = str.toString();
+                }
                 return str.replace(/^\s*/, "").replace(/\s*$/, "");
             } else {
                 return "";
