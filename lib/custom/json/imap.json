@@ -234,11 +234,6 @@
             }
         ]
     }, {
-        "source": "mapquest",
-        "name": "osm",
-        "visibility": false,
-        "group": "background"
-    }, {
         "source": "google",
         "name": "HYBRID",
         "visibility": false
