@@ -1,0 +1,315 @@
+{
+    "servicesHost": "http://basemap.pozi.com",
+    "searchEndPoint": "/ws/rest/v3/ws_all_features_by_string_and_lga.php",
+    "LGACode": "328",
+    "databaseConfig": "basemap",
+    "tools": [{
+        "ptype": "gxp_layermanager",
+        "groups": {
+            "top": {
+                "title": "Surface Layers",
+                "collapsed": true
+            },
+            "default": "Overlays",
+            "aerial": {
+                "title": "Aerial Photo",
+                "collapsed": true,
+                "exclusive": true
+            },            
+            "background": {
+                "title": "Base Maps",
+                "exclusive": true
+            }
+        },
+        "outputConfig": {
+            "id": "tree",
+            "border": false,
+            "tbar": [
+
+            ]
+        },
+        "outputTarget": "westpanel"
+    }, {
+        "ptype": "gxp_addlayers",
+        "actionTarget": "tree.tbar"
+    }, {
+        "ptype": "gxp_layerproperties",
+        "id": "layerproperties",
+        "actionTarget": "tree.contextMenu"
+    }, {
+        "ptype": "gxp_zoomtolayerextent",
+        "actionTarget": "tree.contextMenu"
+    }, {
+        "ptype": "gxp_styler",
+        "actionTarget": "tree.contextMenu"
+    }, {
+        "ptype": "gxp_removelayer",
+        "actionTarget": "tree.contextMenu"
+    }, {
+        "ptype": "gxp_wmsgetfeatureinfo",
+        "format": "grid",
+        "toggleGroup": "interaction",
+        "showButtonText": false
+    }, {
+        "ptype": "gxp_print",
+        "actionTarget": "toolPlaceHolder",
+        "customParams": {
+            "outputFilename": "PoziExplorer-print"
+        },
+        "printService": "/geoserver/pdf",
+        "showButtonText": false
+    }, {
+        "ptype": "gxp_measure",
+        "toggleGroup": "interaction",
+        "controlOptions": {
+            "immediate": true
+        },
+        "showButtonText": false
+    }],
+    "sources": {
+        "local": {
+            "url": "/geoserver/SHEPPARTON/ows",
+            "title": "Shepparton Layers",
+            "ptype": "gxp_wmscsource",
+            "tiled": false
+        },
+        "basemap_dse_administrative_boundaries": {
+            "url": "http://basemap.pozi.com/geoserver/DSE_ADMINISTRATIVE_BOUNDARIES/ows",
+            "title": "DSE - Adminstrative Boundaries",
+            "ptype": "gxp_wmscsource"
+        },
+        "basemap_dse_features_of_interest": {
+            "url": "http://basemap.pozi.com/geoserver/DSE_FEATURES_OF_INTEREST/ows",
+            "title": "DSE - Features Of interest",
+            "ptype": "gxp_wmscsource",
+            "tiled": false
+        },
+        "basemap_dse_planning": {
+            "url": "http://basemap.pozi.com/geoserver/DSE_PLANNING/ows",
+            "title": "DSE - Planning",
+            "ptype": "gxp_wmscsource",
+            "tiled": false
+        },
+        "basemap_dse_property": {
+            "url": "http://basemap.pozi.com/geoserver/DSE_PROPERTY/ows",
+            "title": "DSE - Property",
+            "ptype": "gxp_wmscsource",
+            "tiled": false
+        },
+        "basemap_dse_transport": {
+            "url": "http://basemap.pozi.com/geoserver/DSE_TRANSPORT/ows",
+            "title": "DSE - Transport",
+            "ptype": "gxp_wmscsource",
+            "tiled": false
+        },
+        "basemap_dse_topography": {
+            "url": "http://basemap.pozi.com/geoserver/DSE_TOPOGRAPHY/ows",
+            "title": "DSE - Topography",
+            "ptype": "gxp_wmscsource",
+            "tiled": false
+        },
+        "local_cascaded_imagery": {
+            "url": ["http://shepparton01.pozi.com/geoserver/SHEPPARTON/ows", "http://shepparton02.pozi.com/geoserver/SHEPPARTON/ows", "http://shepparton03.pozi.com/geoserver/SHEPPARTON/ows", "http://shepparton04.pozi.com/geoserver/SHEPPARTON/ows"],
+            "title": "DSE Image Web Server",
+            "ptype": "gxp_wmscsource",
+            "defaultType": "image/JPEG",
+            "group": "background",
+            "transition": "resize"
+        },
+        "ol": {
+            "ptype": "gxp_olsource"
+        },
+        "basemap": {
+            "url": ["http://basemap1.pozi.com/geoserver/ows", "http://basemap2.pozi.com/geoserver/ows", "http://basemap3.pozi.com/geoserver/ows", "http://basemap4.pozi.com/geoserver/ows"],
+            "title": "Pozi Data Server",
+            "ptype": "gxp_wmscsource",
+            "transition": null
+        }
+    },
+    "layers": [{
+        "source": "basemap",
+        "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
+        "title": "Planning Zones",
+        "visibility": false,
+        "opacity": 0.5,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+    }, {
+        "source": "basemap",
+        "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
+        "title": "Planning Overlays",
+        "visibility": false,
+        "opacity": 0.5,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+    }, {
+        "source": "basemap",
+        "name": "VICMAP_CLASSIC:dse_vmprop_parcel_mp",
+        "title": "Parcels",
+        "visibility": false,
+        "opacity": 0.5,
+        "format": "image/GIF",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+    }, {
+        "source": "basemap",
+        "name": "VICMAP_CLASSIC:gt_property_address",
+        "title": "Properties",
+        "visibility": true,
+        "opacity": 0.25,
+        "format": "image/GIF",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+    }, {
+        "source": "basemap",
+        "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_resource_recreational",
+        "title": "Recreational Resources",
+        "visibility": false,
+        "opacity": 0.8,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+    }, {
+        "source": "basemap",
+        "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facility_sport",
+        "title": "Sport Facilities",
+        "visibility": false,
+        "opacity": 0.8,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+    }, {
+        "source": "basemap",
+        "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_shepparton_mask",
+        "title": "Greater Shepparton Boundary",
+        "visibility": true,
+        "opacity": 0.6,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false,
+        "transition": "",
+        "group": "top"
+    }, {
+        "source": "local_cascaded_imagery",
+        "name": "AERIAL_MOIRA-SHEPPARTON_2009DEC14_AIR_VIS_30CM_MGA55",
+        "title": "Moira-Shepparton, Dec 2009",
+        "visibility": false,
+        "opacity": 0,
+        "format": "image/JPEG",
+        "tiled": true,
+        "group": "aerial",
+        "selected": false,
+        "transparent": true,
+        "styles": "",
+        "displayInOpacitySlider": true
+    }, {
+        "source": "ol",
+        "group": "aerial",
+        "fixed": true,
+        "type": "OpenLayers.Layer",
+        "args": ["No Aerial",
+        {
+            "visibility": true
+        }]
+    }, {
+        "source": "basemap",
+        "name": "VICMAP_CLASSIC:LabelClassic",
+        "title": "Labels",
+        "visibility": false,
+        "opacity": 1,
+        "selected": false,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false,
+        "group": "top"
+    }, {
+        "source": "ol",
+        "group": "background",
+        "visibility": true,
+        "fixed": true,
+        "type": "OpenLayers.Layer.XYZ",
+        "args": [
+            "Nokia Maps",
+            [
+                "http://1.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ",
+                "http://2.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ",
+                "http://3.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ",
+                "http://4.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ"
+            ],
+            {
+                "attribution": "&copy; 2013 Nokia</span>&nbsp;<a href='http://maps.nokia.com/services/terms' target='_blank' title='Terms of Use' style='color:#333;text-decoration: underline;'>Terms of Use</a></div> <img src='http://api.maps.nokia.com/2.2.4/assets/ovi/mapsapi/by_here.png' border='0'>",
+                "transitionEffect": "resize"
+            }
+        ]
+    }, {
+        "source": "basemap",
+        "name": "VICMAP_CLASSIC:VicmapClassic",
+        "title": "Pozi Vicmap",
+        "visibility": false,
+        "opacity": 1,
+        "group": "background",
+        "selected": false,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "cached": true,
+        "transition": "resize"
+    }, {
+        "source": "ol",
+        "group": "background",
+        "fixed": true,
+        "type": "OpenLayers.Layer",
+        "args": ["None",
+        {
+            "visibility": false
+        }]
+    }],
+    "center": [
+    16189546, -4358644],
+    "zoom": 10,
+    "workspace": "SHEPPARTON",
+    "highlightSymboliser": {
+        "name": "test",
+        "strokeColor": "#007DC6",
+        "strokeWidth": 20,
+        "strokeOpacity": 0.5,
+        "fillColor": "#007DC6",
+        "fillOpacity": 0.2
+    },
+    "liveDataEndPoints": [{
+        "urlLayout": "http://192.168.0.1/ws/rest/v3/ws_get_layouts.php",
+        "urlLiveData": "http://192.168.0.1/ws/rest/v3/ws_get_live_data.php",
+        "storeMode": "sqlite",
+        "storeName": "shepparton"
+    }, {
+        "urlLayout": "http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php",
+        "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
+        "storeMode": "pgsql",
+        "storeName": "basemap"
+    }, {
+        "urlLayout": "/ws/rest/v3/ws_get_layouts.php",
+        "urlLiveData": "/ws/rest/v3/ws_get_live_data.php",
+        "storeMode": "pgsql",
+        "storeName": "sheppartongis"
+    }],
+    "logoClientSrc": "theme/app/img/custom/shepparton_logo.png",
+    "logoClientURL": "http://www.greatershepparton.com.au/",
+    "zoomMax": 18,
+    "bannerLineColor": "#007DC6",
+    "bannerRightCornerLine1": "Greater Shepparton",
+    "bannerRightCornerLine2": "City Council",
+    "printMapTitle": "Greater Shepparton",
+    "linkToCouncilWebsite": "http://www.greatershepparton.com.au/",
+    "collapseWestPanel": false,
+    "openFirstDefaultTab": true
+}
