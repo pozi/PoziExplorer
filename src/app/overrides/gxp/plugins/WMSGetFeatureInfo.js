@@ -94,15 +94,43 @@
         }
       }
 
-      // Extract the core of the object, that is the JSON object
-      var match = evt.text.match(/<body[^>]*>([\s\S]*)<\/body>/);
-      if (match && !match[1].match(/^\s*$/)) {
-        // Issue with simple quotes - with the template js_string, they appear as \', which is not parseable as JSON
-        res=Ext.util.JSON.decode(match[1].replace('\\\'','\''));
+      // Attempting to decode the string as JSON
+      var featureContent;
+      try
+      {
+        var wkt = new OpenLayers.Format.WKT();
+        var geojson = new OpenLayers.Format.GeoJSON();
 
+        // Interpreting the return as a GeoJSON - if this fails, the catch will interpret it as text/html
+        var features_geojson = geojson.read(evt.text);
+
+        // Building an array of features returned
+        featureContent = Array(features_geojson.length);
+
+        // For each feature returned, we extract properties and geometry (in WKT)
+        for (var j=0;j<features_geojson.length;j++)
+        {
+            featureContent[j] = {};
+            featureContent[j].row = {};
+            featureContent[j].row = features_geojson[j].data;
+            featureContent[j].row["the_geom"] = wkt.write(features_geojson[j]);
+        }
+
+      }
+      catch(e)
+      {
+          // If it was not JSON, it is HTML surrounding a JSON object, that we decode
+          // TODO: this section is bound to disappear as we want to use application/json as infoFormat everywhere
+          var match = evt.text.match(/<body[^>]*>([\s\S]*)<\/body>/);
+          if (match && !match[1].match(/^\s*$/)) {
+            featureContent = Ext.util.JSON.decode(match[1].replace('\\\'','\'')).rows;
+          }
+      }
+
+      if (featureContent) {
         // We hydrate an object that powers the datastore for the right panel combo
         var row_array;
-        for (var i=0;i<res.rows.length;i++)
+        for (var i=0;i<featureContent.length;i++)
         {
           // Id - need to be distinct for all objects in the drop down: if several layers activated, must be different across all layers (we can't use looping variable i)
           id_ct++;
@@ -112,7 +140,7 @@
           var simpleTitle=x.data.title.match(/(.*) ?\(.*\)/);
           if (simpleTitle) { typ = helpers.trim(simpleTitle[1]); }
           // All the attributes are contained in a serialised JSON object
-          var cont=res.rows[i].row;
+          var cont = featureContent[i].row;
 
           // Layer name (without namespace), to enable additional accordion panels
           var lay=x.data.layer.params.LAYERS.split(":")[1];

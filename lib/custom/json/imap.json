@@ -10,6 +10,10 @@
                 "title": "Surface Layers",
                 "collapsed": true
             },
+            "depi":{
+                "title":"DEPI Layers",
+                "collapsed": true
+            },
             "default": "Overlays",
             "background": {
                 "title": "Base Maps",
@@ -121,6 +125,13 @@
         "ol": {
             "ptype": "gxp_olsource"
         },
+        "depi_wms":{
+            "url": "http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms",
+            "title": "DEPI WMS Layers",
+            "ptype": "gxp_wmscsource",
+            "transition": null,
+            "infoFormat": "application/json"
+        },
         "basemap": {
             "url": ["http://basemap1.pozi.com/geoserver/ows", "http://basemap2.pozi.com/geoserver/ows", "http://basemap3.pozi.com/geoserver/ows", "http://basemap4.pozi.com/geoserver/ows"],
             "title": "Pozi Data Server",
@@ -179,17 +190,31 @@
         "transparent": true,
         "tiled": false
     }, {
-        "source": "basemap",
-        "name": "DSE_ADMINISTRATIVE_BOUNDARIES:dse_vmadmin_lga_polygon",
+        "source":"depi_wms",
+        "name": "sii:VMADMIN.LGA_POLYGON",
         "title": "LGAs",
         "visibility": true,
-        "opacity": 0.5,
+        "opacity": 0.6,
         "format": "image/png8",
-        "styles": "",
-        "queryable": false,
+        "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-VMADMIN.LGA_POLYGON.sld",
         "transparent": true,
         "tiled": false,
-        "transition": ""
+        "queryable": false,
+        "transition": "",
+        "group": "depi"
+    }, {
+        "source":"depi_wms",
+        "name": "sii:CROWNLAND.PLM100_POLYGON",
+        "title": "Crown Land",
+        "visibility": true,
+        "opacity": 0.6,
+        "format": "image/png8",
+        "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-CROWNLAND.PLM100_POLYGON.sld",
+        "transparent": true,
+        "tiled": false,
+        "queryable": false,
+        "transition": "",
+        "group": "depi"
     }, {
         "source": "local",
         "name": "IMAP_MASK",
