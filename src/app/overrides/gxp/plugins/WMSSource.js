@@ -223,11 +223,19 @@ gxp.plugins.WMSSource.prototype.createStore = function() {
           config.transition=JSONconf.sources[config.source].transition;
         }
       }
+      if (!('infoFormat' in config))
+      {
+        if ('infoFormat' in JSONconf.sources[config.source])
+        {
+          config.infoFormat=JSONconf.sources[config.source].infoFormat;
+        }
+      }
     }
 
       // update params from config
       layer.mergeNewParams({
     STYLES: config.styles,
+    SLD: config.sld,
     FORMAT: config.format,
     TRANSPARENT: config.transparent,
     CQL_FILTER: config.cql_filter
