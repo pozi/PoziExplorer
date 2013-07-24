@@ -116,6 +116,15 @@
             "group": "background",
             "transition": "resize"
         },
+        "mapquest": {
+            "ptype": "gxp_mapquestsource"
+        },
+        "google": {
+            "ptype": "gxp_googlesource"
+        },
+        "bing": {
+            "ptype": "gxp_bingsource"
+        },
         "ol": {
             "ptype": "gxp_olsource"
         },
