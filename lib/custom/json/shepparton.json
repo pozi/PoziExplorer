@@ -197,6 +197,56 @@
         "tiled": false
     }, {
         "source": "basemap",
+        "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_centre_cultural",
+        "title": "Cultural Centres",
+        "visibility": false,
+        "opacity": 0.85,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+    }, {
+        "source": "basemap",
+        "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facility_admin",
+        "title": "Admin Facilities",
+        "visibility": false,
+        "opacity": 0.85,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+     }, {
+        "source": "basemap",
+        "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_venue_community",
+        "title": "Community Venues",
+        "visibility": false,
+        "opacity": 0.85,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+    }, {
+        "source": "basemap",
+        "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facilty_care",
+        "title": "Care Facilities",
+        "visibility": false,
+        "opacity": 0.85,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+    }, {
+        "source": "basemap",
+        "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_centre_educational",
+        "title": "Schools",
+        "visibility": false,
+        "opacity": 0.85,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+    }, {
+        "source": "basemap",
         "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_shepparton_mask",
         "title": "Greater Shepparton Boundary",
         "visibility": true,
