@@ -11,7 +11,7 @@
                 "collapsed": true
             },
             "depi":{
-                "title":"DEPI Layers",
+                "title":"DEPI Layers (Beta)",
                 "collapsed": true
             },
             "default": "Overlays",
@@ -217,12 +217,12 @@
         "group": "depi"
     }, {
         "source":"depi_wms",
-        "name": "sii:DPS_932_RAIL_STATIONS_VMT",
-        "title": "Train Stations",
+        "name": "sii:DPS_1202_TRAIN_CORR_CENTL",
+        "title": "Train Corridors",
         "visibility": false,
-        "opacity": 1,
+        "opacity": 0.8,
         "format": "image/png8",
-        "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-DPS_932_RAIL_STATIONS_VMT.sld",
+        "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-DPS_1202_TRAIN_CORR_CENTL.sld",
         "transparent": true,
         "tiled": false,
         "queryable": true,
@@ -230,12 +230,12 @@
         "group": "depi"
     }, {
         "source":"depi_wms",
-        "name": "sii:DPS_1202_TRAIN_CORR_CENTL",
-        "title": "Train Corridors",
+        "name": "sii:DPS_932_RAIL_STATIONS_VMT",
+        "title": "Train Stations",
         "visibility": false,
-        "opacity": 0.8,
+        "opacity": 1,
         "format": "image/png8",
-        "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-DPS_1202_TRAIN_CORR_CENTL.sld",
+        "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-DPS_932_RAIL_STATIONS_VMT.sld",
         "transparent": true,
         "tiled": false,
         "queryable": true,
