@@ -26,7 +26,7 @@ buildWFSLayer = function(JSONconf) {
                 protocol: new OpenLayers.Protocol.WFS({
                     version: "1.1.0",
                     url: JSONconf.servicesHost + JSONconf.WFSEndPoint,
-                    featureType: JSONconf.propertyLayerWS,
+                    featureType: JSONconf.propertyLayerName,
                     srsName: JSONconf.WFSsrsName,
                     featureNS: JSONconf.FeatureNS,
                     geometryName: JSONconf.WFSgeometryName
