@@ -298,10 +298,6 @@
             }
         ]
     }, {
-        "source": "google",
-        "name": "HYBRID",
-        "visibility": false
-    }, {
         "source": "basemap",
         "name": "VICMAP_CLASSIC:VicmapClassic",
         "title": "Pozi Vicmap",
@@ -314,6 +310,10 @@
         "transparent": true,
         "cached": true,
         "transition": "resize"
+    }, {
+        "source": "google",
+        "name": "HYBRID",
+        "visibility": false
     }, {
         "source": "ol",
         "group": "background",
