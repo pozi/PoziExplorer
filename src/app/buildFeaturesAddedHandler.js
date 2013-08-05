@@ -14,15 +14,15 @@ buildFeaturesAddedHandler = function(gfromWFSFlag, gComboDataArray, glab, gtyp, 
                 // Capturing the feature as well (it contains the geometry)
                 cont["the_geom_WFS"] = this.features[k];
 
+                var o = app.getSelectionLayer().myGtObject;
                 // If too long for the drop down, we truncate the string to the space remaining after "<LAYER NAME>:"
                 var num_char_in_drop_down = 38;
-                if (glab.value.length > num_char_in_drop_down - gtyp.value.length) {
-                    glab.value = glab.value.substring(0, num_char_in_drop_down - gtyp.value.length - 2) + "..";
+                if (o.featureLabel.length > num_char_in_drop_down - o.featureType.length) {
+                    o.featureLabel = o.featureLabel.substring(0, num_char_in_drop_down - o.featureType.length - 2) + "..";
                 }
 
-                // Building a record and inserting it into an array											
-                //row_array = new Array(k,typ,lab,cont,null,null,this.features[k].layer.protocol.featureType);
-                row_array = new Array(k, gtyp.value, cont, 0, glab.value, this.features[k].layer.protocol.featureType);
+                // Building a record and inserting it into an array
+                row_array = new Array(k, o.featureType, cont, 0, o.featureLabel, o.layerName);
                 gComboDataArray.value.push(row_array);
 
             }

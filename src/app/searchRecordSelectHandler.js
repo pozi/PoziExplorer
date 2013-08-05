@@ -5,51 +5,69 @@
 searchRecordSelectHandler = function(combo, record, app, JSONconf, northPart, eastPanel, gfromWFSFlag, gtyp, glab) {
     if (record.data === undefined) { return; }
 
-    // Zooming to the relevant area (covering the selected record)
-    var bd = new OpenLayers.Bounds(record.data.xmini, record.data.ymini, record.data.xmaxi, record.data.ymaxi).transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
-    var z = app.mapPanel.map.getZoomForExtent(bd);
-    var fullWFSEndPoint = JSONconf.servicesHost + JSONconf.WFSEndPoint;
-
-    if (z < JSONconf.zoomMax) {
-        app.mapPanel.map.zoomToExtent(bd);
-    } else {
-        // If zooming too close, taking step back to level JSONconf.zoomMax , centered on the center of the bounding box for this record
-        app.mapPanel.map.moveTo(new OpenLayers.LonLat((bd.left + bd.right) / 2, (bd.top + bd.bottom) / 2), JSONconf.zoomMax);
+    // Smart title case on selected item
+    var curr_val = Ext.get('gtSearchCombobox').getValue();
+    if (curr_val)
+    {
+        Ext.getCmp('gtSearchCombobox').setValue(helpers.toTitleCase(curr_val));
     }
 
-    // Updating the WFS protocol to fetch this record
-    app.getSelectionLayer().protocol = new OpenLayers.Protocol.WFS({
-        version: "1.1.0",
-        url: fullWFSEndPoint,
-        featureType: record.data.gsln, // GeoServer Layer Name
-        srsName: JSONconf.WFSsrsName,
-        featureNS: JSONconf.FeatureNS, // Feature Name Space (e.g. http://www.pozi.com/cardinia - referencing a workspace)
-        geometryName: JSONconf.WFSgeometryName
-        // schema: fullWFSEndPoint + "?service=WFS&version=1.1.0&request=DescribeFeatureType&TypeName=" + record.data.gsns + ":" + record.data.gsln
+    // Now doing a call to the restful geof endpoint, based on the information in the selected record
+    var url_object = JSONconf.searchEndPoints.basemap.details + record.data.gsln + "/" + record.data.idcol +  "/is/" + encodeURIComponent(record.data.idval.replace('\\', '\\\\'));
+
+    Ext.Ajax.request({
+        method: "GET",
+        url: url_object,
+        params: {},
+        callback: function(options, success, response) {
+            var status = response.status;
+            if (status >= 200 && status < 403 && response.responseText) {
+                // We then feed the object returned into the highlight layer
+                var geojson_format = new OpenLayers.Format.GeoJSON({
+                    'internalProjection': new OpenLayers.Projection("EPSG:900913"),
+                    'externalProjection': new OpenLayers.Projection("EPSG:4326")
+                });
+                var geojson = geojson_format.read(response.responseText);
+
+                // Setting the flag, label and types for feature details display in panel
+                if (! (JSONconf.hideSelectedFeaturePanel)) {
+                    northPart.setHeight(60);
+                    Ext.getCmp('gtInfoCombobox').setVisible(true);
+                    // Collapsing the drop-down
+                    Ext.getCmp('gtInfoCombobox').collapse();
+                }
+                eastPanel.expand();
+                gfromWFSFlag.value = "Y";
+                //gtyp.value = record.data.ld;
+                //glab.value = record.data.label;
+                app.getSelectionLayer().myGtObject = {
+                    layerName : record.data.gsln,
+                    featureType : record.data.ld,
+                    featureLabel : record.data.label
+                };
+
+                // Managing objects in the selection layer
+                app.getSelectionLayer().removeAllFeatures();
+                app.getSelectionLayer().addFeatures(geojson);
+
+                // Calculating the overall envelope of all objects returned
+                var envelope = geojson[0].geometry.getBounds();
+                for (var i=1;i<geojson.length;i++)
+                {
+                    envelope.extend(geojson[i].geometry.getBounds());
+                }
+
+                // Zooming to the envelope
+                var z = app.mapPanel.map.getZoomForExtent(envelope);
+                if (z < JSONconf.zoomMax) {
+                    app.mapPanel.map.zoomToExtent(envelope);
+                } else {
+                    // If zooming too close, taking step back to level JSONconf.zoomMax , centered on the center of the bounding box for this record
+                    app.mapPanel.map.moveTo(new OpenLayers.LonLat((envelope.left + envelope.right) / 2, (envelope.top + envelope.bottom) / 2), JSONconf.zoomMax);
+                }
+
+            }
+        }
     });
-
-    // Filtering the WFS layer on a column name and value - if the value contains a \, we escape it by doubling it
-    app.getSelectionLayer().filter = new OpenLayers.Filter.Comparison({
-        type: OpenLayers.Filter.Comparison.EQUAL_TO,
-        property: record.data.idcol, // ID column
-        value: record.data.idval.replace('\\', '\\\\') // ID value
-    });
-
-    // Refreshing the WFS layer so that the highlight appears and triggers the featuresadded event handler above
-    app.getSelectionLayer().refresh({ force: true });
-
-    //
-    if (! (JSONconf.hideSelectedFeaturePanel)) {
-        northPart.setHeight(60);
-        Ext.getCmp('gtInfoCombobox').setVisible(true);
-        // Collapsing the drop-down
-        Ext.getCmp('gtInfoCombobox').collapse();
-    }
-    eastPanel.expand();
-
-    gfromWFSFlag.value = "Y";
-    gtyp.value = record.data.ld;
-    glab.value = record.data.label;
-
 };
 
