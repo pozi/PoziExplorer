@@ -3,11 +3,15 @@
     "searchEndPoints":{
         "basemap" : {
             "list":"http://basemap.pozi.com/ws/rest/v3/ws_search_api_wrapper.php",
-            "details":"http://basemap.pozi.com:4363/basemap/"
+            "details":"http://basemap.pozi.com:4363/basemap/",
+            "root":"features",
+            "propertyMapPrefix":"properties"
         },
         "internal" : {
-            "list":"http://172.20.10.19:9090/ws/rest/v3/ws_get_assets_by_string.php",
-            "details":"http://mitchellgis.pozi.com/api/v1/mitchellgis/"
+            "list":"http://localhost:8080/ws/rest/v3/ws_get_assets_by_string.php",
+            "details":"http://mitchellgis.pozi.com/api/v1/mitchellgis/",
+            "root":"rows",
+            "propertyMapPrefix":"row"
         }
     },
     "searchEndPoint": "/ws/rest/v3/ws_all_features_by_string_and_lga.php",

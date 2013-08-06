@@ -6,6 +6,9 @@ buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSel
         else { return img; }
     };
 
+    // Returns an array of stores, the first of which is the aggregated store
+    var searchStores = buildAllFeaturesDataStore(JSONconf);
+
     var portalItems = [
         {
             region: "north",
@@ -35,7 +38,7 @@ buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSel
                     new Ext.form.ComboBox({
                         id: 'gtSearchCombobox',
                         queryParam: 'query',
-                        store: buildAllFeaturesDataStore(JSONconf),
+                        store: searchStores[0],
                         displayField: 'label',
                         selectOnFocus: true,
                         minChars: 3,
@@ -51,6 +54,24 @@ buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSel
                         listeners: {
                             'select': function(combo, record) {
                                 searchRecordSelectHandler(combo, record, app, JSONconf, northPart, eastPanel, gfromWFSFlag, gtyp, glab);
+                            },
+                            'beforequery': function(queryEvent) {
+                                if (queryEvent.query.length > 2)
+                                {
+                                    // Removing all records from the aggregate search store
+                                    searchStores[0].removeAll();
+                                    // Reload the stores that power the aggregated store
+                                    for (var s=1; s < searchStores.length; s++)
+                                    {
+                                        // For each store that is powering the search, we emit a request
+                                        searchStores[s].load({
+                                            params:{
+                                                query:queryEvent.query
+                                            }
+                                        });
+                                    }
+                                    // The results will be merged in the aggregate store as per each store's 'load' listener
+                                }
                             },
                             scope: this
                         }
