@@ -9,11 +9,11 @@ searchRecordSelectHandler = function(combo, record, app, JSONconf, northPart, ea
     var curr_val = Ext.get('gtSearchCombobox').getValue();
     if (curr_val)
     {
-        Ext.getCmp('gtSearchCombobox').setValue(helpers.toTitleCase(curr_val));
+        Ext.getCmp('gtSearchCombobox').setValue(helpers.toSmartTitleCase(curr_val));
     }
 
     // Now doing a call to the restful geof endpoint, based on the information in the selected record
-    var url_object = JSONconf.searchEndPoints.basemap.details + record.data.gsln + "/" + record.data.idcol +  "/is/" + encodeURIComponent(record.data.idval.replace('\\', '\\\\'));
+    var url_object = JSONconf.searchEndPoints.basemap.details + record.data.gsln + "/" + record.data.idcol +  "/is/" + encodeURIComponent(record.data.idval);
 
     Ext.Ajax.request({
         method: "GET",

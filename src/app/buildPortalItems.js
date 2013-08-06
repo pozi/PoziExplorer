@@ -46,7 +46,7 @@ buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSel
                         pageSize: 0,
                         emptyText: JSONconf.emptyTextSearch,
                         hideTrigger: true,
-                        tpl: '<tpl for="."><div class="search-item" style="height: 28px;"><font color="#666666">{ld}</font> : {[(helpers.toTitleCase(values.label)).replace(new RegExp( "(" +  Ext.get(\'gtSearchCombobox\').getValue()  + ")" , \'gi\' ), "<b>$1</b>" )]} <br></div></tpl>',
+                        tpl: '<tpl for="."><div class="search-item" style="height: 28px;"><font color="#666666">{ld}</font> : {[(helpers.toSmartTitleCase(values.label)).replace(new RegExp( "(" +  Ext.get(\'gtSearchCombobox\').getValue()  + ")" , \'gi\' ), "<b>$1</b>" )]} <br></div></tpl>',
                         itemSelector: 'div.search-item',
                         listeners: {
                             'select': function(combo, record) {
