@@ -40,8 +40,35 @@ buildAllFeaturesDataStore = function(JSONconf) {
             }),
             listeners:{
                 'load': function(store, records) {
-                    // Appending the loaded records to the aggregate store
-                    agg_store.loadData(records,true);
+                    if (agg_store.getCount() + records.length > 10)
+                    {
+                        // Case 1: we're inserting records that are going to overflow the 10 possible spots in the drop down list
+                        // At a first approximation, we delete records in the store to allow 5 records to come in (case of 2 search endpoints)
+                        var agg_recs;
+                        if (records.length > 5)
+                        {
+                            if (agg_store.getCount() > 5)
+                            {
+                                records = records.slice(0,5);
+                                agg_recs = agg_store.getRange(0,4);
+                            }
+                            else
+                            {
+                                records = records.slice(0,10-agg_store.getCount());
+                                agg_recs = agg_store.getRange();
+                            }
+                        }
+                        else
+                        {
+                            agg_recs = agg_store.getRange(0,9-records.length);
+                        }
+                        agg_store.loadData(agg_recs.concat(records));
+                    }
+                    else
+                    {
+                        // Case 2: otherwise, we just push the records in the aggregate store
+                        agg_store.loadData(records,true);
+                    }
                 },
                 'exception': function(misc) {
                     // Triggered when the JSON request to this endpoint timesout for instance
