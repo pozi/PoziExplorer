@@ -1,6 +1,13 @@
 {
     "servicesHost": "http://basemap.pozi.com",
-    "searchEndPoint": "/ws/rest/v3/ws_all_features_by_string_and_lga.php",
+    "searchEndPoints":{
+        "basemap" : {
+            "list":"http://basemap.pozi.com/ws/rest/v3/ws_search_api_wrapper.php",
+            "details":"http://basemap.pozi.com/api/v1/basemap/",
+            "root":"features",
+            "propertyMapPrefix":"properties"
+        }
+    },
     "LGACode": "361",
     "databaseConfig": "basemap",
     "tools": [{
