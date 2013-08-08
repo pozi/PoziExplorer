@@ -26,7 +26,8 @@ buildAllFeaturesDataStore = function(JSONconf) {
             //autoload the data
             root: JSONconf.searchEndPoints[s].root,
             baseParams: {
-                lga: JSONconf.LGACode
+                lga: JSONconf.LGACode,
+                limit: 12
             },
             fields: [
                 { name: "label", mapping: propertyMapPrefix+".label" },
@@ -40,33 +41,34 @@ buildAllFeaturesDataStore = function(JSONconf) {
             }),
             listeners:{
                 'load': function(store, records) {
-                    if (agg_store.getCount() + records.length > 10)
+                    if (agg_store.getCount() + records.length > 12)
                     {
                         // Case 1: we're inserting records that are going to overflow the 10 possible spots in the drop down list
                         // At a first approximation, we delete records in the store to allow 5 records to come in (case of 2 search endpoints)
                         var agg_recs;
-                        if (records.length > 5)
+                        if (records.length > 6)
                         {
-                            if (agg_store.getCount() > 5)
+                            if (agg_store.getCount() > 6)
                             {
-                                records = records.slice(0,5);
-                                agg_recs = agg_store.getRange(0,4);
+                                records = records.slice(0,6);
+                                agg_recs = agg_store.getRange(0,5);
                             }
                             else
                             {
-                                records = records.slice(0,10-agg_store.getCount());
+                                records = records.slice(0,12-agg_store.getCount());
                                 agg_recs = agg_store.getRange();
                             }
                         }
                         else
                         {
-                            agg_recs = agg_store.getRange(0,9-records.length);
+                            agg_recs = agg_store.getRange(0,11-records.length);
                         }
                         agg_store.loadData(agg_recs.concat(records));
                     }
                     else
                     {
                         // Case 2: otherwise, we just push the records in the aggregate store
+                        // We push them even if there is no record to end the loading indicator display
                         agg_store.loadData(records,true);
                     }
                 },
