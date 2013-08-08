@@ -2,7 +2,7 @@
 // - a record is selected in the search drop down list
 // - a property number is passed in the URL and has returned a valid property record
 
-searchRecordSelectHandler = function(combo, record, app, JSONconf, northPart, eastPanel, gfromWFSFlag) {
+searchRecordSelectHandler = function(combo, record, app, JSONconf, northPart, eastPanel) {
     if (record.data === undefined) { return; }
 
     // Smart title case on selected item
@@ -37,8 +37,8 @@ searchRecordSelectHandler = function(combo, record, app, JSONconf, northPart, ea
                     Ext.getCmp('gtInfoCombobox').collapse();
                 }
                 eastPanel.expand();
-                gfromWFSFlag.value = "Y";
-                app.getSelectionLayer().myGtObject = {
+                app.getSelectionLayer().extraVars = {
+                    WFS: "Y",
                     layerName : record.data.gsln,
                     featureType : record.data.ld,
                     featureLabel : record.data.label

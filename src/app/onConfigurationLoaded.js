@@ -9,16 +9,15 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) { // AND GLOBAL
         var gLayoutsArr;
 
         gLayoutsArr = []; // Layout for the extra tabs
-        gfromWFSFlag.value = "N"; // Flag to track the origin of the store refresh
 
         gCombostore = buildComboStore(); // Store behind the info drop-down list
         westPanel = buildWestPanel(JSONconf);
         tabExpand = buildTabExpand(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, JSONconf, gCurrentLoggedRole, helpers);
 	tabCollapse = buildTabCollapse(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr);
-        northPart = buildNorthPart(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpand, gLayoutsArr, gCurrentExpandedTabIdx);
+        northPart = buildNorthPart(JSONconf, gCombostore, helpers, tabExpand, gLayoutsArr, gCurrentExpandedTabIdx);
         accordion = buildAccordion(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, tabExpand);
         eastPanel = buildEastPanel(JSONconf, northPart, accordion);
-        portalItems = buildPortalItems(JSONconf, buildAllFeaturesDataStore, searchRecordSelectHandler, gfromWFSFlag, westPanel, eastPanel);
+        portalItems = buildPortalItems(JSONconf, buildAllFeaturesDataStore, searchRecordSelectHandler, westPanel, eastPanel);
         app = buildApp(portalItems, JSONconf, doClearHighlight, gCombostore, addDefaultTabs, accordion, gLayoutsArr, northPart, gCurrentLoggedRole, loadTabConfig, buildWFSLayer);
 
 	// Setting current logged role to request the correct tabs
@@ -35,9 +34,9 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) { // AND GLOBAL
         loadTabConfig(JSONconf, gCurrentLoggedRole, gLayoutsArr, addDefaultTabs, accordion, propertyDataInit);
 
         app.on("ready", function() {
-            app.getSelectionLayer().events.on({ featuresadded: buildFeaturesAddedHandler(gfromWFSFlag, gComboDataArray, gCombostore) });
+            app.getSelectionLayer().events.on({ featuresadded: buildFeaturesAddedHandler(gComboDataArray, gCombostore) });
 
-            searchRecordSelectHandler(null, { data: propertyDataInit }, app, JSONconf, northPart, eastPanel, gfromWFSFlag);
+            searchRecordSelectHandler(null, { data: propertyDataInit }, app, JSONconf, northPart, eastPanel);
             addOpacitySlider(app);
 
             // Tree toolbar to add the login button to

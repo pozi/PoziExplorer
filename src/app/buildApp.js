@@ -46,6 +46,12 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
     };
 
     app.getSelectionLayer = function() {
+        // Adding a container object for extra variables used in the application
+        app.getLayerByName("Selection").extraVars={
+            // This flag tracks whether combostore was populated via search selection or direct click on map
+            // (true = WFS = search selection, false = get feature info)
+            WFS:"N"
+        };
         return app.getLayerByName("Selection");
     };
 

@@ -106,8 +106,6 @@ var westPanel;
 var northPart;
 var gLayoutsArr; // for each layer (e.g. property address), lists additional tabs
 var gCurrentExpandedTabIdx = []; // index of currently opened tab, per layer (feature type)
-var gfromWFSFlag = { value: undefined }; // tracks whether combostore was populated via seach selection or direct click on map
-                                         // (true = WFS = search selection, false = get feature info which is text not XML or JSON)
 var gCurrentLoggedRole = { value: "NONE" }; // 'NONE', 'admin','planning' - currently logged in username
 var gtLayerLabel = { value: undefined };
 

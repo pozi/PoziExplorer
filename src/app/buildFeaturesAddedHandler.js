@@ -1,8 +1,8 @@
-buildFeaturesAddedHandler = function(gfromWFSFlag, gComboDataArray, gCombostore) {
+buildFeaturesAddedHandler = function(gComboDataArray, gCombostore) {
 
     return function(event) {
 
-        if (gfromWFSFlag.value == "Y") {
+        if (app.getSelectionLayer().extraVars.WFS == "Y") {
             var row_array = [];
             var cont;
             gComboDataArray.value = [];
@@ -14,7 +14,7 @@ buildFeaturesAddedHandler = function(gfromWFSFlag, gComboDataArray, gCombostore)
                 // Capturing the feature as well (it contains the geometry)
                 cont["the_geom_WFS"] = this.features[k];
 
-                var o = app.getSelectionLayer().myGtObject;
+                var o = app.getSelectionLayer().extraVars;
                 // If too long for the drop down, we truncate the string to the space remaining after "<LAYER NAME>:"
                 var num_char_in_drop_down = 38;
                 if (o.featureLabel.length > num_char_in_drop_down - o.featureType.length) {
