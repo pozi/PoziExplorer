@@ -1,4 +1,4 @@
-buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSelectHandler, gfromWFSFlag, gtyp, glab, westPanel, eastPanel) {
+buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSelectHandler, gfromWFSFlag, westPanel, eastPanel) {
 
     var logoHtml = function() {
         var img ='<img style="height: 60px; padding: 20px;" src="' + JSONconf.logoClientSrc + '" />';
@@ -54,7 +54,7 @@ buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSel
                         itemSelector: 'div.search-item',
                         listeners: {
                             'select': function(combo, record) {
-                                searchRecordSelectHandler(combo, record, app, JSONconf, northPart, eastPanel, gfromWFSFlag, gtyp, glab);
+                                searchRecordSelectHandler(combo, record, app, JSONconf, northPart, eastPanel, gfromWFSFlag);
                             },
                             'beforequery': function(queryEvent) {
                                 if (queryEvent.query.length > 2)

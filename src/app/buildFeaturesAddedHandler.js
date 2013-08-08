@@ -1,4 +1,4 @@
-buildFeaturesAddedHandler = function(gfromWFSFlag, gComboDataArray, glab, gtyp, gCombostore) {
+buildFeaturesAddedHandler = function(gfromWFSFlag, gComboDataArray, gCombostore) {
 
     return function(event) {
 

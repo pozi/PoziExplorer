@@ -109,8 +109,6 @@ var gCurrentExpandedTabIdx = []; // index of currently opened tab, per layer (fe
 var gfromWFSFlag = { value: undefined }; // tracks whether combostore was populated via seach selection or direct click on map
                                          // (true = WFS = search selection, false = get feature info which is text not XML or JSON)
 var gCurrentLoggedRole = { value: "NONE" }; // 'NONE', 'admin','planning' - currently logged in username
-var gtyp = { value: undefined }; // feature type (e.g Address)
-var glab = { value: undefined }; // feature label (e.g. 12 Acorn Lane Packenham 3810)
 var gtLayerLabel = { value: undefined };
 
 // Google Analytics - start

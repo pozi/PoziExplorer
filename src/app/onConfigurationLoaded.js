@@ -18,7 +18,7 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) { // AND GLOBAL
         northPart = buildNorthPart(JSONconf, gCombostore, gfromWFSFlag, helpers, tabExpand, gLayoutsArr, gCurrentExpandedTabIdx);
         accordion = buildAccordion(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, tabExpand);
         eastPanel = buildEastPanel(JSONconf, northPart, accordion);
-        portalItems = buildPortalItems(JSONconf, buildAllFeaturesDataStore, searchRecordSelectHandler, gfromWFSFlag, gtyp, glab, westPanel, eastPanel);
+        portalItems = buildPortalItems(JSONconf, buildAllFeaturesDataStore, searchRecordSelectHandler, gfromWFSFlag, westPanel, eastPanel);
         app = buildApp(portalItems, JSONconf, doClearHighlight, gCombostore, addDefaultTabs, accordion, gLayoutsArr, northPart, gCurrentLoggedRole, loadTabConfig, buildWFSLayer);
 
 	// Setting current logged role to request the correct tabs
@@ -35,9 +35,9 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) { // AND GLOBAL
         loadTabConfig(JSONconf, gCurrentLoggedRole, gLayoutsArr, addDefaultTabs, accordion, propertyDataInit);
 
         app.on("ready", function() {
-            app.getSelectionLayer().events.on({ featuresadded: buildFeaturesAddedHandler(gfromWFSFlag, gComboDataArray, glab, gtyp, gCombostore) });
+            app.getSelectionLayer().events.on({ featuresadded: buildFeaturesAddedHandler(gfromWFSFlag, gComboDataArray, gCombostore) });
 
-            searchRecordSelectHandler(null, { data: propertyDataInit }, app, JSONconf, northPart, eastPanel, gfromWFSFlag, gtyp, glab);
+            searchRecordSelectHandler(null, { data: propertyDataInit }, app, JSONconf, northPart, eastPanel, gfromWFSFlag);
             addOpacitySlider(app);
 
             // Tree toolbar to add the login button to
