@@ -133,7 +133,7 @@ buildNorthPart = function(JSONconf, gCombostore, helpers, tabExpand, gLayoutsArr
 
                             } else if (k == "the_geom_WFS") {
                                 var wktfeatures = record.data.content[k];
-                                app.getSelectionLayer().extraVars.WFS = "N";
+                                app.getSelectionLayer().extraVars.WFS = false;
                                 app.getSelectionLayer().removeAllFeatures();
                                 app.getSelectionLayer().addFeatures(wktfeatures);
                             } else {

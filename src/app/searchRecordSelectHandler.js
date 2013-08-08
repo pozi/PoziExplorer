@@ -38,7 +38,7 @@ searchRecordSelectHandler = function(combo, record, app, JSONconf, northPart, ea
                 }
                 eastPanel.expand();
                 app.getSelectionLayer().extraVars = {
-                    WFS: "Y",
+                    WFS: true,
                     layerName : record.data.gsln,
                     featureType : record.data.ld,
                     featureLabel : record.data.label

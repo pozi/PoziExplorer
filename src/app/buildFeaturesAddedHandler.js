@@ -2,7 +2,7 @@ buildFeaturesAddedHandler = function(gComboDataArray, gCombostore) {
 
     return function(event) {
 
-        if (app.getSelectionLayer().extraVars.WFS == "Y") {
+        if (app.getSelectionLayer().extraVars.WFS) {
             var row_array = [];
             var cont;
             gComboDataArray.value = [];
