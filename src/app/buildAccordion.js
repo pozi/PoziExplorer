@@ -1,4 +1,4 @@
-buildAccordion = function(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, tabExpand) {
+buildAccordion = function(gCurrentExpandedTabIdx, gLayoutsArr, tabExpand) {
 
     return new Ext.Panel({
         id: 'gtAccordion',

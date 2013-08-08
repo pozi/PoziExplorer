@@ -80,7 +80,7 @@ buildNorthPart = function(JSONconf, gCombostore, helpers, tabExpand, gLayoutsArr
                         // Displaying the feature type
                         var ft = record.get("type");
 
-                        gtLayerLabel.value = ft;
+                        app.getSelectionLayer().extraVars.layerLabel = ft;
 
                         ft = ft.replace(/es\s/g, "e ");
 

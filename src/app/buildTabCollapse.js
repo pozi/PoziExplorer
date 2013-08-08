@@ -1,8 +1,12 @@
-buildTabCollapse = function(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr) {
+buildTabCollapse = function(gCurrentExpandedTabIdx, gLayoutsArr) {
 
     return function(p) {
         // Current layer (cl) as per content of the current type (ct) and current drop down (cb)
-        var ct = gtLayerLabel.value;
+        var ct = '';
+        if (app.getSelectionLayer())
+        {
+            ct = app.getSelectionLayer().extraVars.layerLabel;
+        }
         // that contains the type of the currently selected feature
         var cb = Ext.getCmp('gtInfoCombobox');
         // the Ext JS component containing the combo - used to link type to layer name

@@ -107,7 +107,6 @@ var northPart;
 var gLayoutsArr; // for each layer (e.g. property address), lists additional tabs
 var gCurrentExpandedTabIdx = []; // index of currently opened tab, per layer (feature type)
 var gCurrentLoggedRole = { value: "NONE" }; // 'NONE', 'admin','planning' - currently logged in username
-var gtLayerLabel = { value: undefined };
 
 // Google Analytics - start
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

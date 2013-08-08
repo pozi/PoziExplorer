@@ -12,10 +12,10 @@ var onConfigurationLoaded = function(JSONconf, propertyDataInit) { // AND GLOBAL
 
         gCombostore = buildComboStore(); // Store behind the info drop-down list
         westPanel = buildWestPanel(JSONconf);
-        tabExpand = buildTabExpand(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, JSONconf, gCurrentLoggedRole, helpers);
-	tabCollapse = buildTabCollapse(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr);
+        tabExpand = buildTabExpand(gCurrentExpandedTabIdx, gLayoutsArr, JSONconf, gCurrentLoggedRole, helpers);
+        tabCollapse = buildTabCollapse(gCurrentExpandedTabIdx, gLayoutsArr);
         northPart = buildNorthPart(JSONconf, gCombostore, helpers, tabExpand, gLayoutsArr, gCurrentExpandedTabIdx);
-        accordion = buildAccordion(gtLayerLabel, gCurrentExpandedTabIdx, gLayoutsArr, tabExpand);
+        accordion = buildAccordion(gCurrentExpandedTabIdx, gLayoutsArr, tabExpand);
         eastPanel = buildEastPanel(JSONconf, northPart, accordion);
         portalItems = buildPortalItems(JSONconf, buildAllFeaturesDataStore, searchRecordSelectHandler, westPanel, eastPanel);
         app = buildApp(portalItems, JSONconf, doClearHighlight, gCombostore, addDefaultTabs, accordion, gLayoutsArr, northPart, gCurrentLoggedRole, loadTabConfig, buildWFSLayer);
