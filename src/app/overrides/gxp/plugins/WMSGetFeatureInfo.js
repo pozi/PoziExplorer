@@ -58,7 +58,7 @@
           
           queryableLayers.each(function(x){
               var layer = x.getLayer();
-              var vendorParams = Ext.apply({}, this.vendorParams), param;
+              var vendorParams = Ext.apply({ buffer: 15 }, this.vendorParams), param;
               if (this.layerParams) {
                   for (var i=this.layerParams.length-1; i>=0; --i) {
                       param = this.layerParams[i].toUpperCase();
