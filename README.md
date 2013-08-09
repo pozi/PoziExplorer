@@ -1,6 +1,6 @@
 # PoziExplorer
 
-App based on the [OpenGeo Suite SDK](http://opengeo.org/technology/sdk/).
+An app based on the [OpenGeo Suite SDK](http://opengeo.org/technology/sdk/).
 
 ## Getting it running
 
@@ -12,14 +12,14 @@ Get the code:
 
 To run in debug mode (for Groundtruth internal use):
 
-    ./suite-sdk debug -l 9090 -g http://v3.pozi.com/geoserver .
+    ./suite-sdk debug -l 9090 -g http://general.pozi.com/geoserver .
     open http://localhost:9090/?config=cardinia   # for example
     open http://cardinia.pozi.dev:9090/           # for example (only if you've set the right alias for localhost)
 
 To deploy (for Groundtruth use):
 
-    ./suite-sdk deploy -d v3.pozi.com -r 8080 -u manager -p password -c tomcat6x .
-    open http://corangamite.pozi.com   # for example
+    ./suite-sdk deploy -d general.pozi.com -r 8080 -u manager -p password -c tomcat6x .
+    open http://corangamite.pozi.com           # for example
     open http://corangamite.pozi.com/rev.txt   # for revision details of live code
 
 ## About the SDK dependency
@@ -33,6 +33,8 @@ the script (`./suite-sdk`). This will use the bundled version of the SDK
 
 ## Other runtime dependencies
 
-This project expects to be able to use certain PHP scripts.
-Please refer to `lib/custom/json/` for more details.
+This project expects to be able to use certain webservices.
+
+Please refer to `lib/custom/json/` and the config loading code (where defaults
+are defined) for more details.
 
