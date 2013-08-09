@@ -75,6 +75,9 @@ gxp.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
      *  Optional object with properties to be serialized as vendor specific
      *  parameters in the requests (e.g. {buffer: 10}).
      */
+    vendorParams: {
+      buffer: 15
+    },
     
     /** api: config[layerParams]
      *  ``Array`` List of param names that should be taken from the layer and
@@ -100,10 +103,11 @@ gxp.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
         this.popupCache = {};
         
         var actions = gxp.plugins.WMSGetFeatureInfo.superclass.addActions.call(this, [{
-            tooltip: this.infoActionTip,
-            iconCls: "gxp-icon-getfeatureinfo",
+            // tooltip: this.infoActionTip,
+            // iconCls: "gxp-icon-getfeatureinfo",
             buttonText: this.buttonText,
             toggleGroup: this.toggleGroup,
+            disabled: true, // The info button does not need to be clickable
             enableToggle: true,
             allowDepress: true,
             toggleHandler: function(button, pressed) {
@@ -121,8 +125,17 @@ gxp.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
         var info = {controls: []};
         var updateInfo = function() {
             var queryableLayers = this.target.mapPanel.layers.queryBy(function(x){
-                return x.get("queryable");
+                return x.get("queryable") &&
+                       x.get("layer").visibility &&
+                       (x.get("group") != "background");
             });
+            
+            // Keeping track of the number of objects to be returned
+            var layerMax = queryableLayers.length;
+            // ID within the combostore must be unique, so we use a counter
+            var id_ct = 0;
+            // Count the number of features within a layer
+            var layerCounter = 0;
 
             var map = this.target.mapPanel.map;
             var control;
@@ -146,36 +159,141 @@ gxp.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                 if (infoFormat === undefined) {
                     // TODO: check if chosen format exists in infoFormats array
                     // TODO: this will not work for WMS 1.3 (text/xml instead for GML)
-                    infoFormat = this.format == "html" ? "text/html" : "application/vnd.ogc.gml";
+                    infoFormat = "text/html";
                 }
                 var control = new OpenLayers.Control.WMSGetFeatureInfo(Ext.applyIf({
-                    url: layer.url,
+                    url: (typeof layer.url == "object" ? layer.url[0] : layer.url), // Managing array of URLs
                     queryVisible: true,
+                    radius: 64, // this might be trying to do what 'buffer' does above
                     layers: [layer],
                     infoFormat: infoFormat,
                     vendorParams: vendorParams,
                     eventListeners: {
                         getfeatureinfo: function(evt) {
-                            var title = x.get("title") || x.get("name");
-                            if (infoFormat == "text/html") {
+                        
+                            layerCounter = layerCounter + 1;
+                            var idx = 0;
+                            // Index contains the position of the layer within the tree layer
+                            for (var i = 0; i < app.mapPanel.layers.data.items.length; i++) {
+                                if (app.mapPanel.layers.data.items[i] === x) { idx = i; break; }
+                            }
+
+                            // Attempting to decode the string as JSON
+                            var featureContent;
+                            try {
+                                var wkt = new OpenLayers.Format.WKT();
+                                var geojson = new OpenLayers.Format.GeoJSON();
+
+                                // Interpreting the return as a GeoJSON - if this fails, the catch will interpret it as text/html
+                                var features_geojson = geojson.read(evt.text);
+
+                                // Building an array of features returned
+                                featureContent = Array(features_geojson.length);
+
+                                // For each feature returned, we extract properties and geometry (in WKT)
+                                for (var j = 0; j < features_geojson.length; j++) {
+                                    featureContent[j] = {};
+                                    featureContent[j].row = {};
+                                    featureContent[j].row = features_geojson[j].data;
+                                    featureContent[j].row["the_geom"] = wkt.write(features_geojson[j]);
+                                }
+
+                            } catch(e) {
+                                // If it was not JSON, it is HTML surrounding a JSON object, that we decode
+                                // TODO: this section is bound to disappear as we want to use application/json as infoFormat everywhere
                                 var match = evt.text.match(/<body[^>]*>([\s\S]*)<\/body>/);
                                 if (match && !match[1].match(/^\s*$/)) {
-                                    this.displayPopup(evt, title, match[1]);
+                                    featureContent = Ext.util.JSON.decode(match[1].replace('\\\'', '\'')).rows;
                                 }
-                            } else if (infoFormat == "text/plain") {
-                                this.displayPopup(evt, title, '<pre>' + evt.text + '</pre>');
-                            } else if (evt.features && evt.features.length > 0) {
-                                this.displayPopup(evt, title);
                             }
+
+                            Ext.each(featureContent, function(featureContentItem) {
+                                // We hydrate an object that powers the datastore for the right panel combo
+                                var row_array;
+                                // All the attributes are contained in a serialised JSON object
+                                var cont = featureContentItem.row;
+
+                                // Id - need to be distinct for all objects in the drop down: if several layers activated, must be different across all layers
+                                id_ct++;
+                                // Type - from the layer name in the layer selector
+                                var typ = x.data.title;
+                                // Attempt to format it nicely (removing the parenthesis content)
+                                var simpleTitle = x.data.title.match(/(.*) ?\(.*\)/);
+                                if (simpleTitle) {
+                                    typ = helpers.trim(simpleTitle[1]);
+                                }
+
+                                // Layer name (without namespace), to enable additional accordion panels
+                                var lay = x.data.layer.params.LAYERS.split(":")[1];
+                                // Catering for layer groups (they don't have a workspace name as a prefix)
+                                if (!lay)
+                                {
+                                    lay = x.data.layer.params.LAYERS;
+                                }
+
+                                // Label
+                                var lab = '';
+                                var fti_arr = JSONconf.layerPresentation[lay];
+                                // We select the right attribute as the label
+                                if (fti_arr) {
+                                    // If the layer presentation is configured, we select the first configured field value
+                                    lab = cont[fti_arr[0].attr_name];
+                                } else {
+                                    for (l in cont) {
+                                        // If not, we select the first field that comes along (provided it's not a geometry and it's value is non null)
+                                        if (l != "the_geom" && l != "SHAPE" && l != "projection") {
+                                            var lab = cont[l];
+                                            if (lab) { break; }
+                                        }
+                                    }
+                                }
+                                // If too long for the drop down, we truncate the string to the space remaining after "<LAYER NAME>:"
+                                var num_char_in_drop_down = 38;
+                                if (lab.length > num_char_in_drop_down - typ.length) {
+                                    lab = lab.substring(0, num_char_in_drop_down - typ.length - 2) + "..";
+                                }
+
+                                // Building a row and pushing it to an array
+                                row_array = new Array(id_ct, typ, cont, idx, lab, lay);
+
+                                gComboDataArray.value.push(row_array);
+
+                            });
+
+                            // Only to be executed when all queriable layers have been traversed (depends number of layers actually ticked in the layer tree)
+                            if (layerCounter == layerMax) {
+                                // Remove any previous results, but without performing the collapse functions on subtabs
+                                // This allows to keep layers that were switched on
+                                app.clearHighlight();
+
+                                if (gComboDataArray.value.length) {
+                                    var cb = Ext.getCmp('gtInfoCombobox');
+                                    if (cb.disabled) { cb.enable(); }
+                                    gComboDataArray.value.sort(function(a, b) { return b[3] - a[3] });
+                                    gfromWFSFlag.value = "N";
+                                    gCombostore.loadData(gComboDataArray.value);
+
+                                    // Features found during the getFeatureInfo: showing the tab
+                                    if (! (JSONconf.hideSelectedFeaturePanel)) {
+                                        northPart.setHeight(60);
+                                        Ext.getCmp('gtInfoCombobox').setVisible(true);
+                                        // Collapsing the drop-down
+                                        Ext.getCmp('gtInfoCombobox').collapse();
+                                    }
+                                    eastPanel.expand();
+                                }
+
+                                gComboDataArray.value = [];
+                                layerCounter = 0;
+                            }
+
                         },
                         scope: this
                     }
                 }, this.controlOptions));
                 map.addControl(control);
                 info.controls.push(control);
-                if(infoButton.pressed) {
-                    control.activate();
-                }
+                control.activate(); // Always activate info control
             }, this);
 
         };
@@ -185,75 +303,6 @@ gxp.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
         this.target.mapPanel.layers.on("remove", updateInfo, this);
         
         return actions;
-    },
-
-    /** private: method[displayPopup]
-     * :arg evt: the event object from a 
-     *     :class:`OpenLayers.Control.GetFeatureInfo` control
-     * :arg title: a String to use for the title of the results section 
-     *     reporting the info to the user
-     * :arg text: ``String`` Body text.
-     */
-    displayPopup: function(evt, title, text) {
-        var popup;
-        var popupKey = evt.xy.x + "." + evt.xy.y;
-
-        if (!(popupKey in this.popupCache)) {
-            popup = this.addOutput({
-                xtype: "gx_popup",
-                title: this.popupTitle,
-                layout: "accordion",
-                fill: false,
-                autoScroll: true,
-                location: evt.xy,
-                map: this.target.mapPanel,
-                width: 250,
-                height: 300,
-                defaults: {
-                    layout: "fit",
-                    autoScroll: true,
-                    autoHeight: true,
-                    autoWidth: true,
-                    collapsible: true
-                },
-                listeners: {
-                    close: (function(key) {
-                        return function(panel){
-                            delete this.popupCache[key];
-                        };
-                    })(popupKey),
-                    scope: this
-                }
-            });
-            this.popupCache[popupKey] = popup;
-        } else {
-            popup = this.popupCache[popupKey];
-        }
-
-        var features = evt.features, config = [];
-        if (!text && features) {
-            var feature;
-            for (var i=0,ii=features.length; i<ii; ++i) {
-                feature = features[i];
-                config.push(Ext.apply({
-                    xtype: "propertygrid",
-                    listeners: {
-                        'beforeedit': function (e) { 
-                            return false; 
-                        } 
-                    },
-                    title: feature.fid ? feature.fid : title,
-                    source: feature.attributes
-                }, this.itemConfig));
-            }
-        } else if (text) {
-            config.push(Ext.apply({
-                title: title,
-                html: text
-            }, this.itemConfig));
-        }
-        popup.add(config);
-        popup.doLayout();
     }
     
 });
