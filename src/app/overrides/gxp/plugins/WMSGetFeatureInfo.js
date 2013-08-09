@@ -1,3 +1,13 @@
+// There is very little code in this that we actually use in the overridden version.
+// We should probably just make a new control (based on this, but not an override
+// or extension of it) and use that instead of this.
+//
+// Here's what the GXP version does (and what we actually want):
+//  * adds a button for the inspect tool (we want always on, no UI needed)
+//  * adds a OpenLayers.Control.WMSGetFeatureInfo control to each layer
+//    when the layer tree changes (we want)
+//  * displays the returned feature info in a popup (we want to do something else with it)
+
 /**
  * Copyright (c) 2008-2011 The Open Planning Project
  * 
