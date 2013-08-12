@@ -180,6 +180,14 @@ gxp.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                     vendorParams: vendorParams,
                     eventListeners: {
                         getfeatureinfo: function(evt) {
+
+                            var distanceOfWKTFromClick = function(wkt) {
+                                var WGS84 = "EPSG:4326";
+                                var clickLonLat = map.getLonLatFromPixel(evt.xy);
+                                var clickGeom = new OpenLayers.Geometry.Point(clickLonLat.lon, clickLonLat.lat);
+                                var wktGeom = OpenLayers.Geometry.fromWKT(wkt).transform(WGS84, map.projection);
+                                return wktGeom.atPoint(clickLonLat) ? 0.0 : wktGeom.distanceTo(clickGeom);
+                            };
                         
                             layerCounter = layerCounter + 1;
                             var idx = 0;
@@ -279,7 +287,12 @@ gxp.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                                 if (gComboDataArray.value.length) {
                                     var cb = Ext.getCmp('gtInfoCombobox');
                                     if (cb.disabled) { cb.enable(); }
-                                    gComboDataArray.value.sort(function(a, b) { return b[3] - a[3] });
+                                    gComboDataArray.value.sort(function(a, b) {
+                                        var layerComparison = b[3] - a[3];
+                                        var distanceComparison = distanceOfWKTFromClick(a[2]["the_geom"]) - distanceOfWKTFromClick(b[2]["the_geom"]);
+                                        return layerComparison !== 0 ? layerComparison : distanceComparison;
+                                    });
+
                                     gfromWFSFlag.value = "N";
                                     gCombostore.loadData(gComboDataArray.value);
 
