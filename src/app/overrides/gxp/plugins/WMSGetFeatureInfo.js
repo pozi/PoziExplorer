@@ -86,7 +86,7 @@ gxp.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
      *  parameters in the requests (e.g. {buffer: 10}).
      */
     vendorParams: {
-      buffer: 5
+      buffer: 15
     },
     
     /** api: config[layerParams]
