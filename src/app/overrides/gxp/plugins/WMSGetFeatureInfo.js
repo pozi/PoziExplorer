@@ -185,7 +185,7 @@ gxp.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                                 var clickLonLat = map.getLonLatFromPixel(evt.xy);
                                 var clickGeom = new OpenLayers.Geometry.Point(clickLonLat.lon, clickLonLat.lat);
                                 var wktGeom = OpenLayers.Geometry.fromWKT(wkt).transform(WGS84, map.projection);
-                                return wktGeom.atPoint(clickLonLat) ? 0.0 : wktGeom.distanceTo(clickGeom);
+                                return wktGeom.intersects(clickGeom) ? 0.0 : wktGeom.distanceTo(clickGeom);
                             };
                         
                             layerCounter = layerCounter + 1;
