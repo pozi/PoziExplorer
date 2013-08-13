@@ -24,6 +24,11 @@
                 "collapsed": true
             },
             "default": "Overlays",
+            "aerial": {
+                "title": "Aerial Photos",
+                "collapsed": true,
+                "exclusive": true
+            },
             "background": {
                 "title": "Base Maps",
                 "exclusive": true
@@ -279,6 +284,96 @@
         "transparent": true,
         "tiled": false
     }, {
+        "source": "ol",
+        "group": "aerial",
+        "fixed": true,
+        "type": "OpenLayers.Layer",
+        "args": ["No Aerial", { "visibility": true }]
+    }, {
+        "source": "local_cascaded_imagery",
+        "name": "TOWNS_WALLAN_2007MAR13_AIR_VIS_15CM_MGA55",
+        "title": "Seymour (CIP 2007)",
+        "visibility": false,
+        "opacity": 1,
+        "format": "image/JPEG",
+        "tiled": true,
+        "group": "aerial",
+        "selected": false,
+        "transparent": true,
+        "styles": ""
+    }, {
+        "source": "local_cascaded_imagery",
+        "name": "TOWNS_SEYMOUR_2004JAN01_AIR_VIS_13CM_MGA55",
+        "title": "Seymour (CIP 2004)",
+        "visibility": false,
+        "opacity": 1,
+        "format": "image/JPEG",
+        "tiled": true,
+        "group": "aerial",
+        "selected": false,
+        "transparent": true,
+        "styles": ""
+    }, {
+        "source": "local_cascaded_imagery",
+        "name": "TOWNS_KILMORE_2004JAN01_AIR_VIS_13CM_MGA55",
+        "title": "Kilmore (CIP 2004)",
+        "visibility": false,
+        "opacity": 1,
+        "format": "image/JPEG",
+        "tiled": true,
+        "group": "aerial",
+        "selected": false,
+        "transparent": true,
+        "styles": ""
+    }, {
+        "source": "local_cascaded_imagery",
+        "name": "TOWNS_KILMORE_2007MAR13_AIR_VIS_15CM_MGA55",
+        "title": "Kilmore (CIP 2007)",
+        "visibility": false,
+        "opacity": 1,
+        "format": "image/JPEG",
+        "tiled": true,
+        "group": "aerial",
+        "selected": false,
+        "transparent": true,
+        "styles": ""
+    }, {
+        "source": "local_cascaded_imagery",
+        "name": "TOWNS_BROADFORD_2004JAN01_AIR_VIS_13CM_MGA55",
+        "title": "Bradford (CIP 2004)",
+        "visibility": false,
+        "opacity": 1,
+        "format": "image/JPEG",
+        "tiled": true,
+        "group": "aerial",
+        "selected": false,
+        "transparent": true,
+        "styles": ""
+    }, {
+        "source": "local_cascaded_imagery",
+        "name": "AERIAL_MITCHELL_2004JAN01_AIR_VIS_38CM_MGA55",
+        "title": "Mitchell (CIP 2004)",
+        "visibility": false,
+        "opacity": 1,
+        "format": "image/JPEG",
+        "tiled": true,
+        "group": "aerial",
+        "selected": false,
+        "transparent": true,
+        "styles": ""
+    }, {
+        "source": "local_cascaded_imagery",
+        "name": "AERIAL_MITCHELL_2007JAN26_AIR_VIS_50CM_MGA55",
+        "title": "Mitchell (CIP 2007)",
+        "visibility": false,
+        "opacity": 0,
+        "group": "aerial",
+        "selected": false,
+        "format": "image/JPEG",
+        "transparent": true,
+        "styles": "",
+        "displayInOpacitySlider": true
+    }, {
         "source": "basemap",
         "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_mitchell_mask",
         "title": "Municipal Boundary",
@@ -319,19 +414,6 @@
         "name": "osm",
         "visibility": false,
         "group": "background"
-    }, {
-        "source": "local_cascaded_imagery",
-        "name": "AERIAL_MITCHELL_2007JAN26_AIR_VIS_50CM_MGA55",
-        "title": "Aerial Photo (CIP 2007)",
-        "visibility": true,
-        "opacity": 1,
-        "group": "background",
-        "format": "image/JPEG",
-        "tiled": true,
-        "cached": true,
-        "transparent": true,
-        "styles": "",
-        "visibility": false
     }, {
         "source": "ol",
         "group": "background",
