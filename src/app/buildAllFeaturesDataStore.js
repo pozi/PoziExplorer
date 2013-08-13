@@ -11,7 +11,9 @@ buildAllFeaturesDataStore = function(JSONconf) {
             { name: "gsln",  mapping: "data.gsln" },
             { name: "idcol", mapping: "data.idcol" },
             { name: "idval", mapping: "data.idval" },
-            { name: "ld",    mapping: "data.ld" }
+            { name: "ld",    mapping: "data.ld" },
+            { name: "lgacol",mapping: "data.lgacol" },
+            { name: "lga",   mapping: "data.lga" }
         ]
     });
     var arr_store = [agg_store];
@@ -34,7 +36,9 @@ buildAllFeaturesDataStore = function(JSONconf) {
                 { name: "gsln",  mapping: propertyMapPrefix+".gsln" },
                 { name: "idcol", mapping: propertyMapPrefix+".idcol" },
                 { name: "idval", mapping: propertyMapPrefix+".idval" },
-                { name: "ld",    mapping: propertyMapPrefix+".ld" }
+                { name: "ld",    mapping: propertyMapPrefix+".ld" },
+                { name: "lgacol",mapping: propertyMapPrefix+".lgacol" },
+                { name: "lga",   mapping: propertyMapPrefix+".lga" }
             ],
             proxy: new Ext.data.ScriptTagProxy({
                 url: JSONconf.searchEndPoints[s].list
