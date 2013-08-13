@@ -67,7 +67,8 @@ buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSel
                                         // For each store that is powering the search, we emit a request
                                         searchStores[s].load({
                                             params:{
-                                                query:queryEvent.query
+                                                query:queryEvent.query,
+                                                role:gCurrentLoggedRole.value
                                             }
                                         });
                                     }

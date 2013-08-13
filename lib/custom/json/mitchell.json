@@ -8,7 +8,7 @@
             "propertyMapPrefix":"properties"
         },
         "internal" : {
-            "list":"http://172.20.10.19:9090/ws/rest/v3/ws_get_live_data.php?config=mitchell&mode=sqlite&role=na&infoGroup=SearchAnimalDetails&idParam=query",
+            "list":"http://172.20.10.19:9090/ws/rest/v3/ws_get_live_data.php?config=mitchell&mode=sqlite&infoGroup=SearchAnimalDetails&idParam=query",
             "details":"http://basemap.pozi.com/api/v1/basemap/",
             "root":"rows",
             "propertyMapPrefix":"row"
