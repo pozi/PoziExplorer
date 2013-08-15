@@ -432,7 +432,7 @@
     "highlightSymboliser": {
         "name": "test",
         "strokeColor": "#FFA500",
-        "strokeWidth": 20,
+        "strokeWidth": 10,
         "strokeOpacity": 0.5,
         "fillColor": "#FFA500",
         "fillOpacity": 0.2
