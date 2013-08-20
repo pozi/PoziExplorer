@@ -301,7 +301,7 @@
     }, {
         "source": "local_cascaded_imagery",
         "name": "TOWNS_WALLAN_2007MAR13_AIR_VIS_15CM_MGA55",
-        "title": "Seymour (CIP 2007)",
+        "title": "Wallan (CIP 2007)",
         "visibility": false,
         "opacity": 1,
         "format": "image/JPEG",
@@ -349,7 +349,7 @@
     }, {
         "source": "local_cascaded_imagery",
         "name": "TOWNS_BROADFORD_2004JAN01_AIR_VIS_13CM_MGA55",
-        "title": "Bradford (CIP 2004)",
+        "title": "Broadford (CIP 2004)",
         "visibility": false,
         "opacity": 1,
         "format": "image/JPEG",
