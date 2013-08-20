@@ -65,12 +65,15 @@ buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSel
                                     for (var s=1; s < searchStores.length; s++)
                                     {
                                         // For each store that is powering the search, we emit a request
-                                        searchStores[s].load({
-                                            params:{
-                                                query:queryEvent.query,
-                                                role:gCurrentLoggedRole.value
-                                            }
-                                        });
+                                        if (!searchStores[s].isDestroyed)
+                                        {
+                                            searchStores[s].load({
+                                                params:{
+                                                    query:queryEvent.query,
+                                                    role:gCurrentLoggedRole.value
+                                                }
+                                            });
+                                        }
                                     }
                                     // The results will be merged in the aggregate store as per each store's 'load' listener
                                 }

@@ -1,5 +1,4 @@
 buildAllFeaturesDataStore = function(JSONconf) {
-
     // The aggregate store, powering the search drop down
     var agg_store = new Ext.data.JsonStore({
         autoLoad: false,
@@ -23,13 +22,20 @@ buildAllFeaturesDataStore = function(JSONconf) {
     for(s in JSONconf.searchEndPoints)
     {
         var propertyMapPrefix = JSONconf.searchEndPoints[s].propertyMapPrefix;
+        var maxRecord = JSONconf.searchEndPoints[s].maxRecord;
+        if (!maxRecord)
+        {
+            // If no max record configured, we allocate an equal number of records to each source
+            maxRecord = Math.round(12 / helpers.objectSize(JSONconf.searchEndPoints));
+        }
+
         stor = new Ext.data.JsonStore({
             autoLoad: false,
             //autoload the data
             root: JSONconf.searchEndPoints[s].root,
             baseParams: {
                 lga: JSONconf.LGACode,
-                limit: 12
+                limit: maxRecord
             },
             fields: [
                 { name: "label", mapping: propertyMapPrefix+".label" },
@@ -45,45 +51,14 @@ buildAllFeaturesDataStore = function(JSONconf) {
             }),
             listeners:{
                 'load': function(store, records) {
-                    if (agg_store.getCount() + records.length > 12)
-                    {
-                        // Case 1: we're inserting records that are going to overflow the 10 possible spots in the drop down list
-                        // At a first approximation, we delete records in the store to allow 5 records to come in (case of 2 search endpoints)
-                        var agg_recs;
-                        if (records.length > 6)
-                        {
-                            if (agg_store.getCount() > 6)
-                            {
-                                records = records.slice(0,6);
-                                agg_recs = agg_store.getRange(0,5);
-                            }
-                            else
-                            {
-                                records = records.slice(0,12-agg_store.getCount());
-                                agg_recs = agg_store.getRange();
-                            }
-                        }
-                        else
-                        {
-                            agg_recs = agg_store.getRange(0,11-records.length);
-                        }
-                        agg_store.loadData(agg_recs.concat(records));
-                    }
-                    else
-                    {
-                        // Case 2: otherwise, we just push the records in the aggregate store
-                        // We push them even if there is no record to end the loading indicator display
-                        agg_store.loadData(records,true);
-                    }
+                    // We push them even if there is no record to end the loading indicator display
+                    agg_store.loadData(records,true);
                 },
                 'exception': function(misc) {
                     // Triggered when the JSON request to this endpoint timesout for instance
-                    // We would like to do something here, possibly destroy this store
-                    // For the moment, the request is just aborted, but each search will try to query
-                    // this unavailable endpoint anyway ...
-                    // Have tried to implement a 'ping' mechanism but got quite complicated with the
-                    // asynchronous nature of multiple pings and the fact that this function returns
-                    // an array to the calling code (buildPortalItems)
+                    // Destroy this store so that this endpoint won't be queried again
+                    // Useful to avoid repeating queries to endpoints that are just not available
+                    this.destroy();
                 }
             }
         });

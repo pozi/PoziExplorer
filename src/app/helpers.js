@@ -6,8 +6,16 @@ helpers = function() {
         return /\d/.test(str);
     };
 
-    return {
 
+
+    return {
+        objectSize: function(obj) {
+            var size = 0, key;
+            for (key in obj) {
+                if (obj.hasOwnProperty(key)) size++;
+            }
+            return size;
+        },
         toTitleCase: function(str) {
             if (str)
             {
