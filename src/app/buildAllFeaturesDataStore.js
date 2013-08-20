@@ -12,7 +12,8 @@ buildAllFeaturesDataStore = function(JSONconf) {
             { name: "idval", mapping: "data.idval" },
             { name: "ld",    mapping: "data.ld" },
             { name: "lgacol",mapping: "data.lgacol" },
-            { name: "lga",   mapping: "data.lga" }
+            { name: "lga",   mapping: "data.lga" },
+            { name: "store", mapping: "data.storeName" }
         ]
     });
     var arr_store = [agg_store];
@@ -35,7 +36,8 @@ buildAllFeaturesDataStore = function(JSONconf) {
             root: JSONconf.searchEndPoints[s].root,
             baseParams: {
                 lga: JSONconf.LGACode,
-                limit: maxRecord
+                limit: maxRecord,
+                storeName: s
             },
             fields: [
                 { name: "label", mapping: propertyMapPrefix+".label" },
@@ -51,8 +53,15 @@ buildAllFeaturesDataStore = function(JSONconf) {
             }),
             listeners:{
                 'load': function(store, records) {
-                    // We push them even if there is no record to end the loading indicator display
-                    agg_store.loadData(records,true);
+                    // Selecting the first elements from records, according to the limit parameter
+                    var keepRecords = records.slice(0,Math.min(records.length,store.baseParams.limit));
+                    // Adding the storename to each record, so that we hit the right endpoint in the record select handler
+                    for (var k=0; k < keepRecords.length; k++)
+                    {
+                        keepRecords[k].data.storeName = store.baseParams.storeName;
+                    }
+                    // We push the records even if there is no record (to end the loading indicator display)
+                    agg_store.loadData(keepRecords,true);
                 },
                 'exception': function(misc) {
                     // Triggered when the JSON request to this endpoint timesout for instance

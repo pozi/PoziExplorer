@@ -13,7 +13,7 @@ searchRecordSelectHandler = function(combo, record, app, JSONconf, northPart, ea
     }
 
     // Now doing a call to the restful geof endpoint, based on the information in the selected record
-    var url_object = JSONconf.searchEndPoints.basemap.details + record.data.gsln + "/" + record.data.idcol +  "/is/" + encodeURIComponent(record.data.idval);
+    var url_object = JSONconf.searchEndPoints[record.data.store].details + record.data.gsln + "/" + record.data.idcol +  "/is/" + encodeURIComponent(record.data.idval);
     if (record.data.lgacol && record.data.lga)
     {
         url_object += "/"+ record.data.lgacol +"/in/" + record.data.lga;
