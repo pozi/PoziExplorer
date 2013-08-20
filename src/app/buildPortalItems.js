@@ -41,7 +41,7 @@ buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSel
                         store: searchStores[0],
                         displayField: 'label',
                         selectOnFocus: true,
-                        maxHeight: 350,
+                        maxHeight: 400,
                         minChars: 3,
                         typeAhead: false,
                         loadingText: JSONconf.loadingText,
