@@ -183,6 +183,26 @@
         "transparent": true,
         "tiled": false
     }, {
+        "source": "local",
+        "name": "gs_bus_route",
+        "title": "Bus Routes",
+        "visibility": false,
+        "opacity": 0.75,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+    }, {
+        "source": "local",
+        "name": "gs_bus_stop",
+        "title": "Bus Stops",
+        "visibility": false,
+        "opacity": 0.75,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+    }, {
         "source": "basemap",
         "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_resource_recreational",
         "title": "Recreational Resources",
@@ -363,5 +383,6 @@
     "printMapTitle": "Greater Shepparton",
     "linkToCouncilWebsite": "http://www.greatershepparton.com.au/",
     "collapseWestPanel": false,
+    "customJS": "shepparton.js",
     "openFirstDefaultTab": true
 }
