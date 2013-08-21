@@ -184,6 +184,16 @@
         "tiled": false
     }, {
         "source": "local",
+        "name": "vw_gs_street_tree_precinct",
+        "title": "Street Trees Precincts",
+        "visibility": false,
+        "opacity": 1,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+    }, {
+        "source": "local",
         "name": "gs_waste_collection_zone",
         "title": "Waste Collection Zones",
         "visibility": false,
@@ -397,6 +407,17 @@
     "logoClientSrc": "theme/app/img/custom/shepparton_logo.png",
     "logoClientURL": "http://www.greatershepparton.com.au/",
     "zoomMax": 18,
+    "layerPresentation": {
+        "vw_gs_street_tree_precinct": [{
+            "attr_name": "precinct_name"
+        }, {
+            "attr_name": "precinct_number"
+        }, {
+            "attr_name": "township"
+        }, {
+            "attr_name": "some_species"
+        }]
+    },
     "bannerLineColor": "#007DC6",
     "bannerRightCornerLine1": "Greater Shepparton",
     "bannerRightCornerLine2": "City Council",
