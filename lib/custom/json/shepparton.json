@@ -383,7 +383,7 @@
     "highlightSymboliser": {
         "name": "test",
         "strokeColor": "#007DC6",
-        "strokeWidth": 20,
+        "strokeWidth": 10,
         "strokeOpacity": 0.5,
         "fillColor": "#007DC6",
         "fillOpacity": 0.2
