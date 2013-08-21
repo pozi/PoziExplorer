@@ -416,6 +416,9 @@
             "attr_name": "township"
         }, {
             "attr_name": "some_species"
+        }, {
+            "attr_name": "url",
+            "alt_name": "More Information"
         }]
     },
     "bannerLineColor": "#007DC6",
