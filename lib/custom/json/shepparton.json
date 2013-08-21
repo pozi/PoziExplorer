@@ -184,6 +184,16 @@
         "tiled": false
     }, {
         "source": "local",
+        "name": "gs_parking_zone",
+        "title": "Parking Zones",
+        "visibility": false,
+        "opacity": 0.75,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+    }, {
+        "source": "local",
         "name": "gs_bus_route",
         "title": "Bus Routes",
         "visibility": false,
