@@ -171,6 +171,7 @@ requestConfig = function(options) {
                         load: function(request) {
                             if (request.data && request.data.items[0]) {
                                 var propertyDataInit = request.data.items[0].json.row; // property record
+                                propertyDataInit.store = request.data.items[0].store.baseParams.config;
                             } else {
                                 alert("No property found in " + helpers.toTitleCase(configScript) + " with number: " + propNum + ".");
                             }
