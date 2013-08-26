@@ -262,6 +262,8 @@ buildNorthPart = function(JSONconf, gCombostore, helpers, tabExpand, gLayoutsArr
 
                                     if (lock) {
                                         lock = "background-image: url(theme/app/img/panel/lock.png);";
+                                    } else {
+                                        lock = "";
                                     }
 
                                     if (!icon) {
