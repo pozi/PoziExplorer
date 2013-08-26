@@ -7,7 +7,7 @@
     "chai": "~1.7.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./test/bin/run_local.sh"
   },
   "repository": {
     "type": "git",
