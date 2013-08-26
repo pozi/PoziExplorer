@@ -2,6 +2,9 @@
 
 An app based on the [OpenGeo Suite SDK](http://opengeo.org/technology/sdk/).
 
+[![Build Status](https://travis-ci.org/groundtruth/PoziExplorer.png?branch=master)](https://travis-ci.org/groundtruth/PoziExplorer)
+
+
 ## Getting it running
 
 Get the code:
@@ -37,4 +40,45 @@ This project expects to be able to use certain webservices.
 
 Please refer to `lib/custom/json/` and the config loading code (where defaults
 are defined) for more details.
+
+
+## Run the tests
+
+We have integration tests defined using [Mocha](http://visionmedia.github.io/mocha/)
+and [WD.js](https://github.com/admc/wd). They are run on each commit by
+[TravisCI](https://travis-ci.org/groundtruth/PoziExplorer).
+
+Before running the tests locally, you'll need to install:
+
+* [PhantomJS](http://phantomjs.org/download.html)
+* [Node.js](http://nodejs.org/download/)
+* this project's node modules: `npm install`
+* other helpful modules: `npm install -g mocha`, `npm install -g node-inspector`
+* the `pkill` utility (Linux: has it, Mac: `brew install proctools`, Cygwin: install `procps`)
+
+Now you're ready to run the tests:
+
+    # test a local PoziExplorer via PhantomJS (does setup and shutdown):
+    ./test/bin/run_local.sh
+
+    # same, but without starting and stopping PoziExplorer and PhantomJS every time
+    source ./test/bin/start_for_local.sh  # this starts services and sets env vars
+    mocha                                 # actually runs tests... repeat as desired
+    mocha
+    mocha
+    source ./test/bin/stop.sh             # stops services and unsets env vars
+
+    # debug tests interactively
+    source ./test/bin/start_for_local.sh
+    node-inspector &
+    open http://127.0.0.1:8080/debug?port=5858
+    mocha --debug-brk
+    source ./test/bin/stop.sh
+    pkill -f 'node-inspector'
+
+    # run the tests against a live server instead of a local copy of PoziExplorer
+    source ./test/bin/start_for_live.sh   # this starts PhantomJS and sets env vars to target the live server
+    mocha
+    source ./test/bin/stop.sh
+
 
