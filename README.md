@@ -44,9 +44,9 @@ are defined) for more details.
 
 ## Run the tests
 
-We have integration tests defined using [Mocha](http://visionmedia.github.io/mocha/)
-and [WD.js](https://github.com/admc/wd). They are run on each commit by
-[TravisCI](https://travis-ci.org/groundtruth/PoziExplorer).
+We have integration tests defined using [Mocha](http://visionmedia.github.io/mocha/),
+[Chai](http://chaijs.com/) and [WD.js](https://github.com/admc/wd). They are run
+on each commit by [TravisCI](https://travis-ci.org/groundtruth/PoziExplorer).
 
 Before running the tests locally, you'll need to install:
 
