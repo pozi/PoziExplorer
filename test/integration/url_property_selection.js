@@ -1,11 +1,13 @@
 var expect = require("chai").expect,
-    wd = require("wd");
+    wd = require("wd"),
+    webdriver_url = (process.env.POZIEXPLORER_TEST_WEBDRIVER || 'http://localhost:8192/wd/hub'),
+    subject_url = (process.env.POZIEXPLORER_TEST_SUBJECT || 'http://localhost:9090/');
 
 describe("URL property selection", function(){
   var browser;
 
   beforeEach(function() {
-    browser = wd.remote('http://localhost:8192/wd/hub').chain().init();
+    browser = wd.remote(webdriver_url).chain().init();
   });
   afterEach(function() {
     browser.quit();
@@ -16,7 +18,7 @@ describe("URL property selection", function(){
     var addressValueDiv = detailsTab + '//td/div[text()="Address"]/../../td[last()]/div';
 
     browser
-      .get("http://localhost:9090/?config=cardinia&property=3755100500")
+      .get(subject_url + "?config=cardinia&property=3755100500")
       .waitForElementByXPath(detailsTab, 10000)
       .elementByXPath(addressValueDiv, function(err, element) {
         element.text(function(err, text) {
