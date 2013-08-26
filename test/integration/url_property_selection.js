@@ -1,13 +1,15 @@
 var expect = require("chai").expect,
-    wd = require("wd"),
-    webdriver_url = (process.env.POZIEXPLORER_TEST_WEBDRIVER || 'http://localhost:8192/wd/hub'),
-    subject_url = (process.env.POZIEXPLORER_TEST_SUBJECT || 'http://localhost:9090/');
+    wd = require("wd");
+
+if (!("POZIEXPLORER_TEST_WEBDRIVER" in process.env) || !("POZIEXPLORER_TEST_SUBJECT" in process.env)) {
+  throw new Error("Env vars not set!");
+}
 
 describe("URL property selection", function(){
   var browser;
 
   beforeEach(function() {
-    browser = wd.remote(webdriver_url).chain().init();
+    browser = wd.remote(process.env.POZIEXPLORER_TEST_WEBDRIVER).chain().init();
   });
   afterEach(function() {
     browser.quit();
@@ -18,7 +20,7 @@ describe("URL property selection", function(){
     var addressValueDiv = detailsTab + '//td/div[text()="Address"]/../../td[last()]/div';
 
     browser
-      .get(subject_url + "?config=cardinia&property=3755100500")
+      .get(process.env.POZIEXPLORER_TEST_SUBJECT + "?config=cardinia&property=3755100500")
       .waitForElementByXPath(detailsTab, 10000)
       .elementByXPath(addressValueDiv, function(err, element) {
         element.text(function(err, text) {
