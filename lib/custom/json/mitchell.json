@@ -169,7 +169,7 @@
     },
     "layers": [{
         "source": "local",
-        "name": "dse_vmplan_plan_zone_msc_vw_local_law_classification",
+        "name": "vw_msc_plan_zone_local_laws_classification",
         "title": "Local Law Zones (DRAFT)",
         "visibility": false,
         "opacity": 0.6,
