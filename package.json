@@ -1,0 +1,21 @@
+{
+  "name": "poziexplorer",
+  "dependencies": {},
+  "devDependencies": {
+    "wd": "~0.1.0",
+    "mocha": "~1.12.0",
+    "chai": "~1.7.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/groundtruth/PoziExplorer.git"
+  },
+  "author": "",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/groundtruth/PoziExplorer/issues"
+  }
+}
