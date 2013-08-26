@@ -7,7 +7,7 @@
     "chai": "~1.7.2"
   },
   "scripts": {
-    "test": "./test/bin/run_local.sh"
+    "test": "bash ./test/bin/run_local.sh"
   },
   "repository": {
     "type": "git",
