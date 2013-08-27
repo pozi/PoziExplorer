@@ -21,9 +21,12 @@ describe("URL property selection", function(){
 
     browser
       .get(process.env.POZIEXPLORER_TEST_SUBJECT + "?config=cardinia&property=3755100500")
-      .waitForElementByXPath(detailsTab, 10000)
+      .waitForElementByXPath(detailsTab, 30000)
+      .waitForElementByXPath(addressValueDiv, 30000)
       .elementByXPath(addressValueDiv, function(err, element) {
+        expect(err).to.be.a('null');
         element.text(function(err, text) {
+          expect(err).to.be.a('null');
           expect(text).to.equal('11 SAVAGE STREET PAKENHAM 3810');
           done();
         });
