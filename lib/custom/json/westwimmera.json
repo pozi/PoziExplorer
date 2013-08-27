@@ -232,7 +232,7 @@
         "tiled": false
     }, {
         "source": "local",
-        "name": "WWSC_ROAD_DETAIL",
+        "name": "WWSC_ROAD_SEGMENT",
         "title": "Road Details",
         "visibility": false,
         "opacity": 0.8,
