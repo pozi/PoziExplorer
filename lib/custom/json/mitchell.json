@@ -563,7 +563,18 @@
     }, {
         "source": "local_cascaded_imagery",
         "name": "AERIAL_MITCHELL_2007JAN26_AIR_VIS_50CM_MGA55",
-        "title": "Mitchell (CIP 2007)",
+        "title": "Mitchell (CIP Jan 2007)",
+        "visibility": false,
+        "opacity": 0,
+        "group": "aerial",
+        "selected": false,
+        "format": "image/JPEG",
+        "transparent": true,
+        "styles": ""
+    }, {
+        "source": "local_cascaded_imagery",
+        "name": "ALG_LANDCOVER55_2007DEC14_AIR_VIS_50CM_MGA55",
+        "title": "Mitchell Landcover (CIP Dec 2007)",
         "visibility": false,
         "opacity": 0,
         "group": "aerial",
