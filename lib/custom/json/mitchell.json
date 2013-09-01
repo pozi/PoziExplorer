@@ -575,7 +575,7 @@
     }, {
         "source": "local_cascaded_imagery",
         "name": "ALG_LANDCOVER55_2007DEC14_AIR_VIS_50CM_MGA55",
-        "title": "Mitchell Landcover (CIP Dec 2007)",
+        "title": "Mitchell (CIP Dec 2007)",
         "visibility": false,
         "opacity": 0,
         "group": "aerial",
