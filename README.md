@@ -55,6 +55,7 @@ Before running the tests locally, you'll need to install:
 * this project's node modules: `npm install`
 * other helpful modules: `npm install -g mocha`, `npm install -g node-inspector`
 * the `pkill` utility (Linux: has it, Mac: `brew install proctools`, Cygwin: install `procps`)
+* the `nc` utility (Linux: has it, Mac: `brew install netcat`, Cygwin: install `netcat`)
 
 Now you're ready to run the tests:
 
