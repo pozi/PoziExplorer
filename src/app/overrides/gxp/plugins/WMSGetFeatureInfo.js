@@ -137,6 +137,7 @@ gxp.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
             var queryableLayers = this.target.mapPanel.layers.queryBy(function(x){
                 return x.get("queryable") &&
                        x.get("layer").visibility &&
+                       x.get("layer").inRange &&
                        (x.get("group") != "background");
             });
             // Keeping track of the number of objects to be returned

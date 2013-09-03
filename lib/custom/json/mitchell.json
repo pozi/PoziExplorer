@@ -226,7 +226,8 @@
         "format": "image/GIF",
         "styles": "",
         "transparent": true,
-        "tiled": false
+        "tiled": false,
+        "minscale":25000
     }, {
         "source": "local",
         "name": "MSC_GARBAGE_COLLECTION",
