@@ -105,6 +105,14 @@
             "tiled": false,
             "restUrl": "/geoserver/rest"
         },
+        "depi_wms_misc":{
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-misc.xml",
+            "title": "DEPI - Misc",
+            "ptype": "gxp_wmscsource",
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true
+        },
         "basemap_dse_administrative_boundaries": {
             "url": "http://basemap.pozi.com/geoserver/DSE_ADMINISTRATIVE_BOUNDARIES/ows",
             "title": "DSE - Adminstrative Boundaries",
@@ -191,6 +199,16 @@
         "source": "basemap",
         "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
         "title": "Planning Overlays",
+        "visibility": false,
+        "opacity": 0.5,
+        "format": "image/png8",
+        "styles": "",
+        "transparent": true,
+        "tiled": false
+    }, {
+        "source": "depi_wms_misc",
+        "name": "sii:bushfire_prone_areas",
+        "title": "Bushfire Prone Areas",
         "visibility": false,
         "opacity": 0.5,
         "format": "image/png8",
