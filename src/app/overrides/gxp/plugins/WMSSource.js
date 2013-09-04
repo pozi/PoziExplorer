@@ -160,8 +160,18 @@ gxp.plugins.WMSSource.prototype.createStore = function() {
 
       var layer = original.getLayer().clone();
 
-      // Overriding the URL parameter of the GetMap to the one from the source
+    // Overriding the URL parameter of the GetMap to the one from the source (unless prevented by config)
+    // Extraction of the useGetCapabilitiesURLs source-wide parameter
+    if (config && JSONconf.sources[config.source])
+    {
+      config.useGetCapabilitiesURLs=JSONconf.sources[config.source].useGetCapabilitiesURLs;
+    }
+    // If parameter not present or false, the GetMap requests are aligned on the source URL (default behaviour)
+    if (!(config.useGetCapabilitiesURLs))
+    {
       layer.url = this.url;
+    }
+    // If parameter was configured to true, GetMap requests are taken from the WMS GetCapabilities
 
       /**
        * TODO: The WMSCapabilitiesReader should allow for creation

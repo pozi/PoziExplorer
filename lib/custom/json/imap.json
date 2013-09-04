@@ -133,11 +133,12 @@
             "ptype": "gxp_olsource"
         },
         "depi_wms":{
-            "url": "http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms",
+            "url": "/lib/custom/wms/depi-getcapabilities.xml",
             "title": "DEPI WMS Layers",
             "ptype": "gxp_wmscsource",
             "transition": null,
-            "infoFormat": "application/json"
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true
         },
         "basemap": {
             "url": ["http://basemap1.pozi.com/geoserver/ows", "http://basemap2.pozi.com/geoserver/ows", "http://basemap3.pozi.com/geoserver/ows", "http://basemap4.pozi.com/geoserver/ows"],
