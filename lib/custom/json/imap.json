@@ -133,7 +133,7 @@
             "ptype": "gxp_olsource"
         },
         "depi_wms":{
-            "url": "/lib/custom/wms/depi-getcapabilities.xml",
+            "url": "/lib/custom/wms/depi-getcapabilities-mini.xml",
             "title": "DEPI WMS Layers",
             "ptype": "gxp_wmscsource",
             "transition": null,
