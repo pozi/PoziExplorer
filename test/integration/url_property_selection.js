@@ -4,12 +4,10 @@ var expect = require("chai").expect,
 if (!("POZIEXPLORER_TEST_WEBDRIVER" in process.env) || !("POZIEXPLORER_TEST_SUBJECT" in process.env)) {
   throw new Error("Env vars not set!");
 }
+var timeout_for = function(thing) { typeof thing.runnable === "Function" ? thing.runnable().timeout() : thing.timeout(); }
 
 describe("URL property selection", function(){
   var browser;
-  var timeout_for = function(thing) { typeof thing.runnable === "Function" ? thing.runnable().timeout() : thing.timeout(); }
-
-  var suite_timeout = timeout_for(this);
 
   beforeEach(function() {
     browser = wd.remote(process.env.POZIEXPLORER_TEST_WEBDRIVER).chain().init();
@@ -24,8 +22,8 @@ describe("URL property selection", function(){
 
     browser
       .get(process.env.POZIEXPLORER_TEST_SUBJECT + "?config=cardinia&property=3755100500")
-      .waitForElementByXPath(detailsTab, suite_timeout)
-      .waitForElementByXPath(addressValueDiv, suite_timeout)
+      .waitForElementByXPath(detailsTab, timeout_for(this))
+      .waitForElementByXPath(addressValueDiv, timeout_for(this))
       .elementByXPath(addressValueDiv, function(err, element) {
         expect(err).to.be.a('null');
         element.text(function(err, text) {
