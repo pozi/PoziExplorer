@@ -109,6 +109,14 @@
             "tiled": false,
             "restUrl": "/geoserver/rest"
         },
+        "depi_wms_environment":{
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-environment.xml",
+            "title": "DEPI - Environment",
+            "ptype": "gxp_wmscsource",
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true
+        },
         "depi_wms_misc":{
             "url": "/lib/custom/wms/depi-getcapabilities-mini-misc.xml",
             "title": "DEPI - Misc",
@@ -343,6 +351,8 @@
     { "group": "environment", "source": "local", "name": "msc_environment_managed_reserves", "title": "MSC Managed Reserves", "visibility": false, "format": "image/png8", "transparent": true, "tiled": false },
     { "group": "environment", "source": "local", "name": "msc_environment_threatened_fauna", "title": "Threatened Fauna", "visibility": false, "format": "image/png8", "transparent": true, "tiled": false },
     { "group": "environment", "source": "local", "name": "msc_environment_threatened_flora", "title": "Threatened Flora", "visibility": false, "format": "image/png8", "transparent": true, "tiled": false },
+    { "group": "environment", "source": "depi_wms_environment", "name": "sii:CATCHMENTS.CMA100", "title": "Water Catchments", "visibility": false, "format": "image/png8", "transparent": true, "tiled": false, "sld":"http://basemap.pozi.com/vic_styles/sld/sii-CATCHMENTS.CMA100.sld" },
+    { "group": "environment", "source": "depi_wms_environment", "name": "sii:FLORAFAUNA1.NV2005_EVCBCS", "title": "Ecological Vegetation Classes", "visibility": false, "format": "image/png8", "transparent": true, "tiled": true , "sld":"http://basemap.pozi.com/vic_styles/sld/sii-FLORAFAUNA1.NV2005_EVCBCS.sld"},
     { "group": "community_and_recreation", "source": "local", "name": "msc_commrec_baseball_fields", "title": "Baseball Fields", "visibility": false, "format": "image/png8", "transparent": true, "tiled": false },
     { "group": "community_and_recreation", "source": "local", "name": "msc_commrec_athletic_facilities", "title": "Athletic Facilities", "visibility": false, "format": "image/png8", "transparent": true, "tiled": false },
     { "group": "community_and_recreation", "source": "local", "name": "msc_commrec_bmx_tracks", "title": "BMX Tracks", "visibility": false, "format": "image/png8", "transparent": true, "tiled": false },
