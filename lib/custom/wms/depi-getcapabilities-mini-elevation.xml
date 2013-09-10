@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE WMT_MS_Capabilities SYSTEM "http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/schemas/wms/1.1.1/WMS_MS_Capabilities.dtd">
+<WMT_MS_Capabilities version="1.1.1" updateSequence="1529">
+  <Service>
+    <Name>OGC:WMS</Name>
+    <Title>GeoServer Web Map Service</Title>
+    <Abstract>A compliant implementation of WMS plus most of the SLD extension (dynamic styling). Can also generate PDF, SVG, KML, GeoRSS</Abstract>
+    <KeywordList>
+      <Keyword>WFS</Keyword>
+      <Keyword>WMS</Keyword>
+      <Keyword>GEOSERVER</Keyword>
+    </KeywordList>
+    <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://geoserver.sourceforge.net/html/index.php"/>
+    <ContactInformation>
+      <ContactPersonPrimary>
+        <ContactPerson>Christian Maul</ContactPerson>
+        <ContactOrganization>DEPI</ContactOrganization>
+      </ContactPersonPrimary>
+      <ContactPosition>Bürobote</ContactPosition>
+      <ContactAddress>
+        <AddressType>Work</AddressType>
+        <Address>13/570 Bourke St</Address>
+        <City>Melbourne</City>
+        <StateOrProvince>Vic</StateOrProvince>
+        <PostCode>3000</PostCode>
+        <Country>Australia</Country>
+      </ContactAddress>
+      <ContactVoiceTelephone>+61-3-86362325</ContactVoiceTelephone>
+      <ContactFacsimileTelephone>+61-3-86362813</ContactFacsimileTelephone>
+      <ContactElectronicMailAddress>Christian.Maul@depi.com.au</ContactElectronicMailAddress>
+    </ContactInformation>
+    <Fees>NONE</Fees>
+    <AccessConstraints>NONE</AccessConstraints>
+  </Service>
+  <Capability>
+    <Request>
+      <GetCapabilities>
+        <Format>application/vnd.ogc.wms_xml</Format>
+        <DCPType>
+          <HTTP>
+            <Get>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?SERVICE=WMS&amp;"/>
+            </Get>
+            <Post>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?SERVICE=WMS&amp;"/>
+            </Post>
+          </HTTP>
+        </DCPType>
+      </GetCapabilities>
+      <GetMap>
+        <Format>image/png</Format>
+        <Format>application/atom xml</Format>
+        <Format>application/atom+xml</Format>
+        <Format>application/openlayers</Format>
+        <Format>application/pdf</Format>
+        <Format>application/rss xml</Format>
+        <Format>application/rss+xml</Format>
+        <Format>application/vnd.google-earth.kml</Format>
+        <Format>application/vnd.google-earth.kml xml</Format>
+        <Format>application/vnd.google-earth.kml+xml</Format>
+        <Format>application/vnd.google-earth.kml+xml;mode=networklink</Format>
+        <Format>application/vnd.google-earth.kmz</Format>
+        <Format>application/vnd.google-earth.kmz xml</Format>
+        <Format>application/vnd.google-earth.kmz+xml</Format>
+        <Format>application/vnd.google-earth.kmz;mode=networklink</Format>
+        <Format>atom</Format>
+        <Format>image/geotiff</Format>
+        <Format>image/geotiff8</Format>
+        <Format>image/gif</Format>
+        <Format>image/gif;subtype=animated</Format>
+        <Format>image/jpeg</Format>
+        <Format>image/png8</Format>
+        <Format>image/png; mode=8bit</Format>
+        <Format>image/svg</Format>
+        <Format>image/svg xml</Format>
+        <Format>image/svg+xml</Format>
+        <Format>image/tiff</Format>
+        <Format>image/tiff8</Format>
+        <Format>kml</Format>
+        <Format>kmz</Format>
+        <Format>openlayers</Format>
+        <Format>rss</Format>
+        <DCPType>
+          <HTTP>
+            <Get>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?SERVICE=WMS&amp;"/>
+            </Get>
+          </HTTP>
+        </DCPType>
+      </GetMap>
+      <GetFeatureInfo>
+        <Format>text/plain</Format>
+        <Format>application/vnd.ogc.gml</Format>
+        <Format>application/vnd.ogc.gml/3.1.1</Format>
+        <Format>text/html</Format>
+        <Format>application/json</Format>
+        <DCPType>
+          <HTTP>
+            <Get>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?SERVICE=WMS&amp;"/>
+            </Get>
+            <Post>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?SERVICE=WMS&amp;"/>
+            </Post>
+          </HTTP>
+        </DCPType>
+      </GetFeatureInfo>
+      <DescribeLayer>
+        <Format>application/vnd.ogc.wms_xml</Format>
+        <DCPType>
+          <HTTP>
+            <Get>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?SERVICE=WMS&amp;"/>
+            </Get>
+          </HTTP>
+        </DCPType>
+      </DescribeLayer>
+      <GetLegendGraphic>
+        <Format>image/png</Format>
+        <Format>image/jpeg</Format>
+        <Format>image/gif</Format>
+        <DCPType>
+          <HTTP>
+            <Get>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?SERVICE=WMS&amp;"/>
+            </Get>
+          </HTTP>
+        </DCPType>
+      </GetLegendGraphic>
+      <GetStyles>
+        <Format>application/vnd.ogc.sld+xml</Format>
+        <DCPType>
+          <HTTP>
+            <Get>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?SERVICE=WMS&amp;"/>
+            </Get>
+          </HTTP>
+        </DCPType>
+      </GetStyles>
+    </Request>
+    <Exception>
+      <Format>application/vnd.ogc.se_xml</Format>
+      <Format>application/vnd.ogc.se_inimage</Format>
+    </Exception>
+    <UserDefinedSymbolization SupportSLD="1" UserLayer="1" UserStyle="1" RemoteWFS="1"/>
+    <Layer>
+      <Title>GeoServer Web Map Service</Title>
+      <Abstract>A compliant implementation of WMS plus most of the SLD extension (dynamic styling). Can also generate PDF, SVG, KML, GeoRSS</Abstract>
+      <!--All supported EPSG projections:-->
+      <SRS>EPSG:WGS84(DD)</SRS>
+      <SRS>EPSG:3857</SRS>
+      <SRS>EPSG:4283</SRS>
+      <SRS>EPSG:4326</SRS>
+      <SRS>EPSG:28354</SRS>
+      <SRS>EPSG:28355</SRS>
+      <SRS>EPSG:900913</SRS>
+      <LatLonBoundingBox minx="113.15628800000002" miny="-43.86689143805745" maxx="154.308864108" maxy="-10.693111999655512"/>
+      <Layer queryable="0">
+        <Name>sii:VMELEV.EL_CONTOUR</Name>
+        <Title>Contour lines</Title>
+        <Abstract>Vicmap Elevation Contour lines&#13;
+&#13;
+layerconfig:&#13;
+ANZVI0803002504=sii:VMELEV.EL_CONTOUR</Abstract>
+        <KeywordList>
+          <Keyword>ANZVI0803002504</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.501321549" miny="-39.159128830075986" maxx="150.067969051" maxy="-33.00000020313774"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.501321549" miny="-39.159128831" maxx="150.067969051" maxy="-33.000000204"/>
+        <Style>
+          <Name>VMELEV_el_contour_2</Name>
+          <Title>Contourlines</Title>
+          <Abstract>Line styles dependent on feature scale rules (2 rules)</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=VMELEV.EL_CONTOUR"/>
+          </LegendURL>
+        </Style>
+        <Style>
+          <Name>VMELEV_el_contour_1</Name>
+          <Title>Contourlines</Title>
+          <Abstract>Line styles dependent on feature scale rules (2 rules)</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=VMELEV.EL_CONTOUR&amp;style=VMELEV_el_contour_1"/>
+          </LegendURL>
+        </Style>
+        <Style>
+          <Name>VMELEV_el_contour_0</Name>
+          <Title>Line style for Water lines in VMlite</Title>
+          <Abstract>Line styles dependent on feature scale rules (5 rules)</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=VMELEV.EL_CONTOUR&amp;style=VMELEV_el_contour_0"/>
+          </LegendURL>
+        </Style>
+        <Style>
+          <Name>VMELEV_el_contour_2</Name>
+          <Title>Contourlines</Title>
+          <Abstract>Line styles dependent on feature scale rules (2 rules)</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=VMELEV.EL_CONTOUR&amp;style=VMELEV_el_contour_2"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:VMELEV.EL_CONTOUR_1TO5M</Name>
+        <Title>Contour lines (1 to 5m)</Title>
+        <Abstract>Vicmap Elevation Contour lines 1 metre to 5 metres&#13;
+&#13;
+layerconfig:&#13;
+ANZVI0803002813=sii:VMELEV.EL_CONTOUR_1TO5M</Abstract>
+        <KeywordList>
+          <Keyword>ANZVI0803002813</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="144.454644867" miny="-38.483750849080714" maxx="145.750288542" maxy="-37.43460849108907"/>
+        <BoundingBox SRS="EPSG:4283" minx="144.454644867" miny="-38.48375085" maxx="145.750288542" maxy="-37.434608492"/>
+        <Style>
+          <Name>VMELEV_el_contour_1_met</Name>
+          <Title>Contourlines 1-5 Metropolitan</Title>
+          <Abstract>Line styles dependent on feature scale rules (2 rules)</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=VMELEV.EL_CONTOUR_1TO5M"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.0" max="10000.0"/>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:VMELEV.EL_GRND_SURFACE_POINT</Name>
+        <Title>Ground Surface Points</Title>
+        <Abstract>layerconfig:&#13;
+&#13;
+ANZVI0803002502=sii:V_VMELEV.EL_GRND_SURFACE_POINT</Abstract>
+        <KeywordList>
+          <Keyword>ANZVI0803002502</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.501643916" miny="-39.15388849507603" maxx="150.058429354" maxy="-33.00565918513766"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.501643916" miny="-39.153888496" maxx="150.058429354" maxy="-33.005659186"/>
+        <Style>
+          <Name>VMELEV_grnd_surface_point_1</Name>
+          <Title/>
+          <Abstract>Ground surface Point</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=VMELEV.EL_GRND_SURFACE_POINT"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.0" max="30000.0"/>
+      </Layer>
+    </Layer>
+  </Capability>
+</WMT_MS_Capabilities>
