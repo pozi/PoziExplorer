@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE WMT_MS_Capabilities SYSTEM "http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/schemas/wms/1.1.1/WMS_MS_Capabilities.dtd">
+<WMT_MS_Capabilities version="1.1.1" updateSequence="1529">
+  <Service>
+    <Name>OGC:WMS</Name>
+    <Title>GeoServer Web Map Service</Title>
+    <Abstract>A compliant implementation of WMS plus most of the SLD extension (dynamic styling). Can also generate PDF, SVG, KML, GeoRSS</Abstract>
+    <KeywordList>
+      <Keyword>WFS</Keyword>
+      <Keyword>WMS</Keyword>
+      <Keyword>GEOSERVER</Keyword>
+    </KeywordList>
+    <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://geoserver.sourceforge.net/html/index.php"/>
+    <ContactInformation>
+      <ContactPersonPrimary>
+        <ContactPerson>Christian Maul</ContactPerson>
+        <ContactOrganization>DEPI</ContactOrganization>
+      </ContactPersonPrimary>
+      <ContactPosition>Bürobote</ContactPosition>
+      <ContactAddress>
+        <AddressType>Work</AddressType>
+        <Address>13/570 Bourke St</Address>
+        <City>Melbourne</City>
+        <StateOrProvince>Vic</StateOrProvince>
+        <PostCode>3000</PostCode>
+        <Country>Australia</Country>
+      </ContactAddress>
+      <ContactVoiceTelephone>+61-3-86362325</ContactVoiceTelephone>
+      <ContactFacsimileTelephone>+61-3-86362813</ContactFacsimileTelephone>
+      <ContactElectronicMailAddress>Christian.Maul@depi.com.au</ContactElectronicMailAddress>
+    </ContactInformation>
+    <Fees>NONE</Fees>
+    <AccessConstraints>NONE</AccessConstraints>
+  </Service>
+  <Capability>
+    <Request>
+      <GetCapabilities>
+        <Format>application/vnd.ogc.wms_xml</Format>
+        <DCPType>
+          <HTTP>
+            <Get>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?SERVICE=WMS&amp;"/>
+            </Get>
+            <Post>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?SERVICE=WMS&amp;"/>
+            </Post>
+          </HTTP>
+        </DCPType>
+      </GetCapabilities>
+      <GetMap>
+        <Format>image/png</Format>
+        <Format>application/atom xml</Format>
+        <Format>application/atom+xml</Format>
+        <Format>application/openlayers</Format>
+        <Format>application/pdf</Format>
+        <Format>application/rss xml</Format>
+        <Format>application/rss+xml</Format>
+        <Format>application/vnd.google-earth.kml</Format>
+        <Format>application/vnd.google-earth.kml xml</Format>
+        <Format>application/vnd.google-earth.kml+xml</Format>
+        <Format>application/vnd.google-earth.kml+xml;mode=networklink</Format>
+        <Format>application/vnd.google-earth.kmz</Format>
+        <Format>application/vnd.google-earth.kmz xml</Format>
+        <Format>application/vnd.google-earth.kmz+xml</Format>
+        <Format>application/vnd.google-earth.kmz;mode=networklink</Format>
+        <Format>atom</Format>
+        <Format>image/geotiff</Format>
+        <Format>image/geotiff8</Format>
+        <Format>image/gif</Format>
+        <Format>image/gif;subtype=animated</Format>
+        <Format>image/jpeg</Format>
+        <Format>image/png8</Format>
+        <Format>image/png; mode=8bit</Format>
+        <Format>image/svg</Format>
+        <Format>image/svg xml</Format>
+        <Format>image/svg+xml</Format>
+        <Format>image/tiff</Format>
+        <Format>image/tiff8</Format>
+        <Format>kml</Format>
+        <Format>kmz</Format>
+        <Format>openlayers</Format>
+        <Format>rss</Format>
+        <DCPType>
+          <HTTP>
+            <Get>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?SERVICE=WMS&amp;"/>
+            </Get>
+          </HTTP>
+        </DCPType>
+      </GetMap>
+      <GetFeatureInfo>
+        <Format>text/plain</Format>
+        <Format>application/vnd.ogc.gml</Format>
+        <Format>application/vnd.ogc.gml/3.1.1</Format>
+        <Format>text/html</Format>
+        <Format>application/json</Format>
+        <DCPType>
+          <HTTP>
+            <Get>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?SERVICE=WMS&amp;"/>
+            </Get>
+            <Post>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?SERVICE=WMS&amp;"/>
+            </Post>
+          </HTTP>
+        </DCPType>
+      </GetFeatureInfo>
+      <DescribeLayer>
+        <Format>application/vnd.ogc.wms_xml</Format>
+        <DCPType>
+          <HTTP>
+            <Get>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?SERVICE=WMS&amp;"/>
+            </Get>
+          </HTTP>
+        </DCPType>
+      </DescribeLayer>
+      <GetLegendGraphic>
+        <Format>image/png</Format>
+        <Format>image/jpeg</Format>
+        <Format>image/gif</Format>
+        <DCPType>
+          <HTTP>
+            <Get>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?SERVICE=WMS&amp;"/>
+            </Get>
+          </HTTP>
+        </DCPType>
+      </GetLegendGraphic>
+      <GetStyles>
+        <Format>application/vnd.ogc.sld+xml</Format>
+        <DCPType>
+          <HTTP>
+            <Get>
+              <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?SERVICE=WMS&amp;"/>
+            </Get>
+          </HTTP>
+        </DCPType>
+      </GetStyles>
+    </Request>
+    <Exception>
+      <Format>application/vnd.ogc.se_xml</Format>
+      <Format>application/vnd.ogc.se_inimage</Format>
+    </Exception>
+    <UserDefinedSymbolization SupportSLD="1" UserLayer="1" UserStyle="1" RemoteWFS="1"/>
+    <Layer>
+      <Title>GeoServer Web Map Service</Title>
+      <Abstract>A compliant implementation of WMS plus most of the SLD extension (dynamic styling). Can also generate PDF, SVG, KML, GeoRSS</Abstract>
+      <!--All supported EPSG projections:-->
+      <SRS>EPSG:WGS84(DD)</SRS>
+      <SRS>EPSG:3857</SRS>
+      <SRS>EPSG:4283</SRS>
+      <SRS>EPSG:4326</SRS>
+      <SRS>EPSG:28354</SRS>
+      <SRS>EPSG:28355</SRS>
+      <SRS>EPSG:900913</SRS>
+      <LatLonBoundingBox minx="113.15628800000002" miny="-43.86689143805745" maxx="154.308864108" maxy="-10.693111999655512"/>
+      <Layer queryable="1">
+        <Name>sii:CATCHMENTS.BIOLINK500</Name>
+        <Title>BIOLINK500</Title>
+        <Abstract>layerconfig:&#13;
+&#13;
+ANZVI0803003945=sii:BIOLINK500&#13;
+&#13;
+un-uncommented 1.2.2012 (nobody missed it so far)</Abstract>
+        <KeywordList>
+          <Keyword>ANZVI0803003945</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.95866327500005" miny="-38.908515557410986" maxx="148.058289241667" maxy="-34.27085740745491"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.95866327500002" miny="-38.9085155583333" maxx="148.058289241667" maxy="-34.2708574083333"/>
+        <Style>
+          <Name>CATCH_biolink_1</Name>
+          <Title>biolinks500_1</Title>
+          <Abstract/>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=CATCHMENTS.BIOLINK500"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.0" max="1.7976931348623157E308"/>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:CATCHMENTS.CMA100</Name>
+        <Title>CATCHMENTS.CMA100</Title>
+        <Abstract>layerconfig:&#13;
+&#13;
+none ANZVI0803002317</Abstract>
+        <KeywordList>
+          <Keyword>ANZVI0803002317</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.962407408333" miny="-39.13665289907615" maxx="149.975026241667" maxy="-33.98138980745843"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.962407408333" miny="-39.1366529" maxx="149.975026241667" maxy="-33.9813898083333"/>
+        <Style>
+          <Name>CATCH_cma100_1</Name>
+          <Title>CATCH_CMA100</Title>
+          <Abstract> black 1px outline no fill</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=CATCHMENTS.CMA100"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:CATCHMENTS.FLAGSHIP500</Name>
+        <Title>FLAGSHIP500</Title>
+        <Abstract>layerconfig:&#13;
+&#13;
+ANZVI0803003944=sii:CATCHMENTS.FLAGSHIP500</Abstract>
+        <KeywordList>
+          <Keyword>ANZVI0803003944</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.960289758333" miny="-39.18749784907581" maxx="149.96261049166702" maxy="-33.996500899124946"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.960289758333" miny="-39.18749785" maxx="149.96261049166702" maxy="-33.9965009"/>
+        <Style>
+          <Name>CATCH_flagship500</Name>
+          <Title/>
+          <Abstract/>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=CATCHMENTS.FLAGSHIP500"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.0" max="1.7976931348623157E308"/>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:CATCHMENTS.VIF_BIODIVERSITY500</Name>
+        <Title>VIF_BIODIVERSITY500</Title>
+        <Abstract>layerconfig:&#13;
+&#13;
+ANZVI0803003987=sii:CATCHMENTS.VIF_BIODIVERSITY500</Abstract>
+        <KeywordList>
+          <Keyword>ANZVI0803003987</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.962407408333" miny="-39.18749784907581" maxx="149.975026241667" maxy="-33.98138980745843"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.962407408333" miny="-39.18749785" maxx="149.975026241667" maxy="-33.9813898083333"/>
+        <Style>
+          <Name>CATCH_vif_biodiv_1</Name>
+          <Title/>
+          <Abstract/>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=CATCHMENTS.VIF_BIODIVERSITY500"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.0" max="1.7976931348623157E308"/>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:COASTS.SLR00CM_2009</Name>
+        <Title>sea_level_rise_00CM_2009</Title>
+        <Abstract/>
+        <KeywordList>
+          <Keyword>ArcSDE</Keyword>
+          <Keyword>COASTS.SLR00CM_2009</Keyword>
+          <Keyword>ANZVI0803004726</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.950618233" miny="-39.13659220707614" maxx="149.978201758" maxy="-37.404952016089325"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.95061823300003" miny="-39.136592208" maxx="149.978201758" maxy="-37.404952017"/>
+        <Style>
+          <Name>COASTS_slr00_2009_1</Name>
+          <Title>sea level rise 00cm National Tidal Centre High Water</Title>
+          <Abstract>polygon style style, varying 0.25 - 0.5 pixel wide edge - fill DarkBluesurrounding DarkSlateGray</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=COASTS.SLR00CM_2009"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="75000.0" max="5000000.0"/>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:COASTS.SLR00CM_ST_2009</Name>
+        <Title>sea_level_rise_00CM_storm_tide_2009</Title>
+        <Abstract/>
+        <KeywordList>
+          <Keyword>COASTS.SLR00CM_ST_2009</Keyword>
+          <Keyword>ArcSDE</Keyword>
+          <Keyword>ANZVI0803004727</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.950618233" miny="-39.13951279907612" maxx="149.978201758" maxy="-37.402905757089336"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.95061823300003" miny="-39.1395128" maxx="149.978201758" maxy="-37.402905757999996"/>
+        <Style>
+          <Name>COASTS_slr00_2009_storm_tide_1</Name>
+          <Title>sea level rise 00cm National Storm Tide</Title>
+          <Abstract>polygon style style, varying 0.25 - 0.5 pixel wide edge - fill DarkBlue surrounding DarkSlateGray</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=COASTS.SLR00CM_ST_2009"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="75000.0" max="5000000.0"/>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:COASTS.SLR20CM_2040</Name>
+        <Title>sea_level_rise_20CM_2040</Title>
+        <Abstract/>
+        <KeywordList>
+          <Keyword>ArcSDE</Keyword>
+          <Keyword>COASTS.SLR20CM_2040</Keyword>
+          <Keyword>ANZVI0803004728</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.950622267" miny="-39.13660360707615" maxx="149.978215317" maxy="-37.40488582408932"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.95062226700003" miny="-39.136603608" maxx="149.978215317" maxy="-37.404885825"/>
+        <Style>
+          <Name>COASTS_slr20_2040_1</Name>
+          <Title>sea level rise 20cm Storm Tide National Tidal Centre High Water</Title>
+          <Abstract>polygon style style, varying 0.25 - 0.5 pixel wide edge - fill Blue surrounding DarkSlateGray</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=COASTS.SLR20CM_2040"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="75000.0" max="5000000.0"/>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:COASTS.SLR20CM_ST_2040</Name>
+        <Title>sea_level_rise_20CM_storm_tide_2040</Title>
+        <Abstract/>
+        <KeywordList>
+          <Keyword>ArcSDE</Keyword>
+          <Keyword>COASTS.SLR20CM_ST_2040</Keyword>
+          <Keyword>ANZVI0803004731</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.950622267" miny="-39.140095041076115" maxx="149.97821245" maxy="-37.40282339108934"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.95062226700003" miny="-39.140095042" maxx="149.97821245" maxy="-37.402823392"/>
+        <Style>
+          <Name>COASTS_slr20_2040_storm_tide_1</Name>
+          <Title>sea level rise 20cm Storm Tide</Title>
+          <Abstract>polygon style style, varying 0.25 - 0.5 pixel wide edge - fill Blue surrounding DarkSlateGray</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=COASTS.SLR20CM_ST_2040"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="75000.0" max="5000000.0"/>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:COASTS.SLR47CM_2070</Name>
+        <Title>sea_level_rise_47CM_2070</Title>
+        <Abstract/>
+        <KeywordList>
+          <Keyword>ArcSDE</Keyword>
+          <Keyword>COASTS.SLR47CM_2070</Keyword>
+          <Keyword>ANZVI0803004729</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.950618233" miny="-39.13951279907612" maxx="149.978201758" maxy="-37.404664041089326"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.95061823300003" miny="-39.1395128" maxx="149.978201758" maxy="-37.404664042"/>
+        <Style>
+          <Name>COASTS_slr47_2070_1</Name>
+          <Title>sea level rise 47cm National Tidal Centre High Water</Title>
+          <Abstract>polygon style style, varying 0.25 - 0.5 pixel wide edge - fill RoyalBlue surrounding DarkSlateGray</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=COASTS.SLR47CM_2070"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="75000.0" max="5000000.0"/>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:COASTS.SLR47CM_ST_2070</Name>
+        <Title>sea_level_rise_47CM_storm_tide_2070</Title>
+        <Abstract/>
+        <KeywordList>
+          <Keyword>ArcSDE</Keyword>
+          <Keyword>COASTS.SLR47CM_ST_2070</Keyword>
+          <Keyword>ANZVI0803004732</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.950618233" miny="-39.13988061607613" maxx="149.97818965" maxy="-37.40275630708934"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.95061823300003" miny="-39.139880617" maxx="149.97818965" maxy="-37.402756308"/>
+        <Style>
+          <Name>COASTS_slr47_2070_storm_tide_1</Name>
+          <Title>sea level rise 47cm Storm Tide</Title>
+          <Abstract>polygon style style, varying 0.25 - 0.5 pixel wide edge - fill RoyalBlue surrounding DarkSlateGray</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=COASTS.SLR47CM_ST_2070"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="75000.0" max="5000000.0"/>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:COASTS.SLR82CM_2100</Name>
+        <Title>sea_level_rise_82CM_2100</Title>
+        <Abstract/>
+        <KeywordList>
+          <Keyword>ArcSDE</Keyword>
+          <Keyword>COASTS.SLR82CM_2100</Keyword>
+          <Keyword>ANZVI0803004730</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.950618233" miny="-39.13951279907612" maxx="149.97820211700002" maxy="-37.40282499108934"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.95061823300003" miny="-39.1395128" maxx="149.978202117" maxy="-37.402824992"/>
+        <Style>
+          <Name>COASTS_slr82_2100_1</Name>
+          <Title>sea level rise 82cm National Tidal Centre High Water</Title>
+          <Abstract>polygon style style, varying 0.25 - 0.5 pixel wide edge - fill CormflowerBlue surrounding DarkSlateGray</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=COASTS.SLR82CM_2100"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="75000.0" max="5000000.0"/>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:COASTS.SLR82CM_ST_2100</Name>
+        <Title>sea_level_rise_82CM_storm_tide_2100</Title>
+        <Abstract/>
+        <KeywordList>
+          <Keyword>ArcSDE</Keyword>
+          <Keyword>COASTS.SLR82CM_ST_2100</Keyword>
+          <Keyword>ANZVI0803004733</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.950618233" miny="-39.14007430707612" maxx="149.978201758" maxy="-37.39951895708938"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.95061823300003" miny="-39.140074308" maxx="149.978201758" maxy="-37.399518958"/>
+        <Style>
+          <Name>COASTS_slr82_2100_storm_tide_1</Name>
+          <Title>sea level rise 82cm Storm Tide</Title>
+          <Abstract>polygon style style, varying 0.25 - 0.5 pixel wide edge - fill CormflowerBlue surrounding DarkSlateGray</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=COASTS.SLR82CM_ST_2100"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="75000.0" max="5000000.0"/>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:FLORAFAUNA1.NV2005_EVCBCS</Name>
+        <Title>NV2005_EVCBCS</Title>
+        <Abstract>layerconfig:&#13;
+&#13;
+none&#13;
+&#13;
+Native Vegetation - Modelled 2005 Ecological Vegetation Classes (with Bioregional Conservation Status)</Abstract>
+        <KeywordList>
+          <Keyword>ANZVI0803003495</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.96240831666697" miny="-39.159192757409286" maxx="149.97500872499998" maxy="-33.98139840745843"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.962408316667" miny="-39.1591927583333" maxx="149.975008725" maxy="-33.9813984083333"/>
+        <Style>
+          <Name>polygon</Name>
+          <Title>Default polygon style</Title>
+          <Abstract>A sample style that just draws out a solid gray interior with a black 1px outline</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=FLORAFAUNA1.NV2005_EVCBCS"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.0" max="300000.0"/>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:FLORAFAUNA1.NV2005_EXTENT</Name>
+        <Title>NV2005_EXTENT</Title>
+        <Abstract>layerconfig:&#13;
+&#13;
+ANZVI0803003404=sii:FLORAFAUNA1.NV2005_EXTENT</Abstract>
+        <KeywordList>
+          <Keyword>ANZVI0803003404</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.95145964166701" miny="-39.234762115742186" maxx="149.981398741667" maxy="-33.972361257458545"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.95145964166701" miny="-39.234762116666694" maxx="149.981398741667" maxy="-33.9723612583333"/>
+        <Style>
+          <Name>FF1_nv2005_extent_1</Name>
+          <Title/>
+          <Abstract/>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=FLORAFAUNA1.NV2005_EXTENT"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.0" max="1.7976931348623157E308"/>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:FLORAFAUNA1.RAMSAR100</Name>
+        <Title>RAMSAR100</Title>
+        <Abstract>layerconfig:&#13;
+&#13;
+ANZVI0803001093=sii:FLORAFAUNA1.RAMSAR100</Abstract>
+        <KeywordList>
+          <Keyword>ANZVI0803001093</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="141.93584942500001" miny="-38.9066084657444" maxx="148.1430744" maxy="-34.658071349117044"/>
+        <BoundingBox SRS="EPSG:4283" minx="141.93584942500001" miny="-38.9066084666667" maxx="148.1430744" maxy="-34.65807135"/>
+        <Style>
+          <Name>FF1_ramsar100_1</Name>
+          <Title/>
+          <Abstract/>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=FLORAFAUNA1.RAMSAR100"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.0" max="1.7976931348623157E308"/>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:FLORAFAUNA1.RAMSAR25</Name>
+        <Title>FLORAFAUNA1.RAMSAR25</Title>
+        <Abstract/>
+        <KeywordList>
+          <Keyword>FLORAFAUNA1.RAMSAR25</Keyword>
+          <Keyword>ArcSDE</Keyword>
+          <Keyword>ANZVI0803004218</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="141.93584942500001" miny="-38.9066084657444" maxx="148.1430744" maxy="-34.65742739078375"/>
+        <BoundingBox SRS="EPSG:4283" minx="141.93584942500001" miny="-38.9066084666667" maxx="148.1430744" maxy="-34.6574273916667"/>
+        <Style>
+          <Name>FF1_ramsar100_1</Name>
+          <Title/>
+          <Abstract/>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=FLORAFAUNA1.RAMSAR25"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.0" max="1.7976931348623157E308"/>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:FLORAFAUNA1.THFAU500</Name>
+        <Title>FLORAFAUNA1.THFAU500</Title>
+        <Abstract>layerconfig;&#13;
+none</Abstract>
+        <KeywordList/>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="139.509093375" miny="-39.75811731573893" maxx="150.501000125" maxy="-33.491262149131295"/>
+        <BoundingBox SRS="EPSG:4283" minx="139.509093375" miny="-39.7581173166667" maxx="150.501000125" maxy="-33.49126215"/>
+        <Style>
+          <Name>polygon</Name>
+          <Title>Default polygon style</Title>
+          <Abstract>A sample style that just draws out a solid gray interior with a black 1px outline</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=FLORAFAUNA1.THFAU500"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.0" max="300000.0"/>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:FLORAFAUNA1.THFLOR500</Name>
+        <Title>THFLOR500</Title>
+        <Abstract>layerconfig:&#13;
+none</Abstract>
+        <KeywordList/>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.84582590833298" miny="-39.15503379074272" maxx="149.978784858333" maxy="-34.0004120824582"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.84582590833298" miny="-39.155033791666696" maxx="149.978784858333" maxy="-34.000412083333295"/>
+        <Style>
+          <Name>polygon</Name>
+          <Title>Default polygon style</Title>
+          <Abstract>A sample style that just draws out a solid gray interior with a black 1px outline</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=FLORAFAUNA1.THFLOR500"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.0" max="300000.0"/>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:FLORAFAUNA1.VBIOREG100</Name>
+        <Title>VBIOREG100</Title>
+        <Abstract>layerconfig:&#13;
+&#13;
+ANZVI0803002636=sii:FLORAFAUNA1.VBIOREG100</Abstract>
+        <KeywordList>
+          <Keyword>ANZVI0803002636</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.962408733333" miny="-39.23596989907549" maxx="149.975009666667" maxy="-33.98138985745844"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.962408733333" miny="-39.2359699" maxx="149.975009666667" maxy="-33.9813898583333"/>
+        <Style>
+          <Name>FF1_vbioreg100_1</Name>
+          <Title/>
+          <Abstract/>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=FLORAFAUNA1.VBIOREG100"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.0" max="1.7976931348623157E308"/>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:FLORAFAUNA1.WETLANDDIR</Name>
+        <Title>WETLANDDIR</Title>
+        <Abstract>layerconfig:&#13;
+&#13;
+ANZVI0803002376=sii:FLORAFAUNA1.WETLANDDIR</Abstract>
+        <KeywordList>
+          <Keyword>ANZVI0803002376</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.96614990833302" miny="-38.906450115744406" maxx="149.883653725" maxy="-34.035626432457775"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.96614990833302" miny="-38.9064501166667" maxx="149.883653725" maxy="-34.0356264333333"/>
+        <Style>
+          <Name>FF1_wetlanddir_1</Name>
+          <Title/>
+          <Abstract/>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=FLORAFAUNA1.WETLANDDIR"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.0" max="1.7976931348623157E308"/>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:FLORAFAUNA1.WETLAND_1994</Name>
+        <Title>WETLAND_1994</Title>
+        <Abstract>layerconfig:&#13;
+&#13;
+ANZVI0803001066=sii:FLORAFAUNA1.WETLAND_1994</Abstract>
+        <KeywordList>
+          <Keyword>ANZVI0803001066</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.961138775" miny="-38.97953620741049" maxx="149.934321425" maxy="-34.0000484324582"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.961138775" miny="-38.97953620833329" maxx="149.934321425" maxy="-34.0000484333333"/>
+        <Style>
+          <Name>FF1_wetlands_1994_3</Name>
+          <Title>Default Styler</Title>
+          <Abstract>Wetlands from FloraFauna1</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=FLORAFAUNA1.WETLAND_1994"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.0" max="40000.0"/>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:FORESTS.TREE100</Name>
+        <Title>TREE100</Title>
+        <Abstract>layerconfig:&#13;
+&#13;
+ANZVI0803001075=sii:FORESTS.TREE100</Abstract>
+        <KeywordList>
+          <Keyword>ANZVI0803001075</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.96575829166702" miny="-39.13664408240944" maxx="149.970368633333" maxy="-33.99851956579162"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.965758291667" miny="-39.136644083333294" maxx="149.970368633333" maxy="-33.9985195666667"/>
+        <Style>
+          <Name>FOREST_tree100_8</Name>
+          <Title/>
+          <Abstract/>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=FORESTS.TREE100"/>
+          </LegendURL>
+        </Style>
+        <Style>
+          <Name>FOREST_tree100_7</Name>
+          <Title/>
+          <Abstract/>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=FORESTS.TREE100&amp;style=FOREST_tree100_7"/>
+          </LegendURL>
+        </Style>
+        <Style>
+          <Name>FOREST_tree100_5</Name>
+          <Title/>
+          <Abstract/>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=FORESTS.TREE100&amp;style=FOREST_tree100_5"/>
+          </LegendURL>
+        </Style>
+        <Style>
+          <Name>FOREST_tree100_4</Name>
+          <Title/>
+          <Abstract/>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=FORESTS.TREE100&amp;style=FOREST_tree100_4"/>
+          </LegendURL>
+        </Style>
+        <Style>
+          <Name>FOREST_tree100_8</Name>
+          <Title/>
+          <Abstract/>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=FORESTS.TREE100&amp;style=FOREST_tree100_8"/>
+          </LegendURL>
+        </Style>
+        <Style>
+          <Name>FOREST_tree100_6</Name>
+          <Title/>
+          <Abstract/>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=FORESTS.TREE100&amp;style=FOREST_tree100_6"/>
+          </LegendURL>
+        </Style>
+      </Layer>
+      <Layer queryable="0">
+        <Name>sii:WATER.WSPA</Name>
+        <Title>WSPA</Title>
+        <Abstract>layerconfig:&#13;
+&#13;
+ANZVI0803002924=sii:WATER.WSPA</Abstract>
+        <KeywordList>
+          <Keyword>ANZVI0803002924</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.96168519166702" miny="-38.72237675741229" maxx="147.650758191667" maxy="-33.98139193245842"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.96168519166702" miny="-38.7223767583333" maxx="147.650758191667" maxy="-33.98139193333329"/>
+        <Style>
+          <Name>WATER_wspa_1</Name>
+          <Title>WATER-WSPA</Title>
+          <Abstract>DPCD style from 20.7.2011
+Water Supply Protection Areas (WSPAs) 
+Groundwater and Licensing Branch and the River Health Branch DSE.
+</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=WATER.WSPA"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.0" max="1.7976931348623157E308"/>
+      </Layer>
+    </Layer>
+  </Capability>
+</WMT_MS_Capabilities>
