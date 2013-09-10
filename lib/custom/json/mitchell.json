@@ -117,6 +117,16 @@
             "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
         },
+        "depi_wms_elevation":{
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-elevation.xml",
+            "title": "DEPI - Elevation",
+            "ptype": "gxp_wmscsource",
+            "defaultType": "image/png8",
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true,
+            "tiled": true
+        },
         "depi_wms_misc":{
             "url": "/lib/custom/wms/depi-getcapabilities-mini-misc.xml",
             "title": "DEPI - Misc",
