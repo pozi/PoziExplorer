@@ -15,14 +15,15 @@ describe("URL property selection", function(){
     browser.quit();
   });
 
+
   it("should show the correct address", function(done){
     var detailsTab = '//div[@id="gtAccordion"]//div[@id="attributeAcc"]';
     var addressValueDiv = detailsTab + '//td/div[text()="Address"]/../../td[last()]/div';
 
     browser
       .get(process.env.POZIEXPLORER_TEST_SUBJECT + "?config=cardinia&property=3755100500")
-      .waitForElementByXPath(detailsTab, 30000)
-      .waitForElementByXPath(addressValueDiv, 30000)
+      .waitForElementByXPath(detailsTab, this.runnable().timeout())
+      .waitForElementByXPath(addressValueDiv, this.runnable().timeout())
       .elementByXPath(addressValueDiv, function(err, element) {
         expect(err).to.be.a('null');
         element.text(function(err, text) {
