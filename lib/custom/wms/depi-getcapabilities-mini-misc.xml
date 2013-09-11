@@ -163,7 +163,7 @@
         <LatLonBoundingBox minx="140.96221872" miny="-39.136580999076145" maxx="149.972339638" maxy="-33.981763098125136"/>
         <BoundingBox SRS="EPSG:4326" minx="140.96221872" miny="-39.136580999076145" maxx="149.972339638" maxy="-33.981763098125136"/>
       </Layer>
-      <Layer queryable="1">
+      <Layer queryable="0">
         <Name>sii:CORPORATE.IWSFOOTPRINTS</Name>
         <Title>Imagery Footprints</Title>
         <Abstract>Imagery Footprints&#13;
@@ -187,7 +187,7 @@ ANZVI0803003443=sii:CORPORATE.IWSFOOTPRINTS</Abstract>
         </Style>
         <ScaleHint min="10000.0" max="2000000.0"/>
       </Layer>
-      <Layer queryable="1">
+      <Layer queryable="0">
         <Name>sii:CULTURE.ACHP_SURVEYS</Name>
         <Title>ACHP Surveys</Title>
         <Abstract>Aboriginal surveys</Abstract>
@@ -210,7 +210,7 @@ ANZVI0803003443=sii:CORPORATE.IWSFOOTPRINTS</Abstract>
         </Style>
         <ScaleHint min="0.0" max="500000.0"/>
       </Layer>
-      <Layer queryable="1">
+      <Layer queryable="0">
         <Name>sii:CULTURE.SENSITIVITY_AB_Sites</Name>
         <Title>Cultural Sensitivity</Title>
         <Abstract>Aboriginal sites</Abstract>
@@ -233,7 +233,7 @@ ANZVI0803003443=sii:CORPORATE.IWSFOOTPRINTS</Abstract>
         </Style>
         <ScaleHint min="0.0" max="1000000.0"/>
       </Layer>
-      <Layer queryable="1">
+      <Layer queryable="0">
         <Name>sii:ESTA_MARKER_POINT</Name>
         <Title>ESTA Markers</Title>
         <Abstract>Esta Markers as provided from ESTA</Abstract>
@@ -255,7 +255,7 @@ ANZVI0803003443=sii:CORPORATE.IWSFOOTPRINTS</Abstract>
           </LegendURL>
         </Style>
       </Layer>
-      <Layer queryable="1">
+      <Layer queryable="0">
         <Name>sii:RAE_3988_GMW_RUR_HYDRANTS</Name>
         <Title>RAE_3988_GMW_RUR_HYDRANTS</Title>
         <Abstract/>
@@ -276,7 +276,7 @@ ANZVI0803003443=sii:CORPORATE.IWSFOOTPRINTS</Abstract>
           </LegendURL>
         </Style>
       </Layer>
-      <Layer queryable="1">
+      <Layer queryable="0">
         <Name>sii:RAE_4362_METRO_TRAIN_CARPR</Name>
         <Title>RAEDATA.RAE_4362_METRO_TRAIN_CARPR</Title>
         <Abstract/>
@@ -298,7 +298,7 @@ ANZVI0803003443=sii:CORPORATE.IWSFOOTPRINTS</Abstract>
           </LegendURL>
         </Style>
       </Layer>
-      <Layer queryable="1">
+      <Layer queryable="0">
         <Name>sii:RAE_4376_METRO_BIKE_STORE</Name>
         <Title>RAEDATA.RAE_4376_METRO_BIKE_STORE</Title>
         <Abstract/>
@@ -320,7 +320,7 @@ ANZVI0803003443=sii:CORPORATE.IWSFOOTPRINTS</Abstract>
           </LegendURL>
         </Style>
       </Layer>
-      <Layer queryable="1">
+      <Layer queryable="0">
         <Name>sii:SURVEY_MARKS_POINT</Name>
         <Title>Survey Marks</Title>
         <Abstract>layerconfig:&#13;

@@ -155,7 +155,7 @@
       <SRS>EPSG:28355</SRS>
       <SRS>EPSG:900913</SRS>
       <LatLonBoundingBox minx="113.15628800000002" miny="-43.86689143805745" maxx="154.308864108" maxy="-10.693111999655512"/>
-      <Layer queryable="1">
+      <Layer queryable="0">
         <Name>sii:CATCHMENTS.BIOLINK500</Name>
         <Title>BIOLINK500</Title>
         <Abstract>layerconfig:&#13;
