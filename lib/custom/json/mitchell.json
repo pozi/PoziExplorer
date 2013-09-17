@@ -109,14 +109,6 @@
             "tiled": false,
             "restUrl": "/geoserver/rest"
         },
-        "depi_wms_environment":{
-            "url": "/lib/custom/wms/depi-getcapabilities-mini-environment.xml",
-            "title": "DEPI - Environment",
-            "ptype": "gxp_wmscsource",
-            "transition": null,
-            "infoFormat": "application/json",
-            "useGetCapabilitiesURLs": true
-        },
         "depi_wms_elevation":{
             "url": "/lib/custom/wms/depi-getcapabilities-mini-elevation.xml",
             "title": "DEPI - Elevation",
@@ -127,9 +119,25 @@
             "useGetCapabilitiesURLs": true,
             "tiled": true
         },
+        "depi_wms_environment":{
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-environment.xml",
+            "title": "DEPI - Environment",
+            "ptype": "gxp_wmscsource",
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true
+        },
         "depi_wms_misc":{
             "url": "/lib/custom/wms/depi-getcapabilities-mini-misc.xml",
             "title": "DEPI - Misc",
+            "ptype": "gxp_wmscsource",
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true
+        },
+        "depi_wms_planning":{
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-planning.xml",
+            "title": "DEPI - Planning",
             "ptype": "gxp_wmscsource",
             "transition": null,
             "infoFormat": "application/json",
