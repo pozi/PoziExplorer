@@ -208,7 +208,7 @@
     "layers": [{
         "source": "local",
         "name": "vw_msc_plan_zone_local_laws_classification",
-        "title": "Local Laws Zones",
+        "title": "Local Laws Areas",
         "visibility": false,
         "opacity": 0.6,
         "format": "image/png8",
