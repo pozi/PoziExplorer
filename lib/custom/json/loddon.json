@@ -18,6 +18,11 @@
                 "collapsed": true
             },
             "default": "Overlays",
+            "aerial": {
+                "title": "Aerial Photos",
+                "collapsed": true,
+                "exclusive": true
+            },
             "background": {
                 "title": "Base Maps",
                 "exclusive": true
@@ -431,11 +436,12 @@
         "name": "AERIAL_LODDON_2009APR14_AIR_VIS_35CM_MGA54",
         "title": "Aerial Photo (CIP 2009)",
         "visibility": false,
-        "opacity": 1,
-        "group": "background",
+        "opacity": 0,
+        "group": "aerial",
         "selected": false,
         "format": "image/JPEG",
-        "transparent": true
+        "transparent": true,
+        "displayInOpacitySlider": true
     }, {
         "source": "ol",
         "group": "background",
