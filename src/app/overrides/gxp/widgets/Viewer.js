@@ -25,7 +25,20 @@ gxp.Viewer.prototype.addLayers = function() {
         // this is largely a workaround for an OpenLayers Google Layer issue
         // http://trac.openlayers.org/ticket/2661
         baseRecords.sort(function(a, b) {
-            return a.getLayer().visibility < b.getLayer().visibility;
+            // sort function is supposed to return -1, 0 or 1
+            // http://stackoverflow.com/questions/5428236/javascript-sort-not-working-with-ie9
+            if (typeof a.get === 'function')
+            {
+                if (a.get("group") > b.get("group"))
+                {
+                    return -1;
+                }
+                if (a.get("group") < b.get("group"))
+                {
+                    return 1;
+                }
+            }
+            return 0;
         });
         
         var panel = this.mapPanel;
