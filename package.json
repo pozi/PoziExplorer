@@ -2,9 +2,9 @@
   "name": "poziexplorer",
   "dependencies": {},
   "devDependencies": {
-    "wd": "~0.1.5",
-    "mocha": "~1.12.0",
-    "chai": "~1.7.2"
+    "wd": "0.1.5",
+    "mocha": "1.12.0",
+    "chai": "1.7.2"
   },
   "scripts": {
     "test": "bash ./test/bin/run_local.sh"
