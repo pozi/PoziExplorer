@@ -2,12 +2,12 @@
   "name": "poziexplorer",
   "dependencies": {},
   "devDependencies": {
-    "wd": "~0.1.0",
+    "wd": "~0.1.5",
     "mocha": "~1.12.0",
     "chai": "~1.7.2"
   },
   "scripts": {
-    "test": "./test/bin/run_local.sh"
+    "test": "bash ./test/bin/run_local.sh"
   },
   "repository": {
     "type": "git",
