@@ -45,10 +45,13 @@ gxp.Viewer.prototype.addLayers = function() {
         baseRecords.sort(function(a, b) {
             // sort function is supposed to return -1, 0 or 1
             // http://stackoverflow.com/questions/5428236/javascript-sort-not-working-with-ie9
-            var group_order = spaceship_operator(a.get("group"), b.get("group"));
+
+            // Reverse alphabetical order on group name (so that "background" is before = under "aerial")
+            var group_order = spaceship_operator(b.get("group"), a.get("group"));
             if (group_order !== 0) {
                 return group_order;
             } else {
+                // Within each of these groups, original order is maintained
                 return spaceship_operator(a.original_order, b.original_order);
             }
         });
