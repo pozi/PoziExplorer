@@ -330,18 +330,6 @@
     "bannerLineColor": "#B7BA97",
     "bannerRightCornerLine1": "West Wimmera Shire Council",
     "bannerRightCornerLine2": "Victoria, Australia",
-    "quickZoomDatastore": [
-        ["141.079", "-36.971", "141.090", "-36.965", "Apsley"],
-        ["141.416", "-37.282", "141.423", "-37.276", "Chetwynd"],
-        ["141.212", "-37.374", "141.218", "-37.367", "Dergholm"],
-        ["141.276", "-37.043", "141.306", "-37.019", "Edenhope"],
-        ["141.469", "-36.724", "141.479", "-36.715", "Goroke"],
-        ["141.588", "-37.170", "141.595", "-37.163", "Harrow"],
-        ["141.233", "-36.383", "141.251", "-36.370", "Kaniva"],
-        ["141.127", "-36.363", "141.129", "-36.362", "Lillimur"],
-        ["141.339", "-36.357", "141.348", "-36.353", "Miram"],
-        ["140.981", "-36.379", "140.993", "-36.372", "Serviceton"]
-    ],
     "printMapTitle": "West Wimmera Shire Council",
     "linkToCouncilWebsite": "http://www.westwimmera.vic.gov.au/"
 }

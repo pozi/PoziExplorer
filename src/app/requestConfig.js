@@ -66,7 +66,6 @@ requestConfig = function(options) {
                 bannerRightCornerLine2: "Victoria, Australia",
                 printMapTitle: "",
                 linkToCouncilWebsite: "http://www.mitchellshire.vic.gov.au/",
-                quickZoomDatastore: [],
                 collapseWestPanel: false,
                 hideNorthRegion: false,
                 hideSelectedFeaturePanel: false,
