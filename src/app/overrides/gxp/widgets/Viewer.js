@@ -21,26 +21,38 @@ gxp.Viewer.prototype.addLayers = function() {
             }
         }
         
+        // http://sabrelabs.com/post/48201437312/javascript-spaceship-operator
+        var spaceship_operator = function(a, b) {
+            if (typeof a === 'string') {
+                return (a).localeCompare(b);
+            } else {
+                if (a > b) {
+                    return 1;
+                } else if (a < b) {
+                    return -1;
+                }
+                return 0;
+            }
+        }
+
+        _(baseRecords).each(function(record, index) {
+            record.original_order = index;
+        });
+
         // sort background records so visible layers are first
         // this is largely a workaround for an OpenLayers Google Layer issue
         // http://trac.openlayers.org/ticket/2661
         baseRecords.sort(function(a, b) {
             // sort function is supposed to return -1, 0 or 1
             // http://stackoverflow.com/questions/5428236/javascript-sort-not-working-with-ie9
-            if (typeof a.get === 'function')
-            {
-                if (a.get("group") > b.get("group"))
-                {
-                    return -1;
-                }
-                if (a.get("group") < b.get("group"))
-                {
-                    return 1;
-                }
+            var group_order = spaceship_operator(a.get("group"), b.get("group"));
+            if (group_order !== 0) {
+                return group_order;
+            } else {
+                return spaceship_operator(a.original_order, b.original_order);
             }
-            return 0;
         });
-        
+
         var panel = this.mapPanel;
         var map = panel.map;
         
