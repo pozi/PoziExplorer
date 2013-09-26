@@ -54,7 +54,6 @@ describe("Layer presentation order", function(){
     browser
       .get(process.env.POZIEXPLORER_TEST_SUBJECT + "?config=mitchell")
       .waitForElementByXPath(emptyBasemapInLayerTree, timeout_for(this))
-      .waitForConditionInBrowser('try { typeof app.mapPanel.layers.data.items === \'object\' } catch(e) { false }')
       .safeEval('_(app.mapPanel.layers.data.items).map(function(i){ return i.data.group; })', function(err, result) {
         expect(err).to.be.a('null');
         var layersWithGroup = _(result).compact();
