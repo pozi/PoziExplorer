@@ -13,9 +13,9 @@ gxp.Viewer.prototype.addLayers = function() {
                 if (record) {
                     /* This is where the magic happens: background and aerial groups layers are added as basemap */
                     if (record.get("group") === "background" || record.get("group") === "aerial") {
-                        baseRecords.push(record);
+                        baseRecords.unshift(record);
                     } else {
-                        overlayRecords.push(record);
+                        overlayRecords.unshift(record);
                     }
                 }
             }
