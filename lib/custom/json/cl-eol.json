@@ -103,22 +103,86 @@
     },
     "layers": [
         {
+            "source": "google",
+            "name": "HYBRID",
+            "visibility": true
+        },
+        {
+            "source": "google",
+            "name": "ROADMAP",
+            "visibility": false
+        },
+        {
+            "source": "google",
+            "name": "SATELLITE",
+            "visibility": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:LabelClassic",
+            "title": "Labels",
+            "visibility": false,
+            "opacity": 1,
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "group": "top"
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmprop_parcel_mp_OPTI",
+            "title": "Parcels (Vicmap)",
+            "visibility": true,
+            "opacity": 0.5,
+            "queryable": false,
+            "format": "image/png8",
+            "styles": "creeklink_parcel",
+            "transparent": true,
+            "tiled": false,
+            "transition": ""
+        },
+        {
             "source": "local",
-            "name": "GROUP_BOUNDARY_EDIT",
-            "title": "Landcare Boundary (for edit)",
+            "name": "CREEK",
+            "title": "Named Waterways",
+            "visibility": true,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "transition": ""
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmhydro_hy_watercourse",
+            "title": "All Waterways",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "Classic_Watercourse_NoMaxScale",
+            "transparent": true,
+            "tiled": false,
+            "transition": ""
+        },
+        {
+            "source": "local",
+            "name": "CREEK_SEGMENT_FINAL_VISITED",
+            "title": "Creek Segments (visited)",
             "visibility": false,
             "opacity": 0.85,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
             "tiled": false,
-            "transition": "",
-            "group": "editing"
+            "transition": ""
         },
         {
             "source": "local",
-            "name": "GROUP_BOUNDARY",
-            "title": "Landcare Boundary",
+            "name": "CREEK_SEGMENT_FINAL",
+            "title": "Creek Segments",
             "visibility": true,
             "opacity": 0.85,
             "format": "image/png8",
@@ -142,8 +206,8 @@
         },
         {
             "source": "local",
-            "name": "CREEK_SEGMENT_FINAL",
-            "title": "Creek Segments",
+            "name": "GROUP_BOUNDARY",
+            "title": "Landcare Boundary",
             "visibility": true,
             "opacity": 0.85,
             "format": "image/png8",
@@ -154,80 +218,16 @@
         },
         {
             "source": "local",
-            "name": "CREEK_SEGMENT_FINAL_VISITED",
-            "title": "Creek Segments (visited)",
+            "name": "GROUP_BOUNDARY_EDIT",
+            "title": "Landcare Boundary (for edit)",
             "visibility": false,
             "opacity": 0.85,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
             "tiled": false,
-            "transition": ""
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:dse_vmhydro_hy_watercourse",
-            "title": "All Waterways",
-            "visibility": false,
-            "opacity": 0.85,
-            "format": "image/png8",
-            "styles": "Classic_Watercourse_NoMaxScale",
-            "transparent": true,
-            "tiled": false,
-            "transition": ""
-        },
-        {
-            "source": "local",
-            "name": "CREEK",
-            "title": "Named Waterways",
-            "visibility": true,
-            "opacity": 0.85,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false,
-            "transition": ""
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:dse_vmprop_parcel_mp_OPTI",
-            "title": "Parcels (Vicmap)",
-            "visibility": true,
-            "opacity": 0.5,
-            "queryable": false,
-            "format": "image/png8",
-            "styles": "creeklink_parcel",
-            "transparent": true,
-            "tiled": false,
-            "transition": ""
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:LabelClassic",
-            "title": "Labels",
-            "visibility": false,
-            "opacity": 1,
-            "selected": false,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false,
-            "group": "top"
-        },
-        {
-            "source": "google",
-            "name": "SATELLITE",
-            "visibility": false
-        },
-        {
-            "source": "google",
-            "name": "ROADMAP",
-            "visibility": false
-        },
-        {
-            "source": "google",
-            "name": "HYBRID",
-            "visibility": true
+            "transition": "",
+            "group": "editing"
         }
     ],
     "center": [

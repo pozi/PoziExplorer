@@ -159,55 +159,80 @@
     },
     "layers": [
         {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
-            "title": "Planning Zones",
+            "source": "ol",
+            "group": "background",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "None",
+                {
+                    "visibility": false
+                }
+            ]
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_LANDCOVER54_2010FEB23_AIR_VIS_50CM_MGA54",
+            "title": "Aerial Photo (02/2010)",
             "visibility": false,
-            "opacity": 0.5,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
+            "opacity": 1,
+            "group": "background",
+            "selected": false,
+            "format": "image/JPEG",
+            "transparent": true
+        },
+        {
+            "source": "mapquest",
+            "name": "osm",
+            "visibility": false,
+            "group": "background"
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
-            "title": "Planning Overlays",
-            "visibility": false,
-            "opacity": 0.5,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:dse_vmadmin_ward_2012",
-            "title": "Wards",
-            "visibility": false,
-            "opacity": 0.3,
-            "format": "image/png8",
-            "styles": "Corangamite_Wards_2012",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:gt_property_address",
-            "title": "Properties",
+            "name": "VICMAP_CLASSIC:VicmapClassic",
+            "title": "Pozi Vicmap",
             "visibility": true,
-            "opacity": 0.25,
-            "format": "image/GIF",
+            "opacity": 1,
+            "group": "background",
+            "selected": false,
+            "format": "image/png8",
             "styles": "",
             "transparent": true,
-            "tiled": false
+            "cached": true,
+            "transition": "resize"
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_gt_vmfeat_foi_transfer_station",
-            "title": "Transfer Stations",
+            "name": "VICMAP_CLASSIC:LabelClassic",
+            "title": "Labels",
+            "visibility": true,
+            "opacity": 1,
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "group": "top"
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_corangamite_mask",
+            "title": "Municipal Boundary",
+            "visibility": true,
+            "opacity": 0.6,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "transition": "resize",
+            "group": "top"
+        },
+        {
+            "source": "basemap",
+            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facility_sport",
+            "title": "Sport Facilities",
             "visibility": false,
-            "opacity": 0.85,
+            "opacity": 0.8,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
@@ -226,10 +251,10 @@
         },
         {
             "source": "basemap",
-            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facility_sport",
-            "title": "Sport Facilities",
+            "name": "VICMAP_CLASSIC:vw_gt_vmfeat_foi_transfer_station",
+            "title": "Transfer Stations",
             "visibility": false,
-            "opacity": 0.8,
+            "opacity": 0.85,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
@@ -237,72 +262,47 @@
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_corangamite_mask",
-            "title": "Municipal Boundary",
+            "name": "VICMAP_CLASSIC:gt_property_address",
+            "title": "Properties",
             "visibility": true,
-            "opacity": 0.6,
-            "format": "image/png8",
+            "opacity": 0.25,
+            "format": "image/GIF",
             "styles": "",
             "transparent": true,
-            "tiled": false,
-            "transition": "resize",
-            "group": "top"
+            "tiled": false
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:LabelClassic",
-            "title": "Labels",
-            "visibility": true,
-            "opacity": 1,
-            "selected": false,
+            "name": "VICMAP_CLASSIC:dse_vmadmin_ward_2012",
+            "title": "Wards",
+            "visibility": false,
+            "opacity": 0.3,
             "format": "image/png8",
-            "styles": "",
+            "styles": "Corangamite_Wards_2012",
             "transparent": true,
-            "tiled": false,
-            "group": "top"
+            "tiled": false
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:VicmapClassic",
-            "title": "Pozi Vicmap",
-            "visibility": true,
-            "opacity": 1,
-            "group": "background",
-            "selected": false,
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
+            "title": "Planning Overlays",
+            "visibility": false,
+            "opacity": 0.5,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
-            "cached": true,
-            "transition": "resize"
+            "tiled": false
         },
         {
-            "source": "mapquest",
-            "name": "osm",
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
+            "title": "Planning Zones",
             "visibility": false,
-            "group": "background"
-        },
-        {
-            "source": "local_cascaded_imagery",
-            "name": "AERIAL_LANDCOVER54_2010FEB23_AIR_VIS_50CM_MGA54",
-            "title": "Aerial Photo (02/2010)",
-            "visibility": false,
-            "opacity": 1,
-            "group": "background",
-            "selected": false,
-            "format": "image/JPEG",
-            "transparent": true
-        },
-        {
-            "source": "ol",
-            "group": "background",
-            "fixed": true,
-            "type": "OpenLayers.Layer",
-            "args": [
-                "None",
-                {
-                    "visibility": false
-                }
-            ]
+            "opacity": 0.5,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
         }
     ],
     "center": [

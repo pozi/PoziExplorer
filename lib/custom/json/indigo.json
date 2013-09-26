@@ -163,66 +163,67 @@
     },
     "layers": [
         {
-            "source": "local_cascaded_imagery",
-            "name": "TOWNS_RUTHERGLEN-WAHGUNYAH_2009OCT20_AIR_VIS_15CM_MGA55",
-            "title": "Aerial Photo (Rutherglen-Wahgunyah, Oct 2009)",
+            "source": "ol",
+            "group": "background",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "None",
+                {
+                    "visibility": false
+                }
+            ]
+        },
+        {
+            "source": "mapquest",
+            "name": "osm",
             "visibility": false,
-            "opacity": 1,
-            "format": "image/JPEG",
-            "tiled": true,
-            "cached": true,
-            "transparent": true,
-            "styles": "",
-            "group": "default"
+            "group": "background"
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
-            "title": "Planning Zones",
-            "visibility": false,
-            "opacity": 0.5,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
-            "title": "Planning Overlays",
-            "visibility": false,
-            "opacity": 0.5,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:dse_vmprop_parcel_mp",
-            "title": "Parcels",
-            "visibility": false,
-            "opacity": 0.75,
-            "format": "image/png8",
-            "styles": "parcel_label",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:gt_property_address",
-            "title": "Properties",
+            "name": "VICMAP_CLASSIC:VicmapClassic",
+            "title": "Pozi Vicmap",
             "visibility": true,
-            "opacity": 0.25,
-            "format": "image/GIF",
+            "opacity": 1,
+            "group": "background",
+            "selected": false,
+            "format": "image/png8",
             "styles": "",
             "transparent": true,
-            "tiled": false
+            "cached": true,
+            "transition": "resize"
         },
         {
-            "source": "local",
-            "name": "INDIGO:ISC_ASSETS_FOOTPATH",
-            "title": "Footpaths (Assets)",
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:LabelClassic",
+            "title": "Labels",
+            "visibility": true,
+            "opacity": 1,
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "group": "top"
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:VW_INDIGO_MASK",
+            "title": "Municipal Boundary",
+            "visibility": true,
+            "opacity": 0.6,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "transition": "resize",
+            "group": "top"
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_gt_vmfeat_foi_transfer_station",
+            "title": "Transfer Stations",
             "visibility": false,
             "opacity": 0.85,
             "format": "image/png8",
@@ -242,9 +243,9 @@
             "tiled": false
         },
         {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_gt_vmfeat_foi_transfer_station",
-            "title": "Transfer Stations",
+            "source": "local",
+            "name": "INDIGO:ISC_ASSETS_FOOTPATH",
+            "title": "Footpaths (Assets)",
             "visibility": false,
             "opacity": 0.85,
             "format": "image/png8",
@@ -254,61 +255,60 @@
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:VW_INDIGO_MASK",
-            "title": "Municipal Boundary",
+            "name": "VICMAP_CLASSIC:gt_property_address",
+            "title": "Properties",
             "visibility": true,
-            "opacity": 0.6,
-            "format": "image/png8",
+            "opacity": 0.25,
+            "format": "image/GIF",
             "styles": "",
             "transparent": true,
-            "tiled": false,
-            "transition": "resize",
-            "group": "top"
+            "tiled": false
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:LabelClassic",
-            "title": "Labels",
-            "visibility": true,
-            "opacity": 1,
-            "selected": false,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false,
-            "group": "top"
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:VicmapClassic",
-            "title": "Pozi Vicmap",
-            "visibility": true,
-            "opacity": 1,
-            "group": "background",
-            "selected": false,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "cached": true,
-            "transition": "resize"
-        },
-        {
-            "source": "mapquest",
-            "name": "osm",
+            "name": "VICMAP_CLASSIC:dse_vmprop_parcel_mp",
+            "title": "Parcels",
             "visibility": false,
-            "group": "background"
+            "opacity": 0.75,
+            "format": "image/png8",
+            "styles": "parcel_label",
+            "transparent": true,
+            "tiled": false
         },
         {
-            "source": "ol",
-            "group": "background",
-            "fixed": true,
-            "type": "OpenLayers.Layer",
-            "args": [
-                "None",
-                {
-                    "visibility": false
-                }
-            ]
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
+            "title": "Planning Overlays",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
+            "title": "Planning Zones",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "TOWNS_RUTHERGLEN-WAHGUNYAH_2009OCT20_AIR_VIS_15CM_MGA55",
+            "title": "Aerial Photo (Rutherglen-Wahgunyah, Oct 2009)",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/JPEG",
+            "tiled": true,
+            "cached": true,
+            "transparent": true,
+            "styles": "",
+            "group": "default"
         }
     ],
     "center": [

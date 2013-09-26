@@ -158,123 +158,72 @@
     },
     "layers": [
         {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
-            "title": "Planning Zones (Vicmap)",
-            "visibility": false,
-            "opacity": 0.6,
-            "format": "image/png8",
+            "source": "ol",
+            "group": "background",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "None",
+                {
+                    "visibility": false
+                }
+            ]
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_MALLEE_2009JAN14_AIR_VIS_50CM_MGA54",
+            "title": "Aerial Photo (Mallee CMA, Jan 2009)",
+            "opacity": 1,
+            "group": "background",
+            "format": "image/JPEG",
+            "tiled": true,
+            "cached": true,
+            "transparent": true,
             "styles": "",
-            "transparent": true,
-            "tiled": false
+            "visibility": false
         },
         {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
-            "title": "Planning Overlays (Vicmap)",
-            "visibility": false,
-            "opacity": 0.6,
-            "format": "image/png8",
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_WIMMERA-CMA_2004NOV01_AIR_VIS_60CM_MGA54",
+            "title": "Aerial Photo (Wimmera CMA, Nov 2004)",
+            "opacity": 1,
+            "group": "background",
+            "format": "image/JPEG",
+            "tiled": true,
+            "cached": true,
+            "transparent": true,
             "styles": "",
-            "transparent": true,
-            "tiled": false
+            "visibility": false
         },
         {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:dse_vmadmin_ward_2012",
-            "title": "Wards (2012)",
+            "source": "google",
+            "name": "SATELLITE",
+            "visibility": false
+        },
+        {
+            "source": "mapquest",
+            "name": "osm",
             "visibility": false,
-            "opacity": 0.3,
-            "format": "image/png8",
-            "styles": "Yarriambiack_Wards",
-            "transparent": true,
-            "tiled": false
+            "group": "background"
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:gt_property_address",
-            "title": "Properties (Vicmap)",
-            "visibility": true,
-            "opacity": 0.25,
-            "format": "image/GIF",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:dse_vmprop_parcel_mp",
-            "title": "Parcel (Vicmap)",
-            "visibility": false,
-            "opacity": 0.75,
-            "format": "image/png8",
-            "styles": "parcel_label",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_gt_vmfeat_foi_transfer_station",
-            "title": "Transfer Stations",
-            "visibility": false,
-            "opacity": 0.85,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_yarriambiack_mask",
-            "title": "Municipal Boundary",
-            "visibility": true,
-            "opacity": 0.6,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false,
-            "transition": "resize",
-            "group": "top"
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:LabelClassic",
-            "title": "Labels",
+            "name": "VICMAP_CLASSIC:VicmapClassic",
+            "title": "Pozi Vicmap",
             "visibility": true,
             "opacity": 1,
+            "group": "background",
             "selected": false,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
-            "tiled": false,
-            "group": "top"
+            "cached": true,
+            "transition": "resize"
         },
         {
             "source": "local",
-            "name": "YSC_COUNCILOFFICE",
-            "title": "Council Offices",
-            "visibility": false,
-            "opacity": 0.8,
-            "format": "image/GIF",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "local",
-            "name": "YSC_UG_DRAINAGE_PIPE",
-            "title": "Underground Drainage Pipes",
-            "visibility": false,
-            "opacity": 0.6,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "local",
-            "name": "YSC_PIT",
-            "title": "Pits",
+            "name": "YSC_URBAN_HYDRANT",
+            "title": "Urban Hydrants",
             "visibility": false,
             "opacity": 0.6,
             "format": "image/png8",
@@ -295,8 +244,111 @@
         },
         {
             "source": "local",
-            "name": "YSC_URBAN_HYDRANT",
-            "title": "Urban Hydrants",
+            "name": "YSC_PIT",
+            "title": "Pits",
+            "visibility": false,
+            "opacity": 0.6,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "YSC_UG_DRAINAGE_PIPE",
+            "title": "Underground Drainage Pipes",
+            "visibility": false,
+            "opacity": 0.6,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "YSC_COUNCILOFFICE",
+            "title": "Council Offices",
+            "visibility": false,
+            "opacity": 0.8,
+            "format": "image/GIF",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:LabelClassic",
+            "title": "Labels",
+            "visibility": true,
+            "opacity": 1,
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "group": "top"
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_yarriambiack_mask",
+            "title": "Municipal Boundary",
+            "visibility": true,
+            "opacity": 0.6,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "transition": "resize",
+            "group": "top"
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_gt_vmfeat_foi_transfer_station",
+            "title": "Transfer Stations",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmprop_parcel_mp",
+            "title": "Parcel (Vicmap)",
+            "visibility": false,
+            "opacity": 0.75,
+            "format": "image/png8",
+            "styles": "parcel_label",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:gt_property_address",
+            "title": "Properties (Vicmap)",
+            "visibility": true,
+            "opacity": 0.25,
+            "format": "image/GIF",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmadmin_ward_2012",
+            "title": "Wards (2012)",
+            "visibility": false,
+            "opacity": 0.3,
+            "format": "image/png8",
+            "styles": "Yarriambiack_Wards",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
+            "title": "Planning Overlays (Vicmap)",
             "visibility": false,
             "opacity": 0.6,
             "format": "image/png8",
@@ -306,66 +358,14 @@
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:VicmapClassic",
-            "title": "Pozi Vicmap",
-            "visibility": true,
-            "opacity": 1,
-            "group": "background",
-            "selected": false,
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
+            "title": "Planning Zones (Vicmap)",
+            "visibility": false,
+            "opacity": 0.6,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
-            "cached": true,
-            "transition": "resize"
-        },
-        {
-            "source": "mapquest",
-            "name": "osm",
-            "visibility": false,
-            "group": "background"
-        },
-        {
-            "source": "google",
-            "name": "SATELLITE",
-            "visibility": false
-        },
-        {
-            "source": "local_cascaded_imagery",
-            "name": "AERIAL_WIMMERA-CMA_2004NOV01_AIR_VIS_60CM_MGA54",
-            "title": "Aerial Photo (Wimmera CMA, Nov 2004)",
-            "opacity": 1,
-            "group": "background",
-            "format": "image/JPEG",
-            "tiled": true,
-            "cached": true,
-            "transparent": true,
-            "styles": "",
-            "visibility": false
-        },
-        {
-            "source": "local_cascaded_imagery",
-            "name": "AERIAL_MALLEE_2009JAN14_AIR_VIS_50CM_MGA54",
-            "title": "Aerial Photo (Mallee CMA, Jan 2009)",
-            "opacity": 1,
-            "group": "background",
-            "format": "image/JPEG",
-            "tiled": true,
-            "cached": true,
-            "transparent": true,
-            "styles": "",
-            "visibility": false
-        },
-        {
-            "source": "ol",
-            "group": "background",
-            "fixed": true,
-            "type": "OpenLayers.Layer",
-            "args": [
-                "None",
-                {
-                    "visibility": false
-                }
-            ]
+            "tiled": false
         }
     ],
     "center": [

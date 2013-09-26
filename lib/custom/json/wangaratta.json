@@ -159,11 +159,69 @@
     },
     "layers": [
         {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
-            "title": "Planning Zones",
+            "source": "ol",
+            "group": "background",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "None",
+                {
+                    "visibility": false
+                }
+            ]
+        },
+        {
+            "source": "mapquest",
+            "name": "osm",
             "visibility": false,
-            "opacity": 0.5,
+            "group": "background"
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:VicmapClassic",
+            "title": "Pozi Vicmap",
+            "visibility": true,
+            "opacity": 1,
+            "group": "background",
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "cached": true,
+            "transition": "resize"
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:LabelClassic",
+            "title": "Labels",
+            "visibility": true,
+            "opacity": 1,
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "group": "top"
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_wangaratta_mask",
+            "title": "Municipal Boundary",
+            "visibility": true,
+            "opacity": 0.6,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "transition": "resize",
+            "group": "top"
+        },
+        {
+            "source": "basemap",
+            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facility_sport",
+            "title": "Sport Facilities",
+            "visibility": false,
+            "opacity": 0.8,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
@@ -171,10 +229,10 @@
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
-            "title": "Planning Overlays",
+            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_resource_recreational",
+            "title": "Recreational Resources",
             "visibility": false,
-            "opacity": 0.5,
+            "opacity": 0.8,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
@@ -193,10 +251,10 @@
         },
         {
             "source": "basemap",
-            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_resource_recreational",
-            "title": "Recreational Resources",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
+            "title": "Planning Overlays",
             "visibility": false,
-            "opacity": 0.8,
+            "opacity": 0.5,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
@@ -204,72 +262,14 @@
         },
         {
             "source": "basemap",
-            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facility_sport",
-            "title": "Sport Facilities",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
+            "title": "Planning Zones",
             "visibility": false,
-            "opacity": 0.8,
+            "opacity": 0.5,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
             "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_wangaratta_mask",
-            "title": "Municipal Boundary",
-            "visibility": true,
-            "opacity": 0.6,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false,
-            "transition": "resize",
-            "group": "top"
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:LabelClassic",
-            "title": "Labels",
-            "visibility": true,
-            "opacity": 1,
-            "selected": false,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false,
-            "group": "top"
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:VicmapClassic",
-            "title": "Pozi Vicmap",
-            "visibility": true,
-            "opacity": 1,
-            "group": "background",
-            "selected": false,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "cached": true,
-            "transition": "resize"
-        },
-        {
-            "source": "mapquest",
-            "name": "osm",
-            "visibility": false,
-            "group": "background"
-        },
-        {
-            "source": "ol",
-            "group": "background",
-            "fixed": true,
-            "type": "OpenLayers.Layer",
-            "args": [
-                "None",
-                {
-                    "visibility": false
-                }
-            ]
         }
     ],
     "center": [

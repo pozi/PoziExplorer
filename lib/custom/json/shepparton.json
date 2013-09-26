@@ -164,152 +164,93 @@
     },
     "layers": [
         {
+            "source": "ol",
+            "group": "background",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "None",
+                {
+                    "visibility": false
+                }
+            ]
+        },
+        {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
-            "title": "Planning Zones",
+            "name": "VICMAP_CLASSIC:VicmapClassic",
+            "title": "Pozi Vicmap",
             "visibility": false,
-            "opacity": 0.5,
+            "opacity": 1,
+            "group": "background",
+            "selected": false,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
-            "tiled": false
+            "cached": true,
+            "transition": "resize"
         },
         {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
-            "title": "Planning Overlays",
-            "visibility": false,
-            "opacity": 0.5,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:dse_vmprop_parcel_mp",
-            "title": "Parcels",
-            "visibility": false,
-            "opacity": 0.5,
-            "format": "image/GIF",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:gt_property_address",
-            "title": "Properties",
+            "source": "mapquest",
+            "name": "osm",
             "visibility": true,
-            "opacity": 0.25,
-            "format": "image/GIF",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
+            "group": "background"
         },
         {
-            "source": "local",
-            "name": "vw_gs_street_tree_precinct",
-            "title": "Street Trees Precincts",
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:LabelClassic",
+            "title": "Labels",
             "visibility": false,
             "opacity": 1,
+            "selected": false,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
-            "tiled": false
+            "tiled": false,
+            "group": "top"
         },
         {
-            "source": "local",
-            "name": "gs_waste_collection_zone",
-            "title": "Waste Collection Zones",
-            "visibility": false,
-            "opacity": 1,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
+            "source": "ol",
+            "group": "aerial",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "No Aerial",
+                {
+                    "visibility": true
+                }
+            ]
         },
         {
-            "source": "local",
-            "name": "gs_parking_zone",
-            "title": "Parking Zones",
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_MOIRA-SHEPPARTON_2009DEC14_AIR_VIS_30CM_MGA55",
+            "title": "Moira-Shepparton, Dec 2009",
             "visibility": false,
-            "opacity": 0.75,
-            "format": "image/png8",
-            "styles": "",
+            "opacity": 0,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group": "aerial",
+            "selected": false,
             "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "local",
-            "name": "gs_bus_route",
-            "title": "Bus Routes",
-            "visibility": false,
-            "opacity": 0.75,
-            "format": "image/png8",
             "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "local",
-            "name": "gs_bus_stop",
-            "title": "Bus Stops",
-            "visibility": false,
-            "opacity": 0.75,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
+            "displayInOpacitySlider": true
         },
         {
             "source": "basemap",
-            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_resource_recreational",
-            "title": "Recreational Resources",
-            "visibility": false,
-            "opacity": 0.8,
+            "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_shepparton_mask",
+            "title": "Greater Shepparton Boundary",
+            "visibility": true,
+            "opacity": 0.6,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
-            "tiled": false
+            "tiled": false,
+            "transition": "",
+            "group": "top"
         },
         {
             "source": "basemap",
-            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facility_sport",
-            "title": "Sport Facilities",
-            "visibility": false,
-            "opacity": 0.8,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_centre_cultural",
-            "title": "Cultural Centres",
-            "visibility": false,
-            "opacity": 0.85,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facility_admin",
-            "title": "Admin Facilities",
-            "visibility": false,
-            "opacity": 0.85,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_venue_community",
-            "title": "Community Venues",
+            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_centre_educational",
+            "title": "Schools",
             "visibility": false,
             "opacity": 0.85,
             "format": "image/png8",
@@ -330,8 +271,8 @@
         },
         {
             "source": "basemap",
-            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_centre_educational",
-            "title": "Schools",
+            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_venue_community",
+            "title": "Community Venues",
             "visibility": false,
             "opacity": 0.85,
             "format": "image/png8",
@@ -341,87 +282,146 @@
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_shepparton_mask",
-            "title": "Greater Shepparton Boundary",
-            "visibility": true,
-            "opacity": 0.6,
+            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facility_admin",
+            "title": "Admin Facilities",
+            "visibility": false,
+            "opacity": 0.85,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
-            "tiled": false,
-            "transition": "",
-            "group": "top"
-        },
-        {
-            "source": "local_cascaded_imagery",
-            "name": "AERIAL_MOIRA-SHEPPARTON_2009DEC14_AIR_VIS_30CM_MGA55",
-            "title": "Moira-Shepparton, Dec 2009",
-            "visibility": false,
-            "opacity": 0,
-            "format": "image/JPEG",
-            "tiled": true,
-            "group": "aerial",
-            "selected": false,
-            "transparent": true,
-            "styles": "",
-            "displayInOpacitySlider": true
-        },
-        {
-            "source": "ol",
-            "group": "aerial",
-            "fixed": true,
-            "type": "OpenLayers.Layer",
-            "args": [
-                "No Aerial",
-                {
-                    "visibility": true
-                }
-            ]
+            "tiled": false
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:LabelClassic",
-            "title": "Labels",
+            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_centre_cultural",
+            "title": "Cultural Centres",
             "visibility": false,
-            "opacity": 1,
-            "selected": false,
+            "opacity": 0.85,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
-            "tiled": false,
-            "group": "top"
-        },
-        {
-            "source": "mapquest",
-            "name": "osm",
-            "visibility": true,
-            "group": "background"
+            "tiled": false
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:VicmapClassic",
-            "title": "Pozi Vicmap",
+            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facility_sport",
+            "title": "Sport Facilities",
             "visibility": false,
-            "opacity": 1,
-            "group": "background",
-            "selected": false,
+            "opacity": 0.8,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
-            "cached": true,
-            "transition": "resize"
+            "tiled": false
         },
         {
-            "source": "ol",
-            "group": "background",
-            "fixed": true,
-            "type": "OpenLayers.Layer",
-            "args": [
-                "None",
-                {
-                    "visibility": false
-                }
-            ]
+            "source": "basemap",
+            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_resource_recreational",
+            "title": "Recreational Resources",
+            "visibility": false,
+            "opacity": 0.8,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "gs_bus_stop",
+            "title": "Bus Stops",
+            "visibility": false,
+            "opacity": 0.75,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "gs_bus_route",
+            "title": "Bus Routes",
+            "visibility": false,
+            "opacity": 0.75,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "gs_parking_zone",
+            "title": "Parking Zones",
+            "visibility": false,
+            "opacity": 0.75,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "gs_waste_collection_zone",
+            "title": "Waste Collection Zones",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "vw_gs_street_tree_precinct",
+            "title": "Street Trees Precincts",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:gt_property_address",
+            "title": "Properties",
+            "visibility": true,
+            "opacity": 0.25,
+            "format": "image/GIF",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmprop_parcel_mp",
+            "title": "Parcels",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/GIF",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
+            "title": "Planning Overlays",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
+            "title": "Planning Zones",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
         }
     ],
     "center": [

@@ -162,96 +162,22 @@
     },
     "layers": [
         {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
-            "title": "Planning Zones",
+            "source": "ol",
+            "group": "background",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "None",
+                {
+                    "visibility": false
+                }
+            ]
+        },
+        {
+            "source": "mapquest",
+            "name": "osm",
             "visibility": false,
-            "opacity": 0.5,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
-            "title": "Planning Overlays",
-            "visibility": false,
-            "opacity": 0.5,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:dse_vmadmin_ward_2012",
-            "title": "Wards",
-            "visibility": false,
-            "opacity": 0.3,
-            "format": "image/png8",
-            "styles": "Pyrenees_Wards",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:dse_vmprop_parcel_mp",
-            "title": "Parcels",
-            "visibility": false,
-            "opacity": 0.75,
-            "format": "image/png8",
-            "styles": "parcel_label",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:gt_property_address",
-            "title": "Properties",
-            "visibility": true,
-            "opacity": 0.25,
-            "format": "image/GIF",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_gt_vmfeat_foi_transfer_station",
-            "title": "Transfer Stations",
-            "visibility": false,
-            "opacity": 0.85,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_pyrenees_mask",
-            "title": "Municipal Boundary",
-            "visibility": true,
-            "opacity": 0.6,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false,
-            "transition": "resize",
-            "group": "top"
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:LabelClassic",
-            "title": "Labels",
-            "visibility": true,
-            "opacity": 1,
-            "selected": false,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false,
-            "group": "top"
+            "group": "background"
         },
         {
             "source": "basemap",
@@ -268,22 +194,96 @@
             "transition": "resize"
         },
         {
-            "source": "mapquest",
-            "name": "osm",
-            "visibility": false,
-            "group": "background"
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:LabelClassic",
+            "title": "Labels",
+            "visibility": true,
+            "opacity": 1,
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "group": "top"
         },
         {
-            "source": "ol",
-            "group": "background",
-            "fixed": true,
-            "type": "OpenLayers.Layer",
-            "args": [
-                "None",
-                {
-                    "visibility": false
-                }
-            ]
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_pyrenees_mask",
+            "title": "Municipal Boundary",
+            "visibility": true,
+            "opacity": 0.6,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "transition": "resize",
+            "group": "top"
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_gt_vmfeat_foi_transfer_station",
+            "title": "Transfer Stations",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:gt_property_address",
+            "title": "Properties",
+            "visibility": true,
+            "opacity": 0.25,
+            "format": "image/GIF",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmprop_parcel_mp",
+            "title": "Parcels",
+            "visibility": false,
+            "opacity": 0.75,
+            "format": "image/png8",
+            "styles": "parcel_label",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmadmin_ward_2012",
+            "title": "Wards",
+            "visibility": false,
+            "opacity": 0.3,
+            "format": "image/png8",
+            "styles": "Pyrenees_Wards",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
+            "title": "Planning Overlays",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
+            "title": "Planning Zones",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
         }
     ],
     "center": [

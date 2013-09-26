@@ -174,34 +174,121 @@
     "layers": [
         {
             "source": "ol",
-            "group": "aerial",
+            "group": "background",
             "fixed": true,
             "type": "OpenLayers.Layer",
             "args": [
-                "No Aerial",
+                "None",
                 {
-                    "visibility": true
+                    "visibility": false
                 }
             ]
         },
         {
-            "source": "local_cascaded_imagery",
-            "name": "AERIAL_WIMMERA-CMA_2004NOV01_AIR_VIS_60CM_MGA54",
-            "title": "Aerial Photo (WCMA, Nov 2004)",
+            "source": "mapquest",
+            "name": "osm",
             "visibility": false,
-            "opacity": 0,
-            "group": "aerial",
-            "selected": false,
-            "format": "image/JPEG",
-            "transparent": true,
-            "tiled": true,
-            "styles": "",
-            "displayInOpacitySlider": true
+            "group": "background"
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
-            "title": "Planning Zones",
+            "name": "VICMAP_CLASSIC:VicmapClassic",
+            "title": "Pozi Vicmap",
+            "visibility": true,
+            "opacity": 1,
+            "group": "background",
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "cached": true,
+            "transition": "resize"
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:LabelClassic",
+            "title": "Labels",
+            "visibility": true,
+            "opacity": 1,
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "group": "top"
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_west_wimmera_mask",
+            "title": "Municipal Boundary",
+            "visibility": true,
+            "opacity": 0.6,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "transition": "resize",
+            "group": "top"
+        },
+        {
+            "source": "local",
+            "name": "WWSC_TREE",
+            "title": "Street Trees (Data Capture)",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "WWSC_ROAD_SEGMENT",
+            "title": "Road Details",
+            "visibility": false,
+            "opacity": 0.8,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:gt_property_address",
+            "title": "Properties",
+            "visibility": true,
+            "opacity": 0.25,
+            "format": "image/GIF",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmprop_parcel_mp",
+            "title": "Parcels",
+            "visibility": false,
+            "opacity": 0.75,
+            "format": "image/png8",
+            "styles": "parcel_label",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "WWSC_MAINTENANCE_ZONE",
+            "title": "Maintenance Zones",
+            "visibility": false,
+            "opacity": 0.8,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "AAV_CULTURAL_SENSITIVITY",
+            "title": "Cultural Sensitivity",
             "visibility": false,
             "opacity": 0.5,
             "format": "image/png8",
@@ -221,9 +308,9 @@
             "tiled": false
         },
         {
-            "source": "local",
-            "name": "AAV_CULTURAL_SENSITIVITY",
-            "title": "Cultural Sensitivity",
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
+            "title": "Planning Zones",
             "visibility": false,
             "opacity": 0.5,
             "format": "image/png8",
@@ -232,115 +319,28 @@
             "tiled": false
         },
         {
-            "source": "local",
-            "name": "WWSC_MAINTENANCE_ZONE",
-            "title": "Maintenance Zones",
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_WIMMERA-CMA_2004NOV01_AIR_VIS_60CM_MGA54",
+            "title": "Aerial Photo (WCMA, Nov 2004)",
             "visibility": false,
-            "opacity": 0.8,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:dse_vmprop_parcel_mp",
-            "title": "Parcels",
-            "visibility": false,
-            "opacity": 0.75,
-            "format": "image/png8",
-            "styles": "parcel_label",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:gt_property_address",
-            "title": "Properties",
-            "visibility": true,
-            "opacity": 0.25,
-            "format": "image/GIF",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "local",
-            "name": "WWSC_ROAD_SEGMENT",
-            "title": "Road Details",
-            "visibility": false,
-            "opacity": 0.8,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "local",
-            "name": "WWSC_TREE",
-            "title": "Street Trees (Data Capture)",
-            "visibility": false,
-            "opacity": 1,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_west_wimmera_mask",
-            "title": "Municipal Boundary",
-            "visibility": true,
-            "opacity": 0.6,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false,
-            "transition": "resize",
-            "group": "top"
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:LabelClassic",
-            "title": "Labels",
-            "visibility": true,
-            "opacity": 1,
+            "opacity": 0,
+            "group": "aerial",
             "selected": false,
-            "format": "image/png8",
-            "styles": "",
+            "format": "image/JPEG",
             "transparent": true,
-            "tiled": false,
-            "group": "top"
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:VicmapClassic",
-            "title": "Pozi Vicmap",
-            "visibility": true,
-            "opacity": 1,
-            "group": "background",
-            "selected": false,
-            "format": "image/png8",
+            "tiled": true,
             "styles": "",
-            "transparent": true,
-            "cached": true,
-            "transition": "resize"
-        },
-        {
-            "source": "mapquest",
-            "name": "osm",
-            "visibility": false,
-            "group": "background"
+            "displayInOpacitySlider": true
         },
         {
             "source": "ol",
-            "group": "background",
+            "group": "aerial",
             "fixed": true,
             "type": "OpenLayers.Layer",
             "args": [
-                "None",
+                "No Aerial",
                 {
-                    "visibility": false
+                    "visibility": true
                 }
             ]
         }

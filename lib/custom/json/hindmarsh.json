@@ -162,108 +162,67 @@
     },
     "layers": [
         {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
-            "title": "Planning Zones",
+            "source": "ol",
+            "group": "background",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "None",
+                {
+                    "visibility": false
+                }
+            ]
+        },
+        {
+            "source": "mapquest",
+            "name": "osm",
             "visibility": false,
-            "opacity": 0.5,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
+            "group": "background"
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
-            "title": "Planning Overlays",
-            "visibility": false,
-            "opacity": 0.5,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:dse_vmadmin_ward_2012",
-            "title": "Wards",
-            "visibility": false,
-            "opacity": 0.3,
-            "format": "image/png8",
-            "styles": "Hindmarsh_Wards_2012",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:dse_vmprop_parcel_mp",
-            "title": "Parcels",
-            "visibility": false,
-            "opacity": 0.75,
-            "format": "image/png8",
-            "styles": "parcel_label",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:gt_property_address",
-            "title": "Properties",
+            "name": "VICMAP_CLASSIC:VicmapClassic",
+            "title": "Pozi Vicmap",
             "visibility": true,
-            "opacity": 0.25,
-            "format": "image/GIF",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_worship_place_of",
-            "title": "Places Of Worship",
-            "visibility": false,
-            "opacity": 0.85,
+            "opacity": 1,
+            "group": "background",
+            "selected": false,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
-            "tiled": false
+            "cached": true,
+            "transition": "resize"
         },
         {
             "source": "basemap",
-            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_venue_community",
-            "title": "Community Venues",
-            "visibility": false,
-            "opacity": 0.85,
+            "name": "VICMAP_CLASSIC:LabelClassic",
+            "title": "Labels",
+            "visibility": true,
+            "opacity": 1,
+            "selected": false,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
-            "tiled": false
+            "tiled": false,
+            "group": "top"
         },
         {
             "source": "basemap",
-            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_resource_recreational",
-            "title": "Recreational Resources",
-            "visibility": false,
-            "opacity": 0.85,
+            "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_hindmarsh_mask",
+            "title": "Municipal Boundary",
+            "visibility": true,
+            "opacity": 0.6,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
-            "tiled": false
+            "tiled": false,
+            "transition": "resize",
+            "group": "top"
         },
         {
             "source": "basemap",
-            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facility_sport",
-            "title": "Sport Facilities",
-            "visibility": false,
-            "opacity": 0.85,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facility_admin",
-            "title": "Admin Facilities",
+            "name": "VICMAP_CLASSIC:vw_gt_vmfeat_foi_transfer_station",
+            "title": "Transfer Stations",
             "visibility": false,
             "opacity": 0.85,
             "format": "image/png8",
@@ -284,8 +243,8 @@
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_gt_vmfeat_foi_transfer_station",
-            "title": "Transfer Stations",
+            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facility_admin",
+            "title": "Admin Facilities",
             "visibility": false,
             "opacity": 0.85,
             "format": "image/png8",
@@ -295,61 +254,102 @@
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_hindmarsh_mask",
-            "title": "Municipal Boundary",
-            "visibility": true,
-            "opacity": 0.6,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false,
-            "transition": "resize",
-            "group": "top"
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:LabelClassic",
-            "title": "Labels",
-            "visibility": true,
-            "opacity": 1,
-            "selected": false,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false,
-            "group": "top"
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:VicmapClassic",
-            "title": "Pozi Vicmap",
-            "visibility": true,
-            "opacity": 1,
-            "group": "background",
-            "selected": false,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "cached": true,
-            "transition": "resize"
-        },
-        {
-            "source": "mapquest",
-            "name": "osm",
+            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facility_sport",
+            "title": "Sport Facilities",
             "visibility": false,
-            "group": "background"
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
         },
         {
-            "source": "ol",
-            "group": "background",
-            "fixed": true,
-            "type": "OpenLayers.Layer",
-            "args": [
-                "None",
-                {
-                    "visibility": false
-                }
-            ]
+            "source": "basemap",
+            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_resource_recreational",
+            "title": "Recreational Resources",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_venue_community",
+            "title": "Community Venues",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_worship_place_of",
+            "title": "Places Of Worship",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:gt_property_address",
+            "title": "Properties",
+            "visibility": true,
+            "opacity": 0.25,
+            "format": "image/GIF",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmprop_parcel_mp",
+            "title": "Parcels",
+            "visibility": false,
+            "opacity": 0.75,
+            "format": "image/png8",
+            "styles": "parcel_label",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmadmin_ward_2012",
+            "title": "Wards",
+            "visibility": false,
+            "opacity": 0.3,
+            "format": "image/png8",
+            "styles": "Hindmarsh_Wards_2012",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
+            "title": "Planning Overlays",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
+            "title": "Planning Zones",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
         }
     ],
     "center": [

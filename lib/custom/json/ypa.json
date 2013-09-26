@@ -124,23 +124,54 @@
     },
     "layers": [
         {
+            "source": "ol",
+            "group": "background",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "None",
+                {
+                    "visibility": false
+                }
+            ]
+        },
+        {
+            "source": "mapquest",
+            "name": "osm",
+            "visibility": true,
+            "group": "background"
+        },
+        {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
-            "title": "Planning Zones",
+            "name": "VICMAP_CLASSIC:LabelClassic",
+            "title": "Labels",
             "visibility": false,
-            "opacity": 0.5,
+            "opacity": 1,
+            "selected": false,
             "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "group": "top"
+        },
+        {
+            "source": "local",
+            "name": "LISTING",
+            "title": "Listings",
+            "visibility": true,
+            "opacity": 0.8,
+            "format": "image/GIF",
             "styles": "",
             "transparent": true,
             "tiled": false
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
-            "title": "Planning Overlays",
-            "visibility": false,
-            "opacity": 0.5,
-            "format": "image/png8",
+            "name": "VICMAP_CLASSIC:gt_property_address",
+            "title": "Property",
+            "visibility": true,
+            "opacity": 0.25,
+            "format": "image/GIF",
             "styles": "",
             "transparent": true,
             "tiled": false
@@ -158,56 +189,25 @@
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:gt_property_address",
-            "title": "Property",
-            "visibility": true,
-            "opacity": 0.25,
-            "format": "image/GIF",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "local",
-            "name": "LISTING",
-            "title": "Listings",
-            "visibility": true,
-            "opacity": 0.8,
-            "format": "image/GIF",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
+            "title": "Planning Overlays",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/png8",
             "styles": "",
             "transparent": true,
             "tiled": false
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:LabelClassic",
-            "title": "Labels",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
+            "title": "Planning Zones",
             "visibility": false,
-            "opacity": 1,
-            "selected": false,
+            "opacity": 0.5,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
-            "tiled": false,
-            "group": "top"
-        },
-        {
-            "source": "mapquest",
-            "name": "osm",
-            "visibility": true,
-            "group": "background"
-        },
-        {
-            "source": "ol",
-            "group": "background",
-            "fixed": true,
-            "type": "OpenLayers.Layer",
-            "args": [
-                "None",
-                {
-                    "visibility": false
-                }
-            ]
+            "tiled": false
         }
     ],
     "center": [
