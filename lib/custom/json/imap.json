@@ -1,77 +1,87 @@
 {
     "servicesHost": "http://basemap.pozi.com",
-    "searchEndPoints":{
-        "basemap" : {
-            "list":"http://basemap.pozi.com/ws/rest/v3/ws_search_api_wrapper.php",
-            "details":"http://basemap.pozi.com/api/v1/basemap/",
-            "root":"features",
-            "propertyMapPrefix":"properties"
+    "searchEndPoints": {
+        "basemap": {
+            "list": "http://basemap.pozi.com/ws/rest/v3/ws_search_api_wrapper.php",
+            "details": "http://basemap.pozi.com/api/v1/basemap/",
+            "root": "features",
+            "propertyMapPrefix": "properties"
         }
     },
     "LGACode": "341,343,358,363,376",
     "databaseConfig": "basemap",
-    "tools": [{
-        "ptype": "gxp_layermanager",
-        "groups": {
-            "top": {
-                "title": "Surface Layers",
-                "collapsed": true
+    "tools": [
+        {
+            "ptype": "gxp_layermanager",
+            "groups": {
+                "top": {
+                    "title": "Surface Layers",
+                    "collapsed": true
+                },
+                "depi": {
+                    "title": "DEPI Layers (Beta)",
+                    "collapsed": true
+                },
+                "default": "Overlays",
+                "background": {
+                    "title": "Base Maps",
+                    "exclusive": true
+                }
             },
-            "depi":{
-                "title":"DEPI Layers (Beta)",
-                "collapsed": true
-            },
-            "default": "Overlays",
-            "background": {
-                "title": "Base Maps",
-                "exclusive": true
-            }
-        },
-        "outputConfig": {
-            "id": "tree",
-            "border": false,
-            "tbar": [
+            "outputConfig": {
+                "id": "tree",
+                "border": false,
+                "tbar": [
 
-            ]
+                ]
+            },
+            "outputTarget": "westpanel"
         },
-        "outputTarget": "westpanel"
-    }, {
-        "ptype": "gxp_addlayers",
-        "actionTarget": "tree.tbar"
-    }, {
-        "ptype": "gxp_layerproperties",
-        "id": "layerproperties",
-        "actionTarget": "tree.contextMenu"
-    }, {
-        "ptype": "gxp_zoomtolayerextent",
-        "actionTarget": "tree.contextMenu"
-    }, {
-        "ptype": "gxp_styler",
-        "actionTarget": "tree.contextMenu"
-    }, {
-        "ptype": "gxp_removelayer",
-        "actionTarget": "tree.contextMenu"
-    }, {
-        "ptype": "gxp_wmsgetfeatureinfo",
-        "format": "grid",
-        "toggleGroup": "interaction",
-        "showButtonText": false
-    }, {
-        "ptype": "gxp_print",
-        "actionTarget": "toolPlaceHolder",
-        "customParams": {
-            "outputFilename": "PoziExplorer-print"
+        {
+            "ptype": "gxp_addlayers",
+            "actionTarget": "tree.tbar"
         },
-        "printService": "/geoserver/pdf",
-        "showButtonText": false
-    }, {
-        "ptype": "gxp_measure",
-        "toggleGroup": "interaction",
-        "controlOptions": {
-            "immediate": true
+        {
+            "ptype": "gxp_layerproperties",
+            "id": "layerproperties",
+            "actionTarget": "tree.contextMenu"
         },
-        "showButtonText": false
-    }],
+        {
+            "ptype": "gxp_zoomtolayerextent",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_styler",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_removelayer",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_wmsgetfeatureinfo",
+            "format": "grid",
+            "toggleGroup": "interaction",
+            "showButtonText": false
+        },
+        {
+            "ptype": "gxp_print",
+            "actionTarget": "toolPlaceHolder",
+            "customParams": {
+                "outputFilename": "PoziExplorer-print"
+            },
+            "printService": "/geoserver/pdf",
+            "showButtonText": false
+        },
+        {
+            "ptype": "gxp_measure",
+            "toggleGroup": "interaction",
+            "controlOptions": {
+                "immediate": true
+            },
+            "showButtonText": false
+        }
+    ],
     "sources": {
         "local": {
             "url": "/geoserver/IMAP/ows",
@@ -132,7 +142,7 @@
         "ol": {
             "ptype": "gxp_olsource"
         },
-        "depi_wms":{
+        "depi_wms": {
             "url": "/lib/custom/wms/depi-getcapabilities-mini.xml",
             "title": "DEPI WMS Layers",
             "ptype": "gxp_wmscsource",
@@ -141,199 +151,225 @@
             "useGetCapabilitiesURLs": true
         },
         "basemap": {
-            "url": ["http://basemap1.pozi.com/geoserver/ows", "http://basemap2.pozi.com/geoserver/ows", "http://basemap3.pozi.com/geoserver/ows", "http://basemap4.pozi.com/geoserver/ows"],
+            "url": [
+                "http://basemap1.pozi.com/geoserver/ows",
+                "http://basemap2.pozi.com/geoserver/ows",
+                "http://basemap3.pozi.com/geoserver/ows",
+                "http://basemap4.pozi.com/geoserver/ows"
+            ],
             "title": "Pozi Data Server",
             "ptype": "gxp_wmscsource",
             "transition": null
         }
     },
-    "layers": [{
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
-        "title": "Planning Zones",
-        "visibility": false,
-        "opacity": 0.5,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
-        "title": "Planning Overlays",
-        "visibility": false,
-        "opacity": 0.5,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:gt_property_address",
-        "title": "Properties",
-        "visibility": true,
-        "opacity": 0.25,
-        "format": "image/GIF",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "basemap",
-        "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_resource_recreational",
-        "title": "Recreational Resources",
-        "visibility": false,
-        "opacity": 0.8,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "basemap",
-        "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facility_sport",
-        "title": "Sport Facilities",
-        "visibility": false,
-        "opacity": 0.8,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source":"depi_wms",
-        "name": "sii:DPS_955_METRO_BUS_ROUTES",
-        "title": "Bus Routes (Metro)",
-        "visibility": false,
-        "opacity": 0.8,
-        "format": "image/png8",
-        "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-DPS_955_METRO_BUS_ROUTES.sld",
-        "transparent": true,
-        "tiled": false,
-        "queryable": true,
-        "transition": "",
-        "group": "depi"
-    }, {
-        "source":"depi_wms",
-        "name": "sii:DPS_969_TRAM_ROUTES_VMT",
-        "title": "Tram Routes",
-        "visibility": false,
-        "opacity": 0.8,
-        "format": "image/png8",
-        "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-DPS_969_TRAM_ROUTES_VMT.sld",
-        "transparent": true,
-        "tiled": false,
-        "queryable": true,
-        "transition": "",
-        "group": "depi"
-    }, {
-        "source":"depi_wms",
-        "name": "sii:DPS_1202_TRAIN_CORR_CENTL",
-        "title": "Train Corridors",
-        "visibility": false,
-        "opacity": 0.8,
-        "format": "image/png8",
-        "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-DPS_1202_TRAIN_CORR_CENTL.sld",
-        "transparent": true,
-        "tiled": false,
-        "queryable": true,
-        "transition": "",
-        "group": "depi"
-    }, {
-        "source":"depi_wms",
-        "name": "sii:DPS_932_RAIL_STATIONS_VMT",
-        "title": "Train Stations",
-        "visibility": false,
-        "opacity": 1,
-        "format": "image/png8",
-        "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-DPS_932_RAIL_STATIONS_VMT.sld",
-        "transparent": true,
-        "tiled": false,
-        "queryable": true,
-        "transition": "",
-        "group": "depi"
-    }, {
-        "source":"depi_wms",
-        "name": "sii:VMADMIN.LGA_POLYGON",
-        "title": "LGAs",
-        "visibility": true,
-        "opacity": 0.6,
-        "format": "image/png8",
-        "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-VMADMIN.LGA_POLYGON.sld",
-        "transparent": true,
-        "tiled": false,
-        "queryable": false,
-        "transition": "",
-        "group": "depi"
-    }, {
-        "source": "local",
-        "name": "IMAP_MASK",
-        "title": "IMAP Boundary",
-        "visibility": true,
-        "opacity": 0.6,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false,
-        "transition": "",
-        "group": "top"
-    }, {
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:LabelClassic",
-        "title": "Labels",
-        "visibility": false,
-        "opacity": 1,
-        "selected": false,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false,
-        "group": "top"
-    }, {
-        "source": "ol",
-        "group": "background",
-        "visibility": true,
-        "fixed": true,
-        "type": "OpenLayers.Layer.XYZ",
-        "args": [
-            "Nokia Maps",
-            [
-                "http://1.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ",
-                "http://2.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ",
-                "http://3.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ",
-                "http://4.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ"
-            ],
-            {
-                "attribution": "&copy; 2013 Nokia</span>&nbsp;<a href='http://maps.nokia.com/services/terms' target='_blank' title='Terms of Use' style='color:#333;text-decoration: underline;'>Terms of Use</a></div> <img src='http://api.maps.nokia.com/2.2.4/assets/ovi/mapsapi/by_here.png' border='0'>",
-                "transitionEffect": "resize"
-            }
-        ]
-    }, {
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:VicmapClassic",
-        "title": "Pozi Vicmap",
-        "visibility": false,
-        "opacity": 1,
-        "group": "background",
-        "selected": false,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "cached": true,
-        "transition": "resize"
-    }, {
-        "source": "google",
-        "name": "HYBRID",
-        "visibility": false
-    }, {
-        "source": "ol",
-        "group": "background",
-        "fixed": true,
-        "type": "OpenLayers.Layer",
-        "args": ["None",
+    "layers": [
         {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
+            "title": "Planning Zones",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
+            "title": "Planning Overlays",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:gt_property_address",
+            "title": "Properties",
+            "visibility": true,
+            "opacity": 0.25,
+            "format": "image/GIF",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_resource_recreational",
+            "title": "Recreational Resources",
+            "visibility": false,
+            "opacity": 0.8,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facility_sport",
+            "title": "Sport Facilities",
+            "visibility": false,
+            "opacity": 0.8,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "depi_wms",
+            "name": "sii:DPS_955_METRO_BUS_ROUTES",
+            "title": "Bus Routes (Metro)",
+            "visibility": false,
+            "opacity": 0.8,
+            "format": "image/png8",
+            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-DPS_955_METRO_BUS_ROUTES.sld",
+            "transparent": true,
+            "tiled": false,
+            "queryable": true,
+            "transition": "",
+            "group": "depi"
+        },
+        {
+            "source": "depi_wms",
+            "name": "sii:DPS_969_TRAM_ROUTES_VMT",
+            "title": "Tram Routes",
+            "visibility": false,
+            "opacity": 0.8,
+            "format": "image/png8",
+            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-DPS_969_TRAM_ROUTES_VMT.sld",
+            "transparent": true,
+            "tiled": false,
+            "queryable": true,
+            "transition": "",
+            "group": "depi"
+        },
+        {
+            "source": "depi_wms",
+            "name": "sii:DPS_1202_TRAIN_CORR_CENTL",
+            "title": "Train Corridors",
+            "visibility": false,
+            "opacity": 0.8,
+            "format": "image/png8",
+            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-DPS_1202_TRAIN_CORR_CENTL.sld",
+            "transparent": true,
+            "tiled": false,
+            "queryable": true,
+            "transition": "",
+            "group": "depi"
+        },
+        {
+            "source": "depi_wms",
+            "name": "sii:DPS_932_RAIL_STATIONS_VMT",
+            "title": "Train Stations",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/png8",
+            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-DPS_932_RAIL_STATIONS_VMT.sld",
+            "transparent": true,
+            "tiled": false,
+            "queryable": true,
+            "transition": "",
+            "group": "depi"
+        },
+        {
+            "source": "depi_wms",
+            "name": "sii:VMADMIN.LGA_POLYGON",
+            "title": "LGAs",
+            "visibility": true,
+            "opacity": 0.6,
+            "format": "image/png8",
+            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-VMADMIN.LGA_POLYGON.sld",
+            "transparent": true,
+            "tiled": false,
+            "queryable": false,
+            "transition": "",
+            "group": "depi"
+        },
+        {
+            "source": "local",
+            "name": "IMAP_MASK",
+            "title": "IMAP Boundary",
+            "visibility": true,
+            "opacity": 0.6,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "transition": "",
+            "group": "top"
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:LabelClassic",
+            "title": "Labels",
+            "visibility": false,
+            "opacity": 1,
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "group": "top"
+        },
+        {
+            "source": "ol",
+            "group": "background",
+            "visibility": true,
+            "fixed": true,
+            "type": "OpenLayers.Layer.XYZ",
+            "args": [
+                "Nokia Maps",
+                [
+                    "http://1.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ",
+                    "http://2.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ",
+                    "http://3.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ",
+                    "http://4.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ"
+                ],
+                {
+                    "attribution": "&copy; 2013 Nokia</span>&nbsp;<a href='http://maps.nokia.com/services/terms' target='_blank' title='Terms of Use' style='color:#333;text-decoration: underline;'>Terms of Use</a></div> <img src='http://api.maps.nokia.com/2.2.4/assets/ovi/mapsapi/by_here.png' border='0'>",
+                    "transitionEffect": "resize"
+                }
+            ]
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:VicmapClassic",
+            "title": "Pozi Vicmap",
+            "visibility": false,
+            "opacity": 1,
+            "group": "background",
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "cached": true,
+            "transition": "resize"
+        },
+        {
+            "source": "google",
+            "name": "HYBRID",
             "visibility": false
-        }]
-    }],
+        },
+        {
+            "source": "ol",
+            "group": "background",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "None",
+                {
+                    "visibility": false
+                }
+            ]
+        }
+    ],
     "center": [
-    16136560, -4554228],
+        16136560,
+        -4554228
+    ],
     "zoom": 12,
     "workspace": "IMAP",
     "highlightSymboliser": {
@@ -344,22 +380,26 @@
         "fillColor": "#007B82",
         "fillOpacity": 0.2
     },
-    "liveDataEndPoints": [{
-        "urlLayout": "http://192.168.0.1/ws/rest/v3/ws_get_layouts.php",
-        "urlLiveData": "http://192.168.0.1/ws/rest/v3/ws_get_live_data.php",
-        "storeMode": "sqlite",
-        "storeName": "imap"
-    }, {
-        "urlLayout": "http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php",
-        "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
-        "storeMode": "pgsql",
-        "storeName": "basemap"
-    }, {
-        "urlLayout": "/ws/rest/v3/ws_get_layouts.php",
-        "urlLiveData": "/ws/rest/v3/ws_get_live_data.php",
-        "storeMode": "pgsql",
-        "storeName": "imapgis"
-    }],
+    "liveDataEndPoints": [
+        {
+            "urlLayout": "http://192.168.0.1/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://192.168.0.1/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "sqlite",
+            "storeName": "imap"
+        },
+        {
+            "urlLayout": "http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "pgsql",
+            "storeName": "basemap"
+        },
+        {
+            "urlLayout": "/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "pgsql",
+            "storeName": "imapgis"
+        }
+    ],
     "logoClientSrc": "theme/app/img/custom/imap_logo.png",
     "logoClientURL": "http://imap.vic.gov.au/",
     "zoomMax": 18,

@@ -1,70 +1,81 @@
 {
     "servicesHost": "http://basemap.pozi.com",
-    "searchEndPoints":{
-        "basemap" : {
-            "list":"http://basemap.pozi.com/ws/rest/v3/ws_search_api_wrapper.php",
-            "details":"http://basemap.pozi.com/api/v1/basemap/",
-            "root":"features",
-            "propertyMapPrefix":"properties"
+    "searchEndPoints": {
+        "basemap": {
+            "list": "http://basemap.pozi.com/ws/rest/v3/ws_search_api_wrapper.php",
+            "details": "http://basemap.pozi.com/api/v1/basemap/",
+            "root": "features",
+            "propertyMapPrefix": "properties"
         }
     },
     "LGACode": "311",
     "databaseConfig": "basemap",
-    "tools": [{
-        "ptype": "gxp_layermanager",
-        "groups": {
-            "top": {
-                "title": "Surface Layers",
-                "collapsed": true
+    "tools": [
+        {
+            "ptype": "gxp_layermanager",
+            "groups": {
+                "top": {
+                    "title": "Surface Layers",
+                    "collapsed": true
+                },
+                "default": "Overlays",
+                "aerial": {
+                    "title": "Aerial Photos",
+                    "collapsed": true,
+                    "exclusive": true
+                },
+                "background": {
+                    "title": "Base Maps",
+                    "collapsed": false,
+                    "exclusive": true
+                }
             },
-            "default": "Overlays",
-            "aerial": {
-                "title": "Aerial Photos",
-                "collapsed": true,
-                "exclusive": true
+            "outputConfig": {
+                "id": "tree",
+                "border": false,
+                "tbar": [
+
+                ]
             },
-            "background": {
-                "title": "Base Maps",
-                "collapsed": false,
-                "exclusive": true
-            }
+            "outputTarget": "westpanel"
         },
-        "outputConfig": {
-            "id": "tree",
-            "border": false,
-            "tbar": []
+        {
+            "ptype": "gxp_addlayers",
+            "actionTarget": "tree.tbar"
         },
-        "outputTarget": "westpanel"
-    }, {
-        "ptype": "gxp_addlayers",
-        "actionTarget": "tree.tbar"
-    }, {
-        "ptype": "gxp_layerproperties",
-        "id": "layerproperties",
-        "actionTarget": "tree.contextMenu"
-    }, {
-        "ptype": "gxp_zoomtolayerextent",
-        "actionTarget": "tree.contextMenu"
-    }, {
-        "ptype": "gxp_styler",
-        "actionTarget": "tree.contextMenu"
-    }, {
-        "ptype": "gxp_removelayer",
-        "actionTarget": "tree.contextMenu"
-    }, {
-        "ptype": "gxp_wmsgetfeatureinfo",
-        "format": "grid",
-        "toggleGroup": "interaction",
-        "showButtonText": false
-    }, {
-        "ptype": "gxp_print",
-        "actionTarget": "toolPlaceHolder",
-        "customParams": {
-            "outputFilename": "PoziExplorer-print"
+        {
+            "ptype": "gxp_layerproperties",
+            "id": "layerproperties",
+            "actionTarget": "tree.contextMenu"
         },
-        "printService": "/geoserver/pdf",
-        "showButtonText": false
-    }],
+        {
+            "ptype": "gxp_zoomtolayerextent",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_styler",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_removelayer",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_wmsgetfeatureinfo",
+            "format": "grid",
+            "toggleGroup": "interaction",
+            "showButtonText": false
+        },
+        {
+            "ptype": "gxp_print",
+            "actionTarget": "toolPlaceHolder",
+            "customParams": {
+                "outputFilename": "PoziExplorer-print"
+            },
+            "printService": "/geoserver/pdf",
+            "showButtonText": false
+        }
+    ],
     "sources": {
         "local": {
             "url": "/geoserver/CARDINIA/ows",
@@ -109,7 +120,12 @@
             "tiled": false
         },
         "local_cascaded_imagery": {
-            "url": ["http://cardinia01.pozi.com/geoserver/CARDINIA/ows", "http://cardinia02.pozi.com/geoserver/CARDINIA/ows", "http://cardinia03.pozi.com/geoserver/CARDINIA/ows", "http://cardinia04.pozi.com/geoserver/CARDINIA/ows"],
+            "url": [
+                "http://cardinia01.pozi.com/geoserver/CARDINIA/ows",
+                "http://cardinia02.pozi.com/geoserver/CARDINIA/ows",
+                "http://cardinia03.pozi.com/geoserver/CARDINIA/ows",
+                "http://cardinia04.pozi.com/geoserver/CARDINIA/ows"
+            ],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
             "defaultType": "image/JPEG",
@@ -129,401 +145,457 @@
             "ptype": "gxp_olsource"
         },
         "basemap": {
-            "url": ["http://basemap1.pozi.com/geoserver/ows", "http://basemap2.pozi.com/geoserver/ows", "http://basemap3.pozi.com/geoserver/ows", "http://basemap4.pozi.com/geoserver/ows"],
+            "url": [
+                "http://basemap1.pozi.com/geoserver/ows",
+                "http://basemap2.pozi.com/geoserver/ows",
+                "http://basemap3.pozi.com/geoserver/ows",
+                "http://basemap4.pozi.com/geoserver/ows"
+            ],
             "title": "Pozi Data Server",
             "ptype": "gxp_wmscsource",
             "transition": null
         }
     },
     "layerPresentation": {
-        "CSC_RESERVES_FOR_HIRE": [{
-            "attr_name": "reserve_name"
-        }, {
-            "attr_name": "photo_url",
-            "alt_name": "Photo"
-        }, {
-            "attr_name": "address"
-        }, {
-            "attr_name": "facilities"
-        }],
-        "CSC_AREA_DOG_OF_LEASH": [{
-            "attr_name": "reserve_na"
-        }],
-        "VMFEAT_FOI_POINT_CENTRE_EDUCATIONAL": [{
-            "attr_name": "name_label"
-        }]
+        "CSC_RESERVES_FOR_HIRE": [
+            {
+                "attr_name": "reserve_name"
+            },
+            {
+                "attr_name": "photo_url",
+                "alt_name": "Photo"
+            },
+            {
+                "attr_name": "address"
+            },
+            {
+                "attr_name": "facilities"
+            }
+        ],
+        "CSC_AREA_DOG_OF_LEASH": [
+            {
+                "attr_name": "reserve_na"
+            }
+        ],
+        "VMFEAT_FOI_POINT_CENTRE_EDUCATIONAL": [
+            {
+                "attr_name": "name_label"
+            }
+        ]
     },
-    "layers": [{
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
-        "title": "Planning Zones",
-        "visibility": false,
-        "opacity": 0.5,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
-        "title": "Planning Overlays",
-        "visibility": false,
-        "opacity": 0.5,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:dse_vmadmin_ward_2012",
-        "title": "Wards",
-        "visibility": false,
-        "opacity": 0.30,
-        "format": "image/png8",
-        "styles": "Cardinia_Wards_2012",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "local",
-        "name": "CSC_COLLECTION_EWASTE",
-        "title": "eWaste Drop Off Points",
-        "visibility": false,
-        "opacity": 0.85,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-       "source": "local",
-        "name": "CSC_COLLECTION_WASTE_HARD",
-        "title": "Hard Waste Collection",
-        "visibility": false,
-        "opacity": 0.85,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "local",
-        "name": "CSC_COLLECTION_WASTE_GREEN",
-        "title": "Green Waste Collection",
-        "visibility": false,
-        "opacity": 0.85,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "local",
-        "name": "CSC_COLLECTION_RECYCLE",
-        "title": "Recycle Collection",
-        "visibility": false,
-        "opacity": 0.85,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "local",
-        "name": "CSC_COLLECTION_RUBBISH",
-        "title": "Rubbish Collection",
-        "visibility": false,
-        "opacity": 0.85,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "local",
-        "name": "CSC_AREA_FIRE_BAN",
-        "title": "Fire Ban Areas",
-        "visibility": false,
-        "opacity": 0.85,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "local",
-        "name": "CSC_VEGETATION_ZONE",
-        "title": "Vegetation Zones",
-        "visibility": false,
-        "opacity": 0.85,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:gt_property_address",
-        "title": "Properties",
-        "visibility": true,
-        "opacity": 0.25,
-        "format": "image/GIF",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "local",
-        "name": "CSC_AREA_DOG_OF_LEASH",
-        "title": "Dog Off Leash Areas",
-        "visibility": false,
-        "opacity": 0.85,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "basemap",
-        "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_venue_community",
-        "title": "Community Venues",
-        "visibility": false,
-        "opacity": 0.85,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "basemap",
-        "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_centre_cultural",
-        "title": "Cultural Centres",
-        "visibility": false,
-        "opacity": 0.85,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "basemap",
-        "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facility_admin",
-        "title": "Admin Facilities",
-        "visibility": false,
-        "opacity": 0.85,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "basemap",
-        "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facilty_care",
-        "title": "Care Facilities",
-        "visibility": false,
-        "opacity": 0.85,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "basemap",
-        "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_centre_educational",
-        "title": "Schools",
-        "visibility": false,
-        "opacity": 0.85,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "local",
-        "name": "CSC_RESERVES_FOR_HIRE",
-        "title": "Reserves For Hire",
-        "visibility": false,
-        "opacity": 0.85,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "local",
-        "name": "CSC_TRACK_BMX",
-        "title": "BMX Tracks",
-        "visibility": false,
-        "opacity": 0.85,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "local",
-        "name": "CSC_PLAYGROUND_SKATE",
-        "title": "Skate Parks",
-        "visibility": false,
-        "opacity": 0.85,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "ol",
-        "group": "aerial",
-        "fixed": true,
-        "type": "OpenLayers.Layer",
-        "args": ["No Aerial",
+    "layers": [
         {
-            "visibility": true
-        }]
-    }, {
-        "source": "local_cascaded_imagery",
-        "name": "AERIAL_PAKENHAM_2011DEC30_AIR_VIS_10CM_MGA55",
-        "title": "Aerial Photo (Pakenham, Dec 2011)",
-        "visibility": false,
-        "opacity": 1,
-        "format": "image/JPEG",
-        "tiled": true,
-        "group": "aerial",
-        "selected": false,
-        "transparent": true,
-        "styles": ""
-    }, {
-        "source": "local_cascaded_imagery",
-        "name": "AERIAL_PAKENHAM_2011AUG20_AIR_VIS_10CM_MGA55",
-        "title": "Aerial Photo (Pakenham, Aug 2011)",
-        "visibility": false,
-        "opacity": 1,
-        "format": "image/JPEG",
-        "tiled": true,
-        "group": "aerial",
-        "selected": false,
-        "transparent": true,
-        "styles": ""
-    }, {
-        "source": "local_cascaded_imagery",
-        "name": "AERIAL_PAKENHAM_2011APR08_AIR_VIS_10CM_MGA55",
-        "title": "Aerial Photo (Pakenham, Apr 2011)",
-        "visibility": false,
-        "opacity": 1,
-        "format": "image/JPEG",
-        "tiled": true,
-        "group": "aerial",
-        "selected": false,
-        "transparent": true,
-        "styles": ""
-    }, {
-        "source": "local_cascaded_imagery",
-        "name": "AERIAL_PAKENHAM_2010DEC30_AIR_VIS_10CM_MGA55",
-        "title": "Aerial Photo (Pakenham, Dec 2010)",
-        "visibility": false,
-        "opacity": 1,
-        "format": "image/JPEG",
-        "tiled": true,
-        "group": "aerial",
-        "selected": false,
-        "transparent": true,
-        "styles": ""
-    }, {
-        "source": "local_cascaded_imagery",
-        "name": "AERIAL_PORTPHILLIP_2010DEC28_AIR_VIS_35CM_MGA55",
-        "title": "Aerial Photo (Port Phillip, Dec 2010)",
-        "visibility": false,
-        "opacity": 1,
-        "format": "image/JPEG",
-        "tiled": true,
-        "group": "aerial",
-        "selected": false,
-        "transparent": true,
-        "styles": ""
-    }, {
-        "source": "local_cascaded_imagery",
-        "name": "AERIAL_CARDINIA_2006NOV18_AIR_VIS_35CM_MGA55",
-        "title": "Aerial Photo (Cardinia, Nov 2006)",
-        "visibility": false,
-        "opacity": 1,
-        "format": "image/JPEG",
-        "tiled": true,
-        "group": "aerial",
-        "selected": false,
-        "transparent": true,
-        "styles": ""
-    }, {
-        "source": "local_cascaded_imagery",
-        "name": "AERIAL_CARDINIA_2009NOV09_AIR_VIS_15CM_MGA55",
-        "title": "Aerial Photo (Cardinia, Nov 2009)",
-        "visibility": false,
-        "opacity": 1,
-        "group": "aerial",
-        "selected": false,
-        "format": "image/JPEG",
-        "transparent": true,
-        "styles": ""
-    }, {
-        "source": "local_cascaded_imagery",
-        "name": "AERIAL_PORTPHILLIP-OUTER_2011DEC30_AIR_CIR_35CM_MGA55",
-        "title": "Aerial Photo (Port Phillip Outer, Dec 2011, IR)",
-        "visibility": false,
-        "opacity": 1,
-        "format": "image/JPEG",
-        "tiled": true,
-        "group": "aerial",
-        "selected": false,
-        "transparent": true,
-        "styles": ""
-    }, {
-        "source": "local_cascaded_imagery",
-        "name": "AERIAL_PORTPHILLIP-OUTER_2011DEC30_AIR_VIS_35CM_MGA55",
-        "title": "Aerial Photo (Port Phillip Outer, Dec 2011)",
-        "visibility": false,
-        "opacity": 0,
-        "format": "image/JPEG",
-        "tiled": true,
-        "group": "aerial",
-        "selected": false,
-        "transparent": true,
-        "styles": "",
-        "displayInOpacitySlider": true
-    }, {
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_cardinia_mask",
-        "title": "Municipal Boundary",
-        "visibility": true,
-        "opacity": 0.6,
-        "format": "image/png8",
-        "styles": "white_polygon_311",
-        "transparent": true,
-        "tiled": false,
-        "transition": "resize",
-        "group": "top"
-    }, {
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:LabelClassic",
-        "title": "Labels",
-        "visibility": true,
-        "opacity": 1,
-        "selected": false,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false,
-        "group": "top"
-    }, {
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:VicmapClassic",
-        "title": "Pozi Vicmap",
-        "visibility": true,
-        "opacity": 1,
-        "group": "background",
-        "selected": false,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "cached": true,
-        "transition": "resize"
-    }, {
-        "source": "mapquest",
-        "name": "osm",
-        "visibility": false,
-        "group": "background"
-    }, {
-        "source": "ol",
-        "group": "background",
-        "fixed": true,
-        "type": "OpenLayers.Layer",
-        "args": ["None",
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
+            "title": "Planning Zones",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
         {
-            "visibility": false
-        }]
-    }],
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
+            "title": "Planning Overlays",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmadmin_ward_2012",
+            "title": "Wards",
+            "visibility": false,
+            "opacity": 0.3,
+            "format": "image/png8",
+            "styles": "Cardinia_Wards_2012",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "CSC_COLLECTION_EWASTE",
+            "title": "eWaste Drop Off Points",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "CSC_COLLECTION_WASTE_HARD",
+            "title": "Hard Waste Collection",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "CSC_COLLECTION_WASTE_GREEN",
+            "title": "Green Waste Collection",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "CSC_COLLECTION_RECYCLE",
+            "title": "Recycle Collection",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "CSC_COLLECTION_RUBBISH",
+            "title": "Rubbish Collection",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "CSC_AREA_FIRE_BAN",
+            "title": "Fire Ban Areas",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "CSC_VEGETATION_ZONE",
+            "title": "Vegetation Zones",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:gt_property_address",
+            "title": "Properties",
+            "visibility": true,
+            "opacity": 0.25,
+            "format": "image/GIF",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "CSC_AREA_DOG_OF_LEASH",
+            "title": "Dog Off Leash Areas",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_venue_community",
+            "title": "Community Venues",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_centre_cultural",
+            "title": "Cultural Centres",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facility_admin",
+            "title": "Admin Facilities",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facilty_care",
+            "title": "Care Facilities",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_centre_educational",
+            "title": "Schools",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "CSC_RESERVES_FOR_HIRE",
+            "title": "Reserves For Hire",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "CSC_TRACK_BMX",
+            "title": "BMX Tracks",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "CSC_PLAYGROUND_SKATE",
+            "title": "Skate Parks",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "ol",
+            "group": "aerial",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "No Aerial",
+                {
+                    "visibility": true
+                }
+            ]
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_PAKENHAM_2011DEC30_AIR_VIS_10CM_MGA55",
+            "title": "Aerial Photo (Pakenham, Dec 2011)",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group": "aerial",
+            "selected": false,
+            "transparent": true,
+            "styles": ""
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_PAKENHAM_2011AUG20_AIR_VIS_10CM_MGA55",
+            "title": "Aerial Photo (Pakenham, Aug 2011)",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group": "aerial",
+            "selected": false,
+            "transparent": true,
+            "styles": ""
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_PAKENHAM_2011APR08_AIR_VIS_10CM_MGA55",
+            "title": "Aerial Photo (Pakenham, Apr 2011)",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group": "aerial",
+            "selected": false,
+            "transparent": true,
+            "styles": ""
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_PAKENHAM_2010DEC30_AIR_VIS_10CM_MGA55",
+            "title": "Aerial Photo (Pakenham, Dec 2010)",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group": "aerial",
+            "selected": false,
+            "transparent": true,
+            "styles": ""
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_PORTPHILLIP_2010DEC28_AIR_VIS_35CM_MGA55",
+            "title": "Aerial Photo (Port Phillip, Dec 2010)",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group": "aerial",
+            "selected": false,
+            "transparent": true,
+            "styles": ""
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_CARDINIA_2006NOV18_AIR_VIS_35CM_MGA55",
+            "title": "Aerial Photo (Cardinia, Nov 2006)",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group": "aerial",
+            "selected": false,
+            "transparent": true,
+            "styles": ""
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_CARDINIA_2009NOV09_AIR_VIS_15CM_MGA55",
+            "title": "Aerial Photo (Cardinia, Nov 2009)",
+            "visibility": false,
+            "opacity": 1,
+            "group": "aerial",
+            "selected": false,
+            "format": "image/JPEG",
+            "transparent": true,
+            "styles": ""
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_PORTPHILLIP-OUTER_2011DEC30_AIR_CIR_35CM_MGA55",
+            "title": "Aerial Photo (Port Phillip Outer, Dec 2011, IR)",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group": "aerial",
+            "selected": false,
+            "transparent": true,
+            "styles": ""
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_PORTPHILLIP-OUTER_2011DEC30_AIR_VIS_35CM_MGA55",
+            "title": "Aerial Photo (Port Phillip Outer, Dec 2011)",
+            "visibility": false,
+            "opacity": 0,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group": "aerial",
+            "selected": false,
+            "transparent": true,
+            "styles": "",
+            "displayInOpacitySlider": true
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_cardinia_mask",
+            "title": "Municipal Boundary",
+            "visibility": true,
+            "opacity": 0.6,
+            "format": "image/png8",
+            "styles": "white_polygon_311",
+            "transparent": true,
+            "tiled": false,
+            "transition": "resize",
+            "group": "top"
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:LabelClassic",
+            "title": "Labels",
+            "visibility": true,
+            "opacity": 1,
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "group": "top"
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:VicmapClassic",
+            "title": "Pozi Vicmap",
+            "visibility": true,
+            "opacity": 1,
+            "group": "background",
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "cached": true,
+            "transition": "resize"
+        },
+        {
+            "source": "mapquest",
+            "name": "osm",
+            "visibility": false,
+            "group": "background"
+        },
+        {
+            "source": "ol",
+            "group": "background",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "None",
+                {
+                    "visibility": false
+                }
+            ]
+        }
+    ],
     "center": [
-    16205074, -4591164],
+        16205074,
+        -4591164
+    ],
     "zoom": 11,
     "workspace": "CARDINIA",
     "highlightSymboliser": {
@@ -534,22 +606,26 @@
         "fillColor": "#FFA500",
         "fillOpacity": 0.2
     },
-    "liveDataEndPoints": [{
-        "urlLayout": "http://192.168.0.1/ws/rest/v3/ws_get_layouts.php",
-        "urlLiveData": "http://192.168.0.1/ws/rest/v3/ws_get_live_data.php",
-        "storeMode": "sqlite",
-        "storeName": "cardinia"
-    }, {
-        "urlLayout": "http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php",
-        "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
-        "storeMode": "pgsql",
-        "storeName": "basemap"
-    }, {
-        "urlLayout": "/ws/rest/v3/ws_get_layouts.php",
-        "urlLiveData": "/ws/rest/v3/ws_get_live_data.php",
-        "storeMode": "pgsql",
-        "storeName": "cardiniagis"
-    }],
+    "liveDataEndPoints": [
+        {
+            "urlLayout": "http://192.168.0.1/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://192.168.0.1/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "sqlite",
+            "storeName": "cardinia"
+        },
+        {
+            "urlLayout": "http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "pgsql",
+            "storeName": "basemap"
+        },
+        {
+            "urlLayout": "/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "pgsql",
+            "storeName": "cardiniagis"
+        }
+    ],
     "logoClientSrc": "theme/app/img/custom/cardinia_logo.png",
     "logoClientURL": "http://www.cardinia.vic.gov.au/",
     "zoomMax": 18,

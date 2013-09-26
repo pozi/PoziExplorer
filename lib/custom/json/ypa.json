@@ -1,73 +1,83 @@
 {
     "servicesHost": "http://basemap.pozi.com",
-    "searchEndPoints":{
-        "basemap" : {
-            "list":"http://basemap.pozi.com/ws/rest/v3/ws_search_api_wrapper.php",
-            "details":"http://basemap.pozi.com/api/v1/basemap/",
-            "root":"features",
-            "propertyMapPrefix":"properties"
+    "searchEndPoints": {
+        "basemap": {
+            "list": "http://basemap.pozi.com/ws/rest/v3/ws_search_api_wrapper.php",
+            "details": "http://basemap.pozi.com/api/v1/basemap/",
+            "root": "features",
+            "propertyMapPrefix": "properties"
         }
     },
     "LGACode": "308",
     "databaseConfig": "basemap",
-    "tools": [{
-        "ptype": "gxp_layermanager",
-        "groups": {
-            "top": {
-                "title": "Surface Layers",
-                "collapsed": true
+    "tools": [
+        {
+            "ptype": "gxp_layermanager",
+            "groups": {
+                "top": {
+                    "title": "Surface Layers",
+                    "collapsed": true
+                },
+                "default": "Overlays",
+                "background": {
+                    "title": "Base Maps",
+                    "exclusive": true
+                }
             },
-            "default": "Overlays",
-            "background": {
-                "title": "Base Maps",
-                "exclusive": true
-            }
-        },
-        "outputConfig": {
-            "id": "tree",
-            "border": false,
-            "tbar": [
+            "outputConfig": {
+                "id": "tree",
+                "border": false,
+                "tbar": [
 
-            ]
+                ]
+            },
+            "outputTarget": "westpanel"
         },
-        "outputTarget": "westpanel"
-    }, {
-        "ptype": "gxp_addlayers",
-        "actionTarget": "tree.tbar"
-    }, {
-        "ptype": "gxp_layerproperties",
-        "id": "layerproperties",
-        "actionTarget": "tree.contextMenu"
-    }, {
-        "ptype": "gxp_zoomtolayerextent",
-        "actionTarget": "tree.contextMenu"
-    }, {
-        "ptype": "gxp_styler",
-        "actionTarget": "tree.contextMenu"
-    }, {
-        "ptype": "gxp_removelayer",
-        "actionTarget": "tree.contextMenu"
-    }, {
-        "ptype": "gxp_wmsgetfeatureinfo",
-        "format": "grid",
-        "toggleGroup": "interaction",
-        "showButtonText": false
-    }, {
-        "ptype": "gxp_print",
-        "actionTarget": "toolPlaceHolder",
-        "customParams": {
-            "outputFilename": "PoziExplorer-print"
+        {
+            "ptype": "gxp_addlayers",
+            "actionTarget": "tree.tbar"
         },
-        "printService": "/geoserver/pdf",
-        "showButtonText": false
-    }, {
-        "ptype": "gxp_measure",
-        "toggleGroup": "interaction",
-        "controlOptions": {
-            "immediate": true
+        {
+            "ptype": "gxp_layerproperties",
+            "id": "layerproperties",
+            "actionTarget": "tree.contextMenu"
         },
-        "showButtonText": false
-    }],
+        {
+            "ptype": "gxp_zoomtolayerextent",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_styler",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_removelayer",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_wmsgetfeatureinfo",
+            "format": "grid",
+            "toggleGroup": "interaction",
+            "showButtonText": false
+        },
+        {
+            "ptype": "gxp_print",
+            "actionTarget": "toolPlaceHolder",
+            "customParams": {
+                "outputFilename": "PoziExplorer-print"
+            },
+            "printService": "/geoserver/pdf",
+            "showButtonText": false
+        },
+        {
+            "ptype": "gxp_measure",
+            "toggleGroup": "interaction",
+            "controlOptions": {
+                "immediate": true
+            },
+            "showButtonText": false
+        }
+    ],
     "sources": {
         "local": {
             "url": "/geoserver/YPA/ows",
@@ -76,7 +86,12 @@
             "tiled": false
         },
         "local_cascaded_imagery": {
-            "url": ["http://ypa01.pozi.com/geoserver/YPA/ows", "http://ypa02.pozi.com/geoserver/YPA/ows", "http://ypa03.pozi.com/geoserver/YPA/ows", "http://ypa04.pozi.com/geoserver/YPA/ows"],
+            "url": [
+                "http://ypa01.pozi.com/geoserver/YPA/ows",
+                "http://ypa02.pozi.com/geoserver/YPA/ows",
+                "http://ypa03.pozi.com/geoserver/YPA/ows",
+                "http://ypa04.pozi.com/geoserver/YPA/ows"
+            ],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
             "format": "image/JPEG",
@@ -96,91 +111,109 @@
             "ptype": "gxp_olsource"
         },
         "basemap": {
-            "url": ["http://basemap1.pozi.com/geoserver/ows", "http://basemap2.pozi.com/geoserver/ows", "http://basemap3.pozi.com/geoserver/ows", "http://basemap4.pozi.com/geoserver/ows"],
+            "url": [
+                "http://basemap1.pozi.com/geoserver/ows",
+                "http://basemap2.pozi.com/geoserver/ows",
+                "http://basemap3.pozi.com/geoserver/ows",
+                "http://basemap4.pozi.com/geoserver/ows"
+            ],
             "title": "Pozi Data Server",
             "ptype": "gxp_wmscsource",
             "transition": null
         }
     },
-    "layers": [{
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
-        "title": "Planning Zones",
-        "visibility": false,
-        "opacity": 0.5,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
-        "title": "Planning Overlays",
-        "visibility": false,
-        "opacity": 0.5,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:dse_vmadmin_locality_polygon",
-        "title": "Locality",
-        "visibility": true,
-        "opacity": 0.25,
-        "format": "image/png8",
-        "styles": "locality",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:gt_property_address",
-        "title": "Property",
-        "visibility": true,
-        "opacity": 0.25,
-        "format": "image/GIF",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "local",
-        "name": "LISTING",
-        "title": "Listings",
-        "visibility": true,
-        "opacity": 0.8,
-        "format": "image/GIF",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:LabelClassic",
-        "title": "Labels",
-        "visibility": false,
-        "opacity": 1,
-        "selected": false,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false,
-        "group": "top"
-    }, {
-        "source": "mapquest",
-        "name": "osm",
-        "visibility": true,
-        "group": "background"
-    }, {
-        "source": "ol",
-        "group": "background",
-        "fixed": true,
-        "type": "OpenLayers.Layer",
-        "args": ["None",
+    "layers": [
         {
-            "visibility": false
-        }]
-    }],
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
+            "title": "Planning Zones",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
+            "title": "Planning Overlays",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmadmin_locality_polygon",
+            "title": "Locality",
+            "visibility": true,
+            "opacity": 0.25,
+            "format": "image/png8",
+            "styles": "locality",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:gt_property_address",
+            "title": "Property",
+            "visibility": true,
+            "opacity": 0.25,
+            "format": "image/GIF",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "LISTING",
+            "title": "Listings",
+            "visibility": true,
+            "opacity": 0.8,
+            "format": "image/GIF",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:LabelClassic",
+            "title": "Labels",
+            "visibility": false,
+            "opacity": 1,
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "group": "top"
+        },
+        {
+            "source": "mapquest",
+            "name": "osm",
+            "visibility": true,
+            "group": "background"
+        },
+        {
+            "source": "ol",
+            "group": "background",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "None",
+                {
+                    "visibility": false
+                }
+            ]
+        }
+    ],
     "center": [
-    16119430, -4543824],
+        16119430,
+        -4543824
+    ],
     "zoom": 11,
     "workspace": "BRIMBANK",
     "highlightSymboliser": {
@@ -191,17 +224,20 @@
         "fillColor": "#fbff0b",
         "fillOpacity": 0.3
     },
-    "liveDataEndPoints": [{
-        "urlLayout": "http://192.168.0.1/ws/rest/v3/ws_get_layouts.php",
-        "urlLiveData": "http://192.168.0.1/ws/rest/v3/ws_get_live_data.php",
-        "storeMode": "sqlite",
-        "storeName": "cardinia"
-    }, {
-        "urlLayout": "http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php",
-        "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
-        "storeMode": "pgsql",
-        "storeName": "basemap"
-    }],
+    "liveDataEndPoints": [
+        {
+            "urlLayout": "http://192.168.0.1/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://192.168.0.1/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "sqlite",
+            "storeName": "cardinia"
+        },
+        {
+            "urlLayout": "http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "pgsql",
+            "storeName": "basemap"
+        }
+    ],
     "logoClientSrc": "theme/app/img/custom/ypa_logo.jpg",
     "zoomMax": 18,
     "bannerLineColor": "#105c91",

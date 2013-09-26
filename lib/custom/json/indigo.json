@@ -1,73 +1,83 @@
 {
     "servicesHost": "http://basemap.pozi.com",
-    "searchEndPoints":{
-        "basemap" : {
-            "list":"http://basemap.pozi.com/ws/rest/v3/ws_search_api_wrapper.php",
-            "details":"http://basemap.pozi.com/api/v1/basemap/",
-            "root":"features",
-            "propertyMapPrefix":"properties"
+    "searchEndPoints": {
+        "basemap": {
+            "list": "http://basemap.pozi.com/ws/rest/v3/ws_search_api_wrapper.php",
+            "details": "http://basemap.pozi.com/api/v1/basemap/",
+            "root": "features",
+            "propertyMapPrefix": "properties"
         }
     },
     "LGACode": "334",
     "databaseConfig": "basemap",
-    "tools": [{
-        "ptype": "gxp_layermanager",
-        "groups": {
-            "top": {
-                "title": "Surface Layers",
-                "collapsed": true
+    "tools": [
+        {
+            "ptype": "gxp_layermanager",
+            "groups": {
+                "top": {
+                    "title": "Surface Layers",
+                    "collapsed": true
+                },
+                "default": "Overlays",
+                "background": {
+                    "title": "Base Maps",
+                    "exclusive": true
+                }
             },
-            "default": "Overlays",
-            "background": {
-                "title": "Base Maps",
-                "exclusive": true
-            }
-        },
-        "outputConfig": {
-            "id": "tree",
-            "border": false,
-            "tbar": [
+            "outputConfig": {
+                "id": "tree",
+                "border": false,
+                "tbar": [
 
-            ]
+                ]
+            },
+            "outputTarget": "westpanel"
         },
-        "outputTarget": "westpanel"
-    }, {
-        "ptype": "gxp_addlayers",
-        "actionTarget": "tree.tbar"
-    }, {
-        "ptype": "gxp_layerproperties",
-        "id": "layerproperties",
-        "actionTarget": "tree.contextMenu"
-    }, {
-        "ptype": "gxp_zoomtolayerextent",
-        "actionTarget": "tree.contextMenu"
-    }, {
-        "ptype": "gxp_styler",
-        "actionTarget": "tree.contextMenu"
-    }, {
-        "ptype": "gxp_removelayer",
-        "actionTarget": "tree.contextMenu"
-    }, {
-        "ptype": "gxp_wmsgetfeatureinfo",
-        "format": "grid",
-        "toggleGroup": "interaction",
-        "showButtonText": false
-    }, {
-        "ptype": "gxp_print",
-        "actionTarget": "toolPlaceHolder",
-        "customParams": {
-            "outputFilename": "PoziExplorer-print"
+        {
+            "ptype": "gxp_addlayers",
+            "actionTarget": "tree.tbar"
         },
-        "printService": "/geoserver/pdf",
-        "showButtonText": false
-    }, {
-        "ptype": "gxp_measure",
-        "toggleGroup": "interaction",
-        "controlOptions": {
-            "immediate": true
+        {
+            "ptype": "gxp_layerproperties",
+            "id": "layerproperties",
+            "actionTarget": "tree.contextMenu"
         },
-        "showButtonText": false
-    }],
+        {
+            "ptype": "gxp_zoomtolayerextent",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_styler",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_removelayer",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_wmsgetfeatureinfo",
+            "format": "grid",
+            "toggleGroup": "interaction",
+            "showButtonText": false
+        },
+        {
+            "ptype": "gxp_print",
+            "actionTarget": "toolPlaceHolder",
+            "customParams": {
+                "outputFilename": "PoziExplorer-print"
+            },
+            "printService": "/geoserver/pdf",
+            "showButtonText": false
+        },
+        {
+            "ptype": "gxp_measure",
+            "toggleGroup": "interaction",
+            "controlOptions": {
+                "immediate": true
+            },
+            "showButtonText": false
+        }
+    ],
     "sources": {
         "local": {
             "url": "/geoserver/INDIGO/ows",
@@ -112,7 +122,12 @@
             "tiled": false
         },
         "local_cascaded_imagery": {
-            "url": ["http://indigo01.pozi.com/geoserver/INDIGO/ows", "http://indigo02.pozi.com/geoserver/INDIGO/ows", "http://indigo03.pozi.com/geoserver/INDIGO/ows", "http://indigo04.pozi.com/geoserver/INDIGO/ows"],
+            "url": [
+                "http://indigo01.pozi.com/geoserver/INDIGO/ows",
+                "http://indigo02.pozi.com/geoserver/INDIGO/ows",
+                "http://indigo03.pozi.com/geoserver/INDIGO/ows",
+                "http://indigo04.pozi.com/geoserver/INDIGO/ows"
+            ],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
             "defaultType": "image/JPEG",
@@ -135,148 +150,171 @@
             "ptype": "gxp_olsource"
         },
         "basemap": {
-            "url": ["http://basemap1.pozi.com/geoserver/ows", "http://basemap2.pozi.com/geoserver/ows", "http://basemap3.pozi.com/geoserver/ows", "http://basemap4.pozi.com/geoserver/ows"],
+            "url": [
+                "http://basemap1.pozi.com/geoserver/ows",
+                "http://basemap2.pozi.com/geoserver/ows",
+                "http://basemap3.pozi.com/geoserver/ows",
+                "http://basemap4.pozi.com/geoserver/ows"
+            ],
             "title": "Pozi Data Server",
             "ptype": "gxp_wmscsource",
             "transition": null
         }
     },
-    "layers": [{
-        "source": "local_cascaded_imagery",
-        "name": "TOWNS_RUTHERGLEN-WAHGUNYAH_2009OCT20_AIR_VIS_15CM_MGA55",
-        "title": "Aerial Photo (Rutherglen-Wahgunyah, Oct 2009)",
-        "visibility": false,
-        "opacity": 1,
-        "format": "image/JPEG",
-        "tiled": true,
-        "cached": true,
-        "transparent": true,
-        "styles": "",
-        "group": "default"
-    }, {
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
-        "title": "Planning Zones",
-        "visibility": false,
-        "opacity": 0.5,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
-        "title": "Planning Overlays",
-        "visibility": false,
-        "opacity": 0.5,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:dse_vmprop_parcel_mp",
-        "title": "Parcels",
-        "visibility": false,
-        "opacity": 0.75,
-        "format": "image/png8",
-        "styles": "parcel_label",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:gt_property_address",
-        "title": "Properties",
-        "visibility": true,
-        "opacity": 0.25,
-        "format": "image/GIF",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "local",
-        "name": "INDIGO:ISC_ASSETS_FOOTPATH",
-        "title": "Footpaths (Assets)",
-        "visibility": false,
-        "opacity": 0.85,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "local",
-        "name": "INDIGO:ISC_ASSETS_BRIDGE",
-        "title": "Bridges (Assets)",
-        "visibility": false,
-        "opacity": 0.85,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:vw_gt_vmfeat_foi_transfer_station",
-        "title": "Transfer Stations",
-        "visibility": false,
-        "opacity": 0.85,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false
-    }, {
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:VW_INDIGO_MASK",
-        "title": "Municipal Boundary",
-        "visibility": true,
-        "opacity": 0.6,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false,
-        "transition": "resize",
-        "group": "top"
-    }, {
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:LabelClassic",
-        "title": "Labels",
-        "visibility": true,
-        "opacity": 1,
-        "selected": false,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "tiled": false,
-        "group": "top"
-    }, {
-        "source": "basemap",
-        "name": "VICMAP_CLASSIC:VicmapClassic",
-        "title": "Pozi Vicmap",
-        "visibility": true,
-        "opacity": 1,
-        "group": "background",
-        "selected": false,
-        "format": "image/png8",
-        "styles": "",
-        "transparent": true,
-        "cached": true,
-        "transition": "resize"
-    }, {
-        "source": "mapquest",
-        "name": "osm",
-        "visibility": false,
-        "group": "background"
-    }, {
-        "source": "ol",
-        "group": "background",
-        "fixed": true,
-        "type": "OpenLayers.Layer",
-        "args": ["None",
+    "layers": [
         {
-            "visibility": false
-        }]
-    }],
+            "source": "local_cascaded_imagery",
+            "name": "TOWNS_RUTHERGLEN-WAHGUNYAH_2009OCT20_AIR_VIS_15CM_MGA55",
+            "title": "Aerial Photo (Rutherglen-Wahgunyah, Oct 2009)",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/JPEG",
+            "tiled": true,
+            "cached": true,
+            "transparent": true,
+            "styles": "",
+            "group": "default"
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
+            "title": "Planning Zones",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
+            "title": "Planning Overlays",
+            "visibility": false,
+            "opacity": 0.5,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmprop_parcel_mp",
+            "title": "Parcels",
+            "visibility": false,
+            "opacity": 0.75,
+            "format": "image/png8",
+            "styles": "parcel_label",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:gt_property_address",
+            "title": "Properties",
+            "visibility": true,
+            "opacity": 0.25,
+            "format": "image/GIF",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "INDIGO:ISC_ASSETS_FOOTPATH",
+            "title": "Footpaths (Assets)",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "INDIGO:ISC_ASSETS_BRIDGE",
+            "title": "Bridges (Assets)",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_gt_vmfeat_foi_transfer_station",
+            "title": "Transfer Stations",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:VW_INDIGO_MASK",
+            "title": "Municipal Boundary",
+            "visibility": true,
+            "opacity": 0.6,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "transition": "resize",
+            "group": "top"
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:LabelClassic",
+            "title": "Labels",
+            "visibility": true,
+            "opacity": 1,
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "group": "top"
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:VicmapClassic",
+            "title": "Pozi Vicmap",
+            "visibility": true,
+            "opacity": 1,
+            "group": "background",
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "cached": true,
+            "transition": "resize"
+        },
+        {
+            "source": "mapquest",
+            "name": "osm",
+            "visibility": false,
+            "group": "background"
+        },
+        {
+            "source": "ol",
+            "group": "background",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "None",
+                {
+                    "visibility": false
+                }
+            ]
+        }
+    ],
     "center": [
-    16333119, -4331688],
+        16333119,
+        -4331688
+    ],
     "zoom": 10,
     "workspace": "INDIGO",
     "highlightSymboliser": {
@@ -287,22 +325,26 @@
         "fillColor": "#FFA500",
         "fillOpacity": 0.2
     },
-    "liveDataEndPoints": [{
-        "urlLayout": "http://192.168.10.12/ws/rest/v3/ws_get_layouts.php",
-        "urlLiveData": "http://192.168.10.12/ws/rest/v3/ws_get_live_data.php",
-        "storeMode": "sqlite",
-        "storeName": "indigo"
-    }, {
-        "urlLayout": "http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php",
-        "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
-        "storeMode": "pgsql",
-        "storeName": "basemap"
-    }, {
-        "urlLayout": "/ws/rest/v3/ws_get_layouts.php",
-        "urlLiveData": "/ws/rest/v3/ws_get_live_data.php",
-        "storeMode": "pgsql",
-        "storeName": "indigogis"
-    }],
+    "liveDataEndPoints": [
+        {
+            "urlLayout": "http://192.168.10.12/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://192.168.10.12/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "sqlite",
+            "storeName": "indigo"
+        },
+        {
+            "urlLayout": "http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "pgsql",
+            "storeName": "basemap"
+        },
+        {
+            "urlLayout": "/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "pgsql",
+            "storeName": "indigogis"
+        }
+    ],
     "logoClientSrc": "theme/app/img/custom/indigo_logo.png",
     "zoomMax": 18,
     "bannerLineColor": "#9A2843",
