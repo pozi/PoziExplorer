@@ -4,7 +4,8 @@
   "devDependencies": {
     "wd": "0.1.5",
     "mocha": "1.12.0",
-    "chai": "1.7.2"
+    "chai": "1.7.2",
+    "underscore": "1.5.2"
   },
   "scripts": {
     "test": "bash ./test/bin/run_local.sh"
