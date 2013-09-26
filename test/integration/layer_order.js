@@ -21,7 +21,7 @@ describe("Layer order", function(){
         var groups = _(result).compact();
         var startToLastBackground = _(groups).first(_(groups).lastIndexOf('background')+1);
         var groupsUnderABackgroundLayer = _(startToLastBackground).chain().without('background').uniq().value();
-        expect(groupsUnderABackgroundLayer).to.be.empty();
+        expect(groupsUnderABackgroundLayer).to.be.empty;
         done();
       });
     
