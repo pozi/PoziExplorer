@@ -7,5 +7,10 @@ result=$?
 
 source ./test/bin/stop.sh
 
+echo "==================== phantomjs.log ===================="
+cat phantomjs.log
+echo "==================== poziexplorer.log ===================="
+cat poziexplorer.log
+
 exit $result
 
