@@ -10,7 +10,7 @@ describe("Layer order", function(){
   beforeEach(function() { browser = wd.remote(process.env.POZIEXPLORER_TEST_WEBDRIVER).chain().init(); });
   afterEach(function() { browser.quit(); });
 
-  it("should put the background layers before layers of any other group", function(done){
+  it("should put the background layers under layers of any other group", function(done){
     var emptyBasemapInLayerTree = '//li[@class="x-tree-node"]/div/a/span[text()="None"]';
 
     browser
