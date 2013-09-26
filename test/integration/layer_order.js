@@ -10,7 +10,7 @@ describe("Layer order", function(){
   beforeEach(function() { browser = wd.remote(process.env.POZIEXPLORER_TEST_WEBDRIVER).chain().init(); });
   afterEach(function() { browser.quit(); });
 
-  it("should put the background layers under layers of any other group", function(done){
+  it("should not have layers of any other group under a background layer", function(done){
     var emptyBasemapInLayerTree = '//li[@class="x-tree-node"]/div/a/span[text()="None"]';
 
     browser
@@ -18,9 +18,10 @@ describe("Layer order", function(){
       .waitForElementByXPath(emptyBasemapInLayerTree, helpers.timeout_for(this))
       .safeEval('_(app.mapPanel.layers.data.items).map(function(i){ return i.data.group; })', function(err, result) {
         expect(err).to.be.a('null');
-        var layersWithGroup = _(result).compact();
-        var startToLastBackground = _(layersWithGroup).first(_(layersWithGroup).lastIndexOf('background')+1);
-        expect(_(startToLastBackground).uniq()).to.have.length(1);
+        var groups = _(result).compact();
+        var startToLastBackground = _(groups).first(_(groups).lastIndexOf('background')+1);
+        var groupsUnderABackgroundLayer = _(startToLastBackground).chain().without('background').uniq().value();
+        expect(groupsUnderABackgroundLayer).to.be.empty();
         done();
       });
     
