@@ -44,6 +44,11 @@
                     "collapsed": true,
                     "exclusive": false
                 },
+                "local_laws": {
+                    "title": "Local Laws",
+                    "collapsed": true,
+                    "exclusive": false
+                },
                 "environment": {
                     "title": "Environment",
                     "collapsed": true,
@@ -969,6 +974,86 @@
             "source": "local",
             "name": "msc_planning_prescribed_water_supply_catchments",
             "title": "Prescribed Water Catchments",
+            "visibility": false,
+            "format": "image/png8",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "group": "local_laws",
+            "source": "local",
+            "name": "vw_gt_property_animal",
+            "title": "Animal Registrations",
+            "visibility": false,
+            "format": "image/png8",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "group": "local_laws",
+            "source": "local",
+            "name": "vw_gt_property_building_permit",
+            "title": "Building Permits",
+            "visibility": false,
+            "format": "image/png8",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "group": "local_laws",
+            "source": "local",
+            "name": "vw_gt_property_food_premise",
+            "title": "Food Premises",
+            "visibility": false,
+            "format": "image/png8",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "group": "local_laws",
+            "source": "local",
+            "name": "vw_gt_property_local_laws_permit",
+            "title": "Local Laws Permits",
+            "visibility": false,
+            "format": "image/png8",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "group": "local_laws",
+            "source": "local",
+            "name": "vw_gt_property_occupancy_permit",
+            "title": "Occupancy Permits",
+            "visibility": false,
+            "format": "image/png8",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "group": "local_laws",
+            "source": "local",
+            "name": "vw_gt_property_plan_permit",
+            "title": "Planning Permits",
+            "visibility": false,
+            "format": "image/png8",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "group": "local_laws",
+            "source": "local",
+            "name": "vw_gt_property_registered_premise",
+            "title": "Registered Premises",
+            "visibility": false,
+            "format": "image/png8",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "group": "local_laws",
+            "source": "local",
+            "name": "vw_gt_property_septic_tank_permit",
+            "title": "Septic Tank Permits",
             "visibility": false,
             "format": "image/png8",
             "transparent": true,
