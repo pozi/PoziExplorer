@@ -1012,6 +1012,16 @@
         {
             "group": "local_laws",
             "source": "local",
+            "name": "MSC_CAPTURE",
+            "title": "Fire Inspection Hazards 2012",
+            "visibility": false,
+            "format": "image/png8",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "group": "local_laws",
+            "source": "local",
             "name": "vw_gt_property_local_laws_permit",
             "title": "Local Laws Permits",
             "visibility": false,
@@ -1128,6 +1138,17 @@
             "format": "image/png8",
             "transparent": true,
             "tiled": false
+        },
+        {
+            "group": "assets_and_engineering",
+            "source": "local",
+            "name": "msc_contour_1m",
+            "title": "Contours (1m)",
+            "visibility": false,
+            "format": "image/png8",
+            "transparent": true,
+            "tiled": false,
+            "minscale": 5000
         },
         {
             "group": "assets_and_engineering",
