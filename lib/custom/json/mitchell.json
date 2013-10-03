@@ -806,7 +806,8 @@
             "format": "image/png8",
             "transparent": true,
             "tiled": true,
-            "sld": "http://basemap.pozi.com/vic_styles/sld/sii-FLORAFAUNA1.NV2005_EVCBCS.sld"
+            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-FLORAFAUNA1.NV2005_EVCBCS.sld"
+
         },
         {
             "group": "environment",
@@ -897,7 +898,7 @@
             "format": "image/png8",
             "transparent": true,
             "tiled": false,
-            "sld": "http://basemap.pozi.com/vic_styles/sld/sii-CATCHMENTS.CMA100.sld"
+            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-CATCHMENTS.CMA100.sld"
         },
         {
             "group": "planning",
