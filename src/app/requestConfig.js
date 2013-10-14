@@ -76,7 +76,6 @@ requestConfig = function(options) {
                     name: "Property Map",
                     size: 120
                 }],
-                reloadOnLogin: false,
                 openFirstDefaultTab: false,
                 databaseConfig: "basemap", // Datastore definition for the web service search results
                 layerPresentation: {},
@@ -87,7 +86,6 @@ requestConfig = function(options) {
                 loadingText: "Loading ...",
                 detailsTitle: "Details",
                 emptyTextSelectFeature: "Selected feature ..."
-                
             };
 
             var loadedConf = Ext.util.JSON.decode(request.responseText);
