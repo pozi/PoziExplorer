@@ -22,6 +22,7 @@ requestConfig = function(options) {
         success: function(request) {
 
             var defaultConf = {
+                reloadOnLogin: true,
                 servicesHost: "http://basemap.pozi.com",
                 searchEndPoint: "/ws/rest/v3/ws_all_features_by_string_and_lga.php",
                 WFSEndPoint: "/geoserver/wfs",

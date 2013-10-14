@@ -548,6 +548,5 @@
     "printMapTitle": "Loddon Shire Council",
     "linkToCouncilWebsite": "http://www.loddon.vic.gov.au/",
     "collapseWestPanel": false,
-    "openFirstDefaultTab": true,
-    "reloadOnLogin": true
+    "openFirstDefaultTab": true
 }

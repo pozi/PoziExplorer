@@ -267,6 +267,5 @@
     "hideSelectedFeaturePanel": false,
     "printMapTitle": "Point Cook College",
     "linkToCouncilWebsite": "http://www.pcc.vic.edu.au/",
-    "collapseWestPanel": true,
-    "reloadOnLogin": true
+    "collapseWestPanel": true
 }
