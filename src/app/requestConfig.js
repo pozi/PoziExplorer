@@ -1,4 +1,4 @@
-requestConfig = function(options) {	
+requestConfig = function(options) {
 
     var configScript = Ext.urlDecode(location.search.substr(1))['config'];
     // Here are the optional arguments that can be extracted from the query string
@@ -96,7 +96,7 @@ requestConfig = function(options) {
             var layerPresentationDefaults = {
                 // This structure deals with fields to show, in which order and with which name
                 "gt_property_address": [
-                    { attr_name: "ezi_add", alt_name: "Address" },            
+                    { attr_name: "ezi_add", alt_name: "Address" },
                     { attr_name: "locality" },
                     { attr_name: "postcode" },
                     { attr_name: "pr_propnum", alt_name: "Property Number" }
