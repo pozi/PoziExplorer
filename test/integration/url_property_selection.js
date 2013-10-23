@@ -25,7 +25,7 @@ describe("URL property selection", function(){
           done();
         });
       });
-    
+
   });
 
 });

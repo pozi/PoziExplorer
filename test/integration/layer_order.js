@@ -24,7 +24,7 @@ describe("Layer order", function(){
         expect(groupsUnderABackgroundLayer).to.be.empty;
         done();
       });
-    
+
   });
 
 });
