@@ -3,6 +3,7 @@
 An app based on the [OpenGeo Suite SDK](http://opengeo.org/technology/sdk/).
 
 [![Build Status](https://travis-ci.org/groundtruth/PoziExplorer.png?branch=master)](https://travis-ci.org/groundtruth/PoziExplorer)
+[![Code Climate](https://codeclimate.com/github/groundtruth/PoziExplorer.png)](https://codeclimate.com/github/groundtruth/PoziExplorer)
 
 
 ## Getting it running
