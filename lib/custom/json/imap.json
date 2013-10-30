@@ -18,11 +18,15 @@
                     "title": "Surface Layers",
                     "collapsed": true
                 },
-                "depi": {
-                    "title": "DEPI Layers (Beta)",
+                "transport": {
+                    "title": "Transport",
                     "collapsed": true
                 },
-                "default": "Overlays",
+                "environmental": {
+                    "title": "Environmental",
+                    "collapsed": true
+                },
+                "default": "Property",
                 "background": {
                     "title": "Base Maps",
                     "exclusive": true
@@ -124,12 +128,6 @@
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
-        "basemap_wms_cascaded": {
-            "url": "http://basemap.pozi.com/geoserver/DEPI_CASCADED/ows",
-            "title": "DSE - WMS cascaded",
-            "ptype": "gxp_wmscsource",
-            "tiled": false
-        },
         "mapquest": {
             "ptype": "gxp_mapquestsource"
         },
@@ -145,6 +143,14 @@
         "depi_wms": {
             "url": "/lib/custom/wms/depi-getcapabilities-mini.xml",
             "title": "DEPI WMS Layers",
+            "ptype": "gxp_wmscsource",
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true
+        },
+        "depi_wms_planning": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-planning.xml",
+            "title": "DEPI - Planning",
             "ptype": "gxp_wmscsource",
             "transition": null,
             "infoFormat": "application/json",
@@ -252,7 +258,7 @@
             "tiled": false,
             "queryable": false,
             "transition": "",
-            "group": "depi"
+            "group": "top"
         },
         {
             "source": "depi_wms",
@@ -266,7 +272,7 @@
             "tiled": false,
             "queryable": true,
             "transition": "",
-            "group": "depi"
+            "group": "transport"
         },
         {
             "source": "depi_wms",
@@ -280,7 +286,7 @@
             "tiled": false,
             "queryable": true,
             "transition": "",
-            "group": "depi"
+            "group": "transport"
         },
         {
             "source": "depi_wms",
@@ -294,12 +300,12 @@
             "tiled": false,
             "queryable": true,
             "transition": "",
-            "group": "depi"
+            "group": "transport"
         },
         {
             "source": "depi_wms",
             "name": "sii:DPS_955_METRO_BUS_ROUTES",
-            "title": "Bus Routes (Metro)",
+            "title": "Bus Routes",
             "visibility": false,
             "opacity": 0.8,
             "format": "image/png8",
@@ -308,29 +314,7 @@
             "tiled": false,
             "queryable": true,
             "transition": "",
-            "group": "depi"
-        },
-        {
-            "source": "basemap",
-            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_facility_sport",
-            "title": "Sport Facilities",
-            "visibility": false,
-            "opacity": 0.8,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "DSE_FEATURES_OF_INTEREST:gt_vmfeat_foi_point_vw_resource_recreational",
-            "title": "Recreational Resources",
-            "visibility": false,
-            "opacity": 0.8,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
+            "group": "transport"
         },
         {
             "source": "basemap",
@@ -344,22 +328,68 @@
             "tiled": false
         },
         {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
+            "source": "depi_wms_planning",
+            "name": "sii:VMPLAN.PLAN_OVERLAY",
             "title": "Planning Overlays",
             "visibility": false,
-            "opacity": 0.5,
+            "opacity": 0.75,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-VMPLAN.PLAN_OVERLAY-DEPI.sld"
+        },
+        {
+            "source": "depi_wms_planning",
+            "name": "sii:VMPLAN.PLAN_ZONE",
+            "title": "Planning Zones",
+            "visibility": false,
+            "opacity": 0.75,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-VMPLAN.PLAN_ZONE-DEPI.sld"
+        },
+        {
+            "source": "local",
+            "name": "imap_open_space",
+            "title": "IMAP Openspace – Nov 2011",
+            "visibility": false,
+            "opacity": 0.75,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
             "tiled": false
         },
         {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
-            "title": "Planning Zones",
+            "source": "local",
+            "name": "land_council_owned",
+            "title": "IMAP Council Owned Properties - Nov 2011",
             "visibility": false,
-            "opacity": 0.5,
+            "opacity": 0.75,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "land_vicroads",
+            "title": "IMAP VicRoads Owned Properties – Nov 2011",
+            "visibility": false,
+            "opacity": 0.75,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "land_victrack",
+            "title": "IMAP Victrack Owned Properties – Nov 2011",
+            "visibility": false,
+            "opacity": 0.75,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
