@@ -158,10 +158,7 @@
       <Layer queryable="0">
         <Name>sii:VMPLAN.PLAN_OVERLAY</Name>
         <Title>Planning Overlays</Title>
-        <Abstract>Planning overlays&#13;
-&#13;
-layerconfig:&#13;
-ANZVI0803002910=sii:VMPLAN.PLAN_OVERLAY</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>ANZVI0803002910</Keyword>
         </KeywordList>
@@ -182,9 +179,7 @@ ANZVI0803002910=sii:VMPLAN.PLAN_OVERLAY</Abstract>
       <Layer queryable="0">
         <Name>sii:VMPLAN.PLAN_UGA</Name>
         <Title>Melbourne urban growth area</Title>
-        <Abstract>Melbourne urban growth area&#13;
-&#13;
-ANZVI0803002914=sii:VMPLAN.PLAN_UGA</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>ANZVI0803002914</Keyword>
         </KeywordList>
@@ -206,10 +201,7 @@ ANZVI0803002914=sii:VMPLAN.PLAN_UGA</Abstract>
       <Layer queryable="0">
         <Name>sii:VMPLAN.PLAN_UGB</Name>
         <Title>Urban Growth Boundary</Title>
-        <Abstract>Urban Growth Boundary&#13;
-&#13;
-layerconfig:&#13;
-ANZVI0803002912=sii:VMPLAN.PLAN_UGB</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>ANZVI0803002912</Keyword>
         </KeywordList>
@@ -249,10 +241,7 @@ ANZVI0803002912=sii:VMPLAN.PLAN_UGB</Abstract>
       <Layer queryable="0">
         <Name>sii:VMPLAN.PLAN_ZONE</Name>
         <Title>Planning Zones</Title>
-        <Abstract>Planning Zones&#13;
-&#13;
-layerconfig:&#13;
-ANZVI0803002909=sii:VMPLAN.PLAN_ZONE</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>ANZVI0803002909</Keyword>
         </KeywordList>

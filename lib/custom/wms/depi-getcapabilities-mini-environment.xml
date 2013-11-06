@@ -158,11 +158,7 @@
       <Layer queryable="0">
         <Name>sii:CATCHMENTS.BIOLINK500</Name>
         <Title>BIOLINK500</Title>
-        <Abstract>layerconfig:&#13;
-&#13;
-ANZVI0803003945=sii:BIOLINK500&#13;
-&#13;
-un-uncommented 1.2.2012 (nobody missed it so far)</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>ANZVI0803003945</Keyword>
         </KeywordList>
@@ -183,9 +179,7 @@ un-uncommented 1.2.2012 (nobody missed it so far)</Abstract>
       <Layer queryable="0">
         <Name>sii:CATCHMENTS.CMA100</Name>
         <Title>CATCHMENTS.CMA100</Title>
-        <Abstract>layerconfig:&#13;
-&#13;
-none ANZVI0803002317</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>ANZVI0803002317</Keyword>
         </KeywordList>
@@ -205,9 +199,7 @@ none ANZVI0803002317</Abstract>
       <Layer queryable="0">
         <Name>sii:CATCHMENTS.FLAGSHIP500</Name>
         <Title>FLAGSHIP500</Title>
-        <Abstract>layerconfig:&#13;
-&#13;
-ANZVI0803003944=sii:CATCHMENTS.FLAGSHIP500</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>ANZVI0803003944</Keyword>
         </KeywordList>
@@ -228,9 +220,7 @@ ANZVI0803003944=sii:CATCHMENTS.FLAGSHIP500</Abstract>
       <Layer queryable="0">
         <Name>sii:CATCHMENTS.VIF_BIODIVERSITY500</Name>
         <Title>VIF_BIODIVERSITY500</Title>
-        <Abstract>layerconfig:&#13;
-&#13;
-ANZVI0803003987=sii:CATCHMENTS.VIF_BIODIVERSITY500</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>ANZVI0803003987</Keyword>
         </KeywordList>
@@ -435,11 +425,7 @@ ANZVI0803003987=sii:CATCHMENTS.VIF_BIODIVERSITY500</Abstract>
       <Layer queryable="0">
         <Name>sii:FLORAFAUNA1.NV2005_EVCBCS</Name>
         <Title>NV2005_EVCBCS</Title>
-        <Abstract>layerconfig:&#13;
-&#13;
-none&#13;
-&#13;
-Native Vegetation - Modelled 2005 Ecological Vegetation Classes (with Bioregional Conservation Status)</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>ANZVI0803003495</Keyword>
         </KeywordList>
@@ -460,9 +446,7 @@ Native Vegetation - Modelled 2005 Ecological Vegetation Classes (with Bioregiona
       <Layer queryable="0">
         <Name>sii:FLORAFAUNA1.NV2005_EXTENT</Name>
         <Title>NV2005_EXTENT</Title>
-        <Abstract>layerconfig:&#13;
-&#13;
-ANZVI0803003404=sii:FLORAFAUNA1.NV2005_EXTENT</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>ANZVI0803003404</Keyword>
         </KeywordList>
@@ -483,9 +467,7 @@ ANZVI0803003404=sii:FLORAFAUNA1.NV2005_EXTENT</Abstract>
       <Layer queryable="0">
         <Name>sii:FLORAFAUNA1.RAMSAR100</Name>
         <Title>RAMSAR100</Title>
-        <Abstract>layerconfig:&#13;
-&#13;
-ANZVI0803001093=sii:FLORAFAUNA1.RAMSAR100</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>ANZVI0803001093</Keyword>
         </KeywordList>
@@ -529,8 +511,7 @@ ANZVI0803001093=sii:FLORAFAUNA1.RAMSAR100</Abstract>
       <Layer queryable="0">
         <Name>sii:FLORAFAUNA1.THFAU500</Name>
         <Title>FLORAFAUNA1.THFAU500</Title>
-        <Abstract>layerconfig;&#13;
-none</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList/>
         <SRS>EPSG:4283</SRS>
         <LatLonBoundingBox minx="139.509093375" miny="-39.75811731573893" maxx="150.501000125" maxy="-33.491262149131295"/>
@@ -549,8 +530,7 @@ none</Abstract>
       <Layer queryable="0">
         <Name>sii:FLORAFAUNA1.THFLOR500</Name>
         <Title>THFLOR500</Title>
-        <Abstract>layerconfig:&#13;
-none</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList/>
         <SRS>EPSG:4283</SRS>
         <LatLonBoundingBox minx="140.84582590833298" miny="-39.15503379074272" maxx="149.978784858333" maxy="-34.0004120824582"/>
@@ -569,9 +549,7 @@ none</Abstract>
       <Layer queryable="0">
         <Name>sii:FLORAFAUNA1.VBIOREG100</Name>
         <Title>VBIOREG100</Title>
-        <Abstract>layerconfig:&#13;
-&#13;
-ANZVI0803002636=sii:FLORAFAUNA1.VBIOREG100</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>ANZVI0803002636</Keyword>
         </KeywordList>
@@ -592,9 +570,7 @@ ANZVI0803002636=sii:FLORAFAUNA1.VBIOREG100</Abstract>
       <Layer queryable="0">
         <Name>sii:FLORAFAUNA1.WETLANDDIR</Name>
         <Title>WETLANDDIR</Title>
-        <Abstract>layerconfig:&#13;
-&#13;
-ANZVI0803002376=sii:FLORAFAUNA1.WETLANDDIR</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>ANZVI0803002376</Keyword>
         </KeywordList>
@@ -615,9 +591,7 @@ ANZVI0803002376=sii:FLORAFAUNA1.WETLANDDIR</Abstract>
       <Layer queryable="0">
         <Name>sii:FLORAFAUNA1.WETLAND_1994</Name>
         <Title>WETLAND_1994</Title>
-        <Abstract>layerconfig:&#13;
-&#13;
-ANZVI0803001066=sii:FLORAFAUNA1.WETLAND_1994</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>ANZVI0803001066</Keyword>
         </KeywordList>
@@ -638,9 +612,7 @@ ANZVI0803001066=sii:FLORAFAUNA1.WETLAND_1994</Abstract>
       <Layer queryable="0">
         <Name>sii:FORESTS.TREE100</Name>
         <Title>TREE100</Title>
-        <Abstract>layerconfig:&#13;
-&#13;
-ANZVI0803001075=sii:FORESTS.TREE100</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>ANZVI0803001075</Keyword>
         </KeywordList>
@@ -705,9 +677,7 @@ ANZVI0803001075=sii:FORESTS.TREE100</Abstract>
       <Layer queryable="0">
         <Name>sii:WATER.WSPA</Name>
         <Title>WSPA</Title>
-        <Abstract>layerconfig:&#13;
-&#13;
-ANZVI0803002924=sii:WATER.WSPA</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>ANZVI0803002924</Keyword>
         </KeywordList>

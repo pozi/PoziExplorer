@@ -158,10 +158,7 @@
       <Layer queryable="0">
         <Name>sii:VMELEV.EL_CONTOUR</Name>
         <Title>Contour lines</Title>
-        <Abstract>Vicmap Elevation Contour lines&#13;
-&#13;
-layerconfig:&#13;
-ANZVI0803002504=sii:VMELEV.EL_CONTOUR</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>ANZVI0803002504</Keyword>
         </KeywordList>
@@ -208,10 +205,7 @@ ANZVI0803002504=sii:VMELEV.EL_CONTOUR</Abstract>
       <Layer queryable="0">
         <Name>sii:VMELEV.EL_CONTOUR_1TO5M</Name>
         <Title>Contour lines (1 to 5m)</Title>
-        <Abstract>Vicmap Elevation Contour lines 1 metre to 5 metres&#13;
-&#13;
-layerconfig:&#13;
-ANZVI0803002813=sii:VMELEV.EL_CONTOUR_1TO5M</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>ANZVI0803002813</Keyword>
         </KeywordList>
@@ -232,9 +226,7 @@ ANZVI0803002813=sii:VMELEV.EL_CONTOUR_1TO5M</Abstract>
       <Layer queryable="0">
         <Name>sii:VMELEV.EL_GRND_SURFACE_POINT</Name>
         <Title>Ground Surface Points</Title>
-        <Abstract>layerconfig:&#13;
-&#13;
-ANZVI0803002502=sii:V_VMELEV.EL_GRND_SURFACE_POINT</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>ANZVI0803002502</Keyword>
         </KeywordList>

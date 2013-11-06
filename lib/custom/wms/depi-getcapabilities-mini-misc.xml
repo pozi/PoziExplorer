@@ -158,7 +158,7 @@
       <Layer queryable="0">
         <Name>sii:bushfire_prone_areas</Name>
         <Title>Bushfire Prone Areas</Title>
-        <Abstract>Layer-Group type layer: sii:bushfire_prone_areas</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <SRS>EPSG:4326</SRS>
         <LatLonBoundingBox minx="140.96221872" miny="-39.136580999076145" maxx="149.972339638" maxy="-33.981763098125136"/>
         <BoundingBox SRS="EPSG:4326" minx="140.96221872" miny="-39.136580999076145" maxx="149.972339638" maxy="-33.981763098125136"/>
@@ -166,10 +166,7 @@
       <Layer queryable="0">
         <Name>sii:CORPORATE.IWSFOOTPRINTS</Name>
         <Title>Imagery Footprints</Title>
-        <Abstract>Imagery Footprints&#13;
-&#13;
-layerconfig:&#13;
-ANZVI0803003443=sii:CORPORATE.IWSFOOTPRINTS</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>ANZVI0803003443</Keyword>
         </KeywordList>
@@ -190,7 +187,7 @@ ANZVI0803003443=sii:CORPORATE.IWSFOOTPRINTS</Abstract>
       <Layer queryable="0">
         <Name>sii:CULTURE.ACHP_SURVEYS</Name>
         <Title>ACHP Surveys</Title>
-        <Abstract>Aboriginal surveys</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>ArcSDE</Keyword>
           <Keyword>CULTURE.ACHP_SURVEYS</Keyword>
@@ -213,7 +210,7 @@ ANZVI0803003443=sii:CORPORATE.IWSFOOTPRINTS</Abstract>
       <Layer queryable="0">
         <Name>sii:CULTURE.SENSITIVITY_AB_Sites</Name>
         <Title>Cultural Sensitivity</Title>
-        <Abstract>Aboriginal sites</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>ArcSDE</Keyword>
           <Keyword>CULTURE.SENSITIVITY</Keyword>
@@ -236,7 +233,7 @@ ANZVI0803003443=sii:CORPORATE.IWSFOOTPRINTS</Abstract>
       <Layer queryable="0">
         <Name>sii:ESTA_MARKER_POINT</Name>
         <Title>ESTA Markers</Title>
-        <Abstract>Esta Markers as provided from ESTA</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>esta_marker_point</Keyword>
           <Keyword>features</Keyword>
@@ -323,9 +320,7 @@ ANZVI0803003443=sii:CORPORATE.IWSFOOTPRINTS</Abstract>
       <Layer queryable="0">
         <Name>sii:SURVEY_MARKS_POINT</Name>
         <Title>Survey Marks</Title>
-        <Abstract>layerconfig:&#13;
-&#13;
-ANZVI0803002594=sii:SURVEY_MARKS_POINT</Abstract>
+        <Abstract>DEPI WMS</Abstract>
         <KeywordList>
           <Keyword>ANZVI0803002594</Keyword>
         </KeywordList>
