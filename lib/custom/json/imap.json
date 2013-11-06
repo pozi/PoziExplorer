@@ -262,7 +262,7 @@
         },
         {
             "source": "depi_wms",
-            "name": "sii:DPS_932_RAIL_STATIONS_VMT",
+            "name": "sii:DPS_932_RAIL_STATIONS_VMT_SDO",
             "title": "Train Stations",
             "visibility": false,
             "opacity": 1,
@@ -276,7 +276,7 @@
         },
         {
             "source": "depi_wms",
-            "name": "sii:DPS_1202_TRAIN_CORR_CENTL",
+            "name": "sii:DPS_1202_TRAIN_CORR_CENTL_SDO",
             "title": "Train Corridors",
             "visibility": false,
             "opacity": 0.8,
@@ -290,7 +290,7 @@
         },
         {
             "source": "depi_wms",
-            "name": "sii:DPS_969_TRAM_ROUTES_VMT",
+            "name": "sii:DPS_969_TRAM_ROUTES_SDO",
             "title": "Tram Routes",
             "visibility": false,
             "opacity": 0.8,
@@ -304,7 +304,7 @@
         },
         {
             "source": "depi_wms",
-            "name": "sii:DPS_955_METRO_BUS_ROUTES",
+            "name": "sii:DPS_955_METRO_BUS_ROUTES_SDO",
             "title": "Bus Routes",
             "visibility": false,
             "opacity": 0.8,

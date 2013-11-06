@@ -564,7 +564,7 @@ Crownland.Parkres - 2nd set of rules show all above 2000 ha between 250K and 100
         <ScaleHint min="0.0" max="1000000.0"/>
       </Layer>
       <Layer queryable="1">
-        <Name>sii:DPS_1202_TRAIN_CORR_CENTL</Name>
+        <Name>sii:DPS_1202_TRAIN_CORR_CENTL_SDO</Name>
         <Title>RAEDATA.DPS_1202_TRAIN_CORR_CENTL</Title>
         <Abstract>DEPI WMS</Abstract>
         <KeywordList>
@@ -767,7 +767,7 @@ Crownland.Parkres - 2nd set of rules show all above 2000 ha between 250K and 100
         <ScaleHint min="400.0" max="Infinity"/>
       </Layer>
       <Layer queryable="1">
-        <Name>sii:DPS_932_RAIL_STATIONS_VMT</Name>
+        <Name>sii:DPS_932_RAIL_STATIONS_VMT_SDO</Name>
         <Title>RAEDATA.DPS_932_RAIL_STATIONS_VMT</Title>
         <Abstract>DEPI WMS</Abstract>
         <KeywordList>
@@ -820,7 +820,7 @@ Crownland.Parkres - 2nd set of rules show all above 2000 ha between 250K and 100
         </Style>
       </Layer>
       <Layer queryable="1">
-        <Name>sii:DPS_955_METRO_BUS_ROUTES</Name>
+        <Name>sii:DPS_955_METRO_BUS_ROUTES_SDO</Name>
         <Title>RAEDATA.DPS_955_METRO_BUS_ROUTES</Title>
         <Abstract>DEPI WMS</Abstract>
         <KeywordList>
@@ -851,7 +851,7 @@ Crownland.Parkres - 2nd set of rules show all above 2000 ha between 250K and 100
         </Style>
       </Layer>
       <Layer queryable="1">
-        <Name>sii:DPS_969_TRAM_ROUTES_VMT</Name>
+        <Name>sii:DPS_969_TRAM_ROUTES_SDO</Name>
         <Title>RAEDATA.DPS_969_TRAM_ROUTES_VMT</Title>
         <Abstract>DEPI WMS</Abstract>
         <KeywordList>
