@@ -354,7 +354,7 @@
         {
             "source": "local",
             "name": "imap_open_space",
-            "title": "IMAP Openspace – Nov 2011",
+            "title": "IMAP Openspace",
             "visibility": false,
             "opacity": 0.75,
             "format": "image/png8",
@@ -365,7 +365,7 @@
         {
             "source": "local",
             "name": "land_council_owned",
-            "title": "IMAP Council Owned Properties - Nov 2011",
+            "title": "IMAP Council Owned Properties",
             "visibility": false,
             "opacity": 0.75,
             "format": "image/png8",
@@ -376,7 +376,7 @@
         {
             "source": "local",
             "name": "land_vicroads",
-            "title": "IMAP VicRoads Owned Properties – Nov 2011",
+            "title": "IMAP VicRoads Owned Properties",
             "visibility": false,
             "opacity": 0.75,
             "format": "image/png8",
@@ -387,7 +387,7 @@
         {
             "source": "local",
             "name": "land_victrack",
-            "title": "IMAP Victrack Owned Properties – Nov 2011",
+            "title": "IMAP Victrack Owned Properties",
             "visibility": false,
             "opacity": 0.75,
             "format": "image/png8",
