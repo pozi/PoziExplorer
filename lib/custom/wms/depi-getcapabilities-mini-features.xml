@@ -155,134 +155,66 @@
       <SRS>EPSG:28355</SRS>
       <SRS>EPSG:900913</SRS>
       <LatLonBoundingBox minx="113.15628800000002" miny="-43.86689143805745" maxx="154.308864108" maxy="-10.693111999655512"/>
-      <Layer queryable="0">
-        <Name>sii:CORPORATE.IWSFOOTPRINTS</Name>
-        <Title>Imagery Footprints</Title>
+      <Layer queryable="1">
+        <Name>sii:VMFEAT.FOI_INDEX_CENTROID</Name>
+        <Title>Feature of Interest - Index Centroids</Title>
         <Abstract>DEPI WMS</Abstract>
         <KeywordList>
-          <Keyword>ANZVI0803003443</Keyword>
+          <Keyword>ANZVI0803003644</Keyword>
         </KeywordList>
         <SRS>EPSG:4283</SRS>
-        <LatLonBoundingBox minx="113.15628800000002" miny="-43.643039999057756" maxx="153.63973599999997" maxy="-10.693111999655512"/>
-        <BoundingBox SRS="EPSG:4283" minx="113.156288" miny="-43.64304" maxx="153.639736" maxy="-10.693112"/>
+        <LatLonBoundingBox minx="139.88549720799998" miny="-39.11625241207628" maxx="150.046962335" maxy="-33.00310719813769"/>
+        <BoundingBox SRS="EPSG:4283" minx="139.885497208" miny="-39.116252413" maxx="150.046962335" maxy="-33.003107199"/>
         <Style>
-          <Name>CORP_IWSFootprints</Name>
-          <Title>Default polygon style</Title>
-          <Abstract>Footprints layer for Transmaps</Abstract>
+          <Name>point2</Name>
+          <Title>Default point</Title>
+          <Abstract>A sample style that just prints out a 6px wide red square</Abstract>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=CORPORATE.IWSFOOTPRINTS"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=VMFEAT.FOI_INDEX_CENTROID"/>
           </LegendURL>
         </Style>
-        <ScaleHint min="10000.0" max="2000000.0"/>
       </Layer>
-      <Layer queryable="0">
-        <Name>sii:ESTA_MARKER_POINT</Name>
-        <Title>ESTA Markers</Title>
+      <Layer queryable="1">
+        <Name>sii:VMFEAT.FOI_POLYGON</Name>
+        <Title>Feature of Interest - Polygon</Title>
         <Abstract>DEPI WMS</Abstract>
         <KeywordList>
-          <Keyword>esta_marker_point</Keyword>
-          <Keyword>features</Keyword>
-          <Keyword>ANZVI0803004571</Keyword>
-        </KeywordList>
-        <SRS>EPSG:4283</SRS>
-        <LatLonBoundingBox minx="142.00326593999998" miny="-39.83442055909091" maxx="147.00300606" maxy="-34.834680439090924"/>
-        <BoundingBox SRS="EPSG:4283" minx="142.052283" miny="-38.683149999999955" maxx="146.95398899999998" maxy="-35.985951"/>
-        <Style>
-          <Name>esta_marker_1</Name>
-          <Title>Black Circle OrangeLite Fill</Title>
-          <Abstract/>
-          <LegendURL width="20" height="20">
-            <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=ESTA_MARKER_POINT"/>
-          </LegendURL>
-        </Style>
-      </Layer>
-      <Layer queryable="0">
-        <Name>sii:RAE_3988_GMW_RUR_HYDRANTS</Name>
-        <Title>RAE_3988_GMW_RUR_HYDRANTS</Title>
-        <Abstract/>
-        <KeywordList>
-          <Keyword>RAE_3988_GMW_RUR_HYDRANTS</Keyword>
-          <Keyword>features</Keyword>
-        </KeywordList>
-        <SRS>EPSG:4283</SRS>
-        <LatLonBoundingBox minx="141.856039156019" miny="-37.030471544832224" maxx="143.71342786581" maxy="-35.520127803016166"/>
-        <BoundingBox SRS="EPSG:4283" minx="141.856039156019" miny="-37.0304715457396" maxx="143.71342786581" maxy="-35.5201278039087"/>
-        <Style>
-          <Name>point</Name>
-          <Title>Default Point</Title>
-          <Abstract>A sample style that draws a point</Abstract>
-          <LegendURL width="20" height="20">
-            <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=RAE_3988_GMW_RUR_HYDRANTS"/>
-          </LegendURL>
-        </Style>
-      </Layer>
-      <Layer queryable="0">
-        <Name>sii:RAE_4362_METRO_TRAIN_CARPR</Name>
-        <Title>RAEDATA.RAE_4362_METRO_TRAIN_CARPR</Title>
-        <Abstract/>
-        <KeywordList>
-          <Keyword>RAE_4362_METRO_TRAIN_CARPR</Keyword>
-          <Keyword>features</Keyword>
-          <Keyword>ANZVI0803000320</Keyword>
-        </KeywordList>
-        <SRS>EPSG:4283</SRS>
-        <LatLonBoundingBox minx="144.658827" miny="-38.374117999081534" maxx="145.488034" maxy="-37.60050599908768"/>
-        <BoundingBox SRS="EPSG:4283" minx="144.658827" miny="-38.374118" maxx="145.488034" maxy="-37.600506"/>
-        <Style>
-          <Name>DOT_PTV_Car_Park_1</Name>
-          <Title>Black Circle Blue Fill</Title>
-          <Abstract/>
-          <LegendURL width="20" height="20">
-            <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=RAE_4362_METRO_TRAIN_CARPR"/>
-          </LegendURL>
-        </Style>
-      </Layer>
-      <Layer queryable="0">
-        <Name>sii:RAE_4376_METRO_BIKE_STORE</Name>
-        <Title>RAEDATA.RAE_4376_METRO_BIKE_STORE</Title>
-        <Abstract/>
-        <KeywordList>
-          <Keyword>RAEDATA.RAE_4376_METRO_BIKE_STORE</Keyword>
           <Keyword>ArcSDE</Keyword>
-          <Keyword>ANZVI0803000321</Keyword>
+          <Keyword>VMFEAT.FOI_POLYGON</Keyword>
+          <Keyword>ANZVI0803003642</Keyword>
         </KeywordList>
         <SRS>EPSG:4283</SRS>
-        <LatLonBoundingBox minx="144.66102799999996" miny="-38.144030999083284" maxx="145.48528" maxy="-37.60260599908765"/>
-        <BoundingBox SRS="EPSG:4283" minx="144.661028" miny="-38.144031" maxx="145.48528" maxy="-37.602606"/>
+        <LatLonBoundingBox minx="140.501327321" miny="-39.11674292407627" maxx="149.90257201500003" maxy="-33.03002894813733"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.501327321" miny="-39.116742925" maxx="149.902572015" maxy="-33.030028949"/>
         <Style>
-          <Name>DOT_PTV_Bike_Park_1</Name>
-          <Title>Black Circle OrangeLite Fill</Title>
-          <Abstract/>
+          <Name>polygon</Name>
+          <Title>Default polygon style</Title>
+          <Abstract>A sample style that just draws out a solid gray interior with a black 1px outline</Abstract>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=RAE_4376_METRO_BIKE_STORE"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=VMFEAT.FOI_POLYGON"/>
           </LegendURL>
         </Style>
+        <ScaleHint min="0.0" max="300000.0"/>
       </Layer>
-      <Layer queryable="0">
-        <Name>sii:SURVEY_MARKS_POINT</Name>
-        <Title>Survey Marks</Title>
+      <Layer queryable="1">
+        <Name>sii:VMFEAT.LOCALITY_POINT</Name>
+        <Title>Feature of Interest - Locality Points</Title>
         <Abstract>DEPI WMS</Abstract>
-        <KeywordList>
-          <Keyword>ANZVI0803002594</Keyword>
-        </KeywordList>
+        <KeywordList/>
         <SRS>EPSG:4283</SRS>
-        <LatLonBoundingBox minx="139.21972481818202" miny="-39.7643033354358" maxx="150.42604051818202" maxy="-33.92941899912577"/>
-        <BoundingBox SRS="EPSG:4283" minx="139.21972481818202" miny="-39.7643033363636" maxx="150.42604051818202" maxy="-33.929418999999996"/>
+        <LatLonBoundingBox minx="139.04575000000003" miny="-39.02991499907685" maxx="151.48255799999998" maxy="-33.04014399913719"/>
+        <BoundingBox SRS="EPSG:4283" minx="139.04575" miny="-39.029914999999995" maxx="151.48255799999998" maxy="-33.040144"/>
         <Style>
-          <Name>SMES_survey_marks_1</Name>
-          <Title>Different types of survey marks</Title>
-          <Abstract>Survey marks according to rules (T, C, A, PCM, ECC, CT)</Abstract>
+          <Name>point2</Name>
+          <Title>Default point</Title>
+          <Abstract>A sample style that just prints out a 6px wide red square</Abstract>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=SURVEY_MARKS_POINT"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=VMFEAT.LOCALITY_POINT"/>
           </LegendURL>
         </Style>
-        <ScaleHint min="0.0" max="100000.0"/>
       </Layer>
     </Layer>
   </Capability>

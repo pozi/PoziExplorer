@@ -170,9 +170,9 @@
             "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
         },
-        "depi_wms_misc": {
-            "url": "/lib/custom/wms/depi-getcapabilities-mini-misc.xml",
-            "title": "DEPI - Misc",
+        "depi_wms_features": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-features.xml",
+            "title": "DEPI - Features Of Interest",
             "ptype": "gxp_wmscsource",
             "transition": null,
             "infoFormat": "application/json",
@@ -199,12 +199,6 @@
             "transition": null,
             "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
-        },
-        "basemap_dse_features_of_interest": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_FEATURES_OF_INTEREST/ows",
-            "title": "DSE - Features Of interest",
-            "ptype": "gxp_wmscsource",
-            "tiled": false
         },
         "basemap_dse_property": {
             "url": "http://basemap.pozi.com/geoserver/DSE_PROPERTY/ows",
