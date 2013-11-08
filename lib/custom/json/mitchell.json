@@ -192,6 +192,14 @@
             "ptype": "gxp_wmscsource",
             "tiled": true
         },
+        "depi_wms_transport": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-transport.xml",
+            "title": "DEPI - Transport",
+            "ptype": "gxp_wmscsource",
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true
+        },
         "basemap_dse_features_of_interest": {
             "url": "http://basemap.pozi.com/geoserver/DSE_FEATURES_OF_INTEREST/ows",
             "title": "DSE - Features Of interest",
@@ -201,12 +209,6 @@
         "basemap_dse_property": {
             "url": "http://basemap.pozi.com/geoserver/DSE_PROPERTY/ows",
             "title": "DSE - Property",
-            "ptype": "gxp_wmscsource",
-            "tiled": false
-        },
-        "basemap_dse_transport": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_TRANSPORT/ows",
-            "title": "DSE - Transport",
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
