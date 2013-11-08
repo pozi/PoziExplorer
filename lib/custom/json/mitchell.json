@@ -142,6 +142,16 @@
             "tiled": false,
             "restUrl": "/geoserver/rest"
         },
+        "depi_wms_admin": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-admin.xml",
+            "title": "DEPI - Administrative Boundaries",
+            "ptype": "gxp_wmscsource",
+            "defaultType": "image/png8",
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true,
+            "tiled": true
+        },
         "depi_wms_elevation": {
             "url": "/lib/custom/wms/depi-getcapabilities-mini-elevation.xml",
             "title": "DEPI - Elevation",
@@ -181,11 +191,6 @@
             "title": "DEPI - Restricted",
             "ptype": "gxp_wmscsource",
             "tiled": true
-        },
-        "basemap_dse_administrative_boundaries": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_ADMINISTRATIVE_BOUNDARIES/ows",
-            "title": "DSE - Adminstrative Boundaries",
-            "ptype": "gxp_wmscsource"
         },
         "basemap_dse_features_of_interest": {
             "url": "http://basemap.pozi.com/geoserver/DSE_FEATURES_OF_INTEREST/ows",
