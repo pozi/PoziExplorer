@@ -176,6 +176,12 @@
             "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
         },
+        "depi_wms_cascaded": {
+            "url": "/geoserver/DEPI/ows",
+            "title": "DEPI - Restricted",
+            "ptype": "gxp_wmscsource",
+            "tiled": true
+        },
         "basemap_dse_administrative_boundaries": {
             "url": "http://basemap.pozi.com/geoserver/DSE_ADMINISTRATIVE_BOUNDARIES/ows",
             "title": "DSE - Adminstrative Boundaries",
@@ -896,6 +902,28 @@
         },
         {
             "group": "planning",
+            "source": "depi_wms_cascaded",
+            "name": "bushfire_prone_areas",
+            "title": "Bushfire Prone Areas",
+            "visibility": false,
+            "opacity": 0.8,
+            "format": "image/png8",
+            "transparent": true,
+            "tiled": true
+        },
+        {
+            "group": "planning",
+            "source": "depi_wms_cascaded",
+            "name": "CULTURE.SENSITIVITY_AB_Sites",
+            "title": "Cultural Sensitivity",
+            "visibility": false,
+            "opacity": 0.8,
+            "format": "image/png8",
+            "transparent": true,
+            "tiled": true
+        },
+        {
+            "group": "planning",
             "source": "local",
             "name": "msc_planning_amc56_ho_exh",
             "title": "HO Additions (C56)",
@@ -1279,17 +1307,6 @@
             "opacity": 0.3,
             "format": "image/png8",
             "styles": "Mitchell_Wards_2012",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "depi_wms_misc",
-            "name": "sii:bushfire_prone_areas",
-            "title": "Bushfire Prone Areas",
-            "visibility": false,
-            "opacity": 0.5,
-            "format": "image/png8",
-            "styles": "",
             "transparent": true,
             "tiled": false
         },
