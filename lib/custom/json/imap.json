@@ -93,56 +93,37 @@
             "ptype": "gxp_wmscsource",
             "tiled": false
         },
-        "basemap_dse_administrative_boundaries": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_ADMINISTRATIVE_BOUNDARIES/ows",
-            "title": "DSE - Adminstrative Boundaries",
-            "ptype": "gxp_wmscsource"
-        },
-        "basemap_dse_features_of_interest": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_FEATURES_OF_INTEREST/ows",
-            "title": "DSE - Features Of interest",
+        "depi_wms_admin": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-admin.xml",
+            "title": "DEPI - Administrative Boundaries",
             "ptype": "gxp_wmscsource",
-            "tiled": false
+            "defaultType": "image/png8",
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true,
+            "tiled": true
         },
-        "basemap_dse_planning": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_PLANNING/ows",
-            "title": "DSE - Planning",
+        "depi_wms_elevation": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-elevation.xml",
+            "title": "DEPI - Elevation",
             "ptype": "gxp_wmscsource",
-            "tiled": false
+            "defaultType": "image/png8",
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true,
+            "tiled": true
         },
-        "basemap_dse_property": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_PROPERTY/ows",
-            "title": "DSE - Property",
+        "depi_wms_environment": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-environment.xml",
+            "title": "DEPI - Environment",
             "ptype": "gxp_wmscsource",
-            "tiled": false
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true
         },
-        "basemap_dse_transport": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_TRANSPORT/ows",
-            "title": "DSE - Transport",
-            "ptype": "gxp_wmscsource",
-            "tiled": false
-        },
-        "basemap_dse_topography": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_TOPOGRAPHY/ows",
-            "title": "DSE - Topography",
-            "ptype": "gxp_wmscsource",
-            "tiled": false
-        },
-        "mapquest": {
-            "ptype": "gxp_mapquestsource"
-        },
-        "google": {
-            "ptype": "gxp_googlesource"
-        },
-        "bing": {
-            "ptype": "gxp_bingsource"
-        },
-        "ol": {
-            "ptype": "gxp_olsource"
-        },
-        "depi_wms": {
-            "url": "/lib/custom/wms/depi-getcapabilities-mini.xml",
-            "title": "DEPI WMS Layers",
+        "depi_wms_features": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-features.xml",
+            "title": "DEPI - Features Of Interest",
             "ptype": "gxp_wmscsource",
             "transition": null,
             "infoFormat": "application/json",
@@ -155,6 +136,48 @@
             "transition": null,
             "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
+        },
+        "depi_wms_property": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-property.xml",
+            "title": "DEPI - Property",
+            "ptype": "gxp_wmscsource",
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true
+        },
+        "depi_wms_cascaded": {
+            "url": "/geoserver/DEPI/ows",
+            "title": "DEPI - Restricted",
+            "ptype": "gxp_wmscsource",
+            "tiled": true
+        },
+        "depi_wms_topography": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-topography.xml",
+            "title": "DEPI - Topography",
+            "ptype": "gxp_wmscsource",
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true
+        },
+        "depi_wms_transport": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-transport.xml",
+            "title": "DEPI - Transport",
+            "ptype": "gxp_wmscsource",
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true
+        },
+        "mapquest": {
+            "ptype": "gxp_mapquestsource"
+        },
+        "google": {
+            "ptype": "gxp_googlesource"
+        },
+        "bing": {
+            "ptype": "gxp_bingsource"
+        },
+        "ol": {
+            "ptype": "gxp_olsource"
         },
         "basemap": {
             "url": [
@@ -247,7 +270,7 @@
             "group": "top"
         },
         {
-            "source": "depi_wms",
+            "source": "depi_wms_admin",
             "name": "sii:VMADMIN.LGA_POLYGON",
             "title": "LGAs",
             "visibility": true,
@@ -261,7 +284,7 @@
             "group": "top"
         },
         {
-            "source": "depi_wms",
+            "source": "depi_wms_transport",
             "name": "sii:DPS_932_RAIL_STATIONS_VMT_SDO",
             "title": "Train Stations",
             "visibility": false,
@@ -275,7 +298,7 @@
             "group": "transport"
         },
         {
-            "source": "depi_wms",
+            "source": "depi_wms_transport",
             "name": "sii:DPS_1202_TRAIN_CORR_CENTL_SDO",
             "title": "Train Corridors",
             "visibility": false,
@@ -289,7 +312,7 @@
             "group": "transport"
         },
         {
-            "source": "depi_wms",
+            "source": "depi_wms_transport",
             "name": "sii:DPS_969_TRAM_ROUTES_SDO",
             "title": "Tram Routes",
             "visibility": false,
@@ -303,7 +326,7 @@
             "group": "transport"
         },
         {
-            "source": "depi_wms",
+            "source": "depi_wms_transport",
             "name": "sii:DPS_955_METRO_BUS_ROUTES_SDO",
             "title": "Bus Routes",
             "visibility": false,
