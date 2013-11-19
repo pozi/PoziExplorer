@@ -283,7 +283,7 @@
             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=VMADMIN.POSTCODE_POLYGON"/>
           </LegendURL>
         </Style>
-        <ScaleHint min="10.0" max="150000.0"/>
+        <!-- ScaleHint min="10.0" max="150000.0"/ -->
       </Layer>
       <Layer queryable="1">
         <Name>sii:VMADMIN.STATE_ASSEMBLY_2001</Name>
