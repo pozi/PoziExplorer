@@ -208,12 +208,6 @@
             "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
         },
-        "basemap_dse_topography": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_TOPOGRAPHY/ows",
-            "title": "DSE - Topography",
-            "ptype": "gxp_wmscsource",
-            "tiled": false
-        },
         "depi_wms_topography": {
             "url": "/lib/custom/wms/depi-getcapabilities-mini-topography.xml",
             "title": "DEPI - Topography",
