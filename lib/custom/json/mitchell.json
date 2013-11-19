@@ -186,20 +186,6 @@
             "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
         },
-        "depi_wms_cascaded": {
-            "url": "/geoserver/DEPI/ows",
-            "title": "DEPI - Restricted",
-            "ptype": "gxp_wmscsource",
-            "tiled": true
-        },
-        "depi_wms_transport": {
-            "url": "/lib/custom/wms/depi-getcapabilities-mini-transport.xml",
-            "title": "DEPI - Transport",
-            "ptype": "gxp_wmscsource",
-            "transition": null,
-            "infoFormat": "application/json",
-            "useGetCapabilitiesURLs": true
-        },
         "depi_wms_property": {
             "url": "/lib/custom/wms/depi-getcapabilities-mini-property.xml",
             "title": "DEPI - Property",
@@ -208,9 +194,23 @@
             "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
         },
+        "depi_wms_cascaded": {
+            "url": "/geoserver/DEPI/ows",
+            "title": "DEPI - Restricted",
+            "ptype": "gxp_wmscsource",
+            "tiled": true
+        },
         "depi_wms_topography": {
             "url": "/lib/custom/wms/depi-getcapabilities-mini-topography.xml",
             "title": "DEPI - Topography",
+            "ptype": "gxp_wmscsource",
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true
+        },
+        "depi_wms_transport": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-transport.xml",
+            "title": "DEPI - Transport",
             "ptype": "gxp_wmscsource",
             "transition": null,
             "infoFormat": "application/json",
