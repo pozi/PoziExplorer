@@ -200,17 +200,27 @@
             "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
         },
-        "basemap_dse_property": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_PROPERTY/ows",
-            "title": "DSE - Property",
+        "depi_wms_property": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-property.xml",
+            "title": "DEPI - Property",
             "ptype": "gxp_wmscsource",
-            "tiled": false
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true
         },
         "basemap_dse_topography": {
             "url": "http://basemap.pozi.com/geoserver/DSE_TOPOGRAPHY/ows",
             "title": "DSE - Topography",
             "ptype": "gxp_wmscsource",
             "tiled": false
+        },
+        "depi_wms_topography": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-topography.xml",
+            "title": "DEPI - Topography",
+            "ptype": "gxp_wmscsource",
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true
         },
         "local_cascaded_imagery": {
             "url": [
