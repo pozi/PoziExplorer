@@ -229,7 +229,7 @@
             "visibility": false,
             "type": "OpenLayers.Layer.WMS",
             "args": [
-                "Vicmap API",
+                "Vicmap API (Beta)",
                 "http://api.maps.vic.gov.au/geowebcache_900913/service/wms",
                 {
                     "layers" : "WEB_MERCATOR",
@@ -241,7 +241,7 @@
                     "attribution": "Vicmap API &copy; 2013 State Government of Victoria | <a href='http://api.maps.vic.gov.au/vicmapapi/Copyright.jsp' target='_blank' style='color:#4BABFA;'>Copyright and Disclaimer</a>",
                     "resolutions": [2311.3147636336666,1155.657381816833,577.8286909084168,288.9143454542082,144.45717272710417,72.22858636355207,36.11429318177605,18.05714659088802,9.02857329544401,4.514286647722005,2.2571433238610026,1.1285716619305013,0.5642858309652506,0.2821429154826253,0.14107145774131266],
                     "tileSize" : new OpenLayers.Size(256,256),
-                    "projection" : new OpenLayers.Projection("EPSG:3857"),
+                    "projection" : new OpenLayers.Projection("EPSG:900913"),
                     "sphericalMercator" : true,
                     "maxExtent": new OpenLayers.Bounds(-3699984,-5993788.86164787,1.760109286164787E7,1.5307288E7)                 
                 }
