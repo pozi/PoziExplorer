@@ -86,40 +86,79 @@
             "tiled": false,
             "restUrl": "/geoserver/rest"
         },
-        "basemap_dse_administrative_boundaries": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_ADMINISTRATIVE_BOUNDARIES/ows",
-            "title": "DSE - Adminstrative Boundaries",
-            "ptype": "gxp_wmscsource"
-        },
-        "basemap_dse_features_of_interest": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_FEATURES_OF_INTEREST/ows",
-            "title": "DSE - Features Of interest",
+        "depi_wms_admin": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-admin.xml",
+            "title": "DEPI - Administrative Boundaries",
             "ptype": "gxp_wmscsource",
-            "tiled": false
+            "defaultType": "image/png8",
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true,
+            "tiled": true
         },
-        "basemap_dse_planning": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_PLANNING/ows",
-            "title": "DSE - Planning",
+        "depi_wms_elevation": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-elevation.xml",
+            "title": "DEPI - Elevation",
             "ptype": "gxp_wmscsource",
-            "tiled": false
+            "defaultType": "image/png8",
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true,
+            "tiled": true
         },
-        "basemap_dse_property": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_PROPERTY/ows",
-            "title": "DSE - Property",
+        "depi_wms_environment": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-environment.xml",
+            "title": "DEPI - Environment",
             "ptype": "gxp_wmscsource",
-            "tiled": false
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true
         },
-        "basemap_dse_transport": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_TRANSPORT/ows",
-            "title": "DSE - Transport",
+        "depi_wms_features": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-features.xml",
+            "title": "DEPI - Features Of Interest",
             "ptype": "gxp_wmscsource",
-            "tiled": false
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true
         },
-        "basemap_dse_topography": {
-            "url": "http://basemap.pozi.com/geoserver/DSE_TOPOGRAPHY/ows",
-            "title": "DSE - Topography",
+        "depi_wms_planning": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-planning.xml",
+            "title": "DEPI - Planning",
             "ptype": "gxp_wmscsource",
-            "tiled": false
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true
+        },
+        "depi_wms_property": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-property.xml",
+            "title": "DEPI - Property",
+            "ptype": "gxp_wmscsource",
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true
+        },
+        "depi_wms_cascaded": {
+            "url": "/geoserver/DEPI/ows",
+            "title": "DEPI - Restricted",
+            "ptype": "gxp_wmscsource",
+            "tiled": true
+        },
+        "depi_wms_topography": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-topography.xml",
+            "title": "DEPI - Topography",
+            "ptype": "gxp_wmscsource",
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true
+        },
+        "depi_wms_transport": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-transport.xml",
+            "title": "DEPI - Transport",
+            "ptype": "gxp_wmscsource",
+            "transition": null,
+            "infoFormat": "application/json",
+            "useGetCapabilitiesURLs": true
         },
         "local_cascaded_imagery": {
             "url": [
@@ -128,7 +167,7 @@
                 "http://indigo03.pozi.com/geoserver/INDIGO/ows",
                 "http://indigo04.pozi.com/geoserver/INDIGO/ows"
             ],
-            "title": "DSE Image Web Server",
+            "title": "DEPI Image Web Server",
             "ptype": "gxp_wmscsource",
             "defaultType": "image/JPEG",
             "group": "background",
