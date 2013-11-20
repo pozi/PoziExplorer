@@ -249,35 +249,6 @@ Crownland.Parkres - 2nd set of rules show all above 2000 ha between 250K and 100
         <!--ScaleHint min="50000.0" max="399680.0"/ -->
       </Layer>
       <Layer queryable="1">
-        <Name>sii:VMPROP.CAD_LINE</Name>
-        <Title>Easements</Title>
-        <Abstract>DEPI WMS</Abstract>
-        <KeywordList>
-          <Keyword>ANZVI0803002897</Keyword>
-        </KeywordList>
-        <SRS>EPSG:4283</SRS>
-        <LatLonBoundingBox minx="140.96818229000002" miny="-39.0394109190768" maxx="149.75894144" maxy="-34.05614428912421"/>
-        <BoundingBox SRS="EPSG:4283" minx="140.96818229" miny="-39.03941092" maxx="149.75894144" maxy="-34.05614429"/>
-        <Style>
-          <Name>line</Name>
-          <Title>1 px blue line</Title>
-          <Abstract>Default line style, 1 pixel wide blue</Abstract>
-          <LegendURL width="20" height="20">
-            <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=VMPROP.CAD_LINE"/>
-          </LegendURL>
-        </Style>
-        <Style>
-          <Name>line</Name>
-          <Title>1 px blue line</Title>
-          <Abstract>Default line style, 1 pixel wide blue</Abstract>
-          <LegendURL width="20" height="20">
-            <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=VMPROP.CAD_LINE&amp;style=line"/>
-          </LegendURL>
-        </Style>
-      </Layer>
-      <Layer queryable="1">
         <Name>sii:VSUP.PARCEL_VIEW_SDO</Name>
         <Title>Parcels</Title>
         <Abstract>DEPI WMS</Abstract>
