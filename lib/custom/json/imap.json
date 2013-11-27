@@ -384,6 +384,18 @@
             "tiled": false
         },
         {
+            "source": "depi_wms_property",
+            "name": "sii:VMADD.ADDRESS",
+            "title": "Addresses",
+            "visibility": false,
+            "opacity": 0.75,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "minscale": 25000
+        },
+        {
             "source": "basemap",
             "name": "VICMAP_CLASSIC:gt_property_address",
             "title": "Properties",
@@ -392,7 +404,8 @@
             "format": "image/GIF",
             "styles": "",
             "transparent": true,
-            "tiled": false
+            "tiled": false,
+            "minscale": 25000
         },
         {
             "source": "depi_wms_planning",
