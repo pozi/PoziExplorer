@@ -43,6 +43,7 @@
  * @require OpenLayers/Lang.js 
  * @require OpenLayers/Layer/Vector.js
  * @require OpenLayers/Layer/OSM.js
+ * @require OpenLayers/Layer/TMS.js
  * @require OpenLayers/Control/ScaleLine.js
  * @require OpenLayers/Control/Zoom.js
  * @require OpenLayers/Projection.js
