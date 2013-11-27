@@ -91,6 +91,7 @@
             "url": "/geoserver/IMAP/ows",
             "title": "IMAP Layers",
             "ptype": "gxp_wmscsource",
+            "infoFormat": "application/json",
             "tiled": false
         },
         "depi_wms_admin": {
@@ -188,6 +189,7 @@
             ],
             "title": "Pozi Data Server",
             "ptype": "gxp_wmscsource",
+            "infoFormat": "application/json",
             "transition": null
         }
     },
