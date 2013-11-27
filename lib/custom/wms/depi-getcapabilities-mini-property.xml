@@ -199,34 +199,28 @@ Crownland.Parkres - 2nd set of rules show all above 2000 ha between 250K and 100
         <ScaleHint min="0.0" max="300000.0"/>
       </Layer -->
       <Layer queryable="1">
-        <Name>sii:VMADD.ADDRESS</Name>
+        <Name>sii:VSUP.ADDRESS_SDO</Name>
         <Title>Address Points</Title>
         <Abstract>DEPI WMS</Abstract>
         <KeywordList>
+          <Keyword>features</Keyword>
+          <Keyword>ADDRESS_SDO</Keyword>
           <Keyword>ANZVI0803003126</Keyword>
         </KeywordList>
         <SRS>EPSG:4283</SRS>
-        <LatLonBoundingBox minx="140.9635338" miny="-39.157374519076" maxx="149.91703253" maxy="-33.987808269125054"/>
-        <BoundingBox SRS="EPSG:4283" minx="140.9635338" miny="-39.15737452" maxx="149.91703253" maxy="-33.98780827"/>
+        <LatLonBoundingBox minx="140.96360000000004" miny="-39.15739999907601" maxx="149.917" maxy="-33.98779999912506"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.9636" miny="-39.1574" maxx="149.917" maxy="-33.9878"/>
         <Style>
           <Name>ADDR_addresspoint_1</Name>
           <Title>Address point</Title>
           <Abstract/>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=VMADD.ADDRESS"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=VSUP.ADDRESS_SDO"/>
           </LegendURL>
         </Style>
-        <Style>
-          <Name>address</Name>
-          <Title>Sample AXL to SLD transformer.</Title>
-          <Abstract>Test AXL to SLD.</Abstract>
-          <LegendURL width="20" height="20">
-            <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=VMADD.ADDRESS&amp;style=address"/>
-          </LegendURL>
-        </Style>
-      </Layer>
+        <ScaleHint min="0.0" max="10000.0"/>
+      </Layer>      
       <Layer queryable="1">
         <Name>sii:VMLITE.VMLITE_BUILT_UP_AREA</Name>
         <Title>Built-up Areas (Vicmap Lite)</Title>

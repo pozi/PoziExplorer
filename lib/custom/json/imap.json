@@ -385,7 +385,7 @@
         },
         {
             "source": "depi_wms_property",
-            "name": "sii:VMADD.ADDRESS",
+            "name": "sii:VSUP.ADDRESS_SDO",
             "title": "Addresses",
             "visibility": false,
             "opacity": 0.75,
@@ -393,7 +393,7 @@
             "styles": "",
             "transparent": true,
             "tiled": false,
-            "minscale": 25000
+            "minscale": 10000
         },
         {
             "source": "basemap",
