@@ -395,7 +395,8 @@
             "styles": "",
             "transparent": true,
             "tiled": false,
-            "minscale": 10000
+            "minscale": 10000,
+            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-VSUP.ADDRESS_SDO.sld"
         },
         {
             "source": "basemap",
