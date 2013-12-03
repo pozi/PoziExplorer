@@ -59,6 +59,7 @@ gxp.plugins.LayerTree.prototype.createOutputConfig = function() {
         root: treeRoot,
         rootVisible: false,
         shortTitle: this.shortTitle,
+        loader: new Ext.tree.TreeLoader({ preloadChildren: true }),
         border: false,
         enableDD: true,
         selModel: new Ext.tree.DefaultSelectionModel({
@@ -71,6 +72,45 @@ gxp.plugins.LayerTree.prototype.createOutputConfig = function() {
             contextmenu: this.handleTreeContextMenu,
             beforemovenode: this.handleBeforeMoveNode,   
             checkchange:function(n,c){
+              // Managing the change: actions associated with layer being switched off
+              if (c)
+              {
+                // Finding the configuration of the layer from the node just changed
+                for (k in JSONconf.layers)
+                {
+                    if (JSONconf.layers.hasOwnProperty(k)){
+                        // Mostly layer name is in the title, but sometimes it's in the option array (args)
+                        // Hack 1: we've had to add a title to the MapQuest layer for this piece of code to work on the MapQuest layer
+                        // Hack 2: we've had to re-order the basemap layers so that Vicmap basemap is at the bottom
+                        var layerTitleArgs = JSONconf.layers[k].args ? JSONconf.layers[k].args[0] : "";
+                        var layerTitle = JSONconf.layers[k].title ? JSONconf.layers[k].title : layerTitleArgs;
+                        // Checking if there is configuration for ...
+                        if (layerTitle && (layerTitle == n.layer.name))
+                        {
+                            // Layers to switch off ..
+                            var layersToSwitchOff = JSONconf.layers[k].layersToTurnOffWhenShown;
+                            for (ltc in layersToSwitchOff)
+                            {
+                                if (layersToSwitchOff.hasOwnProperty(ltc))
+                                {
+                                    app.mapPanel.map.getLayersByName(layersToSwitchOff[ltc])[0].setVisibility(false);
+                                }
+                            }
+                            
+                            // .. or layers to switch on                            
+                            var layersToSwitchOn = JSONconf.layers[k].layersToTurnOnWhenShown;
+                            for (ltc in layersToSwitchOn)
+                            {
+                                if (layersToSwitchOn.hasOwnProperty(ltc))
+                                {
+                                    app.mapPanel.map.getLayersByName(layersToSwitchOn[ltc])[0].setVisibility(true);
+                                }
+                            }
+                        }                        
+                    }
+                }
+              } 
+
               // If the node checkbox is clicked then we select the node
               if (c)
               {

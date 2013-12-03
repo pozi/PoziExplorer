@@ -270,32 +270,25 @@
             "source": "mapquest",
             "name": "osm",
             "visibility": false,
+            "title":"MapQuest OpenStreetMap",
+            "layersToTurnOffWhenShown":["Labels"],
             "group": "background"
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:VicmapClassic",
-            "title": "Pozi Vicmap",
-            "visibility": true,
-            "opacity": 1,
-            "group": "background",
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "cached": true,
-            "transition": "resize"
         },
         {
             "source": "ol",
             "group": "background",
             "visibility": false,
+            "layersToTurnOffWhenShown":["Labels"],
             "type": "OpenLayers.Layer.TMS",
             "args": [
-                "Spatial Vision",
+                "Mapscape",
                 "http://map1.spatialvision.com.au/mapscape_em_vic",
                 {
                     "layers" : "basic",
+                    "attribution": "<img style='bottom:15px;padding-right:110px;width:80px;height:78px;z-index:1000;opacity:0.75;filter:alpha(opacity=75);' src='theme/app/img/custom/mapscape_logo.png'>",
                     "projection" : new OpenLayers.Projection("EPSG:900913"),
+                    "restrictedExtent" : new OpenLayers.Bounds(16077927,-4525170,16200223,-4402205),
+                    "numZoomLevels": 18,
                     "sphericalMercator" : true,
                     "getURL": function (bounds) {
                         var res = this.map.getResolution();
@@ -306,6 +299,20 @@
                     }
                 }
             ]
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:VicmapClassic",
+            "layersToTurnOnWhenShown":["Labels"],
+            "title": "Pozi Vicmap",
+            "visibility": true,
+            "opacity": 1,
+            "group": "background",
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "cached": true,
+            "transition": "resize"
         },
         {
             "source": "basemap",
