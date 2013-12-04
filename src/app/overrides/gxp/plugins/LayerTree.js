@@ -72,7 +72,7 @@ gxp.plugins.LayerTree.prototype.createOutputConfig = function() {
             contextmenu: this.handleTreeContextMenu,
             beforemovenode: this.handleBeforeMoveNode,   
             checkchange:function(n,c){
-              // Managing the change: actions associated with layer being switched off
+              // Managing the change: actions associated with layer being switched on
               if (c)
               {
                 // Finding the configuration of the layer from the node just changed
