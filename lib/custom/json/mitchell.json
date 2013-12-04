@@ -288,7 +288,7 @@
                     "attribution": "<img style='bottom:15px;padding-right:110px;width:80px;height:78px;z-index:1000;opacity:0.75;filter:alpha(opacity=75);' src='theme/app/img/custom/mapscape_logo.png'>",
                     "projection" : new OpenLayers.Projection("EPSG:900913"),
                     "restrictedExtent" : new OpenLayers.Bounds(16077927,-4525170,16200223,-4402205),
-                    "numZoomLevels": 18,
+                    "numZoomLevels": 20,
                     "sphericalMercator" : true,
                     "getURL": function (bounds) {
                         var res = this.map.getResolution();
