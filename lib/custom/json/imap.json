@@ -209,11 +209,14 @@
         {
             "source": "google",
             "name": "HYBRID",
+            "title": "Google Hybrid",
+            "layersToTurnOffWhenShown":["Labels"],
             "visibility": false
         },
         {
             "source": "basemap",
             "name": "VICMAP_CLASSIC:VicmapClassic",
+            "layersToTurnOnWhenShown":["Labels"],
             "title": "Pozi Vicmap",
             "visibility": false,
             "opacity": 1,
@@ -227,6 +230,7 @@
         },
         {
             "source": "ol",
+            "layersToTurnOffWhenShown":["Labels"],
             "group": "background",
             "visibility": true,
             "fixed": true,
