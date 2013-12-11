@@ -13,16 +13,23 @@ searchRecordSelectHandler = function(combo, record, app, JSONconf, northPart, ea
     }
 
     // Now doing a call to the restful geof endpoint, based on the information in the selected record
-    var url_object = JSONconf.searchEndPoints[record.data.store].details + record.data.gsln + "/" + record.data.idcol +  "/is/" + encodeURIComponent(record.data.idval);
+    var url_object = JSONconf.searchEndPoints[record.data.store].details;
+    var url_params = {
+        gsln: record.data.gsln,
+        idcol: record.data.idcol,
+        idval: record.data.idval
+    };
+
     if (record.data.lgacol && record.data.lga)
     {
-        url_object += "/"+ record.data.lgacol +"/in/" + record.data.lga;
+        url_params["lgacol"] = record.data.lgacol;
+        url_params["lga"] = record.data.lga;
     }
 
     Ext.Ajax.request({
         method: "GET",
         url: url_object,
-        params: {},
+        params: url_params,
         callback: function(options, success, response) {
             var status = response.status;
             if (status >= 200 && status < 403 && response.responseText) {

@@ -3,21 +3,21 @@
     "searchEndPoints": {
         "basemap": {
             "list": "http://basemap.pozi.com/ws/rest/v3/ws_search_api_wrapper.php",
-            "details": "http://basemap.pozi.com/api/v1/basemap/",
+            "details": "http://basemap.pozi.com/ws/rest/v3/ws_is_api_wrapper.php",
             "root": "features",
             "propertyMapPrefix": "properties",
             "maxRecord": 8
         },
         "internal1": {
             "list": "http://172.20.10.19:9090/ws/rest/v3/ws_get_live_data.php?config=mitchell&mode=sqlite&infoGroup=SearchAnimalDetails&idParam=query",
-            "details": "http://basemap.pozi.com/api/v1/basemap/",
+            "details": "http://basemap.pozi.com/ws/rest/v3/ws_is_api_wrapper.php",
             "root": "rows",
             "propertyMapPrefix": "row",
             "maxRecord": 3
         },
         "internal2": {
             "list": "http://172.20.10.19:9090/ws/rest/v3/ws_get_live_data.php?config=mitchell&mode=sqlite&infoGroup=SearchAssets&idParam=query",
-            "details": "http://mitchell.pozi.com/api/v1/mitchellgis/",
+            "details": "http://mitchellgis.pozi.com/ws/rest/v3/ws_is_api_wrapper.php?db=mitchellgis",
             "root": "rows",
             "propertyMapPrefix": "row",
             "maxRecord": 3
