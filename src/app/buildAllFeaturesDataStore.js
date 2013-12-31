@@ -34,11 +34,11 @@ buildAllFeaturesDataStore = function(JSONconf) {
             autoLoad: false,
             //autoload the data
             root: JSONconf.searchEndPoints[s].root,
-            baseParams: {
+            baseParams: _({
                 lga: JSONconf.LGACode,
                 limit: maxRecord,
                 storeName: s
-            },
+            }).extend(JSONconf.extraSearchParameters),
             fields: [
                 { name: "label", mapping: propertyMapPrefix+".label" },
                 { name: "gsln",  mapping: propertyMapPrefix+".gsln" },

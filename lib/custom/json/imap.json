@@ -9,6 +9,9 @@
         }
     },
     "LGACode": "341,343,358,363,376",
+    "extraSearchParameters": {
+        "idcol": "ezi_add,label,name_label,gt_label,name_label"
+    },
     "databaseConfig": "basemap",
     "tools": [
         {
