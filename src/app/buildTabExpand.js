@@ -41,7 +41,7 @@ buildTabExpand = function(gCurrentExpandedTabIdx, gLayoutsArr, JSONconf, gCurren
                 for (var i = gCurrentExpandedTabIdx[cl] - 1; i < gCurrentExpandedTabIdx[cl]; i++) {
                     var g = 0;
 
-                    // Adding a loading indicator for user feedback		
+                    // Adding a loading indicator for user feedback
                     var targ2 = Ext.getCmp(configArray[i].id);
                     targ2.removeAll();
 
@@ -111,7 +111,7 @@ buildTabExpand = function(gCurrentExpandedTabIdx, gLayoutsArr, JSONconf, gCurren
 
                     if (configArray[i].id.substring(0, 1) != 'X') {
                         // Live query using the script tag
-          
+
                         var ds = new Ext.data.Store({
                             autoLoad: true,
                             // Script tag proxy uses a GET method (can not be overriden to a POST)
@@ -299,10 +299,11 @@ buildTabExpand = function(gCurrentExpandedTabIdx, gLayoutsArr, JSONconf, gCurren
 
                                             // The container depends on the number of records returned
                                             var win;
-                                            
-                                            if(!configArray[i - 1].desc)
-                                            	configArray[i - 1].desc = "";
-                                            	
+
+                                            if(!configArray[i - 1].desc) {
+                                                configArray[i - 1].desc = "";
+                                            }
+
                                             if (tab_array.length == 1) {
                                                 // Removing the title - it's useless
                                                 // We should be able to remove the header that was created with a non-null title
