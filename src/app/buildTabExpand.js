@@ -1,6 +1,12 @@
 buildTabExpand = function(gCurrentExpandedTabIdx, gLayoutsArr, JSONconf, gCurrentLoggedRole, helpers) {
 
     return function(p) {
+
+        if (!_(['XWelcome', 'attributeAcc']).contains(p.id)) {
+            // XWelcome opens automatically on load (twice), as does (once) attributeAcc (the details tab), so we don't want to track them.
+            ga('send', 'event', 'tab', 'expand', p.id);
+        }
+
         // Current layer (cl) as per content of the current type (ct) and current drop down (cb)
         var ct = '';
         if (app.getSelectionLayer())
