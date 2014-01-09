@@ -219,6 +219,9 @@ OpenLayers.Layer.GeoRSS = OpenLayers.Class(OpenLayers.Layer.Markers, {
             this.addMarker(marker);
         }
         this.events.triggerEvent("loadend");
+
+        // Hack to let the marker layer on top of other layers so that it's clickable
+        this.setZIndex(900);
     },
     
     /**

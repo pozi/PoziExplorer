@@ -36,6 +36,9 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
         }
     });
 
+    // Hack for popup to be on top of other layers
+    app.mapPanel.map.Z_INDEX_BASE['Popup']=950;
+
     // Setting the title of the map to print
     app.about = { title: JSONconf.printMapTitle };
 

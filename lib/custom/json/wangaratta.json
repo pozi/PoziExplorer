@@ -18,6 +18,11 @@
                     "title": "Surface Layers",
                     "collapsed": true
                 },
+                "live": {
+                    "title": "Live Feeds",
+                    "collapsed": true,
+                    "exclusive": false
+                },   
                 "default": "Overlays",
                 "background": {
                     "title": "Base Maps",
@@ -242,6 +247,22 @@
             "tiled": false,
             "group": "top"
         },
+        {
+            "source": "ol",
+            "group": "live",
+            "visibility": false,
+            "type": "OpenLayers.Layer.GeoRSS",
+            "args": [
+                "CFA Current Incidents",
+                "http://osom.cfa.vic.gov.au/public/osom/IN_COMING.rss",
+                {
+                    "useFeedTitle": false,
+                    "icon": new OpenLayers.Icon("theme/app/img/custom/fire-warning-alert.png", new OpenLayers.Size(40,40)),
+                    "projection": new OpenLayers.Projection("EPSG:4326"),
+                    "popupSize": new OpenLayers.Size(250,250)
+                }
+            ]
+        },        
         {
             "source": "basemap",
             "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_wangaratta_mask",

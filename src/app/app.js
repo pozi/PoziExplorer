@@ -44,6 +44,10 @@
  * @require OpenLayers/Layer/Vector.js
  * @require OpenLayers/Layer/OSM.js
  * @require OpenLayers/Layer/TMS.js
+ * @require OpenLayers/Marker.js 
+ * @require OpenLayers/Popup/Anchored.js 
+ * @require OpenLayers/Format/GeoRSS.js
+ * @require OpenLayers/Layer/GeoRSS.js
  * @require OpenLayers/Control/ScaleLine.js
  * @require OpenLayers/Control/Zoom.js
  * @require OpenLayers/Projection.js
