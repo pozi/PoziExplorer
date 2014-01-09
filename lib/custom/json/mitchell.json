@@ -668,7 +668,8 @@
             "args": [
                 "No Aerial",
                 {
-                    "visibility": true
+                    "visibility": true,
+                    "opacity":0
                 }
             ]
         },

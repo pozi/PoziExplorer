@@ -106,10 +106,49 @@ gxp.plugins.LayerTree.prototype.createOutputConfig = function() {
                                     app.mapPanel.map.getLayersByName(layersToSwitchOn[ltc])[0].setVisibility(true);
                                 }
                             }
+
+                            // Managing a change in the satellite imagery layer group
+                            // Clicking on a layer within this group should set this layer to be the one the slider acts on
+                            var layerGroup = JSONconf.layers[k].group;
+                            if (layerGroup == "aerial")
+                            {
+                                // Getting the opacity slider component
+                                var os = Ext.getCmp('geoExtOpacitySlider');
+                                // Getting the previous slider value
+                                var o = os.getValue();
+
+                                if (layerTitle != "No Aerial")
+                                {
+                                    // Setting layer for slider
+                                    os.setLayer(n.layer);
+                                    
+                                    // Setting value for slider
+                                    if (o == os.minValue)
+                                    {
+                                        // Aplying max value if previous value was 0
+                                        o = os.maxValue;
+                                        // The following behaviour is useful when manually switching back to a layer that
+                                        // has been slided to 0 previously. It set it to the maxValue but an artefact
+                                        // makes the slider looks like it goes back to 100, then back to 0.
+                                        // It is therefore a visual glitch (no impact on functionality) but we prefer to
+                                        // avoid it altogether and no set opacity to maxValue.
+                                        //os.setValue(o);
+                                    }
+                                    else
+                                    {
+                                        // Only applying previous visibility if it was non-null
+                                        os.setValue(o);
+                                    }
+                                }
+                                else
+                                {
+                                    os.setValue(os.minValue);
+                                }
+                            }
                         }                        
                     }
                 }
-              } 
+              }
 
               // If the node checkbox is clicked then we select the node
               if (c)

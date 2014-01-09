@@ -9,22 +9,35 @@
     
 GeoExt.LayerOpacitySlider.prototype.changeLayerVisibility = function(slider, value) {
   var currentVisibility = this.layer.getVisibility();
-  if ((this.inverse === false && value == this.minValue) || (this.inverse === true && value == this.maxValue) && currentVisibility === true) 
+  if ((this.inverse === false && value == this.minValue) || (this.inverse === true && value == this.maxValue)) 
+  {
+    if (currentVisibility)
     {
       this.layer.setVisibility(false);
+      this.layer.setOpacity(0);
 
       // Selecting the none layer within the aerial group
       for (l in app.mapPanel.map.layers) {
         if (app.mapPanel.map.layers[l].name == "No Aerial") {
+          app.mapPanel.map.layers[l].setOpacity(0);
           app.mapPanel.map.layers[l].setVisibility(true);
           break;
         }
-      }
-
-  } else if ((this.inverse === false && value > this.minValue) || (this.inverse === true && value < this.maxValue) && currentVisibility == false) 
-    {
-      this.layer.setVisibility(true);
+      }      
     }
+  } 
+  else 
+    if ((this.inverse === false && value > this.minValue) || (this.inverse === true && value < this.maxValue)) 
+    {
+      if (!currentVisibility)
+      {
+        this.layer.setVisibility(true);
+      }
+    }
+  else
+  {
+    //return true;
+  }
 };
 
 
