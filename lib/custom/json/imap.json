@@ -94,7 +94,6 @@
             "url": "/geoserver/IMAP/ows",
             "title": "IMAP Layers",
             "ptype": "gxp_wmscsource",
-            "infoFormat": "application/json",
             "tiled": false
         },
         "depi_wms_admin": {
@@ -103,7 +102,6 @@
             "ptype": "gxp_wmscsource",
             "defaultType": "image/png8",
             "transition": null,
-            "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true,
             "tiled": true
         },
@@ -113,7 +111,6 @@
             "ptype": "gxp_wmscsource",
             "defaultType": "image/png8",
             "transition": null,
-            "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true,
             "tiled": true
         },
@@ -122,7 +119,6 @@
             "title": "DEPI - Environment",
             "ptype": "gxp_wmscsource",
             "transition": null,
-            "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
         },
         "depi_wms_features": {
@@ -130,7 +126,6 @@
             "title": "DEPI - Features Of Interest",
             "ptype": "gxp_wmscsource",
             "transition": null,
-            "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
         },
         "depi_wms_planning": {
@@ -138,7 +133,6 @@
             "title": "DEPI - Planning",
             "ptype": "gxp_wmscsource",
             "transition": null,
-            "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
         },
         "depi_wms_property": {
@@ -146,7 +140,6 @@
             "title": "DEPI - Property",
             "ptype": "gxp_wmscsource",
             "transition": null,
-            "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
         },
         "depi_wms_cascaded": {
@@ -160,7 +153,6 @@
             "title": "DEPI - Topography",
             "ptype": "gxp_wmscsource",
             "transition": null,
-            "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
         },
         "depi_wms_transport": {
@@ -168,7 +160,6 @@
             "title": "DEPI - Transport",
             "ptype": "gxp_wmscsource",
             "transition": null,
-            "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
         },
         "bom_wms_geofabric": {
@@ -176,7 +167,6 @@
             "title": "BOM - Geofabric",
             "ptype": "gxp_wmscsource",
             "transition": null,
-            "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
         },
         "mapquest": {
@@ -200,7 +190,6 @@
             ],
             "title": "Pozi Data Server",
             "ptype": "gxp_wmscsource",
-            "infoFormat": "application/json",
             "transition": null
         }
     },

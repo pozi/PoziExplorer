@@ -102,7 +102,6 @@
             "ptype": "gxp_wmscsource",
             "defaultType": "image/png8",
             "transition": null,
-            "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true,
             "tiled": true
         },
@@ -112,7 +111,6 @@
             "ptype": "gxp_wmscsource",
             "defaultType": "image/png8",
             "transition": null,
-            "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true,
             "tiled": true
         },
@@ -121,7 +119,6 @@
             "title": "DEPI - Environment",
             "ptype": "gxp_wmscsource",
             "transition": null,
-            "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
         },
         "depi_wms_features": {
@@ -129,7 +126,6 @@
             "title": "DEPI - Features Of Interest",
             "ptype": "gxp_wmscsource",
             "transition": null,
-            "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
         },
         "depi_wms_planning": {
@@ -137,7 +133,6 @@
             "title": "DEPI - Planning",
             "ptype": "gxp_wmscsource",
             "transition": null,
-            "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
         },
         "depi_wms_property": {
@@ -145,7 +140,6 @@
             "title": "DEPI - Property",
             "ptype": "gxp_wmscsource",
             "transition": null,
-            "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
         },
         "depi_wms_cascaded": {
@@ -159,7 +153,6 @@
             "title": "DEPI - Topography",
             "ptype": "gxp_wmscsource",
             "transition": null,
-            "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
         },
         "depi_wms_transport": {
@@ -167,7 +160,6 @@
             "title": "DEPI - Transport",
             "ptype": "gxp_wmscsource",
             "transition": null,
-            "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
         },
         "local_cascaded_imagery": {
@@ -188,7 +180,6 @@
             "title": "BOM - Geofabric",
             "ptype": "gxp_wmscsource",
             "transition": null,
-            "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
         },
         "mapquest": {

@@ -101,7 +101,6 @@
             "title": "BOM - Geofabric",
             "ptype": "gxp_wmscsource",
             "transition": null,
-            "infoFormat": "application/json",
             "useGetCapabilitiesURLs": true
         },
         "mapquest": {

@@ -64,6 +64,7 @@
  * @require underscore.js
  *
  * @require overrides/OpenLayers/Control/WMSGetFeatureInfo.js
+ * @require overrides/OpenLayers/Format/XML.js
  *
  * @require overrides/gxp/plugins/Print.js
  * @require overrides/ext/widgets/grid/PropertyGrid.js

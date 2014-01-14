@@ -169,7 +169,7 @@ gxp.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                 if (infoFormat === undefined) {
                     // TODO: check if chosen format exists in infoFormats array
                     // TODO: this will not work for WMS 1.3 (text/xml instead for GML)
-                    infoFormat = "text/html";
+                    infoFormat = "application/json";
                 }
                 var control = new OpenLayers.Control.WMSGetFeatureInfo(Ext.applyIf({
                     url: (typeof layer.url == "object" ? layer.url[0] : layer.url), // Managing array of URLs
