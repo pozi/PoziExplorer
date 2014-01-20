@@ -1,4 +1,4 @@
-/* Copyright (c) 2006-2012 by OpenLayers Contributors (see authors.txt for 
+/* Copyright (c) 2006-2013 by OpenLayers Contributors (see authors.txt for
  * full list of contributors). Published under the 2-clause BSD license.
  * See license.txt in the OpenLayers distribution or repository for the
  * full text of the license. */
@@ -219,9 +219,6 @@ OpenLayers.Layer.GeoRSS = OpenLayers.Class(OpenLayers.Layer.Markers, {
             this.addMarker(marker);
         }
         this.events.triggerEvent("loadend");
-
-        // Hack to let the marker layer on top of other layers so that it's clickable
-        this.setZIndex(900);
     },
     
     /**

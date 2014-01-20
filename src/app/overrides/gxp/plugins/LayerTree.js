@@ -83,6 +83,11 @@ gxp.plugins.LayerTree.prototype.createOutputConfig = function() {
                         // Hack 1: we've had to add a title to the MapQuest layer for this piece of code to work on the MapQuest layer
                         // Hack 2: we've had to re-order the basemap layers so that Vicmap basemap is at the bottom
                         var layerTitleArgs = JSONconf.layers[k].args ? JSONconf.layers[k].args[0] : "";
+                        // Cater for WMTS layers where the layer name is the "name" attribute
+                        if (JSONconf.layers[k].args && JSONconf.layers[k].args[0].name)
+                        {
+                            layerTitleArgs = JSONconf.layers[k].args[0].name;
+                        }
                         var layerTitle = JSONconf.layers[k].title ? JSONconf.layers[k].title : layerTitleArgs;
                         // Checking if there is configuration for ...
                         if (layerTitle && (layerTitle == n.layer.name))
