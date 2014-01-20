@@ -46,6 +46,7 @@
  * @require OpenLayers/Layer/TMS.js
  * @require OpenLayers/Marker.js 
  * @require OpenLayers/Popup/Anchored.js 
+ * @require OpenLayers/Format/KML.js
  * @require OpenLayers/Format/GeoRSS.js
  * @require OpenLayers/Layer/GeoRSS.js
  * @require OpenLayers/Control/ScaleLine.js
