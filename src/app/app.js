@@ -49,6 +49,7 @@
  * @require OpenLayers/Popup/Anchored.js 
  * @require OpenLayers/Format/KML.js
  * @require OpenLayers/Format/GeoRSS.js
+ * @require OpenLayers/Format/KML.js
  * @require OpenLayers/Layer/GeoRSS.js
  * @require OpenLayers/Control/ScaleLine.js
  * @require OpenLayers/Control/Zoom.js

@@ -132,7 +132,7 @@ gxp.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
         }]);
         var infoButton = this.actions[0].items[0];
 
-        var info = {controls: []};
+        var info = {controls: [], controls2: []};
         var updateInfo = function() {
             var queryableLayers = this.target.mapPanel.layers.queryBy(function(x){
                 return x.get("queryable") &&
@@ -318,6 +318,109 @@ gxp.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                 control.activate(); // Always activate info control
             }, this);
 
+            // Now adding controls for each vector layer, after the getFeatureInfo control
+            // for proper stop prevention
+            for (var i = 0, len = info.controls2.length; i < len; i++){
+                control = info.controls2[i];
+                control.deactivate();  // TODO: remove when http://trac.openlayers.org/ticket/2130 is closed
+                control.destroy();
+            }
+
+            info.controls2 =[];
+            var clickableVectorLayers = this.target.mapPanel.layers.queryBy(function(x){
+                return x.get("layer").visibility &&
+                       x.get("layer").CLASS_NAME == "OpenLayers.Layer.Vector" &&
+                       (x.get("group") != "top");
+            });
+
+
+            clickableVectorLayers.each(function(x,idx){
+                var layer = x.getLayer();
+                if (layer.style)
+                {
+                    layer.style.strokeWidth = 10;
+                }
+                else if (layer.styleMap)
+                {
+                    layer.styleMap.styles.default.strokeWidth = 10;
+                }
+
+                // Redrawing with the updated style
+                layer.redraw();
+
+                // Adding controls for highlight and selection
+                var hc = new OpenLayers.Control.SelectFeature(layer, {
+                    hover: true,
+                    highlightOnly: true, 
+                    renderIntent: 'temporary',
+                    selectStyle: {
+                        fillOpacity: 0.5,
+                        fillColor: "#ffffff",
+                        strokeColor: "#ffffff",
+                        strokeWidth: 10,
+                        cursor: "pointer"
+                    }
+                });
+                var sc = new OpenLayers.Control.SelectFeature(layer,{
+                    handlerOptions:{
+                        'stopSingle': true 
+                    },
+                    onSelect: function(feature){
+                        var content = "<h2>"+feature.attributes.name + "</h2>";
+                        if (content.search("<script") != -1) {
+                            content = "Content contained Javascript! Escaped content below.<br>" + content.replace(/</g, "&lt;");
+                        }
+                        //alert(content);
+
+                        // We capture the attributes brought back by the WFS call
+                        var cont = feature.attributes;
+                        var typ = feature.layer.name;
+                        // Layer name (without namespace), to enable additional accordion panels
+                        var lay = feature.layer.name;
+                        // Label
+                        var lab = '';
+                        var fti_arr = JSONconf.layerPresentation[lay];
+                        // We select the right attribute as the label
+                        if (fti_arr) {
+                            // If the layer presentation is configured, we select the first configured field value
+                            lab = cont[fti_arr[0].attr_name];
+                        } else {
+                            for (l in cont) {
+                                // If not, we select the first field that comes along (provided it's not a geometry and it's value is non null)
+                                if (l != "the_geom" && l != "SHAPE" && l != "projection") {
+                                    var lab = cont[l];
+                                    if (lab) { break; }
+                                }
+                            }
+                        }
+                        // If too long for the drop down, we truncate the string to the space remaining after "<LAYER NAME>:"
+                        var num_char_in_drop_down = 38;
+                        if (lab.length > num_char_in_drop_down - typ.length) {
+                            lab = lab.substring(0, num_char_in_drop_down - typ.length - 2) + "..";
+                        }
+
+                        // Building a row and pushing it to an array
+                        row_array = new Array(0, typ, cont, 0, lab, lay);
+                        gComboDataArray.value.push(row_array);
+
+                        // Loading that in
+                        app.clearHighlight();
+                        app.getSelectionLayer().extraVars.WFS = false;
+                        gCombostore.loadData(gComboDataArray.value);
+                        gComboDataArray.value = [];
+
+                        // Required so that a user could click again on the feature
+                        this.unselectAll();
+                    }
+                });
+
+                // Adding and activating controls
+                map.addControls([hc,sc]);
+                info.controls2.push(hc);
+                info.controls2.push(sc);
+                hc.activate();
+                sc.activate();
+            });
         };
         
         this.target.mapPanel.layers.on("update", updateInfo, this);
