@@ -236,7 +236,8 @@
                 ],
                 {
                     "attribution": "&copy; 2013 Nokia</span>&nbsp;<a href='http://maps.nokia.com/services/terms' target='_blank' title='Terms of Use' style='color:#333;text-decoration: underline;'>Terms of Use</a></div> <img src='http://api.maps.nokia.com/2.2.4/assets/ovi/mapsapi/by_here.png' border='0'>",
-                    "transitionEffect": "resize"
+                    "transitionEffect": "resize",
+                    "isBaseLayer":true
                 }
             ]
         },
@@ -255,6 +256,7 @@
                     "projection" : new OpenLayers.Projection("EPSG:900913"),
                     "restrictedExtent" : new OpenLayers.Bounds(16077927,-4525170,16200223,-4402205),
                     "numZoomLevels": 20,
+                    "isBaseLayer": true,
                     "sphericalMercator" : true,
                     "getURL": function (bounds) {
                         var res = this.map.getResolution();
@@ -279,7 +281,7 @@
                 "tileSize": new OpenLayers.Size(512,512),
                 "style":"_null",
                 "zoomOffset":-5,
-                "isBaseLayer": false,
+                "isBaseLayer": true,
                 "sphericalMercator" : true,
                 "format":"image/png",
                 "matrixSet":"EPSG:3857_WEB_MERCATOR",
@@ -318,19 +320,6 @@
             "transparent": true,
             "cached": true,
             "transition": "resize"
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:LabelClassic",
-            "title": "Labels",
-            "visibility": true,
-            "opacity": 1,
-            "selected": false,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false,
-            "group": "top"
         },
         {
             "source": "ol",
@@ -467,27 +456,42 @@
             "tiled": false
         },
         {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
+            "source": "depi_wms_planning",
+            "name": "sii:VMPLAN.PLAN_OVERLAY",
             "title": "Planning Overlays",
             "visibility": false,
-            "opacity": 0.5,
+            "opacity": 0.75,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
-            "tiled": false
+            "tiled": false,
+            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-VMPLAN.PLAN_OVERLAY-DEPI.sld"
+        },
+        {
+            "source": "depi_wms_planning",
+            "name": "sii:VMPLAN.PLAN_ZONE",
+            "title": "Planning Zones",
+            "visibility": false,
+            "opacity": 0.75,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-VMPLAN.PLAN_ZONE-DEPI.sld"
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
-            "title": "Planning Zones",
-            "visibility": false,
-            "opacity": 0.5,
+            "name": "VICMAP_CLASSIC:LabelClassic",
+            "title": "Labels",
+            "visibility": true,
+            "opacity": 1,
+            "selected": false,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
-            "tiled": false
-        }
+            "tiled": false,
+            "group": "top"
+        }        
     ],
     "center": [
         16300325,

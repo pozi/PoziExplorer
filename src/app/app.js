@@ -65,6 +65,7 @@
  *
  * @require underscore.js
  *
+ * @require overrides/OpenLayers/Map.js
  * @require overrides/OpenLayers/Control/WMSGetFeatureInfo.js
  * @require overrides/OpenLayers/Format/XML.js
  *

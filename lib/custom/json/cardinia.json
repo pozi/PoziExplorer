@@ -190,7 +190,7 @@
             ],
             "title": "Pozi Data Server",
             "ptype": "gxp_wmscsource",
-            "transition": null
+            "transition": "resize"
         }
     },
     "layerPresentation": {
@@ -255,19 +255,6 @@
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:LabelClassic",
-            "title": "Labels",
-            "visibility": true,
-            "opacity": 1,
-            "selected": false,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false,
-            "group": "top"
-        },
-        {
-            "source": "basemap",
             "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_cardinia_mask",
             "title": "Municipal Boundary",
             "visibility": true,
@@ -278,135 +265,6 @@
             "tiled": false,
             "transition": "resize",
             "group": "top"
-        },
-        {
-            "source": "local_cascaded_imagery",
-            "name": "AERIAL_PORTPHILLIP-OUTER_2011DEC30_AIR_VIS_35CM_MGA55",
-            "title": "Aerial Photo (Port Phillip Outer, Dec 2011)",
-            "visibility": false,
-            "opacity": 0,
-            "format": "image/JPEG",
-            "tiled": true,
-            "group": "aerial",
-            "selected": false,
-            "transparent": true,
-            "styles": "",
-            "displayInOpacitySlider": true
-        },
-        {
-            "source": "local_cascaded_imagery",
-            "name": "AERIAL_PORTPHILLIP-OUTER_2011DEC30_AIR_CIR_35CM_MGA55",
-            "title": "Aerial Photo (Port Phillip Outer, Dec 2011, IR)",
-            "visibility": false,
-            "opacity": 1,
-            "format": "image/JPEG",
-            "tiled": true,
-            "group": "aerial",
-            "selected": false,
-            "transparent": true,
-            "styles": ""
-        },
-        {
-            "source": "local_cascaded_imagery",
-            "name": "AERIAL_CARDINIA_2009NOV09_AIR_VIS_15CM_MGA55",
-            "title": "Aerial Photo (Cardinia, Nov 2009)",
-            "visibility": false,
-            "opacity": 1,
-            "group": "aerial",
-            "selected": false,
-            "format": "image/JPEG",
-            "transparent": true,
-            "styles": ""
-        },
-        {
-            "source": "local_cascaded_imagery",
-            "name": "AERIAL_CARDINIA_2006NOV18_AIR_VIS_35CM_MGA55",
-            "title": "Aerial Photo (Cardinia, Nov 2006)",
-            "visibility": false,
-            "opacity": 1,
-            "format": "image/JPEG",
-            "tiled": true,
-            "group": "aerial",
-            "selected": false,
-            "transparent": true,
-            "styles": ""
-        },
-        {
-            "source": "local_cascaded_imagery",
-            "name": "AERIAL_PORTPHILLIP_2010DEC28_AIR_VIS_35CM_MGA55",
-            "title": "Aerial Photo (Port Phillip, Dec 2010)",
-            "visibility": false,
-            "opacity": 1,
-            "format": "image/JPEG",
-            "tiled": true,
-            "group": "aerial",
-            "selected": false,
-            "transparent": true,
-            "styles": ""
-        },
-        {
-            "source": "local_cascaded_imagery",
-            "name": "AERIAL_PAKENHAM_2010DEC30_AIR_VIS_10CM_MGA55",
-            "title": "Aerial Photo (Pakenham, Dec 2010)",
-            "visibility": false,
-            "opacity": 1,
-            "format": "image/JPEG",
-            "tiled": true,
-            "group": "aerial",
-            "selected": false,
-            "transparent": true,
-            "styles": ""
-        },
-        {
-            "source": "local_cascaded_imagery",
-            "name": "AERIAL_PAKENHAM_2011APR08_AIR_VIS_10CM_MGA55",
-            "title": "Aerial Photo (Pakenham, Apr 2011)",
-            "visibility": false,
-            "opacity": 1,
-            "format": "image/JPEG",
-            "tiled": true,
-            "group": "aerial",
-            "selected": false,
-            "transparent": true,
-            "styles": ""
-        },
-        {
-            "source": "local_cascaded_imagery",
-            "name": "AERIAL_PAKENHAM_2011AUG20_AIR_VIS_10CM_MGA55",
-            "title": "Aerial Photo (Pakenham, Aug 2011)",
-            "visibility": false,
-            "opacity": 1,
-            "format": "image/JPEG",
-            "tiled": true,
-            "group": "aerial",
-            "selected": false,
-            "transparent": true,
-            "styles": ""
-        },
-        {
-            "source": "local_cascaded_imagery",
-            "name": "AERIAL_PAKENHAM_2011DEC30_AIR_VIS_10CM_MGA55",
-            "title": "Aerial Photo (Pakenham, Dec 2011)",
-            "visibility": false,
-            "opacity": 1,
-            "format": "image/JPEG",
-            "tiled": true,
-            "group": "aerial",
-            "selected": false,
-            "transparent": true,
-            "styles": ""
-        },
-        {
-            "source": "ol",
-            "group": "aerial",
-            "fixed": true,
-            "type": "OpenLayers.Layer",
-            "args": [
-                "No Aerial",
-                {
-                    "visibility": true
-                }
-            ]
         },
         {
             "source": "local",
@@ -627,6 +485,148 @@
             "styles": "",
             "transparent": true,
             "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:LabelClassic",
+            "title": "Labels",
+            "visibility": true,
+            "opacity": 1,
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "group": "top"
+        },        
+        {
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_PORTPHILLIP-OUTER_2011DEC30_AIR_VIS_35CM_MGA55",
+            "title": "Aerial Photo (Port Phillip Outer, Dec 2011)",
+            "visibility": false,
+            "opacity": 0,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group": "aerial",
+            "selected": false,
+            "transparent": true,
+            "styles": "",
+            "displayInOpacitySlider": true
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_PORTPHILLIP-OUTER_2011DEC30_AIR_CIR_35CM_MGA55",
+            "title": "Aerial Photo (Port Phillip Outer, Dec 2011, IR)",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group": "aerial",
+            "selected": false,
+            "transparent": true,
+            "styles": ""
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_CARDINIA_2009NOV09_AIR_VIS_15CM_MGA55",
+            "title": "Aerial Photo (Cardinia, Nov 2009)",
+            "visibility": false,
+            "opacity": 1,
+            "group": "aerial",
+            "selected": false,
+            "format": "image/JPEG",
+            "transparent": true,
+            "styles": ""
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_CARDINIA_2006NOV18_AIR_VIS_35CM_MGA55",
+            "title": "Aerial Photo (Cardinia, Nov 2006)",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group": "aerial",
+            "selected": false,
+            "transparent": true,
+            "styles": ""
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_PORTPHILLIP_2010DEC28_AIR_VIS_35CM_MGA55",
+            "title": "Aerial Photo (Port Phillip, Dec 2010)",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group": "aerial",
+            "selected": false,
+            "transparent": true,
+            "styles": ""
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_PAKENHAM_2010DEC30_AIR_VIS_10CM_MGA55",
+            "title": "Aerial Photo (Pakenham, Dec 2010)",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group": "aerial",
+            "selected": false,
+            "transparent": true,
+            "styles": ""
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_PAKENHAM_2011APR08_AIR_VIS_10CM_MGA55",
+            "title": "Aerial Photo (Pakenham, Apr 2011)",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group": "aerial",
+            "selected": false,
+            "transparent": true,
+            "styles": ""
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_PAKENHAM_2011AUG20_AIR_VIS_10CM_MGA55",
+            "title": "Aerial Photo (Pakenham, Aug 2011)",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group": "aerial",
+            "selected": false,
+            "transparent": true,
+            "styles": ""
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_PAKENHAM_2011DEC30_AIR_VIS_10CM_MGA55",
+            "title": "Aerial Photo (Pakenham, Dec 2011)",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group": "aerial",
+            "selected": false,
+            "transparent": true,
+            "styles": ""
+        },
+        {
+            "source": "ol",
+            "group": "aerial",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "No Aerial",
+                {
+                    "visibility": true
+                }
+            ]
         }
     ],
     "center": [
