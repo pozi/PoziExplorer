@@ -237,11 +237,14 @@
             "source": "mapquest",
             "name": "osm",
             "visibility": false,
+            "title":"MapQuest OpenStreetMap",
+            "layersToTurnOffWhenShown":["Labels"],
             "group": "background"
         },
         {
             "source": "basemap",
             "name": "VICMAP_CLASSIC:VicmapClassic",
+            "layersToTurnOnWhenShown":["Labels"],
             "title": "Pozi Vicmap",
             "visibility": true,
             "opacity": 1,
@@ -252,19 +255,6 @@
             "transparent": true,
             "cached": true,
             "transition": "resize"
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_cardinia_mask",
-            "title": "Municipal Boundary",
-            "visibility": true,
-            "opacity": 0.6,
-            "format": "image/png8",
-            "styles": "white_polygon_311",
-            "transparent": true,
-            "tiled": false,
-            "transition": "resize",
-            "group": "top"
         },
         {
             "source": "local",
@@ -499,6 +489,19 @@
             "tiled": false,
             "group": "top"
         },        
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_cardinia_mask",
+            "title": "Municipal Boundary",
+            "visibility": true,
+            "opacity": 0.6,
+            "format": "image/png8",
+            "styles": "white_polygon_311",
+            "transparent": true,
+            "tiled": false,
+            "transition": "resize",
+            "group": "top"
+        },
         {
             "source": "local_cascaded_imagery",
             "name": "AERIAL_PORTPHILLIP-OUTER_2011DEC30_AIR_VIS_35CM_MGA55",
