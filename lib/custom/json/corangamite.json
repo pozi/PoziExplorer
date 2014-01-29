@@ -322,26 +322,28 @@
             "tiled": false
         },
         {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
+            "source": "depi_wms_planning",
+            "name": "sii:VMPLAN.PLAN_OVERLAY",
             "title": "Planning Overlays",
             "visibility": false,
-            "opacity": 0.5,
+            "opacity": 0.75,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
-            "tiled": false
+            "tiled": false,
+            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-VMPLAN.PLAN_OVERLAY-DEPI.sld"
         },
         {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
+            "source": "depi_wms_planning",
+            "name": "sii:VMPLAN.PLAN_ZONE",
             "title": "Planning Zones",
             "visibility": false,
-            "opacity": 0.5,
+            "opacity": 0.75,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
-            "tiled": false
+            "tiled": false,
+            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-VMPLAN.PLAN_ZONE-DEPI.sld"
         }
     ],
     "center": [
