@@ -235,7 +235,7 @@ buildNorthPart = function(JSONconf, gCombostore, helpers, tabExpand, gLayoutsArr
                                             var foundLayerArgs = foundLayer.get("args");
                                             if (foundLayerArgs && foundLayerArgs.length > 2)
                                             {
-                                                content = foundLayerArgs[2].abstract;
+                                                content = foundLayerArgs[2]["abstract"];
                                             }
                                         }
                                     }
