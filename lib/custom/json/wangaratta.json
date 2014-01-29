@@ -330,10 +330,10 @@
                 "CFA & MFB Current Incidents",
                 "http://osom.cfa.vic.gov.au/public/osom/IN_COMING.rss",
                 {
+                    "abstract":"<a href=\"http://www.emergency.vic.gov.au/map#now\" target=\"blank\">VicEmergency</a>",
                     "useFeedTitle": false,
                     "icon": new OpenLayers.Icon("theme/app/img/custom/fire-warning-alert.png", new OpenLayers.Size(40,40)),
-                    "projection": new OpenLayers.Projection("EPSG:4326"),
-                    "popupSize": new OpenLayers.Size(250,250)
+                    "projection": new OpenLayers.Projection("EPSG:4326")
                 }
             ]
         },

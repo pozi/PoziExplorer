@@ -226,7 +226,19 @@ buildNorthPart = function(JSONconf, gCombostore, helpers, tabExpand, gLayoutsArr
                                     ];
                                     var content = "";
                                     var foundLayer = app.getWMSLayerByName(record.get('layer'));
-                                    if (foundLayer) { content = foundLayer.get('abstract'); }
+                                    // The following part in case it wasn't a WMS layer
+                                    // In that case, abstract is sourced from the args configured
+                                    if (foundLayer) { 
+                                        content = foundLayer.get('abstract');
+                                        if (!content)
+                                        {
+                                            var foundLayerArgs = foundLayer.get("args");
+                                            if (foundLayerArgs && foundLayerArgs.length > 2)
+                                            {
+                                                content = foundLayerArgs[2].abstract;
+                                            }
+                                        }
+                                    }
                                     return '<p style="' + styles.join('') + '">' + content + '</p>';
                                 }()
                             },
