@@ -381,7 +381,8 @@
             "format": "image/GIF",
             "styles": "",
             "transparent": true,
-            "tiled": false
+            "tiled": false,
+            "minscale": 25000
         },
         {
             "source": "depi_wms_planning",
