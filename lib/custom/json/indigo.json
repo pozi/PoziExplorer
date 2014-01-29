@@ -216,11 +216,36 @@
             "source": "mapquest",
             "name": "osm",
             "visibility": false,
+            "title":"MapQuest OpenStreetMap",
+            "layersToTurnOffWhenShown":["Labels"],
             "group": "background"
+        },
+        {
+            "source": "ol",
+            "group": "background",
+            "visibility": false,
+            "fixed": true,
+            "layersToTurnOffWhenShown":["Labels"],
+            "type": "OpenLayers.Layer.XYZ",
+            "args": [
+                "Nokia Maps",
+                [
+                    "http://1.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ",
+                    "http://2.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ",
+                    "http://3.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ",
+                    "http://4.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ"
+                ],
+                {
+                    "attribution": "&copy; 2013 Nokia</span>&nbsp;<a href='http://maps.nokia.com/services/terms' target='_blank' title='Terms of Use' style='color:#333;text-decoration: underline;'>Terms of Use</a></div> <img src='http://api.maps.nokia.com/2.2.4/assets/ovi/mapsapi/by_here.png' border='0'>",
+                    "transitionEffect": "resize",
+                    "isBaseLayer":true
+                }
+            ]
         },
         {
             "source": "basemap",
             "name": "VICMAP_CLASSIC:VicmapClassic",
+            "layersToTurnOnWhenShown":["Labels"],
             "title": "Pozi Vicmap",
             "visibility": true,
             "opacity": 1,

@@ -217,6 +217,8 @@
             "source": "mapquest",
             "name": "osm",
             "visibility": false,
+            "title":"MapQuest OpenStreetMap",
+            "layersToTurnOffWhenShown":["Labels"],
             "group": "background"
         },
         {
