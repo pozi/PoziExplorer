@@ -6,8 +6,6 @@ helpers = function() {
         return /\d/.test(str);
     };
 
-
-
     return {
         objectSize: function(obj) {
             var size = 0, key;
@@ -67,6 +65,11 @@ helpers = function() {
             } else {
                 return "";
             }
+        },
+
+        // source: http://stackoverflow.com/questions/18082/validate-numbers-in-javascript-isnumeric
+        isNumber: function(n) {
+            return !isNaN(parseFloat(n)) && isFinite(n);
         }
 
     };

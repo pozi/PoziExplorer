@@ -261,14 +261,15 @@ gxp.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                                         // If not, we select the first field that comes along (provided it's not a geometry and it's value is non null)
                                         if (l != "the_geom" && l != "SHAPE" && l != "projection") {
                                             var lab = cont[l];
-                                            if (lab) { break; }
+                                            // Choosing the first property that is not entirely numeric
+                                            if (lab && !helpers.isNumber(lab)) { break; }
                                         }
                                     }
                                 }
                                 // If too long for the drop down, we truncate the string to the space remaining after "<LAYER NAME>:"
-                                var num_char_in_drop_down = 38;
-                                if (lab.length > num_char_in_drop_down - typ.length) {
-                                    lab = lab.substring(0, num_char_in_drop_down - typ.length - 2) + "..";
+                                var num_char_in_drop_down = 30;
+                                if (lab.length > num_char_in_drop_down) {
+                                    lab = lab.substring(0, num_char_in_drop_down - 2) + "..";
                                 }
 
                                 // Building a row and pushing it to an array

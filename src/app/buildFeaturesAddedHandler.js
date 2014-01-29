@@ -16,9 +16,9 @@ buildFeaturesAddedHandler = function(gComboDataArray, gCombostore) {
 
                 var o = app.getSelectionLayer().extraVars;
                 // If too long for the drop down, we truncate the string to the space remaining after "<LAYER NAME>:"
-                var num_char_in_drop_down = 38;
-                if (o.featureLabel.length > num_char_in_drop_down - o.featureType.length) {
-                    o.featureLabel = o.featureLabel.substring(0, num_char_in_drop_down - o.featureType.length - 2) + "..";
+                var num_char_in_drop_down = 30;
+                if (o.featureLabel.length > num_char_in_drop_down) {
+                    o.featureLabel = o.featureLabel.substring(0, num_char_in_drop_down - 2) + "..";
                 }
 
                 // Building a record and inserting it into an array
