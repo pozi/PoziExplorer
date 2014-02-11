@@ -1028,6 +1028,16 @@
             "tiled": false
         },
         {
+            "source": "depi_wms_environment",
+            "name": "sii:bushfire_prone_areas",
+            "title": "Bushfire Prone Areas",
+            "visibility": false,
+            "format": "image/png8",
+            "transparent": true,
+            "tiled": false,
+            "transition": "resize"
+        },
+        {
             "source": "depi_wms_planning",
             "name": "sii:VMPLAN.PLAN_OVERLAY",
             "title": "Planning Overlays",
