@@ -1,7 +1,7 @@
 buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSelectHandler, westPanel, eastPanel) {
 
     var logoHtml = function() {
-        var img ='<img style="height: 60px; padding: 20px;" src="' + JSONconf.logoClientSrc + '" />';
+        var img ='<img style="height: 70px; padding: 15px;" src="' + JSONconf.logoClientSrc + '" />';
         if (JSONconf.logoClientURL) { return '<a href="' + JSONconf.logoClientURL + '" target="_blank">' + img + '</a>'; }
         else { return img; }
     };
