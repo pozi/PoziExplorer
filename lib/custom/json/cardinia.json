@@ -686,6 +686,7 @@
     "workspace": "CARDINIA",
     "highlightSymboliser": {
         "name": "test",
+        "pointRadius":12,
         "strokeColor": "#FFA500",
         "strokeWidth": 20,
         "strokeOpacity": 0.5,
