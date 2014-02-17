@@ -49,7 +49,10 @@ addDefaultTabs = function(accordion, gLayoutsArr, JSONconf) {
 
     // Expanding the first tab if configured to do so
     if (JSONconf.openFirstDefaultTab) {
-        accordion.items.items[0].expand();
+        if (accordion.items.length)
+        {
+            accordion.items.items[0].expand();
+        }
     }
 
 };
