@@ -716,7 +716,7 @@
     "logoClientSrc": "theme/app/img/custom/cardinia_logo.png",
     "logoClientURL": "http://www.cardinia.vic.gov.au/",
     "zoomMax": 18,
-    "bannerLineColor": "#006699",
+    "bannerLineColor": "#20317F",
     "bannerRightCornerLine1": "Return to Community Compass web page",
     "bannerRightCornerLine2": "",
     "printMapTitle": "Cardinia Shire Council",
