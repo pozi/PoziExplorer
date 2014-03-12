@@ -283,7 +283,7 @@
             "visibility": true,
             "opacity": 0.6,
             "format": "image/png8",
-            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-VMADMIN.LGA_POLYGON.sld",
+            "sld": "http://general.pozi.com/gt_public_styles/sld/sii-VMADMIN.LGA_POLYGON.sld",
             "transparent": true,
             "tiled": false,
             "queryable": false,
@@ -297,7 +297,7 @@
             "visibility": false,
             "opacity": 1,
             "format": "image/png8",
-            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-DPS_932_RAIL_STATIONS_VMT.sld",
+            "sld": "http://general.pozi.com/gt_public_styles/sld/sii-DPS_932_RAIL_STATIONS_VMT.sld",
             "transparent": true,
             "tiled": false,
             "queryable": true,
@@ -311,7 +311,7 @@
             "visibility": false,
             "opacity": 0.8,
             "format": "image/png8",
-            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-DPS_1202_TRAIN_CORR_CENTL.sld",
+            "sld": "http://general.pozi.com/gt_public_styles/sld/sii-DPS_1202_TRAIN_CORR_CENTL.sld",
             "transparent": true,
             "tiled": false,
             "queryable": true,
@@ -325,7 +325,7 @@
             "visibility": false,
             "opacity": 0.8,
             "format": "image/png8",
-            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-DPS_969_TRAM_ROUTES_VMT.sld",
+            "sld": "http://general.pozi.com/gt_public_styles/sld/sii-DPS_969_TRAM_ROUTES_VMT.sld",
             "transparent": true,
             "tiled": false,
             "queryable": true,
@@ -339,7 +339,7 @@
             "visibility": false,
             "opacity": 0.8,
             "format": "image/png8",
-            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-DPS_955_METRO_BUS_ROUTES.sld",
+            "sld": "http://general.pozi.com/gt_public_styles/sld/sii-DPS_955_METRO_BUS_ROUTES.sld",
             "transparent": true,
             "tiled": false,
             "queryable": true,
@@ -453,7 +453,7 @@
             "transparent": true,
             "tiled": false,
             "minscale": 10000,
-            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-VSUP.ADDRESS_SDO.sld"
+            "sld": "http://general.pozi.com/gt_public_styles/sld/sii-VSUP.ADDRESS_SDO.sld"
         },
         {
             "source": "basemap",
@@ -477,7 +477,7 @@
             "styles": "",
             "transparent": true,
             "tiled": false,
-            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-VMPLAN.PLAN_OVERLAY-DEPI.sld"
+            "sld": "http://general.pozi.com/gt_public_styles/sld/sii-VMPLAN.PLAN_OVERLAY-DEPI.sld"
         },
         {
             "source": "depi_wms_planning",
@@ -489,7 +489,7 @@
             "styles": "",
             "transparent": true,
             "tiled": false,
-            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-VMPLAN.PLAN_ZONE-DEPI.sld"
+            "sld": "http://general.pozi.com/gt_public_styles/sld/sii-VMPLAN.PLAN_ZONE-DEPI.sld"
         }
     ],
     "center": [

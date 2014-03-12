@@ -528,8 +528,7 @@
             "format": "image/png8",
             "transparent": true,
             "tiled": true,
-            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-FLORAFAUNA1.NV2005_EVCBCS.sld"
-
+            "sld": "http://general.pozi.com/gt_public_styles/sld/sii-FLORAFAUNA1.NV2005_EVCBCS.sld"
         },
         {
             "group": "environment",
@@ -620,7 +619,7 @@
             "format": "image/png8",
             "transparent": true,
             "tiled": false,
-            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-CATCHMENTS.CMA100.sld"
+            "sld": "http://general.pozi.com/gt_public_styles/sld/sii-CATCHMENTS.CMA100.sld"
         },
         {
             "group": "planning",
@@ -1052,7 +1051,7 @@
             "styles": "",
             "transparent": true,
             "tiled": false,
-            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-VMPLAN.PLAN_OVERLAY-DEPI.sld"
+            "sld": "http://general.pozi.com/gt_public_styles/sld/sii-VMPLAN.PLAN_OVERLAY-DEPI.sld"
         },
         {
             "source": "depi_wms_planning",
@@ -1064,7 +1063,7 @@
             "styles": "",
             "transparent": true,
             "tiled": false,
-            "sld": "https://raw.github.com/groundtruth/gt_public_styles/master/sld/sii-VMPLAN.PLAN_ZONE-DEPI.sld"
+            "sld": "http://general.pozi.com/gt_public_styles/sld/sii-VMPLAN.PLAN_ZONE-DEPI.sld"
         },
         {
             "source": "local",
