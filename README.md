@@ -35,6 +35,18 @@ Be sure to run all `suite-sdk` commands using the project-specific version of
 the script (`./suite-sdk`). This will use the bundled version of the SDK
 (under `opengeo-suite-sdk/`) and the project specific `build.xml` file.
 
+## Windows notes
+
+* install OpenGeo Suite
+* copy SDK folder to C:\Tools *(note: may be possible to skip this step and set the environment variable and symlink (below) directly to the installed OpenGeo Suite)*
+* install ANT
+* install Java JDK
+* add environment variables in Path for:
+  * `C:\Tools\opengeo-suite-sdk\bin`
+  * `%ANT_HOME%\bin`
+  * `%JAVA_HOME%\bin`
+* replace `C:\Tools\opengeo-suite-sdk\build.xml` with symlink to `C:\Users\Simon\GitHub\PoziExplorer\build.xml`
+
 ## Other runtime dependencies
 
 This project expects to be able to use certain webservices.
