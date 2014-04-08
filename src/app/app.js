@@ -77,6 +77,7 @@
  * @require overrides/gxp/plugins/AddLayers.js
  * @require overrides/geoext/plugins/TreeNodeComponent.js
  * @require overrides/geoext/widgets/LayerOpacitySlider.js
+ * @require overrides/geoext/widgets/PrintMapPanel.js
  * @require overrides/gxp/plugins/LayerTree.js
  * @require overrides/gxp/plugins/Styler.js
  * @require overrides/gxp/plugins/WMSSource.js
