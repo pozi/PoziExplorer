@@ -459,7 +459,13 @@
             "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
             "storeMode": "pgsql",
             "storeName": "basemap"
-        }
+        },
+        {
+            "urlLayout": "http://general.pozi.com/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://general.pozi.com/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "pgsql",
+            "storeName": "westwimmeragis"
+        }        
     ],
     "logoClientSrc": "theme/app/img/custom/westwimmera_logo.gif",
     "zoomMax": 18,
