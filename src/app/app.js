@@ -15,6 +15,7 @@
  * @require plugins/RemoveLayer.js
  * @require plugins/WMSGetFeatureInfo.js
  * @require plugins/Print.js
+ * @require plugins/GoogleEarth.js
  * @require plugins/LayerProperties.js
  * @require plugins/Measure.js
  * @require plugins/FeatureEditor.js 
@@ -22,6 +23,7 @@
  * @require plugins/Styler.js 
  * @require widgets/WMSLayerPanel.js
  * @require widgets/ScaleOverlay.js
+ * @require widgets/GoogleEarthPanel.js
  * @require RowExpander.js
  * @require RowLayout.js
  * @require GeoExt/widgets/PrintMapPanel.js

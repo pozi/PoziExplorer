@@ -109,6 +109,10 @@ div.olControlZoom a:hover {
 	padding:1px 5px;
 }
 
+#toolPlaceHolder table {
+    float:left;
+}
+
 .selectedFeatureType {
 	font-size: 18px;
 	font-weight: bolder;

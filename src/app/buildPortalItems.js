@@ -199,17 +199,26 @@ buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSel
                                     style: {
                                         // Haven't bee able to find a configuration to replicate:
                                         //  div align='right'
+                                        display:'inline-block'
                                     },
-                                    width: 25
+                                    width: 48
                                 }
                             ]
                         },
                         {
                             xtype: "panel",
-                            layout: 'fit',
+                            layout: 'card',
+                            id: "panel",
                             border: false,
+                            activeItem: 0,
                             flex: 1,
-                            items: ["mymap"]
+                            items: [
+                                "mymap",
+                                {
+                                    xtype: 'gxp_googleearthpanel',
+                                    mapPanel: "mymap"
+                                }
+                            ]
                         }
                     ]
                 },
