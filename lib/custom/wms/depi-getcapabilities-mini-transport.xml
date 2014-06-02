@@ -156,7 +156,7 @@
       <SRS>EPSG:900913</SRS>
       <LatLonBoundingBox minx="113.15628800000002" miny="-43.86689143805745" maxx="154.308864108" maxy="-10.693111999655512"/>
       <Layer queryable="1">
-        <Name>sii:DPS_1202_TRAIN_CORR_CENTL_SDO</Name>
+        <Name>sii:RAEDATA.DPS_1202_TRAIN_CORR_CENTL</Name>
         <Title>Rail Corridors (DoT/PTV)</Title>
         <Abstract>DEPI WMS (DoT/PTV)</Abstract>
         <KeywordList>
@@ -173,7 +173,7 @@
           <Abstract>Default line style, 1 pixel wide blue</Abstract>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=DPS_1202_TRAIN_CORR_CENTL"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=RAEDATA.DPS_1202_TRAIN_CORR_CENTL"/>
           </LegendURL>
         </Style>
         <ScaleHint min="0.0" max="5000000.0"/>
@@ -358,7 +358,7 @@
         </Style>
       </Layer>
       <Layer queryable="1">
-        <Name>sii:DPS_932_RAIL_STATIONS_VMT_SDO</Name>
+        <Name>sii:RAEDATA.DPS_932_RAIL_STATIONS_VMT</Name>
         <Title>Railway Stations (DoT/PTV)</Title>
         <Abstract>DEPI WMS (DoT/PTV)</Abstract>
         <KeywordList>
@@ -375,7 +375,7 @@
           <Abstract/>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=DPS_932_RAIL_STATIONS_VMT"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=RAEDATA.DPS_932_RAIL_STATIONS_VMT"/>
           </LegendURL>
         </Style>
         <Style>
@@ -384,12 +384,12 @@
           <Abstract/>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=DPS_932_RAIL_STATIONS_VMT&amp;style=DOT_PTV_Railway_Station_1"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=RAEDATA.DPS_932_RAIL_STATIONS_VMT&amp;style=DOT_PTV_Railway_Station_1"/>
           </LegendURL>
         </Style>
       </Layer>
       <Layer queryable="1">
-        <Name>sii:DPS_955_METRO_BUS_ROUTES_SDO</Name>
+        <Name>sii:RAEDATA.DPS_955_METRO_BUS_ROUTES</Name>
         <Title>Metro Bus Routes (DoT/PTV)</Title>
         <Abstract>DEPI WMS (DoT/PTV)</Abstract>
         <KeywordList>
@@ -406,7 +406,7 @@
           <Abstract>Orange line, 2px wide</Abstract>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=DPS_955_METRO_BUS_ROUTES"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=RAEDATA.DPS_955_METRO_BUS_ROUTES"/>
           </LegendURL>
         </Style>
         <Style>
@@ -415,12 +415,12 @@
           <Abstract>Orange line, 2px wide</Abstract>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=DPS_955_METRO_BUS_ROUTES&amp;style=DOT_PTV_Bus_Network_1"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=RAEDATA.DPS_955_METRO_BUS_ROUTES&amp;style=DOT_PTV_Bus_Network_1"/>
           </LegendURL>
         </Style>
       </Layer>
       <Layer queryable="1">
-        <Name>sii:DPS_969_TRAM_ROUTES_SDO</Name>
+        <Name>sii:RAEDATA.DPS_969_TRAM_ROUTES_VMT</Name>
         <Title>Tram Routes (DoT/PTV)</Title>
         <Abstract>DEPI WMS (DoT/PTV)</Abstract>
         <KeywordList>
@@ -437,7 +437,7 @@
           <Abstract>Green lines, 3px wide</Abstract>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=DPS_969_TRAM_ROUTES_VMT"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=RAEDATA.DPS_969_TRAM_ROUTES_VMT"/>
           </LegendURL>
         </Style>
         <Style>
@@ -446,7 +446,7 @@
           <Abstract>Green lines, 3px wide</Abstract>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=DPS_969_TRAM_ROUTES_VMT&amp;style=DOT_PTV_Tram_Network_1"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=RAEDATA.DPS_969_TRAM_ROUTES_VMT&amp;style=DOT_PTV_Tram_Network_1"/>
           </LegendURL>
         </Style>
       </Layer>
