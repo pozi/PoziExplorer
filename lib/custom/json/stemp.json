@@ -158,10 +158,10 @@
         },
         "local_cascaded_imagery": {
             "url": [
-                "http://spatialemdata01.pozi.com/geoserver/SPATIALEMDATA/ows",
-                "http://spatialemdata02.pozi.com/geoserver/SPATIALEMDATA/ows",
-                "http://spatialemdata03.pozi.com/geoserver/SPATIALEMDATA/ows",
-                "http://spatialemdata04.pozi.com/geoserver/SPATIALEMDATA/ows"
+                "http://stemp01.pozi.com/geoserver/SPATIALEMDATA/ows",
+                "http://stemp02.pozi.com/geoserver/SPATIALEMDATA/ows",
+                "http://stemp03.pozi.com/geoserver/SPATIALEMDATA/ows",
+                "http://stemp04.pozi.com/geoserver/SPATIALEMDATA/ows"
             ],
             "title": "DEPI Image Web Server",
             "ptype": "gxp_wmscsource",
@@ -518,9 +518,9 @@
     "logoClientSrc": "theme/app/img/custom/semd_logo.png",
     "zoomMax": 18,
     "bannerLineColor": "#455660",
-    "bannerRightCornerLine1": "Spatial EM Data",
+    "bannerRightCornerLine1": "STEMP",
     "bannerRightCornerLine2": "Victoria, Australia",
-    "printMapTitle": "Spatial Emergency Management Data",
+    "printMapTitle": "STEMP",
     "linkToCouncilWebsite": "http://bendigo.vic.gov.au/",
     "collapseWestPanel": false,
     "openFirstDefaultTab": true
