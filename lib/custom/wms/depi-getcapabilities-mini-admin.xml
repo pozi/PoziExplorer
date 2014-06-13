@@ -156,6 +156,69 @@
       <SRS>EPSG:900913</SRS>
       <LatLonBoundingBox minx="113.15628800000002" miny="-43.86689143805745" maxx="154.308864108" maxy="-10.693111999655512"/>
       <Layer queryable="1">
+        <Name>sii:VMADMIN.CFA_DISTRICT</Name>
+        <Title>CFA Districts</Title>
+        <Abstract/>
+        <KeywordList>
+          <Keyword>ANZVI0803004176</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.96190245" miny="-39.136580958076145" maxx="149.97629085" maxy="-33.98135198212513"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.96190245" miny="-39.136580959" maxx="149.97629085" maxy="-33.981351983"/>
+        <Style>
+          <Name>VMADMIN_cfa_district_1</Name>
+          <Title>Default polygon style</Title>
+          <Abstract>CFA Districts</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/httpproxy/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=VMADMIN.CFA_DISTRICT"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.0" max="8000000.0"/>
+      </Layer>
+      <Layer queryable="1">
+        <Name>sii:VMADMIN.CFA_REGION</Name>
+        <Title>CFA Regions</Title>
+        <Abstract/>
+        <KeywordList>
+          <Keyword>ANZVI0803004175</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.96190245" miny="-39.13658095907615" maxx="149.97629085" maxy="-33.98135198212513"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.96190245" miny="-39.13658096" maxx="149.97629085" maxy="-33.981351983"/>
+        <Style>
+          <Name>VMADMIN_cfa_district_1</Name>
+          <Title>Default polygon style</Title>
+          <Abstract>CFA Districts</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/httpproxy/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=VMADMIN.CFA_REGION"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.0" max="8000000.0"/>
+      </Layer>
+      <Layer queryable="1">
+        <Name>sii:VMADMIN.CFA_TFB_DISTRICT</Name>
+        <Title>CFA Total Fireban Districts</Title>
+        <Abstract/>
+        <KeywordList>
+          <Keyword>ANZVI0803004761</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.96190245" miny="-39.136580958076145" maxx="149.97629085" maxy="-33.98135198212513"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.96190245" miny="-39.136580959" maxx="149.97629085" maxy="-33.981351983"/>
+        <Style>
+          <Name>VMADMIN_cfa_district_1</Name>
+          <Title>Default polygon style</Title>
+          <Abstract>CFA Districts</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/httpproxy/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=VMADMIN.CFA_TFB_DISTRICT"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.0" max="8000000.0"/>
+      </Layer>
+      <Layer queryable="1">
         <Name>sii:VMADMIN.DSE_REGION</Name>
         <Title>DSE Regions</Title>
         <Abstract>DEPI WMS</Abstract>
