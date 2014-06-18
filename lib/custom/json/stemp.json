@@ -19,6 +19,11 @@
                     "collapsed": true
                 },
                 "default": "Overlays",
+                "aerial": {
+                    "title": "Aerial Photos",
+                    "collapsed": true,
+                    "exclusive": true
+                },
                 "background": {
                     "title": "Base Maps",
                     "exclusive": true,
@@ -158,10 +163,10 @@
         },
         "local_cascaded_imagery": {
             "url": [
-                "http://stemp01.pozi.com/geoserver/SPATIALEMDATA/ows",
-                "http://stemp02.pozi.com/geoserver/SPATIALEMDATA/ows",
-                "http://stemp03.pozi.com/geoserver/SPATIALEMDATA/ows",
-                "http://stemp04.pozi.com/geoserver/SPATIALEMDATA/ows"
+                "http://stemp01.pozi.com/geoserver/SEMD/ows",
+                "http://stemp02.pozi.com/geoserver/SEMD/ows",
+                "http://stemp03.pozi.com/geoserver/SEMD/ows",
+                "http://stemp04.pozi.com/geoserver/SEMD/ows"
             ],
             "title": "DEPI Image Web Server",
             "ptype": "gxp_wmscsource",
@@ -213,6 +218,31 @@
                 "None",
                 {
                     "visibility": false
+                }
+            ]
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_LODDON_2009APR14_AIR_VIS_35CM_MGA54",
+            "title": "Aerial Photo (CIP 2009)",
+            "visibility": false,
+            "opacity": 0,
+            "group": "aerial",
+            "selected": false,
+            "format": "image/JPEG",
+            "transparent": true,
+            "displayInOpacitySlider": true
+        },
+        {
+            "source": "ol",
+            "group": "aerial",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "No Aerial",
+                {
+                    "visibility": true,
+                    "opacity":0
                 }
             ]
         },
