@@ -203,7 +203,11 @@ GeoExt.PrintMapPanel = Ext.extend(GeoExt.MapPanel, {
                     }
 
                     // Overriding the style here
-                    console.log("Vector layer: "+layer.name);
+                    if (window.console)
+                    {
+                        console.log("Vector layer: "+layer.name);
+                    }
+                    
                     if (vector.name == "Selection")
                     {
                         vector.style = OpenLayers.Util.applyDefaults(
