@@ -219,10 +219,10 @@
         },
         "local_cascaded_imagery": {
             "url": [
-                "http://mitchell01.pozi.com/geoserver/MITCHELL/ows",
-                "http://mitchell02.pozi.com/geoserver/MITCHELL/ows",
-                "http://mitchell03.pozi.com/geoserver/MITCHELL/ows",
-                "http://mitchell04.pozi.com/geoserver/MITCHELL/ows"
+                "http://mitchell01.pozi.com/geoserver/MITCHELL_IWS/ows",
+                "http://mitchell02.pozi.com/geoserver/MITCHELL_IWS/ows",
+                "http://mitchell03.pozi.com/geoserver/MITCHELL_IWS/ows",
+                "http://mitchell04.pozi.com/geoserver/MITCHELL_IWS/ows"
             ],
             "title": "DEPI Image Web Server",
             "ptype": "gxp_wmscsource",
