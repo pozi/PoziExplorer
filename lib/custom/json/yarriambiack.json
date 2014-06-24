@@ -19,6 +19,11 @@
                     "collapsed": true
                 },
                 "default": "Overlays",
+                "aerial": {
+                    "title": "Aerial Photo",
+                    "collapsed": true,
+                    "exclusive": true
+                },
                 "background": {
                     "title": "Base Maps",
                     "exclusive": true
@@ -215,7 +220,7 @@
             "source": "local_cascaded_imagery",
             "name": "AERIAL_MALLEE_2009JAN14_AIR_VIS_50CM_MGA54",
             "title": "Aerial Photo (Mallee CMA, Jan 2009)",
-            "opacity": 1,
+            "opacity": 0,
             "group": "aerial",
             "format": "image/JPEG",
             "tiled": true,
@@ -229,7 +234,7 @@
             "source": "local_cascaded_imagery",
             "name": "AERIAL_WIMMERA-CMA_2004NOV01_AIR_VIS_60CM_MGA54",
             "title": "Aerial Photo (Wimmera CMA, Nov 2004)",
-            "opacity": 1,
+            "opacity": 0,
             "group": "aerial",
             "format": "image/JPEG",
             "tiled": true,
