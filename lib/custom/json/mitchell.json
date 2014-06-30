@@ -49,11 +49,6 @@
                     "collapsed": true,
                     "exclusive": false
                 },
-                "local_laws": {
-                    "title": "Local Laws",
-                    "collapsed": true,
-                    "exclusive": false
-                },
                 "environment": {
                     "title": "Environment",
                     "collapsed": true,
@@ -728,106 +723,6 @@
             "tiled": false
         },
         {
-            "group": "local_laws",
-            "source": "local",
-            "name": "vw_gt_property_animal",
-            "title": "Animal Registrations",
-            "visibility": false,
-            "format": "image/png8",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "group": "local_laws",
-            "source": "local",
-            "name": "vw_gt_property_building_permit",
-            "title": "Building Permits",
-            "visibility": false,
-            "format": "image/png8",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "group": "local_laws",
-            "source": "local",
-            "name": "vw_gt_property_food_premise",
-            "title": "Food Premises",
-            "visibility": false,
-            "format": "image/png8",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "group": "local_laws",
-            "source": "local",
-            "name": "MSC_CAPTURE",
-            "title": "Fire Inspection Hazards 2012",
-            "visibility": false,
-            "format": "image/png8",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "group": "local_laws",
-            "source": "local",
-            "name": "vw_gt_property_local_laws_permit",
-            "title": "Local Laws Permits",
-            "visibility": false,
-            "format": "image/png8",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "group": "local_laws",
-            "source": "local",
-            "name": "vw_gt_property_occupancy_permit",
-            "title": "Occupancy Permits",
-            "visibility": false,
-            "format": "image/png8",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "group": "local_laws",
-            "source": "local",
-            "name": "vw_gt_property_plan_permit",
-            "title": "Planning Permits",
-            "visibility": false,
-            "format": "image/png8",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "group": "local_laws",
-            "source": "local",
-            "name": "vw_gt_property_registered_premise",
-            "title": "Registered Premises",
-            "visibility": false,
-            "format": "image/png8",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "group": "local_laws",
-            "source": "local",
-            "name": "vw_gt_property_septic_tank_permit",
-            "title": "Septic Tank Permits",
-            "visibility": false,
-            "format": "image/png8",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "group": "assets_and_engineering",
-            "source": "local",
-            "name": "MSC_ASSETS_BRIDGE",
-            "title": "Conquest Bridges",
-            "visibility": false,
-            "format": "image/png8",
-            "transparent": true,
-            "tiled": false
-        },
-        {
             "group": "assets_and_engineering",
             "source": "local",
             "name": "msc_conquest_buildings",
@@ -852,16 +747,6 @@
             "source": "local",
             "name": "msc_conquest_drainage_pits",
             "title": "Conquest Drainage Pits",
-            "visibility": false,
-            "format": "image/png8",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "group": "assets_and_engineering",
-            "source": "local",
-            "name": "MSC_ASSETS_FOOTPATH",
-            "title": "Conquest Footpaths",
             "visibility": false,
             "format": "image/png8",
             "transparent": true,
@@ -915,17 +800,6 @@
             "title": "Rail Trail",
             "visibility": false,
             "format": "image/png8",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "local",
-            "name": "MSC_ASSETS_ROAD",
-            "title": "Roads (Assets)",
-            "visibility": false,
-            "opacity": 0.85,
-            "format": "image/png8",
-            "styles": "",
             "transparent": true,
             "tiled": false
         },
