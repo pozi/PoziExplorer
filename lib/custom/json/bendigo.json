@@ -330,6 +330,17 @@
             "group": "top"
         },
         {
+            "source": "local",
+            "name": "VW_CGB_ROADS",
+            "title": "Roads (Responsible Authority)",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
             "source": "basemap",
             "name": "VICMAP_CLASSIC:vw_gt_vmfeat_foi_transfer_station",
             "title": "Transfer Stations",
