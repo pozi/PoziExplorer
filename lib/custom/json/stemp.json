@@ -18,9 +18,29 @@
                     "title": "Surface Layers",
                     "collapsed": true
                 },
+                "assets": {
+                    "title": "Assets of Special Interest",
+                    "collapsed": true
+                },
+                "coping": {
+                    "title": "Coping Capacity",
+                    "collapsed": true
+                },
+                "critical": {
+                    "title": "Critical Infrastructure",
+                    "collapsed": true
+                },
+                "hazard": {
+                    "title": "Hazard Thematic",
+                    "collapsed": true
+                },
+                "social": {
+                    "title": "Social Vulnerability Thematic",
+                    "collapsed": true
+                },
                 "default": "Overlays",
                 "aerial": {
-                    "title": "Aerial Photos",
+                    "title": "Aerial Imagery",
                     "collapsed": true,
                     "exclusive": true
                 },
@@ -361,6 +381,19 @@
             "group": "top"
         },
         {
+            "source": "local",
+            "name": "vw_relief_centre",
+            "title": "Relief Centres",
+            "visibility": false,
+            "opacity": 0.9,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "transition": "resize",
+            "group": "assets"
+        },
+        {
             "source": "depi_wms_admin",
             "name": "sii:VMADMIN.LGA_POLYGON",
             "title": "LGAs",
@@ -516,7 +549,7 @@
         -4369431
     ],
     "zoom": 9,
-    "workspace": "SEMD",
+    "workspace": "STEMP",
     "highlightSymboliser": {
         "name": "test",
         "strokeColor": "#455660",
