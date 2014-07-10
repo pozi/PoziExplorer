@@ -281,13 +281,13 @@
             "group": "top"
         },
         {
-            "source": "depi_wms_admin",
-            "name": "sii:VMADMIN.LGA_POLYGON",
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmadmin_lga_polygon",
             "title": "LGAs",
             "visibility": true,
             "opacity": 0.6,
             "format": "image/png8",
-            "sld": "http://general.pozi.com/gt_public_styles/sld/sii-VMADMIN.LGA_POLYGON.sld",
+            "sld": "http://general.pozi.com/gt_public_styles/sld/VICMAP_CLASSIC-dse_vmadmin_lga_polygon.sld",
             "transparent": true,
             "tiled": false,
             "queryable": false,
