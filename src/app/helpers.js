@@ -21,12 +21,31 @@ helpers = function() {
                 {
                     str = str.toString();
                 }
-                return str.replace(
-                    /\w\S*/g,
-                    function(txt) {
-                        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                    }
-                );
+
+                var exceptLabs = {
+                    "dtpli report":"DTPLI Report",
+                    "pfi":"PFI",
+                    "spi":"SPI",
+                    "area (m2)":"Area (m<sup>2</sup>)",
+                    "area (ha)":"Area (ha)",
+                    "crefno":"CrefNo",
+                    "council id":"Council ID",
+                    "id":"ID"
+                };
+
+                if (exceptLabs[str.toLowerCase()])
+                {
+                    return exceptLabs[str.toLowerCase()];
+                }
+                else
+                {
+                    return str.replace(
+                        /\w\S*/g,
+                        function(txt) {
+                            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                        }
+                    );
+                }
             }
             else
             {
