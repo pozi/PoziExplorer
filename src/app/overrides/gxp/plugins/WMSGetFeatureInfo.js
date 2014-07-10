@@ -188,6 +188,13 @@ gxp.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                                 var wktGeom = OpenLayers.Geometry.fromWKT(wkt).transform(WGS84, map.projection);
                                 return wktGeom.intersects(clickGeom) ? 0.0 : wktGeom.distanceTo(clickGeom);
                             };
+
+                            var bboxSize = function(wkt) {
+                                var WGS84 = "EPSG:4326";
+                                var wktGeom = OpenLayers.Geometry.fromWKT(wkt).transform(WGS84, map.projection);
+                                var geomSize = wktGeom.getBounds().getSize();
+                                return geomSize.h * geomSize.w;
+                            };
                         
                             layerCounter = layerCounter + 1;
                             var idx = 0;
@@ -289,9 +296,14 @@ gxp.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                                     var cb = Ext.getCmp('gtInfoCombobox');
                                     if (cb.disabled) { cb.enable(); }
                                     gComboDataArray.value.sort(function(a, b) {
+                                        // Ordering by layer order
                                         var layerComparison = b[3] - a[3];
+                                        // Within the same layer, ordering by distance to the click
                                         var distanceComparison = distanceOfWKTFromClick(a[2]["the_geom"]) - distanceOfWKTFromClick(b[2]["the_geom"]);
-                                        return layerComparison !== 0 ? layerComparison : distanceComparison;
+                                        // At equal distance to the click, ordering by smaller BBOX first
+                                        var bboxComparison = bboxSize(a[2]["the_geom"]) - bboxSize(b[2]["the_geom"]);
+                                        
+                                        return layerComparison !== 0 ? layerComparison : (distanceComparison !== 0 ? distanceComparison : bboxComparison);
                                     });
                                     app.getSelectionLayer().extraVars.WFS = false;
                                     gCombostore.loadData(gComboDataArray.value);
