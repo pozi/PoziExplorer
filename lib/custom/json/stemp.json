@@ -552,6 +552,7 @@
     "workspace": "STEMP",
     "highlightSymboliser": {
         "name": "test",
+        "pointRadius":12,
         "strokeColor": "#455660",
         "strokeWidth": 10,
         "strokeOpacity": 0.5,

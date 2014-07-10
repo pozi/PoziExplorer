@@ -1318,7 +1318,7 @@
     "workspace": "MITCHELL",
     "highlightSymboliser": {
         "name": "test",
-        "pointRadius":15,
+        "pointRadius":12,
         "strokeColor": "#FFA500",
         "strokeWidth": 10,
         "strokeOpacity": 0.5,

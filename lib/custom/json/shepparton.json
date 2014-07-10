@@ -502,6 +502,7 @@
     "workspace": "SHEPPARTON",
     "highlightSymboliser": {
         "name": "test",
+        "pointRadius":12,
         "strokeColor": "#007DC6",
         "strokeWidth": 10,
         "strokeOpacity": 0.5,

@@ -504,8 +504,9 @@
     "workspace": "IMAP",
     "highlightSymboliser": {
         "name": "test",
+        "pointRadius":12,
         "strokeColor": "#007B82",
-        "strokeWidth": 20,
+        "strokeWidth": 10,
         "strokeOpacity": 0.5,
         "fillColor": "#007B82",
         "fillOpacity": 0.2

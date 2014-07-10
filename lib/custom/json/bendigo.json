@@ -418,8 +418,9 @@
     "workspace": "BENDIGO",
     "highlightSymboliser": {
         "name": "test",
+        "pointRadius":12,
         "strokeColor": "#AF291D",
-        "strokeWidth": 20,
+        "strokeWidth": 10,
         "strokeOpacity": 0.5,
         "fillColor": "#AF291D",
         "fillOpacity": 0.2
