@@ -22,7 +22,8 @@
                 "aerial": {
                     "title": "Aerial Photo",
                     "collapsed": true,
-                    "exclusive": true
+                    "exclusive": true,
+                    "displayInOpacitySlider": true
                 },
                 "background": {
                     "title": "Base Maps",

@@ -148,3 +148,15 @@ div.olMap {
 .x-tree-node, .x-grid3-cell-inner {
 	font-size: 13px;
 }
+
+#opacitySliderCombo {
+    font-size: 16px;
+    border-color:#848484;
+    border-width: 2px;
+    height: 20px !important;
+    background-image: url(img/panel/down_arrow_grey.png);
+    background-repeat:no-repeat;
+    background-position:99% 50%;
+    font-family: tahoma,arial,verdana,sans-serif;
+    color:#6E6E6E;
+}

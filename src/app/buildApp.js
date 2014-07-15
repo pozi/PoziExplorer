@@ -74,12 +74,74 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
             .value();
     };
 
-    app.getLayerForOpacitySlider = function() {
+    app.getDefaultLayerForOpacitySlider = function() {
         var layerConfForOpacitySlider = _(JSONconf.layers).find(function(layerConf) { 
             return layerConf.displayInOpacitySlider; 
         });
         if (layerConfForOpacitySlider) {
             return app.getLayerByName(layerConfForOpacitySlider.title);
+        }
+    };
+
+    app.getLayersByName = function(nameArray) {
+        var filteredLayersByName = _(app.mapPanel.map.layers).filter(function(layer) {
+            return nameArray.indexOf(layer.name) > -1;
+        });
+
+        var idValLayers = _.map(filteredLayersByName,function(l){
+            return {id: l.id, val: l.name };
+        });
+
+        var groupConfig;
+        _(JSONconf.tools).find(function(tool){
+            if (tool.ptype == 'gxp_layermanager')
+            {
+                groupConfig = tool.groups;
+            }
+        });
+
+        for (l in idValLayers){
+            var layerConf = _(JSONconf.layers).find(function(layer) {
+                return layer.title == idValLayers[l].val;
+            });
+
+            // Adding properties required for proper processing of exclusive groups
+            idValLayers[l].group = layerConf.group;
+            idValLayers[l].exclusive = groupConfig[layerConf.group].exclusive;
+        };
+
+        return idValLayers;
+    };
+
+    app.getLayersForOpacitySlider = function() {
+        var groupsToDisplay = [];
+
+        _(JSONconf.tools).find(function(tool){
+            if (tool.ptype == 'gxp_layermanager')
+            {
+                for (g in tool.groups){
+                    if (tool.groups[g].displayInOpacitySlider)
+                    {
+                        groupsToDisplay.push(g);
+                    }                    
+                }
+            }
+        });
+
+        //console.log("Groups to display:"+groupsToDisplay);
+
+        var layersForOpacitySlider = _(JSONconf.layers).filter(function(layerConf) { 
+            if (layerConf.group && groupsToDisplay)
+            {
+                return groupsToDisplay.indexOf(layerConf.group)>-1;
+            }
+        });
+        var layerNameArray = _.map(layersForOpacitySlider,function(l){
+            return l.title;
+        });
+
+        if (layerNameArray) {
+            return app.getLayersByName(layerNameArray);
         }
     };
 

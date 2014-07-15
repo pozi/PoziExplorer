@@ -115,6 +115,20 @@ gxp.plugins.LayerTree.prototype.createOutputConfig = function() {
                             // Managing a change in the satellite imagery layer group
                             // Clicking on a layer within this group should set this layer to be the one the slider acts on
                             var layerGroup = JSONconf.layers[k].group;
+
+                            // Setting the layer in the drop down
+                            var osc = Ext.getCmp('opacitySliderCombo');
+
+                            var valInOsc = _(osc.getStore().data.items).find(function(ddopt){
+                                return ddopt.json.val = layerTitle;
+                            })
+
+                            // Synchronising the title with the drop down
+                            if (valInOsc && layerTitle != "No Aerial" && layerTitle != "None")
+                            {
+                                osc.setValue(layerTitle);
+                            }
+
                             if (layerGroup == "aerial")
                             {
                                 // Getting the opacity slider component
@@ -126,7 +140,7 @@ gxp.plugins.LayerTree.prototype.createOutputConfig = function() {
                                 {
                                     // Setting layer for slider
                                     os.setLayer(n.layer);
-                                    
+                                   
                                     // Setting value for slider
                                     if (o == os.minValue)
                                     {
