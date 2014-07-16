@@ -153,7 +153,8 @@ div.olMap {
     font-size: 16px;
     border-color:#848484;
     border-width: 2px;
-    height: 20px !important;
+    height: 18px !important;
+    margin: 3px;
     background-image: url(img/panel/down_arrow_grey.png);
     background-repeat:no-repeat;
     background-position:99% 50%;
