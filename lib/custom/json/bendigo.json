@@ -19,6 +19,12 @@
                     "collapsed": true
                 },
                 "default": "Overlays",
+                "aerial": {
+                    "title": "Aerial Photos",
+                    "collapsed": true,
+                    "exclusive": true,
+                    "displayInOpacitySlider": true
+                },
                 "background": {
                     "title": "Base Maps",
                     "exclusive": true
@@ -62,6 +68,7 @@
         },
         {
             "ptype": "gxp_print",
+            "actionTarget": "toolPlaceHolder",
             "customParams": {
                 "outputFilename": "PoziExplorer-print"
             },
@@ -74,6 +81,7 @@
         },
         {
             "ptype": "gxp_measure",
+            "actionTarget": "toolPlaceHolder",
             "toggleGroup": "interaction",
             "controlOptions": {
                 "immediate": true
@@ -408,6 +416,20 @@
             "transparent": true,
             "tiled": false,
             "sld": "http://general.pozi.com/gt_public_styles/sld/sii-VMPLAN.PLAN_ZONE-DEPI.sld"
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "towns_bendigo_2013mar05_air_vis_20cm_mga55",
+            "title": "Aerial Photo (Bendigo, Mar 2013)",
+            "visibility": false,
+            "opacity": 0,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group": "aerial",
+            "selected": false,
+            "transparent": true,
+            "styles": "",
+            "displayInOpacitySlider": true
         }
     ],
     "center": [

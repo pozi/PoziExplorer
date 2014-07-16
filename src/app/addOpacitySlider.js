@@ -53,6 +53,8 @@ addOpacitySlider = function(app) {
                     'select': function(combo, record) {
                         // Modifying the layer controlled by the opacity slider
                         var os = Ext.getCmp('geoExtOpacitySlider');
+                        var o = os.getValue();
+
                         var layerSelected = app.mapPanel.map.getLayersByName(record.get("val"))[0];
                         os.setLayer(layerSelected);
 
@@ -73,10 +75,18 @@ addOpacitySlider = function(app) {
                         // Set the opacity to the max if it's not set high enough to show the selected item
                         if (record.get("val") != "No Aerial")
                         {
-                            var o = os.getValue();
                             if (o <= os.minValue)
                             {
                                 os.setValue(os.maxValue);
+                            }
+                            else
+                            {
+                                // If in an exclusive group, we re-use the previous value
+                                // That wouldn't be true in a non-exclusive group
+                                if (record.get("exclusive"))
+                                {
+                                    os.setValue(o);
+                                }
                             }
                         }
                     },
@@ -87,8 +97,12 @@ addOpacitySlider = function(app) {
 
         _([
             firstItem,
-            new Ext.Toolbar.Spacer({ width: 8 }),
-            new GeoExt.LayerOpacitySlider({ id:'geoExtOpacitySlider', layer: defaultLayer, aggressive: true, width: 100, changeVisibility: true })
+            new Ext.Toolbar.Spacer({ width: 15 }),
+            new Ext.Component({ html: '<img style="width: 20px;" class="transparentImg1" src="theme/app/img/panel/map.svg"/>' }),
+            new Ext.Toolbar.Spacer({ width: 4 }),
+            new GeoExt.LayerOpacitySlider({ id:'geoExtOpacitySlider', layer: defaultLayer, aggressive: true, width: 100, changeVisibility: true }),
+            new Ext.Toolbar.Spacer({ width: 4 }),
+            new Ext.Component({ html: '<img style="width: 20px;" class="transparentImg2" src="theme/app/img/panel/map.svg"/>' })
         ]).each(function(newItem) {
             app.getToolbar().items.add(newItem);
         });

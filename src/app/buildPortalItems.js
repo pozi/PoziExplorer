@@ -9,6 +9,15 @@ buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSel
     // Returns an array of stores, the first of which is the aggregated store
     var searchStores = buildAllFeaturesDataStore(JSONconf);
 
+    // Calculating the tool placeholder width based on the number of tools to fit
+    var toolWidth = 0;
+    _(JSONconf.tools).each(function(tool){
+        if (tool.actionTarget == "toolPlaceHolder")
+        {
+            if (tool.ptype == "gxp_measure") {toolWidth += 36;} else {toolWidth += 24;}
+        }  
+    });
+
     var portalItems = [
         {
             region: "north",
@@ -201,7 +210,7 @@ buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSel
                                         //  div align='right'
                                         display:'inline-block'
                                     },
-                                    width: 48
+                                    width: toolWidth
                                 }
                             ]
                         },

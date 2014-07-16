@@ -86,6 +86,7 @@
         },
         {
             "ptype": "gxp_measure",
+            "actionTarget": "toolPlaceHolder",
             "toggleGroup": "interaction",
             "controlOptions": {
                 "immediate": true

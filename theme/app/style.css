@@ -161,3 +161,20 @@ div.olMap {
     font-family: tahoma,arial,verdana,sans-serif;
     color:#6E6E6E;
 }
+
+.transparentImg1 {
+    zoom: 1;
+    filter: alpha(opacity=10);
+    opacity: 0.10;    
+}
+
+.transparentImg2 {
+    zoom: 1;
+    filter: alpha(opacity=40);
+    opacity: 0.4;    
+}
+
+.x-combo-list-item.layer-item {
+    height: 16px;
+    line-height: 16px;
+}

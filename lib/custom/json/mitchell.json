@@ -121,6 +121,7 @@
         },
         {
             "ptype": "gxp_measure",
+            "actionTarget": "toolPlaceHolder",
             "toggleGroup": "interaction",
             "controlOptions": {
                 "immediate": true
@@ -129,11 +130,13 @@
         },
         {
             "ptype": "gxp_featuremanager",
+            "actionTarget": "toolPlaceHolder",
             "id": "featuremanager",
             "maxFeatures": 20
         },
         {
             "ptype": "gxp_featureeditor",
+            "actionTarget": "toolPlaceHolder",
             "featureManager": "featuremanager",
             "autoLoadFeature": true,
             "toggleGroup": "interaction"

@@ -68,6 +68,7 @@
         },
         {
             "ptype": "gxp_print",
+            "actionTarget": "toolPlaceHolder",
             "customParams": {
                 "outputFilename": "PoziExplorer-print"
             },
@@ -80,6 +81,7 @@
         },
         {
             "ptype": "gxp_measure",
+            "actionTarget": "toolPlaceHolder",
             "toggleGroup": "interaction",
             "controlOptions": {
                 "immediate": true
