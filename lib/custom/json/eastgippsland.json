@@ -1,0 +1,448 @@
+{
+    "servicesHost": "http://basemap.pozi.com",
+    "searchEndPoints": {
+        "basemap": {
+            "list": "http://basemap.pozi.com/ws/rest/v3/ws_search_api_wrapper.php",
+            "details": "http://basemap.pozi.com/ws/rest/v3/ws_is_api_wrapper.php",
+            "root": "features",
+            "propertyMapPrefix": "properties"
+        }
+    },
+    "LGACode": "319",
+    "databaseConfig": "basemap",
+    "tools": [
+        {
+            "ptype": "gxp_layermanager",
+            "groups": {
+                "top": {
+                    "title": "Surface Layers",
+                    "collapsed": true
+                },
+                "default": "Overlays",
+                "background": {
+                    "title": "Base Maps",
+                    "exclusive": true
+                }
+            },
+            "outputConfig": {
+                "id": "tree",
+                "border": false,
+                "tbar": [
+
+                ]
+            },
+            "outputTarget": "westpanel"
+        },
+        {
+            "ptype": "gxp_addlayers",
+            "actionTarget": "tree.tbar"
+        },
+        {
+            "ptype": "gxp_layerproperties",
+            "id": "layerproperties",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_zoomtolayerextent",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_styler",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_removelayer",
+            "actionTarget": "tree.contextMenu"
+        },
+        {
+            "ptype": "gxp_wmsgetfeatureinfo",
+            "format": "grid",
+            "toggleGroup": "interaction",
+            "showButtonText": false
+        },
+        {
+            "ptype": "gxp_print",
+            "actionTarget": "toolPlaceHolder",
+            "customParams": {
+                "outputFilename": "PoziExplorer-print"
+            },
+            "printService": "/geoserver/pdf",
+            "showButtonText": false
+        },
+        {
+            "actionTarget": "toolPlaceHolder",
+            "ptype": "gxp_googleearth"
+        },
+        {
+            "ptype": "gxp_measure",
+            "actionTarget": "toolPlaceHolder",
+            "toggleGroup": "interaction",
+            "controlOptions": {
+                "immediate": true
+            },
+            "showButtonText": false
+        }
+    ],
+    "sources": {
+        "local": {
+            "url": "/geoserver/EASTGIPPSLAND/ows",
+            "title": "East Gippsland Shire Council Layers",
+            "ptype": "gxp_wmscsource",
+            "tiled": false,
+            "restUrl": "/geoserver/rest"
+        },
+        "depi_wms_admin": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-admin.xml",
+            "title": "DEPI - Administrative Boundaries",
+            "ptype": "gxp_wmscsource",
+            "defaultType": "image/png8",
+            "transition": null,
+            "useGetCapabilitiesURLs": true,
+            "tiled": true
+        },
+        "depi_wms_elevation": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-elevation.xml",
+            "title": "DEPI - Elevation",
+            "ptype": "gxp_wmscsource",
+            "defaultType": "image/png8",
+            "transition": null,
+            "useGetCapabilitiesURLs": true,
+            "tiled": true
+        },
+        "depi_wms_environment": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-environment.xml",
+            "title": "DEPI - Environment",
+            "ptype": "gxp_wmscsource",
+            "transition": null,
+            "useGetCapabilitiesURLs": true
+        },
+        "depi_wms_features": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-features.xml",
+            "title": "DEPI - Features Of Interest",
+            "ptype": "gxp_wmscsource",
+            "transition": null,
+            "useGetCapabilitiesURLs": true
+        },
+        "depi_wms_planning": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-planning.xml",
+            "title": "DEPI - Planning",
+            "ptype": "gxp_wmscsource",
+            "transition": null,
+            "useGetCapabilitiesURLs": true
+        },
+        "depi_wms_property": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-property.xml",
+            "title": "DEPI - Property",
+            "ptype": "gxp_wmscsource",
+            "transition": null,
+            "useGetCapabilitiesURLs": true
+        },
+        "depi_wms_cascaded": {
+            "url": "/geoserver/DEPI/ows",
+            "title": "DEPI - Restricted",
+            "ptype": "gxp_wmscsource",
+            "tiled": true
+        },
+        "depi_wms_topography": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-topography.xml",
+            "title": "DEPI - Topography",
+            "ptype": "gxp_wmscsource",
+            "transition": null,
+            "useGetCapabilitiesURLs": true
+        },
+        "depi_wms_transport": {
+            "url": "/lib/custom/wms/depi-getcapabilities-mini-transport.xml",
+            "title": "DEPI - Transport",
+            "ptype": "gxp_wmscsource",
+            "transition": null,
+            "useGetCapabilitiesURLs": true
+        },
+        "local_cascaded_imagery": {
+            "url": [
+                "http://eastgippsland01.pozi.com/geoserver/EASTGIPPSLAND/ows",
+                "http://eastgippsland02.pozi.com/geoserver/EASTGIPPSLAND/ows",
+                "http://eastgippsland03.pozi.com/geoserver/EASTGIPPSLAND/ows",
+                "http://eastgippsland04.pozi.com/geoserver/EASTGIPPSLAND/ows"
+            ],
+            "title": "DEPI Image Web Server",
+            "ptype": "gxp_wmscsource",
+            "defaultType": "image/JPEG",
+            "group": "background",
+            "transition": "resize"
+        },
+        "bom_wms_geofabric": {
+            "url": "/lib/custom/wms/bom-getcapabilities-mini.xml",
+            "title": "BOM - Geofabric",
+            "ptype": "gxp_wmscsource",
+            "transition": null,
+            "useGetCapabilitiesURLs": true
+        },
+        "mapquest": {
+            "ptype": "gxp_mapquestsource"
+        },
+        "osm": {
+            "ptype": "gxp_osmsource"
+        },
+        "google": {
+            "ptype": "gxp_googlesource"
+        },
+        "bing": {
+            "ptype": "gxp_bingsource"
+        },
+        "ol": {
+            "ptype": "gxp_olsource"
+        },
+        "basemap": {
+            "url": [
+                "http://basemap1.pozi.com/geoserver/ows",
+                "http://basemap2.pozi.com/geoserver/ows",
+                "http://basemap3.pozi.com/geoserver/ows",
+                "http://basemap4.pozi.com/geoserver/ows"
+            ],
+            "title": "Pozi Data Server",
+            "ptype": "gxp_wmscsource",
+            "transition": null
+        }
+    },
+    "layers": [
+        {
+            "source": "ol",
+            "group": "background",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "None",
+                {
+                    "visibility": false
+                }
+            ]
+        },
+        {
+            "source": "mapquest",
+            "name": "osm",
+            "visibility": false,
+            "title":"MapQuest OpenStreetMap",
+            "layersToTurnOffWhenShown":["Labels"],
+            "group": "background"
+        },
+        {
+            "source": "ol",
+            "group": "background",
+            "visibility": false,
+            "fixed": true,
+            "layersToTurnOffWhenShown":["Labels"],
+            "type": "OpenLayers.Layer.XYZ",
+            "args": [
+                "Nokia Maps",
+                [
+                    "http://1.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ",
+                    "http://2.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ",
+                    "http://3.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ",
+                    "http://4.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ"
+                ],
+                {
+                    "attribution": "&copy; 2013 Nokia</span>&nbsp;<a href='http://maps.nokia.com/services/terms' target='_blank' title='Terms of Use' style='color:#333;text-decoration: underline;'>Terms of Use</a></div> <img src='http://api.maps.nokia.com/2.2.4/assets/ovi/mapsapi/by_here.png' border='0'>",
+                    "transitionEffect": "resize",
+                    "isBaseLayer":true
+                }
+            ]
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:VicmapClassic",
+            "layersToTurnOnWhenShown":["Labels"],
+            "title": "Pozi Vicmap",
+            "visibility": false,
+            "opacity": 1,
+            "group": "background",
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "cached": true,
+            "transition": "resize"
+        },
+        {
+            "source": "ol",
+            "group": "background",
+            "visibility": true,
+            "layersToTurnOffWhenShown":["Labels"],
+            "type": "OpenLayers.Layer.WMTS",
+            "args": [{
+                "name":"Vicmap API",
+                "url":"http://api.maps.vic.gov.au/geowebcacheWM/service/wmts",
+                "layer" : "WEB_MERCATOR",
+                "tileSize": new OpenLayers.Size(512,512),
+                "style":"_null",
+                "isBaseLayer": true,
+                "sphericalMercator" : true,
+                "format":"image/png",
+                "matrixSet":"EPSG:3857_WEB_MERCATOR",
+                "matrixIds":[
+                    {"identifier":"EPSG:3857_WEB_MERCATOR:0","matrixHeight":1,"matrixWidth":1,"resolution":156543.03392800014,"tileSize":new OpenLayers.Size(512,512),"topLeftCorner":new OpenLayers.LonLat(-20037508.34,20037508.34)},
+                    {"identifier":"EPSG:3857_WEB_MERCATOR:1","matrixHeight":1,"matrixWidth":1,"resolution":78271.516963999937,"tileSize":new OpenLayers.Size(512,512),"topLeftCorner":new OpenLayers.LonLat(-20037508.34,20037508.34)},
+                    {"identifier":"EPSG:3857_WEB_MERCATOR:2","matrixHeight":2,"matrixWidth":2,"resolution":39135.758482000092,"tileSize":new OpenLayers.Size(512,512),"topLeftCorner":new OpenLayers.LonLat(-20037508.34,20037508.34)},
+                    {"identifier":"EPSG:3857_WEB_MERCATOR:3","matrixHeight":3,"matrixWidth":4,"resolution":19567.879240999919,"tileSize":new OpenLayers.Size(512,512),"topLeftCorner":new OpenLayers.LonLat(-20037508.34,20037508.34)},
+                    {"identifier":"EPSG:3857_WEB_MERCATOR:4","matrixHeight":6,"matrixWidth":8,"resolution":9783.9396204999593,"tileSize":new OpenLayers.Size(512,512),"topLeftCorner":new OpenLayers.LonLat(-20037508.34,20037508.34)},
+                    {"identifier":"EPSG:3857_WEB_MERCATOR:5","matrixHeight":11,"matrixWidth":15,"resolution":4891.9698102499797,"tileSize":new OpenLayers.Size(512,512),"topLeftCorner":new OpenLayers.LonLat(-20037508.34,20037508.34)},
+                    {"identifier":"EPSG:3857_WEB_MERCATOR:6","matrixHeight":21,"matrixWidth":30,"resolution":2445.9849051249898,"tileSize":new OpenLayers.Size(512,512),"topLeftCorner":new OpenLayers.LonLat(-20037508.34,20037508.34)},
+                    {"identifier":"EPSG:3857_WEB_MERCATOR:7","matrixHeight":41,"matrixWidth":60,"resolution":1222.9924525624949,"tileSize":new OpenLayers.Size(512,512),"topLeftCorner":new OpenLayers.LonLat(-20037508.34,20037508.34)},
+                    {"identifier":"EPSG:3857_WEB_MERCATOR:8","matrixHeight":82,"matrixWidth":119,"resolution":611.496226281379687,"tileSize":new OpenLayers.Size(512,512),"topLeftCorner":new OpenLayers.LonLat(-20037508.34,20037508.34)},
+                    {"identifier":"EPSG:3857_WEB_MERCATOR:9","matrixHeight":163,"matrixWidth":238,"resolution":305.74811314055756,"tileSize":new OpenLayers.Size(512,512),"topLeftCorner":new OpenLayers.LonLat(-20037508.34,20037508.34)},
+                    {"identifier":"EPSG:3857_WEB_MERCATOR:10","matrixHeight":326,"matrixWidth":476,"resolution":152.87405657041106,"tileSize":new OpenLayers.Size(512,512),"topLeftCorner":new OpenLayers.LonLat(-20037508.34,20037508.34)},
+                    {"identifier":"EPSG:3857_WEB_MERCATOR:11","matrixHeight":652,"matrixWidth":951,"resolution":76.437028285073239,"tileSize":new OpenLayers.Size(512,512),"topLeftCorner":new OpenLayers.LonLat(-20037508.34,20037508.34)},
+                    {"identifier":"EPSG:3857_WEB_MERCATOR:12","matrixHeight":1303,"matrixWidth":1902,"resolution":38.21851414253662,"tileSize":new OpenLayers.Size(512,512),"topLeftCorner":new OpenLayers.LonLat(-20037508.34,20037508.34)},
+                    {"identifier":"EPSG:3857_WEB_MERCATOR:13","matrixHeight":2605,"matrixWidth":3804,"resolution":19.10925707126831,"tileSize":new OpenLayers.Size(512,512),"topLeftCorner":new OpenLayers.LonLat(-20037508.34,20037508.34)},
+                    {"identifier":"EPSG:3857_WEB_MERCATOR:14","matrixHeight":5210,"matrixWidth":7608,"resolution":9.5546285356341549,"tileSize":new OpenLayers.Size(512,512),"topLeftCorner":new OpenLayers.LonLat(-20037508.34,20037508.34)},
+                    {"identifier":"EPSG:3857_WEB_MERCATOR:15","matrixHeight":10419,"matrixWidth":15215,"resolution":4.7773142679493699,"tileSize":new OpenLayers.Size(512,512),"topLeftCorner":new OpenLayers.LonLat(-20037508.34,20037508.34)},
+                    {"identifier":"EPSG:3857_WEB_MERCATOR:16","matrixHeight":20837,"matrixWidth":30430,"resolution":2.3886571339746849,"tileSize":new OpenLayers.Size(512,512),"topLeftCorner":new OpenLayers.LonLat(-20037508.34,20037508.34)},
+                    {"identifier":"EPSG:3857_WEB_MERCATOR:17","matrixHeight":41673,"matrixWidth":60860,"resolution":1.1943285668550503,"tileSize":new OpenLayers.Size(512,512),"topLeftCorner":new OpenLayers.LonLat(-20037508.34,20037508.34)},
+                    {"identifier":"EPSG:3857_WEB_MERCATOR:18","matrixHeight":83345,"matrixWidth":121719,"resolution":0.59716428355981721,"tileSize":new OpenLayers.Size(512,512),"topLeftCorner":new OpenLayers.LonLat(-20037508.34,20037508.34)},
+                    {"identifier":"EPSG:3857_WEB_MERCATOR:19","matrixHeight":166689,"matrixWidth":243437,"resolution":0.29858214164761665,"tileSize":new OpenLayers.Size(512,512),"topLeftCorner":new OpenLayers.LonLat(-20037508.34,20037508.34)},
+                    {"identifier":"EPSG:3857_WEB_MERCATOR:20","matrixHeight":333378,"matrixWidth":486873,"resolution":0.14929107082380833,"tileSize":new OpenLayers.Size(512,512),"topLeftCorner":new OpenLayers.LonLat(-20037508.34,20037508.34)}
+                ],
+                "tileOrigin": new OpenLayers.LonLat(-20037508.34,20037508.34),
+                "serverResolutions": [156543.03392800014,78271.516963999937,39135.758482000092,19567.879240999919,9783.9396204999593,4891.9698102499797,2445.9849051249898, 1222.9924525624949, 611.496226281379687, 305.74811314055756, 152.87405657041106, 76.437028285073239, 38.21851414253662, 19.10925707126831, 9.5546285356341549, 4.7773142679493699, 2.3886571339746849, 1.1943285668550503, 0.59716428355981721, 0.29858214164761665, 0.14929107082380833]
+            }]
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:LabelClassic",
+            "title": "Labels",
+            "visibility": false,
+            "opacity": 1,
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "group": "top"
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_eastgippsland_mask",
+            "title": "Municipal Boundary",
+            "visibility": true,
+            "opacity": 0.6,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "transition": "resize",
+            "group": "top"
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_gt_vmfeat_foi_transfer_station",
+            "title": "Transfer Stations",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:gt_property_address",
+            "title": "Properties",
+            "visibility": true,
+            "opacity": 0.25,
+            "format": "image/GIF",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "minscale": 25000
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmprop_parcel_mp",
+            "title": "Parcels",
+            "visibility": false,
+            "opacity": 0.75,
+            "format": "image/png8",
+            "styles": "parcel_label",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:dse_vmadmin_ward_2012",
+            "title": "Wards",
+            "visibility": false,
+            "opacity": 0.3,
+            "format": "image/png8",
+            "styles": "Southgippsland_Wards",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "depi_wms_planning",
+            "name": "sii:VMPLAN.PLAN_OVERLAY",
+            "title": "Planning Overlays",
+            "visibility": false,
+            "opacity": 0.75,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "sld": "http://general.pozi.com/gt_public_styles/sld/sii-VMPLAN.PLAN_OVERLAY-DEPI.sld"
+        },
+        {
+            "source": "depi_wms_planning",
+            "name": "sii:VMPLAN.PLAN_ZONE",
+            "title": "Planning Zones",
+            "visibility": false,
+            "opacity": 0.75,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "sld": "http://general.pozi.com/gt_public_styles/sld/sii-VMPLAN.PLAN_ZONE-DEPI.sld"
+        }
+    ],
+    "center": [
+        16507752,
+        -4491929
+    ],
+    "zoom": 8,
+    "workspace": "EASTGIPPSLAND",
+    "highlightSymboliser": {
+        "name": "test",
+        "pointRadius":12,
+        "strokeColor": "#00599C",
+        "strokeWidth": 10,
+        "strokeOpacity": 0.5,
+        "fillColor": "#00599C",
+        "fillOpacity": 0.2
+    },
+    "liveDataEndPoints": [
+        {
+            "urlLayout": "http://192.168.10.12/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://192.168.10.12/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "sqlite",
+            "storeName": "eastgippsland"
+        },
+        {
+            "urlLayout": "http://basemap.pozi.com/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "http://basemap.pozi.com/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "pgsql",
+            "storeName": "basemap"
+        },
+        {
+            "urlLayout": "/ws/rest/v3/ws_get_layouts.php",
+            "urlLiveData": "/ws/rest/v3/ws_get_live_data.php",
+            "storeMode": "pgsql",
+            "storeName": "eastgippslandgis"
+        }
+    ],
+    "logoClientSrc": "theme/app/img/custom/eastgippsland_logo.jpg",
+    "zoomMax": 18,
+    "bannerLineColor": "#00599C",
+    "bannerRightCornerLine1": "East Gippsland Shire Council",
+    "bannerRightCornerLine2": "Victoria, Australia",
+    "printMapTitle": "East Gippsland Shire Council",
+    "linkToCouncilWebsite": "http://www.eastgippsland.vic.gov.au/",
+    "collapseWestPanel": true,
+    "openFirstDefaultTab": true
+}
