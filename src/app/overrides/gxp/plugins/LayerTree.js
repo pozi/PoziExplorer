@@ -145,13 +145,7 @@ gxp.plugins.LayerTree.prototype.createOutputConfig = function() {
                                     if (o == os.minValue)
                                     {
                                         // Aplying max value if previous value was 0
-                                        o = os.maxValue;
-                                        // The following behaviour is useful when manually switching back to a layer that
-                                        // has been slided to 0 previously. It set it to the maxValue but an artefact
-                                        // makes the slider looks like it goes back to 100, then back to 0.
-                                        // It is therefore a visual glitch (no impact on functionality) but we prefer to
-                                        // avoid it altogether and no set opacity to maxValue.
-                                        //os.setValue(o);
+                                        os.setValue(os.maxValue);
                                     }
                                     else
                                     {

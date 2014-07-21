@@ -108,6 +108,7 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
             // Adding properties required for proper processing of exclusive groups
             idValLayers[l].group = layerConf.group;
             idValLayers[l].exclusive = groupConfig[layerConf.group].exclusive;
+            idValLayers[l].visible = false;
         };
 
         return idValLayers;
@@ -131,16 +132,20 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
         //console.log("Groups to display:"+groupsToDisplay);
 
         var layersForOpacitySlider = _(JSONconf.layers).filter(function(layerConf) { 
-            if (layerConf.group && groupsToDisplay)
+            if (groupsToDisplay && layerConf.title)
             {
+                if (!layerConf.group)
+                {
+                    layerConf.group = "default";
+                }
                 return groupsToDisplay.indexOf(layerConf.group)>-1;
             }
         });
         var layerNameArray = _.map(layersForOpacitySlider,function(l){
             return l.title;
         });
-
         if (layerNameArray) {
+            console.log(layerNameArray);
             return app.getLayersByName(layerNameArray);
         }
     };

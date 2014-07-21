@@ -7,7 +7,7 @@ addOpacitySlider = function(app) {
         var layerStore = new Ext.data.JsonStore({
             storeId: 'myLayerComboStore',
             idIndex: 0,
-            fields: ['id','val','group','exclusive']
+            fields: ['id','val','group','exclusive','visible']
         });
         layerStore.loadData(layerData.reverse());
 
@@ -38,13 +38,23 @@ addOpacitySlider = function(app) {
                 id:'opacitySliderCombo',
                 selectOnFocus: false,
                 mode: 'local',
-                value: defaultLayer.name,
+                value: defaultLayer.id,
                 allowBlank: false,
                 triggerAction: 'all',
                 forceSelection: true,
+                maxHeight: 200,
                 valueField: 'id',
                 displayField: 'val',
                 hideTrigger: true,
+                tpl: new Ext.XTemplate('<tpl for=".">',
+                        '<div class="x-combo-list-item layer-item ">',
+                            '<p style="float:left;">{val}</p>',
+                            '<tpl if="visible == true">',
+                                '<p style="float:right"><img style="width: 20px;" src="theme/app/img/panel/tick.svg"/></p>',
+                            '</tpl>',
+                        '</div>',
+                    '</tpl>'),
+                itemSelector: 'div.layer-item',
                 width: calculatedWidth,
                 store: layerStore,
                 // remove the cursor and prevents typing
@@ -58,37 +68,84 @@ addOpacitySlider = function(app) {
                         var layerSelected = app.mapPanel.map.getLayersByName(record.get("val"))[0];
                         os.setLayer(layerSelected);
 
-                        // Managing the exclusivity of the layer just selected
-                        if (record.get("exclusive"))
+                        // Toggling the record visibility flag
+                        // This will impact the styling of the tick via the combobox template
+                        record.set("visible",!record.get("visible"));
+
+                        var targetOpacity;
+                        if (record.get("visible"))
                         {
-                            _(JSONconf.layers).each(function(l){
-                                if (l.group == record.get("group"))
-                                {
-                                    if (l.title && l.title != "No Aerial")
+                            // Managing the exclusivity of the layer just selected
+                            if (record.get("exclusive"))
+                            {
+                                // Making all other layers in the same group invisible
+                                _(JSONconf.layers).each(function(l){
+                                    if (l.group == record.get("group"))
                                     {
-                                        app.mapPanel.map.getLayersByName(l.title)[0].setVisibility(l.title == record.get("val"));
+                                        if (l.title && l.title != "No Aerial")
+                                        {
+                                            app.mapPanel.map.getLayersByName(l.title)[0].setVisibility(l.title == record.get("val"));
+                                            combo.findRecord('val',l.title).set("visible",l.title == record.get("val"));
+                                        }
+                                    }
+                                });
+                            }
+
+                            if (record.get("val") != "No Aerial")
+                            {
+                                // Set the opacity to the max if it's not set high enough to show the selected item
+                                if (o <= os.minValue)
+                                {
+                                    targetOpacity = os.maxValue;
+                                }
+                                else
+                                {
+                                    // If in an exclusive group, we re-use a previous opacity value for this group
+                                    if (record.get("exclusive"))
+                                    {
+                                        
+                                        // Looping thru the layers of this group to check out the max opacity
+                                        var commonOpacity=0.0;
+                                        _(JSONconf.layers).each(function(l){
+                                            if (l.group == record.get("group"))
+                                            {
+                                                if (l.title && l.title != "No Aerial" && l.title != record.get("val"))
+                                                {
+                                                    // Common opacity for this group float between 0 and 1) - requires JSON configuration to be set to 0
+                                                    commonOpacity = app.mapPanel.map.getLayersByName(l.title)[0].opacity;
+                                                }
+                                            }
+                                        });
+
+                                        // If no opacity set on any layer in the exclusive group, set to the max
+                                        if (commonOpacity == os.minValue)
+                                        {
+                                            commonOpacity = os.maxValue
+                                        }
+                                        else
+                                        {
+                                            // If not, we normalise the value to maxValue
+                                            commonOpacity = commonOpacity * os.maxValue;
+                                        }
+                                        targetOpacity = commonOpacity;
+                                    }
+                                    else
+                                    {
+                                        targetOpacity = os.maxValue;
                                     }
                                 }
-                            });                            
+                            }
                         }
-
-                        // Set the opacity to the max if it's not set high enough to show the selected item
-                        if (record.get("val") != "No Aerial")
+                        else
                         {
-                            if (o <= os.minValue)
-                            {
-                                os.setValue(os.maxValue);
-                            }
-                            else
-                            {
-                                // If in an exclusive group, we re-use the previous value
-                                // That wouldn't be true in a non-exclusive group
-                                if (record.get("exclusive"))
-                                {
-                                    os.setValue(o);
-                                }
-                            }
+                            targetOpacity = os.minValue;
                         }
+                        // Setting the opacity on the slider
+                        os.setValue(targetOpacity);
+
+                    },
+                    'expand':function(combo){
+                        //console.log('expanding');
                     },
                     scope: this
                 }

@@ -16,6 +16,13 @@ GeoExt.LayerOpacitySlider.prototype.changeLayerVisibility = function(slider, val
       this.layer.setVisibility(false);
       this.layer.setOpacity(0);
 
+      // Setting the visible flag of the layer combo record to false
+      var os = Ext.getCmp('opacitySliderCombo');
+      if (os)
+      {
+        os.findRecord('id',os.getValue()).set("visible",false);
+      }
+
       // Selecting the none layer within the aerial group
       for (l in app.mapPanel.map.layers) {
         if (app.mapPanel.map.layers[l].name == "No Aerial") {
@@ -26,11 +33,17 @@ GeoExt.LayerOpacitySlider.prototype.changeLayerVisibility = function(slider, val
       }      
     }
   } 
-  else 
+  else
     if ((this.inverse === false && value > this.minValue) || (this.inverse === true && value < this.maxValue)) 
     {
       if (!currentVisibility)
       {
+        // Setting the visible flag of the layer combo record to true
+        var os = Ext.getCmp('opacitySliderCombo');
+        if (os)
+        {
+          os.findRecord('id',os.getValue()).set("visible",true);
+        }
         this.layer.setVisibility(true);
       }
     }
@@ -61,9 +74,33 @@ GeoExt.LayerOpacitySlider.prototype.changeLayerOpacity = function(slider, value)
     // When below 2% opacity, we set the slider value to 0
     if (value > 0.02)
     {
+      var that = this;
       this._settingOpacity = true;
       this.layer.setOpacity(value);
       delete this._settingOpacity;
+
+      // Here, we should adjust the opacity of all layers in the same exclusive group
+      var os = Ext.getCmp('opacitySliderCombo'), g, e, r;
+      if (os)
+      {
+        r = os.findRecord('id',os.getValue());
+        g = r.get("group");
+        e = r.get("exclusive");
+        if (e)
+        {
+          _(JSONconf.layers).each(function(l){
+            if (l.group == g)
+            {
+              if (l.title && l.title != "No Aerial" && l.title != that.layer.name)
+              {
+                app.mapPanel.map.getLayersByName(l.title)[0].setOpacity(value);
+              }
+            }
+          });
+        }
+      }
+
+
     }
     else
     {
