@@ -55,7 +55,7 @@ addOpacitySlider = function(app) {
                         '<div class="x-combo-list-item layer-item ">',
                             '<p style="float:left;">{val}</p>',
                             '<tpl if="visible == true">',
-                                '<p style="float:right"><img class="transparentImg2" style="width: 20px;" src="theme/app/img/panel/tick.svg"/></p>',
+                                '<p style="float:right;width:20px;"><img class="transparentImg2" style="width:100%;" src="theme/app/img/panel/tick.svg"/></p>',
                             '</tpl>',
                         '</div>',
                     '</tpl>'),
@@ -166,11 +166,11 @@ addOpacitySlider = function(app) {
         _([
             firstItem,
             new Ext.Toolbar.Spacer({ width: 15 }),
-            new Ext.Component({ html: '<img style="width: 20px;" class="transparentImg1" src="theme/app/img/panel/map.svg"/>' }),
+            new Ext.Component({ html: '<p style="width:20px;"><img style="width: 100%;" class="transparentImg1" src="theme/app/img/panel/map.svg"/></p>' }),
             new Ext.Toolbar.Spacer({ width: 4 }),
             new GeoExt.LayerOpacitySlider({ id:'geoExtOpacitySlider', layer: defaultLayer, aggressive: true, width: 100, changeVisibility: true }),
             new Ext.Toolbar.Spacer({ width: 4 }),
-            new Ext.Component({ html: '<img style="width: 20px;" class="transparentImg2" src="theme/app/img/panel/map.svg"/>' })
+            new Ext.Component({ html: '<p style="width:20px;"><img style="width: 100%;" class="transparentImg2" src="theme/app/img/panel/map.svg"/></p>' })
         ]).each(function(newItem) {
             app.getToolbar().items.add(newItem);
         });
