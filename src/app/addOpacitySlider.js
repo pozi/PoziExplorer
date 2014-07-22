@@ -55,7 +55,7 @@ addOpacitySlider = function(app) {
                         '<div class="x-combo-list-item layer-item ">',
                             '<p style="float:left;">{val}</p>',
                             '<tpl if="visible == true">',
-                                '<p style="float:right"><img class="transparentImg2" style="width: 20px;" src="theme/app/img/panel/tick.svg"/></p>',
+                                '<p style="float:right;width:20px;"><img class="transparentImg2" style="width:100%;" src="theme/app/img/panel/tick.svg"/></p>',
                             '</tpl>',
                         '</div>',
                     '</tpl>'),
@@ -163,19 +163,31 @@ addOpacitySlider = function(app) {
             });
         }
 
-        _([
+        var allItemsToFloat = [
             firstItem,
             new Ext.Toolbar.Spacer({ width: 15 }),
-            new Ext.Component({ html: '<img style="width: 20px;" class="transparentImg1" src="theme/app/img/panel/map.svg"/>' }),
+            new Ext.Component({ html: '<p style="width:20px;"><img style="width: 100%;" class="transparentImg1" src="theme/app/img/panel/map.svg"/></p>' }),
             new Ext.Toolbar.Spacer({ width: 4 }),
             new GeoExt.LayerOpacitySlider({ id:'geoExtOpacitySlider', layer: defaultLayer, aggressive: true, width: 100, changeVisibility: true }),
             new Ext.Toolbar.Spacer({ width: 4 }),
-            new Ext.Component({ html: '<img style="width: 20px;" class="transparentImg2" src="theme/app/img/panel/map.svg"/>' })
-        ]).each(function(newItem) {
-            app.getToolbar().items.add(newItem);
+            new Ext.Component({ html: '<p style="width:20px;"><img style="width: 100%;" class="transparentImg2" src="theme/app/img/panel/map.svg"/></p>' }),
+            new Ext.Toolbar.Spacer({ width: 4 })
+        ];
+
+        // Getting the map viewport in the map element
+        var elToRenderInto = Ext.get(Ext.get('mymap').select('div.olMapViewport').elements[0].id)
+
+        // A panel to fit all the content
+        var displayPanel = new Ext.Panel({
+            renderTo : elToRenderInto,
+            id       : 'floatingLayerPicker',
+            height   : 40,
+            width    : calculatedWidth + 15 + 20 + 4 + 100 + 4 + 20 + 4 + 6,
+            layout   : 'toolbar',
+            items    : allItemsToFloat
         });
 
-        app.getToolbar().doLayout();
+        Ext.getCmp('mymap').doLayout();
     }
 
 };

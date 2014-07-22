@@ -31,6 +31,7 @@ body {
 
 div.olControlZoom {
     background: none repeat scroll 0 0 rgba(164, 164, 164, 0.8);
+    top: 48px;
 }
 
 div.olControlZoom a {
@@ -154,7 +155,7 @@ div.olMap {
     border-color:#848484;
     border-width: 2px;
     height: 18px !important;
-    margin: 3px;
+    margin: 3px 3px 3px 0px;
     background-image: url(img/panel/down_arrow_grey.png);
     background-repeat:no-repeat;
     background-position:99% 50%;
@@ -178,4 +179,17 @@ div.olMap {
     height: 16px;
     line-height: 16px;
     color:#6E6E6E;
+}
+
+#mymap .x-panel-tbar {
+    height:0px;
+}
+
+#floatingLayerPicker {
+    vertical-align:middle;
+   position : absolute;
+   top : 8px;
+   left : 8px;
+   z-index : 10000;
+   border: 0px;
 }
