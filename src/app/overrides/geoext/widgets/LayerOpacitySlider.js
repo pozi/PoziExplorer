@@ -20,7 +20,11 @@ GeoExt.LayerOpacitySlider.prototype.changeLayerVisibility = function(slider, val
       var os = Ext.getCmp('opacitySliderCombo');
       if (os)
       {
-        os.findRecord('id',os.getValue()).set("visible",false);
+        var r = os.findRecord('id',os.getValue());
+        if (r)
+        {
+          r.set("visible",false);
+        }
       }
 
       // Selecting the none layer within the aerial group
@@ -42,7 +46,11 @@ GeoExt.LayerOpacitySlider.prototype.changeLayerVisibility = function(slider, val
         var os = Ext.getCmp('opacitySliderCombo');
         if (os)
         {
-          os.findRecord('id',os.getValue()).set("visible",true);
+          var r = os.findRecord('id',os.getValue());
+          if (r)
+          {
+            r.set("visible",true);
+          }
         }
         this.layer.setVisibility(true);
       }
@@ -84,19 +92,22 @@ GeoExt.LayerOpacitySlider.prototype.changeLayerOpacity = function(slider, value)
       if (os)
       {
         r = os.findRecord('id',os.getValue());
-        g = r.get("group");
-        e = r.get("exclusive");
-        if (e)
+        if (r)
         {
-          _(JSONconf.layers).each(function(l){
-            if (l.group == g)
-            {
-              if (l.title && l.title != "No Aerial" && l.title != that.layer.name)
+          g = r.get("group") || "default";
+          e = r.get("exclusive");
+          if (e)
+          {
+            _(JSONconf.layers).each(function(l){
+              if (l.group == g)
               {
-                app.mapPanel.map.getLayersByName(l.title)[0].setOpacity(value);
+                if (l.title && l.title != "No Aerial" && l.title != that.layer.name)
+                {
+                  app.mapPanel.map.getLayersByName(l.title)[0].setOpacity(value);
+                }
               }
-            }
-          });
+            });
+          }          
         }
       }
 

@@ -116,46 +116,42 @@ gxp.plugins.LayerTree.prototype.createOutputConfig = function() {
                             // Clicking on a layer within this group should set this layer to be the one the slider acts on
                             var layerGroup = JSONconf.layers[k].group;
 
-                            // Setting the layer in the drop down
+                            // Setting the layer in the drop down, if it is in the drop down
                             var osc = Ext.getCmp('opacitySliderCombo');
-
-                            var valInOsc = _(osc.getStore().data.items).find(function(ddopt){
-                                return ddopt.json.val = layerTitle;
-                            })
-
-                            // Synchronising the title with the drop down
-                            if (valInOsc && layerTitle != "No Aerial" && layerTitle != "None")
+                            for (i in osc.getStore().data.items)
                             {
-                                osc.setValue(layerTitle);
-                            }
-
-                            if (layerGroup == "aerial")
-                            {
-                                // Getting the opacity slider component
-                                var os = Ext.getCmp('geoExtOpacitySlider');
-                                // Getting the previous slider value
-                                var o = os.getValue();
-
-                                if (layerTitle != "No Aerial")
+                                if (osc.getStore().data.items.hasOwnProperty(i))
                                 {
-                                    // Setting layer for slider
-                                    os.setLayer(n.layer);
-                                   
-                                    // Setting value for slider
-                                    if (o == os.minValue)
+                                    if (osc.getStore().data.items[i].json.val == layerTitle)
                                     {
-                                        // Aplying max value if previous value was 0
-                                        os.setValue(os.maxValue);
-                                    }
-                                    else
-                                    {
-                                        // Only applying previous visibility if it was non-null
-                                        os.setValue(o);
-                                    }
-                                }
-                                else
-                                {
-                                    os.setValue(os.minValue);
+                                        if (layerTitle != "No Aerial" && layerTitle != "None")
+                                        {
+                                            // Identify record in layer picker (by layer name)
+                                            var r = osc.findRecord('val',layerTitle);
+                                            // Setting the layer in the layer picker
+                                            osc.setValue(r.id);
+                                            // Triggering the select event on this record
+                                            osc.fireEvent('select', osc, r);
+                                            // Getting the opacity slider component
+                                            var os = Ext.getCmp('geoExtOpacitySlider');
+                                            // Getting the previous slider value
+                                            var o = os.getValue();
+                                            // Setting layer for slider
+                                            os.setLayer(n.layer);
+                                            // Setting value for slider
+                                            if (o == os.minValue)
+                                            {
+                                                // Aplying max value if previous value was 0
+                                                os.setValue(os.maxValue);
+                                            }
+                                            else
+                                            {
+                                                // Only applying previous visibility if it was non-null
+                                                os.setValue(o);
+                                            }
+                                        }
+                                        break;
+                                    }                                    
                                 }
                             }
                         }                        
