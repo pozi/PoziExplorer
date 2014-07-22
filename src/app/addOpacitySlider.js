@@ -18,7 +18,7 @@ addOpacitySlider = function(app) {
         {
             if (layerData[j].val)
             {
-                currentValWidth = layerData[j].val.length * 8;
+                currentValWidth = layerData[j].val.length * 8 + 30;
                 if (currentValWidth > calculatedWidth)
                 {
                     calculatedWidth = currentValWidth;
