@@ -26,6 +26,11 @@ addOpacitySlider = function(app) {
             }
         }
 
+        // Combo list height
+        var comboItemHeight = 22;
+        var nbOfItemsInList = 9;
+        var comboListHeight = comboItemHeight * nbOfItemsInList;
+
         var firstItem;
         // If only 1 layer, use the old label display
         if (layerData.length == 1)
@@ -42,7 +47,7 @@ addOpacitySlider = function(app) {
                 allowBlank: false,
                 triggerAction: 'all',
                 forceSelection: true,
-                maxHeight: 200,
+                maxHeight: comboListHeight,
                 valueField: 'id',
                 displayField: 'val',
                 hideTrigger: true,
@@ -50,7 +55,7 @@ addOpacitySlider = function(app) {
                         '<div class="x-combo-list-item layer-item ">',
                             '<p style="float:left;">{val}</p>',
                             '<tpl if="visible == true">',
-                                '<p style="float:right"><img style="width: 20px;" src="theme/app/img/panel/tick.svg"/></p>',
+                                '<p style="float:right"><img class="transparentImg2" style="width: 20px;" src="theme/app/img/panel/tick.svg"/></p>',
                             '</tpl>',
                         '</div>',
                     '</tpl>'),
@@ -145,7 +150,13 @@ addOpacitySlider = function(app) {
 
                     },
                     'expand':function(combo){
-                        //console.log('expanding');
+                        // Identifying the index of the currently selected item
+                        var i = combo.getStore().indexOfId(combo.value);
+                        if (i>= nbOfItemsInList ){i = nbOfItemsInList - 1;}
+                        // Scrolling the selected item to the top of the box
+                        setTimeout(function(){
+                            combo.innerList.scroll('down',comboItemHeight*i);
+                        }, 10);
                     },
                     scope: this
                 }

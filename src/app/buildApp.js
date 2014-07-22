@@ -108,7 +108,7 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
             // Adding properties required for proper processing of exclusive groups
             idValLayers[l].group = layerConf.group;
             idValLayers[l].exclusive = groupConfig[layerConf.group].exclusive;
-            idValLayers[l].visible = false;
+            idValLayers[l].visible = layerConf.visibility;
         };
 
         return idValLayers;
@@ -145,7 +145,6 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
             return l.title;
         });
         if (layerNameArray) {
-            console.log(layerNameArray);
             return app.getLayersByName(layerNameArray);
         }
     };
