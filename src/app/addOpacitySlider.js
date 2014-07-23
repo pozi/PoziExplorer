@@ -35,7 +35,7 @@ addOpacitySlider = function(app) {
         // If only 1 layer, use the old label display
         if (layerData.length == 1)
         {
-            firstItem = new Ext.form.Label({ text: layerData[0].val, style: 'font: normal 16px verdana; color:#6E6E6E;' });
+            firstItem = new Ext.form.Label({ text: layerData[0].val, style: 'font: normal 16px verdana; color:#6E6E6E; margin:5px 0px 5px 5px;' });
         }
         else
         {
@@ -55,7 +55,7 @@ addOpacitySlider = function(app) {
                         '<div class="x-combo-list-item layer-item ">',
                             '<p style="float:left;">{val}</p>',
                             '<tpl if="visible == true">',
-                                '<p style="float:right;width:20px;"><img class="transparentImg2" style="width:100%;" src="theme/app/img/panel/tick.svg"/></p>',
+                                '<p style="float:right;width:20px;"><img class="transparentImg2" style="width:100%;" src="theme/app/img/panel/tick.png"/></p>',
                             '</tpl>',
                         '</div>',
                     '</tpl>'),
@@ -165,9 +165,9 @@ addOpacitySlider = function(app) {
 
         var allItemsToFloat = [
             firstItem,
-            new Ext.Component({ html: '<p style="margin:5px 5px 5px 10px;width:20px;"><img style="width: 100%;" class="transparentImg1" src="theme/app/img/panel/map.svg"/></p>' }),
+            new Ext.Component({ html: '<p style="margin:5px 5px 5px 10px;width:20px;"><img style="width: 100%;" class="transparentImg1" src="theme/app/img/panel/map.png"/></p>' }),
             new GeoExt.LayerOpacitySlider({ id:'geoExtOpacitySlider', layer: defaultLayer, aggressive: true, width: 100, changeVisibility: true }),
-            new Ext.Component({ html: '<p style="margin:5px 5px 5px 5px;width:20px;"><img style="width: 100%;" class="transparentImg2" src="theme/app/img/panel/map.svg"/></p>' })
+            new Ext.Component({ html: '<p style="margin:5px 5px 5px 5px;width:20px;"><img style="width: 100%;" class="transparentImg2" src="theme/app/img/panel/map.png"/></p>' })
         ];
 
         // Getting the map viewport in the map element

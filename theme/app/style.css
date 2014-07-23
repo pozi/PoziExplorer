@@ -195,4 +195,6 @@ div.olMap {
 
 #geoExtOpacitySlider {
     margin:4px 0px;
+    cursor: pointer;
+    cursor: hand;
 }
