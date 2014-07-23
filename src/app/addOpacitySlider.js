@@ -165,25 +165,21 @@ addOpacitySlider = function(app) {
 
         var allItemsToFloat = [
             firstItem,
-            new Ext.Toolbar.Spacer({ width: 15 }),
-            new Ext.Component({ html: '<p style="width:20px;"><img style="width: 100%;" class="transparentImg1" src="theme/app/img/panel/map.svg"/></p>' }),
-            new Ext.Toolbar.Spacer({ width: 4 }),
+            new Ext.Component({ html: '<p style="margin:5px 5px 5px 10px;width:20px;"><img style="width: 100%;" class="transparentImg1" src="theme/app/img/panel/map.svg"/></p>' }),
             new GeoExt.LayerOpacitySlider({ id:'geoExtOpacitySlider', layer: defaultLayer, aggressive: true, width: 100, changeVisibility: true }),
-            new Ext.Toolbar.Spacer({ width: 4 }),
-            new Ext.Component({ html: '<p style="width:20px;"><img style="width: 100%;" class="transparentImg2" src="theme/app/img/panel/map.svg"/></p>' }),
-            new Ext.Toolbar.Spacer({ width: 4 })
+            new Ext.Component({ html: '<p style="margin:5px 5px 5px 5px;width:20px;"><img style="width: 100%;" class="transparentImg2" src="theme/app/img/panel/map.svg"/></p>' })
         ];
 
         // Getting the map viewport in the map element
-        var elToRenderInto = Ext.get(Ext.get('mymap').select('div.olMapViewport').elements[0].id)
+        var elToRenderInto = Ext.get(Ext.get('mymap').select('div.olMap').elements[0].id)
 
         // A panel to fit all the content
         var displayPanel = new Ext.Panel({
             renderTo : elToRenderInto,
             id       : 'floatingLayerPicker',
-            height   : 40,
-            width    : calculatedWidth + 15 + 20 + 4 + 100 + 4 + 20 + 4 + 6,
-            layout   : 'toolbar',
+            height   : 32,
+            width    : calculatedWidth + 10 + 20 + 5 + 100 + 5 + 20 + 5 + 4,
+            layout   : 'column',
             items    : allItemsToFloat
         });
 

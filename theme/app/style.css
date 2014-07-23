@@ -153,9 +153,9 @@ div.olMap {
 #opacitySliderCombo {
     font-size: 16px;
     border-color:#848484;
-    border-width: 2px;
-    height: 18px !important;
-    margin: 3px 3px 3px 0px;
+    border-width: 1px;
+    height: 26px !important;
+    margin: 0px 0px 0px 0px;
     background-image: url(img/panel/down_arrow_grey.png);
     background-repeat:no-repeat;
     background-position:99% 50%;
@@ -186,10 +186,13 @@ div.olMap {
 }
 
 #floatingLayerPicker {
-    vertical-align:middle;
    position : absolute;
    top : 8px;
    left : 8px;
    z-index : 10000;
    border: 0px;
+}
+
+#geoExtOpacitySlider {
+    margin:4px 0px;
 }

@@ -419,8 +419,8 @@
         },
         {
             "source": "local_cascaded_imagery",
-            "name": "towns_bendigo_2013mar05_air_vis_20cm_mga55",
-            "title": "Aerial Photo (Bendigo, Mar 2013)",
+            "name": "aerial_bendigo_2008jan06_air_vis_15cm_mga55",
+            "title": "Aerial Photo (2008)",
             "visibility": false,
             "opacity": 0,
             "format": "image/JPEG",
@@ -430,6 +430,19 @@
             "transparent": true,
             "styles": "",
             "displayInOpacitySlider": true
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_COGB_2009",
+            "title": "Aerial Photo (2009)",
+            "visibility": false,
+            "opacity": 0,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group": "aerial",
+            "selected": false,
+            "transparent": true,
+            "styles": ""
         }
     ],
     "center": [
