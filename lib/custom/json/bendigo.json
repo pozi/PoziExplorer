@@ -165,10 +165,14 @@
         },
         "local_cascaded_imagery": {
             "url": [
-                "http://bendigo01.pozi.com/geoserver/BENDIGO/ows",
-                "http://bendigo02.pozi.com/geoserver/BENDIGO/ows",
-                "http://bendigo03.pozi.com/geoserver/BENDIGO/ows",
-                "http://bendigo04.pozi.com/geoserver/BENDIGO/ows"
+                "http://bendigo01.pozi.com/geoserver/ows",
+                "http://bendigo02.pozi.com/geoserver/ows",
+                "http://bendigo03.pozi.com/geoserver/ows",
+                "http://bendigo04.pozi.com/geoserver/ows",
+                "http://bendigo05.pozi.com/geoserver/ows",
+                "http://bendigo06.pozi.com/geoserver/ows",
+                "http://bendigo07.pozi.com/geoserver/ows",
+                "http://bendigo08.pozi.com/geoserver/ows"
             ],
             "title": "DEPI Image Web Server",
             "ptype": "gxp_wmscsource",
@@ -419,7 +423,7 @@
         },
         {
             "source": "local_cascaded_imagery",
-            "name": "aerial_bendigo_2008jan06_air_vis_15cm_mga55",
+            "name": "BENDIGO:aerial_bendigo_2008jan06_air_vis_15cm_mga55",
             "title": "Aerial Photo (2008 Jan)",
             "visibility": false,
             "opacity": 0,
@@ -433,7 +437,7 @@
         },
         {
             "source": "local_cascaded_imagery",
-            "name": "AERIAL_COGB_2009",
+            "name": "BENDIGO:AERIAL_COGB_2009",
             "title": "Aerial Photo (2009 Nov-Dec)",
             "visibility": false,
             "opacity": 0,
