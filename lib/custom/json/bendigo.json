@@ -420,7 +420,7 @@
         {
             "source": "local_cascaded_imagery",
             "name": "aerial_bendigo_2008jan06_air_vis_15cm_mga55",
-            "title": "Aerial Photo (2008)",
+            "title": "Aerial Photo (2008 Jan)",
             "visibility": false,
             "opacity": 0,
             "format": "image/JPEG",
@@ -434,7 +434,7 @@
         {
             "source": "local_cascaded_imagery",
             "name": "AERIAL_COGB_2009",
-            "title": "Aerial Photo (2009)",
+            "title": "Aerial Photo (2009 Nov-Dec)",
             "visibility": false,
             "opacity": 0,
             "format": "image/JPEG",
