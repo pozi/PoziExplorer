@@ -18,7 +18,7 @@ addOpacitySlider = function(app) {
         {
             if (layerData[j].val)
             {
-                currentValWidth = layerData[j].val.length * 8 + 30;
+                currentValWidth = layerData[j].val.length * 8 + 35;
                 if (currentValWidth > calculatedWidth)
                 {
                     calculatedWidth = currentValWidth;
@@ -35,7 +35,7 @@ addOpacitySlider = function(app) {
         // If only 1 layer, use the old label display
         if (layerData.length == 1)
         {
-            firstItem = new Ext.form.Label({ text: layerData[0].val, style: 'font: normal 16px verdana; color:#6E6E6E; margin:5px 0px 5px 5px;' });
+            firstItem = new Ext.form.Label({ text: layerData[0].val, style: 'font: normal 16px verdana; color:#6E6E6E; margin:5px 0px 5px 5px;line-height:30px;' });
         }
         else
         {
@@ -164,26 +164,48 @@ addOpacitySlider = function(app) {
         }
 
         var allItemsToFloat = [
-            firstItem,
-            new Ext.Component({ html: '<p style="margin:5px 5px 5px 10px;width:20px;"><img style="width: 100%;" class="transparentImg1" src="theme/app/img/panel/map.png"/></p>' }),
-            new GeoExt.LayerOpacitySlider({ id:'geoExtOpacitySlider', layer: defaultLayer, aggressive: true, width: 100, changeVisibility: true }),
-            new Ext.Component({ html: '<p style="margin:5px 5px 5px 5px;width:20px;"><img style="width: 100%;" class="transparentImg2" src="theme/app/img/panel/map.png"/></p>' })
+            {
+                width: calculatedWidth,
+                items: firstItem
+            },
+            {
+                width: 35,
+                items: [
+                    new Ext.Component({ html: '<p style="margin:5px 5px 5px 10px;width:20px;"><img style="width: 100%;" class="transparentImg1" src="theme/app/img/panel/map.png"/></p>' })
+                ]
+            },
+            {
+                width: 100,
+                items: [
+                    new GeoExt.LayerOpacitySlider({ id:'geoExtOpacitySlider', layer: defaultLayer, aggressive: true, width: 100, changeVisibility: true })
+                ]
+            },
+            {
+                width: 30,
+                items: [
+                    new Ext.Component({ html: '<p style="margin:5px 5px 5px 5px;width:20px;"><img style="width: 100%;" class="transparentImg2" src="theme/app/img/panel/map.png"/></p>' })
+                ]
+            }
         ];
 
-        // Getting the map viewport in the map element
-        var elToRenderInto = Ext.get(Ext.get('mymap').select('div.olMap').elements[0].id)
+        // Getting the map element
+        var elToRenderInto = Ext.get('mymap');
 
         // A panel to fit all the content
         var displayPanel = new Ext.Panel({
-            renderTo : elToRenderInto,
             id       : 'floatingLayerPicker',
+            renderTo : elToRenderInto,
+            region:'center',
             height   : 32,
-            width    : calculatedWidth + 10 + 20 + 5 + 100 + 5 + 20 + 5 + 4,
+            width    : calculatedWidth + 10 + 20 + 5 + 100 + 5 + 20 + 5 + 5,
             layout   : 'column',
+            defaults : {
+                bodyStyle: 'border:0 none;'
+            },
             items    : allItemsToFloat
         });
 
-        Ext.getCmp('mymap').doLayout();
+        //Ext.getCmp('mymap').doLayout();
     }
 
 };
