@@ -154,6 +154,26 @@ gxp.plugins.LayerTree.prototype.createOutputConfig = function() {
                                     }                                    
                                 }
                             }
+
+                            // What to do if "No Aerial" is pressed?
+                            if (layerTitle == "No Aerial")
+                            {
+                                // Getting the opacity slider component
+                                var os = Ext.getCmp('geoExtOpacitySlider');
+                                var osc = Ext.getCmp('opacitySliderCombo');
+
+                                // Making all other layers in the same group invisible
+                                _(JSONconf.layers).each(function(l){
+                                    if (l.group == layerGroup)
+                                    {
+                                        if (l.title && l.title != layerTitle)
+                                        {
+                                            app.mapPanel.map.getLayersByName(l.title)[0].setOpacity(0);
+                                            osc.findRecord('val',l.title).set("visible",l.title == layerTitle);
+                                        }
+                                    }
+                                });
+                            }
                         }                        
                     }
                 }

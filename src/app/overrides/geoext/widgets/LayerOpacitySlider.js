@@ -13,6 +13,15 @@ GeoExt.LayerOpacitySlider.prototype.changeLayerVisibility = function(slider, val
   {
     if (currentVisibility)
     {
+      // Selecting the none layer within the aerial group
+      for (l in app.mapPanel.map.layers) {
+        if (app.mapPanel.map.layers[l].name == "No Aerial") {
+          //app.mapPanel.map.layers[l].setOpacity(0);
+          app.mapPanel.map.layers[l].setVisibility(true);
+          break;
+        }
+      }
+
       this.layer.setVisibility(false);
       this.layer.setOpacity(0);
 
@@ -27,14 +36,6 @@ GeoExt.LayerOpacitySlider.prototype.changeLayerVisibility = function(slider, val
         }
       }
 
-      // Selecting the none layer within the aerial group
-      for (l in app.mapPanel.map.layers) {
-        if (app.mapPanel.map.layers[l].name == "No Aerial") {
-          app.mapPanel.map.layers[l].setOpacity(0);
-          app.mapPanel.map.layers[l].setVisibility(true);
-          break;
-        }
-      }      
     }
   } 
   else
