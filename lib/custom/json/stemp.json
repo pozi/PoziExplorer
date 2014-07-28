@@ -186,10 +186,14 @@
         },
         "local_cascaded_imagery": {
             "url": [
-                "http://stemp01.pozi.com/geoserver/SEMD/ows",
-                "http://stemp02.pozi.com/geoserver/SEMD/ows",
-                "http://stemp03.pozi.com/geoserver/SEMD/ows",
-                "http://stemp04.pozi.com/geoserver/SEMD/ows"
+                "http://stemp01.pozi.com/geoserver/ows",
+                "http://stemp02.pozi.com/geoserver/ows",
+                "http://stemp03.pozi.com/geoserver/ows",
+                "http://stemp04.pozi.com/geoserver/ows",
+                "http://stemp05.pozi.com/geoserver/ows",
+                "http://stemp06.pozi.com/geoserver/ows",
+                "http://stemp07.pozi.com/geoserver/ows",
+                "http://stemp08.pozi.com/geoserver/ows"
             ],
             "title": "DEPI Image Web Server",
             "ptype": "gxp_wmscsource",
@@ -246,15 +250,28 @@
         },
         {
             "source": "local_cascaded_imagery",
-            "name": "AERIAL_LODDON_2009APR14_AIR_VIS_35CM_MGA54",
+            "name": "BENDIGO:AERIAL_COGB_2009",
+            "title": "Bendigo (2009 Nov-Dec)",
+            "visibility": false,
+            "opacity": 0,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group": "aerial",
+            "selected": false,
+            "transparent": true,
+            "styles": "",
+            "displayInOpacitySlider": true
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "LODDON:AERIAL_LODDON_2009APR14_AIR_VIS_35CM_MGA54",
             "title": "Loddon (CIP 2009)",
             "visibility": false,
             "opacity": 0,
             "group": "aerial",
             "selected": false,
             "format": "image/JPEG",
-            "transparent": true,
-            "displayInOpacitySlider": true
+            "transparent": true
         },
         {
             "source": "ol",
