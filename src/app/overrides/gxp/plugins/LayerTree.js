@@ -130,8 +130,8 @@ gxp.plugins.LayerTree.prototype.createOutputConfig = function() {
                                             var r = osc.findRecord('val',layerTitle);
                                             // Setting the layer in the layer picker
                                             osc.setValue(r.id);
-                                            // Triggering the select event on this record
-                                            osc.fireEvent('select', osc, r);
+                                            // Mark this record as visible for the tick
+                                            r.set("visible",true);
                                             // Getting the opacity slider component
                                             var os = Ext.getCmp('geoExtOpacitySlider');
                                             // Getting the previous slider value
