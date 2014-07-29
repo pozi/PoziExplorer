@@ -38,7 +38,10 @@
                     "collapsed": true,
                     "exclusive": false
                 },
-                "default": "Overlays",
+                "default": {
+                    "title":"Overlays",
+                    "displayInOpacitySlider": true
+                },
                 "assets_and_engineering": {
                     "title": "Assets and Engineering",
                     "collapsed": true,

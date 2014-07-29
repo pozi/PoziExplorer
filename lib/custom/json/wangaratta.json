@@ -23,7 +23,10 @@
                     "collapsed": true,
                     "exclusive": false
                 },   
-                "default": "Overlays",
+                "default": {
+                    "title":"Overlays",
+                    "displayInOpacitySlider": true
+                },
                 "background": {
                     "title": "Base Maps",
                     "exclusive": true
@@ -413,12 +416,13 @@
             "name": "sii:VMPLAN.PLAN_ZONE",
             "title": "Planning Zones",
             "visibility": false,
-            "opacity": 0.75,
+            "opacity": 0,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
             "tiled": false,
-            "sld": "http://general.pozi.com/gt_public_styles/sld/sii-VMPLAN.PLAN_ZONE-DEPI.sld"
+            "sld": "http://general.pozi.com/gt_public_styles/sld/sii-VMPLAN.PLAN_ZONE-DEPI.sld",
+            "displayInOpacitySlider": true
         },
         {
             "source": "basemap",

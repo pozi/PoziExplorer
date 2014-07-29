@@ -38,7 +38,10 @@
                     "title": "Social Vulnerability Thematic",
                     "collapsed": true
                 },
-                "default": "Overlays",
+                "default": {
+                    "title":"Overlays",
+                    "displayInOpacitySlider": true
+                },
                 "aerial": {
                     "title": "Aerial Imagery",
                     "collapsed": true,

@@ -18,7 +18,16 @@
                     "title": "Surface Layers",
                     "collapsed": true
                 },
-                "default": "Overlays",
+                "default": {
+                    "title":"Overlays",
+                    "displayInOpacitySlider": true
+                },
+                "aerial": {
+                    "title": "Aerial Photos",
+                    "collapsed": true,
+                    "exclusive": true,
+                    "displayInOpacitySlider": true
+                },
                 "background": {
                     "title": "Base Maps",
                     "exclusive": true
@@ -277,7 +286,7 @@
         },
         {
             "source": "basemap",
-            "name": "VICMAP_CLASSIC:VW_INDIGO_MASK",
+            "name": "VICMAP_CLASSIC:dse_vmlite_vmlite_lga_vw_indigo_mask",
             "title": "Municipal Boundary",
             "visibility": true,
             "opacity": 0.6,
@@ -293,7 +302,7 @@
             "name": "VICMAP_CLASSIC:vw_gt_vmfeat_foi_transfer_station",
             "title": "Transfer Stations",
             "visibility": false,
-            "opacity": 0.85,
+            "opacity": 1,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
@@ -338,7 +347,7 @@
             "name": "VICMAP_CLASSIC:dse_vmprop_parcel_mp",
             "title": "Parcels",
             "visibility": false,
-            "opacity": 0.75,
+            "opacity": 0,
             "format": "image/png8",
             "styles": "parcel_label",
             "transparent": true,
@@ -349,7 +358,7 @@
             "name": "sii:VMPLAN.PLAN_OVERLAY",
             "title": "Planning Overlays",
             "visibility": false,
-            "opacity": 0.75,
+            "opacity": 0,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
@@ -361,7 +370,7 @@
             "name": "sii:VMPLAN.PLAN_ZONE",
             "title": "Planning Zones",
             "visibility": false,
-            "opacity": 0.75,
+            "opacity": 0,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
@@ -373,13 +382,26 @@
             "name": "TOWNS_RUTHERGLEN-WAHGUNYAH_2009OCT20_AIR_VIS_15CM_MGA55",
             "title": "Aerial Photo (Rutherglen-Wahgunyah, Oct 2009)",
             "visibility": false,
-            "opacity": 1,
+            "opacity": 0,
             "format": "image/JPEG",
             "tiled": true,
             "cached": true,
             "transparent": true,
             "styles": "",
-            "group": "default"
+            "group": "aerial",
+            "displayInOpacitySlider": true
+        },
+        {
+            "source": "ol",
+            "group": "aerial",
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "No Aerial",
+                {
+                    "visibility": true
+                }
+            ]
         }
     ],
     "center": [

@@ -23,7 +23,10 @@
                     "collapsed": true,
                     "exclusive": false
                 },
-                "default": "Overlays",
+                "default": {
+                    "title":"Overlays",
+                    "displayInOpacitySlider": true
+                },
                 "aerial": {
                     "title": "Aerial Photos",
                     "collapsed": true,
