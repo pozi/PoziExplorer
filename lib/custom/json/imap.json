@@ -522,28 +522,26 @@
             "minscale": 25000
         },
         {
-            "source": "depi_wms_planning",
-            "name": "sii:VMPLAN.PLAN_OVERLAY",
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_overlay",
             "title": "Planning Overlays",
             "visibility": false,
             "opacity": 0.75,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
-            "tiled": false,
-            "sld": "http://general.pozi.com/gt_public_styles/sld/sii-VMPLAN.PLAN_OVERLAY-DEPI.sld"
+            "tiled": false
         },
         {
-            "source": "depi_wms_planning",
-            "name": "sii:VMPLAN.PLAN_ZONE",
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:vw_dse_vmplan_plan_zone",
             "title": "Planning Zones",
             "visibility": false,
-            "opacity": 0.75,
+            "opacity": 0,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
             "tiled": false,
-            "sld": "http://general.pozi.com/gt_public_styles/sld/sii-VMPLAN.PLAN_ZONE-DEPI.sld",
             "displayInOpacitySlider": true
         }
     ],
