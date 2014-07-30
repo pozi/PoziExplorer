@@ -189,7 +189,8 @@ div.olMap {
    position : absolute;
    top : 8px;
    left : 8px;
-   z-index : 10000;
+   margin: 0px;
+   z-index : 1000;
    border: 0px;
 }
 
