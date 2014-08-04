@@ -416,7 +416,7 @@
             "name": "sii:VMPLAN.PLAN_ZONE",
             "title": "Planning Zones",
             "visibility": false,
-            "opacity": 0.75,
+            "opacity": 0,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
