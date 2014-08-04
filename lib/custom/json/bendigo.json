@@ -513,5 +513,6 @@
     "printMapTitle": "City of Greater Bendigo",
     "linkToCouncilWebsite": "http://bendigo.vic.gov.au/",
     "collapseWestPanel": true,
+    "customJS": "bendigo.js",
     "openFirstDefaultTab": true
 }
