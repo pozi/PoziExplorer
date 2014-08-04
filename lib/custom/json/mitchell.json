@@ -1395,7 +1395,7 @@
             "storeName": "mitchellgis"
         }
     ],
-    "logoClientSrc": "theme/app/img/custom/mitchell_logo.jpg",
+    "logoClientSrc": "theme/app/img/custom/mitchell_logo.png",
     "zoomMax": 18,
     "bannerLineColor": "#D18623",
     "bannerRightCornerLine1": "Mitchell Shire Council",
