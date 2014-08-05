@@ -213,6 +213,7 @@
         {
             "source": "ol",
             "group": "background",
+            "defaultNullForGroup":true,
             "fixed": true,
             "type": "OpenLayers.Layer",
             "args": [
@@ -252,6 +253,7 @@
         {
             "source": "ol",
             "group": "aerial",
+            "defaultNullForGroup":true,
             "fixed": true,
             "type": "OpenLayers.Layer",
             "args": [

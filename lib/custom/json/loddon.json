@@ -217,12 +217,26 @@
         {
             "source": "ol",
             "group": "background",
+            "defaultNullForGroup":true,
             "fixed": true,
             "type": "OpenLayers.Layer",
             "args": [
                 "None",
                 {
                     "visibility": false
+                }
+            ]
+        },
+        {
+            "source": "ol",
+            "group": "aerial",
+            "defaultNullForGroup":true,
+            "fixed": true,
+            "type": "OpenLayers.Layer",
+            "args": [
+                "No Aerial",
+                {
+                    "visibility": true
                 }
             ]
         },
