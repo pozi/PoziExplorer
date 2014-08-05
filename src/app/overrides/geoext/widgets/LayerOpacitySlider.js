@@ -13,29 +13,39 @@ GeoExt.LayerOpacitySlider.prototype.changeLayerVisibility = function(slider, val
   {
     if (currentVisibility)
     {
-      // Selecting the none layer within the aerial group
-      for (l in app.mapPanel.map.layers) {
-        if (app.mapPanel.map.layers[l].name == "No Aerial") {
-          //app.mapPanel.map.layers[l].setOpacity(0);
-          app.mapPanel.map.layers[l].setVisibility(true);
-          break;
-        }
-      }
-
-      this.layer.setVisibility(false);
-      this.layer.setOpacity(0);
-
-      // Setting the visible flag of the layer combo record to false
       var os = Ext.getCmp('opacitySliderCombo');
       if (os)
       {
         var r = os.findRecord('id',os.getValue());
         if (r)
         {
+          // Setting the visible flag of the layer combo record to false
           r.set("visible",false);
+
+          // Determine which is the default null layer for the exclusive group
+          g = r.get("group") || "default";
+          e = r.get("exclusive");
+          if (e)
+          {
+            _(JSONconf.layers).each(function(l){
+              if (l.group == g && l.defaultNullForGroup)
+              {
+                // Catering for special layer configuration (i.e. basemaps) 
+                if (!l.title && l.args)
+                {
+                  if (typeof l.args[0] === "string") {l.title = l.args[0];} else {l.title = l.args[0].name;}
+                }
+
+                // Selecting this default null layer in the layer tree
+                app.mapPanel.map.getLayersByName(l.title)[0].setVisibility(true);
+              }
+            });
+          }    
         }
       }
 
+      this.layer.setVisibility(false);
+      this.layer.setOpacity(0);
     }
   } 
   else
@@ -102,7 +112,13 @@ GeoExt.LayerOpacitySlider.prototype.changeLayerOpacity = function(slider, value)
             _(JSONconf.layers).each(function(l){
               if (l.group == g)
               {
-                if (l.title && l.title != "No Aerial" && l.title != that.layer.name)
+                // Catering for special layer configuration (i.e. basemaps) 
+                if (!l.title && l.args)
+                {
+                  if (typeof l.args[0] === "string") {l.title = l.args[0];} else {l.title = l.args[0].name;}
+                }
+
+                if (l.title && !l.defaultNullForGroup && l.title != that.layer.name)
                 {
                   app.mapPanel.map.getLayersByName(l.title)[0].setOpacity(value);
                 }

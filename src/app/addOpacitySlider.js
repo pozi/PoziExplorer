@@ -87,7 +87,13 @@ addOpacitySlider = function(app) {
                                 _(JSONconf.layers).each(function(l){
                                     if (l.group == record.get("group"))
                                     {
-                                        if (l.title && l.title != "No Aerial")
+                                        // Catering for special layer configuration (especially basemaps) 
+                                        if (!l.title && l.args)
+                                        {
+                                          if (typeof l.args[0] === "string") {l.title = l.args[0];} else {l.title = l.args[0].name;}
+                                        }
+
+                                        if (l.title && !l.defaultNullForGroup)
                                         {
                                             app.mapPanel.map.getLayersByName(l.title)[0].setVisibility(l.title == record.get("val"));
                                             combo.findRecord('val',l.title).set("visible",l.title == record.get("val"));
@@ -96,7 +102,7 @@ addOpacitySlider = function(app) {
                                 });
                             }
 
-                            if (record.get("val") != "No Aerial")
+                            if (!record.get("defaultNull"))
                             {
                                 // Set the opacity to the max if it's not set high enough to show the selected item
                                 if (o <= os.minValue)
@@ -114,7 +120,13 @@ addOpacitySlider = function(app) {
                                         _(JSONconf.layers).each(function(l){
                                             if (l.group == record.get("group"))
                                             {
-                                                if (l.title && l.title != "No Aerial" && l.title != record.get("val"))
+                                                // Catering for special layer configuration (especially basemaps) 
+                                                if (!l.title && l.args)
+                                                {
+                                                  if (typeof l.args[0] === "string") {l.title = l.args[0];} else {l.title = l.args[0].name;}
+                                                }
+
+                                                if (l.title && !l.defaultNullForGroup && l.title != record.get("val"))
                                                 {
                                                     // Common opacity for this group float between 0 and 1) - requires JSON configuration to be set to 0
                                                     commonOpacity = app.mapPanel.map.getLayersByName(l.title)[0].opacity;

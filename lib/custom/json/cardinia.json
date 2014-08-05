@@ -36,7 +36,8 @@
                 "background": {
                     "title": "Base Maps",
                     "collapsed": false,
-                    "exclusive": true
+                    "exclusive": true,
+                    "displayInOpacitySlider": true
                 }
             },
             "outputConfig": {
@@ -238,6 +239,7 @@
             "source": "ol",
             "group": "background",
             "fixed": true,
+            "defaultNullForGroup":true,
             "type": "OpenLayers.Layer",
             "args": [
                 "None",
@@ -719,6 +721,7 @@
         {
             "source": "ol",
             "group": "aerial",
+            "defaultNullForGroup":true,
             "fixed": true,
             "type": "OpenLayers.Layer",
             "args": [

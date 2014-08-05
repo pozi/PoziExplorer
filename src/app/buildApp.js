@@ -101,14 +101,18 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
         });
 
         for (l in idValLayers){
-            var layerConf = _(JSONconf.layers).find(function(layer) {
-                return layer.title == idValLayers[l].val;
-            });
+            if (idValLayers.hasOwnProperty(l))
+            {
+                var layerConf = _(JSONconf.layers).find(function(layer) {
+                    return layer.title == idValLayers[l].val;
+                });
 
-            // Adding properties required for proper processing of exclusive groups
-            idValLayers[l].group = layerConf.group;
-            idValLayers[l].exclusive = groupConfig[layerConf.group].exclusive;
-            idValLayers[l].visible = layerConf.visibility;
+                // Adding properties required for proper processing of exclusive groups
+                idValLayers[l].group = layerConf.group;
+                idValLayers[l].exclusive = !!groupConfig[layerConf.group].exclusive;
+                idValLayers[l].visible = !!layerConf.visibility;
+                idValLayers[l].defaultNull = !!layerConf.defaultNullForGroup;
+            }
         };
 
         return idValLayers;
@@ -131,14 +135,23 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
 
         //console.log("Groups to display:"+groupsToDisplay);
 
-        var layersForOpacitySlider = _(JSONconf.layers).filter(function(layerConf) { 
-            if (groupsToDisplay && layerConf.title)
+        var layersForOpacitySlider = _(JSONconf.layers).filter(function(layerConf) {
+            if (!layerConf.defaultNullForGroup)
             {
-                if (!layerConf.group)
+                // Catering for special layer configuration (especially basemaps) 
+                if (!layerConf.title && layerConf.args)
                 {
-                    layerConf.group = "default";
+                  if (typeof layerConf.args[0] === "string") {layerConf.title = layerConf.args[0];} else {layerConf.title = layerConf.args[0].name;}
                 }
-                return groupsToDisplay.indexOf(layerConf.group)>-1;
+
+                if (groupsToDisplay && layerConf.title)
+                {
+                    if (!layerConf.group)
+                    {
+                        layerConf.group = "default";
+                    }
+                    return groupsToDisplay.indexOf(layerConf.group)>-1;
+                }
             }
         });
         var layerNameArray = _.map(layersForOpacitySlider,function(l){
