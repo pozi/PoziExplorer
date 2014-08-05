@@ -253,7 +253,7 @@
             "layersToTurnOffWhenShown":["Labels"],
             "type": "OpenLayers.Layer.XYZ",
             "args": [
-                "Nokia Maps",
+                "HERE Maps",
                 [
                     "http://1.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ",
                     "http://2.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ",
@@ -261,7 +261,7 @@
                     "http://4.maptile.lbs.ovi.com/maptiler/v2/maptile/newest/normal.day/${z}/${x}/${y}/256/png8?lg=ENG&app_id=NIEF2Bb3q1uSHV0AILtJ&token=ji8hmfQIabQA7--VT2HOAQ"
                 ],
                 {
-                    "attribution": "&copy; 2013 Nokia</span>&nbsp;<a href='http://maps.nokia.com/services/terms' target='_blank' title='Terms of Use' style='color:#333;text-decoration: underline;'>Terms of Use</a></div> <img src='http://api.maps.nokia.com/2.2.4/assets/ovi/mapsapi/by_here.png' border='0'>",
+                    "attribution": "&copy; 1987 - 2014 HERE</span>&nbsp;<a href='http://here.com/terms?locale=en-US' target='_blank' title='Terms of Use' style='color:#333;text-decoration: underline;'>Terms of Use</a></div> <div style='display: inline-block; position: absolute; bottom: 15px; left: 10px; width: 33px; height: 24px; margin: 6px; background-image: url(http://js.cit.api.here.com/se/2.5.4/assets/ovi/mapsapi/here_logo.png); background-position: 0px 0px; background-repeat: no-repeat;' title='HERE'/>",
                     "transitionEffect": "resize",
                     "isBaseLayer":true
                 }
