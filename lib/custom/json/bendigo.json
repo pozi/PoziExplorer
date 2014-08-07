@@ -365,28 +365,6 @@
             "tiled": false
         },
         {
-            "source": "local",
-            "name": "vw_gb_garbage_collection",
-            "title": "Garbage Collection",
-            "visibility": false,
-            "opacity": 0.85,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "local",
-            "name": "vw_gb_garbage_collection",
-            "title": "Recycling Week",
-            "visibility": false,
-            "opacity": 0.85,
-            "format": "image/png8",
-            "styles": "gb_garbage_collection_week",
-            "transparent": true,
-            "tiled": false
-        },
-        {
             "source": "basemap",
             "name": "VICMAP_CLASSIC:gt_property_address",
             "title": "Properties",
@@ -410,11 +388,33 @@
             "tiled": false
         },
         {
+            "source": "local",
+            "name": "vw_gb_garbage_collection",
+            "title": "Garbage Collection",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "vw_gb_garbage_collection",
+            "title": "Recycling Week",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/png8",
+            "styles": "gb_garbage_collection_week",
+            "transparent": true,
+            "tiled": false
+        },
+        {
             "source": "basemap",
             "name": "VICMAP_CLASSIC:dse_vmadmin_ward_2012",
             "title": "Wards",
             "visibility": false,
-            "opacity": 0.3,
+            "opacity": 1,
             "format": "image/png8",
             "styles": "GreaterBendigo_Wards",
             "transparent": true,
