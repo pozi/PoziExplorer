@@ -97,6 +97,44 @@ addOpacitySlider = function(app) {
                                         {
                                             app.mapPanel.map.getLayersByName(l.title)[0].setVisibility(l.title == record.get("val"));
                                             combo.findRecord('val',l.title).set("visible",l.title == record.get("val"));
+
+                                            // Manage visibility of linked layers
+                                            if (l.title == record.get("val"))
+                                            {
+                                                // For the layer to show, we show (or hide) linked layers                                                
+                                                // switch off linked layers
+                                                for (p in l.layersToTurnOffWhenShown)
+                                                {
+                                                    if (l.layersToTurnOffWhenShown.hasOwnProperty(p))
+                                                    {
+                                                        app.mapPanel.map.getLayersByName(l.layersToTurnOffWhenShown[p])[0].setVisibility(false);
+                                                    }
+                                                }
+
+                                                // switch on linked layers
+                                                for (p in l.layersToTurnOnWhenShown)
+                                                {
+                                                    if (l.layersToTurnOnWhenShown.hasOwnProperty(p))
+                                                    {
+                                                        app.mapPanel.map.getLayersByName(l.layersToTurnOnWhenShown[p])[0].setVisibility(true);
+                                                    }
+                                                }
+
+                                            }
+                                            else
+                                            {
+
+                                                // For the layers to hide, we hide linked layers as well
+
+                                                // switch off linked layers
+                                                for (p in l.layersToTurnOnWhenShown)
+                                                {
+                                                    if (l.layersToTurnOnWhenShown.hasOwnProperty(p))
+                                                    {
+                                                        app.mapPanel.map.getLayersByName(l.layersToTurnOnWhenShown[p])[0].setVisibility(false);
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 });

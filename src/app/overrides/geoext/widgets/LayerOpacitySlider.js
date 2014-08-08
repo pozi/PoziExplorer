@@ -46,6 +46,31 @@ GeoExt.LayerOpacitySlider.prototype.changeLayerVisibility = function(slider, val
 
       this.layer.setVisibility(false);
       this.layer.setOpacity(0);
+
+      // Switch off linked layers on hiding
+      var that = this, layersToSwitchOff = [];
+
+      _(JSONconf.layers).each(function(l){
+        // Catering for special layer configuration (especially basemaps) 
+        if (!l.title && l.args)
+        {
+          if (typeof l.args[0] === "string") {l.title = l.args[0];} else {l.title = l.args[0].name;}
+        }
+
+        if (l.title == that.layer.name)
+        {
+          layersToSwitchOff = l.layersToTurnOnWhenShown;
+        }
+      });
+
+      for (ltc in layersToSwitchOff)
+      {
+          if (layersToSwitchOff.hasOwnProperty(ltc))
+          {
+              app.mapPanel.map.getLayersByName(layersToSwitchOff[ltc])[0].setVisibility(false);
+          }
+      }
+
     }
   } 
   else
@@ -64,6 +89,39 @@ GeoExt.LayerOpacitySlider.prototype.changeLayerVisibility = function(slider, val
           }
         }
         this.layer.setVisibility(true);
+
+        // Switch on/off linked layers on showing
+        var that = this, layersToSwitchOff = [], layersToSwitchOn = [];
+
+        _(JSONconf.layers).each(function(l){
+          // Catering for special layer configuration (especially basemaps) 
+          if (!l.title && l.args)
+          {
+            if (typeof l.args[0] === "string") {l.title = l.args[0];} else {l.title = l.args[0].name;}
+          }
+
+          if (l.title == that.layer.name)
+          {
+            layersToSwitchOff = l.layersToTurnOffWhenShown;
+            layersToSwitchOn = l.layersToTurnOnWhenShown;
+          }
+        });
+
+        for (ltc in layersToSwitchOff)
+        {
+            if (layersToSwitchOff.hasOwnProperty(ltc))
+            {
+                app.mapPanel.map.getLayersByName(layersToSwitchOff[ltc])[0].setVisibility(false);
+            }
+        }
+        for (ltc in layersToSwitchOn)
+        {
+            if (layersToSwitchOn.hasOwnProperty(ltc))
+            {
+                app.mapPanel.map.getLayersByName(layersToSwitchOn[ltc])[0].setVisibility(true);
+            }
+        }
+
       }
     }
   else
