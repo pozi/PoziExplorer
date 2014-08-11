@@ -20,23 +20,28 @@
                 },
                 "assets": {
                     "title": "Assets of Special Interest",
-                    "collapsed": true
+                    "collapsed": true,
+                    "displayInOpacitySlider": true
                 },
                 "coping": {
                     "title": "Coping Capacity",
-                    "collapsed": true
+                    "collapsed": true,
+                    "displayInOpacitySlider": true
                 },
                 "critical": {
                     "title": "Critical Infrastructure",
-                    "collapsed": true
+                    "collapsed": true,
+                    "displayInOpacitySlider": true
                 },
                 "hazard": {
                     "title": "Hazard Thematic",
-                    "collapsed": true
+                    "collapsed": true,
+                    "displayInOpacitySlider": true
                 },
                 "social": {
                     "title": "Social Vulnerability Thematic",
-                    "collapsed": true
+                    "collapsed": true,
+                    "displayInOpacitySlider": true
                 },
                 "default": {
                     "title":"Overlays",
@@ -51,7 +56,8 @@
                 "background": {
                     "title": "Base Maps",
                     "exclusive": true,
-                    "collapsed": true
+                    "collapsed": true,
+                    "displayInOpacitySlider": true
                 }
             },
             "outputConfig": {

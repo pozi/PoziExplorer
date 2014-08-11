@@ -165,10 +165,14 @@
         },
         "local_cascaded_imagery": {
             "url": [
-                "http://cardinia01.pozi.com/geoserver/CARDINIA/ows",
-                "http://cardinia02.pozi.com/geoserver/CARDINIA/ows",
-                "http://cardinia03.pozi.com/geoserver/CARDINIA/ows",
-                "http://cardinia04.pozi.com/geoserver/CARDINIA/ows"
+                "http://cardinia01.pozi.com/geoserver/ows",
+                "http://cardinia02.pozi.com/geoserver/ows",
+                "http://cardinia03.pozi.com/geoserver/ows",
+                "http://cardinia04.pozi.com/geoserver/ows",
+                "http://cardinia05.pozi.com/geoserver/ows",
+                "http://cardinia06.pozi.com/geoserver/ows",
+                "http://cardinia07.pozi.com/geoserver/ows",
+                "http://cardinia08.pozi.com/geoserver/ows"
             ],
             "title": "DSE Image Web Server",
             "ptype": "gxp_wmscsource",
@@ -603,8 +607,8 @@
         },
         {
             "source": "local_cascaded_imagery",
-            "name": "AERIAL_PORTPHILLIP-OUTER_2011DEC30_AIR_VIS_35CM_MGA55",
-            "title": "Aerial Photo (Port Phillip Outer, Dec 2011)",
+            "name": "CARDINIA:AERIAL_CARDINIA_2014",
+            "title": "Aerial Photo (Mar 2014, 10cm)",
             "visibility": false,
             "opacity": 0,
             "format": "image/JPEG",
@@ -617,7 +621,20 @@
         },
         {
             "source": "local_cascaded_imagery",
-            "name": "AERIAL_PORTPHILLIP-OUTER_2011DEC30_AIR_CIR_35CM_MGA55",
+            "name": "CARDINIA:AERIAL_PORTPHILLIP-OUTER_2011DEC30_AIR_VIS_35CM_MGA55",
+            "title": "Aerial Photo (Port Phillip Outer, Dec 2011)",
+            "visibility": false,
+            "opacity": 0,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group": "aerial",
+            "selected": false,
+            "transparent": true,
+            "styles": ""
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "CARDINIA:AERIAL_PORTPHILLIP-OUTER_2011DEC30_AIR_CIR_35CM_MGA55",
             "title": "Aerial Photo (Port Phillip Outer, Dec 2011, IR)",
             "visibility": false,
             "opacity": 0,
@@ -630,7 +647,7 @@
         },
         {
             "source": "local_cascaded_imagery",
-            "name": "AERIAL_PAKENHAM_2011DEC30_AIR_VIS_10CM_MGA55",
+            "name": "CARDINIA:AERIAL_PAKENHAM_2011DEC30_AIR_VIS_10CM_MGA55",
             "title": "Aerial Photo (Pakenham, Dec 2011)",
             "visibility": false,
             "opacity": 0,
@@ -643,7 +660,7 @@
         },
         {
             "source": "local_cascaded_imagery",
-            "name": "AERIAL_PAKENHAM_2011AUG20_AIR_VIS_10CM_MGA55",
+            "name": "CARDINIA:AERIAL_PAKENHAM_2011AUG20_AIR_VIS_10CM_MGA55",
             "title": "Aerial Photo (Pakenham, Aug 2011)",
             "visibility": false,
             "opacity": 0,
@@ -656,7 +673,7 @@
         },
         {
             "source": "local_cascaded_imagery",
-            "name": "AERIAL_PAKENHAM_2011APR08_AIR_VIS_10CM_MGA55",
+            "name": "CARDINIA:AERIAL_PAKENHAM_2011APR08_AIR_VIS_10CM_MGA55",
             "title": "Aerial Photo (Pakenham, Apr 2011)",
             "visibility": false,
             "opacity": 0,
@@ -669,7 +686,7 @@
         },
         {
             "source": "local_cascaded_imagery",
-            "name": "AERIAL_PORTPHILLIP_2010DEC28_AIR_VIS_35CM_MGA55",
+            "name": "CARDINIA:AERIAL_PORTPHILLIP_2010DEC28_AIR_VIS_35CM_MGA55",
             "title": "Aerial Photo (Port Phillip, Dec 2010)",
             "visibility": false,
             "opacity": 0,
@@ -682,7 +699,7 @@
         },
         {
             "source": "local_cascaded_imagery",
-            "name": "AERIAL_PAKENHAM_2010DEC30_AIR_VIS_10CM_MGA55",
+            "name": "CARDINIA:AERIAL_PAKENHAM_2010DEC30_AIR_VIS_10CM_MGA55",
             "title": "Aerial Photo (Pakenham, Dec 2010)",
             "visibility": false,
             "opacity": 0,
@@ -695,7 +712,7 @@
         },
         {
             "source": "local_cascaded_imagery",
-            "name": "AERIAL_CARDINIA_2009NOV09_AIR_VIS_15CM_MGA55",
+            "name": "CARDINIA:AERIAL_CARDINIA_2009NOV09_AIR_VIS_15CM_MGA55",
             "title": "Aerial Photo (Cardinia, Nov 2009)",
             "visibility": false,
             "opacity": 0,
@@ -707,7 +724,7 @@
         },
         {
             "source": "local_cascaded_imagery",
-            "name": "AERIAL_CARDINIA_2006NOV18_AIR_VIS_35CM_MGA55",
+            "name": "CARDINIA:AERIAL_CARDINIA_2006NOV18_AIR_VIS_35CM_MGA55",
             "title": "Aerial Photo (Cardinia, Nov 2006)",
             "visibility": false,
             "opacity": 0,

@@ -30,7 +30,8 @@
                 },
                 "background": {
                     "title": "Base Maps",
-                    "exclusive": true
+                    "exclusive": true,
+                    "displayInOpacitySlider": true
                 }
             },
             "outputConfig": {

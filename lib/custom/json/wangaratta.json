@@ -21,7 +21,8 @@
                 "live": {
                     "title": "Live Feeds",
                     "collapsed": true,
-                    "exclusive": false
+                    "exclusive": false,
+                    "displayInOpacitySlider": true
                 },   
                 "default": {
                     "title":"Overlays",
@@ -29,7 +30,8 @@
                 },
                 "background": {
                     "title": "Base Maps",
-                    "exclusive": true
+                    "exclusive": true,
+                    "displayInOpacitySlider": true
                 }
             },
             "outputConfig": {

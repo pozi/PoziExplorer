@@ -31,7 +31,8 @@
                 "background": {
                     "title": "Base Maps",
                     "exclusive": true,
-                    "collapsed": true
+                    "collapsed": true,
+                    "displayInOpacitySlider": true
                 }
             },
             "outputConfig": {
