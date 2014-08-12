@@ -7,26 +7,70 @@
         <link rel="icon" type="image/ico" href="favicon.ico">
 
         <!-- Ext resources: using cacheFly CDN -->
-        <!--
         <link rel="stylesheet" type="text/css" href="http://extjs.cachefly.net/ext-3.4.0/resources/css/ext-all.css">
         <link rel="stylesheet" type="text/css" href="http://extjs.cachefly.net/ext-3.4.0/resources/css/xtheme-gray.css">
         <script type="text/javascript" src="http://extjs.cachefly.net/ext-3.4.0/adapter/ext/ext-base.js"></script>
         <script type="text/javascript" src="http://extjs.cachefly.net/ext-3.4.0/ext-all.js"></script>
-        -->
+
         <!-- Ext resources: locally served -->
+        <!--
         <link rel="stylesheet" type="text/css" href="src/ext/resources/css/ext-all.css">
         <link rel="stylesheet" type="text/css" href="src/ext/resources/css/xtheme-gray.css">
         <script type="text/javascript" src="src/ext/adapter/ext/ext-base.js"></script>
         <script type="text/javascript" src="src/ext/ext-all.js"></script>
-
+        -->
 
         <!-- OpenLayers resources -->
         <link rel="stylesheet" type="text/css" href="src/openlayers/theme/default/style.css">
 
         <!-- GeoExt resources -->
-        <link rel="stylesheet" type="text/css" href="src/geoext/resources/css/popup.css">
-        <link rel="stylesheet" type="text/css" href="src/geoext/resources/css/layerlegend.css">
-        <link rel="stylesheet" type="text/css" href="src/geoext/resources/css/gxtheme-gray.css">
+
+        <!-- <link rel="stylesheet" type="text/css" href="src/geoext/resources/css/popup.css"> -->
+        <!-- Inlining this CSS, taking care of the resources links -->
+        <style>
+            .gx-popup-anc {
+                background: transparent url(src/geoext/resources/images/default/anchor.png) no-repeat 0 0;
+                position: absolute;
+                left: 5px;
+                z-index: 2;
+                height: 16px;
+                width: 31px;
+                pointer-events: none;
+            }
+
+            .gx-popup-anc.top {
+                background: transparent url(src/geoext/resources/images/default/anchor-top.png) no-repeat 0 0;
+                top: -16px; /* height(gx-popup-anc) */
+            }
+
+            .gx-popup-anc.right {
+                left: auto;
+                right: 5px;
+            }
+        </style>
+
+        <!-- <link rel="stylesheet" type="text/css" href="src/geoext/resources/css/layerlegend.css"> -->
+        <!-- Inlining this CSS, taking care of the resources links -->
+        <style>
+            .gx-ruledrag-insert-below {
+                border-bottom: 1px dotted;
+            }
+            .gx-ruledrag-insert-above {
+                border-top: 1px dotted;
+            }
+        </style>
+        
+        <!-- <link rel="stylesheet" type="text/css" href="src/geoext/resources/css/gxtheme-gray.css"> -->
+        <!-- Inlining this CSS, taking care of the resources links -->
+        <style>
+            .gx-popup-anc {
+                background-image: url(src/geoext/resources/images/gray/anchor.png);
+            }
+
+            .gx-popup-anc.top {
+                background-image: url(src/geoext/resources/images/gray/anchor-top.png);
+            }
+        </style>
 
         <!-- gxp resources -->
         <link rel="stylesheet" type="text/css" href="src/gxp/theme/all.css">
@@ -35,7 +79,52 @@
         <link rel="stylesheet" type="text/css" href="theme/app/style.css">
 
 		<!-- PrintPreview resources -->
-		<link rel="stylesheet" type="text/css" href="src/PrintPreview/resources/css/printpreview.css">
+		<!-- <link rel="stylesheet" type="text/css" href="src/PrintPreview/resources/css/printpreview.css"> -->
+        <!-- Inlining this CSS, taking care of the resources links -->
+        <style>
+            .x-btn .icon-print { 
+                background-image: url(src/PrintPreview/resources/images/silk/printer.png);
+            }
+
+            .gx-printpreview {
+                padding: 5px;
+            }
+
+            /* fixes textarea scrollbar issue in FF on OSX */
+            .gx-printpreview  textarea.x-form-field {
+                padding: 1px 1px 1px 3px;
+            }
+
+            .gx-map-overlay {
+                z-index: 1000; 
+                position: absolute; 
+                right: 10px; 
+                bottom: 10px;
+                text-align: left;
+            }
+
+            .gx-map-overlay .x-panel-body {
+                background-color: #D0DEF0;
+            }
+
+            .gx-map-overlay .olControlScaleLine {
+                bottom: 0;
+                left: 0;
+                position: relative !important;
+            }
+
+            .gx-northarrow {
+                background: transparent url(src/PrintPreview/resources/images/north_arrow.png) no-repeat;
+                *-background: none;
+                *-filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='src/PrintPreview/resources/images/north_arrow.png',sizingMethod='crop');
+                height: 24px;
+                width: 24px;
+            }
+
+            .gx-item-nowrap .x-box-item {
+                white-space: nowrap;
+            }
+        </style>
 
 		<!-- Custom styles should be put in theme/app/style.css -->
 
