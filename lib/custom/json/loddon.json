@@ -287,6 +287,61 @@
             "transparent": true
         },
         {
+            "source": "local_cascaded_imagery",
+            "name": "images_water_aerial_towns_kerang-flood_2011jan19_air_vis_50cm_mga54.ecw",
+            "title": "Kerang Floods (19/01/2011)",
+            "visibility": false,
+            "opacity": 0,
+            "group": "aerial",
+            "selected": false,
+            "format": "image/JPEG",
+            "transparent": true
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "images_water_aerial_towns_kerang-flood_2011jan19_air_cir_50cm_mga54.ecw",
+            "title": "Kerang Floods (19/01/2011, Infrared)",
+            "visibility": false,
+            "opacity": 0,
+            "group": "aerial",
+            "selected": false,
+            "format": "image/JPEG",
+            "transparent": true
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "images_water_aerial_towns_kerang-flood_2011jan22_air_vis_50cm_mga54.ecw",
+            "title": "Kerang Floods (22/01/2011)",
+            "visibility": false,
+            "opacity": 0,
+            "group": "aerial",
+            "selected": false,
+            "format": "image/JPEG",
+            "transparent": true
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "images_water_aerial_towns_serpentine-flood_2011jan16_air_vis_15cm_mga55.ecw",
+            "title": "Serpentine Floods (16/01/2011)",
+            "visibility": false,
+            "opacity": 0,
+            "group": "aerial",
+            "selected": false,
+            "format": "image/JPEG",
+            "transparent": true
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "images_water_aerial_towns_serpentine-flood_2011jan16_air_cir_15cm_mga55.ecw",
+            "title": "Serpentine Floods (16/01/2011, Infrared)",
+            "visibility": false,
+            "opacity": 0,
+            "group": "aerial",
+            "selected": false,
+            "format": "image/JPEG",
+            "transparent": true
+        },
+        {
             "source": "google",
             "name": "SATELLITE",
             "visibility": false
