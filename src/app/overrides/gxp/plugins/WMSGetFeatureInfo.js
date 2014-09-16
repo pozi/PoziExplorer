@@ -290,7 +290,12 @@ gxp.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                             if (layerCounter == layerMax) {
                                 // Remove any previous results, but without performing the collapse functions on subtabs
                                 // This allows to keep layers that were switched on
-                                app.clearHighlight();
+
+                                // Performing cleaning operations except if a vector layer has been clicked first - in that case, the combo is already filled with the attributes of the vector feature, and we don't want to overwrite it
+                                if (!app.getSelectionLayer().extraVars.Vector)
+                                {
+                                    app.clearHighlight();
+                                }
 
                                 if (gComboDataArray.value.length) {
                                     var cb = Ext.getCmp('gtInfoCombobox');
@@ -306,16 +311,25 @@ gxp.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                                         return layerComparison !== 0 ? layerComparison : (distanceComparison !== 0 ? distanceComparison : bboxComparison);
                                     });
                                     app.getSelectionLayer().extraVars.WFS = false;
-                                    gCombostore.loadData(gComboDataArray.value);
 
-                                    // Features found during the getFeatureInfo: showing the tab
-                                    if (! (JSONconf.hideSelectedFeaturePanel)) {
-                                        northPart.setHeight(60);
-                                        Ext.getCmp('gtInfoCombobox').setVisible(true);
-                                        // Collapsing the drop-down
-                                        Ext.getCmp('gtInfoCombobox').collapse();
-                                    }
-                                    eastPanel.expand();
+                                    // Loading the content of the WMS getFeatureInfo only if a vector layer has not been successfully clicked first
+                                    if (!app.getSelectionLayer().extraVars.Vector)
+                                    {
+                                        gCombostore.loadData(gComboDataArray.value);
+                                        // Features found during the getFeatureInfo: showing the tab
+                                        if (! (JSONconf.hideSelectedFeaturePanel)) {
+                                            northPart.setHeight(60);
+                                            Ext.getCmp('gtInfoCombobox').setVisible(true);
+                                            // Collapsing the drop-down
+                                            Ext.getCmp('gtInfoCombobox').collapse();
+                                        }
+                                        eastPanel.expand();
+                                    }                                    
+                                }
+
+                                if (app.getSelectionLayer().extraVars.Vector)
+                                {
+                                    app.getSelectionLayer().extraVars.Vector = false;
                                 }
 
                                 gComboDataArray.value = [];

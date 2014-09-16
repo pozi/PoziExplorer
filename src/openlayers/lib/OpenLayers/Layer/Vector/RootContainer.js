@@ -70,7 +70,15 @@ OpenLayers.Layer.Vector.RootContainer = OpenLayers.Class(OpenLayers.Layer.Vector
         var layers = this.layers;
         var feature;
         for(var i=0; i<layers.length; i++) {
-            feature = layers[i].getFeatureFromEvent(evt);
+            if (typeof layers[i].getFeatureFromEvent == "function")
+            {
+                feature = layers[i].getFeatureFromEvent(evt);
+            }
+            else
+            {
+                feature = layers[i].get("layer").getFeatureFromEvent(evt);
+            }
+            
             if(feature) {
                 return feature;
             }

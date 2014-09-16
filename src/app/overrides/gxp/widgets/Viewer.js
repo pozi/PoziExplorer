@@ -63,6 +63,113 @@ gxp.Viewer.prototype.addLayers = function() {
         if (records.length) {
             panel.layers.add(records);
         }
+
+        // Adding support for WFS vector layers (select feature control)
+        // Building an array of all vector layers so that the select control spans all these layers
+        var vectorLayers = panel.layers.data.items.filter(function(x){
+            return ((x.get("type") === "OpenLayers.Layer.Vector") && (x.get("title") != "Selection"));
+        });
+        var addSelectFeature = function () {
+            var selectFeature = new OpenLayers.Control.SelectFeature(
+                vectorLayers, 
+                {
+                    multiple: false,
+                    highlightOnly: true,
+                    eventListeners: {
+                        featureunhighlighted: function(event){
+                            //console.log("Unhighlighting a feature.");
+
+                            // Flag for WMS getFeatureInfo to not overwrite the combo content
+                            app.getSelectionLayer().extraVars.Vector = true;
+                            // Flag for the clearHighlight to detect if a feature is curently selected
+                            if (!app.getSelectionLayer().extraVars.VectorSelected)
+                            {
+                                // Clearing the highlight
+                                app.clearHighlightWithCollapse();
+                            }
+                            else
+                            {
+                                // Setting the select feature as "not selected"
+                                app.getSelectionLayer().extraVars.VectorSelected = false;                  
+                            }
+                        },
+                        featurehighlighted: function(event){
+                            //console.log("Highlighting a feature.");
+
+                            var clickedFeature = event.feature.data;
+
+                            // Building a point feature to add to the selection layer
+                            var pt = new OpenLayers.Feature.Vector();
+                            pt.geometry = (new OpenLayers.Geometry.Point(event.feature.geometry.x, event.feature.geometry.y));
+
+                            // The WKT string repreenting this feature (for highlight)
+                            var wkt = new OpenLayers.Format.WKT();
+                            var pt_wkt = wkt.write(pt);
+
+                            // All the attributes are contained in a JSON object
+                            var cont = clickedFeature;
+
+                            // Type
+                            var typ = event.feature.layer.name;
+
+                            // Attempt to format it nicely (removing the parenthesis content)
+                            var simpleTitle = typ.match(/(.*) ?\(.*\)/);
+                            if (simpleTitle) {
+                                typ = helpers.trim(simpleTitle[1]);
+                            }
+
+                            // Layer name (without namespace), to enable additional accordion panels
+                            var lay = typ;
+
+                            // Label - returns the value of the 1st property in the object
+                            var lab = clickedFeature[Object.keys(clickedFeature)[0]];
+
+                            // If too long for the drop down, we truncate the string to the space remaining after "<LAYER NAME>:"
+                            var num_char_in_drop_down = 32;
+                            if (lab.length > num_char_in_drop_down) {
+                                lab = lab.substring(0, num_char_in_drop_down - 2) + "..";
+                            }
+
+                            // Building a row and pushing it to an array
+                            var row_array = new Array(0, typ, cont, 0, lab, lay);
+                            gComboDataArray.value.push(row_array);
+
+                            if (gComboDataArray.value.length) {
+                                app.getSelectionLayer().extraVars.Vector = true;
+
+                                // Clearing the highlight
+                                app.clearHighlight();
+                                // Managing objects in the selection layer
+                                app.getSelectionLayer().removeAllFeatures();
+                                app.getSelectionLayer().addFeatures([pt]);
+
+                                // Setting the select feature as "selected"
+                                app.getSelectionLayer().extraVars.VectorSelected = true;
+
+                                var cb = Ext.getCmp('gtInfoCombobox');
+                                if (cb.disabled) { cb.enable(); }
+
+                                gCombostore.loadData(gComboDataArray.value);
+
+                                // Features found during the getFeatureInfo: showing the tab
+                                if (! (JSONconf.hideSelectedFeaturePanel)) {
+                                    northPart.setHeight(60);
+                                    Ext.getCmp('gtInfoCombobox').setVisible(true);
+                                    // Collapsing the drop-down
+                                    Ext.getCmp('gtInfoCombobox').collapse();
+                                }
+                                eastPanel.expand();
+                            }
+                            gComboDataArray.value = [];
+                        }
+                    }
+                }
+            );
+
+            panel.map.addControl(selectFeature);
+            selectFeature.activate();
+        };
+        addSelectFeature();
         
     }        
 };
