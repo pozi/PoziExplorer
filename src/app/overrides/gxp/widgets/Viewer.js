@@ -130,6 +130,14 @@ gxp.Viewer.prototype.addLayers = function() {
 
                             // Label - returns the value of the 1st property in the object
                             var lab = clickedFeature[Object.keys(clickedFeature)[0]];
+                            for (var jj=0; jj < Object.keys(clickedFeature).length; jj++)
+                            {
+                                if (!helpers.isNumber(clickedFeature[Object.keys(clickedFeature)[jj]]))
+                                {
+                                    lab = clickedFeature[Object.keys(clickedFeature)[jj]];
+                                    break;
+                                }
+                            }
 
                             // If too long for the drop down, we truncate the string to the space remaining after "<LAYER NAME>:"
                             var num_char_in_drop_down = 32;

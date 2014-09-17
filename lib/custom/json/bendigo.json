@@ -635,6 +635,28 @@
         "fillColor": "#AF291D",
         "fillOpacity": 0.2
     },
+    "layerPresentation": {
+        "Education Facilities": [{
+            "attr_name": "facility_name","alt_name": "Name"
+            }, {
+            "attr_name": "facility_type","alt_name": "Type"
+            }, {
+            "attr_name": "house_no"
+            }, {
+            "attr_name": "street_name"
+            }, {
+            "attr_name": "suburb"
+        }],
+        "Public Playgrounds": [{
+            "attr_name": "playground_name","alt_name": "Name"
+            }, {
+            "attr_name": "house_no"
+            }, {
+            "attr_name": "street_name"
+            }, {
+            "attr_name": "suburb"
+        }]
+    },
     "liveDataEndPoints": [
         {
             "urlLayout": "http://192.168.10.12/ws/rest/v3/ws_get_layouts.php",
