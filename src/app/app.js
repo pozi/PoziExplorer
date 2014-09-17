@@ -135,6 +135,21 @@ ga('create', 'UA-27881682-2', 'pozi.com');
 ga('send', 'pageview');
 // Google Analytics - end
 
+// http://stackoverflow.com/questions/18912932/object-keys-not-working-in-internet-explorer
+if (!Object.keys) {
+  Object.keys = function(obj) {
+    var keys = [];
+
+    for (var i in obj) {
+      if (obj.hasOwnProperty(i)) {
+        keys.push(i);
+      }
+    }
+
+    return keys;
+  };
+}
+
 Ext.onReady(function() {
     requestConfig({
         onLoad: function(clientConfig, propertyDataInit) {
