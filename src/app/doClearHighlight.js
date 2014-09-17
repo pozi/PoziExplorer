@@ -31,16 +31,8 @@ doClearHighlight = function(app, gCombostore, addDefaultTabs, accordion, gLayout
         for (var a = 0; a < mControls.length; a++) {
             if (mControls[a].displayClass == "olControlSelectFeature")
             {
-                //mControls[a].unselectAll();
-                for (var i=0; i < mControls[a].layers.length; i++ )
-                {
-                    while (mControls[a].layers[i].data.layer.selectedFeatures.length > 0) {
-                        mControls[a].unselect(mControls[a].layers[i].data.layer.selectedFeatures[0]);
-                    }
-                }
-
-                //mControls[a].layers[0].data.layer.selectedFeatures = [];
-                mControls[a].layer.redraw(true);
+                mControls[a].unselectAll();
+                //mControls[a].layer.redraw(true);
             }
         }
     }

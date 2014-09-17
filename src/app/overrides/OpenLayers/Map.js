@@ -19,5 +19,11 @@ OpenLayers.Map.prototype.setLayerZIndex = function (layer, zIdx) {
         multiplier = 2;
     }
 
+    // Modification for root containers - they need to be on top of the feature layers
+    if (layer.CLASS_NAME == "OpenLayers.Layer.Vector.RootContainer")
+    {
+    	offset = this.Z_INDEX_BASE["Feature"] + 100;
+    }
+
     layer.setZIndex( offset + zIdx * multiplier );
 };

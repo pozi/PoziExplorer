@@ -69,6 +69,13 @@ gxp.Viewer.prototype.addLayers = function() {
         var vectorLayers = panel.layers.data.items.filter(function(x){
             return ((x.get("type") === "OpenLayers.Layer.Vector") && (x.get("title") != "Selection"));
         });
+
+        // Proper OpenLayers layer objects are nested within these GXP objects
+        for (var ii=0; ii < vectorLayers.length; ii++)
+        {
+            vectorLayers[ii] = vectorLayers[ii].data.layer;
+        }
+
         var addSelectFeature = function () {
             var selectFeature = new OpenLayers.Control.SelectFeature(
                 vectorLayers, 
