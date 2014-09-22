@@ -535,6 +535,17 @@
             "transition": null
         },
         {
+            "source": "local",
+            "name": "cogb_mach_zone",
+            "title": "Maternal & Child Health Zones",
+            "visibility": false,
+            "opacity": 0.7,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
             "source": "basemap",
             "name": "VICMAP_CLASSIC:vw_gt_vmfeat_foi_transfer_station",
             "title": "Transfer Stations",
