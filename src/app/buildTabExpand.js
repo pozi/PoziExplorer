@@ -291,14 +291,30 @@ buildTabExpand = function(gCurrentExpandedTabIdx, gLayoutsArr, JSONconf, gCurren
                                                     // Going thru all the elements in the tab_array to add the listener
                                                     // Note: we can not just add a default listener in the containing panel/tabpanel
                                                     // because the elements have already been instantiated
-                                                    for (b in tab_array) {
-                                                        if (tab_array.hasOwnProperty(b)) {
-                                                            tab_array[b].addListener('activate',
-                                                            function(tab) {
-                                                                tab.the_geom = geom_array[tab.title];
-                                                                fn2(tab);
-                                                            });
+                                                    if (tab_array.length>1)
+                                                    {
+                                                        for (b in tab_array) {
+                                                            if (tab_array.hasOwnProperty(b)) 
+                                                            {
+                                                                tab_array[b].addListener('activate',
+                                                                    function(tab) {
+                                                                        // Use the title of the tab to locate the geometry
+                                                                        tab.the_geom = geom_array[tab.title];
+                                                                        fn2(tab);
+                                                                    }
+                                                                );
+                                                            }
                                                         }
+                                                    }
+                                                    else
+                                                    {
+                                                        tab_array[0].addListener('added',
+                                                            function(tab) {
+                                                                // When there is only one panel, just take the value of the first property in geom_array
+                                                                tab.the_geom = geom_array[Object.keys(geom_array)[0]];
+                                                                fn2(tab);
+                                                            }
+                                                        );
                                                     }
                                                 }
                                             }
