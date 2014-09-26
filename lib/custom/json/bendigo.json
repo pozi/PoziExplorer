@@ -535,28 +535,6 @@
             "transition": null
         },
         {
-            "source": "local",
-            "name": "cogb_mach_zone",
-            "title": "Maternal & Child Health Zones",
-            "visibility": false,
-            "opacity": 0.7,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:vw_gt_vmfeat_foi_transfer_station",
-            "title": "Transfer Stations",
-            "visibility": false,
-            "opacity": 0.85,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
             "source": "basemap",
             "name": "VICMAP_CLASSIC:gt_property_address",
             "title": "Properties",
@@ -576,6 +554,17 @@
             "opacity": 0.75,
             "format": "image/png8",
             "styles": "parcel_label",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "cogb_mach_zone",
+            "title": "Maternal & Child Health Zones",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/png8",
+            "styles": "",
             "transparent": true,
             "tiled": false
         },
