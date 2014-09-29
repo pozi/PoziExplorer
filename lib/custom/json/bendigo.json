@@ -358,6 +358,52 @@
             "visibility": false,
             "type": "OpenLayers.Layer.Vector",
             "args": [
+                "Pre-School & Childcare",
+                {
+                    "strategies": [new OpenLayers.Strategy.BBOX()],
+                    "projection": new OpenLayers.Projection("EPSG:4326"),
+                    "protocol": new OpenLayers.Protocol.WFS({
+                        "version": "1.1.0",
+                        "url": "http://bendigo.pozi.com/geoserver/wfs",
+                        "featurePrefix": "BENDIGO",
+                        "featureType": "cogb_childcare_facility",
+                        "featureNS": "http://www.pozi.com/bendigo",
+                        "geometryName": "the_geom"
+                    }),
+                    "styleMap": new OpenLayers.StyleMap(
+                        {
+                            "default": new OpenLayers.Style({
+                                "opacity": 1,
+                                "cursor": "pointer"
+                                },{
+                                "rules" : [
+                                    new OpenLayers.Rule({
+                                        "name": " ",
+                                        "elseRule": true,
+                                        "symbolizer": {
+                                            "graphicHeight": 24,
+                                            "graphicWidth": 24,
+                                            "externalGraphic": "http://basemap.pozi.com/geoserver/styles/sjjb/pngall/education_nursery2.n.AC39AC.32.png"
+                                        }
+                                    })
+                                ]
+                            }),
+                            "select": {
+                                "opacity": 1
+                            }
+                        }
+                    )
+                },{
+                    "abstract": "Provided by City of Greater Bendigo"
+                }
+            ],
+            "transition": null
+        },
+        {
+            "source": "ol",
+            "visibility": false,
+            "type": "OpenLayers.Layer.Vector",
+            "args": [
                 "Education Facilities",
                 {
                     "strategies": [new OpenLayers.Strategy.BBOX()],
@@ -519,6 +565,52 @@
                                             "graphicHeight": 24,
                                             "graphicWidth": 24,
                                             "externalGraphic": "http://basemap.pozi.com/geoserver/styles/sjjb/pngall/health_doctors2.n.734A08.32.png"
+                                        }
+                                    })
+                                ]
+                            }),
+                            "select": {
+                                "opacity": 1
+                            }
+                        }
+                    )
+                },{
+                    "abstract": "Provided by City of Greater Bendigo"
+                }
+            ],
+            "transition": null
+        },
+        {
+            "source": "ol",
+            "visibility": false,
+            "type": "OpenLayers.Layer.Vector",
+            "args": [
+                "Public Toilets",
+                {
+                    "strategies": [new OpenLayers.Strategy.BBOX()],
+                    "projection": new OpenLayers.Projection("EPSG:4326"),
+                    "protocol": new OpenLayers.Protocol.WFS({
+                        "version": "1.1.0",
+                        "url": "http://bendigo.pozi.com/geoserver/wfs",
+                        "featurePrefix": "BENDIGO",
+                        "featureType": "cogb_public_toilet",
+                        "featureNS": "http://www.pozi.com/bendigo",
+                        "geometryName": "the_geom"
+                    }),
+                    "styleMap": new OpenLayers.StyleMap(
+                        {
+                            "default": new OpenLayers.Style({
+                                "opacity": 1,
+                                "cursor": "pointer"
+                                },{
+                                "rules" : [
+                                    new OpenLayers.Rule({
+                                        "name": " ",
+                                        "elseRule": true,
+                                        "symbolizer": {
+                                            "graphicHeight": 24,
+                                            "graphicWidth": 24,
+                                            "externalGraphic": "http://basemap.pozi.com/geoserver/styles/sjjb/pngall/amenity_toilets.n.000000.32.png"
                                         }
                                     })
                                 ]
@@ -712,7 +804,29 @@
             "attr_name": "suburb"
             }, {
             "attr_name": "telephone"
-        }]        
+        }],
+        "Public Toilets": [{
+            "attr_name": "toilet_block_name","alt_name": "Block Name"
+            }, {
+            "attr_name": "house_no"
+            }, {
+            "attr_name": "street_name"
+            }, {
+            "attr_name": "suburb"
+            }, {
+            "attr_name": "council_managed"
+        }],
+        "Pre-School & Childcare": [{
+            "attr_name": "facility_name","alt_name": "Name"
+            }, {
+            "attr_name": "house_no"
+            }, {
+            "attr_name": "street_name"
+            }, {
+            "attr_name": "suburb"
+            }, {
+            "attr_name": "council_managed"
+        }]
     },
     "liveDataEndPoints": [
         {
