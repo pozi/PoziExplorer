@@ -683,6 +683,17 @@
             "tiled": false
         },
         {
+            "source": "local",
+            "name": "vw_garbage_collection_commercial",
+            "title": "Garbage Collection (Commercial)",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
             "source": "basemap",
             "name": "VICMAP_CLASSIC:dse_vmadmin_ward_2012",
             "title": "Wards",
