@@ -1024,15 +1024,41 @@
             "source": "ol",
             "group": "live",
             "visibility": false,
-            "type": "OpenLayers.Layer.GeoRSS",
+            "type": "OpenLayers.Layer.Vector",
             "args": [
                 "CFA & MFB Current Incidents",
-                "http://osom.cfa.vic.gov.au/public/osom/IN_COMING.rss",
                 {
-                    "abstract":"<a href=\"http://www.emergency.vic.gov.au/map#now\" target=\"blank\">VicEmergency</a>",
-                    "useFeedTitle": false,
-                    "icon": new OpenLayers.Icon("theme/app/img/custom/fire-warning-alert.png", new OpenLayers.Size(40,40)),
-                    "projection": new OpenLayers.Projection("EPSG:4326")
+                    "projection": new OpenLayers.Projection("EPSG:4326"),
+                    "protocol": new OpenLayers.Protocol.HTTP({
+                        "url": "http://osom.cfa.vic.gov.au/public/osom/IN_COMING.rss",
+                        "format": new OpenLayers.Format.GeoRSS()
+                    }),
+                    "strategies": [new OpenLayers.Strategy.BBOX()],
+                    "styleMap": new OpenLayers.StyleMap(
+                        {
+                            "default": new OpenLayers.Style({
+                                "opacity": 1,
+                                "cursor": "pointer"
+                                },{
+                                "rules" : [
+                                    new OpenLayers.Rule({
+                                        "name": " ",
+                                        "elseRule": true,
+                                        "symbolizer": {
+                                            "graphicHeight": 40,
+                                            "graphicWidth": 40,
+                                            "externalGraphic": "theme/app/img/custom/fire-warning-alert.png"
+                                        }
+                                    })
+                                ]
+                            }),
+                            "select": {
+                                "opacity": 1
+                            }
+                        }
+                    )
+                },{
+                    "abstract": "<a href=\"http://www.emergency.vic.gov.au/map#now\" target=\"blank\">VicEmergency</a>"
                 }
             ]
         },
