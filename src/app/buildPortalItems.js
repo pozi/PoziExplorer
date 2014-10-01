@@ -113,10 +113,10 @@ buildPortalItems = function(JSONconf, buildAllFeaturesDataStore, searchRecordSel
                 new Ext.Panel({
                     region: "east",
                     border: false,
-                    width: 160,
+                    width: 210,
                     height: 100,
                     bodyStyle: " background-color: transparent; ",
-                    html: '<p style="text-align:right;padding: 15px;font-size:12px;"><a href="' + JSONconf.linkToCouncilWebsite + '" target="_blank">' + JSONconf.bannerRightCornerLine1 + '</a><br> ' + JSONconf.bannerRightCornerLine2 + ' <br><br>Map powered by <a href="http://www.pozi.com" target="_blank">Pozi</a></p>'
+                    html: '<div style="text-align:right;padding:5px;font-size:12px;"><div style="padding:5px;"><a href="' + JSONconf.linkToCouncilWebsite + '" target="_blank">' + JSONconf.bannerRightCornerLine1 + '</a></div><div style="padding:5px;"> ' + JSONconf.bannerRightCornerLine2 + ' </div><div style="padding:5px;">Map powered by <a href="http://www.pozi.com" target="_blank">Pozi</a></div></div>'
 
                 })
             ]
