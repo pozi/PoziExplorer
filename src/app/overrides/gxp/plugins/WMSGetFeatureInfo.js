@@ -327,6 +327,7 @@ gxp.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                                     }                                    
                                 }
 
+                                // Resetting the vector flag, acknowledging that all getFeatureInfo have been carried out
                                 if (app.getSelectionLayer().extraVars.Vector)
                                 {
                                     app.getSelectionLayer().extraVars.Vector = false;

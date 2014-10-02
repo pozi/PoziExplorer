@@ -24,15 +24,12 @@ doClearHighlight = function(app, gCombostore, addDefaultTabs, accordion, gLayout
 	}
     }
 
-    // Unselecting features from the vector layers if the status is "selected"
-    if (app.getSelectionLayer().extraVars.VectorSelected)
-    {
-        var mControls = app.mapPanel.map.controls;
-        for (var a = 0; a < mControls.length; a++) {
-            if (mControls[a].displayClass == "olControlSelectFeature")
-            {
-                mControls[a].unselectAll();
-            }
+    // Unselecting all vector features that were selected
+    var mControls = app.mapPanel.map.controls;
+    for (var a = 0; a < mControls.length; a++) {
+        if (mControls[a].displayClass == "olControlSelectFeature")
+        {
+            mControls[a].unselectAll();
         }
     }
 

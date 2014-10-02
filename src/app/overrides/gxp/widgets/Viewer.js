@@ -83,23 +83,6 @@ gxp.Viewer.prototype.addLayers = function() {
                     multiple: false,
                     highlightOnly: true,
                     eventListeners: {
-                        featureunhighlighted: function(event){
-                            //console.log("Unhighlighting a feature.");
-
-                            // Flag for WMS getFeatureInfo to not overwrite the combo content
-                            app.getSelectionLayer().extraVars.Vector = true;
-                            // Flag for the clearHighlight to detect if a feature is curently selected
-                            if (!app.getSelectionLayer().extraVars.VectorSelected)
-                            {
-                                // Clearing the highlight
-                                app.clearHighlightWithCollapse();
-                            }
-                            else
-                            {
-                                // Setting the select feature as "not selected"
-                                app.getSelectionLayer().extraVars.VectorSelected = false;                  
-                            }
-                        },
                         featurehighlighted: function(event){
                             //console.log("Highlighting a feature.");
 
@@ -150,16 +133,21 @@ gxp.Viewer.prototype.addLayers = function() {
                             gComboDataArray.value.push(row_array);
 
                             if (gComboDataArray.value.length) {
+                                // Setting a flag to prevent WMS getFeatureInfos from overwriting the combo filled by the vector feature attributes
                                 app.getSelectionLayer().extraVars.Vector = true;
+
+                                // Set a timeout for this value to turn back to false
+                                // It needs to be long enough for getFeatureInfo to come back
+                                // short enough to allow a user to click on a property after having clicked on a vector feature
+                                setTimeout(function(){
+                                    app.getSelectionLayer().extraVars.Vector = false;
+                                }, 2000);
 
                                 // Clearing the highlight
                                 app.clearHighlight();
                                 // Managing objects in the selection layer
                                 app.getSelectionLayer().removeAllFeatures();
                                 app.getSelectionLayer().addFeatures([pt]);
-
-                                // Setting the select feature as "selected"
-                                app.getSelectionLayer().extraVars.VectorSelected = true;
 
                                 var cb = Ext.getCmp('gtInfoCombobox');
                                 if (cb.disabled) { cb.enable(); }
