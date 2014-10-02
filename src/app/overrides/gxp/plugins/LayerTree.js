@@ -72,9 +72,8 @@ gxp.plugins.LayerTree.prototype.createOutputConfig = function() {
             contextmenu: this.handleTreeContextMenu,
             beforemovenode: this.handleBeforeMoveNode,   
             checkchange:function(n,c){
-              // Managing the change: actions associated with layer being switched on
-              if (c)
-              {
+                // Managing the change: actions associated with layer being switched on
+
                 // Finding the configuration of the layer from the node just changed
                 for (k in JSONconf.layers)
                 {
@@ -89,95 +88,126 @@ gxp.plugins.LayerTree.prototype.createOutputConfig = function() {
                             layerTitleArgs = JSONconf.layers[k].args[0].name;
                         }
                         var layerTitle = JSONconf.layers[k].title ? JSONconf.layers[k].title : layerTitleArgs;
-                        // Checking if there is configuration for ...
+
+                        // Checking if there is configuration for changed layer
                         if (layerTitle && (layerTitle == n.layer.name))
                         {
-                            // Layers to switch off ..
-                            var layersToSwitchOff = JSONconf.layers[k].layersToTurnOffWhenShown;
-                            for (ltc in layersToSwitchOff)
-                            {
-                                if (layersToSwitchOff.hasOwnProperty(ltc))
-                                {
-                                    app.mapPanel.map.getLayersByName(layersToSwitchOff[ltc])[0].setVisibility(false);
-                                }
-                            }
-                            
-                            // .. or layers to switch on                            
-                            var layersToSwitchOn = JSONconf.layers[k].layersToTurnOnWhenShown;
-                            for (ltc in layersToSwitchOn)
-                            {
-                                if (layersToSwitchOn.hasOwnProperty(ltc))
-                                {
-                                    app.mapPanel.map.getLayersByName(layersToSwitchOn[ltc])[0].setVisibility(true);
-                                }
-                            }
-
-                            // Managing a change in the satellite imagery layer group
-                            // Clicking on a layer within this group should set this layer to be the one the slider acts on
-                            var layerGroup = JSONconf.layers[k].group;
-
-                            // Setting the layer in the drop down, if it is in the drop down
+                            // Layer picker component
                             var osc = Ext.getCmp('opacitySliderCombo');
-                            for (i in osc.getStore().data.items)
+                            // Opacity slider component
+                            var os = Ext.getCmp('geoExtOpacitySlider');
+
+                            // If the layer has been ticked ...
+                            if (c)
                             {
-                                if (osc.getStore().data.items.hasOwnProperty(i))
+                                // Layers to switch off ..
+                                var layersToSwitchOff = JSONconf.layers[k].layersToTurnOffWhenShown;
+                                for (ltc in layersToSwitchOff)
                                 {
-                                    if (osc.getStore().data.items[i].json.val == layerTitle)
+                                    if (layersToSwitchOff.hasOwnProperty(ltc))
                                     {
-                                        if (layerTitle != "No Aerial" && layerTitle != "None")
+                                        app.mapPanel.map.getLayersByName(layersToSwitchOff[ltc])[0].setVisibility(false);
+                                    }
+                                }
+                                
+                                // .. or layers to switch on                            
+                                var layersToSwitchOn = JSONconf.layers[k].layersToTurnOnWhenShown;
+                                for (ltc in layersToSwitchOn)
+                                {
+                                    if (layersToSwitchOn.hasOwnProperty(ltc))
+                                    {
+                                        app.mapPanel.map.getLayersByName(layersToSwitchOn[ltc])[0].setVisibility(true);
+                                    }
+                                }
+
+                                // Managing a change in the satellite imagery layer group
+                                // Clicking on a layer within this group should set this layer to be the one the slider acts on
+                                var layerGroup = JSONconf.layers[k].group;
+
+                                for (i in osc.getStore().data.items)
+                                {
+                                    if (osc.getStore().data.items.hasOwnProperty(i))
+                                    {
+                                        if (osc.getStore().data.items[i].json.val == layerTitle)
                                         {
-                                            // Identify record in layer picker (by layer name)
-                                            var r = osc.findRecord('val',layerTitle);
-                                            // Setting the layer in the layer picker
-                                            osc.setValue(r.id);
-                                            // Mark this record as visible for the tick
-                                            r.set("visible",true);
-                                            // Getting the opacity slider component
-                                            var os = Ext.getCmp('geoExtOpacitySlider');
-                                            // Getting the previous slider value
-                                            var o = os.getValue();
-                                            // Setting layer for slider
-                                            os.setLayer(n.layer);
-                                            // Setting value for slider
-                                            if (o == os.minValue)
+                                            if (layerTitle != "No Aerial" && layerTitle != "None")
                                             {
-                                                // Aplying max value if previous value was 0
-                                                os.setValue(os.maxValue);
+                                                // Identify record in layer picker (by layer name)
+                                                var r = osc.findRecord('val',layerTitle);
+                                                // Setting the layer in the layer picker
+                                                osc.setValue(r.id);
+                                                // Mark this record as visible for the tick
+                                                r.set("visible",true);
+                                                // Getting the previous slider value
+                                                var o = os.getValue();
+                                                // Setting layer for slider
+                                                os.setLayer(n.layer);
+                                                // Setting value for slider
+                                                if (o == os.minValue)
+                                                {
+                                                    // Aplying max value if previous value was 0
+                                                    os.setValue(os.maxValue);
+                                                }
+                                                else
+                                                {
+                                                    // Only applying previous visibility if it was non-null
+                                                    os.setValue(o);
+                                                }
                                             }
-                                            else
+                                            break;
+                                        }                                    
+                                    }
+                                }
+
+                                // What to do if "No Aerial" is pressed?
+                                if (layerTitle == "No Aerial")
+                                {
+                                    // Getting the opacity slider component
+                                    var os = Ext.getCmp('geoExtOpacitySlider');
+
+                                    // Making all other layers in the same group invisible
+                                    _(JSONconf.layers).each(function(l){
+                                        if (l.group == layerGroup)
+                                        {
+                                            if (l.title && l.title != layerTitle)
                                             {
-                                                // Only applying previous visibility if it was non-null
-                                                os.setValue(o);
+                                                app.mapPanel.map.getLayersByName(l.title)[0].setOpacity(0);
+                                                osc.findRecord('val',l.title).set("visible",l.title == layerTitle);
                                             }
                                         }
-                                        break;
-                                    }                                    
+                                    });
                                 }
+
                             }
-
-                            // What to do if "No Aerial" is pressed?
-                            if (layerTitle == "No Aerial")
+                            else
                             {
-                                // Getting the opacity slider component
-                                var os = Ext.getCmp('geoExtOpacitySlider');
-                                var osc = Ext.getCmp('opacitySliderCombo');
-
-                                // Making all other layers in the same group invisible
-                                _(JSONconf.layers).each(function(l){
-                                    if (l.group == layerGroup)
+                                // Unticking the layer in the layer tree need to be propagated to layer opacity (for opacity slider) and layer picker (for visibility tick)
+                                for (i in osc.getStore().data.items)
+                                {
+                                    if (osc.getStore().data.items.hasOwnProperty(i))
                                     {
-                                        if (l.title && l.title != layerTitle)
+                                        if (osc.getStore().data.items[i].json.val == layerTitle)
                                         {
-                                            app.mapPanel.map.getLayersByName(l.title)[0].setOpacity(0);
-                                            osc.findRecord('val',l.title).set("visible",l.title == layerTitle);
+                                            if (layerTitle != "No Aerial" && layerTitle != "None")
+                                            {
+                                                //alert("Unticking "+n.layer.name);
+                                                // Identify record in layer picker (by layer name)
+                                                var r = osc.findRecord('val',layerTitle);
+                                                // Mark this record as invisible for the tick
+                                                r.set("visible",false);
+                                                // Set layer opacity to 0
+                                                app.mapPanel.map.getLayersByName(layerTitle)[0].setOpacity(0);
+                                            }
+                                            break;
                                         }
                                     }
-                                });
+                                }
+
                             }
                         }                        
                     }
                 }
-              }
+
 
               // If the node checkbox is clicked then we select the node
               if (c)
