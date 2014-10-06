@@ -633,7 +633,7 @@
             "visibility": true,
             "opacity": 0.25,
             "format": "image/GIF",
-            "styles": "",
+            "styles": "Property_Not_Visible",
             "transparent": true,
             "tiled": false,
             "minscale": 25000
