@@ -585,6 +585,52 @@
             "visibility": false,
             "type": "OpenLayers.Layer.Vector",
             "args": [
+                "Council Offices",
+                {
+                    "strategies": [new OpenLayers.Strategy.BBOX()],
+                    "projection": new OpenLayers.Projection("EPSG:4326"),
+                    "protocol": new OpenLayers.Protocol.WFS({
+                        "version": "1.1.0",
+                        "url": "http://bendigo.pozi.com/geoserver/wfs",
+                        "featurePrefix": "BENDIGO",
+                        "featureType": "cogb_office",
+                        "featureNS": "http://www.pozi.com/bendigo",
+                        "geometryName": "the_geom"
+                    }),
+                    "styleMap": new OpenLayers.StyleMap(
+                        {
+                            "default": new OpenLayers.Style({
+                                "opacity": 1,
+                                "cursor": "pointer"
+                                },{
+                                "rules" : [
+                                    new OpenLayers.Rule({
+                                        "name": " ",
+                                        "elseRule": true,
+                                        "symbolizer": {
+                                            "graphicHeight": 24,
+                                            "graphicWidth": 24,
+                                            "externalGraphic": "lib/custom/img/bendigo/cogb_office/council_office.png"
+                                        }
+                                    })
+                                ]
+                            }),
+                            "select": {
+                                "opacity": 1
+                            }
+                        }
+                    )
+                },{
+                    "abstract": "Provided by City of Greater Bendigo"
+                }
+            ],
+            "transition": null
+        },
+        {
+            "source": "ol",
+            "visibility": false,
+            "type": "OpenLayers.Layer.Vector",
+            "args": [
                 "Public Toilets",
                 {
                     "strategies": [new OpenLayers.Strategy.BBOX()],
