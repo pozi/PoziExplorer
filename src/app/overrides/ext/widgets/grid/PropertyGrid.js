@@ -15,7 +15,7 @@ Ext.grid.PropertyColumnModel.prototype.renderCell = function(val, meta, rec){
     rv = this.renderBool(val);
   }else if(val){
     if (val.search(/^http/)>-1){
-      if (val.toLowerCase().search(/\.jpg/)>-1 || val.toLowerCase().search(/\.png/))
+      if (val.toLowerCase().search(/\.jpg/)>-1 || val.toLowerCase().search(/\.png/)>-1)
       {
         rv ="<a href='"+val+"' target='_blank'><img src='"+val+"' style='display:block; max-height:150px; max-width:230px; height:auto; margin-right:auto;' /></a>";
       }
