@@ -229,14 +229,6 @@
             ]
         },
         {
-            "source": "mapquest",
-            "name": "osm",
-            "visibility": false,
-            "title":"MapQuest OpenStreetMap",
-            "layersToTurnOffWhenShown":["Labels"],
-            "group": "background"
-        },
-        {
             "source": "ol",
             "visibility": false,
             "group":"background",
@@ -276,7 +268,7 @@
         {
             "source": "ol",
             "group": "background",
-            "visibility": true,
+            "visibility": false,
             "layersToTurnOffWhenShown":["Labels"],
             "type": "OpenLayers.Layer.WMTS",
             "args": [{
@@ -315,6 +307,14 @@
                 "tileOrigin": new OpenLayers.LonLat(-20037508.34,20037508.34),
                 "serverResolutions": [156543.03392800014,78271.516963999937,39135.758482000092,19567.879240999919,9783.9396204999593,4891.9698102499797,2445.9849051249898, 1222.9924525624949, 611.496226281379687, 305.74811314055756, 152.87405657041106, 76.437028285073239, 38.21851414253662, 19.10925707126831, 9.5546285356341549, 4.7773142679493699, 2.3886571339746849, 1.1943285668550503, 0.59716428355981721, 0.29858214164761665, 0.14929107082380833]
             }]
+        },
+        {
+            "source": "mapquest",
+            "name": "osm",
+            "visibility": true,
+            "title":"MapQuest OpenStreetMap",
+            "layersToTurnOffWhenShown":["Labels"],
+            "group": "background"
         },
         {
             "source": "basemap",
@@ -679,7 +679,7 @@
             "visibility": true,
             "opacity": 0.25,
             "format": "image/GIF",
-            "styles": "Property_Not_Visible",
+            "styles": "",
             "transparent": true,
             "tiled": false,
             "minscale": 25000
@@ -820,6 +820,7 @@
         -4402224
     ],
     "zoom": 10,
+    "numZoomLevels":19,
     "workspace": "BENDIGO",
     "highlightSymboliser": {
         "name": "test",

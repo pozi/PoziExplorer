@@ -22,6 +22,7 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
             scales: JSONconf.scales,
             center: JSONconf.center,
             zoom: JSONconf.zoom,
+            numZoomLevels: JSONconf.numZoomLevels?JSONconf.numZoomLevels:20,
             layers: _.union(JSONconf.layers, [buildWFSLayer(JSONconf)]),
             // Setting controls manually to have the simple OpenLayers zoom control
             controls: [
