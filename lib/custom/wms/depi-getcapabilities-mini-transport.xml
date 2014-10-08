@@ -156,12 +156,12 @@
       <SRS>EPSG:900913</SRS>
       <LatLonBoundingBox minx="113.15628800000002" miny="-43.86689143805745" maxx="154.308864108" maxy="-10.693111999655512"/>
       <Layer queryable="1">
-        <Name>sii:RAEDATA.DPS_1202_TRAIN_CORR_CENTL</Name>
+        <Name>sii:PTV.PTV_TRAIN_CORRIDOR_CENTRELINE</Name>
         <Title>Rail Corridors (DoT/PTV)</Title>
         <Abstract>DEPI WMS (DoT/PTV)</Abstract>
         <KeywordList>
           <Keyword>ArcSDE</Keyword>
-          <Keyword>RAEDATA.RAE_1202_TRAIN_CORR_CENTL</Keyword>
+          <Keyword>PTV.PTV_TRAIN_CORRIDOR_CENTRELINE</Keyword>
           <Keyword>ANZVI0803000061</Keyword>
         </KeywordList>
         <SRS>EPSG:4283</SRS>
@@ -173,18 +173,18 @@
           <Abstract>Default line style, 1 pixel wide blue</Abstract>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=RAEDATA.DPS_1202_TRAIN_CORR_CENTL"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=sii:PTV.PTV_TRAIN_CORRIDOR_CENTRELINE"/>
           </LegendURL>
         </Style>
         <ScaleHint min="0.0" max="5000000.0"/>
       </Layer>
       <Layer queryable="1">
-        <Name>sii:DPS_1211_TRAIN_TRACK_CENTL_SDO</Name>
+        <Name>sii:PTV.PTV_TRAIN_TRACK_CENTRELINE</Name>
         <Title>Train Tracks (DoT/PTV)</Title>
         <Abstract>DEPI WMS (DoT/PTV)</Abstract>
         <KeywordList>
           <Keyword>ArcSDE</Keyword>
-          <Keyword>RAEDATA.RAE_1211_TRAIN_TRACK_CENTL</Keyword>
+          <Keyword>PTV.PTV_TRAIN_TRACK_CENTRELINE</Keyword>
           <Keyword>ANZVI0803000062</Keyword>
         </KeywordList>
         <SRS>EPSG:4283</SRS>
@@ -196,7 +196,7 @@
           <Abstract>Default line style, 1 pixel wide blue</Abstract>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=DPS_1211_TRAIN_TRACK_CENTL"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=sii:PTV.PTV_TRAIN_TRACK_CENTRELINE"/>
           </LegendURL>
         </Style>
         <Style>
@@ -205,18 +205,18 @@
           <Abstract>Default line style, 1 pixel wide blue</Abstract>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=DPS_1211_TRAIN_TRACK_CENTL&amp;style=DOT_PTV_Rail+track_centreline_1"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=sii:PTV.PTV_TRAIN_TRACK_CENTRELINE&amp;style=DOT_PTV_Rail+track_centreline_1"/>
           </LegendURL>
         </Style>
         <ScaleHint min="0.0" max="5000000.0"/>
       </Layer>
       <Layer queryable="1">
-        <Name>sii:DPS_1220_TRAM_TRACK_CENTL_SDO</Name>
+        <Name>sii:PTV.PTV_TRAM_TRACK_CENTRELINE</Name>
         <Title>Tram Tracks (DoT/PTV)</Title>
         <Abstract>DEPI WMS (DoT/PTV)</Abstract>
         <KeywordList>
           <Keyword>ArcSDE</Keyword>
-          <Keyword>RAEDATA.RAE_1220_TRAM_TRACK_CENTL</Keyword>
+          <Keyword>PTV.PTV_TRAM_TRACK_CENTRELINE</Keyword>
           <Keyword>ANZVI0803000063</Keyword>
         </KeywordList>
         <SRS>EPSG:4283</SRS>
@@ -228,17 +228,17 @@
           <Abstract>Green lines, 3px wide</Abstract>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=DPS_1220_TRAM_TRACK_CENTL"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=sii:PTV.PTV_TRAM_TRACK_CENTRELINE"/>
           </LegendURL>
         </Style>
         <ScaleHint min="0.0" max="500000.0"/>
       </Layer>
       <Layer queryable="1">
-        <Name>sii:DPS_1229_RAIL_STAT_PLATF_SDO</Name>
+        <Name>sii:PTV.PTV_TRAIN_STATION_PLATFORM</Name>
         <Title>Railway Station Platforms (DoT/PTV)</Title>
         <Abstract>DEPI WMS (DoT/PTV)</Abstract>
         <KeywordList>
-          <Keyword>RAEDATA.RAE_1229_RAIL_STAT_PLATF</Keyword>
+          <Keyword>PTV.PTV_TRAIN_STATION_PLATFORM</Keyword>
           <Keyword>ArcSDE</Keyword>
           <Keyword>ANZVI0803000064</Keyword>
         </KeywordList>
@@ -251,17 +251,17 @@
           <Abstract>Station platforms lower scale with black rim</Abstract>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=DPS_1229_RAIL_STAT_PLATF"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=sii:PTV.PTV_TRAIN_STATION_PLATFORM"/>
           </LegendURL>
         </Style>
       </Layer>
       <Layer queryable="1">
-        <Name>sii:DPS_895_BUS_STOPS_VICMAP_SDO</Name>
+        <Name>sii:PTV.PTV_BUS_STOP</Name>
         <Title>Bus Stops (DoT/PTV)</Title>
         <Abstract>DEPI WMS (DoT/PTV)</Abstract>
         <KeywordList>
           <Keyword>ArcSDE</Keyword>
-          <Keyword>RAEDATA.RAE_895_BUS_STOPS_VICMAP</Keyword>
+          <Keyword>PTV.PTV_BUS_STOP</Keyword>
           <Keyword>ANZVI0803000051</Keyword>
         </KeywordList>
         <SRS>EPSG:4283</SRS>
@@ -273,7 +273,7 @@
           <Abstract/>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=DPS_895_BUS_STOPS_VICMAP"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=sii:PTV.PTV_BUS_STOP"/>
           </LegendURL>
         </Style>
         <Style>
@@ -282,7 +282,7 @@
           <Abstract/>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=DPS_895_BUS_STOPS_VICMAP&amp;style=DOT_PTV_Bus_Stop_1"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=sii:PTV.PTV_BUS_STOP&amp;style=DOT_PTV_Bus_Stop_1"/>
           </LegendURL>
         </Style>
         <Style>
@@ -291,17 +291,17 @@
           <Abstract/>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=DPS_895_BUS_STOPS_VICMAP&amp;style=DOT_PTV_Bus_Stop_2"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=sii:PTV.PTV_BUS_STOP&amp;style=DOT_PTV_Bus_Stop_2"/>
           </LegendURL>
         </Style>
       </Layer>
       <Layer queryable="1">
-        <Name>sii:DPS_909_REG_BUS_ROUTES_SDO</Name>
+        <Name>sii:PTV.PTV_BUS_ROUTE_REGIONAL</Name>
         <Title>Bus Routes (DoT/PTV)</Title>
         <Abstract>DEPI WMS (DoT/PTV)</Abstract>
         <KeywordList>
           <Keyword>ArcSDE</Keyword>
-          <Keyword>RAEDATA.RAE_909_REG_BUS_ROUTES_VM</Keyword>
+          <Keyword>PTV.PTV_BUS_ROUTE_REGIONAL</Keyword>
           <Keyword>ANZVI0803000056</Keyword>
         </KeywordList>
         <SRS>EPSG:4283</SRS>
@@ -313,7 +313,7 @@
           <Abstract>Orange line, 2px wide</Abstract>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=DPS_909_REG_BUS_ROUTES_VM"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=sii:PTV.PTV_BUS_ROUTE_REGIONAL"/>
           </LegendURL>
         </Style>
         <Style>
@@ -322,16 +322,16 @@
           <Abstract>Orange line, 2px wide</Abstract>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=DPS_909_REG_BUS_ROUTES_VM&amp;style=DOT_PTV_Bus_Network_1"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=sii:PTV.PTV_BUS_ROUTE_REGIONAL&amp;style=DOT_PTV_Bus_Network_1"/>
           </LegendURL>
         </Style>
       </Layer>
       <Layer queryable="1">
-        <Name>sii:DPS_918_TRAM_STOPS_VICMAP_SDO</Name>
+        <Name>sii:PTV.PTV_TRAM_STOP</Name>
         <Title>Tram Stops (DoT/PTV)</Title>
         <Abstract>DEPI WMS (DoT/PTV)</Abstract>
         <KeywordList>
-          <Keyword>RAEDATA.RAE_918_TRAM_STOPS_VICMAP</Keyword>
+          <Keyword>PTV.PTV_TRAM_STOP</Keyword>
           <Keyword>ArcSDE</Keyword>
           <Keyword>ANZVI0803000052</Keyword>
         </KeywordList>
@@ -344,7 +344,7 @@
           <Abstract/>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=DPS_918_TRAM_STOPS_VICMAP"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=sii:PTV.PTV_TRAM_STOP"/>
           </LegendURL>
         </Style>
         <Style>
@@ -353,16 +353,16 @@
           <Abstract/>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=DPS_918_TRAM_STOPS_VICMAP&amp;style=DOT_PTV_Tram_Stop_2"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=sii:PTV.PTV_TRAM_STOP&amp;style=DOT_PTV_Tram_Stop_2"/>
           </LegendURL>
         </Style>
       </Layer>
       <Layer queryable="1">
-        <Name>sii:RAEDATA.DPS_932_RAIL_STATIONS_VMT</Name>
+        <Name>sii:PTV.PTV_TRAIN_STATION</Name>
         <Title>Railway Stations (DoT/PTV)</Title>
         <Abstract>DEPI WMS (DoT/PTV)</Abstract>
         <KeywordList>
-          <Keyword>RAEDATA.RAE_932_RAIL_STATIONS_VMT</Keyword>
+          <Keyword>PTV.PTV_TRAIN_STATION</Keyword>
           <Keyword>ArcSDE</Keyword>
           <Keyword>ANZVI0803000053</Keyword>
         </KeywordList>
@@ -375,7 +375,7 @@
           <Abstract/>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=RAEDATA.DPS_932_RAIL_STATIONS_VMT"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=sii:PTV.PTV_TRAIN_STATION"/>
           </LegendURL>
         </Style>
         <Style>
@@ -384,17 +384,17 @@
           <Abstract/>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=RAEDATA.DPS_932_RAIL_STATIONS_VMT&amp;style=DOT_PTV_Railway_Station_1"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=sii:PTV.PTV_TRAIN_STATION&amp;style=DOT_PTV_Railway_Station_1"/>
           </LegendURL>
         </Style>
       </Layer>
       <Layer queryable="1">
-        <Name>sii:RAEDATA.DPS_955_METRO_BUS_ROUTES</Name>
+        <Name>sii:PTV.PTV_BUS_ROUTE_METRO</Name>
         <Title>Metro Bus Routes (DoT/PTV)</Title>
         <Abstract>DEPI WMS (DoT/PTV)</Abstract>
         <KeywordList>
           <Keyword>ArcSDE</Keyword>
-          <Keyword>RAEDATA.RAE_955_METRO_BUS_ROUTES</Keyword>
+          <Keyword>PTV.PTV_BUS_ROUTE_METRO</Keyword>
           <Keyword>ANZVI0803000054</Keyword>
         </KeywordList>
         <SRS>EPSG:4283</SRS>
@@ -406,7 +406,7 @@
           <Abstract>Orange line, 2px wide</Abstract>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=RAEDATA.DPS_955_METRO_BUS_ROUTES"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=sii:PTV.PTV_BUS_ROUTE_METRO"/>
           </LegendURL>
         </Style>
         <Style>
@@ -415,16 +415,16 @@
           <Abstract>Orange line, 2px wide</Abstract>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=RAEDATA.DPS_955_METRO_BUS_ROUTES&amp;style=DOT_PTV_Bus_Network_1"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=sii:PTV.PTV_BUS_ROUTE_METRO&amp;style=DOT_PTV_Bus_Network_1"/>
           </LegendURL>
         </Style>
       </Layer>
       <Layer queryable="1">
-        <Name>sii:RAEDATA.DPS_969_TRAM_ROUTES_VMT</Name>
+        <Name>sii:PTV.PTV_TRAM_ROUTE</Name>
         <Title>Tram Routes (DoT/PTV)</Title>
         <Abstract>DEPI WMS (DoT/PTV)</Abstract>
         <KeywordList>
-          <Keyword>RAEDATA.RAE_969_TRAM_ROUTES_VMT</Keyword>
+          <Keyword>PTV.PTV_TRAM_ROUTE</Keyword>
           <Keyword>ArcSDE</Keyword>
           <Keyword>ANZVI0803000055</Keyword>
         </KeywordList>
@@ -437,7 +437,7 @@
           <Abstract>Green lines, 3px wide</Abstract>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=RAEDATA.DPS_969_TRAM_ROUTES_VMT"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=sii:PTV.PTV_TRAM_ROUTE"/>
           </LegendURL>
         </Style>
         <Style>
@@ -446,16 +446,16 @@
           <Abstract>Green lines, 3px wide</Abstract>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=RAEDATA.DPS_969_TRAM_ROUTES_VMT&amp;style=DOT_PTV_Tram_Network_1"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=sii:PTV.PTV_TRAM_ROUTE&amp;style=DOT_PTV_Tram_Network_1"/>
           </LegendURL>
         </Style>
       </Layer>
-      <!--Layer queryable="1">
-        <Name>sii:RAE_4362_METRO_TRAIN_CARPR</Name>
+      <Layer queryable="1">
+        <Name>sii:PTV.PTV_TRAIN_CARPARK</Name>
         <Title>Metro Train Carparks (DoT/PTV)</Title>
         <Abstract>DEPI WMS (DoT/PTV)</Abstract>
         <KeywordList>
-          <Keyword>RAE_4362_METRO_TRAIN_CARPR</Keyword>
+          <Keyword>PTV.PTV_TRAIN_CARPARK</Keyword>
           <Keyword>features</Keyword>
           <Keyword>ANZVI0803000320</Keyword>
         </KeywordList>
@@ -468,16 +468,16 @@
           <Abstract/>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=RAE_4362_METRO_TRAIN_CARPR"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=sii:PTV.PTV_TRAIN_CARPARK"/>
           </LegendURL>
         </Style>
-      </Layer -->
+      </Layer>
       <Layer queryable="1">
-        <Name>sii:RAE_4376_METRO_BIKE_STORE_SDO</Name>
-        <Title>Metro Bike Stores (DoT/PTV)</Title>
+        <Name>sii:PTV.PTV_TRAIN_STATION_BIKE_STORAGE</Name>
+        <Title>Metro Bike Storage (DoT/PTV)</Title>
         <Abstract>DEPI WMS (DoT/PTV)</Abstract>
         <KeywordList>
-          <Keyword>RAEDATA.RAE_4376_METRO_BIKE_STORE</Keyword>
+          <Keyword>PTV.PTV_TRAIN_STATION_BIKE_STORAGE</Keyword>
           <Keyword>ArcSDE</Keyword>
           <Keyword>ANZVI0803000321</Keyword>
         </KeywordList>
@@ -490,7 +490,7 @@
           <Abstract/>
           <LegendURL width="20" height="20">
             <Format>image/png</Format>
-            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=RAE_4376_METRO_BIKE_STORE"/>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=sii:PTV.PTV_TRAIN_STATION_BIKE_STORAGE"/>
           </LegendURL>
         </Style>
       </Layer>
