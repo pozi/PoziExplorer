@@ -79,7 +79,19 @@ buildApp = function(portalItems, JSONconf, doClearHighlight, gCombostore, addDef
             return layerConf.displayInOpacitySlider; 
         });
         if (layerConfForOpacitySlider) {
-            return app.getLayerByName(layerConfForOpacitySlider.title);
+            var lt = app.getLayerByName(layerConfForOpacitySlider.title);
+            if (lt)
+            {
+                return lt;
+            }
+            else
+            {
+                // Falling back on the visible layer inside the background group
+                layerConfForOpacitySlider = _(JSONconf.layers).find(function(layerConf) { 
+                    return (layerConf.group === "background" && layerConf.visibility); 
+                });
+                return app.getLayerByName(layerConfForOpacitySlider.title);
+            }
         }
     };
 
