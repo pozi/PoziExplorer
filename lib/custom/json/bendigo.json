@@ -679,10 +679,10 @@
             "visibility": true,
             "opacity": 0.25,
             "format": "image/GIF",
-            "styles": "",
+            "styles": "Property_Bendigo",
             "transparent": true,
             "tiled": false,
-            "minscale": 25000
+            "minscale": 12500
         },
         {
             "source": "basemap",
@@ -820,7 +820,6 @@
         -4402224
     ],
     "zoom": 10,
-    "numZoomLevels":19,
     "workspace": "BENDIGO",
     "highlightSymboliser": {
         "name": "test",
