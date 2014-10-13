@@ -678,11 +678,25 @@
             "title": "Properties",
             "visibility": true,
             "opacity": 0.25,
-            "format": "image/GIF",
+            "format": "image/png8",
             "styles": "Property_Bendigo",
             "transparent": true,
             "tiled": false,
             "minscale": 12500
+        },
+        {
+            "source": "depi_wms_property",
+            "name": "sii:VSUP.ADDRESS_SDO",
+            "title": "Address",
+            "visibility": true,
+            "opacity": 0.75,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "minscale": 4200,
+            "queryable": false,
+            "sld":"http://general.pozi.com/gt_public_styles/sld/sii-VSUP.ADDRESS_SDO.sld"
         },
         {
             "source": "basemap",
