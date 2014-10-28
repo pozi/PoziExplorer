@@ -43,6 +43,24 @@ GeoExt.data.PrintProvider.prototype.encoders = {
                 extension: "png"
             });
         },
+        // The XYZ encoder is implemented for HERE Maps / Satellite 
+        "XYZ": function (layer) {
+            var enc = this.encoders.layers.TileCache.call(this, layer);
+            return Ext.apply(enc, {
+                type: 'XYZ',
+                baseURL: enc.baseURL.substr(0, enc.baseURL.indexOf("$")),
+                // Need to pass app_id anf token parameters to produce valid HERE queries
+                customParams:{
+                    app_id: helpers.getURLParameter('app_id',enc.baseURL),
+                    token: helpers.getURLParameter('token',enc.baseURL),
+                    lg: helpers.getURLParameter('lg',enc.baseURL)
+                },
+                // TODO better extension detection (right now, only suits 4-letter extensions i.e. png8)
+                extension: enc.baseURL.substr(enc.baseURL.lastIndexOf("/")+1,4),
+                tileOriginCorner: layer.tileOriginCorner,
+                path_format: "${z}/${x}/${y}/256/${extension}"
+            });
+        },  
         "TMS": function(layer) {
             var enc = this.encoders.layers.TileCache.call(this, layer);
             return Ext.apply(enc, {

@@ -7,6 +7,12 @@ helpers = function() {
     };
 
     return {
+        // Source: http://stackoverflow.com/questions/13983666/javascript-to-parse-get-parameter-from-string-what-is-throwing-this-off
+        getURLParameter: function(name, givenstring) {
+            return decodeURI(
+                (RegExp('(^|&)' + name + '=(.+?)(&|$)').exec(givenstring)||[,,null])[2]
+            );
+        },
         objectSize: function(obj) {
             var size = 0, key;
             for (key in obj) {
