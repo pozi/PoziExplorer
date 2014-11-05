@@ -285,7 +285,7 @@
         {
             "source": "ol",
             "group": "background",
-            "visibility": false,
+            "visibility": true,
             "layersToTurnOffWhenShown":["Labels"],
             "type": "OpenLayers.Layer.WMTS",
             "args": [{
@@ -330,8 +330,8 @@
             "name": "VICMAP_CLASSIC:VicmapClassic",
             "layersToTurnOnWhenShown":["Labels"],
             "title": "Pozi Vicmap",
-            "visibility": true,
-            "opacity": 1,
+            "visibility": false,
+            "opacity": 0,
             "group": "background",
             "selected": false,
             "format": "image/png8",
@@ -567,7 +567,7 @@
             "source": "basemap",
             "name": "VICMAP_CLASSIC:LabelClassic",
             "title": "Labels",
-            "visibility": true,
+            "visibility": false,
             "opacity": 1,
             "selected": false,
             "format": "image/png8",
