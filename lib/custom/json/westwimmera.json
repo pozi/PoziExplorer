@@ -398,17 +398,6 @@
         },
         {
             "source": "local",
-            "name": "WWSC_TREE",
-            "title": "Street Trees (Data Capture)",
-            "visibility": false,
-            "opacity": 1,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "local",
             "name": "WWSC_ROAD_SEGMENT",
             "title": "Road Details",
             "visibility": false,
