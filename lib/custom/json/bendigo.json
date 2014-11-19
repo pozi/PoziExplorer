@@ -763,6 +763,7 @@
             "styles": "",
             "transparent": true,
             "tiled": false,
+            "queryable": false,
             "sld": "http://general.pozi.com/gt_public_styles/sld/sii-VMADMIN.LOCALITY_POLYGON-BENDIGO.sld"
         },
         {
@@ -802,8 +803,8 @@
         },
         {
             "source": "local_cascaded_imagery",
-            "name": "BENDIGO:AERIAL_COGB_2009",
-            "title": "Aerial Photo (2009 Nov-Dec)",
+            "name": "BENDIGO:towns_bendigo_2014oct11_air_vis_10cm_mga55",
+            "title": "Aerial Photo (2014 Oct)",
             "visibility": false,
             "opacity": 0,
             "format": "image/JPEG",
@@ -813,6 +814,19 @@
             "transparent": true,
             "styles": "",
             "displayInOpacitySlider": true
+        },        
+        {
+            "source": "local_cascaded_imagery",
+            "name": "BENDIGO:AERIAL_COGB_2009",
+            "title": "Aerial Photo (2009 Nov-Dec)",
+            "visibility": false,
+            "opacity": 0,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group": "aerial",
+            "selected": false,
+            "transparent": true,
+            "styles": ""
         },
         {
             "source": "local_cascaded_imagery",
