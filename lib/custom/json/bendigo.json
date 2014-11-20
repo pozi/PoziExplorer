@@ -9,6 +9,7 @@
         }
     },
     "LGACode": "325",
+    "numZoomLevels":22,
     "databaseConfig": "basemap",
     "tools": [
         {
