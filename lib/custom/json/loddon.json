@@ -353,7 +353,11 @@
         {
             "source": "google",
             "name": "SATELLITE",
-            "visibility": false
+            "visibility": false,
+            "group":"background",
+            "args":[
+                "Google Satellite"
+            ]
         },
         {
             "source": "ol",
@@ -399,10 +403,26 @@
             ]
         },
         {
+            "source": "basemap",
+            "name": "VICMAP_CLASSIC:VicmapClassic",
+            "layersToTurnOnWhenShown":["Labels"],
+            "title": "Pozi Vicmap",
+            "visibility": false,
+            "opacity":1,
+            "group": "background",
+            "selected": false,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "cached": true,
+            "transition": "resize"
+        },
+        {
             "source": "ol",
             "group": "background",
-            "visibility": false,
-            "layersToTurnOffWhenShown":["Labels"],
+            "visibility": true,
+            "opacity":1,
+            "layersToTurnOnWhenShown":["Labels"],
             "type": "OpenLayers.Layer.WMTS",
             "args": [{
                 "name":"Vicmap API",
@@ -440,21 +460,6 @@
                 "tileOrigin": new OpenLayers.LonLat(-20037508.34,20037508.34),
                 "serverResolutions": [156543.03392800014,78271.516963999937,39135.758482000092,19567.879240999919,9783.9396204999593,4891.9698102499797,2445.9849051249898, 1222.9924525624949, 611.496226281379687, 305.74811314055756, 152.87405657041106, 76.437028285073239, 38.21851414253662, 19.10925707126831, 9.5546285356341549, 4.7773142679493699, 2.3886571339746849, 1.1943285668550503, 0.59716428355981721, 0.29858214164761665, 0.14929107082380833]
             }]
-        },
-        {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:VicmapClassic",
-            "layersToTurnOnWhenShown":["Labels"],
-            "title": "Pozi Vicmap",
-            "visibility": true,
-            "opacity": 1,
-            "group": "background",
-            "selected": false,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "cached": true,
-            "transition": "resize"
         },
         {
             "source": "basemap",
