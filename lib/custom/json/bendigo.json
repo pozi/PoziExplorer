@@ -891,6 +891,8 @@
             "attr_name": "street_name"
             }, {
             "attr_name": "suburb"
+            }, {
+            "attr_name": "photo_link","alt_name": "Photo"
         }],
         "Maternal & Child Health Centres": [{
             "attr_name": "centre_name","alt_name": "Name"
