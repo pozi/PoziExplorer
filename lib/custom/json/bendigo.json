@@ -723,34 +723,34 @@
         },
         {
             "source": "local",
-            "name": "vw_gb_garbage_collection",
-            "title": "Garbage Collection",
-            "visibility": false,
-            "opacity": 1,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "local",
-            "name": "vw_gb_garbage_collection",
-            "title": "Recycling Week",
-            "visibility": false,
-            "opacity": 1,
-            "format": "image/png8",
-            "styles": "gb_garbage_collection_week",
-            "transparent": true,
-            "tiled": false
-        },
-        {
-            "source": "local",
             "name": "vw_garbage_collection_commercial",
             "title": "Garbage Collection (Commercial)",
             "visibility": false,
             "opacity": 1,
             "format": "image/png8",
             "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "vw_gb_garbage_collection",
+            "title": "Garbage Collection (Residential)",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "name": "vw_gb_garbage_collection",
+            "title": "Recycling Week (Residential)",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/png8",
+            "styles": "gb_garbage_collection_week",
             "transparent": true,
             "tiled": false
         },
