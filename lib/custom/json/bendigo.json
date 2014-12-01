@@ -726,7 +726,7 @@
             "name": "vw_garbage_collection_commercial",
             "title": "Garbage Collection (Commercial)",
             "visibility": false,
-            "opacity": 1,
+            "opacity": 0.5,
             "format": "image/png8",
             "styles": "",
             "transparent": true,
