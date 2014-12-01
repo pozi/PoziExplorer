@@ -455,6 +455,52 @@
             "tiled": false
         },
         {
+            "source": "ol",
+            "visibility": false,
+            "type": "OpenLayers.Layer.Vector",
+            "args": [
+                "Caravan Parking",
+                {
+                    "strategies": [new OpenLayers.Strategy.BBOX()],
+                    "projection": new OpenLayers.Projection("EPSG:4326"),
+                    "protocol": new OpenLayers.Protocol.WFS({
+                        "version": "1.1.0",
+                        "url": "http://shepparton.pozi.com/geoserver/wfs",
+                        "featurePrefix": "SHEPPARTON",
+                        "featureType": "gs_parking_caravan",
+                        "featureNS": "http://www.pozi.com/shepparton",
+                        "geometryName": "the_geom"
+                    }),
+                    "styleMap": new OpenLayers.StyleMap(
+                        {
+                            "default": new OpenLayers.Style({
+                                "opacity": 1,
+                                "cursor": "pointer"
+                                },{
+                                "rules" : [
+                                    new OpenLayers.Rule({
+                                        "name": " ",
+                                        "elseRule": true,
+                                        "symbolizer": {
+                                            "graphicHeight": 24,
+                                            "graphicWidth": 24,
+                                            "externalGraphic": "http://basemap.pozi.com/geoserver/styles/sjjb/pngall/accommodation_caravan_park.n.734A08.32.png"
+                                        }
+                                    })
+                                ]
+                            }),
+                            "select": {
+                                "opacity": 1
+                            }
+                        }
+                    )
+                },{
+                    "abstract": "Provided by Greater Shepparton City Council"
+                }
+            ],
+            "transition": null
+        },
+        {
             "source": "local",
             "name": "gs_parking_zone",
             "title": "Parking Zones",
