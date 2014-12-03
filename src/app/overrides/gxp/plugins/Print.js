@@ -123,7 +123,7 @@ gxp.plugins.Print = Ext.extend(gxp.plugins.Tool, {
                 {
                     root = JSONconf.localPrintServicePrefix;
                 }
-                this.customParams["logo"] = root +"/"+ JSONconf.logoClientSrc;
+                this.customParams["logo"] = root +"/"+ (JSONconf.logoClientPrintSrc || JSONconf.logoClientSrc);
             }
 
             var printProvider = new GeoExt.data.PrintProvider({
