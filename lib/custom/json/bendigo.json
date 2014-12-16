@@ -16,10 +16,37 @@
             "ptype": "gxp_layermanager",
             "groups": {
                 "top": {
-                    "title": "Surface Layers",
+                    "title": "System Layers",
                     "collapsed": true
                 },
-                "default": "Overlays",
+                "community": {
+                    "title": "Community Facilities",
+                    "collapsed": false
+                },
+                "family": {
+                    "title": "Family Services",
+                    "collapsed": false
+                },
+                "sports": {
+                    "title": "Sports & Recreation",
+                    "collapsed": false
+                },
+                "infrastructure": {
+                    "title": "Infrastructure Assets",
+                    "collapsed": true
+                },
+                "garbage": {
+                    "title": "Garbage & Recycling",
+                    "collapsed": true
+                },
+                "planning": {
+                    "title": "Planning Zones & Overlays",
+                    "collapsed": true
+                },
+                "default": {
+                    "title":"Property & Boundaries",
+                    "collapsed": true
+                },
                 "aerial": {
                     "title": "Aerial Photos",
                     "collapsed": true,
@@ -345,6 +372,33 @@
         },
         {
             "source": "local",
+            "group": "infrastructure",
+            "name": "cogb_drainage_pit",
+            "title": "Drainage Pits",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "minscale": 12500,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "group": "infrastructure",
+            "name": "cogb_drainage_pipe",
+            "title": "Drainage Pipes",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "minscale": 12500,
+            "tiled": false
+        },
+        {
+            "source": "local",
+            "group": "infrastructure",
             "name": "VW_CGB_ROADS_REGISTER",
             "title": "Roads (Coordinating Authority)",
             "visibility": false,
@@ -357,6 +411,7 @@
         {
             "source": "ol",
             "visibility": false,
+            "group":"family",
             "type": "OpenLayers.Layer.Vector",
             "args": [
                 "Pre-School & Childcare",
@@ -403,6 +458,7 @@
         {
             "source": "ol",
             "visibility": false,
+            "group":"family",
             "type": "OpenLayers.Layer.Vector",
             "args": [
                 "Education Facilities",
@@ -492,6 +548,7 @@
         {
             "source": "ol",
             "visibility": false,
+            "group":"sports",
             "type": "OpenLayers.Layer.Vector",
             "args": [
                 "Public Playgrounds",
@@ -538,6 +595,7 @@
         {
             "source": "ol",
             "visibility": false,
+            "group":"family",
             "type": "OpenLayers.Layer.Vector",
             "args": [
                 "Maternal & Child Health Centres",
@@ -584,6 +642,7 @@
         {
             "source": "ol",
             "visibility": false,
+            "group":"community",
             "type": "OpenLayers.Layer.Vector",
             "args": [
                 "Council Offices",
@@ -630,6 +689,7 @@
         {
             "source": "ol",
             "visibility": false,
+            "group":"community",
             "type": "OpenLayers.Layer.Vector",
             "args": [
                 "Public Toilets",
@@ -712,6 +772,7 @@
         },
         {
             "source": "local",
+            "group":"family",
             "name": "cogb_mach_zone",
             "title": "Maternal & Child Health Zones",
             "visibility": false,
@@ -723,6 +784,7 @@
         },
         {
             "source": "local",
+            "group": "garbage",
             "name": "vw_garbage_collection_commercial",
             "title": "Garbage Collection (Commercial)",
             "visibility": false,
@@ -734,6 +796,7 @@
         },
         {
             "source": "local",
+            "group": "garbage",
             "name": "vw_gb_garbage_collection",
             "title": "Garbage Collection (Residential)",
             "visibility": false,
@@ -745,6 +808,7 @@
         },
         {
             "source": "local",
+            "group": "garbage",
             "name": "vw_gb_garbage_collection",
             "title": "Recycling Week (Residential)",
             "visibility": false,
@@ -780,18 +844,7 @@
         },
         {
             "source": "depi_wms_planning",
-            "name": "sii:VMPLAN.PLAN_OVERLAY",
-            "title": "Planning Overlays",
-            "visibility": false,
-            "opacity": 0.75,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "tiled": false,
-            "sld": "http://general.pozi.com/gt_public_styles/sld/sii-VMPLAN.PLAN_OVERLAY-DEPI.sld"
-        },
-        {
-            "source": "depi_wms_planning",
+            "group": "planning",
             "name": "sii:VMPLAN.PLAN_ZONE",
             "title": "Planning Zones",
             "visibility": false,
@@ -801,6 +854,19 @@
             "transparent": true,
             "tiled": false,
             "sld": "http://general.pozi.com/gt_public_styles/sld/sii-VMPLAN.PLAN_ZONE-DEPI.sld"
+        },
+        {
+            "source": "depi_wms_planning",
+            "group": "planning",
+            "name": "sii:VMPLAN.PLAN_OVERLAY",
+            "title": "Planning Overlays",
+            "visibility": false,
+            "opacity": 0.75,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "sld": "http://general.pozi.com/gt_public_styles/sld/sii-VMPLAN.PLAN_OVERLAY-DEPI.sld"
         },
         {
             "source": "local_cascaded_imagery",
