@@ -992,6 +992,18 @@
             "attr_name": "suburb"
             }, {
             "attr_name": "council_managed"
+        }],
+        "cogb_drainage_pit": [{
+            "attr_name": "assetid","alt_name": "Asset ID"
+            }, {
+            "attr_name": "assetdescription","alt_name": "Asset Description"
+        }],
+        "cogb_drainage_pipe": [{
+            "attr_name": "assetid","alt_name": "Asset ID"
+            }, {
+            "attr_name": "assetdescription","alt_name": "Asset Description"
+            }, {
+            "attr_name": "length","alt_name": "Length (m)"
         }]
     },
     "liveDataEndPoints": [
