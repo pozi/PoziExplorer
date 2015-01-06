@@ -571,12 +571,42 @@
                                 },{
                                 "rules" : [
                                     new OpenLayers.Rule({
-                                        "name": " ",
-                                        "elseRule": true,
+                                        "name": "Regional",
+                                        "filter": new OpenLayers.Filter.Comparison({
+                                              "type": OpenLayers.Filter.Comparison.EQUAL_TO,
+                                              "property": "hierarchy",
+                                              "value": "Regional",
+                                        }),
                                         "symbolizer": {
                                             "graphicHeight": 24,
                                             "graphicWidth": 24,
-                                            "externalGraphic": "http://basemap.pozi.com/geoserver/styles/sjjb/pngall/landuse_coniferous.n.39AC39.32.png"
+                                            "externalGraphic": "http://basemap.pozi.com/geoserver/styles/sjjb/pngall/amenity_playground.n.AC39AC.32.png"
+                                        }
+                                    }),
+                                    new OpenLayers.Rule({
+                                        "name": "District",
+                                        "filter": new OpenLayers.Filter.Comparison({
+                                              "type": OpenLayers.Filter.Comparison.EQUAL_TO,
+                                              "property": "hierarchy",
+                                              "value": "District",
+                                        }),
+                                        "symbolizer": {
+                                            "graphicHeight": 24,
+                                            "graphicWidth": 24,
+                                            "externalGraphic": "http://basemap.pozi.com/geoserver/styles/sjjb/pngall/amenity_playground.n.0092DA.32.png"
+                                        }
+                                    }),
+                                    new OpenLayers.Rule({
+                                        "name": "Local",
+                                        "filter": new OpenLayers.Filter.Comparison({
+                                              "type": OpenLayers.Filter.Comparison.EQUAL_TO,
+                                              "property": "hierarchy",
+                                              "value": "Local",
+                                        }),
+                                        "symbolizer": {
+                                            "graphicHeight": 24,
+                                            "graphicWidth": 24,
+                                            "externalGraphic": "http://basemap.pozi.com/geoserver/styles/sjjb/pngall/amenity_playground.n.39AC39.32.png"
                                         }
                                     })
                                 ]
@@ -951,6 +981,8 @@
         }],
         "Public Playgrounds": [{
             "attr_name": "playground_name","alt_name": "Name"
+            }, {
+            "attr_name": "hierarchy"
             }, {
             "attr_name": "house_no"
             }, {
