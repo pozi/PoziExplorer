@@ -147,12 +147,6 @@
             "transition": null,
             "useGetCapabilitiesURLs": true
         },
-        "depi_wms_cascaded": {
-            "url": "/geoserver/DEPI/ows",
-            "title": "DEPI - Restricted",
-            "ptype": "gxp_wmscsource",
-            "tiled": true
-        },
         "depi_wms_topography": {
             "url": "/lib/custom/wms/depi-getcapabilities-mini-topography.xml",
             "title": "DEPI - Topography",
@@ -729,6 +723,18 @@
             "styles": "",
             "transparent": true,
             "tiled": false
+        },
+        {
+            "source": "depi_wms_environment",
+            "name": "sii:CULTURE.SENSITIVITY_AB_Sites",
+            "title": "Cultural Sensitivity",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "minscale": 1000000
         },
         {
             "source": "basemap",

@@ -200,12 +200,6 @@
             "transition": null,
             "useGetCapabilitiesURLs": true
         },
-        "depi_wms_cascaded": {
-            "url": "/geoserver/DEPI/ows",
-            "title": "DEPI - Restricted",
-            "ptype": "gxp_wmscsource",
-            "tiled": true
-        },
         "depi_wms_topography": {
             "url": "/lib/custom/wms/depi-getcapabilities-mini-topography.xml",
             "title": "DEPI - Topography",
@@ -675,8 +669,8 @@
         },
         {
             "group": "planning",
-            "source": "depi_wms_cascaded",
-            "name": "bushfire_prone_areas",
+            "source": "depi_wms_environment",
+            "name": "sii:bushfire_prone_areas",
             "title": "Bushfire Prone Areas",
             "visibility": false,
             "opacity": 0.8,
@@ -686,8 +680,8 @@
         },
         {
             "group": "planning",
-            "source": "depi_wms_cascaded",
-            "name": "CULTURE.SENSITIVITY_AB_Sites",
+            "source": "depi_wms_environment",
+            "name": "sii:CULTURE.SENSITIVITY_AB_Sites",
             "title": "Cultural Sensitivity",
             "visibility": false,
             "opacity": 0.8,

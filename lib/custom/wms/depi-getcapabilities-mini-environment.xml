@@ -522,6 +522,52 @@ Groundwater and Licensing Branch and the River Health Branch DSE.
         </Style>
         <!-- ScaleHint min="0.0" max="1.7976931348623157E308"/ -->
       </Layer>
+      <Layer queryable="1">
+        <Name>sii:CULTURE.ACHP_SURVEYS</Name>
+        <Title>ACHP Surveys</Title>
+        <Abstract>DEPI WMS</Abstract>
+        <KeywordList>
+          <Keyword>ArcSDE</Keyword>
+          <Keyword>CULTURE.ACHP_SURVEYS</Keyword>
+          <Keyword>ANZVI0803003546</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.535009458333" miny="-39.305784765741734" maxx="149.91374075" maxy="-34.060654474124156"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.535009458333" miny="-39.3057847666667" maxx="149.91374075" maxy="-34.060654475"/>
+        <Style>
+          <Name>CULTURE.aboriginal_surveys_1</Name>
+          <Title>Aboriginal sites</Title>
+          <Abstract>Aboriginal sites according to rules perimeter 800 above 100K</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=CULTURE.ACHP_SURVEYS"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.0" max="500000.0"/>
+      </Layer>
+      <Layer queryable="1">
+        <Name>sii:CULTURE.SENSITIVITY_AB_Sites</Name>
+        <Title>Cultural Sensitivity</Title>
+        <Abstract>DEPI WMS</Abstract>
+        <KeywordList>
+          <Keyword>ArcSDE</Keyword>
+          <Keyword>CULTURE.SENSITIVITY</Keyword>
+          <Keyword>ANZVI0803003447</Keyword>
+        </KeywordList>
+        <SRS>EPSG:4283</SRS>
+        <LatLonBoundingBox minx="140.9625494" miny="-39.18613189907581" maxx="150.03296816666702" maxy="-33.98128102412514"/>
+        <BoundingBox SRS="EPSG:4283" minx="140.9625494" miny="-39.1861319" maxx="150.03296816666702" maxy="-33.981281025"/>
+        <Style>
+          <Name>CULTURE_aboriginal_sites_3</Name>
+          <Title>Aboriginal sites</Title>
+          <Abstract>Aboriginal sites according to rules perimeter 800 above 100K</Abstract>
+          <LegendURL width="20" height="20">
+            <Format>image/png</Format>
+            <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="http://services.land.vic.gov.au/catalogue/publicproxy/guest/sdm_geoserver/wms?request=GetLegendGraphic&amp;format=image%2Fpng&amp;width=20&amp;height=20&amp;layer=CULTURE.SENSITIVITY_AB_Sites"/>
+          </LegendURL>
+        </Style>
+        <ScaleHint min="0.0" max="1000000.0"/>
+      </Layer>
     </Layer>
   </Capability>
 </WMT_MS_Capabilities>

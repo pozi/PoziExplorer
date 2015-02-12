@@ -159,12 +159,6 @@
             "transition": null,
             "useGetCapabilitiesURLs": true
         },
-        "depi_wms_cascaded": {
-            "url": "/geoserver/DEPI/ows",
-            "title": "DEPI - Restricted",
-            "ptype": "gxp_wmscsource",
-            "tiled": true
-        },
         "depi_wms_topography": {
             "url": "/lib/custom/wms/depi-getcapabilities-mini-topography.xml",
             "title": "DEPI - Topography",
