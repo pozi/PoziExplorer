@@ -82,12 +82,14 @@
  * @require overrides/geoext/plugins/TreeNodeComponent.js
  * @require overrides/geoext/widgets/LayerOpacitySlider.js
  * @require overrides/geoext/widgets/PrintMapPanel.js
+ * @require overrides/geoext/widgets/WMSLegend.js
  * @require overrides/geoext/data/PrintProvider.js
  * @require overrides/gxp/plugins/LayerTree.js
  * @require overrides/gxp/plugins/Styler.js
  * @require overrides/gxp/plugins/WMSSource.js
  * @require overrides/gxp/widgets/WMSLayerPanel.js
  * @require overrides/gxp/plugins/WMSGetFeatureInfo.js
+ * @require overrides/gxp/plugins/LayerManager.js
  * @require overrides/gxp/widgets/ScaleOverlay.js
  * @require overrides/gxp/widgets/Viewer.js
  *
