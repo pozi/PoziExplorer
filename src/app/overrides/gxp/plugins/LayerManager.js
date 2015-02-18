@@ -10,7 +10,6 @@ gxp.plugins.LayerManager.prototype.configureLayerNode = function(loader, attr) {
         legendXType = "gx_vectorlegend";
     }
     if (legendXType) {
-        console.log('In layer manager override');
         Ext.apply(attr, {
             component: {
                 xtype: legendXType,
