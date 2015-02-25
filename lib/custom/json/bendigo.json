@@ -1023,6 +1023,8 @@
             "attr_name": "assetid","alt_name": "Asset ID"
             }, {
             "attr_name": "assetdescription","alt_name": "Asset Description"
+            }, {
+            "attr_name": "depth","alt_name": "Depth (m)"
         }],
         "cogb_drainage_pipe": [{
             "attr_name": "assetid","alt_name": "Asset ID"
