@@ -58,6 +58,9 @@ GeoExt.WMSLegend.prototype.getLegendUrl = function(layerName, layerNames) {
         if (rec.json["rule"]) {
             url = Ext.urlAppend(url, "RULE=" + rec.json["rule"]);
         }
+        if (rec.json["env"]) {
+            url = Ext.urlAppend(url, "ENV=" + encodeURIComponent(rec.json["env"]));
+        }
     }
     
     return url;

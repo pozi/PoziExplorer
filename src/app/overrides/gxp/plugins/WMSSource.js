@@ -248,7 +248,8 @@ gxp.plugins.WMSSource.prototype.createStore = function() {
     SLD: config.sld,
     FORMAT: config.format,
     TRANSPARENT: config.transparent,
-    CQL_FILTER: config.cql_filter
+    CQL_FILTER: config.cql_filter,
+    ENV: config.env
       });
 
       var singleTile = false;
