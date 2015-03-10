@@ -365,6 +365,19 @@
             "group": "top"
         },
         {
+            "source": "local_cascaded_imagery",
+            "group": "infrastructure",
+            "name": "BENDIGO:COGB_CONTOURS",
+            "title": "Contours",
+            "visibility": false,
+            "opacity": 0.85,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "minscale": 20000
+        },
+        {
             "source": "local",
             "group": "infrastructure",
             "name": "cogb_drainage_pit",
