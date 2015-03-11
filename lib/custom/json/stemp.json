@@ -429,6 +429,19 @@
         },
         {
             "source": "local",
+            "name": "active_facility",
+            "title": "Active Facilities",
+            "visibility": false,
+            "opacity": 0.9,
+            "format": "image/png8",
+            "styles": "",
+            "transparent": true,
+            "tiled": false,
+            "transition": "resize",
+            "group": "assets"
+        },
+        {
+            "source": "local",
             "name": "vw_relief_centre",
             "title": "Relief Centres",
             "visibility": false,
