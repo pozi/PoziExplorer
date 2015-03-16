@@ -456,11 +456,11 @@
         {
             "source": "local",
             "name": "all_vfrr_assets",
-            "title": "VFRR assets - All",
+            "title": "VFRR assets - Risk Rating",
             "visibility": false,
             "opacity": 0.8,
             "format": "image/png8",
-            "styles": "",
+            "styles": "asset_point_line_polygon_riskrating",
             "transparent": true,
             "tiled": false,
             "transition": "resize",
