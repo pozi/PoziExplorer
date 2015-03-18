@@ -365,9 +365,9 @@
             "group": "top"
         },
         {
-            "source": "local_cascaded_imagery",
+            "source": "local",
             "group": "infrastructure",
-            "name": "BENDIGO:COGB_CONTOURS",
+            "name": "contour_opti",
             "title": "Contours",
             "visibility": false,
             "opacity": 0.85,
@@ -907,8 +907,8 @@
         },
         {
             "source": "local_cascaded_imagery",
-            "name": "BENDIGO:towns_bendigo_2014oct11_air_vis_10cm_mga55",
-            "title": "Aerial Photo (2014 Oct)",
+            "name": "BENDIGO:AERIAL_COGB_2015",
+            "title": "Aerial Photo (2015 Feb)",
             "visibility": false,
             "opacity": 0,
             "format": "image/JPEG",
@@ -918,6 +918,19 @@
             "transparent": true,
             "styles": "",
             "displayInOpacitySlider": true
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "BENDIGO:towns_bendigo_2014oct11_air_vis_10cm_mga55",
+            "title": "Aerial Photo (2014 Oct)",
+            "visibility": false,
+            "opacity": 0,
+            "format": "image/JPEG",
+            "tiled": true,
+            "group": "aerial",
+            "selected": false,
+            "transparent": true,
+            "styles": ""
         },        
         {
             "source": "local_cascaded_imagery",
