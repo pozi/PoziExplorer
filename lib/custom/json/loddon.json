@@ -229,8 +229,8 @@
         },
         {
             "source": "local_cascaded_imagery",
-            "name": "AERIAL_LODDON_2009APR14_AIR_VIS_35CM_MGA54",
-            "title": "Aerial (2009)",
+            "name": "aerial_loddon_2014dec02_air_vis_18cm_mga54",
+            "title": "Aerial (2014)",
             "visibility": false,
             "opacity": 0,
             "group": "aerial",
@@ -238,6 +238,28 @@
             "format": "image/JPEG",
             "transparent": true,
             "displayInOpacitySlider": true
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "aerial_loddon_2014dec02_air_cir_18cm_mga54",
+            "title": "Aerial (2014, Infrared)",
+            "visibility": false,
+            "opacity": 0,
+            "group": "aerial",
+            "selected": false,
+            "format": "image/JPEG",
+            "transparent": true
+        },
+        {
+            "source": "local_cascaded_imagery",
+            "name": "AERIAL_LODDON_2009APR14_AIR_VIS_35CM_MGA54",
+            "title": "Aerial (2009)",
+            "visibility": false,
+            "opacity": 0,
+            "group": "aerial",
+            "selected": false,
+            "format": "image/JPEG",
+            "transparent": true
         },
         {
             "source": "local_cascaded_imagery",
