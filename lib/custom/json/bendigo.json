@@ -1088,10 +1088,10 @@
         "name": "Community Compass",
         "size": 180
     }],
-    "bannerRightCornerLine1": "http://bendigo.vic.gov.au",
+    "bannerRightCornerLine1": "http://www.bendigo.vic.gov.au",
     "bannerRightCornerLine2": "<div style=\"text-align:left;\"><a style=\"display:inline-block;width:28px;height:28px;\" href=\"http://www.bendigo.vic.gov.au/feed.rss?listname=Media%20Releases%20RSS%20Feed\" target=\"_blank\" title=\"Read our news on RSS\"><img src=\"theme/app/img/rss-28.png\"></a><a style=\"display:inline-block;width:28px;height:28px;margin-left:4px;\" href=\"http://www.facebook.com/CityofGreaterBendigo\" target=\"_blank\" title=\"Follow us on Facebook\"><img src=\"http://www.bendigo.vic.gov.au/files/0/51/icon_facebook.gif\"></a><a style=\"display:inline-block;width:28px;height:28px;margin-left:4px;\" href=\"http://pinterest.com/greaterbendigo/\" target=\"_blank\" title=\"Follow us on Pintrest\"><img src=\"http://www.bendigo.vic.gov.au/files/0/51/icon_pinterest.jpg\"></a><a style=\"display:inline-block;width:28px;height:28px;margin-left:4px;\" href=\"http://twitter.com/#!/Greater_Bendigo\" target=\"_blank\" title=\"Follow us on Twitter\"><img src=\"http://www.bendigo.vic.gov.au/files/0/51/icon_twitter.gif\"></a><a style=\"display:inline-block;width:60px;height:28px;margin-left:4px;\" href=\"http://www.youtube.com/cityofgreaterbendigo\" target=\"_blank\" title=\"View our YouTube channel\"><img src=\"http://www.bendigo.vic.gov.au/files/0/51/icon_youtube.gif\"></a></div>",
     "printMapTitle": "Community Compass",
-    "linkToCouncilWebsite": "http://bendigo.vic.gov.au",
+    "linkToCouncilWebsite": "http://www.bendigo.vic.gov.au",
     "collapseWestPanel": true,
     "customJS": "bendigo.js",
     "openFirstDefaultTab": true
