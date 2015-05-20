@@ -84,10 +84,6 @@
             },
             "printService": "/geoserver/pdf",
             "showButtonText": false
-        },
-        {
-            "actionTarget": "toolPlaceHolder",
-            "ptype": "gxp_googleearth"
         }
     ],
     "sources": {

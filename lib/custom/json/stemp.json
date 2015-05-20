@@ -106,10 +106,6 @@
             "showButtonText": false
         },
         {
-            "actionTarget": "toolPlaceHolder",
-            "ptype": "gxp_googleearth"
-        },
-        {
             "ptype": "gxp_measure",
             "actionTarget": "toolPlaceHolder",
             "toggleGroup": "interaction",
