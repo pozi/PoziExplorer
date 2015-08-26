@@ -666,7 +666,7 @@
         {
             "group": "planning",
             "source": "depi_wms_environment",
-            "name": "sii:bushfire_prone_areas",
+            "name": "bushfire_prone_areas",
             "title": "Bushfire Prone Areas",
             "visibility": false,
             "opacity": 0.8,

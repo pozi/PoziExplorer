@@ -156,7 +156,7 @@
       <SRS>EPSG:900913</SRS>
       <LatLonBoundingBox minx="113.15628800000002" miny="-43.86689143805745" maxx="154.308864108" maxy="-10.693111999655512"/>
       <Layer queryable="0">
-        <Name>sii:bushfire_prone_areas</Name>
+        <Name>bushfire_prone_areas</Name>
         <Title>Bushfire-Prone Areas</Title>
         <Abstract>DEPI WMS</Abstract>
         <SRS>EPSG:4326</SRS>
