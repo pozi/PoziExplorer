@@ -852,6 +852,17 @@
             "tiled": false
         },
         {
+            "source": "local",
+            "group": "garbage",
+            "name": "gb_organic_collection",
+            "title": "Organic Collection (Residential)",
+            "visibility": false,
+            "opacity": 1,
+            "format": "image/png8",
+            "transparent": true,
+            "tiled": false
+        },
+        {
             "source": "depi_wms_admin",
             "name": "sii:VMADMIN.LOCALITY_POLYGON",
             "title": "Localities",
