@@ -860,6 +860,7 @@
             "opacity": 1,
             "format": "image/png8",
             "transparent": true,
+            "queryable": false,
             "tiled": false
         },
         {
