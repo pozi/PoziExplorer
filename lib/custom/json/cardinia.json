@@ -316,21 +316,6 @@
             }]
         },
         {
-            "source": "basemap",
-            "name": "VICMAP_CLASSIC:VicmapClassic",
-            "layersToTurnOnWhenShown":["Labels"],
-            "title": "Pozi Vicmap",
-            "visibility": false,
-            "opacity": 0,
-            "group": "background",
-            "selected": false,
-            "format": "image/png8",
-            "styles": "",
-            "transparent": true,
-            "cached": true,
-            "transition": "resize"
-        },
-        {
             "source": "local",
             "name": "CSC_PLAYGROUND_SKATE",
             "title": "Skate Parks",
