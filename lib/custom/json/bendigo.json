@@ -916,7 +916,7 @@
         {
             "source": "local_cascaded_imagery",
             "name": "BENDIGO:AERIAL_COGB_2015",
-            "title": "Aerial Photo (2015 Feb)",
+            "title": "Aerial Photo (2015)",
             "visibility": false,
             "opacity": 0,
             "format": "image/JPEG",
