@@ -332,7 +332,7 @@
             "type": "OpenLayers.Layer.WMTS",
             "args": [{
                 "name":"Vicmap API",
-                "url":"http://api.maps.vic.gov.au/geowebcacheWM/service/wmts",
+                "url":"http://116.240.195.134/geowebcacheWM/service/wmts",
                 "layer" : "WEB_MERCATOR",
                 "tileSize": new OpenLayers.Size(512,512),
                 "style":"_null",
