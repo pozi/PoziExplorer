@@ -57,7 +57,7 @@ are defined) for more details.
 
 ## Run the tests
 
-We have integration tests defined using [Mocha](http://visionmedia.github.io/mocha/),
+We have integration tests defined using [Mocha](http://mochajs.org/),
 [Chai](http://chaijs.com/) and [WD.js](https://github.com/admc/wd). They are run
 on each commit by [TravisCI](https://travis-ci.org/groundtruth/PoziExplorer).
 
